@@ -1,0 +1,409 @@
+﻿
+
+@{
+    ViewBag.Title = "Dashboard";
+}
+@section Scripts {
+    <script>
+        var viewURL = "/Designer/Dashboard/";
+    </script>
+
+}
+
+<link href="~/Content/DSDS/dsds.css" rel="stylesheet" type="text/css" />
+
+@*CSS Class desktop is used for overlay*@
+
+<style>
+    .optionsRadios {
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+</style>
+<div class="row desktop">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title" style="width:100%">Dashboard</h3>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-10">
+                            <div class="col-md-4 col-sm-12">
+                                @Html.DropDownList("Checklist", ViewBag.Checklist as List<SelectListItem>, "Select Monitoring Checklist For", htmlAttributes: new { @class = "form-control", id = "Checklist" })
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+
+                        <div class="col-10">
+                            <div class="col-md-4 col-sm-12">
+                                @Html.DropDownList("District", ViewBag.District as List<SelectListItem>, htmlAttributes: new { @class = "form-control", id = "District" })
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-12">
+
+                        <div class="col-10">
+                            <div class="col-md-4 col-sm-12">
+                                @Html.DropDownList("Center", ViewBag.Center as List<SelectListItem>, htmlAttributes: new { @class = "form-control" })
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col-lg-12" style="margin-top: 10px;">
+                    <h2 style="text-align: center;">Total surveys</h2>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="small-box bg-red">
+                                <div class="inner">
+                                    <h3>@ViewBag.All</h3>
+                                    <p>All</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-pie-graph"></i>
+                                </div>
+                                <a href="#" class="small-box-footer"></a>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div class="small-box bg-blue">
+                                <div class="inner">
+                                    <h3>@ViewBag.RHS</h3>
+                                    <p>RHS-A</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-pie-graph"></i>
+                                </div>
+                                <a href="#" class="small-box-footer"></a>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div class="small-box bg-green">
+                                <div class="inner">
+                                    <h3>@ViewBag.MSU</h3>
+                                    <p>MSU</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-pie-graph"></i>
+                                </div>
+                                <a href="#" class="small-box-footer"></a>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div class="small-box bg-yellow">
+                                <div class="inner">
+                                    <h3>@ViewBag.FWC</h3>
+                                    <p>FWC</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-pie-graph"></i>
+                                </div>
+                                <a href="#" class="small-box-footer"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- /.box-header -->
+
+
+            <div style="width: 80%; margin: auto;">
+                <canvas id="myChart" width="400" height="400"></canvas>
+            </div>
+
+            <div style="width: 50%; margin: auto;">
+                <canvas id="myPieChart" width="400" height="400"></canvas>
+            </div>
+
+        </div><!-- /.box -->
+
+        @*<div id="chart-container" style="width: 900px; height: 600px;"></div>*@
+        @*<canvas id="BarChart" style="width:100%;max-width:900px"></canvas>*@
+        @*<canvas id="PeiChart" style="width:100%;max-width:900px"></canvas>*@
+    </div>
+    <!-- Loading (remove the following to stop the loading)-->
+    <div class="overlay" style="display:none;"></div>
+    <div class="loading-img" style="display: none;"></div>
+    <!-- end loading -->
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.2.2/echarts.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script>
+
+
+    $('#Checklist').change(function () {
+        var Checklist = $('#Checklist').val();
+
+        GetDistrict(Checklist);
+
+        var dv = $('#District option').map(function () {
+            return $(this).text();
+        }).get();
+
+        var dvv = $('#District option').map(function () {
+            return $(this).val();
+        }).get();
+
+        OkBarChart(dv.slice(1), dvv.slice(1));
+        OkPeiChart(Checklist);
+       // PieChart(dv.slice(1));
+       // CharBar2(dv.slice(1));
+        $("#District").empty();
+        $("#Center").empty();
+    });
+
+
+
+
+
+
+    $('#District').change(function () {
+        var val = $('#Checklist').val();
+        var selectedText = $(this).find('option:selected').text();
+        var com = val + "," + selectedText;
+        $("#Center").empty();
+        GetCenter(com);
+    });
+
+    var Checklist = $('#Checklist option').map(function () {
+        return $(this).text();
+    }).get();
+   // PieChart(Checklist.slice(1));
+   // CharBar2(Checklist.slice(1));
+
+    function GetDistrict(district) {
+        if (district == 0) {
+            $("#District").empty();
+            $("#District").append('<option value="' + 0 + '">' + "Select District" + '</option>')
+            return;
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: "/Designer/GetDistictById/" + district,
+            data: {},
+            success: function (data) {
+                $("#District").empty();
+                $("#District").append('<option value="' + 0 + '">' + "---Select All---" + '</option>')
+                $.each(data, function (i, state) {
+                    $("#District").append('<option value="' + state.Value + '">' + state.Text + '</option>')
+                })
+            }
+        });
+
+    }
+
+
+    function GetCenter(district) {
+        $.ajax({
+            type: 'POST',
+            url: "/Designer/GetCentral/" + district,
+            data: {},
+            success: function (data) {
+                $("#Center").empty();
+                $("#Centrals").append('<option value="' + 0 + '">' + "---Select All---" + '</option>')
+                $.each(data, function (i, state) {
+                    $("#Center").append('<option value="' + state.Value + '">' + state.Text + '</option>')
+                })
+            }
+        });
+    }
+
+
+
+
+    function OkBarChart(Text, Value) {
+
+       
+
+
+        // Data for the chart
+        var data = {
+            labels: Text,
+            datasets: [{
+                label: 'Bar Chart',
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1,
+                data: Value
+            }]
+        };
+
+        // Configuration options
+        var options = {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        };
+
+        // Create the chart
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: data,
+            options: options
+        });
+    }
+
+
+    function OkPeiChart(project) {
+        // Data for the pie chart
+        var id = 0;
+        if (project.split(',')[1] == "FWC") {
+            id = 7122;
+        }
+        else if (project.split(',')[1] == "MSU") {
+            id = 7121;
+        }
+        else if (project.split(',')[1] == "RHS") {
+            id = 7120;
+        }
+
+        var TitleArray = [];
+        var values = [];
+
+        $.ajax({
+            type: 'POST',
+            url: "/Designer/PieChart/" + project,
+            data: {},
+            success: function (data) {
+                // Extracting values from data using map function
+                values = $.map(data, function (state) {
+                    return state.Value;
+                });
+                // Extracting values from data using map function
+                TitleArray = $.map(data, function (state) {
+                    return state.Text;
+                });
+
+            }
+        });
+
+
+        var data = {
+            labels: TitleArray,
+            datasets: [{
+                label: 'Pie Chart',
+                data: values,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(153, 102, 255, 0.5)',
+                    'rgba(255, 159, 64, 0.5)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        // Configuration options
+        var options = {
+            responsive: true
+        };
+
+        // Create the pie chart
+        var ctx = document.getElementById('myPieChart').getContext('2d');
+        var myPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: data,
+            options: options
+        });
+    }
+
+
+    function CharBar2(districtValues) {
+
+
+
+        var options = {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Bar Chart'
+            },
+            xAxis: {
+                categories: districtValues
+            },
+            yAxis: {
+                title: {
+                    text: 'Value'
+                }
+            },
+            series: [{
+                name: 'Value',
+                data: [10, 20, 30]
+            }]
+        };
+
+        // Initialize Highcharts
+        $('#chart-container').highcharts(options);
+
+    }
+
+
+
+    function PieChart2(Data) {
+        // Initialize ECharts instance
+        var chart = echarts.init(document.getElementById('pie-chart-container'));
+
+        // Chart configuration
+        var options = {
+            title: {
+                text: 'Pie Chart Example'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: '{a} <br/>{b}: {c} ({d}%)'
+            },
+            series: [
+                {
+                    name: 'Value',
+                    type: 'pie',
+                    radius: '55%',
+                    data: Data
+                }
+            ]
+        };
+
+        // Set options
+        chart.setOption(options);
+    }
+
+
+</script>
+
+<script>
+    $(document).ready(function () {
+      
+    });
+</script>

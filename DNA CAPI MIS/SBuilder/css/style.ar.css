@@ -1,0 +1,423 @@
+/*body {
+	line-height: 1.2;
+}*/
+
+/* required for sticky footer */
+
+/*html, body {
+	height: 100%;
+}
+.wrapper {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+}*/
+
+table {
+    padding: 5px;
+}
+td, th {
+    padding: 5px;
+}
+p.gridLabel {
+    margin: 10px 0 0px;
+}
+
+#res{
+	padding:0;
+	margin:0;
+	}
+.wrapper {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  margin-bottom:20px;
+}
+.fa-chevron-right{
+	float: right;
+}
+
+form, form .form-group {
+	float: right;
+    width: 100%;
+}
+
+.hide{
+	display: none;
+}
+.ctrlIdimg{
+	clear: both;
+    float: left;
+    width: 100%;
+	margin:20px 0;
+}
+.ctrlIdimg img{
+	width:96%;
+	height:100%;
+	margin:0 auto;
+	display: block;
+	float: none;
+}
+.form-group .form-control{
+	height:40px !important;
+}
+.form-group input[type="text"]{
+	height:40px !important;
+	padding:2px 10px;
+	font-size: 18px;
+}
+.form-group textarea{
+    width: 100%;
+	padding:2px 10px;
+	font-size: 18px;
+}
+.form-group .form-control{
+	height:40px !important;
+}
+.form-group select{
+	font-size: 18px;
+}
+.counter_text {
+	width: auto;
+	float: left;
+	clear: none;
+	text-align: center;
+    direction: ltr;
+}
+.prnt-of-rdwrapr td{
+	width:auto;
+}
+.prnt-of-rdwrapr .prnt-of-1st-child{
+	padding:5px;
+}
+.prnt-of-2nd-child{
+	background-color: #0088cc !important;
+}
+.rdr-hdng label{
+	font-size: 14px !important;
+	font-weight: normal;
+	padding: 5px;
+	margin: 0;;
+}
+.prnt-of-2nd-child label {
+	width: 100%;
+	padding: 5px 0;
+	margin: 0;
+	float: left;
+}
+.prnt-of-2nd-child span{
+	margin:0 auto !important;
+	display:block !important;
+}
+.prev_button {
+	clear: none;
+	float: left;
+}
+
+.form-group span, .form-group label{
+	font-size: 18px;
+}
+.parent_body p{
+	font-size: 16px;
+}
+.mrradio.horizontal > div {
+    float: left;
+	/*margin-left: 10px;*/
+}
+mmchkbx.horizontal > div {
+    float: left;
+	/*margin-left: 10px;*/
+}
+.mrradio input, .mmchkbx input{
+	width: 20px;
+	height: 20px;
+	position: relative;
+	top: 5px;
+	margin: 10px 0;
+}
+.mrradio, .mmchkbx {
+	font-size: 20px;
+}
+.gridSWRadio {
+    margin: 4px 10px 0px 10px !important;
+    display:block !important;
+    float:right;
+}
+
+
+.horizontal .radio-ar{
+	clear:none !important;
+	
+}
+.next_button {
+
+}
+.mrradio{
+
+
+}
+.mmchkbx{}
+
+.parent_body {
+	float: left;
+	width: 100%;
+	position: relative;
+	/*margin-top: -80px;*/
+}
+.parent_body button{
+	padding:0;
+}
+#btn-left{
+    float:left;
+	z-index: 1;
+	border:0;
+	position: relative;
+}
+#btn-left img{
+	z-index: -1;
+	width: 90px;
+}
+#btn-right img{
+	z-index: -1;
+	width: 90px;
+}
+#btn-right{
+	float: right;
+	/*background-image: url('../img/forward_arrow.png');*/
+	z-index: 1;
+	position: relative;
+	border:0;
+}
+.parent_body.btn-default:hover, .parent_body.btn-default:focus, .parent_body.btn-default.focus, 
+.parent_body.btn-default:active, .parent_body.btn-default.active, .parent_body.open>.dropdown-toggle.btn-default {
+	background-color: transparent;
+	border: 0 none;
+	outline: none;
+}
+input[type="radio"] {
+    display: none;
+}
+.mrradio label, .mmchkbx label {
+	clear: both;
+    float: left;
+    font-size: 18px;
+    font-weight: normal;
+    margin: 10px 0;
+	width:100%;
+}
+.mrradio label p, .mmchkbx label p{
+    float: right;
+}
+input[type="radio"] + label span {
+    background: url("../img/sprites-sfa68604977.png") no-repeat scroll -180px center rgba(0, 0, 0, 0);
+    cursor: pointer;
+    display: inline-block;
+    height: 20px;
+    margin: 3px 0px 0 0;
+    vertical-align: middle;
+    width: 30px;
+    float:right;
+}
+input[type="radio"]:checked + label span {
+    background: url("../img/sprites-sfa68604977.png") no-repeat scroll -330px center rgba(0, 0, 0, 0);
+}
+input[type="checkbox"] {
+    display: none;
+}
+input[type="checkbox"] + label span {
+    background: url("../img/sprites-sfa68604977.png") no-repeat scroll left center rgba(0, 0, 0, 0);
+    cursor: pointer;
+    display: inline-block;
+    height: 20px;
+    margin: 3px 0px 0 0;
+    vertical-align: middle;
+    width: 30px;
+    float:right;
+}
+input[type="checkbox"]:checked + label span {
+    background: url("../img/sprites-sfa68604977.png") no-repeat scroll -150px center rgba(0, 0, 0, 0);
+}
+.txt-fnt-mob{
+	font-size: 20px;
+}
+.txt-info {
+	font-size: 12px !important;
+}
+.radio-ar{
+	float:right;
+	clear:both;
+}
+.radio-ar .mmchkbx, .radio-ar .mrradio {
+    float:right;
+	
+    }
+.radio-ar .mmchkbx > div, .radio-ar .mrradio > div {
+    float:right;
+	clear:both; 
+    }
+.radio-ar .mmchkbx > div span, , .radio-ar .mrradio > div span {
+    float:right !important;
+    }
+
+.frst-pgn{
+	position: relative;;
+	left:-65px;
+}
+
+.shelf-bordr{
+	/*background-image: url("../img/shelf.png"); */
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height: 10px;
+    float: none;
+    margin: 0 auto; 
+    min-width:auto;
+}
+.shelf-bordr .row{
+	/*overflow-y:scroll;*/
+}
+.mask {
+    background-color: #2e7dff;
+    float: left;
+    height: 70%;
+    opacity: 0.7;
+    position: absolute;
+    top: 30%;
+    width: 100%;
+    display: none;
+}
+.selected{
+/*background-color: transparent;
+opacity: 0.8;
+-moz-box-shadow: inset 0px 0px 15px 10px #2e7dff;
+-webkit-box-shadow: inset 0px 0px 15px 10px #2e7dff;
+box-shadow: inset 0px 0px 15px 10px #2e7dff;
+border-radius:5px;*/
+}
+.prd-img-wrap{
+	clear: none;
+	float: left;
+	width: auto;
+	height: 100%;
+	position: relative;
+}
+.prd-img-wrap img{
+	display: block;
+    height: 65%;
+    max-width: 100%;
+    min-width: 10px;
+    position: relative;
+    top: 35%;
+    margin-left:4px;
+}
+.prd_row_wrap{
+	clear:both;
+}
+    
+.sh_label {
+    width: 100%;
+}
+.sh_label_instructions {
+    color: blue;
+}
+
+@media (min-width:220px) and (max-width:563px){
+.mrradio{
+	font-size: 25px;
+	margin: 10px 0;
+}
+.mrradio input, .mmchkbx input{
+	width: 1em;
+	height: 1em;
+	position: relative;
+	top: 3px;
+}
+.mmchkbx{
+	font-size: 25px;
+	margin: 10px 0;
+}
+.form-group span, .form-group label {
+font-size: 23px;
+}
+.txt-fnt-mob{
+	font-size: 25px;
+}
+.prd-img-wrap img {
+    height: 60%;
+    top: 40%;
+}
+.prd_row_wrap{
+	overflow-x:scroll;
+	overflow-y: hidden;;
+}
+}
+
+@media (min-width:564px) and (max-width:768px){
+.mrradio{
+	font-size: 20px;
+	margin: 10px 0;
+}
+.mrradio input, .mmchkbx input{
+	width: 1em;
+	height: 1em;
+	position: relative;
+	top: 3px;
+}
+.mmchkbx{
+	font-size: 20px;
+	margin: 10px 0;
+}
+.form-group span, .form-group label {
+font-size: 25px;
+}
+.txt-fnt-mob{
+	font-size: 20px;
+}
+.prd-img-wrap img {
+    height: 60%;
+    top: 40%;
+}
+.prd_row_wrap{
+	overflow-x:scroll;
+	overflow-y: hidden;;
+}
+}
+
+}
+
+
+@media (min-width:769px) and (max-width:992px){
+.mrradio{
+	font-size: 18px;
+	margin: 10px 0;
+}
+.mmchkbx{
+	font-size: 18px;
+	margin: 10px 0;
+}
+.mrradio input, .mmchkbx input{
+	width: 1em;
+	height: 1em;
+	position: relative;
+	top: 3px;
+}
+.form-group span, .form-group label {
+font-size: 25px;
+}
+.txt-fnt-mob{
+	font-size: 20px;
+}
+}
+
+
+
+@media (max-width:406px){
+
+	.counter_text {
+
+	width: auto;
+	float: left;
+	clear: none;
+	text-align: center;
+}
+
+}

@@ -1,0 +1,152 @@
+﻿@model DNA_CAPI_MIS.Models.ProjectFieldSample
+
+@{
+    ViewBag.Title = "Survey Designer - Question/Answer Edit";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    @Styles.Render("~/Content/styles/bootstrap/dialog")
+    <link href="~/Content/bootstrap-fileinput-master/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+
+    <script src="~/Content/bootstrap-fileinput-master/js/fileinput.min.js" type="text/javascript"></script>
+    <script src="~/Content/DSDS/dsds-pqanswers.js" type="text/javascript"></script>
+
+    <style>
+        .form-group {
+            margin-bottom: 15px;
+            height: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="row desktop">
+
+        @if (Model == null)
+        {
+            <div class="alert alert-danger alert-dismissable">
+                <i class="fa fa-ban"></i>
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <b>Alert!</b> Question/Answer is not valid.
+            </div>
+        }
+        else
+        {
+            using (Html.BeginForm("PQAnswer", "Designer", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                var optionType = "";
+                var optionTypeOtherPF = "";
+                if (ViewBag.OptionsJSON != null && ViewBag.OptionsJSON.ContainsKey("OptionType"))
+                {
+                    optionType = ViewBag.OptionsJSON["OptionType"];
+                }
+                if (ViewBag.OptionsJSON != null && ViewBag.OptionsJSON.ContainsKey("OptionTypeOtherPF"))
+                {
+                    optionTypeOtherPF = ViewBag.OptionsJSON["OptionTypeOtherPF"];
+                }
+
+                <script>
+                    var pqAnswerUploadURL = "/Designer/PQAnswer?ProjectFieldID=" + @ViewBag.ProjectFieldId + "&ProjectFieldSampleID=" + @ViewBag.ProjectFieldSampleID;
+                    var pqAnswerInitialPreview;
+
+                    $(document).ready(function () {
+                        $('#PFSType').val("@optionType");
+                        if ($('#PFSType').val() == "O") {
+                            $('#PFSTypeOther').val("@optionTypeOtherPF");
+                            $("#PFSTypeOther").show();
+                        } else {
+                            $("#PFSTypeOther").hide();
+                        }
+
+                        $('#PFSMediaType').val("@ViewBag.MediaFileType");
+                        SetupMediaFileUploader($('#PFSMediaType').val(), "@ViewBag.MediaFile");
+                    });
+                </script>
+                <div class="col-md-12">
+                    <h4 style="margin-top:0px;" class="box-title">@ViewBag.ProjectFieldName</h4>
+                    <div class="box-body table-responsive" style="display:table;width:100%">
+
+                        <input id="ProjectFieldID" name="ProjectFieldID" type="hidden" value="@ViewBag.ProjectFieldId" />
+                        <input id="ProjectFieldSampleID" name="ProjectFieldSampleID" type="hidden" value="@ViewBag.ProjectFieldSampleID" />
+
+                        <div class="row">
+                            <section class="col-lg-12 connectedSortable">
+                                <div class="row" style="height:70px;">
+                                    <div class="form-group col-lg-6">
+                                        <label>Variable Name</label>
+                                        <input class="form-control" name="PFSVariableName" id="PFSVariableName" value="@Model.VariableName" />
+                                    </div>
+                                    <div class="form-group col-lg-3">
+                                        <label>Order</label>
+                                        <input class="form-control" name="PFSDisplayOrder" id="PFSDisplayOrder" value="@Model.DisplayOrder" />
+                                    </div>
+                                    <div class="form-group col-lg-3">
+                                        <label>Code</label>
+                                        <input class="form-control" name="PFSCode" id="PFSCode" value="@Model.Code" />
+                                    </div>
+                                    <br />
+                                </div>
+                                <div class="row" style="padding-right: 15px;">
+                                    <div class="form-group">
+                                        <label class="col-lg-4">Answer - English</label>
+                                        <input class="col-lg-8" name="PFSTitle" id="PFSTitle" placeholder="Type here ..." value="@Model.Title" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-4">إجابة - عربي</label>
+                                        <input class="col-lg-8" name="PFSTitle_ar" id="PFSTitle_ar" placeholder="اكتب هنا ..." value="@ViewBag.AnswerTitle_ar" />
+                                    </div>
+                                </div>
+                                <div class="row" style="padding-right: 15px;">
+                                    <div class="form-group">
+                                        <label class="col-lg-4">Type</label>
+                                        <select id="PFSType" name="PFSType" class="col-lg-3">
+                                            <option value="0">Default</option>
+                                            <option value="N">None (disable others)</option>
+                                            <option value="A">All (select all)</option>
+                                            <option value="O">Other (another question)</option>
+                                        </select>
+                                        <select id="PFSTypeOther" name="PFSTypeOther" class="col-lg-4" style="margin-left:10px;">
+                                            @foreach (var opf in ViewBag.OtherProjectFields)
+                                            {
+                                            <option value="@opf.ID">@opf.ReportTitle</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group" style="padding-right: 15px;">
+                                        <label class="col-lg-4">Attach Media</label>
+                                        <select id="PFSMediaType" name="PFSMediaType" class="col-lg-3">
+                                            <option>None</option>
+                                            <option>Image</option>
+                                            <option>Audio</option>
+                                            <option>Video</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group" id="MediaFileControl">
+                                        <div class="col-lg-12">
+                                            <input name="PFSMediaFile" id="PFSMediaFile" type="file">
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+
+
+                    <div class="box-footer" style="margin-top:20px;">
+                        <button class="btn btn-primary" type="button" id="doneButton">Save</button>
+                        <button class="btn btn-warning" type="button" id="exitButton">Cancel</button>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</body>
+</html>

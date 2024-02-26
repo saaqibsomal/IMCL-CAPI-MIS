@@ -1,0 +1,242 @@
+﻿@model IEnumerable<DNA_CAPI_MIS.Models.ProjectField>
+
+@{
+    ViewBag.Title = "Quota Definition";
+}
+
+<!-- Analyzer drag-drop -->
+<link href="~/Content/Analyzer/analyzer.css" rel="stylesheet" type="text/css" />
+
+@Styles.Render("~/Content/styles/bootstrap/dialog")
+
+@section Scripts {
+@Scripts.Render("~/bundles/bootstrap/dialog")
+@Scripts.Render("~/bundles/bootstrap/jqwidgets")
+<script src="~/Content/Analyzer/jquery.nestable.js"></script>
+<script src="~/Content/Analyzer/analyzer.js"></script>
+<script src="~/Content/Analyzer/analyzer-designreport.js"></script>
+<script src="~/Content/Survey/projectquota.js"></script>
+}
+
+<p>
+    @Html.ActionLink("All Projects", "OpenProject", "Designer") | 
+    @Html.ActionLink("Project Overview", "ProjectOverview", "Designer", new { id = ViewBag.ProjectId }, null)
+</p>
+<h4><strong>@ViewBag.ProjectName</strong></h4>
+<h4>@ViewBag.Title</h4>
+
+@if (Model == null)
+{
+<div class="alert alert-danger alert-dismissable">
+    <i class="fa fa-ban"></i>
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <b>Alert!</b> No Project is opened yet.
+</div>
+}
+else if (ViewBag.QueryID > 0)
+{
+<div class="nav-tabs-custom box" style="border-top: none;">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#tab_1" id="tab1" data-toggle="tab">Base</a></li>
+        <li><a href="#tab_3" id="tab3" onclick="OnInit()" data-toggle="tab">Tabulation</a></li>
+        <li class="pull-right"><a href="~/ProjectQuota/@ViewBag.ProjectId" class="text-muted"><i class="fa fa-gear"></i></a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="tab_1">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="box" style="display: table;">
+                        <div class="box-header">
+                            <h3 class="box-title">Survey Base</h3>
+                        </div><!-- /.box-header -->
+
+                        <div class="box-body table-responsive" style="display:table;width:100%">
+                            <div class="form-group">
+                                <label>Primary Distribution On</label><br />
+                                <span>@ViewBag.BasePrimaryFieldTitle</span><br />
+                            </div>
+
+                            <div class="form-group col-md-12" id="primaryFieldSampleBox" style="display: table; padding-bottom: 10px;">
+                                <div class="col-md-6">
+                                    <span><strong>Side Dimension</strong></span><br />
+                                    @foreach (var item in ViewBag.AQDSide)
+                                    {
+                                        <span>@item.ProjectFieldTitle</span><br />
+                                    }
+                                </div>
+                                <div class="col-md-6">
+                                    <span><strong>Top Dimension</strong></span><br />
+                                    @foreach (var item in ViewBag.AQDTop)
+                                    {
+                                        <span>@item.ProjectFieldTitle</span><br />
+                                    }
+                                </div>
+                            </div>
+                            <div class="box-footer" style="margin-top:15px;display:table;width:100%">
+                                <button class="btn btn-primary" type="button" id="nextTab" onclick="onNext(1, 1)">View Progress</button>
+                                <button class="btn btn-danger" type="button" id="deleteDataTab" onclick="onDeleteDataTab(@ViewBag.ProjectId)" style="margin-left:15px;">Delete Quota Data</button>
+                                <button class="btn btn-danger" type="button" id="deleteDefTab" onclick="onDeleteDefTab(@ViewBag.ProjectId)" style="margin-left:15px;">Delete Quota Definition</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane" id="tab_3">
+            <div id="tabulation">@{WriteLiteral(ViewBag.Tabulation);}</div>
+        </div><!-- /.tab-pane -->
+
+    </div>
+</div>
+}
+else
+{
+    using (Html.BeginForm())
+    {
+<div class="nav-tabs-custom box" style="border-top: none;">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#tab_1" id="tab1" data-toggle="tab">Base</a></li>
+        <li><a href="#tab_2" id="tab2" data-toggle="tab">Distribution</a></li>
+        <li><a href="#tab_3" id="tab3" data-toggle="tab">Tabulation</a></li>
+        <li class="pull-right"><a href="~/ProjectQuota/@ViewBag.ProjectId" class="text-muted"><i class="fa fa-gear"></i></a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="tab_1">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="box" style="display: table;">
+                        <div class="box-header">
+                            <h3 class="box-title">Survey Base</h3>
+                        </div><!-- /.box-header -->
+
+                        <div class="box-body table-responsive" style="display:table;width:100%">
+                            <div class="form-group" style="display: table;">
+                                <label>Total Base Size</label>
+                                <input name="baseSize" id="baseSize" class="form-control" value="@ViewBag.TotalBaseSize" onblur="validateBaseSize()" /><span>surveys</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Primary Distribution On</label><br />
+                                <select id="primaryField" name="primaryField" class="form-control" onchange="LoadFieldSample(this.value)">
+                                    <option value="0">Select Primary Field</option>
+                                    @foreach (var item in Model)
+                                    {
+                                    <option value="@item.ID">@item.Title</option>
+                                    }
+                                </select>
+                            </div>
+
+                            <div class="form-group" id="primaryFieldSampleBox" style="display: table; padding-bottom: 10px;">
+
+                            </div>
+
+                            <div class="box-footer" style="margin-top:15px;display:table;width:100%">
+                                <button class="btn btn-primary" type="button" id="nextTab" onclick="onNext(1, 0)">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane" id="tab_2">
+            <div class="row">
+            <section class="col-lg-6 connectedSortable">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="box box-solid box-info">
+                            <div class="box-header">
+                                <h3 class="box-title">Distribution</h3>
+                                <div class="box-tools pull-right">
+                                    <button class="btn btn-info btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
+
+                                </div>
+                            </div>
+                            <div class="box-body" style="display:-webkit-box;">
+                                <div class="dd Questionnaire" id="pfAll">
+                                    <ol class="dd-list Questionnaire">
+                                        @foreach (var item in Model)
+                                        {
+                                        <div style="width: 100%; display: inline-block;">
+                                            <li data-id="@item.ID" style="position:relative;float:left;width:98px;">
+                                                <div class="btn-group">
+                                                    <button type="button" data-action="addnewto-top" class="btn btn-default btn-top" style="height: 30px; padding: 4px">Top</button>
+                                                    <button type="button" data-action="addnewto-side" class="btn btn-default btn-side" style="height: 30px; padding: 4px">Side</button>
+                                                </div>
+                                            </li>
+                                            <li class="dd-item" data-id="@item.ID">
+                                                <div class="dd-handle">@item.Title</div>
+                                            </li>
+                                        </div>
+                                        }
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="col-lg-6 connectedSortable">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="box box-solid box-info">
+                            <div class="box-header">
+                                <h3 class="box-title">Top</h3>
+                                <div class="box-tools pull-right">
+                                    <button class="btn btn-info btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                </div>
+                            </div>
+                            <div class="box-body" style="display:-webkit-box;">
+                                <div>
+                                    <button id="distributionTop" type="button" class="btn btn-default" style="height: 30px; padding: 4px"></button><br/><span>-</span>
+                                </div>
+                            </div>
+                            <div class="box-body" style="display:-webkit-box;margin-left:10px;">
+                                <div class="dd" id="pfTop">
+                                    <div class="dd-empty"></div>
+                                </div>
+                            </div><!-- /.box-body -->
+                        </div><!-- /.box -->
+                    </div><!-- /.col -->
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="box box-solid box-info">
+                            <div class="box-header">
+                                <h3 class="box-title">Sides</h3>
+                                <div class="box-tools pull-right">
+                                    <button class="btn btn-info btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                                </div>
+                            </div>
+                            <div class="box-body" style="display:-webkit-box;">
+                                <div class="dd" id="pfSide">
+                                    <div class="dd-empty"></div>
+                                </div>
+                            </div><!-- /.box-body -->
+                        </div><!-- /.box -->
+                    </div><!-- /.col -->
+                </div>
+                <div class="row" style="margin-left:0px;">
+                    <button class="btn btn-primary" type="submit" id="startQuery">Start Query</button>
+                    <button class="btn btn-warning" onclick='javascript: window.navigate("/Home/ProjectOverview/@ViewBag.ProjectId")'>Cancel</button>
+                    <input id="ProjectID" name="ProjectID" type="hidden" value="@ViewBag.ProjectId" />
+                    <input id="pfTop-output" name="FieldsTop" type="hidden" value="" />
+                    <input id="pfSide-output" name="FieldsSide" type="hidden" value="" />
+                </div>
+            </section>
+            </div><!-- /.col row-->
+        </div><!-- /.tab-pane -->
+
+        <div class="tab-pane" id="tab_3">
+            <div id="tabulation"></div>
+        </div><!-- /.tab-pane -->
+
+    </div><!-- /.tab-content -->
+    <!-- Loading (remove the following to stop the loading)-->
+    <div class="overlay" style="display:none;"></div>
+    <div class="loading-img" style="display: none; background: transparent url('/Content/AdminLTE/img/ajax-loader1.gif') 50% 25% no-repeat;"></div>
+    <!-- end loading -->
+</div>
+    }
+}

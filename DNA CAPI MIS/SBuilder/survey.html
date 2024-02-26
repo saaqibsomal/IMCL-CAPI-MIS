@@ -1,0 +1,324 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Preview Questionnaire - Research Pro</title>
+    <link rel="stylesheet" style="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" style="text/css" href="css/jquery-ui.css" />
+    <!--<link rel="stylesheet" style="text/css" href="css/font-awesome.min.css" />   -->
+    <link rel="stylesheet" style="text/css" href="css/font-awesome.min.css" />
+    <link rel="stylesheet" style="text/css" href="css/AdminLTE.css" />
+
+    <style>
+        .parent_body img {
+            width: 45px !important;
+        }
+
+        .counter_text {
+            padding-top: 2px;
+        }
+    </style>
+</head>
+<body class="skin-blue  pace-done">
+    <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/json2.js"></script>
+    <script type="text/javascript" src="js/formControl.js"></script>
+    <script type="text/javascript" src="js/textboxControl.js"></script>
+    <script type="text/javascript" src="js/dropdownControl.js"></script>
+    <script type="text/javascript" src="js/datepickerControl.js"></script>
+    <script type="text/javascript" src="js/integerTextboxControl.js"></script>
+    <script type="text/javascript" src="js/checkboxControl.js"></script>
+    <script type="text/javascript" src="js/singlechoicedropdownControl.js"></script>
+    <script type="text/javascript" src="js/singlechoiceRadioControl.js"></script>
+    <script type="text/javascript" src="js/multiplechoicedropdownControl.js"></script>
+    <script type="text/javascript" src="js/multichoiceCheckboxControl.js"></script>
+    <script type="text/javascript" src="js/openendedtextboxTextControl.js"></script>
+    <script type="text/javascript" src="js/openendedtextboxIntegerControl.js"></script>
+    <script type="text/javascript" src="js/bodytextControl.js"></script>
+    <script type="text/javascript" src="js/numberCounterControls.js"></script>
+    <script type="text/javascript" src="js/rangesliderControl.js"></script>
+    <script type="text/javascript" src="js/stopwatchControl.js"></script>
+    <script type="text/javascript" src="js/radioControl.js"></script>
+    <script type="text/javascript" src="js/surveyForm.js"></script>
+    <script type="text/javascript" src="js/stwController.js"></script>
+    <script type="text/javascript" src="js/input_mask.js"></script>
+    <script type="text/javascript" src="js/soundrecordControls.js"></script>
+    <script type="text/javascript" src="js/imageLoadControl.js"></script>
+    <script type="text/javascript" src="js/multiselectimageControl.js"></script>
+
+    <header class="header">
+        <a class="logo" href="/">Research Pro</a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <div class="navbar-left">
+                <span class="appname">Preview Questionnaire</span>
+            </div>
+        </nav>
+    </header>
+
+    <div class="wrapper">
+        <div class="container">
+            <h1></h1>
+            <form id='fData' role="form"></form>
+            <div id='cData' style="display:none;"></div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="parent_body">
+                <button id="btn-left" class="btn btn-default prev_button"><img src="img/back_arrow.png"></button>
+                <p class="counter_text"><span> 1</span> of 1</p>
+                <button id="btn-right" class="btn btn-default"><img src="img/forward_arrow.png"></button>
+            </div>
+        </div>
+    </footer>
+
+    <div id="res" class="alert"></div>
+
+
+    <script language="javascript">
+var sf = null;
+var SectionWiseView = true;
+
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+$(document).ready(function ()
+{
+    var projectId = getParameterByName("pid");
+    var language = getParameterByName("lang");
+    var mandatory = getParameterByName("mandatory");
+    var qno = getParameterByName("qno");
+  
+
+    //Open style.css according to language
+    var cssId = 'styles';  // you could encode the css path itself to generate id..
+    if (!document.getElementById(cssId))
+    {
+        var head  = document.getElementsByTagName('head')[0];
+        var link  = document.createElement('link');
+        link.id   = cssId;
+        link.rel  = 'stylesheet';
+        link.type = 'text/css';
+        if (language.toUpperCase() != 'EN') {
+            link.href = 'css/style.'+language+'.css';
+        } else {
+            link.href = 'css/style.css';
+        }
+        link.media = 'all';
+        head.appendChild(link);
+    }
+
+
+
+    $.ajax({
+        url: '/Designer/GetProjectSectionFieldsJSON/' + projectId + '/' + language,
+        type: 'GET',
+        success: function(data) {
+            try {
+                //Replace tags with some default values
+                //On mobile platform, this is done by using session and system values
+                data = data.replace("%USER%", "CurrentUser");
+
+                sf = new surveyForm(data);
+                sf.platform = "web";
+                sf.build(mandatory);
+
+                if (typeof(qno) != "undefined" && parseInt(qno) > 0) {
+                    sf.qno = parseInt(qno);
+                }
+                $('#fData').html(sf.formView);
+
+                $('#cData').html(sf.connectedFormView);
+
+                $(".btn").click(function(event)
+                {
+                    event.preventDefault(); // cancel default behavior
+                });
+
+                sf.refreshPage();
+
+                //var jsonForm_values = '[{"FieldValue":null,"FieldId":1430,"sbjnum":8129246},{"FieldValue":"2","FieldId":1431,"sbjnum":8129246},{"FieldValue":"1","FieldId":1432,"sbjnum":8129246},{"FieldValue":"OK","FieldId":2793,"sbjnum":8129246},{"FieldValue":null,"FieldId":4052,"sbjnum":8129246},{"FieldValue":",2,","FieldId":4053,"sbjnum":8129246},{"FieldValue":null,"FieldId":4054,"sbjnum":8129246},{"FieldValue":"06\/03\/2015","FieldId":4055,"sbjnum":8129246},{"FieldValue":null,"FieldId":4056,"sbjnum":8129246},{"FieldValue":null,"FieldId":4057,"sbjnum":8129246},{"FieldValue":"qw,xxc,xcc","FieldId":4058,"sbjnum":8129246},{"FieldValue":null,"FieldId":4059,"sbjnum":8129246},{"FieldValue":null,"FieldId":4060,"sbjnum":8129246},{"FieldValue":"2,","FieldId":7391,"sbjnum":8129246},{"FieldValue":"2,","FieldId":7392,"sbjnum":8129246},{"FieldValue":"2,2,2","FieldId":7393,"sbjnum":8129246}]';
+                //sf.updateValues(jsonForm_values);
+
+
+            }
+            catch(err) {
+                alert(err.stack);
+            }
+        }
+    });
+
+
+    if(language.toUpperCase() == "AR") {
+
+        $('html').attr('dir','rtl');
+        $('.mrradio div').addClass('radio-ar');
+        $('.mmchkbx div').addClass('radio-ar');
+        $('.counter_text span').addClass('frst-pgn');
+
+        $('#btn-right').addClass('backButton');
+        $('#btn-right').click(function() {
+            sf.PrevPage();
+        });
+
+        $('#btn-left').addClass('forwardButton');
+        $('#btn-left').click(function() {
+            sf.NextPage();
+
+        });
+    }
+    else {
+        $('#btn-right').addClass('forwardButton');
+        $('#btn-right').click(function() {
+            sf.NextPage();
+        });
+
+        $('#btn-left').addClass('backButton');
+        $('#btn-left').click(function() {
+            sf.PrevPage();
+        });
+    }
+
+	$(window).resize(function() {
+	    resizePageLayout();
+	    setTimeout(function () { resizeShelfImages(); }, 1000);
+	});
+
+    resizePageLayout();
+    setTimeout(function () { resizeShelfImages(); }, 1000);
+});
+
+function resizePageLayout() {
+    var prntbdywdth = $('.parent_body').width();
+    var getwdth = $('.counter_text').width();
+    var getwdthbtn = $('.parent_body button img').width() + 15; //with padding
+    var ttlbtn = getwdthbtn * 2;
+    $('.counter_text').css('width' , prntbdywdth- ttlbtn);
+
+    var winhgt = $(window).height();
+    var fthgt = $('#btn-left').height();
+    var mrgn_ft = winhgt - fthgt;
+    $('.wrapper').height(mrgn_ft - 30 - 50);
+
+    $('form').width($('div.container').width());
+    $('form').css('overflow', 'hidden');
+}
+
+function resizeShelfImages() {
+
+    var shelfHeight=new Array();
+    var shelfWidth=new Array();
+
+    var shelfImgHeight=new Array();
+    var shelfImgWidth=new Array();
+
+    var shelfImageHeightRatio=new Array();
+    var shelfImageWidthRatio=new Array();
+
+    var actualShelf=new Array();
+    var shthis=new Array();
+
+    var shelfInnerHeight=new Array();
+    var bottleOuterHeight=new Array();
+    var shelfAreaHeight=new Array();
+    var rowsLength=new Array();
+    var shelfAreaWidth=new Array();
+
+    var i=0;
+
+    $('.shelf-bordr').each(function(indexsb){
+
+        bg_url = $(this).css('background-image').replace(/url\(|\)$|"/ig, '');
+        if (bg_url != "http://capimis.apps.dna.com.sa/Pictures/SurveyMedia/" && bg_url.length > 0) {
+            actualShelf[indexsb] = new Image();
+            actualShelf[indexsb].src = bg_url;
+
+            if (actualShelf[indexsb].naturalWidth == 0) {
+                actualShelf[indexsb].onload = function () {
+                    resizeShelfImages();
+                };
+                return;
+            }
+
+            //Considering that Width is greater than Height
+            var resizeRatio = actualShelf[indexsb].naturalWidth / actualShelf[indexsb].naturalHeight;
+
+            if ($('.wrapper').width() > $('.wrapper').height()) {
+                //Set width according to available height
+                shelfAreaHeight[indexsb] = $('.wrapper').height() - 30;                
+                shelfAreaWidth[indexsb] = shelfAreaHeight[indexsb] * resizeRatio;
+
+                //Width correction
+                if (shelfAreaWidth[indexsb] > $(window).width()) {
+                    //Set height according to available width
+                    shelfAreaWidth[indexsb] = $('.container').width();
+                    shelfAreaHeight[indexsb] = shelfAreaWidth[indexsb] / resizeRatio;
+                }
+            } else {
+                //Set height according to available width
+                shelfAreaWidth[indexsb] = $('.container').width();
+                shelfAreaHeight[indexsb] = shelfAreaWidth[indexsb] / resizeRatio;
+            }
+
+            //shelfAreaHeight[indexsb] -= ($('.sh_label').height() + 55);
+
+            $(this).css('width', shelfAreaWidth[indexsb]);
+            $(this).css('height', shelfAreaHeight[indexsb]);
+
+            rowsLength[indexsb] = $(this).find('div.prd_row_wrap').length;
+
+            shthis[indexsb] = $(this);
+
+            shthis[indexsb].find('img').each(function (indexi) {
+
+                if (typeof shelfInnerHeight[indexsb] == 'undefined' || shelfInnerHeight[indexsb] == null) {
+                    shelfInnerHeight[indexsb] = new Array();
+                }
+
+                if (typeof bottleOuterHeight[indexsb] == 'undefined' || bottleOuterHeight[indexsb] == null) {
+                    bottleOuterHeight[indexsb] = new Array();
+                }
+
+                shelfInnerHeight[indexsb][indexi] = (shelfAreaHeight[indexsb] / 100) * 92;
+
+                bottleOuterHeight[indexsb][indexi] = shelfInnerHeight[indexsb][indexi] / rowsLength[indexsb];
+
+                //$(this).css('min-width', 10);
+                //$(this).css('min-height', 20);
+
+                $(this).parent().parent().css('height', bottleOuterHeight[indexsb][indexi]);
+            });
+        }
+    });
+
+    var resizeTimer;
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () {
+        if (sf != null) $(".prd-img-wrap").hide().show(0);
+    }, 100);
+
+
+}
+
+function getPartialData() {
+    sf.saveData();
+}
+
+//Called for setting path of Picture taken from Camera and when Audio recording is finished.
+function setValues(id, value) {
+    sf.setControlValue(id, value);
+}
+
+function updateValues(data) {
+    sf.updateValues(data);
+}
+</script>
+</body>
+</html>

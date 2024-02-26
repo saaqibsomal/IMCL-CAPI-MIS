@@ -1,0 +1,211 @@
+﻿@model IEnumerable<DNA_CAPI_MIS.Models.FieldProgress>
+
+@{
+    ViewBag.Title = "Census Field Progress";
+}
+
+@section Scripts {
+@Scripts.Render("~/bundles/bootstrap/dialog")
+
+
+<script>
+    $(document).ready(function () {
+        /* jQueryKnob */
+        $(".knob").knob();
+    });
+
+    function GetUrlParams(sParam) {
+        var sPageURL = window.location.search.substring(1);
+        var sURLVariables = sPageURL.split('&');
+        for (var i = 0; i < sURLVariables.length; i++) {
+            var sParameterName = sURLVariables[i].split('=');
+            if (sParameterName[0] == sParam) {
+                return decodeURIComponent(sParameterName[1]);
+            }
+        }
+    }
+
+    function GetUrl(country) {
+        var turl = "/Census/SurveyLocationWise/@ViewBag.ProjectId?language=en-US";
+        turl += '&country=' + country;
+        turl += '&projectId=' + GetUrlParams('projectId');
+        window.location.href = turl;
+    }
+
+    function OnKMLDistrictChange(districtId, mapToDist) {
+        if (mapToDist.selectedIndex == -1)
+            return null;
+
+        mapToDistName = mapToDist.options[mapToDist.selectedIndex].text;
+        mapToDistId = mapToDist.options[mapToDist.selectedIndex].value;
+        //alert(districtId + " = " + mapToDistId + " | " + mapToDistName);
+
+        // Get some values from elements on the page:
+        var projectId = @ViewBag.ProjectId;
+        var url = "/District/MapToForProject/" + districtId;
+
+        //Show Overlay
+        $(".overlay").css('display', 'block');
+        $(".loading-img").css('display', 'block');
+
+        // Send the data using post
+        var posting = $.post(url, "mapToDistName=" + mapToDistName, "projectId=" + projectId);
+
+        // Put the results in a div
+        posting.done(function (data) {
+
+            //Hide Overlay
+            $(".overlay").css('display', 'none');
+            $(".loading-img").css('display', 'none');
+
+            alert("Please refresh the page when you are done mapping the District names.");
+        });
+
+    }
+    function OnCityDistrictChange(mapFromDistId, mapFromDistName, mapToDist) {
+        if (mapToDist.selectedIndex == -1)
+            return null;
+
+        mapToDistName = mapToDist.options[mapToDist.selectedIndex].text;
+        mapToDistId = mapToDist.options[mapToDist.selectedIndex].value;
+        //alert(districtId + " = " + mapToDistId + " | " + mapToDistName);
+
+        var url = "/District/ReplaceWith/" + mapFromDistId;
+
+        BootstrapDialog.confirm('You will replace District (' + mapFromDistId + ') "' + mapFromDistName + '" with (' + mapToDistId + ') "' + mapToDistName + '". ARE YOU SURE YOU WANT TO CONTINUE? THIS ACTION CANNOT BE UN-DONE!', function(result){
+            if(result) {
+                //Show Overlay
+                $(".overlay").css('display', 'block');
+                $(".loading-img").css('display', 'block');
+
+                // Send the data using post
+                var posting = $.post(url, "mapToDistId=" + mapToDistId);
+
+                // Put the results in a div
+                posting.done(function (data) {
+
+                    //Hide Overlay
+                    $(".overlay").css('display', 'none');
+                    $(".loading-img").css('display', 'none');
+
+                    alert("Please refresh the page when you are done replacing the Districts.");
+                });
+            }
+        });
+    }
+</script>
+}
+
+@Styles.Render("~/Content/styles/bootstrap/dialog")
+
+<style>
+    .vmiddle-cell {
+        vertical-align: middle !important;
+    }
+</style>
+<h2>@ViewBag.Title</h2>
+<h4>For @ViewBag.ProjectName</h4>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box box-danger" id="loading-example">
+            <div class="box-header">
+                <!-- tools box -->
+                <div class="pull-right box-tools">
+                    <a href="/Census/FieldProgress/@ViewBag.ProjectId">&lt;&lt; Back to Cities&nbsp;</a>
+                    <button class="btn btn-danger btn-sm refresh-btn" data-toggle="tooltip" title="Reload"><i class="fa fa-refresh"></i></button>
+                </div>
+                <i class="fa fa-cloud"></i>
+                <h3 class="box-title"><a href="/Census/FieldProgress/@ViewBag.ProjectId">@ViewBag.ViewTitle</a></h3>
+            </div><!-- /.box-header -->
+            <div class="box-body table-responsive no-padding">
+                <table class="table table-hover">
+                    <tr>
+                        <th style="width:250px;">Name</th>
+                        @if (ViewBag.CityName == null)
+                        {
+                            <th style="width:50px;">City Map</th>
+                        }
+                        <th style="width:100px;">Change Name To</th>
+                        <th style="width:100px;">Name in KML</th>
+                        <th style="width:100px;">POI Count</th>
+                        <th style="width:100px;">Distance<br />Covered (kM)</th>
+                        <th style="width:100px;">Distance<br />Available (kM)</th>
+                        <th style="width:125px;"></th>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        var dPercent = 0;
+                        if (item.DistanceTotal > 0)
+                        {
+                            dPercent = (int)Math.Round((double)(item.DistanceMade / item.DistanceTotal) * 100, 0);
+                        }
+                        <tr>
+                            @if (@item.DistrictId == 0) 
+                            { 
+                            <td class="vmiddle-cell"><a href="/Census/FieldProgress/@ViewBag.ProjectId?cid=@item.CityId">@item.CityName</a></td>
+                            <td class="vmiddle-cell"><a href="/Census/FieldView/@ViewBag.ProjectId?c=@item.CityId">Map</a></td>
+                            }
+                            else
+                            {
+                            <td class="vmiddle-cell"><a href="/Census/FieldView/@ViewBag.ProjectId?c=@item.CityId&district=@item.DistrictId">@item.DistrictName</a></td>
+                            <td class="vmiddle-cell"><div>
+                                <select name="cityDistrict" style="width:120px;height:30px;" onchange="OnCityDistrictChange(@item.DistrictId, '@item.DistrictName', this)">
+                                    @if (ViewBag.CityDistricts != null)
+                                    {
+                                        <option value="0"></option>
+                                        foreach (var cd in ViewBag.CityDistricts)
+                                        {
+                                            if (cd.ID == item.DistrictId)
+                                            {
+                                                <option selected="selected" value="@cd.ID">@cd.Name</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@cd.ID">@cd.Name</option>
+                                            }
+                                        }
+                                    }
+                                </select>
+                            </div></td>
+                            <td class="vmiddle-cell"><div>
+                                <select name="kmlDistrict" style="width:120px;height:30px;" onchange="OnKMLDistrictChange(@item.DistrictId, this)">
+                                    @if (ViewBag.KMLDistricts != null)
+                                    {
+                                        <option value="0"></option>
+                                        foreach (var kd in ViewBag.KMLDistricts)
+                                        {
+                                            if (kd.ID == item.DistrictId)
+                                            {
+                                                <option selected="selected" value="@kd.ID">@kd.Name</option>
+                                            }
+                                            else
+                                            {
+                                                <option value="@kd.ID">@kd.Name</option>
+                                            }
+                                        }
+                                    }
+                                </select>
+                            </div></td>
+                            }
+                            <td class="vmiddle-cell">@item.SurveyCount</td>
+                            <td class="vmiddle-cell">@item.DistanceMade</td>
+                            <td class="vmiddle-cell">@item.DistanceTotal</td>
+                            <td class="vmiddle-cell">
+                                <div class="text-center" style="float:right;margin-right:10px">
+                                    <input type="text" class="knob" data-readonly="true" value="@dPercent" data-width="60" data-height="60" data-fgcolor="#f56954" />
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div><!-- /.box-body -->
+        </div><!-- /.box -->
+    </div>
+
+    <!-- Loading (remove the following to stop the loading)-->
+    <div class="overlay" style="display:none;"></div>
+    <div class="loading-img" style="display: none;"></div>
+    <!-- end loading -->
+
+</div>

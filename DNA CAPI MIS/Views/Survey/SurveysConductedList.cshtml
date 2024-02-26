@@ -1,0 +1,35 @@
+﻿@model IEnumerable<TCF_CAPI_MIS.Models.SurveyDataView>
+
+<link rel="stylesheet" href="~/Content/jqwidgets/jqwidgets/styles/jqx.base.css" type="text/css" />
+<link rel="stylesheet" href="~/Content/DSDS/dsds.css" type="text/css" />
+
+
+<div class="row desktop">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title" style="width:100%">@ViewBag.Project.Name</h3>
+            </div><!-- /.box-header -->
+            <div class="box-body table-responsive no-padding">
+                <table class="table table-hover">
+                    <tr>
+                        <th>Reported On</th>
+                        <th>Reported By</th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td><a href="/SBuilder/view-report.html?lang=en&pid=@ViewBag.Project.ID&sid=@item.sbjnum">@item.Created</a></td>
+                            <td><a href="/SBuilder/view-report.html?lang=en&pid=@ViewBag.Project.ID&sid=@item.sbjnum">@item.SurveyorName</a></td>
+                        </tr>
+                    }
+                </table>
+            </div><!-- /.box-body -->
+        </div><!-- /.box -->
+    </div>
+    <!-- Loading (remove the following to stop the loading)-->
+    <div class="overlay" style="display:none;"></div>
+    <div class="loading-img" style="display: none;"></div>
+    <!-- end loading -->
+</div>

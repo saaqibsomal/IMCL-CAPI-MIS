@@ -1,0 +1,321 @@
+﻿@model IEnumerable<DNA_CAPI_MIS.Models.SurveyDataView>
+
+@{
+    ViewBag.Title = "Survey Results - Approval";
+    if (ViewBag.FieldValueAs == "1")
+    {
+        ViewBag.Title += " (Response Times)";
+    }
+}
+<link rel="stylesheet" href="~/Content/jqwidgets/jqwidgets/styles/jqx.base.css" type="text/css" />
+
+<p>
+    @Html.ActionLink("All Projects", "OpenProject", "Designer") |
+    @Html.ActionLink("Project Overview", "ProjectOverview", "Designer", new { id = ViewBag.Project.ID }, null)
+</p>
+<h4><strong>@ViewBag.Project.Name</strong></h4>
+<h4>@ViewBag.Title</h4>
+
+
+<div>
+    <a href="/Survey/SurveyApprovalFilter/@ViewBag.Project.ID">Modify Data Filters</a>
+    <br/>
+</div>
+
+@if (ViewBag.ErrorMessage != null && ViewBag.ErrorMessage.Length > 0)
+{
+    <h4>@ViewBag.ErrorMessage</h4>
+}
+else
+{
+
+@Styles.Render("~/Content/styles/bootstrap/dialog")
+@Styles.Render("~/Content/styles/jqwidgets")
+
+@section Scripts {
+@Scripts.Render("~/bundles/bootstrap/jqwidgets")
+@Scripts.Render("~/bundles/bootstrap/dialog")
+
+<script type="text/javascript">
+    var projectId = "@ViewBag.Project.ID";
+
+    var dataGrid = new Array();
+
+    function PopulateData() {
+        // prepare the data
+        var data = new Array();
+        var row = {};
+
+        @{
+            var currentSbjnum = 0;
+            var headerPrinted = false;
+            var firstRow = true;
+            var id = 0;
+        }
+        @foreach (var item in Model)
+        {
+            if (currentSbjnum != item.sbjnum)
+            {
+                if (!firstRow)
+                {
+                    WriteLiteral("data[" + id++ + "] = row;\n");
+                }
+                firstRow = false;
+                currentSbjnum = item.sbjnum;
+                WriteLiteral("row = {};");
+                WriteLiteral("row['id'] = " + id + ";");
+                WriteLiteral("row['OpStatus'] = '" + item.OpStatus + "';");
+                WriteLiteral("row['QCStatus'] = '" + item.QCStatus + "';");
+                WriteLiteral("row['sbjnum'] = " + item.sbjnum + ";");
+                WriteLiteral("row['sbjnum2'] = " + item.sbjnum + ";");
+                WriteLiteral("row['STG_sbjnum'] = " + item.STG_sbjnum + ";");
+                WriteLiteral("row['Created'] = '" + item.Created + "';");
+                WriteLiteral("row['Longitude'] = " + item.Longitude + ";");
+                WriteLiteral("row['Latitude'] = " + item.Latitude + ";");
+                WriteLiteral("row['SurveyorName'] = '" + item.SurveyorName + "';");
+                WriteLiteral("row['Country'] = '" + item.CountryName.Replace("'", "\'") + "';");
+                WriteLiteral("row['City'] = '" + Url.Encode(item.CityName) + "';");
+                WriteLiteral("row['District'] = '" + Url.Encode(item.DistrictName) + "';");
+                WriteLiteral("row['DeviceSurveyId'] = '" + item.DeviceSurveyId + "';");
+                WriteLiteral("row['AppVersion'] = '" + item.AppVersion + "';");
+                WriteLiteral("row['CITY_GPS'] = '" + item.CITY_GPS + "';");
+                WriteLiteral("row['DISTRICT_GPS'] = '" + item.DISTRICT_GPS + "';");
+                WriteLiteral("row['DISTRICT_AUDITOR'] = '" + item.DISTRICT_AUDITOR + "';");
+                WriteLiteral("row['BUILDING_NUMBER_AUDITOR'] = '" + item.BUILDING_NUMBER_AUDITOR + "';");
+                WriteLiteral("row['BUILDING_TYPE_DROPDOWN'] = '" + item.BUILDING_TYPE_DROPDOWN + "';");
+                WriteLiteral("row['STREET_NAME_GPS'] = '" + item.STREET_NAME_GPS + "';");
+                WriteLiteral("row['STREET_NAME_DROPDOWN'] = '" + Url.Encode(item.STREET_NAME_DROPDOWN) + "';");
+                WriteLiteral("row['STREET_NAME_AUDITOR'] = '" + Url.Encode(item.STREET_NAME_AUDITOR) + "';");
+                WriteLiteral("row['ZIPCODE_GPS'] = '" + item.ZIPCODE_GPS + "';");
+                WriteLiteral("row['ADDITIONAL_CODE_GPS'] = '" + item.ADDITIONAL_CODE_GPS + "';");
+                WriteLiteral("row['LANDMARK_GPS'] = '" + item.LANDMARK_GPS + "';");
+                WriteLiteral("row['LANDMARK_AUDITOR'] = '" + Url.Encode(item.LANDMARK_AUDITOR) + "';");
+                WriteLiteral("row['STC_SHEET_AUDITOR'] = '" + item.STC_SHEET_AUDITOR + "';");
+                WriteLiteral("row['MOBILY_SHEET_AUDITOR'] = '" + item.MOBILY_SHEET_AUDITOR + "';");
+            }
+            WriteLiteral("row['_" + item.FieldId + "'] = urldecode(\"" + Url.Encode(item.FieldValue) + "\");");
+        }
+        @if (!firstRow)
+        {
+            WriteLiteral("data[" + id++ + "] = row;\n");
+        }
+
+        return data;
+    }
+
+    $(document).ready(function () {
+        // prepare the data
+        dataGrid = PopulateData();
+
+        var source =
+        {
+            localdata: dataGrid,
+            datafields:
+                [
+            @if (Model.Count() > 0)
+            {
+                currentSbjnum = Model.FirstOrDefault().sbjnum;
+            }
+                    @{headerPrinted = false;}
+                    @foreach (var item in Model)
+            {
+                if (currentSbjnum != item.sbjnum) { break; }
+                if (!headerPrinted)
+                {
+                    headerPrinted = true;
+                    WriteLiteral("{ name: 'sbjnum', type: 'number' },");
+                    WriteLiteral("{ name: 'sbjnum2', type: 'number' },");
+                    WriteLiteral("{ name: 'STG_sbjnum', type: 'number' },");
+                    WriteLiteral("{ name: 'OpStatus', type: 'string' },");
+                    WriteLiteral("{ name: 'QCStatus', type: 'string' },");
+                    WriteLiteral("{ name: 'Created', type: 'string' },");
+                    WriteLiteral("{ name: 'Longitude', type: 'number' },");
+                    WriteLiteral("{ name: 'Latitude', type: 'number' },");
+                    WriteLiteral("{ name: 'SurveyorName', type: 'string' },");
+                    WriteLiteral("{ name: 'Country', type: 'string' },");
+                    WriteLiteral("{ name: 'City', type: 'string' },");
+                    WriteLiteral("{ name: 'District', type: 'string' },");
+                    WriteLiteral("{ name: 'DeviceSurveyId', type: 'string' },");
+                    WriteLiteral("{ name: 'AppVersion', type: 'string' },");
+                    WriteLiteral("{ name: 'CITY_GPS', type: 'string' },");
+                    WriteLiteral("{ name: 'DISTRICT_GPS', type: 'string' },");
+                    WriteLiteral("{ name: 'DISTRICT_AUDITOR', type: 'string' },");
+                    WriteLiteral("{ name: 'BUILDING_NUMBER_AUDITOR', type: 'string' },");
+                    WriteLiteral("{ name: 'BUILDING_TYPE_DROPDOWN', type: 'string' },");
+                    WriteLiteral("{ name: 'STREET_NAME_GPS', type: 'string' },");
+                    WriteLiteral("{ name: 'STREET_NAME_DROPDOWN', type: 'string' },");
+                    WriteLiteral("{ name: 'STREET_NAME_AUDITOR', type: 'string' },");
+                    WriteLiteral("{ name: 'ZIPCODE_GPS', type: 'string' },");
+                    WriteLiteral("{ name: 'ADDITIONAL_CODE_GPS', type: 'string' },");
+                    WriteLiteral("{ name: 'LANDMARK_GPS', type: 'string' },");
+                    WriteLiteral("{ name: 'LANDMARK_AUDITOR', type: 'string' },");
+                    WriteLiteral("{ name: 'STC_SHEET_AUDITOR', type: 'string' },");
+                    WriteLiteral("{ name: 'MOBILY_SHEET_AUDITOR', type: 'string' },");
+                }
+                WriteLiteral("{ name: '_" + item.FieldId + "', type: 'string' },");
+            }
+                ],
+            datatype: "array",
+            updaterow: function (rowid, rowdata) {
+                // synchronize with the server - send update command
+                $.get("/Survey/SurveyApprovalApprove/" + rowdata['sbjnum'] + "?OpStatus=" + rowdata['OpStatus']);
+            }
+        };
+
+        var dataAdapter = new $.jqx.dataAdapter(source);
+
+        var toThemeProperty = function (className) {
+            return className + " " + className + "-" + theme;
+        }
+
+        var groupsrenderer = function (text, group, expanded, data) {
+        }
+
+        var maplinkrenderer = function (row, column, value) {
+            return '<a onclick="ShowPOIMap(' + @ViewBag.Project.ID + ', ' + value + ')" href="#">Map</a>';
+        }
+
+        var initialFilter = initialGridFilter();
+
+        // initialize jqxGrid
+        $("#jqxgrid").jqxGrid(
+            {
+                theme: 'metro',
+                editable: true,
+                editmode: 'click',
+                width: '100%',
+                source: dataAdapter,
+                groupable: false,
+                columnsresize: true,
+                columnsreorder: true,
+                //groupsrenderer: groupsrenderer,
+                altrows: true,
+                sortable: true,
+                filterable: true,
+                filtermode: 'excel',
+                showfilterrow: false,
+                selectionmode: 'checkbox',
+                columns: [
+            @{headerPrinted = false;}
+            @foreach (var item in Model)
+            {
+                string FiledTye = "";
+                if (currentSbjnum == item.sbjnum)
+                {
+                    if (!headerPrinted)
+                    {
+                        headerPrinted = true;
+
+                        //Removed initial filter in following line: WriteLiteral("{ text: 'Approved', filter: initialFilter, columntype: 'template', datafield: 'OpStatus', width: 110 },");
+                        WriteLiteral("{ text: 'Approved', columntype: 'template', datafield: 'OpStatus', width: 110 },");
+                        WriteLiteral("{ text: 'Survey Id', groupable: false, editable: false, datafield: 'sbjnum', type: 'number', width: 80 },");
+                        WriteLiteral("{ text: 'Subject Num', groupable: false, editable: false, datafield: 'STG_sbjnum', type: 'number', width: 80 },");
+                        WriteLiteral("{ text: 'Created On', groupable: true, editable: false, datafield: 'Created', type: 'string', width: 120 },");
+                        //WriteLiteral("{ text: 'Country', groupable: true, editable: false, datafield: 'Country', type: 'string', width: 150 },");
+                        WriteLiteral("{ text: 'City', groupable: true, editable: false, datafield: 'City', type: 'string', width: 150 },");
+                        WriteLiteral("{ text: 'District', groupable: true, editable: false, datafield: 'District', type: 'string', width: 150 },");
+                        //WriteLiteral("{ text: 'Longitude', groupable: true, editable: false, datafield: 'Longitude', type: 'number', width: 80 },");
+                        //WriteLiteral("{ text: 'Latitude', groupable: true, editable: false, datafield: 'Latitude', type: 'number', width: 80 },");
+                        WriteLiteral("{ text: 'Map', groupable: true, editable: false, datafield: 'sbjnum2', cellsrenderer: maplinkrenderer, width: 80 },");
+                        WriteLiteral("{ text: 'Surveyor Name', groupable: true, editable: false, datafield: 'SurveyorName', type: 'string', width: 80 },");
+                        WriteLiteral("{ text: 'Device Survey Id', columntype: 'template', datafield: 'DeviceSurveyId', width: 110 },");
+                        WriteLiteral("{ text: 'App Version', groupable: true, editable: false, datafield: 'AppVersion', type: 'number', width: 80 },");
+                        if (ViewBag.Project.NeedMapInput == true)
+                        {
+                            WriteLiteral("{ text: 'City (Device)', groupable: true, editable: false, datafield: 'CITY_GPS', type: 'string', width: 120 },");
+                            WriteLiteral("{ text: 'District (Device)', groupable: true, editable: false, datafield: 'DISTRICT_GPS', type: 'string', width: 150 },");
+                            WriteLiteral("{ text: 'District (Auditor)', groupable: true, editable: false, datafield: 'DISTRICT_AUDITOR', type: 'string', width: 150 },");
+                            WriteLiteral("{ text: 'Building #', groupable: true, editable: false, datafield: 'BUILDING_NUMBER_AUDITOR', type: 'string', width: 150 },");
+                            WriteLiteral("{ text: 'Building Type', groupable: true, editable: false, datafield: 'BUILDING_TYPE_DROPDOWN', type: 'number', width: 80 },");
+                            WriteLiteral("{ text: 'Street Name (Device)', groupable: true, editable: false, datafield: 'STREET_NAME_GPS', type: 'number', width: 80 },");
+                            WriteLiteral("{ text: 'Street Name (Locator)', groupable: true, editable: false, datafield: 'STREET_NAME_DROPDOWN', width: 80 },");
+                            WriteLiteral("{ text: 'Street Name (Auditor)', groupable: true, editable: false, datafield: 'STREET_NAME_AUDITOR', type: 'string', width: 80 },");
+                            WriteLiteral("{ text: 'Zip Code (Locator)', groupable: true, editable: false, datafield: 'ZIPCODE_GPS', type: 'string', width: 150 },");
+                            WriteLiteral("{ text: 'Additional Code (Locator)', groupable: true, editable: false, datafield: 'ADDITIONAL_CODE_GPS', type: 'string', width: 150 },");
+                            WriteLiteral("{ text: 'Landmark (Device)', groupable: true, editable: false, datafield: 'LANDMARK_GPS', type: 'string', width: 150 },");
+                            WriteLiteral("{ text: 'Landmark (Auditor)', groupable: true, editable: false, datafield: 'LANDMARK_AUDITOR', type: 'number', width: 80 },");
+                            WriteLiteral("{ text: 'STC Sheet', groupable: true, editable: false, datafield: 'STC_SHEET_AUDITOR', type: 'number', width: 80 },");
+                            WriteLiteral("{ text: 'Mobily Sheet', groupable: true, editable: false, datafield: 'MOBILY_SHEET_AUDITOR', width: 80 },");
+                        }
+                    }
+
+
+                    //if (FiledTye != item.FieldType && item.FieldType != null)
+                    //{
+                    //    WriteLiteral("{ text: '" + item.FieldType + "' , groupable: true, editable: false, datafield: 'FieldType', type: 'string', width: 80 },");
+                    //    FiledTye = item.FieldType;
+                    //}
+
+
+
+
+                    var reportTitle = "";
+                    if (ViewBag.ReportTitleAs == "0")
+                    {
+                        reportTitle = Url.Encode(item.ReportTitle);
+                    }
+                    else if (ViewBag.ReportTitleAs == "1")
+                    {
+                        reportTitle = Url.Encode(item.Title);
+                    }
+                    else if (ViewBag.ReportTitleAs == "2")
+                    {
+                        reportTitle = Url.Encode(item.ReportTitle + "-" + item.Title);
+                    }
+                    if(reportTitle == null )
+                    {
+                        reportTitle = item.FieldType;
+                    }
+                    WriteLiteral("{ text: urldecode('" + reportTitle + "'), groupable: true, editable: true, datafield: '_" + item.FieldId + "', type: 'string', width: 100 },");
+                }
+            }
+            ]
+        });
+
+        $("#excelExport").click(function () {
+            var exportInfo = $("#jqxgrid").jqxGrid('exportdata', 'xls');
+            download("DataSheet_" + "@DateTime.Today.ToShortDateString().Replace("/", "")" + ".xls", exportInfo);
+        });
+    });
+
+</script>
+
+<script src="~/Content/Survey/SurveyApproval.js"></script>
+}
+
+<div id='jqxWidget'>
+    <div id="jqxgrid"></div>
+
+    <div class="form-group">
+
+        <div style="float: left; margin-left: 20px; margin-top: 20px;">
+            <input type="button" value="Approve" id='recApprove' class="btn btn-default" />
+        </div>
+
+        <div style="float: left; margin-left: 20px; margin-top: 20px;">
+            <input type="button" value="Reject" id='recReject' class="btn btn-default" />
+        </div>
+
+        <div style="float: left; margin-left: 20px; margin-top: 20px;">
+            <input type="button" value="Mark as Junk" id='recTest' class="btn btn-default" />
+        </div>
+
+        <div style="float: left; margin-left: 20px; margin-top: 20px;">
+            <input type="button" value="Copy" id='recCopy' class="btn btn-default" />
+        </div>
+
+        <div style="float: left; margin-left: 20px; margin-top: 20px;">
+            <input type="button" value="Undo Changes" id='recUndo' class="btn btn-default" />
+        </div>
+
+        <div style="float: left; margin-left: 20px; margin-top: 20px;">
+            <input type="button" value="Export to Excel" id='excelExport' class="btn btn-default" />
+        </div>
+
+        <div style="float: left; margin-left: 20px; margin-top: 20px;">
+            <input value="Remove Filter" id="clearfilteringbutton" type="button" class="btn btn-default" />
+        </div>
+        <br />
+    </div>
+</div>
+}

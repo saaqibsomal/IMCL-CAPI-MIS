@@ -1,0 +1,4917 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>districts-riyadh</name>
+	<open>1</open>
+	<Style id="sh_ylw-pushpin9000">
+		<BalloonStyle>
+			<text>$[description]</text>
+		</BalloonStyle>
+		<LineStyle>
+			<color>ff0000ff</color>
+		</LineStyle>
+		<PolyStyle>
+			<color>7f7f0000</color>
+			<fill>0</fill>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="msn_ylw-pushpin0">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_ylw-pushpin</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_ylw-pushpin</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="sh_ylw-pushpin900">
+		<BalloonStyle>
+			<text>$[description]</text>
+		</BalloonStyle>
+		<LineStyle>
+			<color>ff0000ff</color>
+		</LineStyle>
+		<PolyStyle>
+			<color>7f7f0000</color>
+			<fill>0</fill>
+		</PolyStyle>
+	</Style>
+	<Style id="sh_ylw-pushpin">
+		<IconStyle>
+			<scale>1.3</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<LineStyle>
+			<color>ff0000ff</color>
+		</LineStyle>
+		<PolyStyle>
+			<fill>0</fill>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="msn_ylw-pushpin">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_ylw-pushpin0</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_ylw-pushpin0</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="sn_ylw-pushpin14000">
+		<LabelStyle>
+			<scale>0</scale>
+		</LabelStyle>
+		<BalloonStyle>
+			<text>$[description]</text>
+		</BalloonStyle>
+		<LineStyle>
+			<color>ff0000ff</color>
+		</LineStyle>
+		<PolyStyle>
+			<color>7f7f0000</color>
+			<fill>0</fill>
+		</PolyStyle>
+	</Style>
+	<Style id="sn_ylw-pushpin140000">
+		<LabelStyle>
+			<scale>0</scale>
+		</LabelStyle>
+		<BalloonStyle>
+			<text>$[description]</text>
+		</BalloonStyle>
+		<LineStyle>
+			<color>ff0000ff</color>
+		</LineStyle>
+		<PolyStyle>
+			<color>7f7f0000</color>
+			<fill>0</fill>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="m_ylw-pushpin">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#s_ylw-pushpin</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#s_ylw-pushpin_hl</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="sn_ylw-pushpin">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<LineStyle>
+			<color>ff0000ff</color>
+		</LineStyle>
+		<PolyStyle>
+			<fill>0</fill>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="msn_ylw-pushpin1201">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_ylw-pushpin140000</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_ylw-pushpin900</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="msn_ylw-pushpin12010">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#sn_ylw-pushpin14000</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#sh_ylw-pushpin9000</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="s_ylw-pushpin_hl">
+		<IconStyle>
+			<scale>1.3</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<LineStyle>
+			<color>ff0000ff</color>
+		</LineStyle>
+		<PolyStyle>
+			<fill>0</fill>
+		</PolyStyle>
+	</Style>
+	<Style id="sn_ylw-pushpin0">
+		<LabelStyle>
+			<scale>0</scale>
+		</LabelStyle>
+		<BalloonStyle>
+			<text>$[description]</text>
+		</BalloonStyle>
+		<LineStyle>
+			<color>ff0000ff</color>
+		</LineStyle>
+		<PolyStyle>
+			<color>7f7f0000</color>
+			<fill>0</fill>
+		</PolyStyle>
+	</Style>
+	<Style id="sh_ylw-pushpin0">
+		<BalloonStyle>
+			<text>$[description]</text>
+		</BalloonStyle>
+		<LineStyle>
+			<color>ff0000ff</color>
+		</LineStyle>
+		<PolyStyle>
+			<color>7f7f0000</color>
+			<fill>0</fill>
+		</PolyStyle>
+	</Style>
+	<Style id="s_ylw-pushpin">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<LineStyle>
+			<color>ff0000ff</color>
+		</LineStyle>
+		<PolyStyle>
+			<fill>0</fill>
+		</PolyStyle>
+	</Style>
+	<Placemark>
+		<name>Al Khubbar</name>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<Polygon>
+			<tessellate>1</tessellate>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.33170805745058,25.22785785520982,0 46.33462550655072,25.21317002474939,0 46.34214969818059,25.17919205541288,0 46.35145586744256,25.16634271969365,0 46.36420352394264,25.14582899263943,0 46.36212738690394,25.14147957074734,0 46.35878096118412,25.12760107975038,0 46.36593901539463,25.11539927784488,0 46.37247286280375,25.10751357193178,0 46.37436713787283,25.09873646010762,0 46.37517652235085,25.09497751626688,0 46.37670776275436,25.06533780113476,0 46.39184058566054,25.05636214527975,0 46.42226684479844,25.03518690976357,0 46.4551806649905,25.01835167593857,0 46.45526216076168,25.01752990125368,0 46.4588698737549,25.01835417739986,0 46.47073440057805,25.03664421371106,0 46.4777123834351,25.04062874729798,0 46.49923158013536,25.05378736492155,0 46.49174032643187,25.07110637698304,0 46.4789572621712,25.09364149694135,0 46.45952691711878,25.12845415279443,0 46.43465230610963,25.14858113752198,0 46.41736936192008,25.16796642254303,0 46.37932178796433,25.19979792669628,0 46.33058069987424,25.23503360516716,0 46.33170805745058,25.22785785520982,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Banban</name>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<Polygon>
+			<tessellate>1</tessellate>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.4895080795107,24.9155721075253,0 46.49060235085086,24.92161311160501,0 46.50500179483907,24.93303487630212,0 46.52202802143123,24.93506183991217,0 46.53052864654759,24.9437980379413,0 46.55309741793536,24.94851003710594,0 46.57049311765146,24.96296899042612,0 46.58420599764203,24.96936237433111,0 46.60163342458036,24.97743619740125,0 46.59457915780767,24.99155927198622,0 46.60348054956361,24.99828740663149,0 46.61015708742315,25.00535101728307,0 46.6094139673417,25.01273802362359,0 46.59791099456648,25.04228086860325,0 46.56270137720873,25.04423830204064,0 46.53789368041075,25.04419063836106,0 46.50072717044655,25.05364597946824,0 46.47545531655551,25.03988355311387,0 46.47026690416865,25.03550719864384,0 46.45770136877312,25.01632211571904,0 46.46928401436124,25.00119111443057,0 46.47116634073823,24.97733848184929,0 46.47121303910243,24.96322597460846,0 46.4716117927974,24.94172678544588,0 46.47278184057949,24.92527644593847,0 46.47688842560108,24.91890724473298,0 46.4895080795107,24.9155721075253,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Qirawan</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Geerwan<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.564855,24.796874,0 46.56804100000001,24.797262,0 46.569457,24.79765,0 46.57059,24.797972,0 46.572789,24.799517,0 46.57428000000001,24.80125200000001,0 46.57662000000001,24.804791,0 46.579542,24.809656,0 46.58210100000001,24.812742,0 46.58487000000001,24.81454,0 46.613516,24.826475,0 46.55198603892966,24.94883797855504,0 46.53200535267619,24.94479224645094,0 46.52240245246432,24.93605320089731,0 46.50463315195199,24.93335235908601,0 46.4913481157268,24.92159228455903,0 46.48877215852044,24.91487696782392,0 46.50250398604439,24.91154208218974,0 46.51991977965646,24.90283791583397,0 46.53832570656896,24.88074249991498,0 46.54689385627487,24.86916107892832,0 46.54862391113095,24.86587337004278,0 46.55109537751214,24.86086699103457,0 46.55200173837754,24.85765381040863,0 46.55274338718109,24.85444054574031,0 46.553541,24.841122,0 46.55442090884499,24.83382840090946,0 46.55491557682527,24.82867190418032,0 46.55807700164672,24.81936325090886,0 46.56137075464811,24.80987280096623,0 46.564855,24.796874,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Arid</name>
+		<open>1</open>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<Polygon>
+			<tessellate>1</tessellate>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.637263741025,24.8755372492126,0 46.63726360477084,24.877217232151,0 46.58496013770829,24.96866213282053,0 46.56791278219175,24.96124742640848,0 46.55200829066153,24.94844266740997,0 46.60504758824833,24.84159469325817,0 46.61392737133432,24.82746096352408,0 46.6428178930708,24.83753794409187,0 46.65245110260499,24.84358934275216,0 46.637263741025,24.8755372492126,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Narjis</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Narjis<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.68764199999999,24.817912,0 46.690744,24.818986,0 46.693996,24.819629,0 46.70153199999999,24.819225,0 46.61568227176183,24.98736950261523,0 46.58510450447448,24.96910280926785,0 46.6368176072912,24.87550787871815,0 46.669842,24.810645,0 46.68764199999999,24.817912,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>King Khalid Airport</name>
+		<open>1</open>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<Polygon>
+			<tessellate>1</tessellate>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.63165935092162,24.95725341211639,0 46.7019147542803,24.81968323883976,0 46.70873847924,24.82188051375882,0 46.71751481346396,24.82496227962004,0 46.74629758402872,24.83820710345188,0 46.74824988320947,24.83953288649352,0 46.78047730642577,24.85543317259858,0 46.80295560297219,24.86957990363187,0 46.80100720524989,24.88508779609722,0 46.78538052903852,24.9094626301891,0 46.75364687450302,24.95994693195141,0 46.74192913152623,24.96968631358723,0 46.735093834113,24.97676866793811,0 46.73509473182524,24.98163807600533,0 46.7253276926474,24.98075128503654,0 46.71507329361588,24.99668421905206,0 46.70725943852398,25.00243661245543,0 46.67552217002384,24.99844070101903,0 46.66917785872675,24.99489598786688,0 46.66624491548991,25.00418738805808,0 46.61013375898001,25.01297319033482,0 46.60865920454913,25.00546355545373,0 46.59598509912233,24.99041171263232,0 46.5999117622561,24.98023576013859,0 46.61454811286282,24.98688008073046,0 46.63165935092162,24.95725341211639,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Ar Rimal</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Ramal<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.73558217360208,24.97676871686047,0 46.75169385301361,24.96127515234048,0 46.78342974690795,24.91433461853191,0 46.80100720524989,24.88508779609722,0 46.80246858967558,24.87179514494176,0 46.77901161929003,24.85410630808577,0 46.79364984590862,24.82263368704331,0 46.818331,24.83212,0 46.822174,24.833054,0 46.831487,24.834996,0 46.845052,24.837671,0 46.846334,24.838213,0 46.847334,24.838696,0 46.848452,24.839611,0 46.849119,24.840233,0 46.84999499999999,24.841334,0 46.850452,24.84216,0 46.850744,24.843082,0 46.851022,24.844922,0 46.851142,24.848071,0 46.85095399999999,24.850883,0 46.85059,24.852842,0 46.84887,24.862259,0 46.840095,24.906168,0 46.838972,24.909501,0 46.837088,24.913753,0 46.832872,24.919997,0 46.829626,24.923262,0 46.82532100000001,24.927048,0 46.822793,24.928978,0 46.81513,24.935868,0 46.78393350060489,24.96392495716286,0 46.77613204228681,24.98518133148559,0 46.76686046524623,25.01042057468518,0 46.75904312939219,25.03033191295561,0 46.72337753785349,25.02236650334737,0 46.69407223323576,25.01747832671173,0 46.67600557529674,25.01348689913363,0 46.66575688592517,25.00418689613948,0 46.66820154171152,24.99578006748713,0 46.70579452718507,25.00155085676646,0 46.71458490290696,24.99801204440791,0 46.72288617614308,24.98163610860549,0 46.73411767209549,24.97986726982546,0 46.73558217360208,24.97676871686047,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Ad Diriyah</name>
+		<open>1</open>
+		<styleUrl>#m_ylw-pushpin</styleUrl>
+		<Polygon>
+			<tessellate>1</tessellate>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.5646433634346,24.79693796110579,0 46.55407518934781,24.79791500518119,0 46.54403811871555,24.80057635233525,0 46.53530763777999,24.80430005353394,0 46.53138931151009,24.80469931623056,0 46.52057029296767,24.80380467233803,0 46.51266573295597,24.79544412654788,0 46.50247542989558,24.78292175561855,0 46.49696033766002,24.77335795946716,0 46.49805142154143,24.76218251489902,0 46.50287251694184,24.74761978342415,0 46.50683661544301,24.73563827751894,0 46.51152198963681,24.72829900334811,0 46.52869061167894,24.72113031913998,0 46.54278302334303,24.71456876871527,0 46.55973728647619,24.71085152296661,0 46.57720414872466,24.7071714094321,0 46.5819854075588,24.71266372294346,0 46.58397369959627,24.72227739120176,0 46.58456388255851,24.72883732535274,0 46.5893623905995,24.73594650319768,0 46.58150443883736,24.75436502280254,0 46.57272706983722,24.77445274056032,0 46.56777530120004,24.78613497291357,0 46.5646433634346,24.79693796110579,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Malqa</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Mulqa<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.629996,24.793555,0 46.613773,24.82642,0 46.587544,24.81564,0 46.584893,24.81449,0 46.583926,24.813931,0 46.581951,24.812513,0 46.580314,24.81087,0 46.579144,24.808671,0 46.57688400000001,24.804981,0 46.57426900000001,24.801266,0 46.572399,24.799094,0 46.57071,24.798052,0 46.568553,24.797357,0 46.56469199999999,24.796787,0 46.567893,24.784488,0 46.574371,24.770532,0 46.629996,24.793555,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>As Sahafah</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Sahafa<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.64037799999999,24.773927,0 46.653001,24.800645,0 46.64320699999999,24.818959,0 46.622404,24.81021,0 46.64037799999999,24.773927,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Yasmin</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Yasmeen<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.62238500000001,24.810183,0 46.64330099999999,24.81897,0 46.651885,24.802481,0 46.669823,24.810492,0 46.658637,24.831498,0 46.65320200000001,24.842863,0 46.632609,24.834479,0 46.614001,24.826568,0 46.62238500000001,24.810183,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Hittin</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Hateen<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.586322,24.742677,0 46.58807299999999,24.739541,0 46.590211,24.736506,0 46.592414,24.737978,0 46.59375,24.73885,0 46.62945000000001,24.75424,0 46.61324999999999,24.78647,0 46.574405,24.770567,0 46.586322,24.742677,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Aqiq</name>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Aqeeq<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.629285,24.753856,0 46.64268100000001,24.759414,0 46.643975,24.759879,0 46.644856,24.760277,0 46.645778,24.760637,0 46.646956,24.761144,0 46.630231,24.79359300000001,0 46.612732,24.786111,0 46.629285,24.753856,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Ar Rabi</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Rabea<br>
+<b>color:</b> #000000<br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+				<value>#000000</value>
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.642999,24.779027,0 46.678054,24.793953,0 46.670008,24.810669,0 46.655734,24.804383,0 46.652604,24.800271,0 46.642999,24.779027,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>An Nada</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Nadi<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.677907,24.794161,0 46.695748,24.801457,0 46.68777200000001,24.818002,0 46.670071,24.810613,0 46.677907,24.794161,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Jama Imam Muhammed Bin Saud Islamia</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Jama Imam Muhammed Bin Saud Islamia<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.695864,24.801671,0 46.71367399999999,24.808586,0 46.713399,24.809268,0 46.713137,24.810184,0 46.712857,24.812036,0 46.712906,24.813346,0 46.713006,24.814264,0 46.713222,24.815495,0 46.71376800000001,24.817227,0 46.714444,24.818666,0 46.715596,24.82075,0 46.71605,24.822118,0 46.715715,24.822671,0 46.715264,24.822993,0 46.714389,24.823175,0 46.713464,24.822975,0 46.709568,24.820987,0 46.706629,24.819663,0 46.704651,24.819055,0 46.70288599999999,24.818751,0 46.701,24.818779,0 46.697592,24.819111,0 46.695005,24.819304,0 46.693514,24.819304,0 46.69150500000001,24.818973,0 46.688158,24.817786,0 46.695864,24.801671,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Qurtubah</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Qurtaba<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.75751799999999,24.807735,0 46.744773,24.83265700000001,0 46.743386,24.836268,0 46.74278900000001,24.837923,0 46.718493,24.825718,0 46.716156,24.821122,0 46.71415,24.816282,0 46.71373199999999,24.815039,0 46.713388,24.812001,0 46.713814,24.809763,0 46.72212,24.792632,0 46.75751799999999,24.807735,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Munsiyah</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Mondeyah<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.757976,24.807719,0 46.793686,24.823008,0 46.777385,24.855345,0 46.74277699999999,24.837934,0 46.757976,24.807719,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Ghadir</name>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Ghader<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.645931,24.76418500000001,0 46.647147,24.763511,0 46.647822,24.763205,0 46.648767,24.763267,0 46.649848,24.763328,0 46.651265,24.763452,0 46.667806,24.77014,0 46.659832,24.785894,0 46.643358,24.779083,0 46.641064,24.77387,0 46.645931,24.76418500000001,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>An Nafal</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Nifal<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.668151,24.76988800000001,0 46.685853,24.777598,0 46.678366,24.793837,0 46.65993199999999,24.786375,0 46.668151,24.76988800000001,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Wadi</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Wadi<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.686034,24.777728,0 46.704432,24.785311,0 46.695514,24.801309,0 46.678387,24.794047,0 46.686034,24.777728,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Falah</name>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Falah<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.704381,24.785101,0 46.716801,24.79053,0 46.718476,24.791714,0 46.71885499999999,24.792087,0 46.719706,24.793057,0 46.720028,24.794294,0 46.719854,24.795983,0 46.71379500000001,24.808602,0 46.69597699999999,24.801671,0 46.704381,24.785101,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Nakhil</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Nakheel<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.655134,24.744487,0 46.647168,24.760783,0 46.59452,24.739092,0 46.593543,24.738178,0 46.592359,24.736589,0 46.592212,24.735075,0 46.592364,24.733506,0 46.592942,24.732326,0 46.594484,24.730468,0 46.602224,24.72416,0 46.60539599999999,24.727259,0 46.606816,24.728419,0 46.614106,24.735896,0 46.617908,24.73981,0 46.622319,24.744221,0 46.62528,24.742145,0 46.626075,24.741489,0 46.633624,24.735431,0 46.655134,24.744487,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Muruj</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Marooj<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.647443,24.760887,0 46.649826,24.756209,0 46.655739,24.744802,0 46.676382,24.753531,0 46.668323,24.769699,0 46.653022,24.763329,0 46.647443,24.760887,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Masif</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Masfef<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.67674699999999,24.75362,0 46.694405,24.761128,0 46.68629599999999,24.777306,0 46.66862,24.76983,0 46.67674699999999,24.75362,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>At Tawwn</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Taawoon<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin1201</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.694724,24.761252,0 46.712276,24.768634,0 46.704214,24.784793,0 46.686604,24.777382,0 46.694724,24.761252,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Izdihar</name>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Azdahar<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.712601,24.768797,0 46.730337,24.776202,0 46.722415,24.792388,0 46.704547,24.784948,0 46.712601,24.768797,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Ash Shuhada</name>
+		<open>1</open>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<Polygon>
+			<tessellate>1</tessellate>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.73065721655514,24.77640075434132,0 46.74832855736206,24.78376558281097,0 46.74598259001731,24.78839737382083,0 46.74032254679802,24.79971771270319,0 46.72752300527437,24.79449034325499,0 46.72571113700835,24.79334529790501,0 46.72477493877235,24.79207642232603,0 46.72435357290058,24.79025567753872,0 46.72462400226025,24.78905912063159,0 46.73065721655514,24.77640075434132,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Ghirnatah</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Gharnata<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.75799849830128,24.80722569959178,0 46.74064138723939,24.79983043949815,0 46.74872092469504,24.78391429037163,0 46.76609233168814,24.79137766434068,0 46.75799849830128,24.80722569959178,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Yarmuk</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Yarmok<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.766531,24.791563,0 46.8087,24.809331,0 46.797933,24.824236,0 46.758354,24.807402,0 46.766531,24.791563,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Qadisiyah</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Qadseyah<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.817963,24.797157,0 46.846668,24.815831,0 46.84585,24.818369,0 46.846006,24.819959,0 46.845994,24.822034,0 46.846497,24.824148,0 46.84699499999999,24.826954,0 46.84792099999999,24.830735,0 46.84866,24.834888,0 46.850013,24.839642,0 46.84804200000001,24.838549,0 46.846214,24.837549,0 46.839547,24.836452,0 46.826504,24.833753,0 46.819307,24.831812,0 46.81309499999999,24.830417,0 46.80686799999999,24.828218,0 46.798172,24.824328,0 46.817963,24.797157,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Khuzama</name>
+		<open>1</open>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<Polygon>
+			<tessellate>1</tessellate>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.62001589566992,24.70925932902993,0 46.61451636192897,24.71408856392216,0 46.60352001922227,24.72249082285154,0 46.59292395012983,24.73190819771781,0 46.59018964635818,24.73628605241272,0 46.58402203548418,24.72826459946043,0 46.5831562009515,24.72194995960295,0 46.5825976272513,24.71590583173991,0 46.58056871618626,24.71082571124794,0 46.57647771337821,24.70703140909584,0 46.57784873442074,24.70679281523776,0 46.58212164779551,24.70734725774999,0 46.58659970936143,24.70734789373339,0 46.58896109041116,24.70925222524908,0 46.59192279318158,24.70949716448797,0 46.60110860348566,24.70853216539368,0 46.6032856498362,24.70536516077245,0 46.60700097230621,24.70115793811358,0 46.60733414474926,24.70061506873555,0 46.61365016081212,24.69626050278178,0 46.61689643686785,24.69322517865929,0 46.6180748099361,24.69829699951185,0 46.62306626817831,24.70443137350527,0 46.62001589566992,24.70925932902993,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>King Saud University</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Jamea Mailk Saud<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin1201</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.61881100000001,24.710535,0 46.623288,24.704284,0 46.632875,24.713903,0 46.635064,24.715542,0 46.636243,24.71622,0 46.63717500000001,24.716647,0 46.646564,24.720538,0 46.643989,24.725391,0 46.642569,24.727489,0 46.641643,24.728502,0 46.634446,24.734381,0 46.62650000000001,24.740789,0 46.62217900000001,24.743905,0 46.61402199999999,24.735509,0 46.60998,24.731399,0 46.607202,24.728535,0 46.605109,24.726764,0 46.60242099999999,24.724005,0 46.61881100000001,24.710535,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Mohammadiyah</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Muhammdeya<br>
+<b>color:</b> #191919<br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+				<value>#191919</value>
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.64214200000001,24.72855600000001,0 46.643466,24.727026,0 46.6445,24.725474,0 46.646835,24.720577,0 46.66353899999999,24.727689,0 46.655299,24.74425,0 46.633888,24.7353,0 46.64214200000001,24.72855600000001,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>King Fahd</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Malik Fahad<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.663897,24.727984,0 46.68486799999999,24.736495,0 46.676425,24.753267,0 46.655453,24.744417,0 46.663897,24.727984,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Mursalat</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Mursilat<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.676878,24.75346,0 46.685186,24.736957,0 46.70281,24.744361,0 46.69460899999999,24.760885,0 46.676878,24.75346,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>An Nuzhah</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Nuzha<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.72087999999999,24.75197800000001,0 46.712473,24.768284,0 46.694892,24.760993,0 46.703129,24.744482,0 46.72087999999999,24.75197800000001,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Mughrizat</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Magharzat<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.721139,24.75188,0 46.739084,24.760079,0 46.730583,24.77610200000001,0 46.712445,24.768453,0 46.721139,24.75188,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Hamra</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Hamra<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.738861,24.76,0 46.75887044978885,24.76782920695352,0 46.76788578083566,24.77152744242495,0 46.76939187973642,24.77227669658017,0 46.77545026440394,24.77582892445224,0 46.776316,24.776357,0 46.769752,24.785481,0 46.76875,24.786735,0 46.767746,24.78834,0 46.76627122822308,24.79107237899795,0 46.73082139574633,24.77614005181968,0 46.738861,24.76,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Ishbiliyah</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Isbeleyah<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.76813400000001,24.78806,0 46.768953,24.786811,0 46.776494,24.776543,0 46.77853,24.777396,0 46.779648,24.777771,0 46.781418,24.778118,0 46.78332000000001,24.778343,0 46.785148,24.77863,0 46.787093,24.779015,0 46.788754,24.779391,0 46.790684,24.780149,0 46.794098,24.782184,0 46.817968,24.796949,0 46.808922,24.80908,0 46.766667,24.791336,0 46.76813400000001,24.78806,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Janadriyan</name>
+		<open>1</open>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<Polygon>
+			<tessellate>1</tessellate>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.86054963819372,24.7917678152318,0 46.887395170545,24.82855735102027,0 46.90126013024483,24.84145677481211,0 46.92217064838363,24.85787783855633,0 46.9382590486201,24.86992865450097,0 46.94917051702917,24.87943887404511,0 46.96201568871195,24.89411061682581,0 46.97997831490986,24.90965342930583,0 46.99978755357596,24.9409863835909,0 46.99236338485273,24.94544175538069,0 46.97334135432588,24.94028872916346,0 46.95766596123391,24.93092112353046,0 46.94110443036632,24.92008858483093,0 46.92554976323963,24.91250641363183,0 46.90838639239843,24.90122397885265,0 46.90317259235237,24.89352875781772,0 46.89137007674946,24.89183121004814,0 46.87786479837116,24.88241075855548,0 46.87340166209988,24.86635450171037,0 46.86917482141778,24.86108508340801,0 46.85685246587741,24.8467900271944,0 46.85189085323204,24.83882975280963,0 46.84948763277458,24.83710293333567,0 46.84555760296504,24.82075372589053,0 46.84853278298856,24.81237605619345,0 46.86054963819372,24.7917678152318,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Irqah</name>
+		<open>1</open>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<Polygon>
+			<tessellate>1</tessellate>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.55666669206278,24.67754112775093,0 46.56164790502604,24.67921973698422,0 46.56419244632993,24.67983330882012,0 46.56543531057514,24.68104045104315,0 46.56895478990921,24.67925087462461,0 46.57664431677529,24.67562306575907,0 46.5830498389086,24.6710369481698,0 46.58971819918372,24.67137969683243,0 46.59453732712828,24.67380156369357,0 46.60068353560377,24.67400598000372,0 46.60566040409046,24.66964289901198,0 46.60869640443874,24.66974537869436,0 46.6098130022941,24.6757145765266,0 46.60841005757232,24.68158738555542,0 46.6118715632205,24.68548496019438,0 46.6134031501426,24.68857310453484,0 46.61646890590206,24.69307714731063,0 46.60750048787973,24.70034402574645,0 46.60541709173073,24.70263580934657,0 46.6016938205934,24.70869163953909,0 46.58965316067762,24.70984173329556,0 46.58640828527966,24.70776576036338,0 46.57675654319968,24.70718352864049,0 46.57259231727895,24.7024295234325,0 46.56164773631734,24.69310392113302,0 46.55784422307595,24.68627277955627,0 46.55666669206278,24.67754112775093,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>As Safarat</name>
+		<open>1</open>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<Polygon>
+			<tessellate>1</tessellate>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.60776084848417,24.65863861266471,0 46.6158237091222,24.66393652857431,0 46.6220639925622,24.66728797771187,0 46.63098432279044,24.66974308239172,0 46.63751336885959,24.67257535643261,0 46.63938363047316,24.676538373749,0 46.63849968342625,24.68145962323831,0 46.63236151420717,24.69027254187794,0 46.6287459332856,24.69596607326924,0 46.62321584188313,24.70428027029637,0 46.61856667863944,24.69871205850773,0 46.61836187747601,24.69851847565171,0 46.61756494682529,24.694614644908,0 46.61563260430539,24.6907373927301,0 46.61254856048007,24.68866986133516,0 46.61216909772156,24.68594464579809,0 46.61053962383284,24.68416613716323,0 46.60902363400147,24.68201743644264,0 46.60843328679599,24.68052586003959,0 46.610223142724,24.67755427190636,0 46.61025634935015,24.6736668876103,0 46.60920519330536,24.66953463544751,0 46.60730812250746,24.66660245351723,0 46.60776084848417,24.65863861266471,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Ar Raid</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Rand<br>
+<b>color:</b> #333333<br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+				<value>#333333</value>
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.629243,24.695681,0 46.629531,24.695331,0 46.629916,24.6952,0 46.630446,24.695047,0 46.631336,24.695113,0 46.653865,24.704553,0 46.65273199999999,24.70671,0 46.652011,24.70894,0 46.650469,24.71292,0 46.646704,24.720385,0 46.635418,24.715401,0 46.633294,24.713911,0 46.623649,24.704161,0 46.629243,24.695681,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Ar Rahmaniyah</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Rahmania<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.649291,24.716141,0 46.650494,24.71378,0 46.651408,24.711638,0 46.652299,24.708949,0 46.65282799999999,24.70731,0 46.65301999999999,24.706785,0 46.654253,24.70467100000001,0 46.67178400000001,24.712056,0 46.663805,24.727647,0 46.646979,24.720461,0 46.649291,24.716141,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Wurud</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Warood<br>
+<b>color:</b> #4D4D4D<br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+				<value>#4D4D4D</value>
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.67197,24.712225,0 46.692566,24.721493,0 46.684961,24.736664,0 46.66399,24.727816,0 46.67197,24.712225,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Salah Ad Din</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Salahuddin<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.69276160981931,24.72146457943209,0 46.6962430642071,24.72278550901168,0 46.69860911273517,24.72324643221925,0 46.70056947864882,24.72401427745544,0 46.70344243068342,24.72515060802719,0 46.70712664106684,24.72653254448127,0 46.70956032831921,24.72736167227669,0 46.708597,24.732712,0 46.70276799999999,24.744198,0 46.684809,24.736683,0 46.69276160981931,24.72146457943209,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Wahah</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Waha<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.703212,24.743948,0 46.708638,24.732819,0 46.71134847734104,24.73690717359811,0 46.71422151646031,24.73503141300247,0 46.7182815786209,24.73256533462581,0 46.72080954236924,24.73082842263604,0 46.72226392746106,24.73124657874837,0 46.72390947047057,24.73201254057815,0 46.725345,24.742223,0 46.720799,24.751083,0 46.703212,24.743948,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Kind Abdullah</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al-Ameer Abullah<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.730664,24.730349,0 46.732719,24.718541,0 46.743937,24.703764,0 46.761426,24.714518,0 46.75783,24.722392,0 46.752503,24.732248,0 46.73842100000001,24.759898,0 46.721068,24.751959,0 46.730664,24.730349,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Quds</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Quds<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.748758,24.740351,0 46.769674,24.753278,0 46.759255,24.767647,0 46.752617,24.765515,0 46.738907,24.760323,0 46.748758,24.740351,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>King Faisal</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Hai Malick Faisal<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.78991799999999,24.756656,0 46.77629300000001,24.776147,0 46.76970699999999,24.772174,0 46.759064,24.767592,0 46.774459,24.747145,0 46.78991799999999,24.756656,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Khaleej</name>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Khaleej<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.790216,24.756983,0 46.829198,24.781147,0 46.817952,24.796607,0 46.792144,24.780575,0 46.79106,24.779895,0 46.78974199999999,24.779378,0 46.78826500000001,24.778956,0 46.78476500000001,24.778293,0 46.781277,24.77782300000001,0 46.78005900000001,24.777533,0 46.778547,24.77711,0 46.77665500000001,24.776387,0 46.785544,24.76434,0 46.785069,24.764062,0 46.790216,24.756983,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Maizilah</name>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Moezellah<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.841219,24.765155,0 46.842447,24.766357,0 46.85869300000001,24.787821,0 46.859526,24.789657,0 46.859886,24.791677,0 46.859503,24.793807,0 46.858936,24.795617,0 46.857752,24.797519,0 46.85569300000001,24.80093,0 46.854489,24.802719,0 46.852662,24.80529,0 46.850958,24.807843,0 46.849359,24.810265,0 46.847819,24.813025,0 46.84667,24.815842,0 46.81793100000001,24.796899,0 46.841219,24.765155,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Dhahrat Laban</name>
+		<open>1</open>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<Polygon>
+			<tessellate>1</tessellate>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.60681545752507,24.66731545318791,0 46.60934516501968,24.66846433954601,0 46.60469568071827,24.67037469280257,0 46.60089970316104,24.67382538659223,0 46.59518268356325,24.67361032441571,0 46.59034648657563,24.67151688697241,0 46.58295533056193,24.67054347974907,0 46.57155661144576,24.66629374842903,0 46.56377766787034,24.66365682148872,0 46.55281395436622,24.66113013861601,0 46.54860452309373,24.6591981115822,0 46.54692211118581,24.65441463929874,0 46.54002281859853,24.65280348784209,0 46.53330276741607,24.64918419281795,0 46.52676118724861,24.64404962938205,0 46.52234799180045,24.64271016897376,0 46.52064831664408,24.63965847206278,0 46.51646495135509,24.63965029961991,0 46.51604688039083,24.63964947790881,0 46.51186050045951,24.63887944689948,0 46.50532141436783,24.6335308492216,0 46.50181739238926,24.63352383084694,0 46.49701397375007,24.63161164244458,0 46.4868172827189,24.62455294874404,0 46.47631076750642,24.61710835565092,0 46.46246901651279,24.60747436081077,0 46.47014998256293,24.60303473963451,0 46.48313751870789,24.60171572927287,0 46.49553173471377,24.60259958662163,0 46.51233838918938,24.60128256219367,0 46.52347718865132,24.60244876118533,0 46.54062984026897,24.60293469115923,0 46.55304568981357,24.61175322331405,0 46.56694385263882,24.61786402276883,0 46.57700818877704,24.62228563157171,0 46.58964793368135,24.64064254409628,0 46.5989028245146,24.65326483278578,0 46.60807961464854,24.65926292678437,0 46.60681545752507,24.66731545318791,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Umm Al Hamam Al Gharbi</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Umul Hamam Al Maghrabi<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.629743,24.694136,0 46.63841,24.681104,0 46.638766,24.680569,0 46.63915299999999,24.679549,0 46.639246,24.679075,0 46.639372,24.677569,0 46.63924899999999,24.676323,0 46.642768,24.676895,0 46.643309,24.676973,0 46.64427400000001,24.676907,0 46.644568,24.676882,0 46.64559499999999,24.67656,0 46.647638,24.675446,0 46.64838,24.675111,0 46.649313,24.675065,0 46.649887,24.675151,0 46.650782,24.675275,0 46.651675,24.675464,0 46.65316900000001,24.675464,0 46.65464,24.675039,0 46.656286,24.67459,0 46.65708,24.674509,0 46.656995,24.674746,0 46.656376,24.675385,0 46.653342,24.682326,0 46.652139,24.684986,0 46.651893,24.685587,0 46.650858,24.687649,0 46.65052599999999,24.689543,0 46.64948,24.696084,0 46.64936400000001,24.696836,0 46.649367,24.697353,0 46.649693,24.697907,0 46.654892,24.702224,0 46.653878,24.704292,0 46.629743,24.694136,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Umm Al Hamam Ash Sharqi</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Umul Hamam Al Sharqi<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.654921,24.702216,0 46.649727,24.69797,0 46.64951000000001,24.697667,0 46.649428,24.697524,0 46.649369,24.696835,0 46.65086,24.687635,0 46.65191900000001,24.685547,0 46.652124,24.684961,0 46.653366,24.682289,0 46.656362,24.675394,0 46.65695500000001,24.67478,0 46.657568,24.67342,0 46.658709,24.671077,0 46.660659,24.669824,0 46.661725,24.669061,0 46.663812,24.66746,0 46.668325,24.663917,0 46.668347,24.668393,0 46.668356,24.66959,0 46.668586,24.672368,0 46.668692,24.674095,0 46.66875900000001,24.674359,0 46.668611,24.6753,0 46.665982,24.68068,0 46.66588300000001,24.683438,0 46.659346,24.693463,0 46.654921,24.702216,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Madhar Ash Shamali</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Maazar Shumali<br>
+<b>color:</b> 		#999999<br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+				<value>#999999</value>
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.659819,24.693565,0 46.666208,24.683918,0 46.666453,24.680724,0 46.669127,24.675267,0 46.677884,24.675593,0 46.678184,24.67832200000001,0 46.67809299999999,24.679182,0 46.663409,24.708209,0 46.654217,24.704341,0 46.659819,24.693565,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Olaya</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Ulya<br>
+<b>color:</b> #808080<br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+				<value>#808080</value>
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.663744,24.708375,0 46.678137,24.679954,0 46.678402,24.679364,0 46.67852199999999,24.678883,0 46.67852199999999,24.678446,0 46.678255,24.675533,0 46.680016,24.675796,0 46.681569,24.67622,0 46.683331,24.676731,0 46.68487100000001,24.677277,0 46.68580105729039,24.67767377771949,0 46.6865460776675,24.67794505159103,0 46.68740820763271,24.67819076029283,0 46.68887063314317,24.67900533814598,0 46.68955602507786,24.67726993402807,0 46.690297,24.675654,0 46.690742,24.675573,0 46.693048,24.671197,0 46.695918,24.668504,0 46.69807599999999,24.670129,0 46.70088700000001,24.672697,0 46.70299599999999,24.675118,0 46.7033,24.67543,0 46.69867800000001,24.685527,0 46.703019,24.696669,0 46.695968,24.693196,0 46.692512,24.700223,0 46.691698,24.701783,0 46.691407,24.704005,0 46.691119,24.705907,0 46.69033200000001,24.707474,0 46.687221,24.706148,0 46.681841,24.716318,0 46.663744,24.708375,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>As Sulimaniyah</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Sulyamania<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.70336,24.675741,0 46.71598800000001,24.691833,0 46.71698500000001,24.692377,0 46.717649,24.692739,0 46.717683,24.705949,0 46.71861400000001,24.706252,0 46.71690200000001,24.706704,0 46.708291,24.709298,0 46.698084,24.713537,0 46.694839,24.717419,0 46.69282400000001,24.721151,0 46.682129,24.716405,0 46.68742,24.706458,0 46.690477,24.707791,0 46.691367,24.70607,0 46.691903,24.702503,0 46.692119,24.701847,0 46.69615799999999,24.693496,0 46.703404,24.697116,0 46.698985,24.685492,0 46.699081,24.684858,0 46.70336,24.675741,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>King Abdul Aziz</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Hai Mailk Abdul Aziz<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin1201</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.694853,24.717371,0 46.698111,24.713554,0 46.700999,24.712343,0 46.70530400000001,24.71053,0 46.70795200000001,24.709457,0 46.717257,24.706596,0 46.71858100000001,24.706238,0 46.717686,24.705945,0 46.717782,24.692648,0 46.727623,24.69463,0 46.730164,24.695052,0 46.73166499999999,24.695569,0 46.74389094057322,24.70369074706773,0 46.76021579617293,24.71352314736114,0 46.76090312449507,24.71451397765626,0 46.76066110042183,24.71557844233117,0 46.75290724362649,24.73105510227405,0 46.74963584331613,24.73761731315903,0 46.74688914172943,24.74291144473893,0 46.74333444239898,24.74992205165956,0 46.73848631494717,24.75914329079565,0 46.72130766927514,24.75154763199091,0 46.72583432610204,24.7426653795956,0 46.72438597733638,24.73319175038097,0 46.72408890644437,24.73190186409263,0 46.72347011360468,24.73156467000751,0 46.72270281557169,24.73122747530583,0 46.7211187215433,24.73068795398958,0 46.72073316491783,24.73058498089982,0 46.72038836453028,24.73093246762426,0 46.71858824796512,24.73204397343808,0 46.71663494324861,24.73315536642994,0 46.71510286336617,24.73405840289755,0 46.71387698114575,24.7349964131419,0 46.71268951859673,24.73572582422086,0 46.71154015412962,24.73662912495666,0 46.71119252749568,24.73619574084914,0 46.70885947422303,24.73286627785149,0 46.70950324323686,24.72989881532571,0 46.70962711183581,24.728325164273,0 46.70975093977638,24.72724609170349,0 46.70611274928503,24.72587447782752,0 46.70180063540051,24.72408336017719,0 46.69888025228745,24.72320624182626,0 46.6962567835003,24.72248645636266,0 46.69308875216984,24.72124940433082,0 46.693314,24.720394,0 46.694853,24.717371,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Ar Rawdah</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Rowdah<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.748795,24.740209,0 46.760698,24.71583,0 46.761961,24.714592,0 46.787337,24.730313,0 46.769857,24.753007,0 46.748795,24.740209,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Andalus</name>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Andulus<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.790069,24.75671000000001,0 46.774815,24.746912,0 46.78737,24.7305,0 46.802455,24.739935,0 46.790069,24.75671000000001,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Nahdah</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> AlNahzah<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.80270900000001,24.740128,0 46.837251,24.761814,0 46.839205,24.763363,0 46.840991,24.765117,0 46.829405,24.780939,0 46.790282,24.756839,0 46.80270900000001,24.740128,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Hada</name>
+		<open>1</open>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<Polygon>
+			<tessellate>1</tessellate>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.64328140858797,24.64104056077692,0 46.64631540547523,24.65015283362929,0 46.65888099968174,24.64935409403411,0 46.66669534232994,24.64961263325104,0 46.66715010156113,24.65328617706057,0 46.66565315591357,24.65791503613728,0 46.66428424556983,24.66232500967548,0 46.66321894228614,24.6641810201597,0 46.6639629317086,24.66550886790138,0 46.66213940928645,24.66647544479225,0 46.66017954145335,24.66583525386227,0 46.65893349834263,24.66844308177798,0 46.6587530898594,24.67051047985169,0 46.65731542223536,24.67465572311934,0 46.65315953545045,24.67495918672378,0 46.65193064187447,24.67491455381989,0 46.64855199289872,24.67478507205211,0 46.64481611754027,24.67616081518765,0 46.6397337332305,24.67623923587807,0 46.6374531759926,24.67238307523618,0 46.6295399948,24.66925149836879,0 46.62087457284557,24.66716621634318,0 46.61314798795681,24.66167031165931,0 46.60837121658813,24.65925863591863,0 46.61313995590264,24.65797296624092,0 46.6161985782687,24.65944450266284,0 46.61854464011328,24.65822538693092,0 46.61598962725213,24.65632120174725,0 46.62442155141386,24.65281299400078,0 46.62851505928787,24.64879752620024,0 46.63409406162908,24.64662185372822,0 46.6391879522918,24.64457639671315,0 46.64328140858797,24.64104056077692,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Ash Sharafiyah</name>
+		<open>1</open>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<Polygon>
+			<tessellate>1</tessellate>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.66715077930186,24.64901801095357,0 46.6678967716529,24.64892646371908,0 46.66842729910018,24.64952466617048,0 46.66942378378051,24.65061349741053,0 46.66999740211602,24.65081515154993,0 46.67291681338483,24.65285021716765,0 46.67645171459114,24.65515344233589,0 46.67832149960275,24.65664469237115,0 46.67659344631196,24.65789877292648,0 46.67547995273316,24.65887762671449,0 46.67398847880953,24.65956027826147,0 46.67136079554557,24.66124083344531,0 46.66875410666355,24.66345577231803,0 46.66594717852752,24.66575116566558,0 46.66234991087843,24.66848320430247,0 46.65884621858074,24.67106323256888,0 46.65946190270031,24.6677945293143,0 46.66053187812131,24.66621900086371,0 46.66160728140721,24.66651529371385,0 46.66261013016577,24.6666287203012,0 46.66417514181124,24.66503411120464,0 46.66369333259933,24.66445212011101,0 46.66423620368698,24.66308709543491,0 46.66550412856935,24.65868731314942,0 46.66658883385718,24.65596359485334,0 46.66679796093192,24.65492193467539,0 46.66733788684713,24.6533428664692,0 46.66659626226334,24.6490801296471,0 46.66715077930186,24.64901801095357,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Maather</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Mazar<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.668337,24.663845,0 46.670027,24.662424,0 46.67056100000001,24.662032,0 46.674128,24.659543,0 46.675188,24.659084,0 46.675858,24.658673,0 46.676406,24.658191,0 46.676617,24.657857,0 46.678417,24.656567,0 46.684687,24.660929,0 46.67816,24.674027,0 46.67806900000001,24.675285,0 46.669768,24.674912,0 46.668633,24.674872,0 46.668721,24.674418,0 46.668618,24.672481,0 46.66835300000001,24.669599,0 46.668337,24.663845,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Mutamarat</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Motamrat<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.68495600000001,24.661157,0 46.69540600000001,24.668139,0 46.692776,24.670593,0 46.69242000000001,24.671043,0 46.692116,24.671493,0 46.68882644986292,24.67901706104055,0 46.6876916245086,24.67836585743907,0 46.68691583332939,24.67803699127427,0 46.68628994974679,24.67784513966635,0 46.68476844812656,24.67730358325418,0 46.68301116849509,24.6766244068056,0 46.68131210125184,24.67610955996556,0 46.67820378492932,24.67559614985142,0 46.678751,24.674133,0 46.68495600000001,24.661157,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Laban</name>
+		<open>1</open>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<Polygon>
+			<tessellate>1</tessellate>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.67041693619072,24.62662828870327,0 46.66697239528572,24.62993679668272,0 46.65262566622054,24.63545161647723,0 46.65039354267764,24.63747149988757,0 46.64391415326056,24.64095865052387,0 46.63925265413888,24.64352403454501,0 46.62895978006202,24.64902770032241,0 46.62431527057623,24.6521431524682,0 46.61565110213004,24.65620015093094,0 46.61886730713935,24.65782714064477,0 46.61624864425366,24.65930281412318,0 46.61302290096838,24.65821224003195,0 46.60837624954501,24.65948214448629,0 46.59990983601099,24.6542984020653,0 46.58743981051099,24.63801125383635,0 46.57577345722144,24.62173430991818,0 46.56585844776222,24.61383695166029,0 46.55487784016819,24.60144165760494,0 46.5562665312664,24.60270983929132,0 46.56039528528476,24.60424652987795,0 46.56120196052018,24.60224257027358,0 46.55829885401352,24.60053067274104,0 46.55872702136512,24.59853983536192,0 46.55516435598206,24.59456182809686,0 46.55836433683084,24.59491826989699,0 46.56062290926786,24.59587602797128,0 46.56341138320531,24.59713639078761,0 46.56400884493922,24.59567264677136,0 46.56222515062574,24.59332122412147,0 46.56262559890328,24.5922263090368,0 46.5646268407275,24.59368187493501,0 46.56938097283137,24.60421158234011,0 46.5711924364016,24.60458039964374,0 46.57241097589287,24.6031321377937,0 46.5772338031841,24.60441546968682,0 46.58065368225661,24.60113920692096,0 46.58966553846732,24.60657771230294,0 46.59309073386303,24.60367710659486,0 46.6053442308859,24.6180780666329,0 46.61017724382297,24.61477119870781,0 46.60795619530785,24.61096180067476,0 46.60936277526442,24.60895350036273,0 46.61178599787593,24.60635615893563,0 46.62287697041301,24.6136547281149,0 46.63178253229815,24.62206422006942,0 46.63643003563193,24.62206096958452,0 46.6410567768701,24.62426556416495,0 46.64837374828087,24.63031159775073,0 46.65727574603513,24.62663440873306,0 46.67082460882219,24.62534177154124,0 46.67041693619072,24.62662828870327,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Ar Rafiah</name>
+		<open>1</open>
+		<styleUrl>#msn_ylw-pushpin1201</styleUrl>
+		<Polygon>
+			<tessellate>1</tessellate>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.66957295180664,24.65073608272913,0 46.6678768510239,24.64895634484642,0 46.65922134061955,24.64950340431257,0 46.64617691067774,24.64988915705829,0 46.64455206547513,24.64327723907765,0 46.64356836810381,24.64024716880059,0 46.65022697587015,24.63713433722881,0 46.65215650519568,24.63502830850182,0 46.66037633544739,24.63251042963406,0 46.66709465981,24.6302985196964,0 46.671294173095,24.62561246248601,0 46.67658429686514,24.62531918066739,0 46.67691598880561,24.62830750095379,0 46.67509324404251,24.6332332973746,0 46.67292006122655,24.64032869897271,0 46.67075609587516,24.64746367470949,0 46.66957295180664,24.65073608272913,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>An Nasiriyah</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Nasria<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.672043,24.642957,0 46.67781599999999,24.64434,0 46.67934,24.644999,0 46.680145,24.645326,0 46.680719,24.645583,0 46.68146200000001,24.645859,0 46.681997,24.64603,0 46.68243399999999,24.646125,0 46.682835,24.646106,0 46.684107,24.646135,0 46.685645,24.646287,0 46.68668400000001,24.646383,0 46.687495,24.646615,0 46.687789,24.646855,0 46.688115,24.647114,0 46.688191,24.647254,0 46.688589,24.647233,0 46.690243,24.647207,0 46.69293400000001,24.646911,0 46.691642,24.647724,0 46.690826,24.648299,0 46.68922199999999,24.651448,0 46.684759,24.66084,0 46.669623,24.650582,0 46.672043,24.642957,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Namudhajiyah</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> AlNamrazjiah<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.689787,24.650278,0 46.69083999999999,24.648306,0 46.69172999999999,24.647664,0 46.692957,24.646933,0 46.694553,24.646667,0 46.69684300000001,24.646185,0 46.698199,24.647129,0 46.699274,24.647891,0 46.69988,24.648327,0 46.700759,24.649002,0 46.70124299999999,24.649474,0 46.702055,24.650315,0 46.701908,24.65136,0 46.701598,24.653222,0 46.700662,24.659374,0 46.700269,24.66224,0 46.70008200000001,24.663124,0 46.699938,24.663683,0 46.699833,24.663984,0 46.69963599999999,24.664363,0 46.699374,24.664741,0 46.698147,24.665979,0 46.69555699999999,24.668108,0 46.68475000000001,24.66082700000001,0 46.689787,24.650278,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Murabba</name>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Muraba<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.698626,24.670248,0 46.69607599999999,24.668257,0 46.69924,24.665221,0 46.69986399999999,24.664344,0 46.70029,24.663132,0 46.702921,24.644882,0 46.706803,24.644019,0 46.708196,24.643322,0 46.709719,24.643779,0 46.71315800000001,24.644579,0 46.712718,24.646063,0 46.714878,24.646608,0 46.714626,24.647265,0 46.715124,24.647783,0 46.71585,24.651197,0 46.716282,24.652881,0 46.71619299999999,24.65322700000001,0 46.71596499999999,24.653388,0 46.71577600000001,24.653513,0 46.715369,24.65349,0 46.715027,24.653525,0 46.714844,24.654106,0 46.70976199999999,24.667277,0 46.70914,24.668846,0 46.709255,24.669088,0 46.709073,24.670381,0 46.708566,24.67255,0 46.708114,24.674801,0 46.708031,24.676616,0 46.708196,24.677965,0 46.708439,24.679661,0 46.707957,24.681357,0 46.70677599999999,24.679742,0 46.70111500000001,24.672578,0 46.698626,24.670248,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Wizarat</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Wazarat<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.708749,24.679124,0 46.7083,24.677238,0 46.708308,24.675281,0 46.70858,24.673948,0 46.709253,24.67054900000001,0 46.70940300000001,24.669128,0 46.714579,24.6554,0 46.71503899999999,24.654104,0 46.715458,24.654381,0 46.71594,24.654796,0 46.716588,24.65576400000001,0 46.71698199999999,24.656629,0 46.717293,24.657626,0 46.717676,24.661536,0 46.71801,24.66687,0 46.717925,24.667098,0 46.717819,24.692256,0 46.717412,24.692163,0 46.716816,24.691864,0 46.715926,24.691207,0 46.707871,24.681362,0 46.708749,24.679124,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Ad Dhubbat</name>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Tassat<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.718357,24.667082,0 46.727569,24.666598,0 46.727554,24.669764,0 46.727686,24.670201,0 46.728106,24.670363,0 46.727932,24.671216,0 46.72661,24.676837,0 46.724387,24.686385,0 46.72313000000001,24.692684,0 46.72309200000001,24.692996,0 46.722914,24.693169,0 46.722648,24.693261,0 46.718096,24.692332,0 46.71829000000001,24.684597,0 46.718486,24.677235,0 46.718615,24.671849,0 46.718357,24.667082,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Az Zahra</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Zahra<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.739466,24.68123,0 46.73989900000001,24.681361,0 46.740694,24.68182,0 46.738001,24.684685,0 46.733238,24.686677,0 46.731752,24.694482,0 46.73168,24.694613,0 46.73151200000001,24.694788,0 46.731199,24.694919,0 46.730766,24.694854,0 46.72957200000001,24.694593,0 46.723298,24.693374,0 46.723409,24.692799,0 46.72658300000001,24.678883,0 46.739466,24.68123,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Ar Rabwah</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Rabwa<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.745192,24.703962,0 46.732191,24.69528,0 46.73207,24.69469,0 46.733605,24.686776,0 46.737905,24.685079,0 46.74091,24.681929,0 46.7419,24.682773,0 46.742675,24.68333700000001,0 46.745416,24.685239,0 46.746542,24.685839,0 46.74830699999999,24.686487,0 46.751704,24.687598,0 46.754474,24.688468,0 46.760394,24.67322,0 46.76298000000001,24.674392,0 46.764279,24.674981,0 46.765627,24.675689,0 46.769212,24.676985,0 46.771888,24.677926,0 46.777117,24.679681,0 46.77625700000001,24.685496,0 46.77576199999999,24.687467,0 46.77365,24.693108,0 46.771965,24.697283,0 46.771023,24.70007800000001,0 46.770014,24.70209,0 46.76860299999999,24.704325,0 46.767145,24.706373,0 46.764305,24.710311,0 46.763726,24.710988,0 46.762981,24.711448,0 46.76156199999999,24.712192,0 46.760912,24.712411,0 46.760263,24.712564,0 46.759613,24.71263,0 46.758891,24.712412,0 46.745192,24.703962,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Ar Rayyan</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Reyan<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.783339,24.727667,0 46.76157100000001,24.714488,0 46.768455,24.705614,0 46.769496,24.703973,0 46.770607,24.701399,0 46.771648,24.699758,0 46.773313,24.69455,0 46.781647,24.697531,0 46.778121,24.70237,0 46.79445599999999,24.712639,0 46.783339,24.727667,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Manar</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Manar<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.79451700000001,24.712689,0 46.81077999999999,24.722787,0 46.799466,24.737851,0 46.783455,24.727867,0 46.79451700000001,24.712689,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>An Nasim Al Gharbi</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Naseem Gharbi<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.82748000000001,24.700699,0 46.831468,24.702937,0 46.83957,24.708217,0 46.84775299999999,24.713076,0 46.82014800000001,24.750853,0 46.799763,24.737994,0 46.82748000000001,24.700699,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>An Nasim Ash Sharqi</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Naseem Sharqi<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.820339,24.750969,0 46.847965,24.71327,0 46.86949200000001,24.726754,0 46.868402,24.729759,0 46.86746700000001,24.732314,0 46.866969,24.734069,0 46.866303,24.735534,0 46.865542,24.737117,0 46.86243,24.73915,0 46.858691,24.741822,0 46.85767900000001,24.742685,0 46.856479,24.744295,0 46.84092,24.764687,0 46.83952600000001,24.763137,0 46.837056,24.761242,0 46.820339,24.750969,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Rimayah</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Ramaya<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.842967,24.766916,0 46.840755,24.764802,0 46.856422,24.744532,0 46.866554,24.750613,0 46.867567,24.750842,0 46.889719,24.750989,0 46.889646,24.769575,0 46.858555,24.787859,0 46.842967,24.766916,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>An Nadhim</name>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Naeem<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.85875299999999,24.787978,0 46.882091,24.773872,0 46.89819998638947,24.76420949536199,0 46.91205508099958,24.77677346614271,0 46.92044688465046,24.77496769504693,0 46.96393983656976,24.81657710666079,0 47.02627712385991,24.85091729318788,0 47.07380794594058,24.86879380786436,0 47.05750065374179,24.9298879678465,0 47.0414307237141,24.95144139603119,0 47.02903077144062,24.94808961368696,0 47.00257577866685,24.94320843851396,0 46.98883647570036,24.92319139420309,0 46.97875771444817,24.90836169443217,0 46.94888395504334,24.8783109227541,0 46.92267954944248,24.85885548462971,0 46.8947772785079,24.83541225027818,0 46.888218,24.828024,0 46.85875299999999,24.787978,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Fakhiriyah</name>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Faghria<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.674978,24.633441,0 46.684616,24.638226,0 46.685749,24.638785,0 46.692699,24.641509,0 46.69293400000001,24.646907,0 46.69103499999999,24.647137,0 46.690228,24.647228,0 46.688215,24.647242,0 46.68749399999999,24.646618,0 46.686697,24.646384,0 46.683668,24.6461,0 46.682432,24.646141,0 46.68177,24.645992,0 46.678161,24.644438,0 46.67203600000001,24.642935,0 46.674978,24.633441,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Wisham</name>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Washair<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.69239500000001,24.637006,0 46.703507,24.63771,0 46.702724,24.645052,0 46.70198499999999,24.650282,0 46.70111200000001,24.6492,0 46.69684199999999,24.646176,0 46.692949,24.646912,0 46.6926,24.641517,0 46.69239500000001,24.637006,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Futah</name>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Noma<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.703688,24.637779,0 46.713635,24.638428,0 46.714688,24.638292,0 46.715768,24.638154,0 46.716849,24.637997,0 46.71756200000001,24.637978,0 46.71758400000001,24.63913700000001,0 46.717496,24.639381,0 46.717648,24.640512,0 46.714903,24.646581,0 46.712698,24.64607,0 46.713131,24.644558,0 46.709673,24.643772,0 46.70816599999999,24.643321,0 46.706842,24.644007,0 46.702908,24.64489,0 46.703688,24.637779,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Amal</name>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Amal<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.727487,24.64356400000001,0 46.733127,24.644555,0 46.733581,24.644614,0 46.73343,24.645223,0 46.73338,24.645724,0 46.733452,24.646618,0 46.733473,24.647482,0 46.73366799999999,24.648563,0 46.733819,24.648936,0 46.73459700000001,24.650095,0 46.730836,24.647345,0 46.715842,24.651235,0 46.715124,24.64778,0 46.714616,24.647285,0 46.71749300000001,24.640947,0 46.71766,24.640518,0 46.727487,24.64356400000001,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Malaz</name>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Mulz<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.717621,24.657679,0 46.717145,24.656029,0 46.71621,24.651374,0 46.730926,24.647542,0 46.733041,24.648908,0 46.734454,24.650017,0 46.734938,24.650424,0 46.735813,24.651137,0 46.736634,24.651726,0 46.73769000000001,24.652398,0 46.738545,24.652786,0 46.739446,24.653016,0 46.746862,24.653386,0 46.752568,24.653703,0 46.754292,24.654209,0 46.748068,24.666412,0 46.744833,24.67389500000001,0 46.742494,24.679717,0 46.740969,24.681483,0 46.739953,24.681071,0 46.72651200000001,24.678704,0 46.728156,24.67118,0 46.728372,24.670402,0 46.728345,24.670288,0 46.72809099999999,24.670139,0 46.727837,24.669816,0 46.727886,24.666344,0 46.718311,24.666861,0 46.717621,24.657679,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Jarir</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Jarir<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.75995499999999,24.673103,0 46.754055,24.687972,0 46.746454,24.685543,0 46.745161,24.684695,0 46.742442,24.682655,0 46.741172,24.68171,0 46.742757,24.679783,0 46.743592,24.677805,0 46.745179,24.673873,0 46.748003,24.667013,0 46.748092,24.666771,0 46.748193,24.66676,0 46.748282,24.666852,0 46.75084900000001,24.669607,0 46.75995499999999,24.673103,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Ar Rawabi</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Rawabi<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.776538,24.686771,0 46.77783,24.679691,0 46.792304,24.68431500000001,0 46.795458,24.685661,0 46.80947199999999,24.69298,0 46.803267,24.701835,0 46.79418699999999,24.712799,0 46.778036,24.702277,0 46.781835,24.697386,0 46.77376199999999,24.694779,0 46.776538,24.686771,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>As Salam</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Salam<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.80252699999999,24.702426,0 46.809565,24.692559,0 46.813649,24.694578,0 46.818753,24.696511,0 46.82311500000001,24.698445,0 46.825435,24.699285,0 46.827663,24.700378,0 46.811084,24.722812,0 46.794466,24.71263,0 46.80252699999999,24.702426,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Ulaishah</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Alisha<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.676795,24.62848500000001,0 46.67656900000001,24.625293,0 46.68839,24.625428,0 46.690632,24.62617600000001,0 46.69120600000001,24.626285,0 46.691773,24.626375,0 46.691985,24.627695,0 46.692098,24.629881,0 46.692544,24.641459,0 46.684986,24.638355,0 46.67526400000001,24.633549,0 46.676795,24.62848500000001,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Umm Salim</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Umm Salim<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.69247107159792,24.62991262843833,0 46.70421514152381,24.63103503762781,0 46.70421515207714,24.63143043000877,0 46.703461,24.637617,0 46.69280754201749,24.63691486852984,0 46.69247107159792,24.62991262843833,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Ad Dirah</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Dera<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.7055,24.623074,0 46.707961,24.624378,0 46.709142,24.62499,0 46.711079,24.626512,0 46.71308599999999,24.627401,0 46.717222,24.630004,0 46.716362,24.63147,0 46.716189,24.633458,0 46.716659,24.634449,0 46.717017,24.635264,0 46.717407,24.636544,0 46.71770200000001,24.637927,0 46.716837,24.637927,0 46.713811,24.638368,0 46.70365799999999,24.637741,0 46.70455,24.63109,0 46.7055,24.623074,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Marqab</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Muraqib<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.73615387520486,24.6391221548425,0 46.73621951098419,24.63965863518718,0 46.71769299999999,24.637914,0 46.717485,24.636551,0 46.717258,24.635848,0 46.71703200000001,24.635146,0 46.716274,24.633702,0 46.716065,24.633274,0 46.716409,24.631112,0 46.717186,24.630026,0 46.73615387520486,24.6391221548425,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Thulaim</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Naseem<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.717516,24.637978,0 46.736128,24.639681,0 46.736046,24.641224,0 46.73516999999999,24.642644,0 46.73341499999999,24.644497,0 46.727666,24.643484,0 46.725019,24.642745,0 46.717678,24.640498,0 46.717516,24.637978,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>As Sinaiyah</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Sanaeya<br>
+<b>color:</b> #666666<br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+				<value>#666666</value>
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.754443,24.65388,0 46.75284300000001,24.65333,0 46.742426,24.652851,0 46.73927,24.652585,0 46.738578,24.652349,0 46.73706299999999,24.651564,0 46.735466,24.650365,0 46.73482200000001,24.649821,0 46.734217,24.649153,0 46.733915,24.648328,0 46.733807,24.646993,0 46.73385,24.645343,0 46.734001,24.644518,0 46.73633499999999,24.641866,0 46.736741,24.63957,0 46.737568,24.63449,0 46.73927500000001,24.630384,0 46.75738700000001,24.633466,0 46.75715476184358,24.63404738639905,0 46.76159786259416,24.63429761025912,0 46.759764,24.640562,0 46.757929,24.646678,0 46.754443,24.65388,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>As Safa</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Safa<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.77697700000001,24.679296,0 46.768547,24.676445,0 46.766282,24.675703,0 46.76533899999999,24.675247,0 46.764143,24.674504,0 46.762633,24.673762,0 46.75112,24.669483,0 46.748602,24.667027,0 46.748413,24.666456,0 46.754442,24.65445,0 46.75721,24.655706,0 46.761677,24.657589,0 46.783947,24.666889,0 46.781434,24.669977,0 46.779864,24.671921,0 46.77835600000001,24.674037,0 46.777855,24.675752,0 46.77697700000001,24.679296,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Jazirah</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Jazeera<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.77803400000001,24.677625,0 46.779143,24.674512,0 46.781361,24.671314,0 46.78376500000001,24.668368,0 46.785615,24.666011,0 46.788941,24.660121,0 46.79734599999999,24.64329,0 46.815032,24.65177,0 46.795908,24.685518,0 46.792945,24.684763,0 46.790167,24.683756,0 46.777758,24.679812,0 46.77803400000001,24.677625,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Fayha</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Feha<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.80611,24.667588,0 46.82725200000001,24.677484,0 46.81899700000001,24.693026,0 46.81687299999999,24.695875,0 46.80857,24.69261,0 46.795888,24.685954,0 46.80611,24.667588,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>As Saadah</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Saada<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.816847,24.695729,0 46.81854299999999,24.693241,0 46.827226,24.677338,0 46.856086,24.690879,0 46.855161,24.717145,0 46.848593,24.713479,0 46.836341,24.705568,0 46.82786200000001,24.700388,0 46.816847,24.695729,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Tuwaiq</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Taweeq<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.554941,24.594319,0 46.55866500000001,24.598612,0 46.558493,24.600314,0 46.561043,24.603102,0 46.560787,24.604031,0 46.55985,24.604339,0 46.555001,24.602555,0 46.553811,24.60147,0 46.551092,24.598295,0 46.54616300000001,24.593028,0 46.539184,24.593252,0 46.529319,24.588211,0 46.515626,24.580843,0 46.51444200000001,24.57581,0 46.50267302335539,24.57064383515821,0 46.49562637473892,24.55939412771564,0 46.49155031097769,24.5525566490093,0 46.50327933268888,24.54515677943167,0 46.52338246773986,24.54007225366028,0 46.53416682313836,24.54438092339374,0 46.55395471537166,24.54818057569354,0 46.57764850222831,24.54628284810154,0 46.57879658417089,24.54645955378645,0 46.57897996786784,24.55426736084534,0 46.57817212686463,24.56937981243353,0 46.594951,24.57294900000001,0 46.57313,24.602495,0 46.571768,24.602648,0 46.57125499999999,24.604196,0 46.570234,24.60442700000001,0 46.569129,24.60311,0 46.56862,24.601407,0 46.568196,24.599704,0 46.567091,24.598156,0 46.56313700000001,24.591988,0 46.562232,24.5919,0 46.56299200000001,24.59346,0 46.56418100000001,24.59528,0 46.56427500000001,24.596493,0 46.56441699999999,24.5971,0 46.563512,24.596969,0 46.562941,24.596579,0 46.562322,24.596621,0 46.561988,24.59683800000001,0 46.561226,24.596404,0 46.56098900000001,24.59571,0 46.554941,24.594319,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Uraija Al Gharabi</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Areja Gharbia<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.615182,24.60067,0 46.61202999999999,24.604537,0 46.610837,24.606935,0 46.610154,24.609333,0 46.60777,24.610647,0 46.610916,24.614751,0 46.6047,24.618152,0 46.593478,24.602822,0 46.59024,24.606766,0 46.58496599999999,24.603667,0 46.58045800000001,24.6008,0 46.577133,24.605054,0 46.57305,24.60265100000001,0 46.578761,24.594995,0 46.581659,24.591515,0 46.584898,24.58672,0 46.58890199999999,24.581229,0 46.595036,24.573031,0 46.601672,24.574893,0 46.62404100000001,24.588604,0 46.615182,24.60067,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Uraija Al Awsat</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Areja Alwusta<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.64123755953037,24.59890489798676,0 46.644063,24.600964,0 46.66843051923446,24.61564534402877,0 46.66935370133674,24.61747697106731,0 46.67262087674014,24.62113462088576,0 46.67145206199304,24.62510842919804,0 46.66309641821493,24.62643772883049,0 46.65982078524797,24.62658071773248,0 46.65780376041719,24.62672223983513,0 46.64782443057719,24.63096641919482,0 46.63992806284758,24.62334828016447,0 46.63559850133085,24.62221209046366,0 46.6317362780279,24.62304412557026,0 46.616636,24.608235,0 46.612274,24.605319,0 46.62423292537957,24.58843808213997,0 46.64123755953037,24.59890489798676,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Badi&apos;ah</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Badeaa<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.691286,24.626291,0 46.690663,24.626218,0 46.688433,24.625412,0 46.676132,24.625302,0 46.674223,24.62525700000001,0 46.671408,24.62536,0 46.672729,24.622771,0 46.67286600000001,24.622085,0 46.67274,24.621404,0 46.67221500000001,24.62020800000001,0 46.671084,24.619061,0 46.670566,24.618633,0 46.669164,24.61747,0 46.668582,24.616331,0 46.668463,24.615316,0 46.669291,24.613866,0 46.67019000000001,24.613153,0 46.670809,24.612206,0 46.671324,24.611063,0 46.671856,24.610225,0 46.67204399999999,24.60956,0 46.672314,24.608976,0 46.672895,24.608138,0 46.673601,24.607485,0 46.673957,24.606975,0 46.674319,24.606709,0 46.67479,24.606488,0 46.675439,24.606517,0 46.676081,24.606302,0 46.67695400000001,24.606054,0 46.67721868970744,24.60601793540244,0 46.67722138987951,24.60623607192024,0 46.67710348307024,24.60663568002205,0 46.67758749642872,24.60685361863411,0 46.67933993409588,24.60765285700544,0 46.68168895104014,24.60907204404546,0 46.6844067740053,24.61063719347171,0 46.68448580695547,24.61103824442969,0 46.68452512723284,24.61103890736414,0 46.685366,24.611318,0 46.68640900000001,24.613607,0 46.687987,24.614481,0 46.687762,24.615491,0 46.69174099999999,24.616915,0 46.692735,24.617026,0 46.691286,24.626291,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Ash Shimaisi</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Shamsi<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.69247121392553,24.62685164191673,0 46.69285006540424,24.62658381553972,0 46.69321487927815,24.62645628919997,0 46.69362178447357,24.62623948113606,0 46.6941269663757,24.6255673650663,0 46.69806952556112,24.62017581033789,0 46.69906562163332,24.61881110210029,0 46.69958471129115,24.61842846650293,0 46.70051065731006,24.61812234529909,0 46.70387779306878,24.61767580341201,0 46.706326,24.617147,0 46.706262,24.617466,0 46.7055200650521,24.62278404011379,0 46.70497309742894,24.62617672643534,0 46.704832821566,24.62716875854643,0 46.70481882768737,24.62785748633148,0 46.70472066664415,24.62882681261265,0 46.70421562780764,24.63008951055598,0 46.70424373392304,24.63090579699826,0 46.69249918303914,24.62974692583846,0 46.69227476411592,24.62728528947978,0 46.69247121392553,24.62685164191673,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Jaradiyah</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Jararia<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.706399,24.615892,0 46.706168,24.61722,0 46.69989200000001,24.618109,0 46.698898,24.618706,0 46.694723,24.624203,0 46.693272,24.626273,0 46.692407,24.626427,0 46.69141,24.626227,0 46.691624,24.623854,0 46.691993,24.622305,0 46.69278800000001,24.617106,0 46.693191,24.614275,0 46.693987,24.612818,0 46.694671,24.612108,0 46.695091,24.61122,0 46.69587300000001,24.609993,0 46.69676799999999,24.610322,0 46.697663,24.610599,0 46.698929,24.610904,0 46.700253,24.611396,0 46.701094,24.611684,0 46.70303199999999,24.612481,0 46.706372,24.614022,0 46.706399,24.615892,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Salam</name>
+		<open>1</open>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<Polygon>
+			<tessellate>1</tessellate>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.70674958679232,24.61775016393233,0 46.70691989942959,24.61745603473095,0 46.70719237884133,24.61723931817211,0 46.70763513203861,24.61720838707546,0 46.70848658267349,24.61706911189953,0 46.70955940102638,24.61697628537434,0 46.70976374227253,24.61703822052227,0 46.70996807803052,24.61719304206211,0 46.7100021209313,24.61748667726549,0 46.71109156427983,24.62562981042436,0 46.71102343653481,24.62580010352067,0 46.71081907302102,24.62584653823373,0 46.7098654280568,24.62514982594622,0 46.70908208279607,24.62468534544711,0 46.70610202378312,24.62287386573194,0 46.70674958679232,24.61775016393233,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Mikal</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Makal<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.71036996172964,24.61930708529614,0 46.71025923429348,24.6185016952957,0 46.71013005036103,24.61751172603898,0 46.71024079126722,24.61736071788435,0 46.71044381433354,24.61720971307888,0 46.71156965247285,24.61769634535418,0 46.71744458066162,24.62046603878522,0 46.71739157170142,24.62064273484944,0 46.71696843116561,24.62118875399494,0 46.71609500554584,24.62241046599394,0 46.71509920131613,24.62377677725931,0 46.71422100336571,24.62493858761881,0 46.71357018557115,24.62582202803987,0 46.71330358172006,24.62621404833659,0 46.71306049840626,24.62660606986339,0 46.71289756109417,24.62696378320934,0 46.71242475307977,24.62663511335287,0 46.71221614919305,24.62655386949378,0 46.71180943767354,24.62645482383256,0 46.71129263270893,24.62620313608234,0 46.7110527377834,24.62460914661413,0 46.71060986448499,24.6210688546088,0 46.71036996172964,24.61930708529614,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Wusaita</name>
+		<open>1</open>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<Polygon>
+			<tessellate>1</tessellate>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.71650452007319,24.6246512659534,0 46.71553617936073,24.62600831957316,0 46.71394425527067,24.62769215174825,0 46.71292691364204,24.62724053246572,0 46.71295640193104,24.6269979464827,0 46.71431265013766,24.62492283925424,0 46.71578227076331,24.62278724212857,0 46.71744718828073,24.62049977046586,0 46.7188159031404,24.62059383709469,0 46.71650452007319,24.6246512659534,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Jabrah</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Jabrah<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.71866362148958,24.62087613353846,0 46.71876348785576,24.62065412093137,0 46.7188159031404,24.62059383709469,0 46.721178,24.620798,0 46.722712,24.620918,0 46.72365,24.621004,0 46.72299300000001,24.622423,0 46.72282199999999,24.622922,0 46.72239400000001,24.623664,0 46.722086,24.62428600000001,0 46.721941,24.624461,0 46.721569,24.624753,0 46.720419,24.625565,0 46.719867,24.626286,0 46.718708,24.62787,0 46.717318,24.629832,0 46.71617,24.62919,0 46.71412699999999,24.62785,0 46.71405633512946,24.62769105201602,0 46.7149349455016,24.62673061280016,0 46.71639779337985,24.62497029400683,0 46.71745952120228,24.62299113873081,0 46.71799171371253,24.62207043209946,0 46.7183160537645,24.62148575497638,0 46.71866362148958,24.62087613353846,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Ud</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al-Oud<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.733868,24.620565,0 46.733689,24.629038,0 46.733394,24.630098,0 46.73231,24.63109,0 46.731182,24.632359,0 46.73027800000001,24.633342,0 46.72921800000001,24.635651,0 46.72137500000001,24.632167,0 46.717069,24.630087,0 46.720406,24.625568,0 46.722257,24.62426,0 46.723055,24.622569,0 46.725438,24.617331,0 46.733868,24.620565,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>As Salhiyah</name>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Salheya<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.738775,24.630086,0 46.737204,24.633852,0 46.736288,24.639342,0 46.729037,24.635661,0 46.730221,24.6334,0 46.730721,24.632713,0 46.731172,24.632195,0 46.733224,24.63027200000001,0 46.73359,24.629373,0 46.738775,24.630086,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Faruq</name>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Farooq<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.757368,24.648978,0 46.757883,24.647883,0 46.75952400000001,24.642893,0 46.760129,24.640909,0 46.761448,24.641282,0 46.762247,24.641537,0 46.763264,24.641953,0 46.791416,24.653546,0 46.786459,24.663286,0 46.785392,24.664945,0 46.784387,24.666603,0 46.782059,24.66569,0 46.759663,24.656105,0 46.757524,24.655134,0 46.754732,24.654066,0 46.757368,24.648978,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Dharat Namar</name>
+		<open>1</open>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<Polygon>
+			<tessellate>1</tessellate>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.62218285043587,24.53824607190552,0 46.62451661152099,24.54012065265713,0 46.63089357335987,24.54321407721958,0 46.63222447890361,24.54426870392156,0 46.64087917395967,24.54722017207557,0 46.64376828804112,24.55053094958197,0 46.64568496187242,24.5521021013457,0 46.64422678698958,24.55714586377604,0 46.64422500085117,24.55784543850742,0 46.64517454703619,24.5615172003378,0 46.63937030735396,24.56100099661062,0 46.62035421097404,24.56798753207766,0 46.60788580702943,24.57427531187852,0 46.60403347656429,24.57618509755215,0 46.59904404547869,24.57339085833199,0 46.57989319438792,24.56972838638632,0 46.57817085341102,24.56972804244474,0 46.57897446044198,24.55617427226364,0 46.57879658117163,24.54663319751072,0 46.59444567775527,24.54324786367591,0 46.60209449010274,24.53793059806717,0 46.61048089174614,24.54144518672654,0 46.61416584298467,24.53299604728718,0 46.62218285043587,24.53824607190552,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>As Suwaidi Al Gharabi</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Soedi Gharbi<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.606711,24.575053,0 46.608329,24.573739,0 46.610458,24.572734,0 46.61216,24.572194,0 46.621608,24.567789,0 46.63275800000001,24.562455,0 46.636077,24.561064,0 46.638034,24.560446,0 46.639906,24.560447,0 46.641862,24.560834,0 46.643649,24.561377,0 46.624403,24.588761,0 46.604923,24.577064,0 46.606711,24.575053,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Dhahrat Al Badi&apos;ah</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Zahra Albadea<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.663033,24.612534,0 46.65773699999999,24.609205,0 46.643576,24.600653,0 46.64082149892955,24.59852705576614,0 46.62431653807186,24.58851400936695,0 46.630254,24.580541,0 46.63207700000001,24.581692,0 46.634391,24.583016,0 46.63545000000001,24.581574,0 46.63736800000001,24.581154,0 46.639483,24.582538,0 46.639879,24.584342,0 46.641267,24.584884,0 46.64146599999999,24.584403,0 46.642259,24.584223,0 46.64259,24.584884,0 46.643317,24.585065,0 46.644044,24.585246,0 46.645896,24.585246,0 46.646491,24.584946,0 46.647086,24.585367,0 46.64655599999999,24.586269,0 46.64655599999999,24.587592,0 46.647415,24.588434,0 46.64801000000001,24.588434,0 46.64887000000001,24.588434,0 46.649729,24.588735,0 46.65039,24.588735,0 46.651448,24.589698,0 46.65521600000001,24.591863,0 46.656339,24.592224,0 46.656935,24.592285,0 46.657992,24.593668,0 46.65911599999999,24.59463,0 46.660041,24.595532,0 46.661759,24.597397,0 46.66195699999999,24.598419,0 46.66242,24.599561,0 46.66314700000001,24.600343,0 46.664205,24.600824,0 46.665659,24.600885,0 46.666916,24.600885,0 46.669098,24.600886,0 46.669693,24.600946,0 46.671016,24.601187,0 46.671809,24.600827,0 46.672338,24.600526,0 46.67227199999999,24.601187,0 46.67227199999999,24.601729,0 46.67260200000001,24.60233,0 46.673134,24.602766,0 46.673795,24.602947,0 46.674655,24.603128,0 46.675845,24.602767,0 46.676506,24.602346,0 46.67735546250736,24.60162874938262,0 46.67815314079247,24.60057628321903,0 46.67808287523138,24.60275699818703,0 46.67773983173192,24.60412890849159,0 46.67745379093409,24.60492713461524,0 46.6774533607968,24.60529058021427,0 46.67729641049387,24.60583608405997,0 46.676836,24.606074,0 46.67558,24.606434,0 46.675117,24.606434,0 46.674125,24.606735,0 46.67372799999999,24.607336,0 46.673397,24.607757,0 46.672736,24.608418,0 46.67227199999999,24.609199,0 46.67214,24.609921,0 46.671743,24.610462,0 46.67137399999999,24.611221,0 46.67052300000001,24.610447,0 46.666439,24.608124,0 46.665076,24.609826,0 46.663033,24.612534,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Az Zahrah</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Zahra2<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.651397,24.589798,0 46.65087500000001,24.589264,0 46.650288,24.588789,0 46.649439,24.588729,0 46.648656,24.58855000000001,0 46.64787199999999,24.588491,0 46.647219,24.588253,0 46.646632,24.5876,0 46.646632,24.587006,0 46.646633,24.58623400000001,0 46.646894,24.585522,0 46.64656800000001,24.585047,0 46.64585,24.585284,0 46.64493600000001,24.585284,0 46.64434800000001,24.585283,0 46.643695,24.585164,0 46.643173,24.585164,0 46.642585,24.584986,0 46.642063,24.584451,0 46.64141,24.584451,0 46.641018,24.584926,0 46.640366,24.58451,0 46.639713,24.584213,0 46.63945199999999,24.5835,0 46.639257,24.58261,0 46.637168,24.581243,0 46.63521,24.58142,0 46.634295,24.582904,0 46.629921,24.580409,0 46.641159,24.565037,0 46.661065,24.576859,0 46.651397,24.589798,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>As Suwaidi</name>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Swuaidi<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.702758,24.59626,0 46.702778,24.597772,0 46.702959,24.599025,0 46.703489,24.600008,0 46.704031,24.601159,0 46.704649,24.602055,0 46.705646,24.603101,0 46.70611700000001,24.604514,0 46.70393600000001,24.603699,0 46.701659,24.602806,0 46.699091,24.601675,0 46.696188,24.600986,0 46.695231,24.600446,0 46.691905,24.598855,0 46.69106300000001,24.598647,0 46.68838399999999,24.598453,0 46.685883,24.59816500000001,0 46.68458,24.597898,0 46.681035,24.595485,0 46.67840399999999,24.599151,0 46.678029,24.600601,0 46.677354,24.601648,0 46.67638800000001,24.602459,0 46.674957,24.60321,0 46.67356599999999,24.60303,0 46.672711,24.602569,0 46.672384,24.601659,0 46.672512,24.600641,0 46.671604,24.600858,0 46.670985,24.601312,0 46.66986600000001,24.601034,0 46.668297,24.600949,0 46.66691300000001,24.600854,0 46.665533,24.600843,0 46.664249,24.600911,0 46.66331,24.60054,0 46.66243800000001,24.599661,0 46.66172899999999,24.598354,0 46.66177900000001,24.597512,0 46.660609,24.596149,0 46.660023,24.595426,0 46.659171,24.594885,0 46.657839,24.593868,0 46.657036,24.592408,0 46.6549,24.59177,0 46.651362,24.58963500000001,0 46.661013,24.576839,0 46.688036,24.593481,0 46.692693,24.59654000000001,0 46.69429098474359,24.59570387429418,0 46.695022,24.595207,0 46.697092,24.595443,0 46.698818,24.595678,0 46.69985299999999,24.595913,0 46.702758,24.59626,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Sultanah</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Sultana<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.68094499999999,24.595667,0 46.684955,24.598046,0 46.68538,24.59816,0 46.68791,24.598446,0 46.691273,24.598832,0 46.691897,24.598916,0 46.69505,24.600349,0 46.69688,24.601163,0 46.697661,24.601475,0 46.6994955632921,24.60193588277658,0 46.69927357794848,24.60298427507149,0 46.69889855540847,24.60425665016444,0 46.69779468219524,24.60657542365416,0 46.69701535604136,24.60784419023172,0 46.69624057842818,24.6091335562327,0 46.69588606127139,24.60967750019525,0 46.695753,24.610105,0 46.695103,24.611058,0 46.694664,24.612032,0 46.69393599999999,24.612899,0 46.69318299999999,24.614317,0 46.692776,24.617062,0 46.69178000000001,24.616933,0 46.68780699999999,24.61547,0 46.68798,24.61451,0 46.686414,24.613614,0 46.685378,24.611345,0 46.684625,24.611074,0 46.68448553856506,24.61078380325236,0 46.68384780554106,24.61038173099046,0 46.68252576390073,24.60950970357073,0 46.68109246531125,24.60867122423294,0 46.67914173982382,24.60768902496897,0 46.67706328445131,24.60656303110347,0 46.67804287736995,24.60279320317029,0 46.67822499999999,24.599461,0 46.68094499999999,24.595667,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Siyah</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Sayeyah<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.69570744301938,24.60998017362272,0 46.69644100443343,24.60875056867418,0 46.69697106627199,24.60790463810799,0 46.69770721466446,24.60669643024055,0 46.69823421927858,24.60572829648003,0 46.69865451902683,24.60488134953749,0 46.69896418967377,24.60399376453596,0 46.69927373417561,24.60284332420148,0 46.69949559148,24.60191576720154,0 46.700554,24.602116,0 46.701829,24.602547,0 46.70267199999999,24.603174,0 46.703592,24.603691,0 46.704338,24.603965,0 46.706036,24.604595,0 46.706397,24.605597,0 46.706556,24.607003,0 46.706533,24.608525,0 46.706556,24.610339,0 46.70657300000001,24.611775,0 46.70646299999999,24.613149,0 46.706407,24.614088,0 46.703875,24.61288,0 46.70096,24.611643,0 46.698993,24.61095,0 46.69570744301938,24.60998017362272,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Utaiqah</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Ateqah<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.706704,24.606444,0 46.70635900000001,24.605038,0 46.705758,24.603307,0 46.70433,24.601424,0 46.703187,24.598866,0 46.703033,24.596258,0 46.70482100000001,24.588757,0 46.706146,24.58721,0 46.707656,24.586721,0 46.70883700000001,24.587463,0 46.709514,24.588024,0 46.710668,24.588824,0 46.711538,24.589664,0 46.709796,24.616894,0 46.706435,24.617157,0 46.706704,24.606444,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Manfouhah Al Jadidah</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Manfoha Aljadeda<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.71047400000001,24.605994,0 46.711343,24.606054,0 46.71286899999999,24.605937,0 46.71518800000001,24.60592000000001,0 46.719211,24.607301,0 46.725904,24.609901,0 46.72691799999999,24.610241,0 46.727544,24.610673,0 46.727997,24.6109,0 46.723464,24.620964,0 46.71762127951182,24.62046603916969,0 46.71009419241755,24.61693193402245,0 46.71047400000001,24.605994,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Ghubairah</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Ghabera<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.738812,24.630095,0 46.733842,24.62929,0 46.733919,24.620539,0 46.725472,24.617199,0 46.728375,24.610824,0 46.740155,24.617777,0 46.743946,24.620199,0 46.747155,24.621874,0 46.74644,24.622398,0 46.74518700000001,24.622854,0 46.74382099999999,24.623219,0 46.74276099999999,24.623372,0 46.741633,24.624113,0 46.738812,24.630095,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Khalidiyah</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Khaledeyah<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.73928315913364,24.63042570389591,0 46.7412,24.625427,0 46.741778,24.62428,0 46.74246099999999,24.623754,0 46.743354,24.623276,0 46.744878,24.623036,0 46.746927,24.622366,0 46.750814,24.619689,0 46.757748,24.615098,0 46.76047999999999,24.614045,0 46.762003,24.613805,0 46.762634,24.613901,0 46.763528,24.613995,0 46.764579,24.614473,0 46.76542,24.614759,0 46.766051,24.614997,0 46.766734,24.615331,0 46.767102,24.615713,0 46.76642,24.616239,0 46.766,24.616908,0 46.765685,24.617721,0 46.765686,24.618867,0 46.765687,24.61972700000001,0 46.765477,24.620587,0 46.76542500000001,24.621304,0 46.764902,24.623693,0 46.7615625780658,24.63429761117678,0 46.75715476468507,24.63411159668319,0 46.75733157476594,24.63350206147761,0 46.73928315913364,24.63042570389591,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Faisaliyah</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Fayseleya<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.765706,24.620181,0 46.765517,24.617942,0 46.766031,24.61673400000002,0 46.76698199999999,24.61565,0 46.768751,24.618603,0 46.76958599999999,24.619803,0 46.770811,24.620852,0 46.7721,24.622269,0 46.773847,24.623336,0 46.775578,24.62431,0 46.777629,24.625333,0 46.780153,24.626097,0 46.783439,24.626466,0 46.790176,24.627559,0 46.795431,24.62849,0 46.799389,24.629138,0 46.80262299999999,24.62979800000001,0 46.791619,24.653316,0 46.761187,24.641049,0 46.759603,24.640903,0 46.765706,24.620181,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>An Nur</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Noor<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.805303,24.625899,0 46.80990700000001,24.618507,0 46.812902,24.616874,0 46.81682700000001,24.615851,0 46.824584,24.611431,0 46.83519,24.616596,0 46.814957,24.651661,0 46.796903,24.643402,0 46.805303,24.625899,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Sulay</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Seili<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.806087,24.667441,0 46.83502900000001,24.616617,0 46.871243,24.633706,0 46.857095,24.654895,0 46.855609,24.690951,0 46.806087,24.667441,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Shubra</name>
+		<open>1</open>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<Polygon>
+			<tessellate>1</tessellate>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.64370036538968,24.56130417386358,0 46.64489658031753,24.56154998162469,0 46.64883219859566,24.56320544471081,0 46.65205201719237,24.56482276575275,0 46.65604044455534,24.56706985113605,0 46.65769109556918,24.56751030702362,0 46.66315163577418,24.5690988617828,0 46.67039247470306,24.57140933234346,0 46.67083219607226,24.57142411444072,0 46.67149061763413,24.57146555653825,0 46.67546889441569,24.57403020504178,0 46.68189853197529,24.57846872315299,0 46.68744508358954,24.583076884397,0 46.68517817652153,24.58553852756092,0 46.68043503632254,24.5860697353857,0 46.67929251700856,24.5875605445518,0 46.6664931851076,24.58061153299206,0 46.65382544693003,24.5723656501449,0 46.64139579894168,24.56487682139889,0 46.64370036538968,24.56130417386358,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Ad Duraihimiyah</name>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Darehmea<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.69098799999999,24.585237,0 46.69415900000001,24.58574,0 46.695514,24.585724,0 46.69769500000001,24.586112,0 46.69885900000001,24.585995,0 46.700778,24.586117,0 46.703063,24.586163,0 46.704645,24.585855,0 46.70468,24.586358,0 46.704615,24.587203,0 46.704608,24.58799,0 46.704319,24.589188,0 46.704135,24.590099,0 46.703768,24.591078,0 46.703467,24.593017,0 46.70319899999999,24.594562,0 46.70262600000001,24.596184,0 46.70138,24.596137,0 46.70066092119502,24.59617950102653,0 46.69972339021869,24.59600868652056,0 46.69853626525455,24.59589472950193,0 46.697368,24.595554,0 46.6965055629115,24.59538258306896,0 46.69581815087128,24.59498452453125,0 46.69547521868758,24.59538240294174,0 46.69338385990874,24.59595061151422,0 46.69244737638505,24.59643384851338,0 46.67921061526486,24.58797771727518,0 46.68083582217924,24.58571517490409,0 46.68354254005669,24.58571508941636,0 46.68519177877913,24.58565847248397,0 46.68722866039438,24.58307917007377,0 46.69098799999999,24.585237,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Yamamah</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Yamamah<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.71152299999999,24.589579,0 46.706914,24.586117,0 46.70916,24.585398,0 46.711842,24.585574,0 46.713961,24.58572,0 46.71668,24.585869,0 46.720124,24.586728,0 46.724765,24.588138,0 46.723421,24.590686,0 46.72292400000001,24.592388,0 46.722626,24.593519,0 46.72213300000001,24.596584,0 46.722041,24.60052200000001,0 46.721911,24.601732,0 46.721362,24.603888,0 46.719286,24.607327,0 46.71509200000001,24.605779,0 46.71260600000001,24.605865,0 46.7105,24.605941,0 46.71152299999999,24.589579,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Manfuhah</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Manfoha<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.726981,24.589369,0 46.736796,24.594466,0 46.735141,24.596909,0 46.734638,24.597908,0 46.734108,24.599309,0 46.733381,24.600694,0 46.73227000000001,24.602666,0 46.730438,24.60607,0 46.729719,24.607236,0 46.728016,24.610848,0 46.727159,24.610396,0 46.71942899999999,24.60730600000001,0 46.720961,24.604653,0 46.72144,24.604053,0 46.72178400000001,24.602678,0 46.722063,24.600651,0 46.722172,24.598209,0 46.72210800000001,24.596719,0 46.722232,24.596041,0 46.72258,24.593304,0 46.723368,24.590594,0 46.72467,24.58834,0 46.726981,24.589369,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Mansourah</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Mansura<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.72955600000001,24.607343,0 46.730926,24.605179,0 46.73401699999999,24.599517,0 46.73453299999999,24.597704,0 46.735134,24.596861,0 46.7369,24.594113,0 46.758193,24.606004,0 46.76040900000001,24.607727,0 46.762732,24.609585,0 46.765157,24.612489,0 46.758762,24.614473,0 46.757105,24.615469,0 46.747576,24.621919,0 46.743996,24.620013,0 46.728065,24.610734,0 46.72955600000001,24.607343,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Dirab</name>
+		<open>1</open>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<Polygon>
+			<tessellate>1</tessellate>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.63119343710225,24.49976378877449,0 46.63852345759661,24.51123770184877,0 46.62727370998866,24.51673334660048,0 46.62781884668477,24.52272235155333,0 46.62321979949936,24.52864674533799,0 46.62469265257484,24.53433994595524,0 46.62200028359996,24.53777128145817,0 46.61454169935953,24.5335167918175,0 46.61105670555287,24.5301321770804,0 46.61032526237801,24.5261020646322,0 46.60555545455052,24.52364854961024,0 46.60299207934264,24.52643035777955,0 46.59844540709007,24.52348771703445,0 46.59409414224777,24.51580222593362,0 46.59556189864485,24.51328362567028,0 46.59593103369566,24.51194268531379,0 46.59013460103259,24.50859034739154,0 46.59740576280857,24.50512370004616,0 46.60212791063967,24.50282364170475,0 46.61592924743935,24.49559009187308,0 46.61321210296039,24.4888158147825,0 46.62028922013268,24.48404957907282,0 46.63119343710225,24.49976378877449,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Hazm</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Hazam<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.644883,24.517557,0 46.651184,24.528,0 46.6674606971211,24.54872015446202,0 46.66108361831872,24.55398420469079,0 46.65732128340421,24.55727318644253,0 46.65577093870259,24.55969645604815,0 46.65654745715067,24.56359911363894,0 46.65674094261044,24.56726419346244,0 46.64483516008733,24.56132489809924,0 46.64473641621457,24.55551696509424,0 46.64511982555794,24.55323152034596,0 46.64567822641678,24.55193155555652,0 46.64316398787541,24.55007248113315,0 46.64124073030245,24.54715582059152,0 46.63761662230066,24.54522443182337,0 46.63140657028195,24.54345763656272,0 46.62849119442565,24.54125154448758,0 46.62735365629518,24.54063625679391,0 46.626081,24.540031,0 46.62406300000001,24.539915,0 46.622045,24.538078,0 46.62320208178908,24.53678811697213,0 46.62459760497094,24.53422200673253,0 46.62312928997287,24.5279027928133,0 46.62752413830902,24.5221989276045,0 46.62756324463863,24.51704183436251,0 46.63854483237739,24.510942815609,0 46.64372261698292,24.51564609134235,0 46.644883,24.517557,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Namar</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Nimar<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.65671031879652,24.56702694825233,0 46.65658503225396,24.56409739100543,0 46.65591088278421,24.55976245408231,0 46.65728144913197,24.55710425888505,0 46.66762429561465,24.54866162079525,0 46.684855,24.565752,0 46.69096099999999,24.571207,0 46.695545,24.575083,0 46.69963599999999,24.577589,0 46.701619,24.579365,0 46.703489,24.580962,0 46.704278,24.581864,0 46.704656,24.582788,0 46.705178,24.584273,0 46.705193,24.585881,0 46.703352,24.586168,0 46.699821,24.585977,0 46.69776,24.586087,0 46.695879,24.585808,0 46.693168,24.585478,0 46.690657,24.585044,0 46.687644,24.583219,0 46.685361,24.581454,0 46.68317900000001,24.579591,0 46.681543,24.578174,0 46.674373,24.573677,0 46.671595,24.571861,0 46.65671031879652,24.56702694825233,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Uhud</name>
+		<open>1</open>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<Polygon>
+			<tessellate>1</tessellate>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.63662903273713,24.50754120702164,0 46.62257030933593,24.48792664015173,0 46.61475942208642,24.47317106281062,0 46.62266915488006,24.47177116484873,0 46.62763777237996,24.46992990162448,0 46.62846012885797,24.46748261207818,0 46.63176171684773,24.4675209830779,0 46.63454884326517,24.46857033820593,0 46.63759107951443,24.46738106827844,0 46.64014660771818,24.46501522630414,0 46.64294511048828,24.46582569011052,0 46.64405039740809,24.46844388076613,0 46.64422082768198,24.47070902498868,0 46.64455138733077,24.47217974078855,0 46.64634344098211,24.47325657127237,0 46.64895250650367,24.47370592965889,0 46.65123031654324,24.4737240646181,0 46.65623496219948,24.4731219806553,0 46.66015208985016,24.47337796285994,0 46.66088354604241,24.4761907178642,0 46.65853369991238,24.48001908612189,0 46.65576833408726,24.48425784585674,0 46.65719600433987,24.48770884461234,0 46.66275415231887,24.49542025924562,0 46.63662903273713,24.50754120702164,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Okaz</name>
+		<open>1</open>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<Polygon>
+			<tessellate>1</tessellate>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.70038796400421,24.51003205736229,0 46.68099346295096,24.52278462502683,0 46.66969340444173,24.53046220884925,0 46.65927000533253,24.53751207620191,0 46.65342995108859,24.53061563795951,0 46.65419843188924,24.53033789264265,0 46.65481408811399,24.53019885687735,0 46.64958400850317,24.5265431997606,0 46.6442369278511,24.51698488770416,0 46.63874354311817,24.51178398606714,0 46.63661881171408,24.50715906197024,0 46.65554425124196,24.4989701677836,0 46.66223361953941,24.49567137971809,0 46.65718981725942,24.48765009557011,0 46.66073751215053,24.49077527855158,0 46.66509172813316,24.49113689567598,0 46.6688975388738,24.49559916904833,0 46.67538986997877,24.49776983029561,0 46.67829988821134,24.50115722647156,0 46.68320836841334,24.502858835243,0 46.68626401706462,24.50008489983047,0 46.68878763514693,24.49972158183328,0 46.69131377818898,24.50455925535848,0 46.6949087446694,24.50613997138478,0 46.6985020946145,24.50493344992744,0 46.70183647885833,24.50518254315102,0 46.7046435047556,24.50288961319935,0 46.70596275730326,24.5007040251674,0 46.70994542003631,24.49997387193765,0 46.7139595401917,24.49973800616415,0 46.70038796400421,24.51003205736229,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Marwah</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Maroorah<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.67760200000001,24.525056,0 46.68868,24.539457,0 46.692137,24.543939,0 46.674574,24.556303,0 46.659216,24.537314,0 46.67760200000001,24.525056,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Ash Shifa</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Shifa<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.674353,24.556423,0 46.692267,24.544208,0 46.709986,24.565612,0 46.716656,24.572717,0 46.70951000000001,24.582857,0 46.708652,24.584763,0 46.707318,24.585977,0 46.705984,24.586843,0 46.704745,24.58797,0 46.705412,24.58589,0 46.705508,24.58407,0 46.70436399999999,24.582076,0 46.703126,24.580083,0 46.700839,24.578263,0 46.696742,24.575924,0 46.69073900000001,24.57081,0 46.674353,24.556423,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Masani</name>
+		<open>1</open>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<Polygon>
+			<tessellate>1</tessellate>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.77735836536289,24.5110053832282,0 46.77453492582691,24.52066735461457,0 46.77339243762842,24.53373760192451,0 46.76998881089906,24.54205983048738,0 46.76057305269691,24.55757298389356,0 46.75825575654397,24.56123166096678,0 46.77282774447097,24.56889885617828,0 46.76030390908388,24.58713574010746,0 46.74625369247191,24.58147987499418,0 46.73794071510894,24.59366481348764,0 46.73817142063288,24.59366412672406,0 46.71894942725592,24.58496826066972,0 46.70896762169779,24.58515989245042,0 46.7170832223077,24.57219620012021,0 46.72081589614408,24.57290918570418,0 46.72766043419681,24.56566451651386,0 46.73868242884355,24.55199648122737,0 46.74504298180894,24.54957450058647,0 46.75247243939013,24.5410286733637,0 46.76203781564367,24.53132862432964,0 46.76185466899288,24.52238970053222,0 46.76078418233679,24.52064412243455,0 46.76440534577927,24.51340954246928,0 46.77268674219008,24.51118507749692,0 46.77735836536289,24.5110053832282,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Aziziyah</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Azizeyah<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.760929,24.587487,0 46.772099,24.568536,0 46.805224,24.58423,0 46.807174,24.585692,0 46.80853000000001,24.586923,0 46.807938,24.588079,0 46.805398,24.589621,0 46.802435,24.591779,0 46.800064,24.59309,0 46.796084,24.595403,0 46.78804,24.599644,0 46.777709,24.605117,0 46.77508400000001,24.606582,0 46.772628,24.608201,0 46.768478,24.610205,0 46.765514,24.612133,0 46.762632,24.609361,0 46.760937,24.607744,0 46.75949599999999,24.606435,0 46.753056,24.602586,0 46.736955,24.593964,0 46.740513,24.589804,0 46.743223,24.585952,0 46.746187,24.581176,0 46.760929,24.587487,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Manakh</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Manakh<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.776961,24.6055,0 46.79483000000001,24.596069,0 46.806287,24.589207,0 46.808953,24.587568,0 46.81054,24.588776,0 46.814454,24.590603,0 46.822559,24.594025,0 46.821745,24.595392,0 46.820861,24.596962,0 46.82102700000001,24.597898,0 46.821482,24.599272,0 46.82164800000001,24.600208,0 46.817641,24.607997,0 46.823605,24.611252,0 46.816411,24.615955,0 46.81285700000001,24.616763,0 46.811721,24.617506,0 46.809742,24.618852,0 46.80918700000001,24.619893,0 46.806419,24.623947,0 46.803452,24.629855,0 46.79932399999999,24.629211,0 46.789939,24.627511,0 46.782231,24.626334,0 46.77757499999999,24.625094,0 46.774517,24.623333,0 46.771855,24.621418,0 46.76931500000001,24.619004,0 46.766783,24.615437,0 46.765001,24.612529,0 46.776961,24.6055,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Badr</name>
+		<open>1</open>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Badar<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.67852452908437,24.52479698393857,0 46.69962164366312,24.51058950323893,0 46.71327875125281,24.50016731980571,0 46.72527923310685,24.49809274018493,0 46.7377418201447,24.49655803346364,0 46.7471373851641,24.4953584296683,0 46.75463977358381,24.49486310571297,0 46.76162097417353,24.49974810281742,0 46.76694593668342,24.49976102803059,0 46.77290928600179,24.49540621765118,0 46.78031984122152,24.4961073542355,0 46.78133583784603,24.49890883933206,0 46.78423297673638,24.50334825354277,0 46.77831938933286,24.51082110009852,0 46.7732464434158,24.51081476489025,0 46.76481723919902,24.51378697147856,0 46.76094310774857,24.51967894892665,0 46.7621125661618,24.52375216934054,0 46.76163966824895,24.53153410735202,0 46.7562753148439,24.53604648953846,0 46.7496078408239,24.54397838594435,0 46.74398457078686,24.5493497365477,0 46.73825913911948,24.55177376682558,0 46.73588680680974,24.55465629449275,0 46.73062586315812,24.56033175758635,0 46.7253874059891,24.56844623470269,0 46.72083634475857,24.57242712862309,0 46.71661592929582,24.57267898354784,0 46.70995565013665,24.56622568472502,0 46.70147561566721,24.55558952727138,0 46.68901027260508,24.53965642094349,0 46.67852452908437,24.52479698393857,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Ad Dar Al Baida</name>
+		<open>1</open>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<Polygon>
+			<tessellate>1</tessellate>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.7695171097284,24.54249589252302,0 46.78339247400203,24.54904252330654,0 46.79420633969397,24.5543182438338,0 46.80816226959989,24.56072692056536,0 46.81428947430938,24.56366125496481,0 46.82207955414414,24.56742982176502,0 46.82644419660567,24.5727272494584,0 46.80917405782094,24.5865785125862,0 46.75842996367912,24.56150239781359,0 46.7695171097284,24.54249589252302,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Ad Difa</name>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Difa<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.82674193190596,24.57383400758621,0 46.83253567565487,24.58136638118516,0 46.8333487813803,24.58201331661839,0 46.83467013156474,24.58187501725924,0 46.83655062979776,24.58187541432802,0 46.83812629674823,24.58182953011475,0 46.83893966069938,24.58127526124472,0 46.84076987749644,24.58016662667961,0 46.84270195279011,24.57928888736815,0 46.84514248471718,24.57924292703064,0 46.84773710520037,24.57961379457082,0 46.84983951579584,24.58029209907257,0 46.85167188190574,24.58084692051056,0 46.85309702407778,24.5818642383529,0 46.85431862187238,24.58292788393077,0 46.85477643416328,24.58389900700021,0 46.85523430123595,24.5847776392641,0 46.85523390525498,24.58547119324691,0 46.8554877594164,24.5868582993065,0 46.85604690391602,24.58870773662055,0 46.85492636415094,24.58898454073927,0 46.85217653342188,24.59004603539984,0 46.84782662301934,24.59268565022212,0 46.84508000009226,24.59522548671946,0 46.82186809329271,24.60006846496534,0 46.8212067145453,24.59674528406984,0 46.82237337324333,24.5940218968776,0 46.81754895068385,24.59198947425166,0 46.81424808277637,24.59041898079897,0 46.81049032308012,24.58866363908197,0 46.80916966829294,24.5875551313878,0 46.82674193190596,24.57383400758621,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Taybah</name>
+		<open>1</open>
+		<styleUrl>#msn_ylw-pushpin</styleUrl>
+		<Polygon>
+			<tessellate>1</tessellate>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.84797369222512,24.56050333639877,0 46.82695295416731,24.57300556780576,0 46.82287393829332,24.56750280901438,0 46.8080434747414,24.56066395527159,0 46.79618288942135,24.55465779997509,0 46.80751733582818,24.53533472822478,0 46.81653979612201,24.52626730637085,0 46.83558856444677,24.51376637097113,0 46.86419524360773,24.5492994419261,0 46.84797369222512,24.56050333639877,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Mansuriyah</name>
+		<styleUrl>#msn_ylw-pushpin0</styleUrl>
+		<Polygon>
+			<tessellate>1</tessellate>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.79905240080179,24.48508830462368,0 46.81655453396597,24.49471653354062,0 46.82469772762578,24.5045412759865,0 46.83585202661185,24.51404604586677,0 46.82753706486869,24.51872458897064,0 46.81815497464365,24.5253559238377,0 46.81052789997322,24.53198488068676,0 46.80324682334636,24.54233160034504,0 46.79614739941874,24.55538953287705,0 46.78267587313194,24.5490668785528,0 46.77008812699427,24.54276660951017,0 46.77259292822034,24.53484742884996,0 46.77453784967485,24.52179274932774,0 46.77757530105563,24.51114272994675,0 46.78325622680012,24.50453409645701,0 46.79905240080179,24.48508830462368,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Iskan</name>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Askan<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.850033,24.558402,0 46.868487,24.583253,0 46.86889300000001,24.584346,0 46.869056,24.585859,0 46.866582,24.586798,0 46.863956,24.587472,0 46.861605,24.587913,0 46.860078,24.588233,0 46.855582,24.589085,0 46.8552,24.586932,0 46.854433,24.583204,0 46.85343,24.581719,0 46.852029,24.580964,0 46.85031899999999,24.58025500000001,0 46.84831700000001,24.579684,0 46.84643500000001,24.579192,0 46.844755,24.579247,0 46.843244,24.57966,0 46.84185300000001,24.580152,0 46.839998,24.581001,0 46.838212,24.581647,0 46.83606699999999,24.582057,0 46.834593,24.582081,0 46.833411,24.581967,0 46.832575,24.581417,0 46.826726,24.57344,0 46.850033,24.558402,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Misfat</name>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<Polygon>
+			<tessellate>1</tessellate>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.86415880155127,24.54946329334317,0 46.8357140372447,24.51372308088964,0 46.87223407389472,24.49462360694642,0 46.89734759898376,24.52784521910261,0 46.86415880155127,24.54946329334317,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Ghnamiah</name>
+		<styleUrl>#msn_ylw-pushpin0</styleUrl>
+		<Polygon>
+			<tessellate>1</tessellate>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.80861070979938,24.46842929186648,0 46.85395173157438,24.48831652393027,0 46.86584356978821,24.49800712474821,0 46.86300959799065,24.4994607450984,0 46.85202568999145,24.50511645641956,0 46.83536167849998,24.51386049956772,0 46.82684647604096,24.5069125013263,0 46.82258830923173,24.50255890382063,0 46.81709463694381,24.4951235828544,0 46.79989326748096,24.48592332555553,0 46.79404309221244,24.47849834644321,0 46.79368875329921,24.47849815150043,0 46.78984557790619,24.47010004600259,0 46.79006390924153,24.46590984068382,0 46.79467460934495,24.45914978262552,0 46.79926384659885,24.45431750451285,0 46.81447683340128,24.4577016711437,0 46.80861070979938,24.46842929186648,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>New Industrial Area</name>
+		<snippet></snippet>
+		<description><![CDATA[<div class="googft-info-window">
+<b>district:</b> Al Madina Sanaeya Al Jadeda<br>
+<b>color:</b> <br>
+<b>population-layer:</b> <br>
+<b>sec:</b> <br>
+<b>sec-layer:</b> <br>
+<b>Photo:</b> 
+</div>]]></description>
+		<styleUrl>#msn_ylw-pushpin12010</styleUrl>
+		<ExtendedData>
+			<Data name="color">
+			</Data>
+			<Data name="population-layer">
+			</Data>
+			<Data name="sec">
+			</Data>
+			<Data name="sec-layer">
+			</Data>
+			<Data name="Photo">
+			</Data>
+		</ExtendedData>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.935246,24.503,0 46.939198,24.506345,0 46.942361,24.509691,0 46.945391,24.512438,0 46.945923,24.515549,0 46.947113,24.518898,0 46.94646,24.522011,0 46.94475500000001,24.52500600000001,0 46.942654,24.527762,0 46.94068599999999,24.530637,0 46.939504,24.532314,0 46.936223,24.536627,0 46.93359600000001,24.539144,0 46.93018,24.542021,0 46.929393,24.543099,0 46.926633,24.544898,0 46.92216500000001,24.548015,0 46.893648,24.56612,0 46.886945,24.570316,0 46.883528,24.572713,0 46.879847,24.574871,0 46.878534,24.577146,0 46.87551299999999,24.58086,0 46.873542,24.583256,0 46.871176,24.584934,0 46.869728,24.585295,0 46.850093,24.55875,0 46.935246,24.503,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Haeer</name>
+		<styleUrl>#msn_ylw-pushpin0</styleUrl>
+		<Polygon>
+			<tessellate>1</tessellate>
+			<outerBoundaryIs>
+				<LinearRing>
+					<coordinates>
+						46.8933939862774,24.48496679839569,0 46.87298406796035,24.49419803591995,0 46.86510804000729,24.49789290426227,0 46.85757681696767,24.49069891343929,0 46.8523579284309,24.48723173851329,0 46.82737579879353,24.47629946685181,0 46.80873682774701,24.46911545799124,0 46.81406461104972,24.45825023058218,0 46.80010951296008,24.45397546031065,0 46.80602976150516,24.44365161317751,0 46.81099777286558,24.44101615774438,0 46.82114733063493,24.43655280606019,0 46.82288460586878,24.43364814372717,0 46.82060394035952,24.42993198720827,0 46.81256430791478,24.42540620138683,0 46.81114784280683,24.42143518744821,0 46.81868012735549,24.41484410166345,0 46.82681201530685,24.41142670088389,0 46.83092304516622,24.40747441082541,0 46.82981006701222,24.39954326395723,0 46.82607779644598,24.39504606936804,0 46.8243132088939,24.39344707203929,0 46.82403683428105,24.39053942455413,0 46.82403562556378,24.3855096017631,0 46.82989802972713,24.38475413648804,0 46.83104748814299,24.38448796549702,0 46.85862988984019,24.3832449594505,0 46.86994219395763,24.3835354158747,0 46.88123573262627,24.38566081523028,0 46.88435860250053,24.40893352814069,0 46.88579300703062,24.41501870130956,0 46.89190287974485,24.41027242564346,0 46.89915734245736,24.41213975427085,0 46.90524586490843,24.41585563698067,0 46.91540186162527,24.4195802764261,0 46.9180079951269,24.42302543633231,0 46.92381344846454,24.42621408176878,0 46.91504895226677,24.44287328390714,0 46.91037710163376,24.44922593643299,0 46.90543951508767,24.44682919846568,0 46.90017141324582,24.45688939873472,0 46.89058417444069,24.45394601889924,0 46.88006043198382,24.47219002861763,0 46.8896376129137,24.47752535884212,0 46.88729624756356,24.4812332305634,0 46.8933939862774,24.48496679839569,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+</Document>
+</kml>

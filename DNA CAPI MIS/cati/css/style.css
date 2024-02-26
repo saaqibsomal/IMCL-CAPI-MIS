@@ -1,0 +1,259 @@
+.fa-chevron-right{
+	float: right;
+}
+
+
+.hide{
+	display: none;
+}
+
+
+.counter_text {
+	width: 100%;
+	float: left;
+	clear: none;
+	text-align: center;
+	padding-top: 20px;
+}
+
+.prev_button {
+	clear: none;
+	float: left;
+}
+
+.form-group span, .form-group label{
+	font-size: 18px;
+}
+.parent_body p{
+	font-size: 16px;
+}
+.mrradio input, .mmchkbx input{
+	width: 20px;
+	height: 20px;
+	position: relative;
+	top: 5px;
+	margin: 10px 0;;
+}
+.mrradio, .mmchkbx {
+	font-size: 20px;
+}
+
+.next_button {
+
+}
+.mrradio{
+
+
+}
+.mmchkbx{}
+
+.parent_body {
+	float: left;
+	width: 100%;
+	position: relative;
+	margin-top: 50px;
+}
+.parent_body button{
+	padding:0;
+}
+#btn-left{
+	z-index: 1;
+	border:0;
+	position: relative;
+}
+#btn-left img{
+	z-index: -1;
+	width: 90px;
+}
+#btn-right img{
+	z-index: -1;
+	width: 90px;
+}
+#btn-right{
+	float: right;
+	/*background-image: url('../img/forward_arrow.png');*/
+	z-index: 1;
+	position: relative;
+	border:0;
+}
+.parent_body.btn-default:hover, .parent_body.btn-default:focus, .parent_body.btn-default.focus, 
+.parent_body.btn-default:active, .parent_body.btn-default.active, .parent_body.open>.dropdown-toggle.btn-default {
+	background-color: transparent;
+	border: 0 none;
+	outline: none;
+}
+input[type="radio"] {
+    display: none;
+}
+.mrradio label, .mmchkbx label {
+	clear: both;
+    float: left;
+    font-size: 18px;
+    font-weight: normal;
+    margin: 10px 0;
+}
+input[type="radio"] + label span {
+    background: url("../img/sprites-sfa68604977.png") no-repeat scroll -180px center rgba(0, 0, 0, 0);
+    cursor: pointer;
+    display: inline-block;
+    height: 20px;
+    margin: -1px 4px 0 0;
+    vertical-align: middle;
+    width: 30px;
+}
+input[type="radio"]:checked + label span {
+    background: url("../img/sprites-sfa68604977.png") no-repeat scroll -330px center rgba(0, 0, 0, 0);
+}
+input[type="checkbox"] {
+    display: none;
+}
+input[type="checkbox"] + label span {
+    background: url("../img/sprites-sfa68604977.png") no-repeat scroll left center rgba(0, 0, 0, 0);
+    cursor: pointer;
+    display: inline-block;
+    height: 20px;
+    margin: -1px 4px 0 0;
+    vertical-align: middle;
+    width: 30px;
+}
+input[type="checkbox"]:checked + label span {
+    background: url("../img/sprites-sfa68604977.png") no-repeat scroll -150px center rgba(0, 0, 0, 0);
+}
+.txt-fnt-mob{
+	font-size: 20px;
+}
+.radio-ar{
+	/*float:right;*/
+	clear:both;
+}
+.frst-pgn{
+	position: relative;;
+	left:-55px;
+}
+.formControl{
+	float:left;	
+}
+/*#btn-right{
+	background-color: #0c7db1;
+	padding: 6px 10px;
+	font-family: "Open Sans";
+	font-size: 18px;
+	color: #fff;
+}*/
+
+
+.err_msg {
+	color:#ff0000;
+	font-size:15px;
+	font-weight:bold;
+}
+.inpt-err-msg{
+	border: 1px solid #ff0000;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(255, 0, 0, 1);
+	-moz-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px  rgba(255, 0, 0, 1);
+	-o-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(255, 0, 0, 1);
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(255, 0, 0, 1);
+}
+.glyphicon{
+	font-size: 15px !important;
+	padding-right: 5px;
+}
+.alert-danger {
+	color: #a94442;
+	background-color: transparent;
+	border-color: transparent;
+	padding: 10px 0 0;
+	font-size: 13px !important;
+	margin: 0;
+}
+.sec-hd-area{
+	background-color: #98C6E7; 
+	border-color: transparent; 
+	padding: 10px 0;
+	border-radius:4px;
+	text-indent: 5px;
+	font-weight: bold;
+}
+@media (min-width:220px) and (max-width:563px){
+.mrradio{
+	font-size: 25px;
+	margin: 10px 0;
+}
+.mrradio input, .mmchkbx input{
+	width: 1em;
+	height: 1em;
+	position: relative;
+	top: 3px;
+}
+.mmchkbx{
+	font-size: 25px;
+	margin: 10px 0;
+}
+.form-group span, .form-group label {
+font-size: 23px;
+}
+.txt-fnt-mob{
+	font-size: 25px;
+}
+}
+
+@media (min-width:564px) and (max-width:768px){
+.mrradio{
+	font-size: 20px;
+	margin: 10px 0;
+}
+.mrradio input, .mmchkbx input{
+	width: 1em;
+	height: 1em;
+	position: relative;
+	top: 3px;
+}
+.mmchkbx{
+	font-size: 20px;
+	margin: 10px 0;
+}
+.form-group span, .form-group label {
+font-size: 25px;
+}
+.txt-fnt-mob{
+	font-size: 20px;
+}
+}
+
+
+@media (min-width:769px) and (max-width:992px){
+.mrradio{
+	font-size: 18px;
+	margin: 10px 0;
+}
+.mmchkbx{
+	font-size: 18px;
+	margin: 10px 0;
+}
+.mrradio input, .mmchkbx input{
+	width: 1em;
+	height: 1em;
+	position: relative;
+	top: 3px;
+}
+.form-group span, .form-group label {
+font-size: 25px;
+}
+.txt-fnt-mob{
+	font-size: 20px;
+}
+}
+
+
+
+@media (max-width:406px){
+
+	.counter_text {
+
+	width: 75%;
+	float: left;
+	clear: none;
+	text-align: center;
+}
+
+}

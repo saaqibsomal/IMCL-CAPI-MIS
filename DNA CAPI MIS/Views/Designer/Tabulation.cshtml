@@ -1,0 +1,231 @@
+﻿@model IEnumerable<DNA_CAPI_MIS.Models.BasicSingleCrosstab>
+
+@{
+    ViewBag.Title = "DSDS";
+    Layout = "";
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/bootstrap/jqwidgets")
+}
+
+<link rel="stylesheet" href="~/Content/jqwidgets/jqwidgets/styles/jqx.base.css" type="text/css" />
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="box-header">
+            <i class="fa fa-bar-chart-o"></i>
+            <h3 class="box-title">Tabulation</h3>
+        </div>
+        <div class="box-body">
+            <div id='jqxWidget'>
+                <div id="jqxgrid"></div>
+
+                <div style="float: left; margin-left: 20px; margin-top: 20px;">
+                    <input type="button" value="Export to Excel" id='excelExport' />
+                </div>
+
+                <div style="float: left; margin-left: 20px; margin-top: 20px;">
+                    <input value="Remove Filter" id="clearfilteringbutton" type="button" />
+                </div>
+                <br />
+            </div>
+        </div><!-- /.box-body-->
+    </div><!-- /.col row-->
+</div>
+
+<script type="text/javascript">
+
+    function ViewColumnBase(aggregates) {
+        var renderstring = "";
+        $.each(aggregates, function (key, value) {
+            if (key == 'Base') {
+                renderstring += '<div style="text-align: right;position: relative; margin: 8px; overflow: hidden;">' + value + '</div>';
+            }
+        });
+        return renderstring;
+    }
+
+    function GetColumnBase(aggregatedValue, currentValue) {
+        if (currentValue >= 0) {
+            return aggregatedValue + 1;
+        }
+
+        return aggregatedValue;
+    }
+
+    function PopulateData() {
+        // prepare the data
+        var data = new Array();
+        var row = {};
+
+        @{
+                var currentCol = 0;
+                var firstRow = true;
+                var id = 0;
+            }
+
+        @foreach (var colg in ViewBag.ColumnGroup)
+        {
+            WriteLiteral("row = {};");
+            WriteLiteral("row['id'] = " + id + ";");
+            WriteLiteral("row['SideGroupId'] = 0;");
+            WriteLiteral("row['SideGroupTitle'] = '';");
+            WriteLiteral("row['SideId'] = 0;");
+            WriteLiteral("row['SideTitle'] = '';");
+            foreach (var item in colg.Value.Items)
+            {
+                WriteLiteral("row['_" + item.Id + "'] = null;");
+            }
+            WriteLiteral("data[" + id++ + "] = row;");
+        }
+        @foreach (var item in Model)
+        {
+            if (currentCol != item.SideId)
+            {
+                if (!firstRow)
+                {
+                    WriteLiteral("data[" + id++ + "] = row;\n");
+                }
+                firstRow = false;
+                currentCol = item.SideId;
+                WriteLiteral("row = {};");
+                WriteLiteral("row['id'] = " + id + ";");
+                WriteLiteral("row['SideGroupId'] = " + item.SideGroupId + ";");
+                WriteLiteral("row['SideGroupTitle'] = \"" + item.SideGroupTitle + "\";");
+                WriteLiteral("row['SideId'] = " + item.SideId + ";");
+                WriteLiteral("row['SideTitle'] = \"" + item.SideTitle + "\";");
+            }
+            WriteLiteral("row['_" + item.TopId + "'] = '" + Math.Round((double)(item.AggregateValue * 100) / item.GroupBaseCount) + "%';");
+        }
+        @if (!firstRow)
+        {
+            WriteLiteral("data[" + id++ + "] = row;\n");
+        }
+        return data;
+    }
+
+    $(document).ready(function () {
+        // prepare the data
+        var data = PopulateData();
+
+        var source =
+        {
+            localdata: data,
+            datafields:
+            [
+            @if (Model.Count() > 0)
+            {
+                currentCol = Model.FirstOrDefault().SideId;
+            }
+            @foreach (var colg in ViewBag.ColumnGroup)
+            {
+                WriteLiteral("\n{ name: 'SideGroupId', type: 'number' },");
+                WriteLiteral("{ name: 'SideGroupTitle', type: 'string' },");
+                WriteLiteral("{ name: 'SideId', type: 'number' },");
+                WriteLiteral("{ name: 'SideTitle', type: 'string' },");
+                WriteLiteral("{ name: 'AggregateValue', type: 'number' },");
+                foreach (var item in colg.Value.Items)
+                {
+                    WriteLiteral("{ name: '_" + item.Id + "', type: 'string' },");
+                }
+            }
+            ],
+            datatype: "array",
+            updaterow: function (rowid, rowdata) {
+                // synchronize with the server - send update command
+            }
+        };
+
+        var dataAdapter = new $.jqx.dataAdapter(source);
+
+        var toThemeProperty = function (className) {
+            return className + " " + className + "-" + theme;
+        }
+
+        var groupsrenderer = function (text, group, expanded, data) {
+            expanded = true;
+            if (data.groupcolumn) {
+                return '<div class="' + toThemeProperty('jqx-grid-groups-row') + '" style="position: absolute;"><span>' + group + '</span></div><div class="' + toThemeProperty('jqx-grid-groups-row') + '" style="position: absolute;"><span>' + group + '</span></div>';
+            }
+        }
+
+        // initialize jqxGrid
+        $("#jqxgrid").jqxGrid(
+        {
+            theme: "energyblue",
+            width: 950,
+            source: dataAdapter,
+            groupable: true,
+            columnsresize: true,
+            columnsreorder: true,
+            groupsrenderer: groupsrenderer,
+            groupsexpandedbydefault: true,
+            showgroupsheader: false,
+            showstatusbar: true,
+            showaggregates: true,
+            altrows: true,
+            sortable: true,
+            filterable: true,
+            showfilterrow: false,
+            selectionmode: 'multiplecellsextended',
+            @if (ViewBag.RowGroup.Count > 0)
+                {
+                    WriteLiteral("groups: [");
+                    foreach (var rowg in ViewBag.RowGroup)
+                    {
+                        WriteLiteral("'" + rowg.Value.Field + "',");
+                    }
+                    WriteLiteral("],");
+                }
+            columns: [
+            @if (ViewBag.RowGroup.Count > 0)
+                {
+                    foreach (var rowg in ViewBag.RowGroup)
+                    {
+                        WriteLiteral("{ text: '', groupable: true, datafield: '" + rowg.Value.Field + @"', hidden: true },");
+                    }
+                }
+            { text: '', groupable: true, datafield: 'SideTitle', width: 200,
+                aggregatesrenderer: function (aggregates, column, element) {
+                    var renderstring = "<div style='text-align: left;position: relative; margin: 8px; overflow: hidden;'>BASE: All Respondents</div>";
+                    return renderstring;
+                } 
+            },
+            @foreach (var colg in ViewBag.ColumnGroup)
+                {
+                    foreach (var item in colg.Value.Items)
+                    {
+                        WriteLiteral("{ text: '" + item.Title.Replace("'", " ") + "', columngroup: '_" + colg.Value.Id + "', groupable: true, datafield: '_" + item.Id + "', cellsalign: 'right', cellsformat: 'p3', width: 100, " +
+                            @"aggregatesrenderer: function (aggregates, column, element) {
+                                var renderstring = ""<div style='text-align: right;position: relative; margin: 8px; overflow: hidden;'>" + item.GroupBaseCount + @"</div>"";
+                                return renderstring;
+                            }  },
+                            ");
+                    }
+                }
+            ],
+            columngroups: [
+            @foreach (var colg in ViewBag.ColumnGroup)
+                {
+                    WriteLiteral("{ text: '" + colg.Value.Title + "', align: 'center', name: '_" + colg.Value.Id + "' },\n");
+                }
+            ]
+        });
+
+        $("#excelExport").click(function () {
+            var exportInfo = $("#jqxgrid").jqxGrid('exportdata', 'xls');
+            download("DataSheet_" + "@DateTime.Today.ToShortDateString().Replace("/", "")" + ".xls", exportInfo);
+        });
+
+        function download(filename, content) {
+            contentType = 'application/octet-stream';
+            var a = document.createElement('a');
+            var blob = new Blob([content], { 'type': contentType });
+            a.href = window.URL.createObjectURL(blob);
+            a.download = filename;
+            a.click();
+        }
+
+    });
+</script>

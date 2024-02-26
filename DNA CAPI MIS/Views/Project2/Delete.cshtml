@@ -1,0 +1,152 @@
+﻿@model DNA_CAPI_MIS.Models.Project2
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete</title>
+</head>
+<body>
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>Project2</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Guid)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Guid)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.QCRequirement)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.QCRequirement)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.questions_list)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.questions_list)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.fld_respondent_name)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.fld_respondent_name)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.fld_respondent_phone1)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.fld_respondent_phone1)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.fld_respondent_phone2)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.fld_respondent_phone2)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedByUserId)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.CreatedByUserId)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedOn)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.CreatedOn)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ModifiedByUserId)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ModifiedByUserId)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ModifiedOn)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ModifiedOn)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.STGSync)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.STGSync)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Status)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Status)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.StatusChangedByUserId)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.StatusChangedByUserId)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.StatusChangedOn)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.StatusChangedOn)
+            </dd>
+    
+        </dl>
+    
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+    
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>
+</body>
+</html>

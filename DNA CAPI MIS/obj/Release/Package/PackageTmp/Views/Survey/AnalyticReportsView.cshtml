@@ -1,0 +1,107 @@
+﻿@model IEnumerable<DNA_CAPI_MIS.Models.FieldAnalyticsReport>
+
+@{
+    ViewBag.Title = "Analytic Reports View";
+}
+
+@Styles.Render("~/Content/styles/filters")
+
+@section Scripts {
+@Scripts.Render("~/bundles/bootstrap/filters")
+
+<script>
+    $(document).ready(function () {
+    });
+</script>
+}
+
+<h4><strong>@ViewBag.ProjectName</strong></h4>
+<h4>@ViewBag.Title</h4>
+
+@if (ViewBag.ErrorMessage != null && ViewBag.ErrorMessage.Length > 0)
+{
+    <h4>@ViewBag.ErrorMessage</h4>
+}
+else
+{                    
+    var sectionIndex = 0;
+    var currentSectionID = 0;
+    var currentSectionName = "";
+    var HeadPrinted = false;
+    <div class="box box-solid box-info">
+        <div class="box-header">
+            <h3 class="box-title">Dataset info</h3>
+            <div class="box-tools pull-right">
+                <button class="btn btn-info btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
+            </div>
+        </div>
+        <div class="box-body" style="display:-webkit-box;">
+            <div class="col-md-12">
+                <div class="col-sm-4">
+                    <h4>Total surveys found matching the criteria</h4>
+                </div>
+                <div class="col-sm-4">
+                    <h4><strong>@ViewBag.BaseTotal</strong></h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    foreach (DNA_CAPI_MIS.Models.ProjectFieldSection projectSection in ViewBag.ProjectFieldSection)
+    {
+        HeadPrinted = false;
+        foreach (var item in Model)
+        {
+            if (projectSection.ID == item.SectionID.GetValueOrDefault(0) || (sectionIndex == 0 && sectionIndex == item.SectionID.GetValueOrDefault(0)))
+            {
+                if (currentSectionID == projectSection.ID)
+                {
+                    currentSectionName = projectSection.Name;
+                }
+                if (!HeadPrinted)
+                {
+                    HeadPrinted = true;
+                    WriteLiteral(@"<div class=""box box-solid box-info"">
+        <div class=""box-header"">
+            <h3 class=""box-title"">" + projectSection.Name + @"</h3>
+            <div class=""box-tools pull-right"">
+                <button class=""btn btn-info btn-sm"" data-widget=""collapse""><i class=""fa fa-minus""></i></button>
+            </div>
+        </div>
+        <div class=""box-body"" style=""width:100%;display:table;"">
+            <div class=""col-sm-12"">
+                <div class=""pad"">");
+                }
+                <div class="col-sm-4">
+                    <h4>@item.FieldTitle</h4>
+
+                    @foreach (var option in item.FieldAnalytics)
+                    {
+                        var countPercent = 100 * (double)option.BaseCount / (double)ViewBag.BaseTotal;
+                    <div class="clearfix">
+                        <span class="pull-left">@option.Title</span>
+                        <small class="pull-right">@Math.Round((double)option.BaseCount, 1)</small>
+                    </div>
+                    <div class="progress xs">
+                        <div class="progress-bar progress-bar-green" style="width: @{WriteLiteral(countPercent + "%");};"></div>
+                    </div>
+                    }
+                </div>
+            }
+        }
+        if (HeadPrinted)
+        {
+            WriteLiteral(@"
+                </div>
+            </div>
+        </div>
+    </div>");
+        }
+        sectionIndex++;
+    }
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-8">
+            <input type="submit" value="View Survey Data" class="btn btn-default" />
+        </div>
+    </div>
+}

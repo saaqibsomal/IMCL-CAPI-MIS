@@ -1,0 +1,60 @@
+﻿@model IEnumerable<DNA_CAPI_MIS.Models.ProjectField>
+
+@{
+    ViewBag.Title = "Dashboard";
+    var previewFrameSource = "/SBuilder/web.html?pid=" + ViewBag.ProjectId + "&lang=en";
+}
+
+<!-- DSDS drag-drop -->
+<link rel="stylesheet" href="~/Content/jqwidgets/jqwidgets/styles/jqx.base.css" type="text/css" />
+<link href="~/Content/DSDS/dsds.css" rel="stylesheet" type="text/css" />
+
+<style>
+    .dd-Nested {
+        height: 31px;
+        padding: 4px;
+        margin-top: -6px;
+        background: transparent;
+        box-shadow: none;
+    }
+</style>
+@*CSS Class desktop is used for overlay*@
+@*<p>
+    @Html.ActionLink("All Projects", "OpenProject", "Designer") |
+    @Html.ActionLink("Project Overview", "ProjectOverview", "Designer", new { id = ViewBag.ProjectId }, null)
+</p>*@
+<h4><strong>@ViewBag.ProjectName</strong></h4>
+<h4>@ViewBag.Title</h4>
+
+<div class="row desktop">
+    @if (Model == null)
+    {
+        <div class="alert alert-danger alert-dismissable">
+            <i class="fa fa-ban"></i>
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <b>Alert!</b> No Project is opened yet.
+        </div>
+    }
+    else
+    {
+        using (Html.BeginForm())
+        {
+            <div class="col-md-5">
+                <div id="previewPanel" style="background-image:url('/SBuilder/img/android-device.jpg');width: 250px;height: 820px;background-repeat: no-repeat;background-size: 100%;">
+                    <iframe id="previewFrame" src="@previewFrameSource" width="440" height="820" style="margin-top: 50px; border: none; margin-left: 17px; width: 218px; height: 350px;"></iframe>
+                </div>
+            </div>
+
+        }
+    }
+    <!-- Loading (remove the following to stop the loading)-->
+    <div class="overlay" style="display:none;"></div>
+    <div class="loading-img" style="display: none;"></div>
+    <!-- end loading -->
+</div><!-- /.col row-->
+
+@section Scripts {
+var previewFrameSource = "@previewFrameSource";
+@Scripts.Render("~/bundles/bootstrap/jqwidgets")
+<script src="~/Content/DSDS/dsds-pqsettings.js"></script>
+}

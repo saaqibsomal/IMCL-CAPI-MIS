@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Data Setup";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<table class="table">
+    <tr>
+        <td>
+            Country
+        </td>
+        <td>
+            @Html.ActionLink("Create New", "Create", "Country") |
+            @Html.ActionLink("View List", "Index", "Country")
+        </td>
+    </tr>
+    <tr>
+        <td>
+            City
+        </td>
+        <td>
+            @Html.ActionLink("Create New", "Create", "City") |
+            @Html.ActionLink("View List", "Index", "City")
+        </td>
+    </tr>
+    <tr>
+        <td>
+            District
+        </td>
+        <td>
+            @Html.ActionLink("Create New", "Create", "District") |
+            @Html.ActionLink("View List", "Index", "District")
+        </td>
+    </tr>
+</table>

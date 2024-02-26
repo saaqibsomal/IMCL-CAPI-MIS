@@ -1,0 +1,68 @@
+﻿@model IEnumerable<DNA_CAPI_MIS.Models.ProjectField>
+
+@{
+    ViewBag.Title = "Telephonic Survey";
+}
+
+<!-- DSDS drag-drop -->
+<link rel="stylesheet" href="~/Content/jqwidgets/jqwidgets/styles/jqx.base.css" type="text/css" />
+<link href="~/Content/DSDS/dsds.css" rel="stylesheet" type="text/css" />
+
+<style>
+    .dd-Nested {
+        height: 31px;
+        padding: 4px;
+        margin-top: -6px;
+        background: transparent;
+        box-shadow: none;
+    }
+</style>
+@*CSS Class desktop is used for overlay*@
+<p>
+    @Html.ActionLink("All Projects", "OpenProject", "Designer") |
+    @Html.ActionLink("Project Overview", "ProjectOverview", "Designer", new { id = ViewBag.ProjectId }, null)
+    <a href="/cati/web.html?pid=@ViewBag.ProjectId&lang=en" target="_blank" style="float:right;">No Layout</a>
+</p>
+<h4><strong>@ViewBag.ProjectName</strong></h4>
+<h4>@ViewBag.Title</h4>
+
+<div class="row desktop">
+    @if (Model == null)
+    {
+        <div class="alert alert-danger alert-dismissable">
+            <i class="fa fa-ban"></i>
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <b>Alert!</b> No Project is opened yet.
+        </div>
+    }
+    else
+    {
+        using (Html.BeginForm())
+        {
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="box-header">
+                    </div><!-- /.box-header -->
+
+                    <div class="box-body table-responsive previewFrame" style="width:100%">
+                    </div>
+
+                    <div class="box-footer">
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    <!-- Loading (remove the following to stop the loading)-->
+    <div class="overlay" style="display:none;"></div>
+    <div class="loading-img" style="display: none;"></div>
+    <!-- end loading -->
+</div><!-- /.col row-->
+
+@section Scripts {
+<script>
+    var projectId = @ViewBag.ProjectId;
+    var projLang = "en";
+</script>
+<script src="~/Content/DSDS/dsds-cati.js"></script>
+}

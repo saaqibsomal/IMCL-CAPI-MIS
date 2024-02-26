@@ -1,0 +1,155 @@
+﻿@model IEnumerable<DNA_CAPI_MIS.Models.SurveyDataView>
+
+@{
+    ViewBag.Title = "Quality Check Filter";
+}
+
+@*<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>*@
+<script src="~/Content/js/jquery-1.11.0.min.js"></script>
+@*<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>*@
+
+<script src="~/Content/bootstrap-datepicker.js"></script>
+<link href="~/Content/datepicker.css" rel="stylesheet" />
+
+<!-- multi select -->
+<link href="~/Content/css/select2.css" rel="stylesheet" />
+<script src="~/Content/js/select2.js"></script>
+<script src="~/Content/js/select2.min.js"></script>
+<script>
+    $(function () {
+        $("#fromdate").datepicker();
+        $("#todate").datepicker();
+        $("#surveror").select2();
+                
+        $("#qc").click(function () {
+            var path = document.location.toString();
+            path = path.replace("SurveyQCFilter", "SurveyQC");
+            path = path.replace("#","")
+
+            if($("#fromdate").val() != "" && $("#todate").val() != "" ){
+
+                var fromdate = $("#fromdate").val(); //.replace('0','')
+                var spl_fromdate = fromdate.split('/');
+
+                var day_fromdate = spl_fromdate[1];
+                var month_fromdate= spl_fromdate[0];
+                if(spl_fromdate[1] != '10' && spl_fromdate[1] != '20' && spl_fromdate[1] !='30'){
+                    day_fromdate = spl_fromdate[1].replace('0',' ');
+                            
+                }
+                if (month_fromdate != 10) {
+                    month_fromdate = spl_fromdate[0].replace('0', ' ');
+                }
+
+                var todate = $("#todate").val();
+                var spl_todate = todate.split('/');
+
+                var day_todate = spl_todate[1];
+                var month_todate = spl_todate[0];
+                if(spl_todate[1] != '10' && spl_todate[1] != '20' && spl_todate[1] !='30'){
+                    day_todate = spl_todate[1].replace('0',' ');
+                            
+                }
+                if (month_todate != 10) {
+                    month_todate = spl_todate[0].replace('0', ' ');
+                }
+                        
+                path += "&fromdate=" + spl_fromdate[2] + "-" + month_fromdate + "-" + day_fromdate;
+                path += "&todate=" + spl_todate[2] + "-" + month_todate + "-" + day_todate;
+
+            }
+            if ($("#surveror").val() != "" && $("#surveror").val() != null) {
+                path += "&surveyors=" + $("#surveror").val();
+            }
+                    
+            //alert(path);
+            window.location = path;
+
+        });
+               
+
+    });            
+</script>
+<script type="text/javascript">
+    function MyFunction() {
+        alert("fromdate:" + getFromDate() + ",todate:" + gettoDate());
+    }
+    function getFromDate() {
+
+        return document.getElementById('fromdate').value;
+    }
+    function getToDate() {
+        return document.getElementById('todate').value;
+    }
+</script>
+
+<link rel="stylesheet" href="~/Content/jqwidgets/jqwidgets/styles/jqx.base.css" type="text/css" />
+
+<h2>Census Results - Quality Check Filter</h2>
+@if (ViewBag.ErrorMessage != null && ViewBag.ErrorMessage.Length > 0)
+{
+    <h4>@ViewBag.ErrorMessage</h4>
+}
+else
+{
+
+    <div id='jqxWidget'>
+        <div id="jqxgrid"></div>
+        <div class="filter_container">
+            <div class="filter_content">
+                <div> Surveyor</div>
+                <div>
+                    <select id="surveror" multiple="multiple" style="width:200px;height:30px;">
+
+                        @if (ViewBag.surveyorname != null)
+                        {
+                            foreach (var cat in ViewBag.surveyorname)
+                            {
+                                <option>@cat.Name</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="filter_content">
+                <div>From Date</div>
+                <div>
+                    <input type="text" id="fromdate" style="width:200px;height:30px;">
+                </div>
+            </div>
+            <div class="filter_content">
+                <div>To Date</div>
+                <div>
+                    <input type="text" id="todate" style="width:200px;height:30px;">
+                </div>
+            </div>
+            <div class="filter_content">
+                <div style="height:20px;"></div>
+                <div>
+                    <a href="#" id="qc">Quality Check</a>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+   <br />
+
+    //@Html.ActionLink("Quality Check", "/SurveyQC", "Census", new { id = @ViewBag.id, projectId = @ViewBag.projectId,todate="to date", fromdate = "from date"}, null) 
+    
+    
+    // , surveyor = "@<%=Html.DropDownList('surveror')%>"  //, todate = "todate", fromdate = "fromdate", surveyor = "@<%=Html.DropDownList('surveror')%>" 
+    //   routes.MaRoute("CarSale"
+    //"/List/Cars/ForSale/{id}",
+    //new { controller = "list", action = "carsale", id =  UrlParameter.Optional }
+    //);
+    @*<a href="2?projectId=@ViewBag.projectId&surveyor=@Html.select('surveror', 'Select surveror')&c=@ViewBag.city&country=@ViewBag.CountryID">Next</a>*@
+
+}
+
+
+
+@*@using (Html.BeginForm("", ""))
+{
+    <input type="submit" id="emailSubmit" value="Quality Check" />
+}*@

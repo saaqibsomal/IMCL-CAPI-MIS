@@ -1,0 +1,43 @@
+﻿  
+@{ 
+    Layout = null;
+    List<DNA_CAPI_MIS.Models.SurveyDetails>
+       Sdetail = ViewBag.SurDetail as List<DNA_CAPI_MIS.Models.SurveyDetails>
+           ;
+    int number = 1;
+    <tr class="table-bordered @ViewBag.id" style="background-color:lightgrey">
+        <td style="width: 2%;">
+        </td>
+        <td>
+        </td>
+        <td>
+            <div class="col-md-6"><b>Question </b></div>
+            <div class="col-md-6"><b>Selected Answer</b></div>
+        </td>
+        <td>
+        </td>
+    </tr>
+
+
+    foreach (var item in Sdetail)
+    {
+        <tr class="table-bordered @ViewBag.id" aria-expanded="false" style="height: 2px; background: rgba(191, 191, 191, 0.290196);">
+            <td  style="width: 2%;"></td>
+            <td class="" aria-expanded="false" >
+            </td>
+            <td >
+                <div class="col-md-4">@item.Section_name</div>
+                <div class="col-md-4">@item.name</div>
+                <div class="col-md-4">@item.options</div>
+            </td>
+            <td >
+                @item.Score
+            </td>
+            @*<td style="    width: 20%;"></td>*@
+            
+
+        </tr>
+    }
+
+
+}

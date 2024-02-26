@@ -1,0 +1,1838 @@
+﻿@model IEnumerable<DNA_CAPI_MIS.Models.SurveyDataView>
+
+@{
+    ViewBag.Title = "Dashboard";
+    bool firstRec = true;
+    bool catHeadPrinted = false;
+}
+
+<style type="text/css">
+    .POI_Legend {
+        width: 24px;
+        height: 24px;
+        border-radius: 12px;
+        background: #000;
+    }
+</style>
+
+<div class="box-header"><h4 style="margin-left:10px;">@ViewBag.CurrentFilterText</h4></div>
+
+<div class="nav-tabs-custom box" style="border-top: none;">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#tab_1" id="tab1" data-toggle="tab">Map View</a></li>
+        <li><a href="#tab_2" id="tab2" data-toggle="tab">Data Sheet</a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="tab-pane active" id="tab_1">
+            <div class="row">
+                <div class="col-xs-12">
+                    <!-- Map box -->
+                    <div class="box box-primary">
+                        <div class="box-body no-padding">
+                            <div id="dvMap" style="height: 400px;">
+                            </div>
+                        </div><!-- /.box-body-->
+                        <div class="box-footer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane" id="tab_2">
+            <div class="row">
+                <div class="col-xs-12">
+                    <!-- Map box -->
+                    <div class="box box-primary">
+                        <div class="box-body no-padding">
+                            <div id="tabulation" style="height: 400px;">
+                            </div>
+                        </div><!-- /.box-body-->
+                        <div class="box-footer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.tab-pane -->
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-6">
+        <!-- Map box -->
+        <div style="float:left;">
+            <span id="spnDistance"></span>
+            <span id="spnCategoryCount"></span>
+        </div>
+        <div style="float:right;">
+            <a href="@Url.Content("?c=" + ViewBag.city)">Clear Map</a>
+        </div>
+        @*<input type="button" onclick="ClearMap();" value="Clear Map" style="margin:5px; float:right" /> <br style="clear:both" />*@
+        <div id="summaryPnl" style="margin-top:36px;">
+            <div class="box box-primary">
+                <div class="box-header">
+                </div>
+                <div class="box-body no-padding">
+                    <div class="table-responsive">
+                        <!-- .table - Uses sparkline charts-->
+                        <table class="table table-striped">
+                            <tr>
+                                <th></th>
+                                <th>Category</th>
+                                <th>Outlets</th>
+                                <th>Legend</th>
+                            </tr>
+                            @{
+                                var checkBoxControl = "";
+                                var colorcode = "";
+                                var checkState = "";
+                            }
+                            @foreach (var cat in ViewBag.CategorySummary)
+                            {
+                                if ((cat.ID >= 1010 && cat.ID <= 1013) || (cat.ID >= 3922 && cat.ID <= 3925) || cat.ID == 3944)
+                                {
+                                    if (!catHeadPrinted)
+                                    {
+                                        catHeadPrinted = true;
+                                        <tr>
+                                            <td colspan="4"><a href="@{Url.Action("Index", "Home");}?pcat=2&c=@ViewBag.city&cn=@ViewBag.country"><strong><u>Stationary</u></strong></a></td>
+                                        </tr>
+                                    }
+                                    colorcode = "#" + cat.Color_Red.ToString("X") + cat.Color_Green.ToString("X") + cat.Color_Blue.ToString("X");
+                                    checkState = "";
+                                    
+                                    if (ViewBag.country != null && Convert.ToInt32(ViewBag.RootCategory) > 0)
+                                    {
+                                        if (Convert.ToInt32(ViewBag.RootCategory) == 2)
+                                        {                        
+                                            if (cat.ID == 1010 || cat.ID == 1011 || cat.ID == 1012 || cat.ID == 1013 || cat.ID == 3922 || cat.ID == 3923 || cat.ID == 3924 || cat.ID == 3925 || cat.ID == 3944)
+                                            {
+                                                checkState = "checked='checked'";
+                                            }
+                                        }
+                                        else if (Convert.ToInt32(ViewBag.RootCategory) == 3)
+                                        {
+                                            if (cat.ID == 1014 || cat.ID == 1015 || cat.ID == 1016 || cat.ID == 1017 || cat.ID == 1018 || cat.ID == 1019 || cat.ID == 3926 || cat.ID == 3927 || cat.ID == 3928 || cat.ID == 3929 || cat.ID == 3930 || cat.ID == 3931)
+                                            {
+                                                checkState = "checked='checked'";
+                                            }
+                                        }
+ 
+                                        checkBoxControl = "<input type='checkbox' " + checkState + "' id='dispCategory_" + cat.ID + "' class='dispCategory' />";
+                                    }
+                                    <tr>
+                                        <td>@{WriteLiteral(checkBoxControl);}</td>
+                                        <td><a href="@{Url.Action("Index", "Home");}?cat=@cat.ID&c=@ViewBag.city&cn=@ViewBag.country">@cat.Name</a></td>
+                                        <td>@cat.OutletCount</td>
+                                        <td><div class="POI_Legend" style="background-color:@colorcode"></div></td>
+                                    </tr>
+                                }
+                            }
+                            @{
+                                catHeadPrinted = false;
+                                checkBoxControl = "";
+                            }
+                            @foreach (var cat in ViewBag.CategorySummary)
+                            {
+                                if ((cat.ID >= 1014 && cat.ID <= 1019) || (cat.ID >= 3926 && cat.ID <= 3931))
+                                {
+                                    if (!catHeadPrinted)
+                                    {
+                                        catHeadPrinted = true;
+                                        <tr>
+                                            <td colspan="4"><a href="@{Url.Action("Index", "Home");}?pcat=3&c=@ViewBag.city&cn=@ViewBag.country"><strong><u>Education</u></strong></a></td>
+                                        </tr>
+                                    }
+                                    colorcode = "#" + cat.Color_Red.ToString("X") + cat.Color_Green.ToString("X") + cat.Color_Blue.ToString("X");
+                                    checkState = "";
+
+                                    if (ViewBag.country != null && Convert.ToInt32(ViewBag.RootCategory) > 0)
+                                    {
+                                        if (Convert.ToInt32(ViewBag.RootCategory) == 2)
+                                        {
+                                            if (cat.ID == 1010 || cat.ID == 1011 || cat.ID == 1012 || cat.ID == 1013 || cat.ID == 3922 || cat.ID == 3923 || cat.ID == 3924 || cat.ID == 3925 || cat.ID == 3944)
+                                            {
+                                                checkState = "checked='checked'";
+                                            }
+                                        }
+                                        else if (Convert.ToInt32(ViewBag.RootCategory) == 3)
+                                        {
+                                            if (cat.ID == 1014 || cat.ID == 1015 || cat.ID == 1016 || cat.ID == 1017 || cat.ID == 1018 || cat.ID == 1019 || cat.ID == 3926 || cat.ID == 3927 || cat.ID == 3928 || cat.ID == 3929 || cat.ID == 3930 || cat.ID == 3931)
+                                            {
+                                                checkState = "checked='checked'";
+                                            }
+                                        }
+ 
+                                        checkBoxControl = "<input type='checkbox' " + checkState + "' id='dispCategory_" + cat.ID + "' class='dispCategory' />";
+                                    }
+
+                                    <tr>
+                                        <td>@{WriteLiteral(checkBoxControl);}</td>
+                                        <td><a href="@{Url.Action("Index", "Home");}?cat=@cat.ID&c=@ViewBag.city&cn=@ViewBag.country">@cat.Name</a></td>
+                                        <td>@cat.OutletCount</td>
+                                        <td><div class="POI_Legend" style="background-color:@colorcode"></div></td>
+                                    </tr>
+                                }
+                            }
+                        </table><!-- /.table -->
+                    </div>
+                </div><!-- /.box-body-->
+                <div class="box-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="popex" class="col-xs-6">
+
+        <ul style="font-size:10px;" class="nav nav-tabs">
+            <li class="active"><a href="#mainpop" data-toggle="tab">Main Pop Data</a></li>
+            <li><a href="#popgrowth" data-toggle="tab">Pop Growth</a></li>
+            <li><a href="#genderage" data-toggle="tab">Gender & Age Groups</a></li>
+            <li><a href="#poidensity" data-toggle="tab">POI Density</a></li>
+            <li><a href="#poigrowth" data-toggle="tab">POI Growth</a></li>
+        </ul>
+
+
+        <div class="tab-content pre-scrollable">
+
+            <div class="tab-pane active" id="mainpop">
+
+                <div class="box box-primary">
+
+                    <div class="box-body no-padding">
+                        <div class="table-responsive">
+                            <!-- .table - Uses sparkline charts-->
+                            <table class="table table-striped">
+                                <tr>
+                                    <th>Parameter</th>
+                                    <th>Values</th>
+                                    <th>Units</th>
+                                </tr>
+                                <tr>
+                                    <td>Region Name :</td>
+                                    <td colspan="2" class="spnRegionName"></td>
+                                </tr>
+                                <tr>
+                                    <td><b><u id="spnYear">Estimate: </u></b></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="spnTotalPopYear">Population Estimate :</td>
+                                    <td class="spnTotalPop"></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Population Density :</td>
+                                    <td class="spnpopDensity"></td>
+                                    <td>Per km square</td>
+                                </tr>
+                                <tr>
+                                    <td>Most Populated :</td>
+                                    <td class="spnmostpop"></td>
+                                    <td>Per km square</td>
+                                </tr>
+                                <tr>
+                                    <td>Least Populated :</td>
+                                    <td id="spnleastpop"></td>
+                                    <td>Per km square</td>
+                                </tr>
+                                <tr>
+                                    <td>Map Area :</td>
+                                    <td class="spnArea"></td>
+                                    <td>km square</td>
+                                </tr>
+                                <tr>
+                                    <td>Map Perimeter :</td>
+                                    <td class="spnPerimeter"></td>
+                                    <td>km</td>
+                                </tr>
+                                <tr>
+                                    <td>House Hold Size :</td>
+                                    <td id="spnHHSize"></td>
+                                    <td>Family Members</td>
+                                </tr>
+
+
+                                <tr>
+                                    <td>'</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td><b><u>Derived Information</u></b></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+
+
+
+                                <tr>
+                                    <td>No of Housing Units :</td>
+                                    <td id="spnHousingUnits"></td>
+                                    <td>Houses</td>
+                                </tr>
+                                <tr>
+                                    <td>No of Units/km2 :</td>
+                                    <td id="spnUnitsPerKM"></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Avg Unit Size m2 :</td>
+                                    <td id="spnAvgUnitSize"></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Utilized m2/km2 :</td>
+                                    <td id="spnUtilized"></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>% Land Utlized/km2 :</td>
+                                    <td id="spnLandUtilized"></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>% Land Not Utlized/km2 :</td>
+                                    <td id="spnLandNotUtilized"></td>
+                                    <td></td>
+                                </tr>
+
+
+
+
+                            </table><!-- /.table -->
+                        </div>
+
+                    </div>
+                    <div class="box-footer">
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="tab-pane" id="popgrowth">
+
+                <div class="box box-primary">
+                    <div class="box-body no-padding">
+                        <div class="table-responsive">
+                            <span><b><u>Population Growth (Previous)</u></b></span>
+                            <table id="popGrowthTable" class="table table-striped">
+                                <tr>
+                                    <th>Growth Rate</th>
+                                    <th>Year</th>
+                                    <th>HHSize</th>
+                                    <th>Population</th>
+
+                                    <th>No of Housing Units</th>
+                                    <th>No of Units/km2</th>
+                                    <th>Avg Unit Size m2</th>
+                                    <th>Utilized m2/km2</th>
+                                    <th>% Land Utlized/km2</th>
+                                    <th>% Land Not Utlized/km2</th>
+                                </tr>
+
+                            </table>
+                        </div>
+
+                    </div>
+                    <div class="box-footer">
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <div class="tab-pane" id="genderage">
+
+                <div class="box box-primary">
+
+                    <div class="box-body no-padding">
+                        <div class="table-responsive">
+                            <table id="ageGroupTable" class="table table-striped">
+                                <tr>
+                                    <th>Age Group</th>
+                                    <th>Male Pop</th>
+                                    <th>Female Pop</th>
+                                    <th>Total Pop</th>
+                                </tr>
+
+                            </table>
+                        </div>
+
+                    </div>
+                    <div class="box-footer">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="tab-pane" id="poidensity">
+
+                <div class="box box-primary">
+
+                    <div class="box-body no-padding">
+                        <div class="table-responsive">
+
+                            <table id="poiDensityTable" class="table table-striped">
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                @*<tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>*@
+                                <tr>
+                                    <td class="spnTotalPopYear">Population Estimate :</td>
+                                    <td class="spnTotalPop"></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Map Area :</td>
+                                    <td class="spnArea"></td>
+                                    <td>km square</td>
+                                </tr>
+                                <tr>
+                                    <td>Population Density :</td>
+                                    <td class="spnpopDensity"></td>
+                                    <td>Per km square</td>
+                                </tr>
+                                <tr>
+                                    <td>Map Perimeter :</td>
+                                    <td class="spnPerimeter"></td>
+                                    <td>km</td>
+                                </tr>
+                                <tr>
+                                    <td>Most Populated :</td>
+                                    <td class="spnmostpop"></td>
+                                    <td>Per km square</td>
+                                </tr>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+                    <div class="box-footer">
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="tab-pane" id="poigrowth">
+
+                <div class="box box-primary">
+                    <div class="box-body no-padding">
+                        <div class="table-responsive">
+                            <span><b><u id="poiGrowthStartYear">Population Growth (Starting year YYYY)</u></b></span>
+                            <table id="poiGrowthTable" class="table table-striped"></table>
+                        </div>
+
+                    </div>
+                    <div class="box-footer">
+                    </div>
+                </div>
+            </div>
+        </div> <!-- End Tab Content-->
+    </div>
+
+
+    @if (ViewBag.ShowOutlets)
+    {
+        <div class="col-xs-6">
+            <!-- Map box -->
+            <div class="box box-primary">
+                <div class="box-header">
+                </div>
+                <div class="box-body no-padding">
+                    <div class="table-responsive">
+                        <!-- .table - Uses sparkline charts-->
+                        <table class="table table-striped">
+                            <tr>
+                                <th>Outlet Sizes</th>
+                                <th>Outlets</th>
+                            </tr>
+                            @foreach (var os in ViewBag.OutletSizeSummary)
+                            {
+                                if (os.OutletCount > 1)     //CHANGE IT TO ZERO
+                                {
+                                    <tr>
+                                        <td><a href="@{Url.Action("Index", "Home");}?cat=@ViewBag.category&c=@ViewBag.city&os=@os.ID">@os.Name</a></td>
+                                        <td>@os.OutletCount</td>
+                                    </tr>
+                                }
+                            }
+                        </table><!-- /.table -->
+                    </div>
+
+                </div><!-- /.box-body-->
+                <div class="box-footer">
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=drawing&v=3.exp&language=ar"></script>
+
+    <script type="text/javascript">
+
+        var markers = [
+            @foreach (var item in Model)
+        {
+            if (!firstRec)
+            {
+                WriteLiteral(",");
+            }
+            WriteLiteral("{title: \"" + Url.Encode( item.FieldValue ) + "\",");
+            WriteLiteral("lat: " + item.Latitude + ",");
+            WriteLiteral("lng: " + item.Longitude + ",");
+            WriteLiteral("ID: " + item.SubCategoryID + ",");
+            WriteLiteral("sbjnum: " + item.sbjnum + ",");
+            WriteLiteral("multiples: " + Convert.ToInt32(item.Multiples) + ",");
+            WriteLiteral("Cat: \"" + item.SubCategoryName + "\"}");
+            firstRec = false;
+
+        }
+
+        ];
+
+        var rootCategory = @ViewBag.RootCategory;
+    </script>
+
+
+    <script type="text/javascript">
+
+        function getUrlVars()
+        {
+            var vars = [], hash;
+            var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+            for(var i = 0; i < hashes.length; i++)
+            {
+                hash = hashes[i].split('=');
+                vars.push(hash[0]);
+                vars[hash[0]] = hash[1];
+            }
+            return vars;
+        }
+
+
+        function ShowDistance(trackingCoordinates) {
+            var distance = 0;
+
+            for (var k = 0; k < trackingCoordinates.length - 1; k++) {
+                getDistanceFromLatLonInKm(trackingCoordinates[k].lat(), trackingCoordinates[k].lng(), trackingCoordinates[k + 1].lat(), trackingCoordinates[k + 1].lng());
+                distance = i + distance;
+            }
+
+            $("#spnDistance").text("Distance of drawn path: " + distance.toFixed(2));
+
+            //alert(distance.toFixed(2));
+            //document.getElementById("spndistance").innerHTML = "Distance: " + distance.toFixed(2) + " Km.";
+        }
+
+        // Calculate distance from latitude and longitude
+        function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+            var R = 6371; // Radius of the earth in km
+            var dLat = deg2rad(lat2 - lat1);  // deg2rad below
+            var dLon = deg2rad(lon2 - lon1);
+            var a =
+              Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+              Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+              Math.sin(dLon / 2) * Math.sin(dLon / 2)
+            ;
+            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            i = R * c; // Distance in km
+        }
+
+        // converting degree to radiun
+        function deg2rad(deg) {
+            return deg * (Math.PI / 180)
+        }
+
+        var currOverlay = null;
+        var makersCatId = [];
+        var markersCatName = [];
+
+
+        var currCatNames;
+        var currCatCounts;
+
+        var minx = 0;
+        var miny = 0;
+        var maxx = 0;
+        var maxy = 0;
+        var polyg = 'POLYGON((';
+
+        var kmlLayer;
+
+        function oncitydistrictlevelsclick(kmlType) {
+            //c=6 Riyadh
+            //c=2 Jeddah
+
+            if(kmlLayer != null) {
+                kmlLayer.setMap(null);
+            }
+
+            var city = getUrlVars()["c"];
+            if(city==null || city == "") return;
+
+            //Google was unable to load KML file using apps.dna.com.sa url
+            var kmlUrl = 'http://85.25.211.247:5303/kml/kml_' + city + '_' + kmlType +'.kml';
+            //kmlUrl = 'https://developers.google.com/maps/tutorials/kml/westcampus.kml';
+            var kmlOptions = {
+                suppressInfoWindows: true,
+                preserveViewport: false,
+                map: map
+            };
+            kmlLayer = new google.maps.KmlLayer(kmlUrl, kmlOptions);
+            
+            google.maps.event.addListener(kmlLayer, 'click', function (event) {
+                kmlEvent = event;
+
+                var selectedPoly = null;
+                for (var i = 0; i < kmlPolygons.length; i++) {
+                    if (google.maps.geometry.poly.containsLocation(event.latLng, kmlPolygons[i].poly)) {
+                        //if (kmlPolygons[i].place == event.featureData.name) {
+
+                        selectedPoly = kmlPolygons[i].poly;
+                        break;
+                    }
+                }
+
+                if (selectedPoly == null) { return; }
+                var polygonBounds = selectedPoly.getPath();
+
+
+
+                var Containsplacemarks = [];
+                var index = 0;
+                var selectedID = [];
+                var SelectedCatName = [];
+
+
+
+                $(".spnRegionName").text(kmlEvent.featureData.name);
+                $(".spnTotalPop").text("...");
+                $(".spnArea").text("...");
+                $(".spnpopDensity").text("...");
+                $(".spnmostpop").text("...");
+                $("#spnleastpop").text("...");
+                $(".spnPerimeter").text("...");
+                $("#spnHHSize").text("...");
+
+                $("#spnHousingUnits").text("...");
+                $("#spnUnitsPerKM").text("...");
+                $("#spnAvgUnitSize").text("...");
+                $("#spnUtilized").text("...");
+                $("#spnLandUtilized").text("...");
+                $("#spnLandNotUtilized").text("...");
+
+
+
+
+                for (var i = 0; i < placemarks.length; i++) {
+                    //alert(selectedPoly);
+                    if (google.maps.geometry.poly.containsLocation(placemarks[i].position, selectedPoly)) {
+                        Containsplacemarks[index] = placemarks[i];
+                        selectedID[index] = makersCatId[i];
+                        SelectedCatName[index] = markersCatName[i];
+                        index++;
+                    }
+                }
+
+                SelectedLocSummery(selectedID, SelectedCatName);
+                //localStorage.setItem('pplacemarks', Containsplacemarks);
+                //var polygonBounds = event.overlay.getPath();
+                var firstBound;
+                polyg = 'POLYGON((';
+                polygonBounds.forEach(function (xy, i) {
+                    if (i == 0) {
+                        firstBound = xy.lng() + ' ' + xy.lat();
+                        miny = xy.lat();
+                        minx = xy.lng();
+                        maxy = xy.lat();
+                        maxx = xy.lng();
+                    }
+                    if (xy.lat() < miny) miny = xy.lat();
+                    if (xy.lng() < minx) minx = xy.lng();
+                    if (xy.lat() > maxy) maxy = xy.lat();
+                    if (xy.lng() > maxx) maxx = xy.lng();
+                    polyg += xy.lng() + ' ' + xy.lat() + ',';
+                });
+                polyg += firstBound;
+                polyg += '))';
+
+                population();
+
+                //var polygonBounds = selectedPoly.getPath();
+                //var firstBound;
+                //polyg = 'POLYGON((';
+                //polygonBounds.forEach(function (xy, i) {
+                //    if (i == 0) {
+                //        firstBound = xy.lng() + ' ' + xy.lat();
+                //        miny = xy.lat();
+                //        minx = xy.lng();
+                //        maxy = xy.lat();
+                //        maxx = xy.lng();
+                //    }
+                //    if (xy.lat() < miny) miny = xy.lat();
+                //    if (xy.lng() < minx) minx = xy.lng();
+                //    if (xy.lat() > maxy) maxy = xy.lat();
+                //    if (xy.lng() > maxx) maxx = xy.lng();
+                //    polyg += xy.lng() + ' ' + xy.lat() + ',';
+                //});
+                //polyg += firstBound;
+                //polyg += '))';
+                //population();
+
+            });
+
+            //KML needs to be loaded from local folder to load the polygons
+            loadKMLPlacemarks('/kml/kml_' + city + '_' + kmlType +'.kml');
+
+        }
+
+
+        var kmlEvent;
+        var kmlPolygons = [];
+        function loadKMLPlacemarks(url) {
+            $.get(url, function (data) {
+
+                $(data).find("Placemark").each(function (index, value) {
+
+                    //get coordinates and place name
+                    var coords = $(this).find("coordinates").text().trim();
+
+                    var triangleCoords = [];
+                    var coordArray = coords.split(',0');
+                    for (var i = 0; i < coordArray.length - 1; i++) {
+                        c = coordArray[i].split(",")
+                        triangleCoords.push(new google.maps.LatLng(c[1], c[0]));
+                    }
+                    var newPoly = new google.maps.Polygon({
+                        paths: triangleCoords,
+                        strokeColor: '#FF0000',
+                        strokeOpacity: 0.8,
+                        strokeWeight: 2,
+                        fillColor: '#FF0000',
+                        fillOpacity: 0.35
+                    });
+                    //newPoly.setMap(map);
+
+                    var place = $(this).find("name").text();
+
+                    c = coords.split(",")
+                    kmlPolygons.push({
+                        "place": place,
+                        "poly": newPoly,
+                    });
+                });
+
+
+                //kmlPolygons[0].poly.setMap(map);
+                //kmlPolygons[10].poly.setMap(map);
+
+            });
+
+
+        }
+
+        var map;
+        var placemarks = [];
+        var lastPolyline = null;
+
+
+
+        window.onload = function () {
+            //Load Category data
+            var catColors = new Object();
+            @foreach (var cat in ViewBag.CategorySummary)
+            {
+                colorcode = "#" + cat.Color_Red.ToString("X") + cat.Color_Green.ToString("X") + cat.Color_Blue.ToString("X");
+                WriteLiteral("catColors[\"" + cat.ID + "\"] = \"" + colorcode + "\";");
+            }
+
+            //Generate markers on the map
+            if (markers.length > 0) {
+                //var latlngbounds = new google.maps.LatLngBounds();
+                var countryId = getParameterByName('cn');
+                var categoryId = getParameterByName('cat');
+                var zoom = 8;
+                var centerLat = markers[0].lat;
+                var centerLong = markers[0].lng;
+
+                if (countryId.length > 0) {
+                    zoom = 6;
+                    centerLat = @ViewBag.Default_Latitude;
+                    centerLong = @ViewBag.Default_Longitude;
+                }
+                var mapOptions = {
+                    center: new google.maps.LatLng(centerLat, centerLong),
+                    zoom: zoom,
+                    mapTypeControlOptions: {
+                        mapTypeIds: [google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE, google.maps.MapTypeId.TERRAIN
+                        ,google.maps.MapTypeId.HYBRID]
+                    },
+
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+                var infoWindow = new google.maps.InfoWindow();
+                map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
+               
+
+                for (i = 0; i < markers.length; i++) {
+                    var data = markers[i];
+                    data.title = decodeURIComponent(data.title).replace(/\+/g, " ");
+                    var myLatlng = new google.maps.LatLng(data.lat, data.lng);
+
+                    var colour = catColors[data.ID];
+
+                    var marker;
+                    if (data.multiples > 1) {
+                        marker = new google.maps.Marker({
+                            position: myLatlng,
+                            sbjnum: data.sbjnum,
+                            title: data.title,
+                            //icon: "/Images/red.png"
+                            icon: {
+                                path: 'M 125,5 155,90 245,90 175,145 200,230 125,180 50,230 75,145 5,90 95,90 z',
+                                fillOpacity: 0.5,
+                                fillColor: colour,
+                                strokeWeight: 1,
+                                scale: 0.05 //pixels
+                            }
+                        });
+                    } else {
+                        marker = new google.maps.Marker({
+                            position: myLatlng,
+                            sbjnum: data.sbjnum,
+                            title: data.title,
+                            //icon: "/Images/red.png"
+                            icon: {
+                                path: google.maps.SymbolPath.CIRCLE,
+                                fillOpacity: 0.5,
+                                fillColor: colour,
+                                strokeWeight: 1,
+                                scale: 5 //pixels
+                            }
+                        });
+                    }
+
+                    if (rootCategory == 2 || categoryId.length > 0) {
+                        if (data.ID == 1010 || data.ID == 1011 || data.ID == 1012 || data.ID == 1013 || data.ID == 3922 || data.ID == 3923 || data.ID == 3924 || data.ID == 3925 || data.ID == 3944) {
+                            marker.setMap(map);
+                        }
+                    } else if(rootCategory == 3 || categoryId.length > 0) {
+                        if (data.ID == 1014 || data.ID == 1015 || data.ID == 1016 || data.ID == 1017 || data.ID == 1018 || data.ID == 1019 || data.ID == 3926 || data.ID == 3927 || data.ID == 3928 || data.ID == 3929 || data.ID == 3930 || data.ID == 3931) {
+                            marker.setMap(map);
+                        }
+                    }
+                    //latlngbounds.extend(marker.position);
+                    placemarks[i] = marker;
+                    makersCatId[i] = data.ID;
+                    markersCatName[i] = data.Cat;
+
+                    (function (marker, data) {
+                        google.maps.event.addListener(marker, "click", function (e) {
+                            //infoWindow.setContent(data.title);
+                            var infoHTML = "";
+                            var catId = "";
+
+                            var infowindowHTML =
+                            "    <div style='width: 650px; height: 300px;'> " +
+                            "        <div id='info-window-left' style='width: 40%; height: 100%; float: left; border: solid; border-radius: 15px; border-width: 2px;'> " +
+                            "        </div> " +
+                            "        <div style='width: 58%; height: 100%; float: right; '> " +
+                            "            <div id='info-window-right'  style='height: 50%; border: solid; border-radius: 15px; border-width: 2px;'> " +
+                            "            </div> " +
+                            "            <div id='info-window-image' style='height: 47%; margin-top:5px'> " +
+                            "                <div style='width: 23%; height: 97%; float: left; border: solid; border-radius: 15px; border-width: 2px;'><span id='header1' style='text-align:center'></span><img id='info_img1' style='width: 100%; height: 100%; border: solid; border-radius: 15px; border-width: 0px;'/></div> " +
+                            "                <div style='margin-left: 3px; width: 24%; height: 97%; float: left; border: solid; border-radius: 15px; border-width: 2px;'><span id='header2' style='text-align:center'></span><img id='info_img2' style='width: 100%; height: 100%; border: solid; border-radius: 15px; border-width: 0px;'/></div> " +
+                            "                <div style='margin-left: 3px; width: 23%; height: 97%; float: left; border: solid; border-radius: 15px; border-width: 2px;'><span id='header3' style='text-align:center'></span><img id='info_img3' style='width: 100%; height: 100%; border: solid; border-radius: 15px; border-width: 0px;'/></div> " +
+                            "                <div style='margin-left: 3px; width: 24%; height: 97%; float: left; border: solid; border-radius: 15px; border-width: 2px;'><span id='header4' style='text-align:center'></span><img id='info_img4' style='width: 100%; height: 100%; border: solid; border-radius: 15px; border-width: 0px;'/></div> " +
+                            "            </div> " +
+                            "        </div> " +
+                            "    </div> ";
+
+
+                            infoWindow.setContent(infowindowHTML);
+                            infoWindow.open(map, marker);
+
+                            $.get("/surveyproxy.aspx?r=surveyview&sbjnum=" + data.sbjnum, function (data) {
+
+                                var surveyJson = jQuery.parseJSON(data);
+                                //alert(surveyJson);
+                                $('#info-window-left').html("<br/>");
+                                $('#info-window-right').html("<br/>");
+                                var maxAll = 15;
+                                var maxLeft = 10;
+                                for (var i = 0; i < surveyJson.length && i < maxAll; i++) {
+                                    if(surveyJson[i].FieldType == "PIC") {maxAll++; maxLeft++; continue;}
+                                    if(surveyJson[i].FieldValue == null || surveyJson[i].FieldValue == "") surveyJson[i].FieldValue = "N/a";
+                                    if(i<maxLeft)
+                                        $('#info-window-left br:last').after("<span style='font-family: sans-serif;'><b>" + surveyJson[i].Title + "</b></span> : <span style='font-family: sans-serif;'> " + surveyJson[i].FieldValue+ "</span> <br/>");
+                                    else
+                                        $('#info-window-right br:last').after("<span style='font-family: sans-serif;'><b>" + surveyJson[i].Title + "</b></span> : <span style='font-family: sans-serif;'> " + surveyJson[i].FieldValue+ "</span> <br/>");
+                                }
+                                var j=1;
+                                for (var i = 0; i < surveyJson.length; i++) {
+                                    if(surveyJson[i].FieldType == "PIC" && surveyJson[i].FieldValue != "" && surveyJson[i].FieldValue != "N/a") {
+                                        $("#info_img" + j).attr("src", "http://85.25.211.247:5312/Pictures/" + surveyJson[i].FieldValue)
+                                        j++;
+                                        //src=
+                                    }
+                                    if(j>4) break;
+                                }
+
+                                //$("#info-window-left").text(data);
+                                //infoWindow.setContent(infoHTML);
+                                //infoWindow.open(map, marker);
+
+
+
+                                //var surveyJson = jQuery.parseJSON(data);
+                                //for (var i = 0; i < surveyJson.length; i++) {
+
+                                //    if (surveyJson[i].FieldValue != "" && surveyJson[i].FieldValue.length > 1) {
+                                //        infoHTML += surveyJson[i].FieldValue + "<br/>";
+                                //    }
+                                //}
+                                //infoWindow.setContent(infoHTML);
+                                //infoWindow.open(map, marker);
+
+
+                            });
+                            //alert(infoHTML);
+                            //infoWindow.setContent(infoHTML);
+                            //infoWindow.open(map, marker);
+                        });
+                    })(marker, data);
+                }
+
+                //map.setCenter(latlngbounds.getCenter());
+                //map.fitBounds(latlngbounds);
+
+
+
+                SelectedLocSummery(makersCatId, markersCatName);
+
+                var drawingManager = new google.maps.drawing.DrawingManager({
+                    drawingMode: google.maps.drawing.OverlayType.MARKER,
+                    drawingControl: true,
+                    drawingControlOptions: {
+                        position: google.maps.ControlPosition.TOP_CENTER,
+                        drawingModes: [
+                          google.maps.drawing.OverlayType.CIRCLE,
+                          google.maps.drawing.OverlayType.POLYGON,
+                          google.maps.drawing.OverlayType.POLYLINE,
+                          google.maps.drawing.OverlayType.RECTANGLE
+                        ]
+                    },
+                    markerOptions: {
+                        icon: 'images/beachflag.png'
+                    },
+                    circleOptions: {
+                        fillColor: '#ff0000',
+                        fillOpacity: 0.15,
+                        strokeWeight: 5,
+                        clickable: false,
+                        editable: true,
+                        zIndex: 1
+                    }
+
+                });
+                drawingManager.setMap(map);
+
+
+                google.maps.event.addListener(drawingManager, 'overlaycomplete', function (event) {
+
+                    if (event.type == google.maps.drawing.OverlayType.POLYLINE) {
+
+                        if (lastPolyline != null) {
+                            lastPolyline.setMap(null);
+                        }
+                        lastPolyline = event.overlay;
+                        var tempo;
+                        tempo = event.overlay.getPath();
+                        ShowDistance(tempo.getArray());
+
+                        return;
+                    }
+
+
+
+                    if (currOverlay != null) {
+                        currOverlay.setMap(null);
+                        currOverlay = null;
+                    }
+
+                    var Containsplacemarks = [];
+                    var index = 0;
+                    var selectedID = [];
+                    var SelectedCatName = [];
+
+
+                    
+                    $(".spnRegionName").text("...");
+                    $(".spnTotalPop").text("...");
+                    $(".spnArea").text("...");
+                    $(".spnpopDensity").text("...");
+                    $(".spnmostpop").text("...");
+                    $("#spnleastpop").text("...");
+                    $(".spnPerimeter").text("...");
+                    $("#spnHHSize").text("...");
+
+                    $("#spnHousingUnits").text("...");
+                    $("#spnUnitsPerKM").text("...");
+                    $("#spnAvgUnitSize").text("...");
+                    $("#spnUtilized").text("...");
+                    $("#spnLandUtilized").text("...");
+                    $("#spnLandNotUtilized").text("...");
+
+
+                    if (event.type == google.maps.drawing.OverlayType.POLYGON) {
+
+                        for (var i = 0; i < placemarks.length; i++) {
+
+                            if (google.maps.geometry.poly.containsLocation(placemarks[i].position, event.overlay)) {
+                                Containsplacemarks[index] = placemarks[i];
+                                selectedID[index] = makersCatId[i];
+                                SelectedCatName[index] = markersCatName[i];
+                                index++;
+                            }
+                        }
+
+                        SelectedLocSummery(selectedID, SelectedCatName);
+
+                        var polygonBounds = event.overlay.getPath();
+                        var firstBound;
+                        polyg = 'POLYGON((';
+                        polygonBounds.forEach(function (xy, i) {
+                            if (i == 0) {
+                                firstBound = xy.lng() + ' ' + xy.lat();
+                                miny = xy.lat();
+                                minx = xy.lng();
+                                maxy = xy.lat();
+                                maxx = xy.lng();
+                            }
+                            if (xy.lat() < miny) miny = xy.lat();
+                            if (xy.lng() < minx) minx = xy.lng();
+                            if (xy.lat() > maxy) maxy = xy.lat();
+                            if (xy.lng() > maxx) maxx = xy.lng();
+                            polyg += xy.lng() + ' ' + xy.lat() + ',';
+                        });
+                        polyg += firstBound;
+                        polyg += '))';
+
+                        population();
+
+                    }
+
+                    var mapLatLng = [];
+                    var count = 0;
+                    if (event.type == google.maps.drawing.OverlayType.RECTANGLE) {
+
+                        for (var i = 0; i < placemarks.length; i++) {
+
+                            if (MarkerContain(placemarks[i].position, event.overlay)) {
+                                Containsplacemarks[index] = placemarks[i];
+                                mapLatLng[index] = placemarks[i].sbjnum;
+                                selectedID[index] = makersCatId[i];
+                                SelectedCatName[index] = markersCatName[i];
+                                index++;
+                            }
+                        }
+
+                        localStorage.setItem("points",mapLatLng);
+
+                        var bounds = new google.maps.LatLngBounds(
+                            new google.maps.LatLng(event.overlay.getBounds().getSouthWest().lat(), event.overlay.getBounds().getSouthWest().lng()),
+                            new google.maps.LatLng(event.overlay.getBounds().getNorthEast().lat(), event.overlay.getBounds().getNorthEast().lng())
+                        );
+
+
+                        // Define the rectangle and set its editable property to true.
+                        var rectangle = new google.maps.Rectangle({
+                            bounds: bounds,
+                            editable: true,
+                            draggable: true
+                        });
+
+                        rectangle.setMap(map);
+                        event.overlay.setMap(null);
+                        event.overlay = rectangle;
+
+                        SelectedLocSummery(selectedID, SelectedCatName);
+
+
+
+
+
+
+
+
+
+
+                        var rectBound = event.overlay.getBounds();
+                        var NE = rectBound.getNorthEast();
+                        var SW = rectBound.getSouthWest();
+                        var NW = new google.maps.LatLng(NE.lat(), SW.lng());
+                        var SE = new google.maps.LatLng(SW.lat(), NE.lng());
+                        polyg = 'POLYGON((';
+                        polyg += NE.lng() + ' ' + NE.lat() + ','
+                            + NW.lng() + ' ' + NW.lat() + ','
+                            + SW.lng() + ' ' + SW.lat() + ','
+                            + SE.lng() + ' ' + SE.lat() + ','
+                            + NE.lng() + ' ' + NE.lat();
+                        polyg += '))';
+
+                        minx = NE.lng();
+                        maxx = NE.lng();
+                        miny = NE.lat();
+                        maxy = NE.lat();
+
+                        if (NE.lat() < miny) miny = NE.lat();
+                        if (SW.lat() < miny) miny = SW.lat();
+                        if (NW.lat() < miny) miny = NW.lat();
+                        if (SE.lat() < miny) miny = SE.lat();
+
+                        if (NE.lat() > maxy) maxy = NE.lat();
+                        if (SW.lat() > maxy) maxy = SW.lat();
+                        if (NW.lat() > maxy) maxy = NW.lat();
+                        if (SE.lat() > maxy) maxy = SE.lat();
+
+
+                        if (NE.lng() < minx) minx = NE.lng();
+                        if (SW.lng() < minx) minx = SW.lng();
+                        if (NW.lng() < minx) minx = NW.lng();
+                        if (SE.lng() < minx) minx = SE.lng();
+
+                        if (NE.lng() > maxx) maxx = NE.lng();
+                        if (SW.lng() > maxx) maxx = SW.lng();
+                        if (NW.lng() > maxx) maxx = NW.lng();
+                        if (SE.lng() > maxx) maxx = SE.lng();
+
+
+
+
+
+
+                        //google.maps.event.addListener(map, 'center_changed', function () {
+                        //    alert("helo");
+                        //});
+
+
+                        google.maps.event.addListener(event.overlay, "bounds_changed", function () {
+
+                            timestamp = new Date();
+
+                            Containsplacemarks = [];
+                            selectedID = [];
+                            index = 0;
+                            SelectedCatName = [];
+
+                            for (var i = 0; i < placemarks.length; i++) {
+
+                                if (MarkerContain(placemarks[i].position, event.overlay)) {
+                                    Containsplacemarks[index] = placemarks[i];
+                                    selectedID[index] = makersCatId[i];
+                                    SelectedCatName[index] = markersCatName[i];
+                                    index++;
+                                }
+                            }
+
+                            SelectedLocSummery(selectedID, SelectedCatName);
+
+
+
+
+                            var rectBound = event.overlay.getBounds();
+                            var NE = rectBound.getNorthEast();
+                            var SW = rectBound.getSouthWest();
+                            var NW = new google.maps.LatLng(NE.lat(), SW.lng());
+                            var SE = new google.maps.LatLng(SW.lat(), NE.lng());
+                            polyg = 'POLYGON((';
+                            polyg += NE.lng() + ' ' + NE.lat() + ','
+                                + NW.lng() + ' ' + NW.lat() + ','
+                                + SW.lng() + ' ' + SW.lat() + ','
+                                + SE.lng() + ' ' + SE.lat() + ','
+                                + NE.lng() + ' ' + NE.lat();
+                            polyg += '))';
+
+                            minx = NE.lng();
+                            maxx = NE.lng();
+                            miny = NE.lat();
+                            maxy = NE.lat();
+
+                            if (NE.lat() < miny) miny = NE.lat();
+                            if (SW.lat() < miny) miny = SW.lat();
+                            if (NW.lat() < miny) miny = NW.lat();
+                            if (SE.lat() < miny) miny = SE.lat();
+
+                            if (NE.lat() > maxy) maxy = NE.lat();
+                            if (SW.lat() > maxy) maxy = SW.lat();
+                            if (NW.lat() > maxy) maxy = NW.lat();
+                            if (SE.lat() > maxy) maxy = SE.lat();
+
+
+                            if (NE.lng() < minx) minx = NE.lng();
+                            if (SW.lng() < minx) minx = SW.lng();
+                            if (NW.lng() < minx) minx = NW.lng();
+                            if (SE.lng() < minx) minx = SE.lng();
+
+                            if (NE.lng() > maxx) maxx = NE.lng();
+                            if (SW.lng() > maxx) maxx = SW.lng();
+                            if (NW.lng() > maxx) maxx = NW.lng();
+                            if (SE.lng() > maxx) maxx = SE.lng();
+
+
+
+
+
+
+
+                            if (check == false) {
+                                population();
+                            }
+                            else {
+
+                                var diffSec = Math.floor((new Date().getTime() - timestamp.getTime()) / 1000);
+                                if (diffSec > 5) {
+                                    population();
+
+                                }
+
+                            }
+
+                        });
+
+                        population();
+
+                    }
+
+                    if (event.type == google.maps.drawing.OverlayType.CIRCLE) {
+
+
+
+                        for (var i = 0; i < placemarks.length; i++) {
+
+                            if (event.overlay.getBounds().contains(placemarks[i].position) && google.maps.geometry.spherical.computeDistanceBetween(event.overlay.getCenter(), placemarks[i].position) <= event.overlay.getRadius()) {
+                                Containsplacemarks[index] = placemarks[i];
+                                selectedID[index] = makersCatId[i];
+                                SelectedCatName[index] = markersCatName[i];
+                                index++;
+                            }
+                        }
+
+                        SelectedLocSummery(selectedID, SelectedCatName);
+
+                        //circle to poly
+                        drawCircle(event.overlay.getBounds().getCenter().lng(), event.overlay.getBounds().getCenter().lat(), ((event.overlay.getRadius() / 1000) * 0.621371192237334));
+                        //end circle to poly
+
+
+
+                        google.maps.event.addListener(event.overlay, 'radius_changed', function () {
+
+                            Containsplacemarks = [];
+                            selectedID = [];
+                            index = 0;
+                            SelectedCatName = [];
+
+                            for (var i = 0; i < placemarks.length; i++) {
+
+                                //if (this.getBounds().contains(placemarks[i].position)) {
+                                if (event.overlay.getBounds().contains(placemarks[i].position) && google.maps.geometry.spherical.computeDistanceBetween(event.overlay.getCenter(), placemarks[i].position) <= event.overlay.getRadius()) {
+                                    Containsplacemarks[index] = placemarks[i];
+                                    selectedID[index] = makersCatId[i];
+                                    SelectedCatName[index] = markersCatName[i];
+                                    index++;
+                                }
+                            }
+
+                            SelectedLocSummery(selectedID, SelectedCatName);
+
+                            drawCircle(event.overlay.getBounds().getCenter().lng(), event.overlay.getBounds().getCenter().lat(), ((event.overlay.getRadius() / 1000) * 0.621371192237334));
+
+                        })
+
+                        google.maps.event.addListener(event.overlay, 'center_changed', function () {
+
+                            Containsplacemarks = [];
+                            selectedID = [];
+                            index = 0;
+                            SelectedCatName = [];
+
+                            for (var i = 0; i < placemarks.length; i++) {
+
+                                //if (this.getBounds().contains(placemarks[i].position)) {
+                                if (event.overlay.getBounds().contains(placemarks[i].position) && google.maps.geometry.spherical.computeDistanceBetween(event.overlay.getCenter(), placemarks[i].position) <= event.overlay.getRadius()) {
+                                    Containsplacemarks[index] = placemarks[i];
+                                    selectedID[index] = makersCatId[i];
+                                    SelectedCatName[index] = markersCatName[i];
+                                    index++;
+                                }
+                            }
+
+                            SelectedLocSummery(selectedID, SelectedCatName);
+
+                            drawCircle(event.overlay.getBounds().getCenter().lng(), event.overlay.getBounds().getCenter().lat(), ((event.overlay.getRadius() / 1000) * 0.621371192237334));
+                        });
+
+                    }
+
+                    currOverlay = event.overlay;
+
+                });
+
+
+                function drawCircle(lng, lat, radius)
+                {
+
+                    var d2r = Math.PI / 180;   // degrees to radians
+                    var r2d = 180 / Math.PI;   // radians to degrees
+                    var earthsradius = 3963;
+
+
+
+                    var points = 32;
+                    //var radius = 20;             // radius in miles
+
+                    // find the raidus in lat/lon
+                    var rlat = (radius / earthsradius) * r2d;
+                    var rlng = rlat / Math.cos(lat * d2r);
+
+                    var extp = new Array();
+                    for (var i=0; i < points+1; i++) // one extra here makes sure we connect the
+                    {
+                        var theta = Math.PI * (i / (points/2));
+                        ex = lng + (rlng * Math.cos(theta)); // center a + radius x * cos(theta)
+                        ey = lat + (rlat * Math.sin(theta)); // center b + radius y * sin(theta)
+                        extp.push(new google.maps.LatLng(ey, ex));
+                    }
+
+                    //var tempPoly = new google.maps.Polygon({
+                    //    paths: extp,
+                    //    strokeColor: '#FF0000',
+                    //    strokeOpacity: 0.8,
+                    //    strokeWeight: 2,
+                    //    fillColor: '#FF0000',
+                    //    fillOpacity: 0.35
+                    //});
+                    //tempPoly.setMap(map);
+
+
+                    var polygonBounds = extp; //event.overlay.getPath();
+                    var firstBound;
+                    polyg = 'POLYGON((';
+                    polygonBounds.forEach(function (xy, i) {
+                        if (i == 0) {
+                            firstBound = xy.lng() + ' ' + xy.lat();
+                            miny = xy.lat();
+                            minx = xy.lng();
+                            maxy = xy.lat();
+                            maxx = xy.lng();
+                        }
+                        if (xy.lat() < miny) miny = xy.lat();
+                        if (xy.lng() < minx) minx = xy.lng();
+                        if (xy.lat() > maxy) maxy = xy.lat();
+                        if (xy.lng() > maxx) maxx = xy.lng();
+                        polyg += xy.lng() + ' ' + xy.lat() + ',';
+                    });
+                    polyg += firstBound;
+                    polyg += '))';
+
+                    population();
+
+                }
+
+                function MarkerContain(latLng, Rectangle) {
+
+                    if (latLng.lat() >= Rectangle.getBounds().getSouthWest().lat() && latLng.lat() <= Rectangle.getBounds().getNorthEast().lat()) {
+                        if (latLng.lng() >= Rectangle.getBounds().getSouthWest().lng() && latLng.lng() <= Rectangle.getBounds().getNorthEast().lng()) {
+                            return true;
+                        }
+                        else {
+                            return false;
+                        }
+                    }
+                    else {
+                        return false;
+                    }
+
+                }
+
+
+                //END NEW CODE
+            }
+            else {
+                var countryId = getParameterByName('cn');
+                var zoom = 9;
+                if (countryId.length > 0) {
+                    zoom = 6;
+                }
+                var mapOptions = {
+                    center: new google.maps.LatLng(@ViewBag.Default_Latitude, @ViewBag.Default_Longitude),
+                    zoom: zoom,
+                    mapTypeControlOptions: {
+                        mapTypeIds: [google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE, google.maps.MapTypeId.TERRAIN
+                        ,google.maps.MapTypeId.HYBRID]
+                    },
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+                var infoWindow = new google.maps.InfoWindow();
+                map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
+
+
+                //alert("init map 2");
+
+                //var ctaLayer = new google.maps.KmlLayer({
+                //    url: 'http://117.20.29.236:3003/jeddah.xml'
+                //});
+                //ctaLayer.setMap(map);
+
+                //var kmlUrl = 'http://117.20.29.236:3003/jeddah.xml';
+                //var kmlOptions = {
+                //    suppressInfoWindows: true,
+                //    preserveViewport: false,
+                //    map: map
+                //};
+                //var kmlLayer = new google.maps.KmlLayer(kmlUrl, kmlOptions);
+                //kmlLayer.setMap(map);
+
+
+            }
+
+        }
+
+        function ClearMap() {
+            currOverlay.setMap(null);
+            if (lastPolyline != null) lastPolyline.setMap(null);
+            SelectedLocSummery(makersCatId, markersCatName);
+            
+            $(".spnRegionName").text("");
+            $(".spnTotalPop").text("");
+            $(".spnArea").text("");
+            $(".spnpopDensity").text("");
+            $(".spnmostpop").text("");
+            $("#spnleastpop").text("");
+            $(".spnPerimeter").text("");
+            $("#spnHHSize").text("");
+
+            $("#spnHousingUnits").text("");
+            $("#spnUnitsPerKM").text("");
+            $("#spnAvgUnitSize").text("");
+            $("#spnUtilized").text("");
+            $("#spnLandUtilized").text("");
+            $("#spnLandNotUtilized").text("");
+
+            $("#popGrowthTable").find("tr:gt(0)").remove();
+            $("#ageGroupTable").find("tr:gt(0)").remove();
+            $("#poiGrowthTable").find("tr:gt(0)").remove();
+
+            $("#spnDistance").text("");
+        }
+
+        function addCommas(n) {
+            var rx = /(\d+)(\d{3})/;
+            return String(n).replace(/^\d+/, function (w) {
+                while (rx.test(w)) {
+                    w = w.replace(rx, '$1,$2');
+                }
+                return w;
+            });
+        }
+
+        function SelectedLocSummery(selectedID, SelectedCatName) {
+
+            localStorage.setItem('SelectedCatName', SelectedCatName);
+            localStorage.setItem('selectedID', selectedID);
+            var CatIDs = [];
+            var CatCount = [];
+            var CatName = [];
+            var check;
+
+            CatIDs[0] = selectedID[0];
+            CatName[0] = SelectedCatName[0];
+            CatCount[0] = 1;
+
+            if (selectedID.length != 0) {
+                for (var j = 1; j < selectedID.length; j++) {
+
+                    for (var k = 0; k < CatIDs.length; k++) {
+
+                        if (selectedID[j] == CatIDs[k])
+                        {
+                            CatCount[k] = (parseInt(CatCount[k]) + 1);
+                            check = true;
+                            break;
+                        }
+                        else
+                        {
+                            check = false;
+                            continue;
+                        }
+
+                    }
+                    if (!check) {
+                        CatIDs.push(selectedID[j]);
+                        CatName.push(SelectedCatName[j])
+                        CatCount.push(1);
+
+                    }
+
+                }
+            }
+
+            currCatNames = CatName;
+            currCatCounts = CatCount;
+        }
+
+        var check = false;
+        var timestamp = null; //  = new Date();
+
+        function population() {
+            check = true;
+            var formData = { minx: minx, maxx: maxx, miny: miny, maxy: maxy, geom: polyg };
+            // alert("call");
+
+            $.ajax({
+                url: "/popex.aspx",
+                type: "POST",
+                data: formData,
+                success: function (data, textStatus, jqXHR) {
+                    check = false;
+
+                    var currYearGrowthIndex = -1;
+                    var currYear = new Date().getFullYear();
+                    var json = jQuery.parseJSON(data);
+                    //var hhSize = json.data.GrowthRates[0].HHSize;
+                    // alert(json);
+                    localStorage.setItem('json', data);
+                    var growth = json.data.GrowthRates;
+                    var currGrowth = '';
+                    var growthHtml = '<tr><td>rate</td><td>year</td><td>hhsize</td><td>population</td><td>one</td><td>two</td><td>three</td><td>four</td><td>five</td><td>six</td></tr>';
+                    var ageGroupHtml = '<tr><td>one</td><td>two</td><td>three</td><td>four</td></tr>';
+
+
+                    $("#popGrowthTable").find("tr:gt(0)").remove();
+                    $("#ageGroupTable").find("tr:gt(0)").remove();
+
+                    for (var i = 0; i < growth.length; i++) {
+                        if (growth[i].Year == currYear) {
+                            currGrowth = growth[i];
+                            currYearGrowthIndex = i;
+                            break;
+                        }
+                        var chtml = growthHtml;
+                        chtml = chtml.replace('rate', growth[i].Rate);
+                        chtml = chtml.replace('year', growth[i].Year);
+                        chtml = chtml.replace('hhsize', growth[i].HHSize);
+                        chtml = chtml.replace('population', growth[i].Population);
+
+                        var one = parseFloat(growth[i].Population) / parseFloat(growth[i].HHSize);
+                        var two = parseFloat(one) / parseFloat(json.data.Area);
+                        var three = 200;
+                        var four = parseFloat(two) * parseFloat(200);
+                        var five = (four / 1000000) * 100;
+                        var six = ((1000000 - four) / 1000000) * 100;
+
+                        chtml = chtml.replace('one', addCommas(parseFloat(one).toFixed(2)));
+                        chtml = chtml.replace('two', addCommas(parseFloat(two).toFixed(2)));
+                        chtml = chtml.replace('three', three);
+                        chtml = chtml.replace('four', addCommas(parseFloat(four).toFixed(2)));
+                        chtml = chtml.replace('five', addCommas(parseFloat(five).toFixed(2)) + ' %');
+                        chtml = chtml.replace('six', addCommas(parseFloat(six).toFixed(2)) + ' %');
+                        $('#popGrowthTable tr:last').after(chtml);
+
+                    }
+
+                    for (var i = 0; i < json.data.Pyramids.length; i++) {
+                        var chtml = ageGroupHtml;
+                        chtml = chtml.replace('one', json.data.Pyramids[i].AgeGroup);
+                        chtml = chtml.replace('two', json.data.Pyramids[i].FemalePop);
+                        chtml = chtml.replace('three', json.data.Pyramids[i].MalePop);
+                        chtml = chtml.replace('four', json.data.Pyramids[i].TotalPop);
+
+                        $('#ageGroupTable tr:last').after(chtml);
+                    }
+
+
+                    // POI Growth Start
+
+                    var currCatCountsOrig = $.extend(true, [], currCatCounts); // Saving orignal values to be used in POI Density
+
+                    var poigheader = '<tr><th>Growth Rate</th><th>Year</th><th>HHSize</th><th>Population</th>';
+
+                    if (currCatNames != null && currCatNames.length > 0) {
+                        for (var k = 0; k < currCatNames.length; k++) {
+                            if (currCatNames[k] == null) continue;
+                            if (currCatNames[k].split(">").length > 1) {
+                                poigheader += '<th>' + currCatNames[k].split(">")[1] + '</th>';
+                            } else {
+                                poigheader += '<th>' + currCatNames[k] + '</th>';
+                            }
+                            //poicat.push(cat.OutletCount);
+                        }
+                    }
+                    poigheader += "</tr>"
+
+                    document.getElementById('poiGrowthTable').innerHTML = poigheader;
+
+                    for (var i = currYearGrowthIndex; i < growth.length; i++) {
+                        var poi = '<tr><td>rate</td><td>year</td><td>hhsize</td><td>population</td>';
+                        poi = poi.replace('rate', growth[i].Rate);
+                        poi = poi.replace('year', growth[i].Year);
+                        poi = poi.replace('hhsize', growth[i].HHSize);
+                        poi = poi.replace('population', growth[i].Population);
+
+                        if (currCatCounts != null && currCatCounts.length > 0) {
+                            for (var j = 0; j < currCatCounts.length; j++) {
+                                if (currCatNames == null || currCatNames.length == 0 || currCatNames[0] == null) break;
+                                poi += '<td>' + currCatCounts[j] + '</td>';
+                                currCatCounts[j] = Math.round(currCatCounts[j] + (currCatCounts[j] * (parseFloat(growth[i].Rate) / 100)));
+                            }
+                        }
+                        poi += '</tr>'
+
+                        $('#poiGrowthTable tr:last').after(poi);
+
+                    }
+
+
+
+
+                    //POI Growth End
+
+                    var hhSize = currGrowth.HHSize;
+                    var totalPop = currGrowth.Population;
+
+                    var totalArea = json.data.Area;
+                    var popDensity = json.data.PopulationDensity;
+                    var mostpop = json.data.MostPopulated;
+                    var leastpop = json.data.LeastPopulated;
+                    var Perimeter = json.data.Perimeter;
+
+                    var housingUnits = parseFloat(totalPop) / parseFloat(hhSize);
+                    var unitsPerKm = housingUnits / totalArea;
+                    var avgUnitSize = 200;
+                    var utilized = unitsPerKm * 200;
+                    var landUtilized = (utilized / 1000000) * 100;
+                    var notUtilized = ((1000000 - utilized) / 1000000) * 100;
+
+
+                    $("#spnYear").text(currYear + " Estimate :");
+                    $(".spnTotalPopYear").text("Population estimate " + currYear + " :");
+                    $(".spnTotalPop").text(addCommas(totalPop));
+                    $(".spnArea").text(addCommas(parseFloat(totalArea).toFixed(2)));
+                    $(".spnpopDensity").text(addCommas(parseFloat(popDensity).toFixed(2)));
+                    $(".spnmostpop").text(addCommas(parseFloat(mostpop).toFixed(2)));
+                    $("#spnleastpop").text(addCommas(parseFloat(leastpop).toFixed(2)));
+                    $(".spnPerimeter").text(addCommas(parseFloat(Perimeter).toFixed(2)));
+                    $("#spnHHSize").text(addCommas(parseFloat(hhSize).toFixed(2)));
+
+
+                    $("#spnHousingUnits").text(addCommas(parseFloat(housingUnits).toFixed(2)));
+                    $("#spnUnitsPerKM").text(addCommas(parseFloat(unitsPerKm).toFixed(2)));
+                    $("#spnAvgUnitSize").text(avgUnitSize);
+                    $("#spnUtilized").text(addCommas(parseFloat(utilized).toFixed(2)));
+                    $("#spnLandUtilized").text(addCommas(parseFloat(landUtilized).toFixed(2)) + ' %');
+                    $("#spnLandNotUtilized").text(addCommas(parseFloat(notUtilized).toFixed(2)) + ' %');
+
+
+
+                    $('#poiDensityTable tr:first  th:gt(2)').remove();
+                    $('#poiDensityTable tr:eq(1)  td:gt(2)').remove();
+                    $('#poiDensityTable tr:eq(2)  td:gt(2)').remove();
+                    $('#poiDensityTable tr:eq(4)  td:gt(2)').remove();
+                    $('#poiDensityTable tr:eq(6)  td:gt(2)').remove();
+                    var poiDensityHeader = '';
+                    if (currCatNames != null && currCatNames.length > 0) {
+                        for (var k = 0; k < currCatNames.length; k++) {
+                            if (currCatNames[k] == null) continue;
+                            if (currCatNames[k].split(">").length > 1) {
+                                poiDensityHeader += '<th>' + currCatNames[k].split(">")[1] + '</th>';
+                            } else {
+                                poiDensityHeader += '<th>' + currCatNames[k] + '</th>';
+                            }
+                            //poicat.push(cat.OutletCount);
+                        }
+                    }
+                    //poigheader += "</tr>"
+
+                    //Show Outlets count for the selected Category over Category box
+                    if (currCatNames != null && currCatNames.length > 0 && currCatCountsOrig != null && currCatCountsOrig.length > 0) {
+                        $('#spnCategoryCount').text(currCatNames[0] + " count: " + currCatCountsOrig[0]);
+                    }
+
+                    $('#poiDensityTable tr:first  th:last').after(poiDensityHeader);
+                    var pod = "";
+                    if (currCatCountsOrig != null && currCatCountsOrig.length > 0) {
+                        for (var j = 0; j < currCatCountsOrig.length; j++) {
+                            if (currCatNames == null || currCatNames.length == 0 || currCatNames[0] == null) break;
+                            pod += '<td>' + currCatCountsOrig[j] + '</td>';
+                            //alert("  count =    "+currCatCountsOrig[j]);
+                            //currCatCounts[j] = Math.round(currCatCounts[j] + (currCatCounts[j] * (parseFloat(growth[i].Rate) / 100)));
+                        }
+                    }
+                    $('#poiDensityTable tr:eq(1)  td:last').after(pod);
+
+                    pod = "";
+                    if (currCatCountsOrig != null && currCatCountsOrig.length > 0) {
+                        for (var j = 0; j < currCatCountsOrig.length; j++) {
+                            if (currCatNames == null || currCatNames.length == 0 || currCatNames[0] == null) break;
+                            pod += '<td>' + Math.round(totalPop / currCatCountsOrig[j]) + '</td>';
+                        }
+                    }
+                    $('#poiDensityTable tr:eq(2)  td:last').after(pod);
+                    //$('#poiDensityTable tr:eq(3)  td:last').after("<tr></tr>");
+
+                    pod = "";
+                    if (currCatCountsOrig != null && currCatCountsOrig.length > 0) {
+                        for (var j = 0; j < currCatCountsOrig.length; j++) {
+                            if (currCatNames == null || currCatNames.length == 0 || currCatNames[0] == null) break;
+                            pod += '<td>' + parseFloat(popDensity * (parseFloat(currCatCountsOrig[j]) / parseFloat(totalPop))).toFixed(2) + '</td>';
+                        }
+                    }
+                    $('#poiDensityTable tr:eq(4)  td:last').after(pod);
+
+                    //mostpop
+                    pod = "";
+                    if (currCatCountsOrig != null && currCatCountsOrig.length > 0) {
+                        for (var j = 0; j < currCatCountsOrig.length; j++) {
+                            if (currCatNames == null || currCatNames.length == 0 || currCatNames[0] == null) break;
+                            pod += '<td>' + Math.round(mostpop / currCatCountsOrig[j]) + '</td>';
+                        }
+                    }
+                    $('#poiDensityTable tr:eq(6)  td:last').after(pod);
+
+
+                    currCatNames = null;
+                    currCatCounts = null;
+                    currCatCountsOrig = null;
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    check = false;
+                    $(".spnRegionName").text("");
+                    $(".spnTotalPop").text("N/A");
+                    $(".spnArea").text("N/A");
+                    $(".spnpopDensity").text("N/A");
+                    $(".spnmostpop").text("N/A");
+                    $("#spnleastpop").text("N/A");
+                    $(".spnPerimeter").text("N/A");
+                    $("#spnHHSize").text("N/A");
+
+                    $("#spnHousingUnits").text("N/A");
+                    $("#spnUnitsPerKM").text("N/A");
+                    $("#spnAvgUnitSize").text("N/A");
+                    $("#spnUtilized").text("N/A");
+                    $("#spnLandUtilized").text("N/A");
+                    $("#spnLandNotUtilized").text("N/A");
+
+                }
+            });
+            //if (diffTime != null) {
+            // alert(Math.floor(new Date().getTime() / 1000));
+            // alert(new Date().getTime() + "  -  " + timestamp.getTime());
+            // var diffSec = Math.floor((new Date().getTime() - timestamp.getTime()) / 1000);
+            //var diffTime = Math.floor(new Date().getTime() - diffTime.getTime() / 1000);
+            //alert(diffTime);
+            //}
+
+        }
+
+        //Show/Hide Outlet points on the map
+        $('input[type="checkbox"]').on('ifChanged', function(event){
+            var id = event.currentTarget.id.split("_");
+            if (id.length > 1) {
+                var categoryId = id[1];
+                for (var i = 0; i < placemarks.length; i++)
+                {
+                    if (makersCatId[i] == categoryId) {
+                        if (event.currentTarget.checked) {
+                            placemarks[i].setMap(map);
+                        }
+                        else {
+                            placemarks[i].setMap(null);
+                        }
+                    }                    
+                }
+            }
+        });
+
+        function getRemainingPoints() {
+            for (var i = 0; i < placemarks.length; i++)
+            {
+                if (placemarks[i].getMap() != null) {
+                    alert(makersCatId[i]);
+                }
+            }
+        }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            // Attach a submit handler to the form
+            $("#tab2").on('click', function (event) {
+
+                //Show Overlay
+                //$(".overlay").css('display', 'block');
+                //$(".loading-img").css('display', 'block');
+
+                var catId = getParameterByName('cat');
+                var pcatId = getParameterByName('pcat');
+                var cityId = getParameterByName('c');
+                var countryId = getParameterByName('cn');
+
+                var uparams = "";
+                if (catId.length == 0) {
+                    catId = "0";
+                }
+                if (pcatId.length > 0) {
+                    uparams += "&pcat=" + pcatId;
+                }
+                if (countryId.length > 0) {
+                    uparams += "&country=" + countryId;
+                } else {
+                    if (cityId.length > 0) {
+                        uparams += "&city=" + cityId;
+                    }
+                }
+                // Query data
+                var posting = $.get('/Home/SurveyLocationWise/' + catId + '?language=en-US' + uparams);
+
+                // Put the results in a div
+                posting.done(function (data) {
+                    var content = data; //$(data).find(".content");
+                    $("#tabulation").empty().append(content);
+
+                    //Hide Overlay
+                    //$(".overlay").css('display', 'none');
+                    //$(".loading-img").css('display', 'none');
+                });
+            });
+        });
+
+        function getParameterByName(name) {
+            name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+            return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+        }
+    </script>
+
+    @Scripts.Render("~/bundles/bootstrap/jqwidgets")
+}

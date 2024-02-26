@@ -1,0 +1,3676 @@
+﻿@{
+    ViewBag.Title = "Summary Survey";
+}
+
+@Styles.Render("~/Content/styles/filters")
+@Scripts.Render("~/bundles/bootstrap/filters")
+<link href="~/Content/css/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<style>
+    #National g.highcharts-series-group rect,
+    #RegionalNorth g.highcharts-series-group rect,
+    #RegionalCentral g.highcharts-series-group rect,
+    #RegionalSouth g.highcharts-series-group rect,
+    #MetroDealerDetail .highcharts-series rect {
+        cursor: pointer;
+    }
+
+    #nationalStatusPie .highcharts-legend-box {
+        overflow-x: scroll;
+    }
+
+    .loader {
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+        background: url('/Content/page loader/page-loader.gif') 50% 50% no-repeat;
+        /*rgb(249,249,249)*/
+    }
+
+    .Section {
+        margin: 10px;
+        border-radius: 4px;
+        background-color: white;
+    }
+
+    .extra {
+        width: 100%;
+        height: 150px;
+        border: 1px solid #ccc;
+        border-left: none;
+        border-bottom: none;
+        border-top: none;
+    }
+
+    .extraCity {
+        width: 100%;
+        border-bottom: none;
+        height: 59px;
+        border: solid 1px #ddd;
+        position: unset;
+    }
+
+    /* Style the tab */
+    div.tabCity {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: white;
+        border-bottom: none;
+    }
+
+        /* Style the buttons inside the tab */
+        div.tabCity button {
+            background-color: #ddd;
+            color: white;
+            float: left;
+            border: 1px solid #ccc;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: medium;
+        }
+
+
+            /* Create an active/current tablink class */
+            div.tabCity button.active {
+                background-color: #ccc;
+            }
+
+    /* Style the tab content */
+    .tabcontentCity {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+    }
+
+    div.tabCity button.active {
+        border: 1px solid white !important;
+    }
+    /* Style the tab */
+    div .tab {
+        float: left;
+        /*border: 1px solid #ccc;*/
+        /*background-color: black;*/
+        width: 5%;
+        height: 100%;
+    }
+
+        /*div.tabCity {
+        width: 7%;
+    }*/
+
+        /* Style the buttons inside the tab */
+        div.tab button {
+            display: block;
+            background-color: #ddd;
+            color: white;
+            padding: 22px 16px;
+            width: 100%;
+            border: 1px solid #ccc;
+            outline: none;
+            text-align: left;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+            /* Change background color of buttons on hover */
+            /*div.tab button:hover {
+                background-color: #ddd;
+                color: inherit;
+            }*/
+
+            /* Create an active/current "tab button" class */
+            div.tab button.active, div.tabCity button.active {
+                background-color: white;
+                color: black;
+                border: solid #cccccc 1px;
+                border-right: none;
+            }
+
+    /* Style the tab content */
+    .tabcontent {
+        float: left;
+        padding: 0px 12px;
+        border: 1px solid #ccc;
+        width: 95%;
+        border-left: none;
+        height: 300px;
+        -webkit-animation: fadeEffect 1s;
+        animation: fadeEffect 1s;
+    }
+    /*.tabcontentCity {
+        width: 93%;
+        height: 400px;
+    }*/
+
+    /* Style the tab content */
+
+    /* Fade in tabs */
+    @@-webkit-keyframes fadeEffect {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    @@keyframes fadeEffect {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+</style>
+
+
+@section Scripts {
+
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    @*<script src="~/Content/bootstrap-multiselect-master/dist/js/bootstrap-multiselect.js"></script>*@
+
+    <script src="~/Scripts/bootstrap-multiselect-master/dist/js/bootstrap-multiselect.js"></script>
+    <link href="~/Scripts/bootstrap-multiselect-master/dist/css/bootstrap-multiselect.css" rel="stylesheet" />
+
+
+    <script>
+
+        var DealersOverAllPie='@Html.Raw(@ViewBag.OverAllStatusPie)', DealersOverAllTop5Value='@Html.Raw(@ViewBag.DealerHighScoreDetailX)', DealersOverAllBottom5Value='@Html.Raw(@ViewBag.DealerLowScoreDetailX)', DealersOverAllTopName='@Html.Raw(@ViewBag.DealerHighScoreDetailName)', DealersOverAllBottomName='@Html.Raw(@ViewBag.DealerLowScoreDetailName)';
+        var dealername='@ViewBag.BranchName';
+
+        function DrawPie(data, id, title,name) {
+            var json;
+            try {
+                json = $.parseJSON(data);
+            } catch (e) {
+                // not json
+                json = data
+
+            }
+
+
+
+
+            var chart = $("#" + id).highcharts();
+            if (chart != undefined) {
+                chart.destroy();
+            }
+            Highcharts.chart(id, {
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie',
+                    events: {
+                        drilldown: function (e) {
+
+                        }
+                    }
+                },
+                title: {
+                    text: title//'National Avg'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.records} records, {point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        showInLegend: true,
+                        dataLabels: {
+                            enabled: false,
+                            formatter: function () {
+                                return this.percentage.toFixed(2) + '%';
+                            }
+                        },
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'top',
+                    x: 0,
+                    y: 30,
+                    floating: false,
+                    borderWidth: 1,
+                    backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+                    shadow: true,
+                    useHTML: true,
+                    labelFormatter: function () {
+                        var total = 0;
+                        $.each(this.series.data, function () {
+
+                            total += this.y;
+                        });
+                        //var percentage = ((this.y / total) * 100).toFixed(1);
+                        //percentage = isNaN(percentage) ? 0 : percentage;
+                        return '<div style="text-align: left; width:100px;float:left;">' + this.name + ": " + this.y  + '</div>';
+                    }
+                },
+                point: {
+                    events: {
+                        click: function (event) {
+                            alert(this.x + " " + this.y);
+                        }
+                    }
+                },
+                series: [{
+                    name: name,
+                    colorByPoint: true,
+                    data:
+                    json,
+                    //[{
+                    //    name: 'Central',
+                    //    y: 40 ,
+                    //}, {
+                    //        name: 'North',
+                    //    y: 30,
+                    //    selected: true,
+                    //    }, {
+                    //        name: 'South',
+                    //        y: 30,
+                    //        selected: true,
+                    //    }],
+                }]
+            });
+        }
+
+
+        function DrawPieWithHLengend(data, id, title) {
+
+            if ($.type(data) == "string") {
+                data = JSON.parse(data);
+            }
+
+
+            Highcharts.chart(id, {
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie',
+                    events: {
+
+                    }
+                },
+                title: {
+                    text: title
+                },
+                tooltip: {
+                    pointFormat: '<b>Percentage {point.percentage:.1f}%</b><br>Average Survey Score: {point.totl}<br>Survey Count: {point.Surveycount}'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: false,
+                            formatter: function () {
+                                return this.percentage.toFixed(2) + '%';
+                            }
+                        },
+                        showInLegend: true
+                    },
+                    series: {
+                        dataLabels: {
+                            enabled: true,
+                            formatter: function () {
+                                return Math.round(this.percentage.toFixed(1) * 100) / 100 + ' %';
+                            },
+                            distance: -30,
+                            color: 'white'
+                        }
+                    }
+                    //pie: {
+                    //    allowPointSelect: true,
+                    //    cursor: 'pointer',
+                    //    showInLegend: false,
+                    //}
+                },
+                point: {
+                    events: {
+                        click: function (event) {
+                            alert(this.x + " " + this.y);
+                        }
+                    }
+                },
+                series: [{
+                    name: title,//'Dealer Area Wise Score',
+                    colorByPoint: true,
+                    data:
+                        data,
+                }]
+            });
+
+
+
+        }
+
+        function DrawBarChartVertical(Name, Value,id,Title,legendname) {
+
+            try {
+                Name = JSON.parse(Name)
+            }
+            catch(e){}
+            try {
+                Value = JSON.parse(Value);
+            }
+            catch (e){}
+
+            var chart = $("#"+id).highcharts();
+            if (chart != undefined) {
+                chart.destroy();
+            }
+
+            Highcharts.chart(id, {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: Title//' Audit of City Average '
+                },
+                //subtitle: {
+                //    text: 'Source: WorldClimate.com'
+                //},
+                xAxis: {
+                    categories: Name,
+
+                    crosshair: true
+                },
+                yAxis: {
+                    min: 0,
+                    max: 100,
+                    title: {
+                        text: "Percentage"
+                    },
+                    plotLines: [{
+                        color: '#FF0000', // Red
+                        width: 2,
+                        value: 92 // Position, you'll have to translate this to the values on your x axis
+                    }]
+
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.2f} </b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    }
+                },
+
+                series: [{
+                    name: legendname,
+                    data:
+                    Value
+
+                    , dataLabels: {
+                        enabled: true,
+                        formatter: function () {
+
+                            return this.point.y.toFixed(1).toString() +'%';
+                        }
+                    }
+                }]
+            });
+
+
+
+        }
+        
+        function DrawMetroOrCityDealerDetail(Name, Value,id,Title) {
+
+            var jsonName;
+            try {
+                jsonName = $.parseJSON(Name);
+            } catch (e) {
+                // not json
+                jsonName = Name
+
+            }
+            Name = jsonName;
+
+            var jsonValue;
+            try {
+                jsonValue = $.parseJSON(Value);
+            } catch (e) {
+                // not json
+                jsonValue = Value
+            }
+            Value = jsonValue;
+
+
+            var chart = $("#" + id).highcharts();
+            if (chart != undefined) {
+                chart.destroy();
+            }
+            Highcharts.chart(id, {
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: Title
+                },
+                //subtitle: {
+                //    text: 'Source: <a href="https://en.wikipedia.org/wiki/World_population">Wikipedia.org</a>'
+                //},
+                xAxis: {
+                    categories:
+                    (Name),
+                    //['Karachi', 'Lahore', 'Islamabad', 'Others'],
+                    title: {
+                        text: 'In Percentage'
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Scores',
+                        align: 'high'
+                    },
+                    labels: {
+                        overflow: 'justify'
+                    }
+                },
+                tooltip: {
+                    valueSuffix: ' Scores'
+                },
+
+                plotOptions: {
+                    bar: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    },
+                    series: {
+                        pointWidth: 40
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'top',
+                    x: -40,
+                    y: 80,
+                    floating: true,
+                    borderWidth: 1,
+                    backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+                    shadow: true
+                },
+                credits: {
+                    enabled: false
+                },
+
+                series: [{
+                    name: 'Cities',
+                    data: //[{ y: 93, id: 1 }, { y: 90, id: 2071 }, { y: 89, id: 5558 }, { y: 86, id: 0 }]
+                    (Value)
+                    , dataLabels: {
+                        enabled: true,
+                        formatter: function () {
+                            return this.point.y.toString() +'%';
+                        }
+                    },
+                    point: {
+                        events: {
+                            legendItemClick: function () {
+                                return false; // <== returning false will cancel the default action
+                            },
+                            click: function () {
+                                //alert('click')
+
+
+                                if (id != "CityDealerDetail" && this.intenal!=true)
+                                {
+                                    DestoryAndReDrawCity(this.category, this.id)
+                                }
+
+                            }
+                        }
+                    }
+                }]
+            });
+
+        }
+
+        function DrawCityDealerDetail(Name,Value,title) {
+
+            try {
+                Name = JSON.parse(Name)
+            }
+            catch(e){}
+            try {
+                Value = JSON.parse(Value);
+            }
+            catch (e){}
+
+            var chart = $("#CityDealerDetail").highcharts();
+            if (chart != undefined) {
+                chart.destroy();
+            }
+
+            Highcharts.chart('CityDealerDetail', {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: title//' Audit of City Average '
+                },
+                //subtitle: {
+                //    text: 'Source: WorldClimate.com'
+                //},
+                xAxis: {
+                    categories: Name,
+                    //labels: {
+                    //    rotation: 90
+                    //},
+
+                    crosshair: true
+                },
+                yAxis: {
+                    min: 0,
+                    max: 100,
+                    title: {
+                        text: 'Survy Scores'
+                    },
+                    plotLines: [{
+                        color: '#FF0000', // Red
+                        width: 2,
+                        value: 92 // Position, you'll have to translate this to the values on your x axis
+                    }]
+
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    }
+                },
+
+                series: [{
+                    name: 'Q1',
+                    data:
+                    Value
+
+                    , dataLabels: {
+                        enabled: true,
+                        formatter: function () {
+                            return this.point.y.toString() +'%';
+                        }
+                    }
+                }]
+            });
+
+        }
+
+        function DrawHighScores(Values,name,id,title) {
+            var chart = $("#" + id).highcharts();
+            if (chart != undefined) {
+                chart.destroy();
+            }
+
+            Highcharts.chart(id, {
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: title
+                },
+                //subtitle: {
+                //    text: 'Source: <a href="https://en.wikipedia.org/wiki/World_population">Wikipedia.org</a>'
+                //},
+                xAxis: {
+                    categories:
+                    JSON.parse(name),
+                    //['Staff', 'Sales Reception', 'Directional Sign', 'Customer Lounge', 'Customer Relation'],
+                    title: {
+                        text: 'In Percentage'
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Scores',
+                        align: 'high'
+                    },
+                    labels: {
+                        overflow: 'justify'
+                    }
+                },
+                tooltip: {
+                    valueSuffix: ' Scores'
+                },
+
+                plotOptions: {
+                    bar: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'top',
+                    x: -40,
+                    y: 80,
+                    floating: true,
+                    borderWidth: 1,
+                    backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+                    shadow: true
+                },
+                credits: {
+                    enabled: false
+                },
+
+                series: [{
+                    //name: 'Year 1800',
+                    data:
+                    JSON.parse(Values)
+                    //[93, 90, 89, 86, 78]
+                    , dataLabels: {
+                        enabled: true,
+                        formatter: function () {
+                            return this.point.y.toString() + '%';
+                        }
+                    }
+                }]
+            });
+
+        }
+
+        function DrawCompGraph(data1,data2,name,id,title)
+        {
+            if ($.type(data1 == "string")) {
+                data1 = JSON.parse(data1);
+            }
+
+            if ($.type(data2 == "string")){
+                data2 = JSON.parse(data2);
+            }
+            if ($.type(name == "string")) {
+                name = JSON.parse(name);
+            }
+
+            var chart = $("#" + id).highcharts();
+            if (chart != undefined) {
+                chart.destroy();
+            }
+
+            Highcharts.chart(id, {
+                chart: {
+                    height: 500,
+                    type: 'column'
+                },
+                title: {
+                    text: title
+                },
+                xAxis: {
+
+                    categories:
+
+                name,
+
+                    crosshair: true
+                },
+                yAxis: {
+                    min: 0,
+                    //max: 100,
+                    title: {
+                        text: 'Survy Scores'
+                    },
+                    plotLines: [{
+                        color: '#FF0000', // Red
+                        width: 2,
+                        value: 92 // Position, you'll have to translate this to the values on your x axis
+                    }]
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0,
+                        point: {
+                            events: {
+                                click: function () {
+                                    if(this.intenal==false || this.intenal==true)
+                                    {
+                                        DestoryAndReDrawBranchLevel(this.category, this.id, this.intenal);
+                                    }
+                                    else{
+                                        DestoryAndReDraw(this.category, this.id);
+
+                                    }
+                                    //$('#Internal .highcharts-title').text(this.category.name + " Internal Average")
+
+
+                                    $('#internalTabButton').fadeIn();
+
+                                    var height = $('#internalTabButton').outerHeight();
+                                    $('.extra').height(150 - height);
+                                    $('#internalTabButton').click();
+                                }
+                            }
+                        }
+                    }
+                },
+
+                series: [{
+                    name: 'Q1',
+                    data:
+                    data1
+                    //, color: 'red'
+                    , dataLabels: {
+                        enabled: true,
+                        formatter: function () {
+                            return this.point.y + '%';
+                        }
+                    }
+
+                }, {
+                    name: 'Qn',
+                    data:
+                    data2
+
+                    , color: 'green'
+                    , dataLabels: {
+                        enabled: true,
+                        formatter: function () {
+                            return this.point.y + '%';
+                        }
+                    }
+                }]
+            });
+
+        }
+
+        totalajaxCall = 0;
+        function CompareRedraw(CompareQuarterG, dealerid, Cityid, CompareQuarterL) {
+            var comp = "",compLocal="";
+            if (CompareQuarterG.length > 0)
+            {
+                comp = "'";
+            }
+            for (var i = 0; i < CompareQuarterG.length; i++) {
+                comp = comp + CompareQuarterG[i].toString() + "','";
+            }
+            if (CompareQuarterG.length > 0) {
+                comp = comp.substring(0, comp.length - 2);
+            }
+            if (CompareQuarterL.length > 0) {
+                compLocal = "'";
+            }
+            for (var i = 0; i < CompareQuarterL.length; i++) {
+                compLocal = compLocal + CompareQuarterL[i].toString() + "','";
+            }
+            if (CompareQuarterG.length > 0) {
+                compLocal = compLocal.substring(0, compLocal.length - 2);
+            }
+            if (Cityid == undefined || dealerid == "") {
+                Cityid = "";
+            }
+            if (dealerid == undefined || dealerid == "") {
+                dealerid = "-1";
+            }
+
+            if (comp != LastSelectGlobal) {
+                $('.loader').fadeIn();
+
+                LastSelectGlobal = comp;
+                totalajaxCall = totalajaxCall + 1;
+                $.ajax({
+                    url: '@Url.Action("FilterFirstRow")',
+                    data: {
+                        CompareQuarter: comp,
+                        dealerid: dealerid,
+                        Cityid: Cityid,
+                        Projectid: @ViewBag.id,
+                    },
+                    type: 'GET',
+                    dataType:'json',
+                    success: function (data) {
+                        totalajaxCall = totalajaxCall - 1;
+                        if (totalajaxCall==0)
+                            $('.loader').fadeOut();
+
+                        DrawBarChartVertical( data.nationalSummaryName,data.nationalSummaryData ,'nationalStatusPie','',"Region")
+                        //DrawPie(data.nationalPie, 'nationalStatusPie','National Average','National');
+
+                        DrawMetroOrCityDealerDetail(data.MetroCitySummaryname, data.MetroCitySummaryData,"MetroDealerDetail")
+
+                        if (data.cityValue)
+                        {
+                            DrawMetroOrCityDealerDetail(data.cityname, data.cityValue, "CityDealerDetail", "Audit of City Average ")
+                        }
+                    },
+                    error: function () {
+                        totalajaxCall = totalajaxCall - 1;
+                        if (totalajaxCall == 0)
+                            $('.loader').fadeOut();
+                    }
+
+                });
+
+                totalajaxCall = totalajaxCall + 1;
+                $.ajax({
+                    url: '@Url.Action("FilterThirdRow")',
+                    data: {
+                        CompareQuarter: comp,
+                        dealerid: dealerid,
+                        Projectid: @ViewBag.id,
+                    },
+                    success: function (data) {
+                        totalajaxCall = totalajaxCall - 1;
+                        if (totalajaxCall == 0)
+                            $('.loader').fadeOut();
+
+                        DealersOverAllPie = data.nationalCustomerSectionPie;
+                        DealersOverAllTop5Value = data.firstValue;
+                        DealersOverAllBottom5Value = data.lastValue;
+                        DealersOverAllTopName = data.firstname;
+                        DealersOverAllBottomName = data.lastname;
+
+
+                        //DrawPie(data.nationalCustomerSectionPie, 'nationalStatusPie', 'National Average', 'National');
+                        //DrawPie(data.nationalCustomerSectionPie, 'DealerDetail', 'Dealer Area Wise Score', 'Details')
+
+                        DrawPieWithHLengend(data.nationalCustomerSectionPie, 'DealerDetail', 'Dealer Area Wise Score');
+
+                        DrawHighScores(data.firstValue, data.firstname, "DealerHighScoreDetail", 'Top 5 Highest scoring areas')
+
+                        DrawHighScores(data.lastValue, data.lastname, "DealerLowScoreDetail", 'Top 5 Low scoring areas')
+
+                    },
+                    error: function () {
+                        totalajaxCall = totalajaxCall - 1;
+                        if (totalajaxCall == 0)
+                            $('.loader').fadeOut();
+
+                    }
+
+                });
+
+
+                totalajaxCall = totalajaxCall + 1;
+                $.ajax({
+                    url: '@Url.Action("FilterSecondRow")',
+                    data: {
+                        CompareQuarter: comp,
+                        CompareQuarterLocal: compLocal,
+                        Projectid: '@ViewBag.id',
+                    },
+                    success: function (data) {
+
+                        totalajaxCall = totalajaxCall - 1;
+                        if (totalajaxCall == 0)
+                            $('.loader').fadeOut();
+
+
+                        DrawCompGraph(data.NationalQ0, data.NationalQ1, data.NationalName, "National", "National and Region Average ")
+
+                        DrawCompGraph(data.NorthQ0, data.NorthQ1, data.NorthName , "RegionalNorth", "North Region Average ")
+
+                        DrawCompGraph(data.CentralQ0, data.CentralQ1, data.CentralName , "RegionalCentral", "Central Region Average ")
+
+                        DrawCompGraph(data.SouthQ0, data.SouthQ1, data.SouthName , "RegionalSouth", "South Region Average ")
+
+
+
+                    },
+                    error: function () {
+                        totalajaxCall = totalajaxCall - 1;
+                        if (totalajaxCall == 0)
+                            $('.loader').fadeOut();
+
+                    }
+                });
+
+            }
+            else {
+                $('.loader').fadeOut();
+            }
+
+
+
+
+
+
+        }
+
+        function GetValuesFilters(id) {
+
+        }
+
+
+        var LastSelectGlobal = "", LastSelectLocal = "";
+        $(document).ready(function () {
+
+
+
+            CompareRedraw("1", "", "","1");
+
+            $('[data-toggle="offcanvas"]').click()
+
+            $('#LocalCompFilter').multiselect({
+                buttonWidth: '100%',
+                onDropdownHide: function (event) {
+
+                    $('.loader').fadeIn();
+                    var globalComp = $('#GlobalFilter option:selected');
+                    var localCom = $('#LocalCompFilter option:selected');
+
+                    var selected = [];
+                    var selectedLocal = [];
+                    $(globalComp).each(function (index, brand) {
+                        selected.push($(this).val());
+                    });
+
+                    $(localCom).each(function (index, brand) {
+                        selectedLocal.push($(this).val());
+                    });
+
+                    if (selected.length > 0) {
+
+
+                        var comp = "", compLocal = "";
+                        if (selected.length > 0) {
+                            comp = "'";
+                        }
+                        for (var i = 0; i < selected.length; i++) {
+                            comp = comp + selected[i].toString() + "','";
+                        }
+                        if (selected.length > 0) {
+                            comp = comp.substring(0, comp.length - 2);
+                        }
+                        if (selectedLocal.length > 0) {
+                            compLocal = "'";
+                        }
+                        for (var i = 0; i < selectedLocal.length; i++) {
+                            compLocal = compLocal + selectedLocal[i].toString() + "','";
+                        }
+                        if (selected.length > 0) {
+                            compLocal = compLocal.substring(0, compLocal.length - 2);
+                        }
+                        var dealerid = $('#dealerId').text();
+                        var Cityid = $("#Cityid").text();
+
+                        if (Cityid == undefined || dealerid == "") {
+                            Cityid = "";
+                        }
+                        if (dealerid == undefined || dealerid == "") {
+                            dealerid = "-1";
+                        }
+
+                        if (LastSelectGlobal != comp || LastSelectLocal != compLocal) {
+
+                            $.ajax({
+                                url: '@Url.Action("FilterSecondRow")',
+                                data: {
+                                    CompareQuarter: comp,
+                                    CompareQuarterLocal: compLocal,
+                                    Projectid: '@ViewBag.id',
+                                },
+                                success: function (data) {
+
+                                    DrawCompGraph(data.NationalQ0, data.NationalQ1, data.NationalName, "National", "National and Region Average ")
+
+                                    DrawCompGraph(data.NorthQ0, data.NorthQ1, data.NorthName, "RegionalNorth", "North Region Average ")
+
+                                    DrawCompGraph(data.CentralQ0, data.CentralQ1, data.CentralName, "RegionalCentral", "Central Region Average ")
+
+                                    DrawCompGraph(data.SouthQ0, data.SouthQ1, data.SouthName, "RegionalSouth", "South Region Average ")
+
+                                    $('.loader').fadeOut();
+
+                                },
+                                error: function () {
+
+                                }
+                            });
+                        }
+                        else {
+
+                        }
+                    }
+                }
+            });
+            $('#GlobalFilter').multiselect({
+                buttonWidth: '100%',
+                onDropdownHide: function (event) {
+
+
+                    var globalComp = $('#GlobalFilter option:selected');
+                    var localCom = $('#LocalCompFilter option:selected');
+
+                    var selected = [];
+                    var selectedLocal = [];
+                    $(globalComp).each(function (index, brand) {
+                        selected.push($(this).val());
+                    });
+
+                    $(localCom).each(function (index, brand) {
+                        selectedLocal.push($(this).val());
+                    });
+
+                    if (selected.length > 0)
+                    {
+                        var dealerid= $('#dealerId').text();
+                        var Cityid = $("#Cityid").text();
+                        CompareRedraw(selected, dealerid, Cityid, selectedLocal);
+                        //alert('Dropdown closed.');
+                    }
+                    else {
+                        event.preventDefault();
+                        alert('Please select atleast 1 option.');
+                    }
+
+                }
+            });
+
+
+            // Build the chart
+            Highcharts.chart('nationalStatusPie', {
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie',
+                    events: {
+                        drilldown: function (e) {
+
+                            debugger
+                        }
+                    }
+                },
+                title: {
+                    text: ''
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.records} records, {point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        showInLegend: true,
+                        dataLabels: {
+                            enabled: false,
+                            formatter: function () {
+                                return this.percentage.toFixed(2) + '%';
+                            }
+                        },
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'top',
+                    x: 0,
+                    y: 30,
+                    floating: false,
+                    borderWidth: 1,
+                    backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+                    shadow: true,
+                    useHTML: true,
+                    labelFormatter: function () {
+                        var total = 0;
+                        $.each(this.series.data, function () {
+                            total += this.y;
+                        });
+                        var percentage = ((this.y / total) * 100).toFixed(2);
+                        return '<div style="text-align: left; width:auto;float:left;">' + this.name + " " + percentage + '% </div>';
+                    }
+                },
+                point: {
+                    events: {
+                        click: function (event) {
+                            alert(this.x + " " + this.y);
+                        }
+                    }
+                } ,
+                series: [{
+                    name: 'National ',
+                    colorByPoint: true,
+                    data:
+                    //@Html.Raw(ViewBag.NationalStatusPie)
+                    []
+
+                    ,
+                    //[{
+                    //    name: 'Central',
+                    //    y: 40 ,
+                    //}, {
+                    //        name: 'North',
+                    //    y: 30,
+                    //    selected: true,
+                    //    }, {
+                    //        name: 'South',
+                    //        y: 30,
+                    //        selected: true,
+                    //    }],
+                }]
+            });
+        });
+
+        @*  Highcharts.chart('chartContainer2', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie',
+                events: {
+                    drilldown: function (e) {
+
+                    }
+                }
+            },
+            title: {
+                text: 'North Avg'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.records} records, {point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    showInLegend: true,
+                    dataLabels: {
+                        enabled: false,
+                        formatter: function () {
+                            return this.percentage.toFixed(2) + '%';
+                        }
+                    }
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: 0,
+                y: 30,
+                floating: false,
+                borderWidth: 1,
+                backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+                shadow: true,
+                useHTML: true,
+                labelFormatter: function () {
+                    return '<div style="text-align: left; width:auto;float:left;">' + this.name + " " + this.y + ' %</div>';
+                }
+            },
+            point: {
+                events: {
+                    click: function (event) {
+                        alert(this.x + " " + this.y);
+                    }
+                }
+            },
+            series: [{
+                name: 'North',
+                colorByPoint: true,
+                data: [{
+                    name: 'Abbott',
+                    y: 60,
+                }, {
+                    name: 'Azad',
+                    y: 48,
+                    },
+                {
+                    name: 'Capital',
+                    y: 20,
+                }, {
+                    name: 'DI Khan',
+                    y: 48,
+                },
+                {
+                    name: 'Frontier',
+                    y: 60,
+                }, {
+                    name: 'GT',
+                    y: 48
+                },
+                {
+                    name: 'Islamabad',
+                    y: 60,
+                }, {
+                    name: 'Mardan',
+                    y: 77,
+                }, {
+                    name: 'Khybar',
+                    y: 40
+                }, {
+                    name: 'Rawal',
+                    y: 40
+                }
+                ],
+            }]
+        });
+
+
+        Highcharts.chart('chartContainer1', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie',
+                events: {
+                    drilldown: function (e) {
+
+                    }
+                }
+            },
+            title: {
+                text: 'Central'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.records} records, {point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    showInLegend: true,
+                    dataLabels: {
+                        enabled: false,
+                        formatter: function () {
+                            return this.percentage.toFixed(2) + '%';
+                        }
+                    }
+                },
+                series: {
+                    point: {
+                        events: {
+                            legendItemClick: function () {
+                                return false; // <== returning false will cancel the default action
+                            },
+                            click: function () {
+                                //alert('click')
+                                DestoryAndReDraw(this.category.name);
+                            }
+                        }
+                    }
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: 0,
+                y: 30,
+                floating: false,
+                borderWidth: 1,
+                backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+                shadow: true,
+                useHTML: true,
+                labelFormatter: function () {
+                    return '<div style="text-align: left; width:auto;float:left;">' + this.name + " " + this.y + ' %</div>';
+                }
+            },
+
+            series: [{
+                name: 'Central',
+                colorByPoint: true,
+                data: [ {
+                    name: 'Airport',
+                    y: 21
+                },
+                    {
+                        name: 'Bahawalpur',
+                        y: 29,
+                    }, {
+                        name: 'Cantt',
+                        y: 38
+                    }, {
+                        name: 'City',
+                        y: 48
+                    },
+                    {
+                        name: 'DG Khan',
+                        y: 87,
+                    }, {
+                        name: 'Faisalabad',
+                        y: 38
+                    }, {
+                        name: 'Garden',
+                        y: 48
+                    },
+                    {
+                        name: 'Gujranwala',
+                        y: 87,
+                    }, {
+                        name: 'Lyallpur',
+                        y: 71
+                    },{
+                    name: 'Multan',
+                    y: 85,
+                }, {
+                    name: 'Ravi',
+                    y: 60,
+                    selected: true,
+                    },
+                {
+                    name: 'Royal',
+                    y: 25,
+                },
+                {
+                    name: 'HN',
+                    y: 25,
+                },
+                {
+                    name: 'Jinnah',
+                    y: 25,
+                },{
+                    name: 'Sahara',
+                    y: 10,
+                    selected: true,
+                }, {
+                    name: 'Sargodha',
+                    y: 43,
+                    selected: true,
+                }, {
+                    name: 'Shaheen',
+                    y: 63,
+                    selected: true,
+                }, {
+                    name: 'Sahiwal',
+                    y: 63,
+                    selected: true,
+                },
+                {
+                    name: 'Sialkot City',
+                    y: 57,
+                }, {
+                    name: 'TownShip',
+                    y: 73,
+                    selected: true,
+                },
+                {
+                    name: 'Walton',
+                    y: 34,
+                }
+                ],
+            }]
+        });
+
+
+
+        Highcharts.chart('chartContainer3', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie',
+                events: {
+                    drilldown: function (e) {
+
+                    }
+                }
+            },
+            title: {
+                text: 'South Avg'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.records} records, {point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    showInLegend: true,
+                    dataLabels: {
+                        enabled: false,
+                        formatter: function() {
+                            return this.percentage.toFixed(2) + '%';
+                        }
+                    }
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: 0,
+                y: 30,
+                floating: false,
+                borderWidth: 1,
+                backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+                shadow: true,
+                useHTML: true,
+                labelFormatter: function () {
+                    return '<div style="text-align: left; width:auto;float:left;">' + this.name + " "+ this.y + ' %</div>';
+                }
+            },
+            point: {
+                events: {
+                    click: function (event) {
+                        alert(this.x + " " + this.y);
+                    }
+                }
+            },
+            series: [{
+                name: 'South ',
+                colorByPoint: true,
+                data: [
+                    {
+                        name: 'Central',
+                        y: 59,
+                    },
+                    {
+                        name: 'Clifton',
+                        y: 59,
+                    }, {
+                        name: 'Creek',
+                        y: 27
+                    },
+                    {
+                        name: 'Defence',
+                        y: 29,
+                    },
+                    {
+                        name: 'Eastern',
+                        y: 29,
+                    }, {
+                        name: 'Highway',
+                        y: 69
+                    },
+                    {
+                    name: 'Hydrabad',
+                    y: 10,
+                    },
+                    {
+                        name: 'Point',
+                        y: 35,
+                    },
+                    {
+                        name: 'Society',
+                        y: 35,
+                    },
+                    {
+                    name: 'Southern',
+                    y: 19,
+                    selected: true,
+                    }, {
+                    name: 'University',
+                    y: 78,
+                    selected: true,
+                }, {
+                    name: 'Western',
+                    y: 20,
+                }, {
+                    name: 'Zarghoon',
+                    y: 37,
+                    selected: true,
+                }
+
+
+                ],
+            }]
+        });*@
+
+        var dataDealer =@Html.Raw(@ViewBag.OverAllStatusPie);
+        DrawPie(dataDealer, 'DealerDetail', 'Dealer Area Wise Score','Details')
+
+        @*Highcharts.chart('DealerDetail', {
+                    chart: {
+                        plotBackgroundColor: null,
+                        plotBorderWidth: null,
+                        plotShadow: false,
+                        type: 'pie',
+                        events: {
+                            drilldown: function (e) {
+
+
+                            }
+                        }
+                    },
+                    title: {
+                        text: 'Details'
+                    },
+                    tooltip: {
+                        pointFormat: '{series.name}: <b>{point.records} records, {point.percentage:.1f}%</b>'
+                    },
+                    plotOptions: {
+                        pie: {
+                            allowPointSelect: true,
+                            cursor: 'pointer',
+                            dataLabels: {
+                                enabled: false,
+                                formatter: function () {
+                                    return this.percentage.toFixed(2) + '%';
+                                }
+                            },
+                            showInLegend: true
+                        }
+                        //pie: {
+                        //    allowPointSelect: true,
+                        //    cursor: 'pointer',
+                        //    showInLegend: false,
+                        //}
+                    },
+                    point: {
+                        events: {
+                            click: function (event) {
+                                alert(this.x + " " + this.y);
+                            }
+                        }
+                    },
+                    series: [{
+                        name: 'Dealer Area Wise Score',
+                        colorByPoint: true,
+                        data:
+                        //[{
+                        //    name: 'Exterior',
+                        //    y: 30,
+                        //}, {
+                        //    name: 'Customer Relation',
+                        //    y: 15,
+                        //},
+                        //{
+                        //    name: 'Showroom',
+                        //    y: 10,
+                        //}, {
+                        //    name: 'Service Area',
+                        //    y: 16,
+                        //}, {
+                        //    name: 'Prayer Area',
+                        //    y: 5,
+                        //}
+                        //],
+                        @Html.Raw(@ViewBag.OverAllStatusPie),
+                    }]
+                });*@
+
+
+
+        @*
+        Highcharts.chart('chartContainer4', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie',
+                events: {
+                    drilldown: function (e) {
+                        if (!e.seriesOptions) {
+                            var url = "@Url.Action("Index", "AuditReport", new { id = 0, type = "INCIDENTNATURE" })";
+                            url = url.replace("/0?", "/" + e.point.id + "?");
+                            window.location = url;
+                        }
+                        debugger
+                    }
+                }
+            },
+            title: {
+                text: ''
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.records} records, {point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            },
+            point: {
+                events: {
+                    click: function (event) {
+                        alert(this.x + " " + this.y);
+                    }
+                }
+            },
+            series: [{
+                name: 'KPK',
+                colorByPoint: true,
+                data: [{
+                    name: 'Peshawar',
+                    y: 56.33,
+                }, {
+                    name: 'Dera Ghazi Khan',
+                    y: 24.03,
+
+                }],
+            }]
+        });
+*@
+
+    </script>
+
+
+    <script>
+
+
+
+        function openCity(evt, cityName, obj) {
+
+            if (cityName !== 'Internaltab') {
+
+                var chart = $("#Internal").highcharts();
+                if (chart != undefined) {
+                    chart.destroy();
+                }
+
+
+
+
+                DrawHighScores(DealersOverAllTop5Value, DealersOverAllTopName, "DealerHighScoreDetail", 'Top 5 Highest scoring areas')
+
+
+                DrawHighScores(DealersOverAllBottom5Value, DealersOverAllBottomName, "DealerLowScoreDetail", 'Top 5 Low scoring areas')
+
+                DrawPieWithHLengend(DealersOverAllPie, 'DealerDetail',"Dealer Area Wise Score")
+                //DrawPie(DealersOverAllPie, 'DealerDetail', 'Dealer Area Wise Score', 'Details')
+                //var chart = $("#DealerDetail").highcharts();
+                //if (chart != undefined) {
+                //    chart.destroy();
+                //}
+
+                //Highcharts.chart('DealerDetail', {
+                //    chart: {
+                //        plotBackgroundColor: null,
+                //        plotBorderWidth: null,
+                //        plotShadow: false,
+                //        type: 'pie',
+                //        events: {
+                //            drilldown: function (e) {
+                //            }
+                //        },
+
+                //    },
+                //    title: {
+                //        text: ''
+                //    },
+                //    tooltip: {
+                //        pointFormat: '{series.name}: <b>{point.records} records, {point.percentage:.1f}%</b>'
+                //    },
+                //    plotOptions: {
+                //        //pie: {
+                //        //    allowPointSelect: true,
+                //        //    cursor: 'pointer',
+                //        //    showInLegend: false,
+                //        //}
+                //        pie: {
+                //            allowPointSelect: true,
+                //            cursor: 'pointer',
+                //            dataLabels: {
+                //                enabled: false,
+                //                formatter: function () {
+                //                    return this.percentage.toFixed(2) + '%';
+                //                }
+                //            },
+                //            showInLegend: true
+                //        }
+                //    },
+                //    point: {
+                //        events: {
+                //            click: function (event) {
+                //                alert(this.x + " " + this.y);
+                //            }
+                //        }
+                //    },
+                //    series: [{
+                //        name: 'Dealer Area Wise Score',
+                //        colorByPoint: true,
+                //        data: JSON.parse(DealersOverAllPie),
+                //        //data:
+                //        //[{
+                //        //    name: 'Exterior',
+                //        //    y: 30,
+                //        //}, {
+                //        //    name: 'Customer Relation',
+                //        //    y: 15,
+                //        //},
+                //        //{
+                //        //    name: 'Showroom',
+                //        //    y: 10,
+                //        //}, {
+                //        //    name: 'Service Area',
+                //        //    y: 16,
+                //        //}, {
+                //        //    name: 'Prayer Area',
+                //        //    y: 5,
+                //        //}
+                //        //],
+                //    }]
+                //});
+
+
+                $("#detailHeading").text("Over all status");
+                if(dealername !=null && dealername!=""){
+                    $("#detailHeading").text(dealername);
+                }
+            }
+
+            // Declare all variables
+            var i, tabcontent, tablinks;
+
+            // Get all elements with class="tabcontent" and hide them
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+
+            }
+
+            // Get all elements with class="tablinks" and remove the class "active"
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+
+            // Show the current tab, and add an "active" class to the button that opened the tab
+            document.getElementById(cityName).style.display = "block";
+
+            if (evt.currentTarget != undefined)
+                evt.currentTarget.className += " active";
+            else {
+                $(obj).addClass("active");
+            }
+
+        }
+        $('.tabcontent').css('height', '100%');
+        $('.tab').css('height', '100%');
+
+
+
+
+        function openMetroCity(evt, cityName, obj) {
+
+            // Declare all variables
+            var i, tabcontent, tablinks;
+
+            // Get all elements with class="tabcontent" and hide them
+            tabcontent = document.getElementsByClassName("tabcontentCity");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+
+            }
+
+            // Get all elements with class="tablinks" and remove the class "active"
+            tablinks = document.getElementsByClassName("tablinksCity");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+
+            // Show the current tab, and add an "active" class to the button that opened the tab
+            document.getElementById(cityName).style.display = "block";
+
+            if (evt.currentTarget != undefined)
+                evt.currentTarget.className += " active";
+            else {
+                $(obj).addClass('active');
+            }
+        }
+
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpenCity").click();
+
+
+
+    </script>
+
+
+    <script>
+        $(document).ready(function () {
+            Highcharts.chart('National', {
+                chart: {
+                    height: 500,
+                    type: 'column'
+                },
+                title: {
+                    text: 'National and Region Average '
+                },
+                //subtitle: {
+                //    text: 'Source: WorldClimate.com'
+                //},
+                xAxis: {
+
+                    categories:
+
+                    @Html.Raw(ViewBag.NationalAVGname),
+
+                    //[
+                    //    'Abbott',
+                    //    'Azad',
+                    //    'Capital',
+                    //    'DI Khan',
+                    //    'Frontier',
+                    //    'GT',
+                    //    'Islamabad',
+                    //    'Khybar',
+                    //    'Mardan',
+                    //    'Rawal',
+                    //    'Airport',
+                    //    'Bahawalpur',
+                    //    'City',
+                    //    'Cantt',
+                    //    'D.G Khan',
+                    //    'Faisalabad',
+                    //    'Garden',
+                    //    'Gujranwala',
+                    //    'Jinnah',
+                    //    'Lyallpur',
+                    //    'Multan',
+                    //    'Ravi',
+                    //    'Royal',
+                    //    'Sahara',
+                    //    'Sargodha',
+                    //    'Siallkot',
+                    //    'Shaheen',
+                    //    'TownShip',
+                    //    'Walton',
+                    //    'Central',
+                    //    'Creek',
+                    //    'Defence',
+                    //    'Eastern',
+                    //    'Hydrabad',
+                    //    'Highway',
+                    //    'Southern',
+                    //    'Society',
+                    //    'University',
+                    //    'Western',
+                    //    'Zarghoon'
+
+
+                    //    //],
+
+                    //    //}
+                    //],
+                    //labels: {
+                    //    rotation: 90
+                    //},
+
+                    crosshair: true
+                },
+                yAxis: {
+                    min: 0,
+                    //max: 100,
+                    title: {
+                        text: 'Survy Scores'
+                    },
+                    plotLines: [{
+                        color: '#FF0000', // Red
+                        width: 2,
+                        value: 92 // Position, you'll have to translate this to the values on your x axis
+                    }]
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0,
+                        point: {
+                            events: {
+                                click: function () {
+
+                                    DestoryAndReDraw(this.category.name, this.id);
+                                    //$('#Internal .highcharts-title').text(this.category.name + " Internal Average")
+
+
+                                    $('#internalTabButton').fadeIn();
+
+                                    var height = $('#internalTabButton').outerHeight();
+                                    $('.extra').height(150 - height);
+                                    $('#internalTabButton').click();
+                                }
+                            }
+                        }
+                    }
+                },
+
+                series: [{
+                    name: 'Q1',
+                    data:
+                    //[88, 85, 85, 85, 84, 83, 82, 82, 81, 80, 80, 80, 80, 79, 77, 77, 77, 74, 74, 73, 73, 73, 73, 72, 71, 71, 71, 71, 70, 70, 68, 68, 67, 63, 60, 57, 50, 37, 8, 1]
+
+                    @Html.Raw(ViewBag.NationalAVGdataQ0)
+                    //, color: 'red'
+                    , dataLabels: {
+                        enabled: true,
+                        formatter: function () {
+                            return this.point.y;
+                        }
+                    }
+
+                }, {
+                    name: 'Qn',
+                    data:
+                    //[60, 87, 94, 84, 73, 81, 81, 83, 47, 83, 87, 83, 70, 78, 77, 83, 81, 18, 84, 91, 90, 78, 78, 87, 11, 81, 92, 92, 93, 82, 93, 90, 95, 95, 95, 80, 83, 80, 89, 98]
+
+                    @Html.Raw(ViewBag.NationalAVGdataQ1)
+                        , color: 'green'
+                    , dataLabels: {
+                        enabled: true,
+                        formatter: function () {
+                            return this.point.y;
+                        }
+                    }
+                }]
+            });
+
+            DrawMetroOrCityDealerDetail('[]', '[]', 'MetroDealerDetail', 'Metro Cities Average Score');
+
+
+            @*Highcharts.chart('MetroDealerDetail', {
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: 'Metro Cities Average Score'
+                },
+                //subtitle: {
+                //    text: 'Source: <a href="https://en.wikipedia.org/wiki/World_population">Wikipedia.org</a>'
+                //},
+                xAxis: {
+                    categories:
+                    //@Html.Raw(ViewBag.MetroCitySummaryname)
+                    []
+                    ,
+                    //['Karachi', 'Lahore', 'Islamabad', 'Others'],
+                    title: {
+                        text: 'In Percentage'
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Scores',
+                        align: 'high'
+                    },
+                    labels: {
+                        overflow: 'justify'
+                    }
+                },
+                tooltip: {
+                    valueSuffix: ' Scores'
+                },
+
+                plotOptions: {
+                    bar: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'top',
+                    x: -40,
+                    y: 80,
+                    floating: true,
+                    borderWidth: 1,
+                    backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+                    shadow: true
+                },
+                credits: {
+                    enabled: false
+                },
+
+                series: [{
+                    name: 'Cities',
+                    data: //[{ y: 93, id: 1 }, { y: 90, id: 2071 }, { y: 89, id: 5558 }, { y: 86, id: 0 }]
+                    //@Html.Raw(ViewBag.MetroCitySummaryData)
+                    []
+
+                    , dataLabels: {
+                        enabled: true,
+                        formatter: function () {
+                            return this.point.y;
+                        }
+                    },
+                    point: {
+                        events: {
+                            legendItemClick: function () {
+                                return false; // <== returning false will cancel the default action
+                            },
+                            click: function () {
+                                //alert('click')
+
+
+
+                                DestoryAndReDrawCity(this.category.name, this.id)
+                            }
+                        }
+                    }
+                }]
+            });*@
+
+            Highcharts.chart('RegionalNorth', {
+                chart: {
+                    height: 500,
+                    type: 'column'
+                },
+                title: {
+                    text: 'North Region Average '
+                },
+                //subtitle: {
+                //    text: 'Source: WorldClimate.com'
+                //},
+                xAxis: {
+                    categories:
+                    @Html.Raw(ViewBag.NorthAVGname),
+                    //[
+                    //    'Abbott',
+                    //    'Azad',
+                    //    'Capital',
+                    //    'Frontier',
+                    //    'GT',
+                    //    'Islamabad',
+                    //    'Mardan',
+                    //    'DI Khan',
+                    //    'Rawal',
+                    //    'Khybar',
+
+                    //],
+                    //labels: {
+                    //    rotation: 90
+                    //},
+
+                    crosshair: true
+                },
+                yAxis: {
+                    min: 0,
+                    //max: 100,
+                    title: {
+                        text: 'Survy Scores'
+                    },
+                    plotLines: [{
+                        color: '#FF0000', // Red
+                        width: 2,
+                        value: 92 // Position, you'll have to translate this to the values on your x axis
+                    }]
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0,
+                        point: {
+                            events: {
+                                click: function () {
+
+                                    DestoryAndReDraw(this.category.name, this.id);
+                                    //$('#Internal .highcharts-title').text(this.category.name + " Internal Average")
+
+
+
+                                    $('#internalTabButton').fadeIn();
+
+                                    var height = $('#internalTabButton').outerHeight();
+                                    $('.extra').height(150 - height);
+                                    $('#internalTabButton').click();
+                                }
+                            }
+                        }
+                    }
+                },
+
+                series: [{
+                    name: 'Q1',
+                    data:
+                    @Html.Raw(ViewBag.NorthAVGdataQ0)
+                    //[88, 85, 85, 85, 84, 83, 82, 82, 81, 80]
+                    , dataLabels: {
+                        enabled: true,
+                        formatter: function () {
+                            return this.point.y;
+                        }
+                    }
+                },
+                    {
+                        name: 'Qn',
+                        data:
+                        //[88, 23, 35, 87, 54, 83, 12, 82, 81, 20],
+                          @Html.Raw(ViewBag.NorthAVGdataQ1),
+                        color: 'green',
+                        dataLabels: {
+                            enabled: true,
+                            formatter: function () {
+                                return this.point.y;
+                            }
+                        }
+                    }]
+            });
+
+            Highcharts.chart('RegionalCentral', {
+                chart: {
+                    height: 500,
+                    type: 'column'
+                },
+                title: {
+                    text: 'Central Region Average '
+                },
+                //subtitle: {
+                //    text: 'Source: WorldClimate.com'
+                //},
+                xAxis: {
+                    categories:
+                    @Html.Raw(ViewBag.CentralAVGname),
+                    //[
+                    //    //{
+                    //    //    name: "North",
+                    //    //    categories: [
+                    //    //        'Abbott',
+                    //    //        'Azad',
+                    //    //        'Capital',
+                    //    //        'Frontier',
+                    //    //        'GT',
+                    //    //        'Islamabad',
+                    //    //        'Mardan',
+                    //    //        'DI Khan',
+                    //    //        'Rawal',
+                    //    //        'Khybar',
+
+
+                    //    //    ],
+                    //    //},
+                    //    //{
+                    //    //    name: "Central",
+                    //    //    categories: [
+                    //    'Airport',
+                    //    'Bahawalpur',
+                    //    'Cantt',
+                    //    'City',
+                    //    'Faisalabad',
+                    //    'Garden',
+                    //    'Gujranwala',
+                    //    'Lyallpur',
+                    //    'Multan',
+                    //    'Ravi',
+                    //    'Royal',
+                    //    'Sahara',
+                    //    'Sargodha',
+                    //    'Shaheen',
+                    //    'Sialkot City',
+                    //    'TownShip',
+                    //    'Bahawalpur',
+                    //    'D.G Khan',
+                    //    'Walton',
+                    //    'Sahiwal',
+                    //    'Jinnah',
+                    //    'HN',
+
+                    //    //    ],
+                    //    //},
+                    //    //{
+                    //    //    name: "South",
+                    //    //    categories: [
+
+                    //    //        //        //"Cod", "Salmon", "Tuna"
+                    //    //        'Central',
+
+                    //    //        'Defence',
+                    //    //        'Eastern',
+                    //    //        'Highway',
+                    //    //        'Hydrabad',
+                    //    //        'Southern',
+                    //    //        'Society',
+                    //    //        'University',
+                    //    //        'Western',
+                    //    //        'Zarghoon',
+                    //    //        'Creek',
+                    //    //        'Cilfton',
+                    //    //        'Point'
+                    //    //    ],
+                    //    //}
+                    //],
+                    //labels: {
+                    //    rotation: 90
+                    //},
+
+                    crosshair: true
+                },
+                yAxis: {
+                    min: 0,
+                    //max: 100,
+                    title: {
+                        text: 'Survy Scores'
+                    },
+                    plotLines: [{
+                        color: '#FF0000', // Red
+                        width: 2,
+                        value: 92 // Position, you'll have to translate this to the values on your x axis
+                    }]
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0,
+                        point: {
+                            events: {
+                                click: function () {
+
+                                    DestoryAndReDraw(this.category.name, this.id);
+                                    //$('#Internal .highcharts-title').text(this.category.name + " Internal Average")
+
+
+
+                                    $('#internalTabButton').fadeIn();
+
+                                    var height = $('#internalTabButton').outerHeight();
+                                    $('.extra').height(150 - height);
+                                    $('#internalTabButton').click();
+                                }
+                            }
+                        }
+                    }
+                },
+
+                series: [{
+                    name: 'Q1',
+                    data:
+                    //[88, 85, 85, 85, 84, 83, 82, 82, 81, 80, 80, 80, 80, 79, 77, 77, 77, 74, 74, 73, 85, 77]
+                    @Html.Raw(ViewBag.CentralAVGdataQ0)
+                    , dataLabels: {
+                        enabled: true,
+                        formatter: function () {
+                            return this.point.y;
+                        }
+                    }
+                }, {
+                    name: 'Qn',
+                    data:
+                    //[60, 87, 94, 84, 73, 81, 81, 83, 47, 83, 87, 83, 70, 78, 77, 83, 81, 18, 84, 91, 90, 78]
+                    @Html.Raw(ViewBag.CentralAVGdataQ0)
+                    , color: 'green'
+                    , dataLabels: {
+                        enabled: true,
+                        formatter: function () {
+                            return this.point.y;
+                        }
+                    }
+                }]
+            });
+
+            Highcharts.chart('RegionalSouth', {
+                chart: {
+                    height: 500,
+                    type: 'column'
+                },
+                title: {
+                    text: 'South Region Average '
+                },
+                //subtitle: {
+                //    text: 'Source: WorldClimate.com'
+                //},
+                xAxis: {
+                    categories:
+
+                    @Html.Raw(ViewBag.SouthAVGname),
+                    //[
+                    //    'Central',
+                    //    'Defence',
+                    //    'Eastern',
+                    //    'Highway',
+                    //    'Hydrabad',
+                    //    'Southern',
+                    //    'Society',
+                    //    'University',
+                    //    'Western',
+                    //    'Zarghoon',
+                    //    'Creek',
+                    //    'Cilfton',
+                    //    'Point'
+
+                    //],
+                    //labels: {
+                    //    rotation: 90
+                    //},
+
+                    crosshair: true
+                },
+                yAxis: {
+                    min: 0,
+                    //max: 100,
+                    title: {
+                        text: 'Survy Scores'
+                    },
+                    plotLines: [{
+                        color: '#FF0000', // Red
+                        width: 2,
+                        value: 92 // Position, you'll have to translate this to the values on your x axis
+                    }]
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0,
+                        point: {
+                            events: {
+                                click: function () {
+
+                                    DestoryAndReDraw(this.category.name, this.id);
+                                    //$('#Internal .highcharts-title').text(this.category.name + " Internal Average")
+
+
+
+                                    $('#internalTabButton').fadeIn();
+
+                                    var height = $('#internalTabButton').outerHeight();
+                                    $('.extra').height(150 - height);
+                                    $('#internalTabButton').click();
+                                }
+                            }
+                        }
+                    }
+                },
+
+                series: [{
+                    name: 'Q1',
+                    data: //[88, 85, 85, 85, 84, 83, 82, 82, 81, 80, 80, 80, 80, 65],
+                    //[
+                    //    { y: 88, id: 1 },
+                    //    {y: 85, id: 1},
+                    //    {y: 85, id: 1 },
+                    //    {y: 85, id: 1 },
+                    //    {y: 84, id: 1 },
+                    //    {y: 83, id: 1 },
+                    //    {y: 82, id: 1 },
+                    //    {y: 82, id: 1 },
+                    //    {y: 81, id: 1 },
+                    //    {y: 80, id: 1 },
+                    //    {y: 80, id: 1 },
+                    //    {y: 80, id: 1 },
+                    //    {y: 80, id: 1 },
+                    //    { y: 65, id: 1 }
+                    //]
+
+                     @Html.Raw(ViewBag.SouthAVGdataQ0)
+                    ,
+                    dataLabels: {
+                        enabled: true,
+                        formatter: function () {
+                            return this.point.y;
+                        }
+                    }
+                }, {
+                    name: 'Qn',
+                    data:
+                    //[60, 87, 94, 84, 73, 81, 81, 83, 47, 83, 87, 83, 70, 70],
+                    @Html.Raw(ViewBag.SouthAVGdataQ1),
+                    id: 1,
+                    color: 'green',
+                    dataLabels: {
+                        enabled: true,
+                        formatter: function () {
+                            return this.point.y;
+                        }
+                    }
+                }]
+            });
+
+            Highcharts.chart('Internal', {
+                chart: {
+                    height: 500,
+                    type: 'column'
+                },
+                title: {
+                    text: 'Internal Average '
+                },
+                //subtitle: {
+                //    text: 'Source: WorldClimate.com'
+                //},
+                xAxis: {
+                    categories: ['EXTERIOR & FAÇADE', 'CUSTOMER RELATIONS AREA', 'SHOWROOM/DISPLAY AREA', 'SERVICE AREA', 'PRAYER AREA', 'T-Sure'],
+                    //labels: {
+                    //    rotation: 90
+                    //},
+
+                    crosshair: true
+                },
+                yAxis: {
+                    min: 0,
+                    max: 100,
+                    title: {
+                        text: 'Survy Scores'
+                    },
+                    plotLines: [{
+                        color: '#FF0000', // Red
+                        width: 2,
+                        value: 92 // Position, you'll have to translate this to the values on your x axis
+                    }]
+
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    }
+                },
+
+                series: [{
+                    name: 'Q1',
+                    data: [88, 85, 85, 85, 84],
+                    dataLabels: {
+                        enabled: true,
+                        formatter: function () {
+                            return this.point.y;
+                        }
+                    }
+                }, {
+                    name: 'Qn',
+                    data: [60, 87, 94, 84, 73]
+                    , color: 'green'
+                    , dataLabels: {
+                        enabled: true,
+                        formatter: function () {
+                            return this.point.y;
+                        }
+                    }
+                }]
+            });
+
+            Highcharts.chart('DealerHighScoreDetail', {
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: 'Top 5 Highest scoring areas'
+                },
+                //subtitle: {
+                //    text: 'Source: <a href="https://en.wikipedia.org/wiki/World_population">Wikipedia.org</a>'
+                //},
+                xAxis: {
+                    categories: @Html.Raw(ViewBag.DealerHighScoreDetailName),
+                    title: {
+                        text: 'In Percentage'
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Scores',
+                        align: 'high'
+                    },
+                    labels: {
+                        overflow: 'justify'
+                    }
+                },
+                tooltip: {
+                    valueSuffix: ' Scores'
+                },
+
+                plotOptions: {
+                    bar: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'top',
+                    x: -40,
+                    y: 80,
+                    floating: true,
+                    borderWidth: 1,
+                    backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+                    shadow: true
+                },
+                credits: {
+                    enabled: false
+                },
+
+                series: [{
+                    name: 'Status',
+                    data: @Html.Raw(ViewBag.DealerHighScoreDetailX )
+                    , dataLabels: {
+                        enabled: true,
+                        formatter: function () {
+                            return this.point.y;
+                        }
+                    }
+                }]
+            });
+
+            Highcharts.chart('DealerLowScoreDetail', {
+                chart: {
+                    type: 'bar'
+                },
+                title: {
+                    text: 'Top 5 Low scoring areas'
+                },
+                //subtitle: {
+                //    text: 'Source: <a href="https://en.wikipedia.org/wiki/World_population">Wikipedia.org</a>'
+                //},
+                xAxis: {
+                    categories: @Html.Raw(ViewBag.DealerLowScoreDetailName),
+                    title: {
+                        text: 'In Percentage'
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Scores',
+                        align: 'high'
+                    },
+                    labels: {
+                        overflow: 'justify'
+                    }
+                },
+                tooltip: {
+                    valueSuffix: ' Scores'
+                },
+
+                plotOptions: {
+                    bar: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'top',
+                    x: -40,
+                    y: 80,
+                    floating: true,
+                    borderWidth: 1,
+                    backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+                    shadow: true
+                },
+                credits: {
+                    enabled: false
+                },
+
+                series: [{
+                    name: 'Status',
+                    data: @Html.Raw(ViewBag.DealerLowScoreDetailName)
+                    , dataLabels: {
+                        enabled: true,
+                        formatter: function () {
+                            return this.point.y;
+                        }
+                    }
+                }]
+            });
+
+
+
+
+            DrawMetroOrCityDealerDetail('[]', '[]', 'CityDealerDetail', ' Audit of City Average ');
+            //Highcharts.chart('CityDealerDetail', {
+            //    chart: {
+            //        type: 'column'
+            //    },
+            //    title: {
+            //        text: ' Audit of City Average '
+            //    },
+            //    //subtitle: {
+            //    //    text: 'Source: WorldClimate.com'
+            //    //},
+            //    xAxis: {
+            //        categories: [],
+            //        //labels: {
+            //        //    rotation: 90
+            //        //},
+
+            //        crosshair: true
+            //    },
+            //    yAxis: {
+            //        min: 0,
+            //        max: 100,
+            //        title: {
+            //            text: 'Survy Scores'
+            //        },
+            //        plotLines: [{
+            //            color: '#FF0000', // Red
+            //            width: 2,
+            //            value: 92 // Position, you'll have to translate this to the values on your x axis
+            //        }]
+
+            //    },
+            //    tooltip: {
+            //        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            //        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            //        '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
+            //        footerFormat: '</table>',
+            //        shared: true,
+            //        useHTML: true
+            //    },
+            //    plotOptions: {
+            //        column: {
+            //            pointPadding: 0.2,
+            //            borderWidth: 0
+            //        }
+            //    },
+
+            //    series: [{
+            //        name: 'Q1',
+            //        data: []
+            //        , dataLabels: {
+            //            enabled: true,
+            //            formatter: function () {
+            //                return this.point.y;
+            //            }
+            //        }
+            //    }]
+            //});
+
+
+
+
+            $('#National').css('height', '100%');
+            $('.tab').css('height', '100%');
+
+        });
+
+        var cityname = "";
+        function DestoryAndReDrawCity(name, Cityid) {
+            $('.loader').fadeIn();
+            $("#Cityid").text(Cityid);
+
+
+            var globalComp = $('#GlobalFilter option:selected');
+
+            var selected = [];
+            var selectedLocal = [];
+            $(globalComp).each(function (index, brand) {
+                selected.push($(this).val());
+            });
+
+            var comp = "", compLocal = "";
+            if (selected.length > 0) {
+                comp = "'";
+            }
+            for (var i = 0; i < selected.length; i++) {
+                comp = comp + selected[i].toString() + "','";
+            }
+            if (selected.length > 0) {
+                comp = comp.substring(0, comp.length - 2);
+            }
+
+
+
+            cityname = name
+            $.ajax({
+                url: '@Url.Action("GetInternalCityDetails")',
+                data:
+                {
+                    Cityid: Cityid,
+                    ProjectID: @ViewBag.id,
+                    CompareQuarter: comp
+                },
+                success: function (data) {
+                    $('.loader').fadeOut();
+
+                    var cat = [], values = [];;
+                    //if (name == "Karachi") {
+                    //    cat = ["Central",
+                    //        "Defence",
+                    //        "Eastern",
+                    //        "Highway",
+                    //        "Society",
+                    //        "Southern",
+                    //        "University",
+                    //        "Western",
+                    //        "Creek",
+                    //        "Clifton"];
+                    //    values = [23, 54, 76, 87, 43, 87, 20, 57, 62, 97];
+
+                    //}
+                    //else if (name == "Lahore") {
+                    //    cat = ["Airport",
+                    //        "Cantt",
+                    //        "Garden",
+                    //        "Ravi",
+                    //        "Sahara",
+                    //        "Shaheen",
+                    //        "Township",
+                    //        "Walton",
+                    //        "Jinnah",
+                    //        "HN"];
+                    //    values = [23, 54, 76, 87, 43, 87, 20, 57, 62, 97];
+
+                    //}
+                    //else if (name == "Islamabad") {
+                    //    cat = ["Capital",
+                    //        "G.T",
+                    //        "Islamabad",
+                    //        "Rawal"
+                    //    ];
+
+                    //    values = [32, 67, 95, 23];
+                    //}
+
+                    //else if (name == "Others") {
+
+                    //    cat = ["Abbott",
+                    //        "Azad",
+                    //        "DI Khan",
+                    //        "Frontier",
+                    //        "Mardan",
+                    //        "Khyber",
+                    //        "City",
+                    //        "Faisalabad",
+                    //        "Gujranwala",
+                    //        "Lyallpur",
+                    //        "Multan",
+                    //        "Ravi",
+                    //        "Royal",
+                    //        "Sarghoda",
+                    //        "Sialkot City",
+                    //        "Bhahwalpur",
+                    //        "D.G Khan",
+                    //        "Sahiwal",
+                    //        "Hyderabad",
+                    //        "Zarghoon",
+                    //        "Point"
+                    //    ];
+                    //    values = [23, 54, 76, 87, 43, 87, 20, 57, 62, 97, 87, 20, 57, 62, 54, 76, 87, 43, 57, 62];
+                    //}
+
+                    //cat = JSON.parse(data.name);
+                    //values = JSON.parse(data.y);
+
+                    cat = data.name;
+                    values = data.y;
+
+
+                    $('#Citytabbtn').click();
+
+
+                    DrawCityDealerDetail(cat, values, 'Audit Average of ' + cityname)
+
+
+                    //        var chart = $("#CityDealerDetail").highcharts();
+                    //        if (chart != undefined) {
+                    //            chart.destroy();
+                    //        }
+
+                    //        Highcharts.chart('CityDealerDetail', {
+                    //            chart: {
+                    //                //height: 500,
+                    //                type: 'column'
+                    //            },
+                    //            title: {
+                    //                text: 'Audit Average of ' + name
+                    //            },
+                    //            //subtitle: {
+                    //            //    text: 'Source: WorldClimate.com'
+                    //            //},
+                    //            xAxis: {
+                    //                categories: cat,
+                    //                //labels: {
+                    //                //    rotation: 90
+                    //                //},
+
+                    //                crosshair: true
+                    //            },
+                    //            yAxis: {
+                    //                min: 0,
+                    //                max: 100,
+                    //                title: {
+                    //                    text: 'Survy Scores'
+                    //                },
+                    //                plotLines: [{
+                    //                    color: '#FF0000', // Red
+                    //                    width: 2,
+                    //                    value: 92 // Position, you'll have to translate this to the values on your x axis
+                    //                }]
+
+                    //            },
+                    //            tooltip: {
+                    //                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    //                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    //                '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
+                    //                footerFormat: '</table>',
+                    //                shared: true,
+                    //                useHTML: true
+                    //            },
+                    //            plotOptions: {
+                    //                column: {
+                    //                    pointPadding: 0.2,
+                    //                    borderWidth: 0
+                    //                }
+                    //            },
+
+                    //            series: [{
+                    //                name: 'Dealer',
+                    //                data: values
+                    //                , dataLabels: {
+                    //                    enabled: true,
+                    //                    formatter: function () {
+                    //                        return this.point.y;
+                    //                    }
+                    //                }
+                    //            }]
+                    //        });
+
+
+                },
+
+                error: function (data) {
+                    $('.loader').fadeOut();
+                    alert("Error : " + data);
+                }
+
+            });
+        }
+
+
+
+        function DestoryAndReDrawBranchLevel(name,Dealerid,intenal) {
+
+
+            $('#detailHeading').text(name);
+            $('#dealerId').text(Dealerid);
+
+            var dealerid = $('#dealerId').text();
+            var Cityid = $("#Cityid").text();
+
+            var globalComp = $('#GlobalFilter option:selected');
+            var localCom = $('#LocalCompFilter option:selected');
+
+            var selected = [];
+            var selectedLocal = [];
+            $(globalComp).each(function (index, brand) {
+                selected.push($(this).val());
+            });
+
+            $(localCom).each(function (index, brand) {
+                selectedLocal.push($(this).val());
+            });
+
+
+
+            var comp = "", compLocal = "";
+            if (selected.length > 0) {
+                comp = "'";
+            }
+            for (var i = 0; i < selected.length; i++) {
+                comp = comp + selected[i].toString() + "','";
+            }
+            if (selected.length > 0) {
+                comp = comp.substring(0, comp.length - 2);
+            }
+            if (selectedLocal.length > 0) {
+                compLocal = "'";
+            }
+            for (var i = 0; i < selectedLocal.length; i++) {
+                compLocal = compLocal + selectedLocal[i].toString() + "','";
+            }
+            if (selected.length > 0) {
+                compLocal = compLocal.substring(0, compLocal.length - 2);
+            }
+
+            if (Cityid == undefined || dealerid == "") {
+                Cityid = "";
+            }
+            if (dealerid == undefined || dealerid == "") {
+                dealerid = "-1";
+            }
+
+
+
+            var chart = $("#Internal").highcharts();
+            if (chart != undefined) {
+                chart.destroy();
+            }
+            $('.loader').fadeIn();
+            $.ajax({
+                url: '@Url.Action("GetInternalDetailsBranch")',
+                type: 'POST',
+                data: {
+                    Dealerid: Dealerid,
+                    ProjectId: @ViewBag.id,
+                    CompareQuarter:compLocal,
+                    CompareQuarter1:comp,
+                    intenal:intenal
+                },
+                success: function (datajson) {
+                    $('.loader').fadeOut();
+
+                    DrawPieWithHLengend(datajson.piData, 'DealerDetail', 'Dealer Area Wise Score');
+                    name = $('#detailHeading').text();
+
+                    Highcharts.chart('Internal', {
+                        chart: {
+                            height: 500,
+                            type: 'column'
+                        },
+                        title: {
+                            text: 'Details of ' + name+ ' Average '
+                        },
+                        //subtitle: {
+                        //    text: 'Source: WorldClimate.com'
+                        //},
+                        xAxis: {
+                            categories:
+                            JSON.parse(datajson.internalname),
+
+                            crosshair: true
+                        },
+                        yAxis: {
+                            min: 0,
+                            max: 100,
+                            title: {
+                                text: 'Survy Scores'
+                            },
+                            plotLines: [{
+                                color: '#FF0000', // Red
+                                width: 2,
+                                value: 92 // Position, you'll have to translate this to the values on your x axis
+                            }]
+
+                        },
+                        tooltip: {
+                            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                            '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
+                            footerFormat: '</table>',
+                            shared: true,
+                            useHTML: true
+                        },
+                        plotOptions: {
+                            column: {
+                                pointPadding: 0.2,
+                                borderWidth: 0
+                            }
+                        },
+
+                        series: [{
+                            name: 'Q1',
+                            data:JSON.parse(datajson.internalY1),
+                            dataLabels: {
+                                enabled: true,
+                                formatter: function () {
+                                    return this.point.y;
+                                }
+                            }
+                        }, {
+                            name: 'Qn',
+                            data:
+                            JSON.parse(datajson.internalY),
+                            color: 'green',
+                            dataLabels: {
+                                enabled: true,
+                                formatter: function () {
+                                    return this.point.y;
+                                }
+                            }
+                        }]
+                    });
+
+                    DrawHighScores(datajson.FirstxValue, datajson.FirstyValue, "DealerHighScoreDetail", 'Top 5 Highest scoring areas')
+
+                    DrawHighScores(datajson.LowxValue, datajson.LowyValue, "DealerLowScoreDetail", 'Top 5 Low scoring areas')
+
+                },
+                error: function () {
+                    $('.loader').fadeOut();
+                }
+            });
+
+
+
+
+
+        }
+
+
+
+        function DestoryAndReDraw(name,Dealerid) {
+
+
+            $('#detailHeading').text(name);
+            $('#dealerId').text(Dealerid);
+
+            var dealerid = $('#dealerId').text();
+            var Cityid = $("#Cityid").text();
+
+            var globalComp = $('#GlobalFilter option:selected');
+            var localCom = $('#LocalCompFilter option:selected');
+
+            var selected = [];
+            var selectedLocal = [];
+            $(globalComp).each(function (index, brand) {
+                selected.push($(this).val());
+            });
+
+            $(localCom).each(function (index, brand) {
+                selectedLocal.push($(this).val());
+            });
+
+
+
+            var comp = "", compLocal = "";
+            if (selected.length > 0) {
+                comp = "'";
+            }
+            for (var i = 0; i < selected.length; i++) {
+                comp = comp + selected[i].toString() + "','";
+            }
+            if (selected.length > 0) {
+                comp = comp.substring(0, comp.length - 2);
+            }
+            if (selectedLocal.length > 0) {
+                compLocal = "'";
+            }
+            for (var i = 0; i < selectedLocal.length; i++) {
+                compLocal = compLocal + selectedLocal[i].toString() + "','";
+            }
+            if (selected.length > 0) {
+                compLocal = compLocal.substring(0, compLocal.length - 2);
+            }
+
+            if (Cityid == undefined || dealerid == "") {
+                Cityid = "";
+            }
+            if (dealerid == undefined || dealerid == "") {
+                dealerid = "-1";
+            }
+
+
+
+            var chart = $("#Internal").highcharts();
+            if (chart != undefined) {
+                chart.destroy();
+            }
+            $('.loader').fadeIn();
+            $.ajax({
+                url: '@Url.Action("GetInternalDetails")',
+                type: 'POST',
+                data: {
+                    Dealerid: Dealerid,
+                    ProjectId: @ViewBag.id,
+                    CompareQuarter:compLocal,
+                    CompareQuarter1:comp
+                },
+                success: function (datajson) {
+                    $('.loader').fadeOut();
+
+                    DrawPieWithHLengend(datajson.piData, 'DealerDetail', 'Dealer Area Wise Score');
+                    name = $('#detailHeading').text();
+
+                    Highcharts.chart('Internal', {
+                        chart: {
+                            height: 500,
+                            type: 'column'
+                        },
+                        title: {
+                            text: 'Details of ' + name+ ' Average '
+                        },
+                        //subtitle: {
+                        //    text: 'Source: WorldClimate.com'
+                        //},
+                        xAxis: {
+                            categories:
+                            //['EXTERIOR & FAÇADE', 'CUSTOMER RELATIONS AREA', 'SHOWROOM/DISPLAY AREA', 'SERVICE AREA', 'PRAYER AREA', 'T-Sure'],
+                            JSON.parse(datajson.internalname),
+
+                            //labels: {
+                            //    rotation: 90
+                            //},
+
+                            crosshair: true
+                        },
+                        yAxis: {
+                            min: 0,
+                            max: 100,
+                            title: {
+                                text: 'Survy Scores'
+                            },
+                            plotLines: [{
+                                color: '#FF0000', // Red
+                                width: 2,
+                                value: 92 // Position, you'll have to translate this to the values on your x axis
+                            }]
+
+                        },
+                        tooltip: {
+                            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                            '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
+                            footerFormat: '</table>',
+                            shared: true,
+                            useHTML: true
+                        },
+                        plotOptions: {
+                            column: {
+                                pointPadding: 0.2,
+                                borderWidth: 0
+                            }
+                        },
+
+                        series: [{
+                            name: 'Q1',
+                            data:
+                            //[88, 85, 85, 85, 84, 70]
+
+                            JSON.parse(datajson.internalY1)
+                            , dataLabels: {
+                                enabled: true,
+                                formatter: function () {
+                                    return this.point.y;
+                                }
+                            }
+                        }, {
+                            name: 'Qn',
+                            data:
+                            //[60, 87, 94, 84, 73, 68]
+
+                            JSON.parse(datajson.internalY)
+                            , color: 'green'
+                            , dataLabels: {
+                                enabled: true,
+                                formatter: function () {
+                                    return this.point.y;
+                                }
+                            }
+                        }]
+                    });
+
+
+                    DrawHighScores(datajson.FirstxValue, datajson.FirstyValue, "DealerHighScoreDetail", 'Top 5 Highest scoring areas')
+
+                    DrawHighScores(datajson.LowxValue, datajson.LowyValue, "DealerLowScoreDetail", 'Top 5 Low scoring areas')
+
+
+
+                    //var chart = $("#DealerHighScoreDetail").highcharts();
+                    //chart.destroy();
+                    //Highcharts.chart('DealerHighScoreDetail', {
+                    //    chart: {
+                    //        type: 'bar'
+                    //    },
+                    //    title: {
+                    //        text: 'Top 5 Highest scoring areas'
+                    //    },
+                    //    //subtitle: {
+                    //    //    text: 'Source: <a href="https://en.wikipedia.org/wiki/World_population">Wikipedia.org</a>'
+                    //    //},
+                    //    xAxis: {
+                    //        categories:
+                    //        JSON.parse(datajson.FirstyValue),
+                    //        //['Staff', 'Sales Reception', 'Directional Sign', 'Customer Lounge', 'Customer Relation'],
+                    //        title: {
+                    //            text: 'In Percentage'
+                    //        }
+                    //    },
+                    //    yAxis: {
+                    //        min: 0,
+                    //        title: {
+                    //            text: 'Scores',
+                    //            align: 'high'
+                    //        },
+                    //        labels: {
+                    //            overflow: 'justify'
+                    //        }
+                    //    },
+                    //    tooltip: {
+                    //        valueSuffix: ' Scores'
+                    //    },
+
+                    //    plotOptions: {
+                    //        bar: {
+                    //            dataLabels: {
+                    //                enabled: true
+                    //            }
+                    //        }
+                    //    },
+                    //    legend: {
+                    //        layout: 'vertical',
+                    //        align: 'right',
+                    //        verticalAlign: 'top',
+                    //        x: -40,
+                    //        y: 80,
+                    //        floating: true,
+                    //        borderWidth: 1,
+                    //        backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+                    //        shadow: true
+                    //    },
+                    //    credits: {
+                    //        enabled: false
+                    //    },
+
+                    //    series: [{
+                    //        //name: 'Year 1800',
+                    //        data:
+                    //        JSON.parse(datajson.FirstxValue)
+                    //        //[93, 90, 89, 86, 78]
+                    //        , dataLabels: {
+                    //            enabled: true,
+                    //            formatter: function () {
+                    //                return this.point.y;
+                    //            }
+                    //        }
+                    //    }]
+                    //});
+
+
+                    //var chart = $("#DealerLowScoreDetail").highcharts();
+                    //chart.destroy();
+                    //Highcharts.chart('DealerLowScoreDetail', {
+                    //    chart: {
+                    //        type: 'bar'
+                    //    },
+                    //    title: {
+                    //        text: 'Top 5 Low scoring areas'
+                    //    },
+                    //    //subtitle: {
+                    //    //    text: 'Source: <a href="https://en.wikipedia.org/wiki/World_population">Wikipedia.org</a>'
+                    //    //},
+                    //    xAxis: {
+                    //        categories:
+                    //        JSON.parse(datajson.LowyValue),
+                    //        //['Service Reception', 'Showroom', 'Prayer area', 'Pylon', 'Washroom'],
+                    //        title: {
+                    //            text: 'In Percentage'
+                    //        }
+                    //    },
+                    //    yAxis: {
+                    //        min: 0,
+                    //        title: {
+                    //            text: 'Scores',
+                    //            align: 'high'
+                    //        },
+                    //        labels: {
+                    //            overflow: 'justify'
+                    //        }
+                    //    },
+                    //    tooltip: {
+                    //        valueSuffix: ' Scores'
+                    //    },
+
+                    //    plotOptions: {
+                    //        bar: {
+                    //            dataLabels: {
+                    //                enabled: true
+                    //            }
+                    //        }
+                    //    },
+                    //    legend: {
+                    //        layout: 'vertical',
+                    //        align: 'right',
+                    //        verticalAlign: 'top',
+                    //        x: -40,
+                    //        y: 80,
+                    //        floating: true,
+                    //        borderWidth: 1,
+                    //        backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+                    //        shadow: true
+                    //    },
+                    //    credits: {
+                    //        enabled: false
+                    //    },
+
+                    //    series: [{
+                    //        //name: 'Year 1800',
+                    //        data:
+                    //        JSON.parse(datajson.LowyValue)
+                    //        //[5, 9, 10, 15, 22]
+                    //        , dataLabels: {
+                    //            enabled: true,
+                    //            formatter: function () {
+                    //                return this.point.y;
+                    //            }
+                    //        }
+                    //    }]
+                    //});
+
+
+
+
+                    //var chart = $("#DealerDetail").highcharts();
+                    //chart.destroy();
+                    //Highcharts.chart('DealerDetail', {
+                    //    chart: {
+                    //        plotBackgroundColor: null,
+                    //        plotBorderWidth: null,
+                    //        plotShadow: false,
+                    //        type: 'pie',
+                    //        events: {
+                    //            drilldown: function (e) {
+                    //               }
+                    //        },
+
+                    //    },
+                    //    title: {
+                    //        text: ''
+                    //    },
+                    //    tooltip: {
+                    //        pointFormat: '{series.name}: <b>{point.records} records, {point.percentage:.1f}%</b>'
+                    //    },
+                    //    plotOptions: {
+                    //        //pie: {
+                    //        //    allowPointSelect: true,
+                    //        //    cursor: 'pointer',
+                    //        //    showInLegend: false,
+                    //        //}
+                    //        pie: {
+                    //            allowPointSelect: true,
+                    //            cursor: 'pointer',
+                    //            dataLabels: {
+                    //                enabled: false,
+                    //                formatter: function () {
+                    //                    return this.percentage.toFixed(2) + '%';
+                    //                }
+                    //            },
+                    //            showInLegend: true
+                    //        }
+                    //    },
+                    //    point: {
+                    //        events: {
+                    //            click: function (event) {
+                    //                alert(this.x + " " + this.y);
+                    //            }
+                    //        }
+                    //    },
+                    //    series: [{
+                    //        name: 'Dealer Area Wise Score',
+                    //        colorByPoint: true,
+                    //        data: JSON.parse(datajson.piData),
+                    //        //data:
+                    //        //[{
+                    //        //    name: 'Exterior',
+                    //        //    y: 30,
+                    //        //}, {
+                    //        //    name: 'Customer Relation',
+                    //        //    y: 15,
+                    //        //},
+                    //        //{
+                    //        //    name: 'Showroom',
+                    //        //    y: 10,
+                    //        //}, {
+                    //        //    name: 'Service Area',
+                    //        //    y: 16,
+                    //        //}, {
+                    //        //    name: 'Prayer Area',
+                    //        //    y: 5,
+                    //        //}
+                    //        //],
+                    //    }]
+                    //});
+                },
+                error: function () {
+                    $('.loader').fadeOut();
+                }
+            });
+
+
+
+
+
+        }
+
+        setTimeout(
+            function () {
+                $('#defaultOpen').click();
+            }
+            , 1000)
+    </script>
+
+
+}
+<!-- Modal -->
+<div id="DetailModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Detail</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+
+                    <div class="col-sm-6 col-sm-offset-3 text-center">
+                        <h1 id="provinces"> </h1>
+                        <div id="provinces-pie-chart" style="width: 250px;height: 250px"></div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                @*<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>*@
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="row ">
+
+
+
+    <div class="loader" style="display:none"></div>
+    <div class="form-group">
+
+    </div>
+    <div class="form-group col-md-12">
+
+        <div class="col-sm-6 pull-right">
+            <div class="form-group">
+                <label style="height: 18px; display:block;">Filter</label>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-filter fa-lg fa-fw"></i></span>
+
+
+                    <select id="GlobalFilter" class="form-control input-lg multiselectCheckbox" multiple="multiple" style="background-color:initial">
+                        <option value="1">2017 Quarter 1</option>
+                        <option value="2">2017 Quarter 2</option>
+                        <option value="3">2017 Quarter 3</option>
+                        <option value="4">2017 Quarter 4</option>
+                        <option value="5" selected>2018 Quarter 1</option>
+                        <option value="6">2018 Quarter 2</option>
+                        <option value="7">2018 Quarter 3</option>
+                        <option value="8">2018 Quarter 4</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+
+            <a class="btn btn-success" href="/Survey/SurveyDetail?ProjectId=@ViewBag.id" style="margin-top: 10px;background-color:#87C440">Go to Survey Report</a>
+        </div>
+    </div>
+
+</div>
+<div class="row text-center Section">
+
+
+    <div class=" col-sm-5 text-center">
+        <div style="font-weight:bolder;padding: 8px;font-size: 30px;font-family: 'Source Sans Pro', sans-serif;">
+            National Average
+        </div>
+
+        <div id="nationalStatusPie"></div>
+    </div>
+
+
+    <div class="col-sm-7 text-center">
+        @*<div id="chartContainer1"></div>*@
+        <div class="tabCity">
+            <button class="tablinksCity" onclick="openMetroCity(event, 'MetroCitytab',this)" id="defaultOpenCity" title="Metro CityLevel"><i class="fa fa-globe " aria-hidden="true"></i> Metro City Level</button>
+            <button class="tablinksCity" id="Citytabbtn" onclick="openMetroCity(event, 'Citytab',this)" title="City Level"><i class="fa fa-flag " aria-hidden="true"></i> City Level</button>
+            <div class="extraCity"></div>
+        </div>
+        <div id="Cityid" hidden></div>
+        <div id="MetroCitytab" class="tabcontentCity">
+
+            <div id="MetroDealerDetail"></div>
+
+        </div>
+
+        <div id="Citytab" class="tabcontentCity">
+
+            <div id="CityDealerDetail">
+
+            </div>
+        </div>
+
+    </div>
+    @*
+
+        <div class="col-sm-3 text-center">
+            <div id="chartContainer2"></div>
+        </div>
+        <div class="col-sm-3 text-center">
+            <div id="chartContainer3"></div>
+        </div>*@
+</div>
+<div class="row Section">
+
+
+    <div class="col-md-offset-6 col-md-6">
+        <div class="form-group">
+            <label style="height: 18px; display:block;">Compare With</label>
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-filter fa-lg fa-fw" multiple="multiple"></i></span>
+
+
+                <select id="LocalCompFilter" multiple="multiple" class="form-control input-lg multiselectCheckbox" style="background-color:initial">
+                    <option selected value="1">2017 Quarter 1</option>
+                    <option value="2">2017 Quarter 2</option>
+                    <option value="3">2017 Quarter 3</option>
+                    <option value="4">2017 Quarter 4</option>
+                </select>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="col-md-12" style="margin-top:30px">
+
+        <div class="tab">
+            <button class="tablinks" onclick="openCity(event, 'Nationaltab',this)" id="defaultOpen" title="National Level"><i class="fa fa-globe fa-3x" aria-hidden="true"></i></button>
+            <button class="tablinks" onclick="openCity(event, 'CentralRegionaltab',this)" title="Central Regional Level"><i class="fa fa-flag fa-3x" aria-hidden="true"></i></button>
+            <button class="tablinks" onclick="openCity(event, 'NorthRegionaltab',this)" id="defaultOpen" title="North Regional Level"><i class="fa fa-flag fa-3x" aria-hidden="true"></i></button>
+            <button class="tablinks" onclick="openCity(event, 'SouthRegionaltab',this)" title="South Regional Level"><i class="fa fa-flag fa-3x" aria-hidden="true"></i></button>
+            <button id="internalTabButton" style="display:none" class="tablinks" onclick="openCity(event, 'Internaltab',this)" title="Internal Level"><i class="fa fa-home fa-3x" aria-hidden="true"></i></button>
+
+
+            <div class="extra"></div>
+        </div>
+
+        <div id="Nationaltab" class="tabcontent">
+
+            <div id="National">
+
+            </div>
+        </div>
+
+
+        <div id="CentralRegionaltab" class="tabcontent">
+            <div id="RegionalCentral">
+
+            </div>
+
+        </div>
+
+        <div id="NorthRegionaltab" class="tabcontent">
+            <div id="RegionalNorth">
+
+            </div>
+
+        </div>
+
+        <div id="SouthRegionaltab" class="tabcontent">
+            <div id="RegionalSouth">
+
+            </div>
+        </div>
+
+
+        <div id="Internaltab" class="tabcontent text-center">
+            <div id="Internal">
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row Section">
+    <div id="dealerId" hidden></div>
+    <div id="detailHeading" class="col-lg-12 h2 text-center " style="text-decoration:underline;font-weight:bolder">
+        Over all status
+    </div>
+    <div class="col-md-4" style="margin-top:10px">
+        <div id="DealerDetail"></div>
+    </div>
+    <div class="col-md-4" style="margin-top:10px">
+        <div id="DealerHighScoreDetail"></div>
+    </div>
+    <div class="col-md-4" style="margin-top:10px">
+        <div id="DealerLowScoreDetail"></div>
+    </div>
+</div>

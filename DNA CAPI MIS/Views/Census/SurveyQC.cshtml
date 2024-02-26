@@ -1,0 +1,334 @@
+﻿@model IEnumerable<DNA_CAPI_MIS.Models.SurveyDataView>
+
+@{
+    ViewBag.Title = "Index";
+}
+<link rel="stylesheet" href="~/Content/jqwidgets/jqwidgets/styles/jqx.base.css" type="text/css" />
+<h2>Census Results - Quality Check</h2>
+
+@if (ViewBag.ErrorMessage != null && ViewBag.ErrorMessage.Length > 0)
+{
+    <h4>@ViewBag.ErrorMessage</h4>
+}
+else
+{
+    
+   
+@section Scripts {
+    @Scripts.Render("~/bundles/bootstrap/jqwidgets")
+
+<script type="text/javascript">
+    function urldecode(str) {
+        return decodeURIComponent((str + '').replace(/\+/g, '%20'));
+    }
+
+    function PopulateData() {
+        // prepare the data
+        var data = new Array();
+        var row = {};
+
+        @{
+            var currentSbjnum = 0;
+            var headerPrinted = false;
+            var firstRow = true;
+            var id = 0;
+        }
+        @foreach (var item in Model)
+        {
+            if (currentSbjnum != item.sbjnum)
+            {
+                if (!firstRow)
+                {
+                    WriteLiteral("data[" + id++ + "] = row;\n");
+                }
+                firstRow = false;
+                currentSbjnum = item.sbjnum;
+                WriteLiteral("row = {};");
+                WriteLiteral("row['id'] = " + id + ";");
+                WriteLiteral("row['OpStatus'] = '" + item.OpStatus + "';");
+                WriteLiteral("row['QCStatus'] = '" + item.QCStatus + "';");
+                WriteLiteral("row['sbjnum'] = " + item.sbjnum + ";");
+                WriteLiteral("row['sbjnum2'] = " + item.sbjnum + ";");
+                WriteLiteral("row['Created'] = '" + item.Created + "';");
+                WriteLiteral("row['Longitude'] = " + item.Longitude + ";");
+                WriteLiteral("row['Latitude'] = " + item.Latitude + ";");
+                WriteLiteral("row['SurveyorName'] = '" + item.SurveyorName + "';");
+                WriteLiteral("row['Country'] = '" + item.CountryName.Replace("'", "\'") + "';");
+                WriteLiteral("row['City'] = '" + Url.Encode(item.CityName) + "';");
+                WriteLiteral("row['District'] = '" + Url.Encode(item.DistrictName) + "';");
+            }
+            WriteLiteral("row['_" + item.FieldId + "'] = urldecode(\"" + Url.Encode(item.FieldValue) + "\");");
+        }
+        @if (!firstRow)
+        {
+            WriteLiteral("data[" + id++ + "] = row;\n");
+        }
+
+        return data;
+    }
+
+    $(document).ready(function () {
+        var rowdata = { items: [] };
+        var data = PopulateData();
+        var counter = 0;
+        var countselected = {selectedrow:[]};
+        var source =
+        {
+            localdata: data,
+            datafields:
+            [
+            @if (Model.Count() > 0)
+            {
+                currentSbjnum = Model.FirstOrDefault().sbjnum;
+            }
+            @{headerPrinted = false;}
+            @foreach (var item in Model)
+            {
+                if (currentSbjnum != item.sbjnum) { break; }
+                if (!headerPrinted)
+                {
+                    headerPrinted = true;
+                    WriteLiteral("{ name: 'sbjnum', type: 'number' },");
+                    WriteLiteral("{ name: 'sbjnum2', type: 'number' },");
+                    WriteLiteral("{ name: 'OpStatus', type: 'string' },");
+                    WriteLiteral("{ name: 'QCStatus', type: 'string' },");
+                    WriteLiteral("{ name: 'Created', type: 'string' },");
+                    WriteLiteral("{ name: 'Longitude', type: 'number' },");
+                    WriteLiteral("{ name: 'Latitude', type: 'number' },");
+                    WriteLiteral("{ name: 'SurveyorName', type: 'string' },");
+                    WriteLiteral("{ name: 'Country', type: 'string' },");
+                    WriteLiteral("{ name: 'City', type: 'string' },");
+                    WriteLiteral("{ name: 'District', type: 'string' },");
+                }
+                WriteLiteral("{ name: '_" + item.FieldId + "', type: 'string' },");
+            }
+            ],
+            datatype: "array",
+            updaterow: function (rowid, rowdata) {
+                // synchronize with the server - send update command
+                $.get("/Survey/SurveyQCApprove/" + rowdata['sbjnum'] + "?QCStatus=" + rowdata['QCStatus']);
+            }
+
+        };
+
+        var dataAdapter = new $.jqx.dataAdapter(source);
+
+        var getEditorDataAdapter = function (datafield) {
+            var dataApproval = new Array();
+            var rowApproval = {};
+            rowApproval['id'] = 0;
+            rowApproval['QCStatus'] = 'No';
+            dataApproval[0] = rowApproval;
+            rowApproval = {};
+            rowApproval['id'] = 1;
+            rowApproval['QCStatus'] = 'Yes';
+            dataApproval[1] = rowApproval;
+
+            var source =
+             {
+                 localdata: dataApproval,
+                 datatype: "array",
+                 datafields:
+                 [
+                     { name: 'QCStatus', type: 'string' },
+                 ]
+             };
+            var dataAdapter = new $.jqx.dataAdapter(source, { uniqueDataFields: [datafield] });
+            return dataAdapter;
+        }
+
+        var toThemeProperty = function (className) {
+            return className + " " + className + "-" + theme;
+        }
+
+        var groupsrenderer = function (text, group, expanded, data) {
+        }
+
+        var maplinkrenderer = function (row, column, value) {
+            return '<a target="_blank" href="/Survey/Map/@ViewBag.ProjectId?sid=' + value + '">Map</a>';
+        }
+
+        // initialize jqxGrid
+        $("#jqxgrid").jqxGrid(
+            {
+                source: dataAdapter,
+                editable: true,
+                width: 950,
+                selectionmode: 'checkbox',
+                columns: [
+                @{headerPrinted = false;}
+               @foreach (var item in Model)
+                {
+                 if (currentSbjnum == item.sbjnum)
+                    {
+                        if (!headerPrinted)
+                        {
+                            headerPrinted = true;
+                            string approve = @"{ text: 'Approved', columntype: 'template', datafield: 'QCStatus', width: 110,
+                        createeditor: function (row, cellvalue, editor, cellText, width, height) {
+                            // construct the editor.
+                            editor.jqxDropDownList({
+                                checkboxes: false, source: getEditorDataAdapter('QCStatus'), displayMember: 'QCStatus', valueMember: 'QCStatus', width: width, height: height,
+                                selectionRenderer: function () {
+                                    return ""Approve?"";
+                                }
+                            });
+                        },
+                        initeditor: function (row, cellvalue, editor, celltext, pressedkey) {
+                            // set the editor's current value. The callback is called each time the editor is displayed.
+                            var items = editor.jqxDropDownList('getItems');
+                            editor.jqxDropDownList('uncheckAll');
+                            var values = cellvalue.split(/,\s*/);
+                            for (var j = 0; j < values.length; j++) {
+                                for (var i = 0; i < items.length; i++) {
+                                    if (items[i].label === values[j]) {
+                                        editor.jqxDropDownList('checkIndex', i);
+                                    }
+                                }
+                            }
+                        },
+                        geteditorvalue: function (row, cellvalue, editor) {
+                            // return the editor's value.
+                            return editor.val();
+                        } },";
+                            //cellsrenderer:test,
+                            //WriteLiteral("{ text: '', datafield: 'available', columntype: 'checkbox', width: 40, },");
+       
+
+                            WriteLiteral(approve);
+                            WriteLiteral("{ text: 'Survey Id', groupable: true, editable: false, datafield: 'sbjnum', type: 'number', width: 80 },");
+                            WriteLiteral("{ text: 'Created On', groupable: true, editable: false, datafield: 'Created', type: 'string', width: 120 },");
+                            WriteLiteral("{ text: 'Country', groupable: true, editable: false, datafield: 'Country', type: 'string', width: 150 },");
+                            WriteLiteral("{ text: 'City', groupable: true, editable: false, datafield: 'City', type: 'string', width: 150 },");
+                            WriteLiteral("{ text: 'District', groupable: true, editable: false, datafield: 'District', type: 'string', width: 150 },");
+                            WriteLiteral("{ text: 'Longitude', groupable: true, editable: false, datafield: 'Longitude', type: 'number', width: 80 },");
+                            WriteLiteral("{ text: 'Latitude', groupable: true, editable: false, datafield: 'Latitude', type: 'number', width: 80 },");
+                            WriteLiteral("{ text: 'Map', groupable: true, editable: false, datafield: 'sbjnum2', cellsrenderer: maplinkrenderer, width: 80 },");
+                            WriteLiteral("{ text: 'Surveyor Name', groupable: true, editable: false, datafield: 'SurveyorName', type: 'string', width: 80 },");
+                        }
+                        WriteLiteral("{ text: '" + item.Title + "', groupable: true, editable: false, datafield: '_" + item.FieldId + "', type: 'string', width: 100 },");
+                     }
+               }
+
+                ]
+            });
+        //$('#jqxgrid').jqxGrid('selectrow', 1);
+        function getselectedrows() {
+            var rows = "";
+            for (a = 0; a < rowdata.items.length; a++) { 
+                if (a + 1 != rowdata.items.length) {
+                    rows += rowdata.items[a].id + ",";
+                }
+                else {
+                    rows += rowdata.items[a].id;
+                }
+            }
+            alert(rows);
+
+        }
+        
+        $("#jqxgrid").bind('rowselect', function (event) {
+            var selectedRowIndex = event.args.rowindex;
+            var len = selectedRowIndex.length;
+            rowdata.items.push({ id: selectedRowIndex });
+            rowdata.items[selectedRowIndex] = ({ id: selectedRowIndex });
+            countselected.selectedrow[selectedRowIndex] = rowdata.items[rowdata.items.length - 1].id;
+            //alert(rowdata.items[rowdata.items.length - 1].id+" length"+len);
+        });
+        $("#jqxgrid").bind('rowunselect', function (event) {
+            var unselectedRowIndex = event.args.rowindex;
+            rowdata.items.pop({ id: unselectedRowIndex });
+            //rowdata.items[unselectedRowIndex] = ({ id: -1 });
+            //rowdata.items.pop([unselectedRowIndex]);
+            //countselected.selectedrow.pop(unselectedRowIndex - 1);
+            countselected.selectedrow[unselectedRowIndex] = -1;
+            //alert(rowdata.items);
+        });
+        $("#excelExport").click(function () {
+            var exportInfo = $("#jqxgrid").jqxGrid('exportdata', 'xls');
+            download("DataSheet_" + "@DateTime.Today.ToShortDateString().Replace("/", "")" + ".xls", exportInfo);
+        });
+
+        function download(filename, content) {
+            contentType = 'application/octet-stream';
+            var a = document.createElement('a');
+            var blob = new Blob([content], { 'type': contentType });
+            a.href = window.URL.createObjectURL(blob);
+            a.download = filename;
+            a.click();
+        }
+        $("#approve").click(function () {
+            //getselectedrows();
+            var city = "";
+            var row = "";
+            for (a = 0; a < countselected.selectedrow.length; a++) {
+                if (countselected.selectedrow[a] != -1) {
+                    if (a + 1 == countselected.selectedrow.length) {
+                        row += countselected.selectedrow[a];
+                        var cit = $('#jqxgrid').jqxGrid('getrowdata', rowdata.items[a].id, 'City');
+                        city += cit.City;
+                    }
+                    else {
+                        row += countselected.selectedrow[a] + ",";
+                        var cit = $('#jqxgrid').jqxGrid('getrowdata', rowdata.items[a].id, 'City');
+                        city += cit.City+",";
+                    }
+                }
+            }
+            //var abc = $('#jqxgrid').jqxGrid('getrowdata', rowdata.items[0].id, 'City');
+            //var city = abc.City;
+            alert(city + " count = " + row);
+            ////var indexes = $("#jqxgrid").jqxGrid("selectedrowindexes");
+            ////for(var index in indexes )
+            ////{
+            ////    var data = $("#jqxgrid").jqxGrid("getrowdata", index);
+            ////    alert(data.Id)
+            ////}
+        });
+
+    });
+</script>
+
+}
+
+    
+    @*<fieldset>
+<input id="getSelected" type="button" value="Get Selected"/>
+<input id="selectAll" type="button" value="Select All"/>
+<input id="clear" type="button" value="Clear Selection"/>
+</fieldset>
+<table id="list10"><tr><td/></tr></table>
+<div id="pager"/>
+
+<div style="display:none;" id="dialog-confirm" title="Confirm">
+<p><span class="ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Are you sure want send this names:</p><p><span id="names"></span></p>
+</div>*@
+
+
+    //// http://www.ok-soft-gmbh.com/jqGrid/DataToMultiSelect2.htm
+    ////view-source:http://www.ok-soft-gmbh.com/jqGrid/DataToMultiSelect2.htm
+    ////http://www.jqwidgets.com/jquery-widgets-demo/demos/jqxgrid/index.htm
+<div id='jqxWidget'>
+    <div id="jqxgrid"></div>
+ 
+
+    <div style="float: left; margin-left: 20px; margin-top: 20px;">
+        <input type="button" value="Approve" id='approve' />
+    </div>
+    <div style="float: left; margin-left: 20px; margin-top: 20px;">
+        <input type="button" value="Reject" id='reject' />
+    </div>
+    <div style="float: left; margin-left: 20px; margin-top: 20px;">
+        <input type="button" value="Undo" id='undo' />
+    </div>
+
+    <div style="float: left; margin-left: 20px; margin-top: 20px;">
+        <input type="button" value="Export to Excel" id='excelExport' />
+    </div>
+    
+    <div style="float: left; margin-left: 20px; margin-top: 20px;">
+        <input value="Remove Filter" id="clearfilteringbutton" type="button" />
+    </div>
+    <br/>
+</div>
+}

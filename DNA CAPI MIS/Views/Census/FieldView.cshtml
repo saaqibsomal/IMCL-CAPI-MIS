@@ -1,0 +1,482 @@
+﻿@model IEnumerable<DNA_CAPI_MIS.Models.SurveyDataView>
+
+@{
+    ViewBag.Title = "Surveyor Tracker";
+    bool firstRec = true;
+}
+
+<style type="text/css">
+    .POI_Legend {
+        width: 24px;
+        height: 24px;
+        border-radius: 12px;
+        background: #000;
+    }
+    .skin-blue .sidebar {
+         border-bottom: none; 
+    }
+    .rgt-panel-inner-wrapper {
+        padding: 0 0 !important;
+        color: black !important;
+        font-weight: normal !important;
+        font-size: 14px !important;
+        height: 100%;
+        float: left;
+        overflow: hidden !important;
+        overflow-x: hidden;
+    }
+</style>
+
+@section Scripts {
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@Scripts.Render("~/bundles/bootstrap/AdminLTE")
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=drawing&v=3.exp&language=en"></script>
+<script src="~/Content/js/bootstrap-datepicker.js"></script>
+<link href="~/Content/css/datepicker.css" rel="stylesheet" />
+<link href="~/Content/Site.css" rel="stylesheet" />
+<link href="~/Content/bootstrap-multiselect-master/dist/css/bootstrap-multiselect.css" rel="stylesheet" />
+<script src="~/Content/bootstrap-multiselect-master/dist/js/bootstrap-multiselect.js"></script>
+<script src="~/Content/Survey/SurveyTrack.js"></script>
+
+<script type="text/javascript">
+
+    var trackPoint = "/Images/TrackPoint8.png";
+    var markers = [
+        @foreach (var item in Model)
+        {
+            if (!firstRec)
+            {
+                WriteLiteral(",");
+            }
+            WriteLiteral("{title: \"" + Url.Encode( item.FieldValue ) + "\",");
+            WriteLiteral("user: '" + item.SurveyorName + "',");
+            WriteLiteral("lat: " + item.Latitude + ",");
+            WriteLiteral("lng: " + item.Longitude + ",");
+            WriteLiteral("ID: " + item.SubCategoryID + ",");
+            WriteLiteral("Cat: \"" + item.SubCategoryName + "\",");
+            WriteLiteral("sid: " + item.sbjnum + ",");
+            WriteLiteral("dt: '" + item.yy + '-' + item.mm + '-' + item.dd + "',");
+            WriteLiteral("tm: '" + item.hh + ":" + item.mins + ":" + item.ss + "',");
+            WriteLiteral("inv: 0 }");     //Invalid
+            firstRec = false;
+        }
+    ];
+    var userPaths = [
+    @*@{firstRec = true;}
+    @foreach (var item in ViewBag.SnappedPaths)
+    {
+        var multiplePaths = item.SnappedPath.Split('&');
+        for (int mp = 0; mp < multiplePaths.Length; mp++) 
+        {
+            if (multiplePaths[mp].Length > 0) 
+            {
+                if (!firstRec)
+                {
+                    WriteLiteral(",");
+                }
+                WriteLiteral("{user: '" + item.SurveyorName + "',");
+                WriteLiteral("path: '" + multiplePaths[mp] + "',");
+                WriteLiteral("dt: '" + item.ForDate + "',");
+                WriteLiteral("d: " + item.distance + "}");
+                firstRec = false;
+            }
+        }
+    }*@
+    ];
+
+    var makersCatId = [];
+    var markersCatName = [];
+
+    var map;
+    var placemarks = [];
+
+    var polyLines = new Array();
+    var surveydates = new Array();
+    var polyLineFix = new Array();
+
+    var showStartEndMarkers = true;
+    var showTrackPointMarkers = false;
+
+    var seMarkersArray = [];
+    var pathPointArray = [];
+
+    window.onload = function () {
+        //Load Category data
+        var catColors = new Object();
+        @if (ViewBag.CategorySummary != null) {
+            foreach (var cat in ViewBag.CategorySummary)
+            {
+                var colorcode = "#" + cat.Color_Red.ToString("X") + cat.Color_Green.ToString("X") + cat.Color_Blue.ToString("X");
+                WriteLiteral("catColors[\"" + cat.ID + "\"] = \"" + colorcode + "\";");
+            }
+        }
+
+        //Generate markers on the map
+        //ddlFieldData();  // Removing this method call.
+        $('#dvMap').height(window.innerHeight - 100);
+
+        if (markers.length > 0) {
+            var mapOptions = {
+                center: new google.maps.LatLng(markers[0].lat, markers[0].lng),
+                zoom: 15,
+                mapTypeControlOptions: {
+                    mapTypeIds: [google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE, google.maps.MapTypeId.TERRAIN
+                    , google.maps.MapTypeId.HYBRID]
+                },
+
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var infoWindow = new google.maps.InfoWindow();
+            map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
+
+            google.maps.event.addListenerOnce(map, 'tilesloaded', function () {
+                addSurveyorTracks();
+            });
+
+            //...
+
+            for (i = 0; i < markers.length; i++) {
+                var data = markers[i];
+                data.title = decodeURIComponent(data.title).replace(/\+/g, " ");
+                var myLatlng = new google.maps.LatLng(data.lat, data.lng);
+
+                var path;
+                var colour = catColors[data.ID];
+
+                if (data.Cat.length > 0 && data.ID > 0) {
+                    var marker = new google.maps.Marker({
+                        position: myLatlng,
+                        map: map,
+                        title: data.title,
+                        @if (ViewBag.CurrentSIdData != null)
+                        {
+                            WriteLiteral("draggable: true");
+                        }
+                        else {
+                           WriteLiteral(@"icon: {
+                           path: path = google.maps.SymbolPath.CIRCLE,
+                           fillOpacity: 1,
+                           fillColor: colour,
+                           strokeWeight: 1,
+                           scale: 5 //pixels
+                       }");
+                    }
+
+                    });
+                }
+
+                placemarks[i] = marker;
+                makersCatId[i] = data.ID;
+                markersCatName[i] = data.Cat;
+            }
+        }
+
+        var kmlUrl = "@ViewBag.KMLUrl";
+
+        //var kmlOptions = {
+        //    suppressInfoWindows: true,
+        //    preserveViewport: false,
+        //    map: map
+        //};
+        //var kmlLayer = new google.maps.KmlLayer(kmlUrl, kmlOptions);
+        //kmlLayer.setMap(map);
+
+        loadKMLPlacemarks(kmlUrl);
+
+    }
+
+    function showInContentWindow(poly) {
+        var sidediv = document.getElementById('polygonInfo');
+        sidediv.innerHTML = "Name: " + poly.place + '<br/>Distance: ' + Math.round(poly.DistanceMade) + ' of ' + Math.round(poly.DistanceTotal);
+    }
+
+
+    var kmlEvent;
+    var kmlPolygons = [];
+    @foreach (var districtProgress in ViewBag.FieldProgress)
+    {
+        WriteLiteral("kmlPolygons.push({\"place\": \"" + districtProgress.DistrictName + "\"" +
+            ",\"SurveyCount\": " + districtProgress.SurveyCount +
+            ",\"DistanceMade\": " + districtProgress.DistanceMade +
+            ",\"DistanceTotal\": " + districtProgress.DistanceTotal + ", \"poly\": null});");
+    }
+
+    function loadKMLPlacemarks(url) {
+        $.get(url, function (data) {
+
+            $(data).find("Placemark").each(function (index, value) {
+
+                //get coordinates and place name
+                var coords = $(this).find("coordinates").text().trim();
+                var place = $(this).find("name").text();
+                var polyStrokeColor = '#3B79EA';        //Blue
+                var polyFillColor = '#3B79EA';
+
+                var polyIndex = -1;
+
+                for (var i = 0; i < kmlPolygons.length; i++) {
+                    //alert(kmlPolygons[i].place + "==" + place);
+                    if (kmlPolygons[i].place == place) {
+                        polyIndex = i;
+
+                        if (kmlPolygons[i].DistanceTotal > 0)
+                        {
+                            var distanceTotal = kmlPolygons[i].DistanceTotal;
+                            if (distanceTotal < kmlPolygons[i].DistanceMade) distanceTotal = kmlPolygons[i].DistanceMade;
+
+                            var percentCovered = (kmlPolygons[i].DistanceMade / kmlPolygons[i].DistanceTotal) * 100;
+
+                            if (percentCovered <= 25) {
+                                polyStrokeColor = '#F26C5B';        //Red
+                                polyFillColor = '#F26C5B';
+                            }
+                            else if (percentCovered > 25 && percentCovered <= 50) {
+                                polyStrokeColor = '#F8A167';        //Orange
+                                polyFillColor = '#F8A167';
+                            }
+                            else if (percentCovered > 50 && percentCovered <= 75) {
+                                polyStrokeColor = '#F6D860';        //Yellow
+                                polyFillColor = '#F6D860';
+                            }
+                            else if (percentCovered > 75) {
+                                polyStrokeColor = '#60F67E';        //Green
+                                polyFillColor = '#60F67E';
+                            }
+                        }
+                        break;
+                    }
+                }
+
+                //Find
+                var triangleCoords = [];
+                var coordArray = coords.split(',0');
+                for (var i = 0; i < coordArray.length - 1; i++) {
+                    c = coordArray[i].split(",")
+                    triangleCoords.push(new google.maps.LatLng(c[1], c[0]));
+                }
+                var newPoly = new google.maps.Polygon({
+                    paths: triangleCoords,
+                    strokeColor: polyStrokeColor,
+                    strokeOpacity: 0.8,
+                    strokeWeight: 1,
+                    fillColor: polyFillColor,
+                    fillOpacity: 0.25
+                });
+                if (polyIndex >= 0) {
+                    kmlPolygons[polyIndex].poly = newPoly;
+                }
+
+                google.maps.event.addListener(newPoly, 'click', function (event) {
+                    kmlEvent = event;
+
+                    var selectedPoly = null;
+                    for (var i = 0; i < kmlPolygons.length; i++) {
+                        if (typeof(kmlPolygons[i].poly) != "undefined" && kmlPolygons[i].poly != null) {
+                            if (google.maps.geometry.poly.containsLocation(event.latLng, kmlPolygons[i].poly)) {
+                                showInContentWindow(kmlPolygons[i]);
+                                selectedPoly = kmlPolygons[i].poly;
+                                break;
+                            }
+                        }
+                    }
+                });
+
+                var showAll = true;
+                var districtPolygonToShow = "";
+                @if (ViewBag.DistrictName.Length > 0)
+                {
+                    WriteLiteral("showAll = false;");
+                    WriteLiteral("districtPolygonToShow = \"" + ViewBag.DistrictName + "\";");
+                }
+
+                if (showAll) {
+                    newPoly.setMap(map);
+                } else if (districtPolygonToShow == place) {
+                    newPoly.setMap(map);
+                }
+
+
+
+                //c = coords.split(",")
+                //kmlPolygons.push({
+                //    "place": place,
+                //    "poly": newPoly,
+                //});
+            });
+
+            //kmlPolygons[0].poly.setMap(map);
+            //kmlPolygons[10].poly.setMap(map);
+
+        });
+    }
+
+</script>
+
+@if (ViewBag.DistrictName.Length > 0)
+{
+    <script>
+        $(document).ready(function () {
+            /* jQueryKnob */
+            $(".knob").knob();
+        });
+
+        function GetUrlParams(sParam) {
+            var sPageURL = window.location.search.substring(1);
+            var sURLVariables = sPageURL.split('&');
+            for (var i = 0; i < sURLVariables.length; i++) {
+                var sParameterName = sURLVariables[i].split('=');
+                if (sParameterName[0] == sParam) {
+                    return decodeURIComponent(sParameterName[1]);
+                }
+            }
+        }
+
+        function GetUrl(country) {
+            var turl = "/Census/SurveyLocationWise/@ViewBag.ProjectId?language=en-US";
+            turl += '&country=' + country;
+            turl += '&projectId=' + GetUrlParams('projectId');
+            window.location.href = turl;
+        }
+    </script>
+}
+}
+
+<div class="row">
+    <div class="box-body">
+        <div class="mappg-dtpck-area" style="display:none;">
+            <div class="mappg-control">
+                <div>City</div>
+                <div>
+                    <select id="fctlCity" multiple="multiple" style="width:200px;height:30px;">
+                        @{
+                            var countryName = "";
+                            var firstrow = true;
+                        }
+                        @if (ViewBag.AllCitiesList != null)
+                        {
+                            foreach (var ct in ViewBag.AllCitiesList)
+                            {
+                                if (countryName != ct.CountryName)
+                                {
+                                    if (!firstrow)
+                                    {
+                                        WriteLiteral("</optgroup>");
+                                    }
+                                    countryName = ct.CountryName;
+                                    firstrow = false;
+                                    WriteLiteral("<optgroup label=\"" + countryName + "\">");
+                                }
+                                <option value="_@ct.ID">@ct.Name</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="mappg-control">
+                <div>Surveyor</div>
+                <div>
+                    <select id="fctlSurveyor" multiple="multiple" style="width:200px;height:30px;">
+                        @if (ViewBag.surveyorname != null)
+                        {
+                            foreach (var sn in ViewBag.surveyorname)
+                            {
+                                <option>@sn</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="mappg-control">
+                <div>From Date</div>
+                <div>
+                    <input class="btn btn-default" type="text" id="fromdate" style="width:100px;height:32px;">
+                </div>
+            </div>
+            <div class="mappg-control">
+                <div>To Date</div>
+                <div>
+                    <input class="btn btn-default" type="text" id="todate" style="width:100px;height:32px;">
+                </div>
+            </div>
+            <div class="mappg-control">
+                <div>&nbsp;</div>
+                <div>
+                    <input type="button" id="btnsubmit" value="Filter" style="width:100px;height:32px;">
+                </div>
+            </div>
+            <div class="panelSurveyordates" style="display:none;">
+                <div class="mappg-control">
+                    <div>Track Dates</div>
+                    <div>
+                        <select id="mctlTrackDates" multiple="multiple" style="width:100px;height:30px;"></select>
+                    </div>
+                </div>
+                <div class="mappg-control">
+                    <div>Options</div>
+                    <div>
+                        <select id="mctlOptions" multiple="multiple" style="width:100px;height:30px;">
+                            <option value="SE">View Start/End Markers</option>
+                            <option value="TP">View Track Markers</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (ViewBag.DistrictName.Length > 0)
+{
+    <style>
+        .vmiddle-cell {
+            vertical-align: middle !important;
+        }
+    </style>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-danger" id="loading-example">
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover">
+                        @foreach (var item in ViewBag.FieldProgress)
+                        {
+                            var dPercent = 0;
+                            if (item.DistanceTotal > 0)
+                            {
+                                dPercent = (int)Math.Round((double)(item.DistanceMade / item.DistanceTotal) * 100, 0);
+                            }
+                            <tr>
+                                <td class="vmiddle-cell" style="width:150px;"><a href="/Census/FieldProgress/@ViewBag.ProjectId?cid=@item.CityId">&lt;&lt; Back to all Districts</a></td>
+                                <td class="vmiddle-cell" style="width:250px;">@item.DistrictName</td>
+                                <td class="vmiddle-cell">POI Count: @item.SurveyCount</td>
+                                <td class="vmiddle-cell">Distance Covered: @item.DistanceMade of @item.DistanceTotal kM</td>
+                                <td class="vmiddle-cell" style="width:30%">
+                                    <div class="text-center" style="float:right;margin-right:10px">
+                                        <input type="text" class="knob" data-readonly="true" value="@dPercent" data-width="60" data-height="60" data-fgcolor="#f56954" />
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div><!-- /.box-body -->
+            </div><!-- /.box -->
+        </div>
+    </div>
+} 
+else if (ViewBag.DistrictName.Length == 0)
+{
+<div class="row">
+    <div class="box-header">
+        <h4 style="margin-left:10px;float:left;">@ViewBag.CurrentFilterText</h4>
+        <div style="float:right;width:20%;margin-top: 1px;" id="polygonInfo"></div>
+    </div>
+</div>
+}
+
+<div class="row">
+    <!-- Left side column. contains the logo and sidebar -->
+    <div id="dvMap" style="height: 100vh; float:left; width:100%;">
+    </div>
+</div>
+

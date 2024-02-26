@@ -1,0 +1,33 @@
+﻿@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <img src="~/Images/app_logo.png" alt="Logo" style="float: left; margin-right: 10px; max-width: 60px; margin-top: 10px;" />
+
+    @if (User.IsInRole("Admin") || User.IsInRole("Project Manager"))
+    {
+        <h1 style="margin-top: 0px;">Welcome to @User.Identity.Name.Split('@')[0]</h1>
+    }
+    else
+    {
+        <h1 style="margin-top: 0px;">Research Console </h1>
+    }
+    <p class="lead">Monitor your projects in real time</p>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Getting started</h2>
+        <p>
+            Map your project questions with pre-set Variables, plan survey projects based on any number
+            of demographics or other customer Variables.<br />
+            Monitor all your projects at once or view details of a project in realtime!
+        </p>
+        <p>
+            Open projects assigned to you from <a href="~/Designer/OpenProject">Projects Center</a> and devise your future strategies.
+        </p>
+        <!--p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p-->
+    </div>
+</div>

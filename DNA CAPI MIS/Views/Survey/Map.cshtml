@@ -1,0 +1,717 @@
+﻿@model IEnumerable<DNA_CAPI_MIS.Models.SurveyDataView>
+
+@{
+    ViewBag.Title = "Dashboard";
+    bool firstRec = true;
+}
+
+<link href="~/Content/Site.css" rel="stylesheet" />
+
+<style type="text/css">
+    .POI_Legend {
+        width: 24px;
+        height: 24px;
+        border-radius: 12px;
+        background: #000;
+    }
+</style>
+
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=drawing&v=3.exp&language=ar"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="~/Content/js/bootstrap.js"></script>
+<script src="~/Content/js/bootstrap.min.js"></script>
+<script src="~/Content/js/bootstrap-datepicker.js"></script>
+<link href="~/Content/css/datepicker.css" rel="stylesheet" />
+<link href="~/Content/Site.css" rel="stylesheet" />
+<link href="~/Content/css/select2.css" rel="stylesheet" />
+<script src="~/Content/js/select2.js"></script>
+<script src="~/Content/js/select2.min.js"></script>
+
+
+
+
+<script type="text/javascript">  
+    var markers = [
+        @foreach (var item in Model)
+        {
+            if (!firstRec)
+            {
+                WriteLiteral(",");
+            }
+            WriteLiteral("{title: \"" + Url.Encode( item.FieldValue ) + "\",");
+            WriteLiteral("lat: " + item.Latitude + ",");
+            WriteLiteral("lng: " + item.Longitude + ",");
+            WriteLiteral("ID: " + item.SubCategoryID + ",");
+            WriteLiteral("sbjnum: " + item.sbjnum + ",");
+            WriteLiteral("yy: " + item.yy + ",");
+            WriteLiteral("mm: " + item.mm + ",");
+            WriteLiteral("dd: " + item.dd + ",");
+            WriteLiteral("Cat: \"" + item.SubCategoryName + "\"}");
+            firstRec = false;
+        }
+    ];
+
+    
+    @if (ViewBag.SurveyorOwnOutlets != null)
+    { 
+        firstRec = true;
+        WriteLiteral("var soomarkers = [");
+        foreach (var item in ViewBag.SurveyorOwnOutlets)
+        {
+            if (!firstRec)
+            {
+                WriteLiteral(",");
+            }
+            WriteLiteral("{title: \"" + Url.Encode( item.FieldValue ) + "\",");
+            WriteLiteral("lat: " + item.Latitude + ",");
+            WriteLiteral("lng: " + item.Longitude + ",");
+            WriteLiteral("ID: " + item.SubCategoryID + ",");
+            WriteLiteral("sbjnum: " + item.sbjnum + ",");
+            WriteLiteral("yy: " + item.yy + ",");
+            WriteLiteral("mm: " + item.mm + ",");
+            WriteLiteral("dd: " + item.dd + ",");
+            WriteLiteral("Cat: \"" + item.SubCategoryName + "\"}");
+            firstRec = false;
+        }
+        WriteLiteral("];");
+    }
+
+  
+
+    function toggle(source) {
+        var chk = source.checked;
+        checkboxes = document.getElementsByName('foo');
+        for(var i=0, n=checkboxes.length;i<n;i++) {
+            if(chk == true){
+                checkboxes[i].checked = source.checked;
+                polyLines[checkboxes[i].id].setMap(map);
+            }else{
+                polyLines[checkboxes[i].id].setMap(null);
+                checkboxes[i].checked = source.checked;
+            }
+        }
+    }
+
+    function getDayofWeek(date){
+        var dayName = $('#fromdate').formatDate('DD', date);
+        alert(dayname);
+    }
+
+
+</script>
+
+
+<script type="text/javascript">
+ 
+
+    function getUrlVars() {
+        var vars = [], hash;
+        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        for (var i = 0; i < hashes.length; i++) {
+            hash = hashes[i].split('=');
+            vars.push(hash[0]);
+            vars[hash[0]] = hash[1];
+        }
+        return vars;
+    }
+
+    // converting degree to radiun
+    function deg2rad(deg) {
+        return deg * (Math.PI / 180)
+    }
+
+    var makersCatId = [];
+    var markersCatName = [];
+
+    var map;
+    var placemarks = [];
+
+    var polyLines = new Array();
+    var surveydates = new Array();
+
+    window.onload = function () {
+        $('.collapse').collapse();
+        dragablePanel();
+        //Load Category data
+        var catColors = new Object();
+        @if (ViewBag.CategorySummary != null) {
+            foreach (var cat in ViewBag.CategorySummary)
+            {
+                var colorcode = "#" + cat.Color_Red.ToString("X") + cat.Color_Green.ToString("X") + cat.Color_Blue.ToString("X");
+                WriteLiteral("catColors[\"" + cat.ID + "\"] = \"" + colorcode + "\";");
+            }
+        }
+
+        //Generate markers on the map
+        //ddlFieldData();  // Removing this method call.
+        $('#dvMap').height(window.innerHeight - 100);
+
+        if (markers.length > 0) {
+            var mapOptions = {
+                center: new google.maps.LatLng(markers[0].lat, markers[0].lng),
+                zoom: 15,
+                mapTypeControlOptions: {
+                    mapTypeIds: [google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE, google.maps.MapTypeId.TERRAIN
+                    , google.maps.MapTypeId.HYBRID]
+                },
+
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var infoWindow = new google.maps.InfoWindow();
+            map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
+
+            //...
+
+            for (i = 0; i < markers.length; i++) {
+                var data = markers[i];
+                data.title = decodeURIComponent(data.title).replace(/\+/g, " ");
+                var myLatlng = new google.maps.LatLng(data.lat, data.lng);
+
+                var path;
+                var colour = catColors[data.ID];
+
+                if (data.Cat.length > 0 && data.ID > 0) {
+                    var marker = new google.maps.Marker({
+                        position: myLatlng,
+                        map: map,
+                        title: data.title,
+                        @if (ViewBag.CurrentSIdData != null)
+                        {
+                            WriteLiteral("draggable: true");
+                        }
+                        else {
+                           WriteLiteral(@"icon: {
+                           path: path = google.maps.SymbolPath.CIRCLE,
+                           fillOpacity: 1,
+                           fillColor: colour,
+                           strokeWeight: 1,
+                           scale: 5 //pixels
+                       }");
+                    }
+
+                    });
+                }
+
+                placemarks[i] = marker;
+                makersCatId[i] = data.ID;
+                markersCatName[i] = data.Cat;
+
+                @if (ViewBag.CurrentSIdData != null)
+                {
+                    WriteLiteral(@"google.maps.event.addListener(marker, 'dragend', function (marker) {
+                    var latLng = marker.latLng;
+                    var lat = latLng.lat();
+                    var lng = latLng.lng();
+                    alert('lat = ' + lat + ' And lng = ' + lng);
+                    });");
+                }
+            }
+        }
+        else {
+            if (markers.length > 0) {
+                var mapOptions = {
+                    center: new google.maps.LatLng(@ViewBag.City_Latitude, @ViewBag.City_Longitude),
+                    zoom: 9,
+                    mapTypeControlOptions: {
+                        mapTypeIds: [google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE, google.maps.MapTypeId.TERRAIN
+                        ,google.maps.MapTypeId.HYBRID]
+                    },
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+                var infoWindow = new google.maps.InfoWindow();
+                map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
+            }
+        }
+
+    }
+    
+    function accordianpanel(){
+        function close_accordion_section() {
+            $('.accordion .accordion-section-title').removeClass('active');
+            $('.accordion .accordion-section-content').slideUp(300).removeClass('open');
+        }
+ 
+        $('.accordion-section-title').click(function(e) {
+            // Grab current anchor value
+            var currentAttrValue = $(this).attr('href');
+ 
+            if($(e.target).is('.active')) {
+                close_accordion_section();
+            }else {
+                close_accordion_section();
+ 
+                // Add active class to section title
+                $(this).addClass('active');
+                // Open up the hidden content panel
+                $('.accordion ' + currentAttrValue).slideDown(300).addClass('open'); 
+            }
+ 
+            e.preventDefault();
+        });
+    }
+
+    function Surveyorlist(){
+        if(surveydates.length > 0){
+            var out='<input class="parent-chk-dt" type="checkbox" checked="checked" onClick="toggle(this)" />Surveyor Date<br/>';
+            for(i=0;i<surveydates.length;i++){
+                var color = polyLines[i].strokeColor;
+                out+="<div class='rgt-panel-chk-area'>"+
+                    "<input id='"+i+"' class='chksurveyordate' type='checkbox' checked='checked' name='foo'/>"+
+                            "<p>"+surveydates[i]+"</p></div>";
+                // out += '<li>'+surveydates[i]+'</li>'; 
+            }
+            $("#sidedata").html(out);
+            $('.chksurveyordate').click(function(){
+                if(this.checked == true){
+                    polyLines[this.id].setMap(map);
+                }else{
+                    polyLines[this.id].setMap(null);
+                
+                }
+            });
+        }
+    }
+
+    function dragablePanel(){
+        accordianpanel();
+        //$("#fromdate").datepicker();
+        //$("#todate").datepicker();
+        $("#btnsubmit").click(function(){
+            //alert(document.location.toString().toLowerCase());
+            var path = document.location.toString();
+            var spl = path.split("?");
+            path = spl[0]+"?";
+            var url= path;  //"~/Survey/Map/3390?"; //http://localhost:54050
+            $("#lblfromdate").css("display","none");
+            $("#lbltodate").css("display","none");
+            if($("#fromdate").val() != "" && $("#todate").val() != "" ){
+
+                var fromdate = $("#fromdate").val(); //.replace('0','')
+                var spl_fromdate = fromdate.split('/');
+
+                var day_fromdate = spl_fromdate[1];
+                var month_fromdate= spl_fromdate[0];
+                if(spl_fromdate[1] != '10' && spl_fromdate[1] != '20' && spl_fromdate[1] !='30'){
+                    day_fromdate = spl_fromdate[1].replace('0',' ');
+                }
+                if(month_fromdate != '10'){
+                    month_fromdate = spl_fromdate[0].replace('0',' ');
+                }
+            
+                var todate = $("#todate").val();
+                var spl_todate = todate.split('/');
+
+                var day_todate = spl_todate[1];
+                var month_todate = spl_todate[0];
+                if(spl_todate[1] != '10' && spl_todate[1] != '20' && spl_todate[1] !='30'){
+                    day_todate = spl_todate[1].replace('0',' ');
+                }
+                if(month_todate != '10'){
+                    month_todate = spl_todate[0].replace('0',' ');
+                }
+
+                if(getParameterByName("surveyor") != ""){
+                    url+= "surveyor="+getParameterByName("surveyor");
+                }
+                if(getParameterByName("c") != ""){
+                    url+= "&c="+getParameterByName("c");
+                }
+                if(getParameterByName("country") != ""){
+                    url+= "&country="+getParameterByName("country");
+                }
+                url+= "&fromdate="+spl_fromdate[2]+"-"+month_fromdate+"-"+day_fromdate;
+                url+= "&todate="+spl_todate[2]+"-"+month_todate+"-"+day_todate;
+                window.location= url;
+            }
+            else{
+                if($("#fromdate").val() == ""){
+                    $("#lblfromdate").css("display","block");
+                }
+                if($("#todate").val() == ""){
+                    $("#lbltodate").css("display","block");
+                }
+            }
+
+        });
+
+        (function($) {
+            $.fn.drags = function(opt) {
+
+                opt = $.extend({handle:"",cursor:"move"}, opt);
+
+                if(opt.handle === "") {
+                    var $el = this;
+                } else {
+                    var $el = this.find(opt.handle);
+                }
+
+                return $el.css('cursor', opt.cursor).on("mousedown", function(e) {
+                    if(opt.handle === "") {
+                        var $drag = $(this).addClass('draggable');
+                    } else {
+                        var $drag = $(this).addClass('active-handle').parent().addClass('draggable');
+                    }
+                    var z_idx = $drag.css('z-index'),
+                        drg_h = $drag.outerHeight(),
+                        drg_w = $drag.outerWidth(),
+                        pos_y = $drag.offset().top + drg_h - e.pageY,
+                        pos_x = $drag.offset().left + drg_w - e.pageX;
+                    $drag.css('z-index', 1000).parents().on("mousemove", function(e) {
+                        $('.draggable').offset({
+                            top:e.pageY + pos_y - drg_h,
+                            left:e.pageX + pos_x - drg_w
+                        }).on("mouseup", function() {
+                            $(this).removeClass('draggable').css('z-index', z_idx);
+                        });
+                    });
+                    e.preventDefault(); // disable selection
+                }).on("mouseup", function() {
+                    if(opt.handle === "") {
+                        $(this).removeClass('draggable');
+                    } else {
+                        $(this).removeClass('active-handle').parent().removeClass('draggable');
+                    }
+                });
+
+            }
+        })(jQuery);
+        $("#tst_drag").drags();
+        $("#sidepanel").drags();
+    
+    }
+
+    function addSurveyorTracks() {
+        if(markers.length > 0){
+        var currentDate = "";
+        var path;
+        var lineno = 0;
+        var latlngbounds = new google.maps.LatLngBounds();
+        var myLatlng;
+        for (i = 0; i < markers.length; i++) {
+            var data = markers[i];
+            if (data.Cat == "" && data.ID == 0) {
+                if (currentDate.length == 0 || currentDate != data.yy + "-" + data.mm + "-" + data.dd) {
+                    //Intialize the Path Array
+                    path = new google.maps.MVCArray();
+                    currentDate = data.yy + "-" + data.mm + "-" + data.dd
+
+                    //Set the Path Stroke Color
+                    color = '#11' + (((lineno + 25) * 5) % 255).toString(16) + (((lineno + 50) * 50) % 255).toString(16);//'#'+Math.floor(Math.random()*16777215).toString(16);
+                    polyLines[lineno] = new google.maps.Polyline({ path: path, map: map, strokeColor: color, strokeOpacity: 0.5, strokeWeight: 2 });
+                    surveydates[lineno] = data.dd+'-'+data.mm+'-'+data.yy;
+                    // Add a new marker at the new plotted point on the polyline.
+                    if (i > 0) {
+                        var datap = markers[i - 1];
+                        myLatlng = new google.maps.LatLng(datap.lat, datap.lng);
+                        var marker = new google.maps.Marker({
+                            position: myLatlng,
+                            title: 'End of day for date: ' + datap.yy + "-" + datap.mm + "-" + datap.dd,
+                            map: map
+                        });
+                    }
+                    myLatlng = new google.maps.LatLng(data.lat, data.lng);
+                    var marker = new google.maps.Marker({
+                        position: myLatlng,
+                        title: 'Start of day for date: ' + currentDate,
+                        map: map
+                    });
+                    lineno++;
+                }
+
+                //Add current post to current Path
+                myLatlng = new google.maps.LatLng(data.lat, data.lng);
+
+                path.push(myLatlng);
+
+                //Build the area of the points, so that it can be centered on the map
+                var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(data.lat, data.lng),
+                    //map: map,
+                    //title: data.title
+                });
+
+                latlngbounds.extend(marker.position);
+
+                //if (i > 23) {
+                //    break;
+                //}
+            }
+        }
+        Surveyorlist();
+        if (i > 0) {
+            var datap = markers[markers.length - 1];
+            myLatlng = new google.maps.LatLng(datap.lat, datap.lng);
+            var marker = new google.maps.Marker({
+                position: myLatlng,
+                title: 'End of day for date: ' + datap.yy + "-" + datap.mm + "-" + datap.dd,
+                map: map
+            });
+        }
+        map.setCenter(latlngbounds.getCenter());
+        map.fitBounds(latlngbounds);
+
+
+        for (i = 0; i < soomarkers.length; i++) {
+            var data = soomarkers[i];
+            if (data.sbjnum > 0) {
+                myLatlng = new google.maps.LatLng(data.lat, data.lng);
+                var marker = new google.maps.Marker({
+                    position: myLatlng,
+                    map: map,
+                    title: data.Cat + ' > ' + data.title,
+                    icon: {
+                        path: path = google.maps.SymbolPath.CIRCLE,
+                        fillOpacity: 0.5,
+                        fillColor: 'red',
+                        strokeWeight: 1,
+                        scale: 4 //pixels
+                    }
+                });
+            }
+        }
+        }
+
+    }
+
+
+    function addCommas(n) {
+        var rx = /(\d+)(\d{3})/;
+        return String(n).replace(/^\d+/, function (w) {
+            while (rx.test(w)) {
+                w = w.replace(rx, '$1,$2');
+            }
+            return w;
+        });
+    }
+    //Not needed
+    function ddlFieldData() {
+
+        var tempJson = '@ViewBag.ddlFieldItems';
+        //var obj = jQuery.parseJSON(tempJson);
+        var code = /&quot;/g;
+        var tempJson = tempJson.replace(code, '\"');
+        //alert(tempJson1);
+        // alert(obj);
+
+
+        var obj = jQuery.parseJSON(tempJson);
+        //alert(obj[0].Title);
+
+        var ddlHtml = '<select>';
+        for (var i = 0; i < obj.length; i++) {
+            ddlHtml += '<option>' + obj[i].Title + '</option>';
+        }
+        ddlHtml += '</select>';
+        ddlHtml += '<input  type="text" />';
+
+        $("#ddl").append(ddlHtml);
+
+        //document.getElementById("ddl").innerHTML = ddlHtml;
+        //alert(ddlHtml);
+    }
+
+    function getParameterByName(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+            results = regex.exec(location.search);
+        return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+</script>
+
+<!-- <div style="display:block; position:absolute; z-index='100'" id="divSummery"></div> -->
+
+
+<div class="row">
+    <div class="col-xs-3"></div>
+    <div class="col-xs-9">
+        <div class="mappg-dtpck-area">
+            <div style="float: left; margin-left: 20px; margin-top: 20px;">
+                <div>From Date</div>
+                <div>
+                    <input type="text" id="fromdate" style="width:200px;height:30px;">
+                </div>
+                <div style=" width: 200px; height: 30px;">
+                    <p id="lblfromdate" style="color:red;display:none;">Select from date</p>
+                </div>
+            </div>
+            <div style="float: left; margin-left: 20px; margin-top: 20px;">
+                <div>To Date</div>
+                <div>
+                    <input type="text" id="todate" style="width:200px;height:30px;">
+                </div>
+                <div style=" width: 200px; height: 30px;">
+                    <p id="lbltodate" style="color: red; display: none;">Select to date</p>
+                </div>
+            </div>
+            <div style="float: left; margin-left: 20px; margin-top: 20px;">
+                <div>&nbsp;</div>
+                <div>
+                    <input type="button" id="btnsubmit" value="Filter" style="width:100px;height:30px;">
+
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="box-header"><h4 style="margin-left:10px;">@ViewBag.CurrentFilterText</h4></div>
+    <!-- Left side column. contains the logo and sidebar -->
+    <div id="dvMap" style="height: 100vh; float:left; width:100%;">
+    </div>
+    
+        <div class="col-xs-3" id="tst_drag" style="z-index: 9;">
+            <section class="sidebar">
+                <div class="col-xs-12">
+                    <!-- Map box -->
+                    <div id="summaryPnl" style="margin-top:36px;">
+                        <div class="box box-primary">
+                            <div class="box-header">
+                            </div>
+                            <div class="box-body no-padding">
+                                <div class="table-responsive">
+                                    @*<div>
+                                        <a href="javascript:addSurveyorTracks()">Show Surveyor Tracks</a>
+                                    </div>*@
+
+                                    <div>
+                                        <div class="accordion">
+                                            <div class="accordion-section">
+                                                <div style="height: 30px; padding: 5px;">
+                                                    <a href="javascript:addSurveyorTracks()">Show Surveyor Tracks</a>
+                                                </div>
+                                                <a class="accordion-section-title" href="#accordion-1">Cities</a>
+
+                                                <div id="accordion-1" class="accordion-section-content">
+                                                    <p>
+                                                        <!-- .table - Uses sparkline charts-->
+                                                        <table class="table">
+                                                            @{
+                                                                var countryName = "";
+                                                                var firstRow = true;
+                                                            }
+                                                            @if (ViewBag.AllCitiesList != null)
+                                                            {
+                                                                foreach (var ct in ViewBag.AllCitiesList)
+                                                                {
+                                                                    if (countryName != ct.CountryName)
+                                                                    {
+                                                                        countryName = ct.CountryName;
+                                                                        if (!firstRow)
+                                                                        {
+                                                                            firstRow = false;
+                                                        <tr>
+                                                            <td><br /></td>
+                                                        </tr>
+                                                                        }
+                                                        <tr>
+                                                            <th><b><a href="?country=@ct.CountryID">@countryName</a></b></th>
+                                                        </tr>
+                                                                    }
+                                                        <tr>
+                                                            <td><a href="?country=@ct.CountryID&c=@ct.ID"><i class="fa fa-angle-double-right"></i> @ct.Name</a></td>
+                                                        </tr>
+                                                                }
+                                                            }
+                                                        </table><!-- /.table -->
+                                                    </p>
+                                                </div>
+                                                <a class="accordion-section-title" href="#accordion-2">Category</a>
+
+                                                <div id="accordion-2" class="accordion-section-content">
+                                                    <p>
+                                                        <!-- .table - Uses sparkline charts-->
+                                                        <table class="table table-striped">
+                                                            <tr>
+
+                                                                <th colspan="2"><a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><strong>Category</strong></a></th>
+                                                                <th>Outlets</th>
+
+                                                            </tr>
+                                                            @if (ViewBag.CategorySummary != null)
+                                                            {
+                                                                foreach (var cat in ViewBag.CategorySummary)
+                                                                {
+                                                                    var colorcode = "#" + cat.Color_Red.ToString("X") + cat.Color_Green.ToString("X") + cat.Color_Blue.ToString("X");
+                                                            <tr>
+                                                                <td><div class="POI_Legend" style="background-color:@colorcode"></div></td>
+                                                                <td>
+                                                                    <a href="?cat=@cat.ID&c=@ViewBag.city&country=@ViewBag.CountryID">@cat.Name</a>
+                                                                </td>
+                                                                <td>@cat.OutletCount</td>
+                                                            </tr>
+                                                                }
+                                                            }
+                                                        </table>
+                                                    </p>
+                                                </div><!--end .accordion-section-content-->
+                                                <a class="accordion-section-title" href="#accordion-3">Surveyors</a>
+
+                                                <div id="accordion-3" class="accordion-section-content">
+                                                    <p>
+                                                        <table class="table table-striped">
+                                                            <tr>
+                                                                <th colspan="2"><strong>Surveyors</strong></th>
+                                                                <th>Outlets</th>
+                                                            </tr>
+                                                            @if (ViewBag.surveyorname != null)
+                                                            {
+                                                                foreach (var cat in ViewBag.surveyorname)
+                                                                {
+
+                                                                    //var colorcode = "#" + cat.Color_Red.ToString("X") + cat.Color_Green.ToString("X") + cat.Color_Blue.ToString("X");
+                                                                    <tr>
+                                                                        <td></td>
+                                                                        <td>
+                                                                            <a href="?surveyor=@cat.Name&c=@ViewBag.city&country=@ViewBag.CountryID">@cat.Name</a>
+                                                                        </td>
+                                                                        <td>@cat.count</td>
+                                                                    </tr>
+                                                                }
+                                                            }
+                                                        </table><!-- /.table -->
+
+                                                    </p>
+                                                </div><!--end .accordion-section-content-->
+
+
+                                            </div><!--end .accordion-section-->
+                                        </div><!--end .accordion-->
+
+                                    </div>
+
+                                  @*// remove code from here*@
+                                </div>
+                            </div><!-- /.box-body-->
+                            <div class="box-footer">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- /.sidebar -->
+        </div>
+        <div class="col-xs-9">
+            <!-- Map box -->
+
+            <div class="box box-primary">
+
+
+                <div class="box-body no-padding">
+
+                    <div id="sidepanel" class="rgt-panel-area">
+
+                        <div id="sidedata" class="rgt-panel-inner-wrapper">
+
+                        </div>
+
+                    </div>
+                </div>
+            </div><!-- /.box-body-->
+            <div class="box-footer">
+            </div>
+        </div>
+
+    </div>
+
+

@@ -1,0 +1,150 @@
+﻿@model IEnumerable<DNA_CAPI_MIS.Models.ProjectField>
+
+@{
+    ViewBag.Title = "Survey Reports Data Filter";
+}
+
+@Styles.Render("~/Content/styles/filters")
+
+@section Scripts {
+@Scripts.Render("~/bundles/bootstrap/jqwidgets")
+@Scripts.Render("~/bundles/bootstrap/filters")
+
+<script>
+    $(document).ready(function () {
+        $("#fromdate").datepicker();
+        $("#todate").datepicker();
+        $("#surveror").select2();
+    });
+
+    function getdata() {
+        var path = document.location.toString();
+        path = path.replace("OpsReports", "OpsReportsView");
+        path = path.replace("#", "");
+
+        if ($("#fromdate").val() != "" && $("#todate").val() != "") {
+            var fromdate = $("#fromdate").val();
+            var spl_fromdate = fromdate.split('/');
+            var day_fromdate = spl_fromdate[1];
+            var month_fromdate = spl_fromdate[0];
+
+            var todate = $("#todate").val();
+            var spl_todate = todate.split('/');
+            var day_todate = spl_todate[1];
+            var month_todate = spl_todate[0];
+
+            path += "&fromdate=" + spl_fromdate[2] + "/" + month_fromdate + "/" + day_fromdate;
+            path += "&todate=" + spl_todate[2] + "/" + month_todate + "/" + day_todate;
+
+        }
+        if ($("#surveror").val() != "" && $("#surveror").val() != null) {
+            path += "&surveyors=" + $("#surveror").val();
+        }
+        if ($("#astatus").val() != "" && $("#astatus").val() != null) {
+            path += "&astatus=" + $("#astatus").val();
+        }
+
+        var totOEFields = document.getElementsByName("chkOEFields");
+        var iOEFields = 0;
+        var sOEFields = "";
+
+        for (iOEFields = 0; iOEFields < totOEFields.length; iOEFields++) {
+            if (totOEFields[iOEFields].checked) {
+                sOEFields += "," + totOEFields[iOEFields].value;
+            }
+        }
+        if (sOEFields.length > 0) {
+            sOEFields = sOEFields.substring(1);     //remove first comma
+        }
+        path += "&oef=" + sOEFields;
+        //alert(path);
+        window.location = path;
+    }
+
+</script>
+<script type="text/javascript">
+    function MyFunction() {
+        alert("fromdate:" + getFromDate() + ",todate:" + gettoDate());
+    }
+    function getFromDate() {
+
+        return document.getElementById('fromdate').value;
+    }
+    function getToDate() {
+        return document.getElementById('todate').value;
+    }
+</script>
+}
+
+<h4><strong>@ViewBag.ProjectName</strong></h4>
+<h4>@ViewBag.Title</h4>
+
+@if (ViewBag.ErrorMessage != null && ViewBag.ErrorMessage.Length > 0)
+{
+    <h4>@ViewBag.ErrorMessage</h4>
+}
+else
+{
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-md-2">Approval Status</label>
+            <div class="col-md-8">
+                <select id="astatus" style="margin-top: 5px;">
+                    <option value="0">Unchecked</option>
+                    <option value="1">Approved</option>
+                    <option value="2">Rejected</option>
+                    <option value="3">All</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Surveyors</label>
+            <div class="col-md-8">
+                <select id="surveror" multiple="multiple" style="width:100%;height:26px;">
+
+                    @if (ViewBag.Surveyors != null)
+                    {
+                        foreach (var s in ViewBag.Surveyors)
+                        {
+                            <option value="'@s.Name'">@s.Name</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">From Date</label>
+            <div class="col-md-8">
+                <input type="text" id="fromdate" style="width:200px;height:30px;">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">To Date</label>
+            <div class="col-md-8">
+                <input type="text" id="todate" style="width:200px;height:30px;">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">Open Ended Questions</label>
+            <div class="col-md-8">
+                @foreach (var item in Model)
+                {
+                    var itemName = item.Title;
+                    if (itemName.Length > 40)
+                    {
+                        itemName = itemName.Substring(0, 40);
+                    }
+
+                <input type="checkbox" name="chkOEFields" value="@item.ID" title="@itemName" >@itemName<br />
+                }
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-8">
+                <input type="button" onclick="getdata()" value="View Survey Data" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}

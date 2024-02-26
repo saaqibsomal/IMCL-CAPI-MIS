@@ -1,0 +1,220 @@
+﻿@model IEnumerable<DNA_CAPI_MIS.Models.SurveyDataView>
+
+@{
+    ViewBag.Title = "Index";
+}
+<link rel="stylesheet" href="~/Content/jqwidgets/jqwidgets/styles/jqx.base.css" type="text/css" />
+
+<h2>@ViewBag.CensusCategoryName: Survey Results</h2>
+<p><a href="@Url.Action("SurveyLocations")/@ViewBag.CategoryId">Back to Census Locations</a></p>
+
+@if (ViewBag.ErrorMessage != null && ViewBag.ErrorMessage.Length > 0)
+{
+    <h4>@ViewBag.ErrorMessage</h4>
+}
+else
+{
+   
+@section Scripts {
+    @Scripts.Render("~/bundles/bootstrap/jqwidgets")
+
+<script type="text/javascript">
+    function urldecode(str) {
+        return decodeURIComponent((str + '').replace(/\+/g, '%20'));
+    }
+
+    function PopulateData() {
+        // prepare the data
+        var data = new Array();
+        var row = {};
+
+        @{
+            var currentSbjnum = 0;
+            var headerPrinted = false;
+            var firstRow = true;
+            var id = 0;
+        }
+        @foreach (var item in Model)
+        {
+            if (currentSbjnum != item.sbjnum)
+            {
+                if (!firstRow)
+                {
+                    WriteLiteral("data[" + id++ + "] = row;\n");
+                }
+                firstRow = false;
+                currentSbjnum = item.sbjnum;
+                WriteLiteral("row = {};");
+                WriteLiteral("row['id'] = " + id + ";");
+                WriteLiteral("row['sbjnum'] = " + item.sbjnum + ";");
+                WriteLiteral("row['CreatedDate'] = '" + item.Created.ToShortDateString() + "';");
+                WriteLiteral("row['CreatedTime'] = '" + item.Created.ToShortTimeString() + "';");
+                WriteLiteral("row['Longitude'] = " + item.Longitude + ";");
+                WriteLiteral("row['Latitude'] = " + item.Latitude + ";");
+                WriteLiteral("row['SurveyorName'] = '" + item.SurveyorName + "';");
+                WriteLiteral("row['Country'] = '" + item.CountryName.Replace("'", "\'") + "';");
+                WriteLiteral("row['City'] = '" + Url.Encode(item.CityName) + "';");
+                WriteLiteral("row['District'] = '" + Url.Encode(item.DistrictName) + "';");
+            }
+            WriteLiteral("row['_" + item.FieldId + "'] = urldecode(\"" + Url.Encode(item.FieldValue) + "\");");
+        }
+        @if (!firstRow)
+        {
+            WriteLiteral("data[" + id++ + "] = row;\n");
+        }
+
+        return data;
+    }
+
+    $(document).ready(function () {
+        // prepare the data
+        var data = PopulateData();
+
+        var source =
+        {
+            localdata: data,
+            datafields:
+            [
+            @if (Model.Count() > 0)
+            {
+                currentSbjnum = Model.FirstOrDefault().sbjnum;
+            }    
+            @{headerPrinted = false;}
+            @foreach (var item in Model)
+            {
+                if (currentSbjnum != item.sbjnum) { break; }
+                if (!headerPrinted)
+                {
+                    headerPrinted = true;
+                    WriteLiteral("{ name: 'sbjnum', type: 'number' },");
+                    WriteLiteral("{ name: 'CreatedDate', type: 'string' },");
+                    WriteLiteral("{ name: 'CreatedTime', type: 'string' },");
+                    WriteLiteral("{ name: 'Longitude', type: 'number' },");
+                    WriteLiteral("{ name: 'Latitude', type: 'number' },");
+                    WriteLiteral("{ name: 'SurveyorName', type: 'string' },");
+                    WriteLiteral("{ name: 'Country', type: 'string' },");
+                    WriteLiteral("{ name: 'City', type: 'string' },");
+                    WriteLiteral("{ name: 'District', type: 'string' },");
+                }
+                WriteLiteral("{ name: '_" + item.FieldId + "', type: 'string' },");
+            }
+            ],
+            datatype: "array",
+            updaterow: function (rowid, rowdata) {
+                // synchronize with the server - send update command
+            }
+        };
+
+        var dataAdapter = new $.jqx.dataAdapter(source);
+
+        var toThemeProperty = function (className) {
+            return className + " " + className + "-" + theme;
+        }
+
+        var groupsrenderer = function (text, group, expanded, data) {
+            /*                if (data.groupcolumn.datafield == 'price' || data.groupcolumn.datafield == 'quantity') {
+                                var number = dataAdapter.formatNumber(group, data.groupcolumn.cellsformat);
+                                var text = data.groupcolumn.text + ': ' + number;
+                                if (data.subItems.length > 0) {
+                                    var aggregate = this.getcolumnaggregateddata(data.groupcolumn.datafield, ['sum'], true, data.subItems);
+                                }
+                                else {
+                                    var rows = new Array();
+                                    var getRows = function (group, rows) {
+                                        if (group.subGroups.length > 0) {
+                                            for (var i = 0; i < group.subGroups.length; i++) {
+                                                getRows(group.subGroups[i], rows);
+                                            }
+                                        }
+                                        else {
+                                            for (var i = 0; i < group.subItems.length; i++) {
+                                                rows.push(group.subItems[i]);
+                                            }
+                                        }
+                                    }
+                                    getRows(data, rows);
+                                    var aggregate = this.getcolumnaggregateddata(data.groupcolumn.datafield, ['sum'], true, rows);
+                                }
+                                
+                                return '<div class="' + toThemeProperty('jqx-grid-groups-row') + '" style="position: absolute;"><span>' + text + ', </span>' + '<span class="' + toThemeProperty('jqx-grid-groups-row-details') + '">' + "Total" + ' (' + aggregate.sum + ')' + '</span></div>';
+                            }
+                            else {
+                                return '<div class="' + toThemeProperty('jqx-grid-groups-row') + '" style="position: absolute;"><span>' + text + '</span>';
+                            }*/
+        }
+
+
+        // initialize jqxGrid
+        $("#jqxgrid").jqxGrid(
+        {
+            width: 950,
+            source: dataAdapter,
+            groupable: true,
+            columnsresize: true,
+            columnsreorder: true,
+            groupsrenderer: groupsrenderer,
+            altrows: true,
+            sortable: true,
+            filterable: true,
+            showfilterrow: false,
+            selectionmode: 'multiplecellsextended',
+            columns: [
+            @{headerPrinted = false;}
+            @foreach (var item in Model)
+            {
+                if (currentSbjnum == item.sbjnum)
+                {
+                    if (!headerPrinted)
+                    {
+                        headerPrinted = true;
+                        WriteLiteral("{ text: 'Survey Id', groupable: true, datafield: 'sbjnum', type: 'number', width: 80 },");
+                        WriteLiteral("{ text: 'Created OnDate', groupable: true, datafield: 'CreatedDate', type: 'string', width: 120 },");
+                        WriteLiteral("{ text: 'Created OnTime', groupable: true, datafield: 'CreatedTime', type: 'string', width: 120 },");
+                        WriteLiteral("{ text: 'Country', groupable: true, datafield: 'Country', type: 'string', width: 150 },");
+                        WriteLiteral("{ text: 'City', groupable: true, datafield: 'City', type: 'string', width: 150 },");
+                        //if (ViewBag.CountryId == 2)
+                        //{
+                        WriteLiteral("{ text: 'District', groupable: true, datafield: 'District', type: 'string', width: 150 },");
+                        WriteLiteral("{ text: 'Longitude', groupable: true, datafield: 'Longitude', type: 'number', width: 80 },");
+                        WriteLiteral("{ text: 'Latitude', groupable: true, datafield: 'Latitude', type: 'number', width: 80 },");
+                        //}
+                        WriteLiteral("{ text: 'Surveyor Name', groupable: true, datafield: 'SurveyorName', type: 'string', width: 80 },");
+                    }
+                    WriteLiteral("{ text: '" + item.Title + "', groupable: true, datafield: '_" + item.FieldId + "', type: 'string', width: 100 },");
+                }
+            }
+            ]
+        });
+
+        $("#excelExport").click(function () {
+            var exportInfo = $("#jqxgrid").jqxGrid('exportdata', 'xls');
+            download("DataSheet_" + "@DateTime.Today.ToShortDateString().Replace("/", "")" + ".xls", exportInfo);
+        });
+
+        function download(filename, content) {
+            contentType = 'application/octet-stream';
+            var a = document.createElement('a');
+            var blob = new Blob([content], {'type':contentType});
+            a.href = window.URL.createObjectURL(blob);
+            a.download = filename;
+            a.click();
+        }
+
+    });
+</script>
+
+}
+
+<div id='jqxWidget'>
+    <div id="jqxgrid"></div>
+
+    <div style="float: left; margin-left: 20px; margin-top: 20px;">
+        <input type="button" value="Export to Excel" id='excelExport' />
+    </div>
+    
+    <div style="float: left; margin-left: 20px; margin-top: 20px;">
+        <input value="Remove Filter" id="clearfilteringbutton" type="button" />
+    </div>
+    <br/>
+</div>
+}

@@ -1,0 +1,152 @@
+﻿@model DNA_CAPI_MIS.Models.Project
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap/jqwidgets")
+    @Scripts.Render("~/bundles/bootstrap/filters")
+
+    <script>
+        $(document).ready(function () {
+            $("#fromdate").datepicker();
+            $("#todate").datepicker();
+        });
+
+        function getdata() {
+            var path = document.location.toString();
+            path = path.replace("SurveyApprovalFilter", "SurveyApproval");
+            path = path.replace("#", "");
+            path += "/en?";
+
+            if ($("#fromdate").val() != "" && $("#todate").val() != "") {
+                var fromdate = $("#fromdate").val();
+                var spl_fromdate = fromdate.split('/');
+                var day_fromdate = spl_fromdate[1];
+                var month_fromdate = spl_fromdate[0];
+
+                var todate = $("#todate").val();
+                var spl_todate = todate.split('/');
+                var day_todate = spl_todate[1];
+                var month_todate = spl_todate[0];
+
+                path += "&fromdate=" + spl_fromdate[2] + "/" + month_fromdate + "/" + day_fromdate;
+                path += "&todate=" + spl_todate[2] + "/" + month_todate + "/" + day_todate;
+
+            }
+
+            //alert(path);
+            window.location = path;
+        }
+
+    </script>
+    <script type="text/javascript">
+        function MyFunction() {
+            alert("fromdate:" + getFromDate() + ",todate:" + gettoDate());
+        }
+        function getFromDate() {
+
+            return document.getElementById('fromdate').value;
+        }
+        function getToDate() {
+            return document.getElementById('todate').value;
+        }
+    </script>
+}
+
+<p>
+    @Html.ActionLink("All Projects", "OpenProject", "Designer")
+</p>
+<h4>@ViewBag.Title</h4>
+
+<div class="row desktop">
+    <div class="col-md-12">
+        <div class="box" style="display: table;">
+            <div class="box-header">
+            </div><!-- /.box-header -->
+
+            <div class="box-body table-responsive" style="display:table;width:100%">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true)
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Guid, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.HiddenFor(model => model.Guid)
+                                @Html.TextBox("GuidView", Model.Guid, new { disabled = "disabled", style = "width:300px" })
+                                @Html.ValidationMessageFor(model => model.Guid)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(model => model.Name, new { style = "width:300px" })
+                                @Html.ValidationMessageFor(model => model.Name)
+                            </div>
+                        </div>
+
+                        @*<div class="form-group">
+                                @Html.LabelFor(model => model.QCRequirement, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.QCRequirement)
+                                    @Html.ValidationMessageFor(model => model.QCRequirement)
+                                </div>
+                            </div>*@
+
+                        @*<div class="form-group">
+                                <label class="control-label col-md-2">From Date</label>
+                                <div class="col-md-8">
+                                    <input type="text" id="fromdate" style="width:200px;height:30px;">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-2">To Date</label>
+                                <div class="col-md-8">
+                                    <input type="text" id="todate" style="width:200px;height:30px;">
+                                </div>
+                            </div>*@
+                        @*<div class="form-group">
+                            <label class="control-label col-md-2">Sync with Dooblo SurveyToGo(r)</label>
+                            <div class="col-md-8">
+                                <input type="checkbox" name="SelectedRole" value="@Model.STGSync" checked="@Model.STGSync" class="checkbox-inline" />
+                            </div>
+                        </div>*@
+
+                        <div class="form-group">
+                            @Html.Label("Status", new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("Status")
+                                @Html.ValidationMessageFor(model => model.Status)
+                            </div>
+                        </div>
+
+                        @*<div class="form-group">
+                            @Html.Label("Project Type", new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("Type")
+                                @Html.ValidationMessageFor(model => model.Type)
+                            </div>
+                        </div>*@
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Create" class="btn btn-default" />
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <div class="box-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

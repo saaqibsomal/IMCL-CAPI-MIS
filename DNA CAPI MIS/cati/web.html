@@ -1,0 +1,224 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+  <link rel="stylesheet" style="text/css" href="/cati/css/bootstrap.min.css" />
+   <link rel="stylesheet" style="text/css" href="/cati/css/jquery-ui.css" />
+   <!--<link rel="stylesheet" style="text/css" href="/cati/css/font-awesome.min.css" />   -->
+   <link rel="stylesheet" style="text/css" href="/cati/css/font-awesome.min.css" />
+   <link rel="stylesheet" style="text/css" href="/cati/css/style.css" />  
+   <link rel="stylesheet" style="text/css" href="/cati/css/kati-web-style.css" />  
+
+  </head>
+  <body>
+    <script type="text/javascript" src="/cati/js/jquery-2.1.1.min.js"></script>  
+    <script type="text/javascript" src="/cati/js/jquery-ui.js" ></script> 
+    <script type="text/javascript" src="/cati/js/json2.js"></script>  
+    <script type="text/javascript" src="/cati/js/formControl.js" ></script>  
+    <script type="text/javascript" src="/cati/js/textboxControl.js" ></script>
+    <script type="text/javascript" src="/cati/js/dropdownControl.js" ></script> 
+    <script type="text/javascript" src="/cati/js/datepickerControl.js" ></script>
+    <script type="text/javascript" src="/cati/js/integerTextboxControl.js" ></script>
+    <script type="text/javascript" src="/cati/js/checkboxControl.js" ></script>
+    <script type="text/javascript" src="/cati/js/singlechoicedropdownControl.js" ></script>
+    <script type="text/javascript" src="/cati/js/singlechoiceRadioControl.js" ></script>
+    <script type="text/javascript" src="/cati/js/multiplechoicedropdownControl.js" ></script>
+    <script type="text/javascript" src="/cati/js/multichoiceCheckboxControl.js" ></script>
+    <script type="text/javascript" src="/cati/js/openendedtextboxTextControl.js" ></script>
+    <script type="text/javascript" src="/cati/js/openendedtextboxIntegerControl.js" ></script> 
+    <script type="text/javascript" src="/cati/js/bodytextControl.js" ></script> 
+    <script type="text/javascript" src="/cati/js/numberCounterControls.js" ></script> 
+    <script type="text/javascript" src="/cati/js/rangesliderControl.js" ></script>
+    <script type="text/javascript" src="/cati/js/stopwatchControl.js" ></script>
+    <script type="text/javascript" src="/cati/js/radioControl.js" ></script> 
+    <script type="text/javascript" src="/cati/js/surveyForm.js" ></script>
+    <script type="text/javascript" src="/cati/js/stwController.js" ></script>
+    <script type="text/javascript" src="/cati/js/input_mask.js" ></script>
+    <script type="text/javascript" src="/cati/js/soundrecordControls.js"></script>
+
+
+
+    
+	<div class="wrapper">
+		<div>
+		  <h1></h1>
+		  <form id='fData' role="form"></form>
+		  <div id='cData' style="display:none;"></div>
+		</div>  
+	</div>
+	
+      <footer class="footer">
+          <div class="container">
+              <!--   <div class="parent_body">
+                   <button id="btn-right" class="btn btn-default">save</button>
+               </div> -->
+
+              <div class="parent_body">
+                  <button id="btn-left" class="btn btn-default prev_button"><img src="/cati/img/back_arrow.png"></button>
+                  <p class="counter_text"><span> 1</span> of 1</p>
+                  <!--  <p class="counter_text">
+                    <span class="parnt-pgnmbr">
+                      <span class="frst-pgn">1</span>
+                      <span class="scnd-pgn">of</span>
+                      <span class="thrd-pgn">1</span>
+                    </span>
+                  </p> -->
+                  <button id="btn-right" class="btn btn-default"><img src="/cati/img/forward_arrow.png"></button>
+                  <!--    <button id="btn-right" class="btn btn-default"><img src="img/forward_arrow.png"></button>  -->
+
+              </div>
+          </div>
+      </footer>
+
+    <div id="res" class="alert"></div>
+
+    
+<script language="javascript"><!--
+
+  var sf = null;
+  
+  function getParameterByName(name) {
+      name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+      var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+          results = regex.exec(location.search);
+      return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+  }
+  
+  $(document).ready(function () 
+    {
+        var language='en';
+
+        //Following code is not working when called via ajax
+        var projectId = getParameterByName("pid");
+        var language = getParameterByName("lang");
+        
+        //location.pathname returns the url components of calling page
+        var pathArray = window.location.pathname.split( '/' );
+        if (projectId <= 0 && pathArray[3] > 0) {
+            projectId = pathArray[3];
+        }
+        if (projectId > 0)
+        {
+            $.ajax({
+                url: '/Designer/GetProjectSectionFieldsJSON/'+projectId+'/'+language,
+                type: 'GET',
+                success: function(data) {
+                    try {
+                        sf = new surveyForm(data);
+                        sf.build();
+
+                        $('#fData').html(sf.formView);
+
+                        $('#cData').html(sf.connectedFormView);
+
+                        sf.refreshPage();
+                    }
+                    catch(err) {
+                        sf.alert(err.stack);
+                    }                  
+                }
+            });
+       
+
+            if (language=="EN") {
+                $('#btn-right').click(function(e) {
+		    e.preventDefault();
+                    sf.NextPage();
+                });
+
+
+                $('#btn-left').click(function(e) {
+		    e.preventDefault();
+                    sf.PrevPage();
+                });
+            }
+
+            else if(language=="AR") {
+                $('#btn-right').click(function(e) {
+		    e.preventDefault();
+                    sf.PrevPage();
+                });
+
+
+                $('#btn-left').click(function(e) {
+		    e.preventDefault();
+                    sf.NextPage();
+                
+                });
+            }
+
+            else {
+                $('#btn-right').click(function(e) {
+		    e.preventDefault();
+                    sf.NextPage();
+                });
+
+
+                $('#btn-left').click(function(e) {
+		    e.preventDefault();
+                    sf.PrevPage();
+                });
+            }
+
+            //  $('.mrradio div').addClass('radio-ar');
+
+
+            // updateValues(jsonForm_values);
+
+            var prntbdywdth = $('.parent_body').width();
+            var getwdth = $('.counter_text').width();
+            var getwdthbtn = $('.parent_body button img').width();
+            var ttlbtn = getwdthbtn * 2;
+            $('.counter_text').css('width' , prntbdywdth- ttlbtn);
+
+            $(window).resize(function() {
+                var prntbdywdth = $('.parent_body').width();
+                var getwdth = $('.counter_text').width();
+                var getwdthbtn = $('.parent_body button img').width();
+                var ttlbtn = getwdthbtn * 2;
+                $('.counter_text').css('width' , prntbdywdth- ttlbtn);
+			
+                var winhgt = $(window).height();
+                var fthgt = $('.footer').height();
+                var mrgn_ft = winhgt - fthgt;
+                $('.wrapper').height(mrgn_ft -30);
+
+            });
+		
+            $(window).resize();
+            $('.mrradio div').addClass('radio-ar');
+            $('.mmchkbx div').addClass('radio-ar');
+		
+
+            //   $('html').attr('dir','rtl');
+
+	
+            /*function getPartialData() {
+              //sf.saveData();
+              android.setData("A");
+            }*/
+        }
+       
+    });
+
+  function getPartialData(){  
+    sf.saveData();
+  }
+ 
+  function setValues(id,filename,path) {
+    sf.setRecordingValue(id,filename,path);
+    android.testFunction();
+  }
+
+
+  function updateValues(data) {
+    sf.updateValues(data);
+    android.testFunction();
+  }
+
+
+-->
+  </script>
+</body>
+</html>

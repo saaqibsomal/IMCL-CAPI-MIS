@@ -1,0 +1,5073 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+	<name>Jeddah</name>
+	<open>1</open>
+	<StyleMap id="style15202">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style15201</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style15200</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style4600">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>80000000</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style4304">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style4302</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style4303</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style10622">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>80000000</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style14902">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>80000000</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style12110">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>80000000</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style7320">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style7322</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style7321</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style2200">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>80000000</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style17100">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>80000000</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style6502">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>80000000</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style5922">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>80000000</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style7002">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style7000</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style7001</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style5630">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style5501">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style5500</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style5502</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style14102">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style14101</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style14100</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style16322">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style4000">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style4002</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style4001</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style2801">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ffffaa00</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style14521">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ff00</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style14300">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f00aa</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style3122">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ffffaa00</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style13501">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style13502</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style13500</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style5500">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f55ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style5112">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f55ff</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style16121">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style16120</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style16122</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style15902">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f55ff</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style13220">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style13221</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style13222</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style17220">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style12501">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f55ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style18101">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff998d8c</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style2920">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ffffaa00</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style16501">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style16500</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style16502</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style14110">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff998d8c</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style5302">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style5301</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style5300</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style3421">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style4901">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style4900</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style4902</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style7900">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ffffaa00</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style10201">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style10202</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style10200</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style17921">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style17922</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style17920</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style10521">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style12111">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ffff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style11132">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ff00</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style3500">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f55ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style14200">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ffff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style5640">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style7200">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style7202</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style7201</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style12900">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ff00</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style9502">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ffffaa00</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style7701">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f00aa</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style5122">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style5121</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style5120</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style12802">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style12800</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style12801</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style11202">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style11200</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style11201</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style14900">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f00aa</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style16002">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ffffaa00</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style7702">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style7700</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style7701</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style12010">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style12011</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style12012</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style4602">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ff00</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style10300">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style10302</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style10301</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style11121">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style11120</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style11122</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style8800">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff998d8c</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style17114">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style17113</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style17112</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style6302">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ffff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style13130">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff998d8c</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style17800">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ffffaa00</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style6500">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style6502</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style6501</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style5300">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ffff</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style2921">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style2920</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style2922</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style9500">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style9502</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style9501</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style6112">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ffff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style5301">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ffff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style15822">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style6922">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ffff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style6501">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ffffaa00</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style6721">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style6722</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style6720</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style10302">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ff00</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style17113">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ffffaa00</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style13301">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f55ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style9021">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style14301">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f00aa</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style18020">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style18021</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style18022</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style10200">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f55ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style15500">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f00aa</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style8601">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f00aa</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style13302">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f55ff</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style8101">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style8100</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style8102</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style11130">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style11132</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style11131</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style3020">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style12700">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style12701</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style12702</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style6111">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style6110</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style6112</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style15502">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f00aa</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style10202">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f55ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style17922">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ffff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style12901">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ff00</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style15302">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f55ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style6300">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ffff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style3130">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style11701">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style11702</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style11700</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style9702">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style9701</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style9700</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style9110">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ffffaa00</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style16130">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ff00</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style17802">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style17800</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style17801</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style9700">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f55ff</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style16900">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style16902</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style16901</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style5920">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style5921</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style5922</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style17300">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style17301</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style17302</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style16500">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f00aa</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style2102">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f00aa</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style11201">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ffffaa00</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style7321">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style8100">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ff00</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style15022">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style15020</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style15021</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style12221">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ffff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style11621">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style15021">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style8002">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f55ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style12102">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff998d8c</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style16601">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff998d8c</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style14522">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style14521</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style14520</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style16132">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style16130</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style16131</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style6720">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ff00</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style10722">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style10720</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style10721</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style14020">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style14022</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style14021</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style16700">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style16702</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style16701</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style14622">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style14620</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style14621</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style9111">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ffffaa00</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style12702">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f55ff</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style5012">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style5010</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style5011</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style6921">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style6920</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style6922</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style3422">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style3420</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style3421</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style15122">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ffff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style5110">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f55ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style14620">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style8600">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f00aa</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style12012">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff998d8c</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style4420">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style4422</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style4421</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style13131">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style13130</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style13132</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style8001">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style8000</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style8002</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style15121">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style15120</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style15122</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style15201">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ff00</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style14803">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ffffaa00</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style7322">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style2100">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style2102</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style2101</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style9420">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ffffaa00</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style4002">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f00aa</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style4700">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff998d8c</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style17101">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style17100</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style17102</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style9622">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style9621</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style9620</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style11622">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style15820">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style15822</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style15821</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style15400">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style15402</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style15401</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style14901">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style14900</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style14902</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style7202">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff998d8c</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style7822">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style4201">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style4200</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style4202</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style16502">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f00aa</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style10520">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style10401">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff998d8c</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style15900">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style15901</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style15902</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style18102">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style18100</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style18101</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style3150">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style3720">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ff00</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style2400">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>b27faa00</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style10721">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style2922">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ffffaa00</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style5011">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff998d8c</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style12100">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff998d8c</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style7201">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff998d8c</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style9020">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style15020">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style4200">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f55ff</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style13420">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style13421</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style13422</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style6920">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ffff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style16702">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff998d8c</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style5121">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style9621">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style12112">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style12110</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style12111</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style5120">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style14302">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style14301</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style14300</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style9422">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style9421</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style9420</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style3120">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ffffaa00</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style11131">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ff00</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style10400">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff998d8c</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style16901">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ffffaa00</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style13132">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff998d8c</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style16000">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style16001</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style16002</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style3722">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ff00</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style3121">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style3122</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style3120</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style5502">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f55ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style17301">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ffff</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style7902">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style7901</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style7900</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style17302">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ffff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style9701">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f55ff</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style5111">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style5110</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style5112</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style5620">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style5640</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style5630</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style13701">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style13702</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style13700</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style16420">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style16422</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style16421</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style15821">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style16122">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f00aa</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style16321">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style12101">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style12102</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style12100</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style4302">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ffffaa00</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style11321">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style15300">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style15301</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style15302</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style1922">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style3502">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style3501</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style3500</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style11320">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style15901">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f55ff</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style4702">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style4701</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style4700</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style7821">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style7822</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style7820</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style1822">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f55ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style7000">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff998d8c</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style2802">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ffffaa00</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style4303">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ffffaa00</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style13300">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style13302</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style13301</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style17920">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ffff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style7820">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style9620">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style4701">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff998d8c</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style3022">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style14202">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ffff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style13421">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ffffaa00</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style14100">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f55ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style7001">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff998d8c</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style2202">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff998d8c</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style16902">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ffffaa00</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style12011">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff998d8c</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style17102">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f55ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style17112">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ffffaa00</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style4422">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style3140">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style3130</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style3150</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style17222">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style17221</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style17220</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style17801">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ffffaa00</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style12222">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ffff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style8802">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff998d8c</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style7101">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style7102</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style7100</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style2800">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style2802</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style2801</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style8000">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f55ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style13502">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff998d8c</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style12500">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style12502</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style12501</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style12801">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ffffaa00</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style10402">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style10400</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style10401</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style16421">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ff00</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style15401">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f00aa</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style7901">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ffffaa00</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style15120">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ffff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style13500">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff998d8c</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style16120">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f00aa</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style16131">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ff00</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style4601">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style4600</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style4602</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style15301">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f55ff</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style3721">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style3720</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style3722</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style13121">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style13122</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style13120</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style10522">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style10520</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style10521</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style15200">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ff00</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style14201">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style14200</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style14202</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style6110">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ffff</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style14804">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style14802</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style14803</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style11702">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff998d8c</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style8801">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style8802</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style8800</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style12701">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f55ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style7100">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f00aa</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style4902">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f00aa</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style15501">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style15500</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style15502</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style6301">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style6300</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style6302</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style8102">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ff00</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style9022">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style9020</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style9021</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style10301">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ff00</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style14520">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ff00</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style11620">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style11622</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style11621</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style2201">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style2202</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style2200</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style5921">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ff00</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style9112">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style9111</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style9110</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style16602">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff998d8c</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style13422">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ffffaa00</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style12502">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f55ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style14112">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff998d8c</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style18022">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style9501">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ffffaa00</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style14111">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style14112</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style14110</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style11700">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff998d8c</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style13222">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style4001">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f00aa</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style7102">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f00aa</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style3021">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style3022</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style3020</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style12220">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style12222</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style12221</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style6722">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ff00</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style13122">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ff00</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style13700">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f55ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style11200">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ffffaa00</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style13120">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ff00</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style3420">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style13702">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f55ff</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style1921">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style1920</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style1922</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style15402">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f00aa</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style1820">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f55ff</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style11322">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style11320</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style11321</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style1920">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style5010">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff998d8c</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style17221">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style11120">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f00aa</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style3501">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f55ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style12800">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ffffaa00</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style10621">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style10620</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style10622</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style16422">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ff00</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style16600">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style16602</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style16601</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style7700">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f00aa</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style14802">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ffffaa00</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style14621">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style18100">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff998d8c</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style4900">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f00aa</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style9421">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ffffaa00</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style18021">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style4421">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style1821">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style1822</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style1820</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style11122">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f00aa</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style14022">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style12902">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style12901</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style12900</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="style16320">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style16322</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style16321</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style10620">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff00ff00</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style13221">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style2101">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f00aa</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style14101">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f55ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style4202">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff7f55ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style14021">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style4100">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>4c7f00ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style10720">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff0000ff</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style16001">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ffffaa00</color>
+		</PolyStyle>
+	</Style>
+	<Style id="style16701">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin_maps.png</href>
+			</Icon>
+		</IconStyle>
+		<PolyStyle>
+			<color>ff998d8c</color>
+		</PolyStyle>
+	</Style>
+	<StyleMap id="style8602">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style8600</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style8601</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Placemark>
+		<name>Taibah</name>
+		<styleUrl>#style9422</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.116688,21.808086,0 39.118515,21.802658,0 39.121708,21.797375,0 39.126167,21.792105,0 39.130325,21.788553,0 39.133572,21.786629,0 39.135777,21.785959,0 39.137878,21.785862,0 39.139484,21.786102,0 39.143433,21.786692,0 39.149727,21.78763,0 39.152313,21.787664,0 39.153576,21.787788,0 39.154613,21.787668,0 39.154476,21.790161,0 39.154598,21.791649,0 39.154427,21.796677,0 39.154274,21.800474,0 39.154465,21.804499,0 39.155567,21.806896,0 39.156597,21.808998,0 39.159042,21.811705,0 39.156391,21.826294,0 39.153645,21.826061,0 39.144684,21.821138,0 39.142281,21.819809,0 39.140141,21.819227,0 39.115997,21.811333,0 39.116688,21.808086,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Falah</name>
+		<styleUrl>#style9112</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.17321,21.775789,0 39.174068,21.774101,0 39.177914,21.77549,0 39.181995,21.765331,0 39.207508,21.774412,0 39.198257,21.797945,0 39.182156,21.792442,0 39.18325,21.789572,0 39.17358,21.786377,0 39.173599,21.785252,0 39.166325,21.783409,0 39.169884,21.780224,0 39.171505,21.778301,0 39.17321,21.775789,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Rahmania</name>
+		<styleUrl>#style14804</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.207794,21.774443,0 39.216831,21.777479,0 39.218266,21.774761,0 39.236244,21.781345,0 39.223545,21.812714,0 39.196426,21.802881,0 39.198292,21.798008,0 39.207794,21.774443,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Frosia</name>
+		<styleUrl>#style17802</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.223446,21.812824,0 39.221069,21.818985,0 39.219215,21.825142,0 39.218346,21.829165,0 39.216152,21.83527,0 39.215221,21.841158,0 39.212536,21.852449,0 39.209393,21.850376,0 39.206535,21.847897,0 39.204472,21.845503,0 39.202217,21.842806,0 39.196739,21.83659,0 39.194462,21.834404,0 39.191589,21.832214,0 39.18618,21.829018,0 39.19656,21.802986,0 39.223446,21.812824,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Bashair</name>
+		<styleUrl>#style16000</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.162609,21.785437,0 39.164417,21.784466,0 39.166279,21.783377,0 39.173615,21.785303,0 39.173473,21.786415,0 39.183067,21.789574,0 39.181938,21.792524,0 39.1982,21.797995,0 39.186176,21.828871,0 39.173229,21.821222,0 39.165226,21.816282,0 39.161976,21.814087,0 39.160065,21.812468,0 39.157249,21.809719,0 39.156044,21.807894,0 39.155334,21.806538,0 39.154808,21.805204,0 39.154495,21.803999,0 39.154274,21.802485,0 39.15424,21.798965,0 39.154503,21.793344,0 39.154556,21.789652,0 39.15472,21.787706,0 39.157272,21.787273,0 39.159611,21.786613,0 39.162609,21.785437,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Kausar</name>
+		<styleUrl>#style2800</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.189217,21.736322,0 39.200062,21.708731,0 39.221703,21.714155,0 39.219372,21.732267,0 39.221127,21.732811,0 39.214046,21.745008,0 39.189217,21.736322,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Reyan</name>
+		<styleUrl>#style3121</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.206093,21.654724,0 39.208832,21.656237,0 39.21077,21.669394,0 39.222759,21.673189,0 39.215118,21.692394,0 39.212528,21.71172,0 39.200027,21.708675,0 39.201435,21.704746,0 39.203465,21.697557,0 39.204258,21.690428,0 39.204044,21.682011,0 39.204056,21.666704,0 39.204033,21.65872,0 39.204613,21.653925,0 39.206093,21.654724,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Marwa</name>
+		<styleUrl>#style13420</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.192379,21.599888,0 39.207855,21.604187,0 39.220779,21.608282,0 39.21104,21.634216,0 39.20982,21.635071,0 39.206837,21.634867,0 39.196217,21.632957,0 39.187153,21.631687,0 39.182377,21.631048,0 39.192379,21.599888,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Safa</name>
+		<styleUrl>#style2921</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.202217,21.562546,0 39.230988,21.567383,0 39.227119,21.588173,0 39.225681,21.594162,0 39.225178,21.596304,0 39.2216,21.60511,0 39.220322,21.607742,0 39.201679,21.602335,0 39.192417,21.599777,0 39.198814,21.579399,0 39.199699,21.573801,0 39.202217,21.562546,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Rabwa</name>
+		<styleUrl>#style10722</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.174698,21.591906,0 39.177074,21.584909,0 39.185951,21.587479,0 39.186573,21.587746,0 39.197735,21.579596,0 39.198097,21.579924,0 39.185394,21.619509,0 39.167046,21.616049,0 39.169544,21.607464,0 39.174698,21.591906,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Bawadi</name>
+		<styleUrl>#style15820</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.165321,21.581402,0 39.176662,21.58445,0 39.171532,21.600115,0 39.167847,21.611279,0 39.166851,21.615009,0 39.166214,21.615786,0 39.15572,21.613853,0 39.15757,21.60498,0 39.165321,21.581402,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Zahrah</name>
+		<styleUrl>#style9622</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.121307,21.600758,0 39.121635,21.599146,0 39.12682,21.583187,0 39.127056,21.581282,0 39.126629,21.572432,0 39.134407,21.572393,0 39.14307,21.574839,0 39.143867,21.596535,0 39.143253,21.597197,0 39.143444,21.597715,0 39.143871,21.598412,0 39.142925,21.601402,0 39.141853,21.604528,0 39.140877,21.610617,0 39.121124,21.606085,0 39.121307,21.600758,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Salamah</name>
+		<styleUrl>#style4100</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.165012,21.581041,0 39.159691,21.597004,0 39.158165,21.601269,0 39.157181,21.604486,0 39.15519,21.613722,0 39.141167,21.610676,0 39.142197,21.604797,0 39.144455,21.598337,0 39.144955,21.597565,0 39.144215,21.596754,0 39.143299,21.574993,0 39.165012,21.581041,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Faisaleyah</name>
+		<styleUrl>#style3021</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.174038,21.55591,0 39.187218,21.559097,0 39.201824,21.562319,0 39.199867,21.572908,0 39.198586,21.578547,0 39.187271,21.58672,0 39.185783,21.587103,0 39.177162,21.584539,0 39.165485,21.580992,0 39.174038,21.55591,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Rawdah</name>
+		<styleUrl>#style2400</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.152554,21.549772,0 39.173393,21.555902,0 39.165077,21.580753,0 39.143604,21.574762,0 39.143269,21.574406,0 39.142765,21.559622,0 39.142609,21.556728,0 39.143177,21.551645,0 39.143299,21.54841,0 39.152554,21.549772,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Bani Malick</name>
+		<styleUrl>#style12112</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.192513,21.52647,0 39.192768,21.526073,0 39.204716,21.526535,0 39.234573,21.52821,0 39.239765,21.528372,0 39.239948,21.530298,0 39.240974,21.530491,0 39.240688,21.531559,0 39.237835,21.540289,0 39.192394,21.531797,0 39.192513,21.52647,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Naseem</name>
+		<styleUrl>#style15121</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.209763,21.526709,0 39.210243,21.525339,0 39.210709,21.524639,0 39.211548,21.523804,0 39.214035,21.520056,0 39.216206,21.515177,0 39.217045,21.514126,0 39.217884,21.513395,0 39.219086,21.512493,0 39.22065,21.511818,0 39.222301,21.511414,0 39.227711,21.510874,0 39.231171,21.510561,0 39.234009,21.510292,0 39.236362,21.509846,0 39.238697,21.509338,0 39.239277,21.509338,0 39.25156,21.511944,0 39.250404,21.513912,0 39.249798,21.514721,0 39.24752,21.517628,0 39.245213,21.520937,0 39.24345,21.523756,0 39.242764,21.525322,0 39.242043,21.527693,0 39.240993,21.530493,0 39.239952,21.530333,0 39.239735,21.528364,0 39.209763,21.526709,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Warood</name>
+		<styleUrl>#style16132</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.192734,21.521046,0 39.192879,21.51461,0 39.193138,21.511295,0 39.195744,21.511322,0 39.196903,21.511456,0 39.198151,21.511671,0 39.198959,21.511562,0 39.200119,21.511185,0 39.201134,21.511049,0 39.203827,21.510832,0 39.210751,21.51095,0 39.214401,21.511057,0 39.216923,21.511108,0 39.220139,21.511227,0 39.21632,21.514147,0 39.215969,21.514977,0 39.215302,21.516565,0 39.214001,21.519384,0 39.212788,21.521486,0 39.211906,21.522924,0 39.210922,21.524246,0 39.210228,21.525108,0 39.209995,21.525568,0 39.209618,21.526619,0 39.192654,21.526012,0 39.192734,21.521046,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Musharafa</name>
+		<styleUrl>#style16420</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.17923,21.531078,0 39.180511,21.529985,0 39.181526,21.529638,0 39.193321,21.532024,0 39.217762,21.536592,0 39.215256,21.548458,0 39.2057,21.546869,0 39.205166,21.546968,0 39.190331,21.544285,0 39.176773,21.541653,0 39.17923,21.531078,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Hamra</name>
+		<styleUrl>#style11130</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.176533,21.541677,0 39.175102,21.541332,0 39.169941,21.54026,0 39.156178,21.534416,0 39.156456,21.53392,0 39.156178,21.533976,0 39.156139,21.533772,0 39.156395,21.533644,0 39.156952,21.532831,0 39.157265,21.532333,0 39.157227,21.531523,0 39.157146,21.53097,0 39.156769,21.530712,0 39.156551,21.530474,0 39.156792,21.530214,0 39.156372,21.530087,0 39.155838,21.529238,0 39.15556,21.52887,0 39.155304,21.528742,0 39.154709,21.528261,0 39.153084,21.526861,0 39.152447,21.526281,0 39.151711,21.525766,0 39.151375,21.52536,0 39.151077,21.525084,0 39.150879,21.524862,0 39.15078,21.524549,0 39.150543,21.524441,0 39.150482,21.523996,0 39.150383,21.523647,0 39.150204,21.523243,0 39.149948,21.522726,0 39.149925,21.522339,0 39.150005,21.522062,0 39.150265,21.521877,0 39.151077,21.521393,0 39.151394,21.521208,0 39.151966,21.519659,0 39.152184,21.519014,0 39.152699,21.518295,0 39.152641,21.517815,0 39.152798,21.517281,0 39.153095,21.516783,0 39.153351,21.516562,0 39.153351,21.515732,0 39.153332,21.515566,0 39.153748,21.514551,0 39.154125,21.51339,0 39.155231,21.511749,0 39.155354,21.511454,0 39.155331,21.511086,0 39.155193,21.510773,0 39.155113,21.51046,0 39.155174,21.510256,0 39.155331,21.510054,0 39.155586,21.50996,0 39.155746,21.510054,0 39.15646,21.510494,0 39.156857,21.510384,0 39.156975,21.510145,0 39.156719,21.509794,0 39.156677,21.509592,0 39.156757,21.509371,0 39.156876,21.509169,0 39.157093,21.50913,0 39.157291,21.508928,0 39.15757,21.508818,0 39.157806,21.508743,0 39.157925,21.508818,0 39.158085,21.509092,0 39.158047,21.509352,0 39.158066,21.50959,0 39.158047,21.51009,0 39.156998,21.511526,0 39.157848,21.512024,0 39.159039,21.512318,0 39.159233,21.513111,0 39.161198,21.513845,0 39.166508,21.515587,0 39.165527,21.51963,0 39.165134,21.520773,0 39.163967,21.523317,0 39.179337,21.529421,0 39.176533,21.541677,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Rawais</name>
+		<styleUrl>#style13121</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.165401,21.520769,0 39.166176,21.517675,0 39.166733,21.51565,0 39.161213,21.513769,0 39.160851,21.513309,0 39.161774,21.512844,0 39.162758,21.510986,0 39.164845,21.505981,0 39.164639,21.504864,0 39.164024,21.50386,0 39.163776,21.503025,0 39.164089,21.502224,0 39.165012,21.501385,0 39.166256,21.50098,0 39.170395,21.504383,0 39.169167,21.506851,0 39.170532,21.508162,0 39.172726,21.509539,0 39.17522,21.510342,0 39.182556,21.510923,0 39.18174,21.522535,0 39.181282,21.524469,0 39.180664,21.52746,0 39.180218,21.529505,0 39.164204,21.52323,0 39.165401,21.520769,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Baghdadeyah Gharbeyah</name>
+		<styleUrl>#style8101</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.168007,21.499317,0 39.16832,21.4998,0 39.16925,21.50009,0 39.170132,21.500477,0 39.17091,21.500669,0 39.171898,21.50091,0 39.17205,21.501295,0 39.17231,21.501732,0 39.173038,21.502069,0 39.173298,21.502695,0 39.173557,21.50289,0 39.173866,21.50342,0 39.174179,21.503082,0 39.174282,21.502842,0 39.17503,21.503002,0 39.175423,21.502647,0 39.175682,21.501827,0 39.175529,21.501297,0 39.175163,21.500767,0 39.174438,21.500332,0 39.173367,21.500187,0 39.172249,21.500029,0 39.171188,21.499794,0 39.169926,21.499367,0 39.169201,21.498835,0 39.168785,21.498112,0 39.168732,21.496712,0 39.169407,21.495504,0 39.170341,21.494347,0 39.171795,21.493139,0 39.170189,21.492029,0 39.17112,21.490919,0 39.171741,21.490246,0 39.171951,21.489664,0 39.172783,21.488218,0 39.173302,21.487881,0 39.17382,21.487686,0 39.175167,21.487591,0 39.176102,21.487495,0 39.176567,21.487253,0 39.17688,21.486818,0 39.177658,21.486818,0 39.178642,21.486868,0 39.17942,21.486916,0 39.180248,21.487688,0 39.180771,21.488123,0 39.180771,21.489233,0 39.181129,21.490873,0 39.181545,21.492081,0 39.182091,21.492964,0 39.182713,21.49375,0 39.183414,21.494015,0 39.184086,21.493626,0 39.185101,21.492821,0 39.185139,21.491138,0 39.184738,21.49077,0 39.183674,21.490248,0 39.182755,21.489973,0 39.181599,21.488363,0 39.18129,21.487785,0 39.181309,21.487375,0 39.181763,21.487158,0 39.182274,21.487724,0 39.182842,21.488508,0 39.18362,21.489668,0 39.184868,21.489716,0 39.185642,21.490343,0 39.186268,21.491405,0 39.185955,21.494061,0 39.185333,21.496859,0 39.184761,21.499319,0 39.183804,21.501564,0 39.183598,21.502523,0 39.183453,21.503662,0 39.182632,21.510509,0 39.17654,21.510197,0 39.174641,21.509882,0 39.172668,21.509205,0 39.17067,21.508253,0 39.170471,21.507845,0 39.169899,21.506609,0 39.17083,21.504515,0 39.16658,21.500881,0 39.168007,21.499317,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Sharfeyah</name>
+		<styleUrl>#style10621</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.183872,21.501356,0 39.185226,21.502119,0 39.186993,21.502459,0 39.188858,21.502699,0 39.191139,21.502361,0 39.192432,21.502405,0 39.193161,21.502701,0 39.193195,21.503885,0 39.193188,21.505606,0 39.193233,21.507254,0 39.193077,21.508953,0 39.192917,21.510256,0 39.192829,21.511705,0 39.192799,21.512583,0 39.192642,21.514668,0 39.192436,21.5179,0 39.192329,21.520515,0 39.192238,21.525084,0 39.192127,21.527945,0 39.192059,21.531736,0 39.184284,21.530294,0 39.182072,21.52994,0 39.180279,21.529591,0 39.181782,21.52277,0 39.182426,21.514585,0 39.182766,21.510166,0 39.183872,21.501356,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Baghdadeyah Sharqiyah</name>
+		<styleUrl>#style14522</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.185146,21.497826,0 39.185467,21.496342,0 39.18602,21.493757,0 39.186375,21.491529,0 39.186432,21.491215,0 39.186474,21.490995,0 39.186646,21.490866,0 39.186962,21.490835,0 39.187126,21.490978,0 39.189163,21.492437,0 39.190338,21.493073,0 39.192055,21.493902,0 39.192715,21.494396,0 39.193901,21.495338,0 39.19521,21.496338,0 39.201042,21.500774,0 39.203094,21.501768,0 39.202236,21.503172,0 39.201935,21.503519,0 39.201473,21.503798,0 39.201275,21.503904,0 39.201126,21.503948,0 39.200859,21.503986,0 39.200535,21.504015,0 39.199615,21.503967,0 39.196316,21.503681,0 39.195259,21.503408,0 39.193634,21.502777,0 39.19294,21.502548,0 39.192421,21.502434,0 39.19149,21.502401,0 39.190369,21.502462,0 39.188869,21.502628,0 39.187401,21.502539,0 39.185345,21.502155,0 39.183865,21.501472,0 39.184757,21.499357,0 39.185146,21.497826,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Kandra</name>
+		<styleUrl>#style10300</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.196808,21.494574,0 39.19725,21.493643,0 39.198029,21.491632,0 39.199478,21.486568,0 39.202744,21.48616,0 39.207287,21.484266,0 39.207554,21.484428,0 39.207851,21.48777,0 39.207645,21.488825,0 39.205784,21.494074,0 39.203613,21.500927,0 39.203056,21.501257,0 39.202152,21.501205,0 39.201141,21.500715,0 39.197968,21.498304,0 39.195503,21.496336,0 39.196808,21.494574,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Sahifa</name>
+		<styleUrl>#style15202</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.1908,21.486763,0 39.192223,21.48562,0 39.192574,21.485451,0 39.193199,21.485249,0 39.19519,21.484697,0 39.196598,21.484644,0 39.197456,21.484646,0 39.198841,21.485111,0 39.199535,21.485418,0 39.199387,21.48597,0 39.199162,21.48671,0 39.198715,21.488222,0 39.198322,21.489473,0 39.198013,21.490459,0 39.197746,21.491295,0 39.195358,21.490137,0 39.19453,21.489832,0 39.192112,21.488478,0 39.191505,21.488194,0 39.190144,21.487774,0 39.190529,21.487017,0 39.1908,21.486763,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Amariyah</name>
+		<styleUrl>#style12902</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.189297,21.489626,0 39.189598,21.488878,0 39.189957,21.488239,0 39.190144,21.487766,0 39.191559,21.488203,0 39.1945,21.489826,0 39.195297,21.490126,0 39.19643,21.490662,0 39.197723,21.49131,0 39.197147,21.493038,0 39.196812,21.493893,0 39.196556,21.494415,0 39.19614,21.495049,0 39.195171,21.496262,0 39.193314,21.494768,0 39.192123,21.493912,0 39.189499,21.49247,0 39.189274,21.490353,0 39.189297,21.489626,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Balad</name>
+		<styleUrl>#style4601</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.183628,21.489676,0 39.18314,21.488953,0 39.182823,21.488482,0 39.182434,21.487886,0 39.182011,21.487333,0 39.181805,21.487148,0 39.180981,21.487495,0 39.180035,21.486547,0 39.179207,21.485937,0 39.179028,21.4856,0 39.178642,21.484152,0 39.178337,21.483936,0 39.178291,21.483751,0 39.178299,21.483381,0 39.178387,21.482821,0 39.178497,21.482426,0 39.178368,21.482241,0 39.177982,21.482054,0 39.177792,21.481876,0 39.177429,21.481291,0 39.17728,21.480915,0 39.177216,21.480696,0 39.177345,21.480349,0 39.177246,21.480095,0 39.177155,21.480076,0 39.176918,21.479891,0 39.176865,21.479528,0 39.177143,21.479202,0 39.177353,21.479208,0 39.177338,21.478785,0 39.176727,21.478384,0 39.17701,21.477825,0 39.177219,21.477489,0 39.177246,21.476954,0 39.177547,21.476826,0 39.178596,21.476889,0 39.181332,21.477039,0 39.183147,21.477123,0 39.186253,21.477285,0 39.189571,21.477489,0 39.190556,21.477665,0 39.192097,21.478022,0 39.193157,21.478285,0 39.193932,21.478493,0 39.194908,21.478813,0 39.196404,21.479551,0 39.197441,21.480219,0 39.197968,21.480707,0 39.198273,21.481003,0 39.19875,21.481613,0 39.199184,21.482391,0 39.199352,21.482801,0 39.199451,21.483068,0 39.199574,21.483665,0 39.199619,21.484478,0 39.199593,21.484959,0 39.199539,21.48542,0 39.197456,21.484653,0 39.197006,21.48464,0 39.195198,21.484699,0 39.192608,21.485439,0 39.19223,21.485613,0 39.190807,21.48674,0 39.190125,21.48772,0 39.189903,21.488327,0 39.189285,21.489613,0 39.189251,21.490026,0 39.189491,21.492456,0 39.189003,21.492212,0 39.187931,21.491438,0 39.187141,21.490833,0 39.186897,21.490576,0 39.186817,21.490728,0 39.186626,21.490854,0 39.186291,21.49085,0 39.185966,21.49078,0 39.185513,21.490393,0 39.185196,21.490128,0 39.184998,21.489927,0 39.184731,21.489779,0 39.184662,21.489689,0 39.183628,21.489676,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Sabel</name>
+		<styleUrl>#style1821</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.195198,21.478609,0 39.19836,21.473766,0 39.203693,21.478853,0 39.206051,21.481131,0 39.207054,21.482119,0 39.207321,21.484068,0 39.20274,21.486137,0 39.201794,21.486252,0 39.199451,21.486561,0 39.199837,21.484829,0 39.199921,21.483694,0 39.199635,21.482491,0 39.198811,21.481043,0 39.198071,21.480225,0 39.197117,21.479525,0 39.195198,21.478609,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Hindawiyah</name>
+		<styleUrl>#style15900</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.190262,21.477394,0 39.18708,21.4771,0 39.183739,21.476892,0 39.181343,21.47694,0 39.177422,21.476606,0 39.177212,21.476358,0 39.17709,21.47546,0 39.177132,21.474451,0 39.177246,21.472944,0 39.177639,21.4709,0 39.178223,21.468428,0 39.180248,21.469236,0 39.184837,21.468826,0 39.186539,21.468691,0 39.187038,21.468645,0 39.188992,21.469175,0 39.190964,21.469858,0 39.194386,21.471138,0 39.196198,21.47188,0 39.198231,21.473503,0 39.196907,21.475611,0 39.196178,21.476818,0 39.195038,21.478554,0 39.190262,21.477394,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Sa&apos;aleyah</name>
+		<styleUrl>#style12700</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.18716,21.468477,0 39.185345,21.46863,0 39.180569,21.469051,0 39.178146,21.468161,0 39.1791,21.462927,0 39.179611,21.4615,0 39.180141,21.460745,0 39.18074,21.460363,0 39.181496,21.460159,0 39.182713,21.459919,0 39.183929,21.459772,0 39.186062,21.459505,0 39.18774,21.459368,0 39.190647,21.459272,0 39.193008,21.459215,0 39.192226,21.463942,0 39.193474,21.467381,0 39.192352,21.470091,0 39.18716,21.468477,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Qaryat</name>
+		<styleUrl>#style5501</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.193565,21.467285,0 39.192329,21.464008,0 39.193089,21.459173,0 39.198097,21.459244,0 39.206814,21.459011,0 39.207146,21.459551,0 39.207306,21.464249,0 39.207214,21.464544,0 39.206974,21.465059,0 39.204346,21.464907,0 39.19989,21.464701,0 39.198528,21.464615,0 39.199253,21.465811,0 39.200294,21.468296,0 39.200329,21.468739,0 39.20002,21.469582,0 39.20018,21.470949,0 39.198368,21.473404,0 39.196304,21.471657,0 39.195213,21.471191,0 39.194569,21.470928,0 39.19241,21.470093,0 39.193565,21.467285,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Nazlah Yamaniyah</name>
+		<styleUrl>#style13701</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.200462,21.471008,0 39.200176,21.469467,0 39.200596,21.468805,0 39.200611,21.468281,0 39.200417,21.467649,0 39.199501,21.465788,0 39.198902,21.464819,0 39.207466,21.465275,0 39.207458,21.459011,0 39.210415,21.45867,0 39.212078,21.458279,0 39.214382,21.457439,0 39.216084,21.45639,0 39.216988,21.456484,0 39.221966,21.460949,0 39.218452,21.469067,0 39.218601,21.469997,0 39.219002,21.470783,0 39.212364,21.473761,0 39.212574,21.481615,0 39.207733,21.483835,0 39.207237,21.481731,0 39.198654,21.473568,0 39.200462,21.471008,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Nazlah Sharqeyah</name>
+		<styleUrl>#style8001</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.212666,21.473656,0 39.219139,21.470798,0 39.218651,21.469959,0 39.218456,21.469025,0 39.222046,21.461363,0 39.222389,21.461805,0 39.228848,21.474327,0 39.212875,21.48155,0 39.212666,21.473656,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Feha</name>
+		<styleUrl>#style6721</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.234615,21.510218,0 39.221336,21.511221,0 39.214329,21.510977,0 39.209782,21.510914,0 39.20332,21.510862,0 39.201584,21.511,0 39.199787,21.511295,0 39.198975,21.511539,0 39.198513,21.511675,0 39.197529,21.511595,0 39.196281,21.511326,0 39.193123,21.511299,0 39.19347,21.508846,0 39.193584,21.507607,0 39.193653,21.505365,0 39.193581,21.502918,0 39.195858,21.503719,0 39.197227,21.503906,0 39.19928,21.504082,0 39.200912,21.504145,0 39.20145,21.503998,0 39.201782,21.503805,0 39.202164,21.503519,0 39.203289,21.502108,0 39.20369,21.50157,0 39.203991,21.500793,0 39.205864,21.494944,0 39.208073,21.488676,0 39.208153,21.488117,0 39.208076,21.487091,0 39.228138,21.483015,0 39.231712,21.48221,0 39.232201,21.482105,0 39.232571,21.483038,0 39.232876,21.484291,0 39.233021,21.48564,0 39.232758,21.487806,0 39.232361,21.489136,0 39.23103,21.49189,0 39.229454,21.494528,0 39.227455,21.497553,0 39.224907,21.501057,0 39.239254,21.499836,0 39.239399,21.509296,0 39.238621,21.509344,0 39.234615,21.510218,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Jamea</name>
+		<styleUrl>#style5111</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.237198,21.470968,0 39.260273,21.460573,0 39.262447,21.464338,0 39.260101,21.480558,0 39.262112,21.487074,0 39.244987,21.484022,0 39.243607,21.483595,0 39.237198,21.470968,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Saghar</name>
+		<styleUrl>#style13300</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.207901,21.484077,0 39.237053,21.471121,0 39.243141,21.483093,0 39.243374,21.483932,0 39.238834,21.483158,0 39.23325,21.483856,0 39.232731,21.481833,0 39.220867,21.484344,0 39.208038,21.486866,0 39.207794,21.484768,0 39.207901,21.484077,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Jamea Malik Abdul Aziz</name>
+		<styleUrl>#style12220</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.2257,21.50074,0 39.226044,21.500261,0 39.229832,21.494518,0 39.232353,21.490343,0 39.233364,21.487728,0 39.233601,21.485388,0 39.233391,21.484253,0 39.238808,21.483629,0 39.262264,21.487394,0 39.265423,21.488199,0 39.266724,21.488791,0 39.267796,21.489328,0 39.267529,21.490112,0 39.266743,21.492245,0 39.264565,21.496479,0 39.262768,21.498884,0 39.259418,21.502773,0 39.247078,21.501829,0 39.239403,21.501755,0 39.239429,21.499624,0 39.2257,21.50074,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Rawabi</name>
+		<styleUrl>#style4901</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.260498,21.480968,0 39.263084,21.464499,0 39.260838,21.460232,0 39.276714,21.453318,0 39.278831,21.452679,0 39.274097,21.468716,0 39.26825,21.487732,0 39.262466,21.487133,0 39.260498,21.480968,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Ghulail</name>
+		<styleUrl>#style9702</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.198006,21.44775,0 39.204933,21.445032,0 39.215332,21.454716,0 39.215881,21.455214,0 39.216122,21.45554,0 39.215977,21.455896,0 39.213379,21.457308,0 39.211079,21.458138,0 39.20961,21.458485,0 39.208118,21.458645,0 39.198158,21.458992,0 39.198006,21.44775,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Madain Fahad</name>
+		<styleUrl>#style15300</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.226318,21.45154,0 39.22805,21.451139,0 39.255051,21.449537,0 39.260159,21.460514,0 39.229153,21.474218,0 39.222385,21.46122,0 39.217129,21.455971,0 39.22369,21.452854,0 39.226318,21.45154,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Farooq</name>
+		<styleUrl>#style14901</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.255699,21.449362,0 39.261326,21.449091,0 39.263527,21.448854,0 39.266361,21.448097,0 39.26944,21.446611,0 39.272404,21.44529,0 39.274437,21.444017,0 39.278584,21.442268,0 39.283829,21.441002,0 39.289516,21.439327,0 39.288197,21.440098,0 39.285267,21.441589,0 39.284241,21.442692,0 39.283051,21.443954,0 39.2822,21.445309,0 39.281525,21.446646,0 39.281002,21.448189,0 39.280422,21.449787,0 39.279556,21.452274,0 39.276928,21.453032,0 39.260586,21.460257,0 39.255699,21.449362,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Wazeer</name>
+		<styleUrl>#style14102</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.21072,21.449888,0 39.227055,21.434755,0 39.234638,21.431467,0 39.247433,21.44129,0 39.253036,21.44491,0 39.255058,21.449244,0 39.23568,21.450117,0 39.227482,21.450727,0 39.225079,21.451561,0 39.216675,21.455496,0 39.21072,21.449888,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Johra</name>
+		<styleUrl>#style4201</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.25552,21.407869,0 39.253723,21.416304,0 39.269306,21.446751,0 39.265213,21.448511,0 39.261948,21.448978,0 39.255711,21.449455,0 39.253613,21.444778,0 39.247757,21.440969,0 39.235237,21.431175,0 39.2327,21.429134,0 39.25552,21.407869,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Ameer Fawaz Southern</name>
+		<styleUrl>#style7702</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.294704,21.429144,0 39.290913,21.42057,0 39.293304,21.41959,0 39.293522,21.420357,0 39.303944,21.417076,0 39.304039,21.418676,0 39.304657,21.420055,0 39.304771,21.42231,0 39.304779,21.422899,0 39.305096,21.423389,0 39.305824,21.423853,0 39.306068,21.424103,0 39.307957,21.423847,0 39.309757,21.423588,0 39.30991,21.424423,0 39.309551,21.425589,0 39.30759,21.427229,0 39.305225,21.429708,0 39.302185,21.43231,0 39.300385,21.433954,0 39.298496,21.435381,0 39.296883,21.436497,0 39.294823,21.437477,0 39.29343,21.438028,0 39.289482,21.439077,0 39.283989,21.440809,0 39.276283,21.442902,0 39.273937,21.443621,0 39.272053,21.444653,0 39.271767,21.443235,0 39.271988,21.442236,0 39.272945,21.441074,0 39.274296,21.440149,0 39.275276,21.438791,0 39.276451,21.437212,0 39.278793,21.435503,0 39.294704,21.429144,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Ameer Abdul Majeed</name>
+		<styleUrl>#style16121</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.283157,21.399754,0 39.293186,21.419674,0 39.290821,21.420605,0 39.294643,21.42919,0 39.278847,21.435457,0 39.276352,21.437267,0 39.274551,21.439697,0 39.274052,21.44021,0 39.272167,21.441689,0 39.271709,21.44261,0 39.271729,21.444321,0 39.271694,21.445412,0 39.269314,21.446568,0 39.253925,21.416376,0 39.255211,21.410252,0 39.283157,21.399754,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Petromen</name>
+		<styleUrl>#style10201</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.204731,21.444958,0 39.197762,21.447624,0 39.197536,21.448027,0 39.197853,21.45895,0 39.194984,21.458782,0 39.19146,21.45878,0 39.188236,21.458944,0 39.184036,21.459393,0 39.181461,21.459684,0 39.180687,21.460068,0 39.18037,21.46027,0 39.179752,21.460752,0 39.179607,21.459688,0 39.179581,21.459055,0 39.179798,21.45635,0 39.17989,21.454346,0 39.179661,21.452196,0 39.17952,21.450653,0 39.179413,21.449575,0 39.179337,21.44927,0 39.179188,21.448883,0 39.178082,21.448532,0 39.168335,21.446905,0 39.169033,21.443483,0 39.169758,21.441397,0 39.170818,21.439018,0 39.172169,21.437696,0 39.172527,21.436661,0 39.172523,21.435293,0 39.180241,21.437397,0 39.185127,21.436878,0 39.18557,21.440878,0 39.191067,21.440334,0 39.191246,21.440355,0 39.191891,21.439606,0 39.193104,21.438934,0 39.193928,21.438232,0 39.195869,21.436502,0 39.198902,21.439262,0 39.204731,21.444958,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Mahjar</name>
+		<styleUrl>#style17101</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.226967,21.434574,0 39.218006,21.442869,0 39.211197,21.449289,0 39.210808,21.449625,0 39.210518,21.449722,0 39.210136,21.44973,0 39.209824,21.4494,0 39.204762,21.444592,0 39.195843,21.43611,0 39.193523,21.438189,0 39.192749,21.438826,0 39.190895,21.439957,0 39.190105,21.440138,0 39.185577,21.440561,0 39.185158,21.436853,0 39.180172,21.437355,0 39.172512,21.435226,0 39.173691,21.427691,0 39.176792,21.426353,0 39.177792,21.426069,0 39.177406,21.422651,0 39.184895,21.42211,0 39.18663,21.420218,0 39.189358,21.417175,0 39.19022,21.415298,0 39.190029,21.411982,0 39.189465,21.407934,0 39.199165,21.407148,0 39.199596,21.41065,0 39.209671,21.409689,0 39.209774,21.410831,0 39.210892,21.412464,0 39.217865,21.417837,0 39.234459,21.431286,0 39.226967,21.434574,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Saroreyah</name>
+		<styleUrl>#style12500</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.196583,21.376917,0 39.222736,21.374887,0 39.225349,21.375463,0 39.226784,21.3759,0 39.227104,21.376648,0 39.230816,21.392677,0 39.229618,21.394733,0 39.228985,21.395573,0 39.216434,21.407438,0 39.213875,21.409597,0 39.212212,21.410734,0 39.210854,21.412407,0 39.209793,21.410883,0 39.209724,21.409658,0 39.199852,21.41057,0 39.196583,21.376917,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Sarawat</name>
+		<styleUrl>#style14111</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.192261,21.331669,0 39.224613,21.327669,0 39.22905,21.32696,0 39.231201,21.32696,0 39.234116,21.327196,0 39.235252,21.327785,0 39.23576,21.328848,0 39.236141,21.331207,0 39.234623,21.33333,0 39.22665,21.37561,0 39.222614,21.37475,0 39.196705,21.376783,0 39.192261,21.331669,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Saheya</name>
+		<styleUrl>#style4702</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.192863,21.283979,0 39.232845,21.285542,0 39.231583,21.326717,0 39.192219,21.331543,0 39.192863,21.283979,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Qareneyah</name>
+		<styleUrl>#style2201</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.233109,21.28554,0 39.261978,21.286476,0 39.261055,21.327654,0 39.231724,21.32707,0 39.233109,21.28554,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Wadi</name>
+		<styleUrl>#style7200</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.151775,21.333361,0 39.15316,21.282717,0 39.192467,21.283466,0 39.191685,21.329527,0 39.151775,21.333361,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Sahil</name>
+		<styleUrl>#style13501</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.130917,21.335405,0 39.126732,21.334826,0 39.125076,21.334326,0 39.122204,21.333263,0 39.119476,21.33231,0 39.117542,21.331673,0 39.11504,21.331671,0 39.112537,21.331881,0 39.110603,21.329973,0 39.109241,21.328913,0 39.107536,21.327534,0 39.1064,21.326157,0 39.1064,21.324461,0 39.106403,21.322765,0 39.105606,21.320965,0 39.105267,21.318846,0 39.105381,21.317362,0 39.105724,21.315136,0 39.104782,21.312843,0 39.10376,21.310513,0 39.103645,21.309029,0 39.104332,21.307014,0 39.1049,21.305107,0 39.104904,21.303307,0 39.104675,21.301399,0 39.105247,21.29928,0 39.106842,21.297798,0 39.108662,21.296316,0 39.110939,21.295046,0 39.11219,21.293457,0 39.113194,21.291136,0 39.113762,21.289335,0 39.114674,21.2869,0 39.116268,21.285204,0 39.117634,21.283192,0 39.118431,21.281389,0 39.119003,21.279165,0 39.120026,21.277576,0 39.122074,21.276094,0 39.123669,21.274612,0 39.124695,21.27334,0 39.12606,21.2708,0 39.127995,21.267727,0 39.129589,21.263807,0 39.130501,21.259674,0 39.131069,21.257238,0 39.132664,21.255438,0 39.134937,21.253637,0 39.136871,21.251307,0 39.137669,21.249506,0 39.15453,21.264175,0 39.153164,21.266083,0 39.151886,21.333258,0 39.130917,21.335405,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Sanayeah</name>
+		<styleUrl>#style3502</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.226871,21.375475,0 39.233902,21.376703,0 39.260548,21.373846,0 39.260277,21.378683,0 39.259026,21.387281,0 39.257118,21.397646,0 39.255745,21.405945,0 39.255138,21.408064,0 39.232624,21.429203,0 39.210869,21.412384,0 39.212334,21.410732,0 39.213898,21.409595,0 39.215359,21.40843,0 39.218025,21.406042,0 39.229729,21.394922,0 39.230816,21.39253,0 39.226871,21.375475,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Sanabil</name>
+		<styleUrl>#style2100</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.259853,21.381964,0 39.26083,21.373659,0 39.280796,21.372889,0 39.287106,21.373735,0 39.297951,21.392216,0 39.290798,21.396946,0 39.255177,21.410336,0 39.259853,21.381964,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Sulimaniah</name>
+		<styleUrl>#style6921</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.239391,21.501783,0 39.247646,21.501949,0 39.252789,21.502289,0 39.259373,21.502848,0 39.255909,21.507296,0 39.254345,21.509287,0 39.251598,21.511976,0 39.239517,21.509256,0 39.239391,21.501783,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Aziziyah</name>
+		<styleUrl>#style3721</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.17688,21.541719,0 39.190319,21.544451,0 39.215038,21.548737,0 39.21183,21.563923,0 39.198112,21.561296,0 39.187233,21.559029,0 39.17392,21.555935,0 39.17688,21.541719,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Rihab</name>
+		<styleUrl>#style17921</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.21814,21.53684,0 39.238258,21.540409,0 39.236614,21.545015,0 39.235886,21.548088,0 39.233631,21.555094,0 39.231621,21.563368,0 39.230953,21.567308,0 39.228683,21.56691,0 39.212246,21.56366,0 39.21814,21.53684,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Minar</name>
+		<styleUrl>#style9500</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.225262,21.597244,0 39.227139,21.590452,0 39.249664,21.596521,0 39.244495,21.614496,0 39.239883,21.613117,0 39.230984,21.610718,0 39.228405,21.61002,0 39.226883,21.609859,0 39.225765,21.609966,0 39.221184,21.608326,0 39.225262,21.597244,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Ajwad</name>
+		<styleUrl>#style11202</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.251766,21.590191,0 39.25246,21.590126,0 39.252491,21.58917,0 39.25296,21.588638,0 39.253544,21.588306,0 39.25441,21.588577,0 39.255356,21.588726,0 39.256668,21.589355,0 39.257656,21.589764,0 39.258652,21.590233,0 39.259106,21.590696,0 39.259995,21.591946,0 39.260403,21.592487,0 39.260887,21.592939,0 39.261715,21.593163,0 39.262196,21.593163,0 39.262749,21.593086,0 39.264076,21.592398,0 39.264671,21.592108,0 39.265945,21.592045,0 39.267105,21.592348,0 39.268703,21.593262,0 39.269245,21.593952,0 39.26976,21.594889,0 39.269894,21.596153,0 39.269596,21.597736,0 39.268925,21.599855,0 39.264626,21.615368,0 39.2603,21.615471,0 39.257847,21.615488,0 39.254444,21.615465,0 39.250565,21.615267,0 39.247677,21.614918,0 39.24456,21.614502,0 39.251766,21.590191,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Khumra</name>
+		<styleUrl>#style8801</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.234718,21.333294,0 39.236099,21.331305,0 39.23579,21.328939,0 39.235481,21.327953,0 39.2341,21.327188,0 39.260902,21.327688,0 39.260983,21.371117,0 39.260544,21.373714,0 39.233902,21.3766,0 39.226978,21.375374,0 39.234718,21.333294,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Nuzha</name>
+		<description>Al Nuzha</description>
+		<styleUrl>#style5620</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.155586,21.614061,0 39.168144,21.616335,0 39.185703,21.619871,0 39.182003,21.631067,0 39.17696,21.631418,0 39.171967,21.632137,0 39.167351,21.632973,0 39.163509,21.633919,0 39.160416,21.634771,0 39.158249,21.635099,0 39.156712,21.635544,0 39.154552,21.6366,0 39.153587,21.637079,0 39.152431,21.637743,0 39.151978,21.63669,0 39.151699,21.634359,0 39.152504,21.63168,0 39.153393,21.628605,0 39.154255,21.620834,0 39.155586,21.614061,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Naeem</name>
+		<styleUrl>#style7320</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.138374,21.618982,0 39.138622,21.618008,0 39.14138,21.611032,0 39.155094,21.613941,0 39.153633,21.622007,0 39.152988,21.627934,0 39.152714,21.629272,0 39.152168,21.631071,0 39.151638,21.632633,0 39.150822,21.634449,0 39.149319,21.637161,0 39.146877,21.640615,0 39.143955,21.644484,0 39.130642,21.6399,0 39.138035,21.621059,0 39.138374,21.618982,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Nahda</name>
+		<styleUrl>#style7821</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.12077,21.607504,0 39.121063,21.606443,0 39.140327,21.610712,0 39.14072,21.611071,0 39.14072,21.611496,0 39.136417,21.623636,0 39.133297,21.631933,0 39.127605,21.630577,0 39.127331,21.63191,0 39.11359,21.62867,0 39.12077,21.607504,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Muhammdeya</name>
+		<styleUrl>#style16320</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.099541,21.650391,0 39.100269,21.643986,0 39.100368,21.640144,0 39.101627,21.634132,0 39.10183,21.630093,0 39.103302,21.625263,0 39.103722,21.623688,0 39.106159,21.623878,0 39.106899,21.621908,0 39.107105,21.620825,0 39.106892,21.619446,0 39.105724,21.618658,0 39.106674,21.617376,0 39.107414,21.615602,0 39.107937,21.613041,0 39.107933,21.611662,0 39.107506,21.610184,0 39.107292,21.608904,0 39.107182,21.607229,0 39.107285,21.605555,0 39.107704,21.604074,0 39.1077,21.601809,0 39.108971,21.602102,0 39.110771,21.602098,0 39.111198,21.602789,0 39.111519,21.603674,0 39.117882,21.605534,0 39.120743,21.606415,0 39.11327,21.628693,0 39.127365,21.631952,0 39.127556,21.630655,0 39.133366,21.632011,0 39.130558,21.639877,0 39.144009,21.644564,0 39.138885,21.651558,0 39.134125,21.657946,0 39.132969,21.660095,0 39.128689,21.670708,0 39.096802,21.659657,0 39.099541,21.650391,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Basateen</name>
+		<styleUrl>#style13220</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.109608,21.691853,0 39.110855,21.665415,0 39.11113,21.665051,0 39.111507,21.66498,0 39.128597,21.671108,0 39.114552,21.706932,0 39.11451,21.709028,0 39.112339,21.708364,0 39.110649,21.707664,0 39.109802,21.705111,0 39.106812,21.69968,0 39.109608,21.691853,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Hamdaneya</name>
+		<styleUrl>#style16900</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.189175,21.736534,0 39.211636,21.744246,0 39.200642,21.77179,0 39.181854,21.765152,0 39.178024,21.77545,0 39.174103,21.774136,0 39.189175,21.736534,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Salheya</name>
+		<styleUrl>#style4304</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.211746,21.744375,0 39.246399,21.756615,0 39.23621,21.781195,0 39.218197,21.774679,0 39.216961,21.777517,0 39.200836,21.771969,0 39.211746,21.744375,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Abhar Alshumalia</name>
+		<styleUrl>#style5122</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.072624,21.727509,0 39.074738,21.724859,0 39.075798,21.722406,0 39.077637,21.718719,0 39.079594,21.714743,0 39.080769,21.711941,0 39.082638,21.709471,0 39.084778,21.707918,0 39.086773,21.70805,0 39.087955,21.707909,0 39.090237,21.706989,0 39.092232,21.707064,0 39.093571,21.708422,0 39.094307,21.710432,0 39.095192,21.71591,0 39.09626,21.718721,0 39.097858,21.720423,0 39.099632,21.7216,0 39.100937,21.721397,0 39.101887,21.722013,0 39.103561,21.721804,0 39.105854,21.721174,0 39.108894,21.720982,0 39.109291,21.721897,0 39.111687,21.722946,0 39.112579,21.726339,0 39.112862,21.730038,0 39.113407,21.734365,0 39.113705,21.736267,0 39.112247,21.737747,0 39.113014,21.738598,0 39.114178,21.73782,0 39.115032,21.737106,0 39.115616,21.737963,0 39.114956,21.739019,0 39.11499,21.740349,0 39.114254,21.740828,0 39.114777,21.7418,0 39.114929,21.74284,0 39.114769,21.743942,0 39.115189,21.745487,0 39.116619,21.747887,0 39.118595,21.749752,0 39.120415,21.750233,0 39.121471,21.750153,0 39.122852,21.750526,0 39.123909,21.75033,0 39.124722,21.750486,0 39.126842,21.750612,0 39.127522,21.750425,0 39.128334,21.750406,0 39.128845,21.750917,0 39.128994,21.751898,0 39.12923,21.753859,0 39.129921,21.756449,0 39.130875,21.759726,0 39.132011,21.760281,0 39.132824,21.760435,0 39.131611,21.761562,0 39.131439,21.762201,0 39.132088,21.763172,0 39.132805,21.764372,0 39.135792,21.766621,0 39.136326,21.765682,0 39.136711,21.766081,0 39.136421,21.766954,0 39.136551,21.767183,0 39.13665,21.768513,0 39.137234,21.769424,0 39.138622,21.770205,0 39.142262,21.771166,0 39.14341,21.772125,0 39.144989,21.772959,0 39.146793,21.772802,0 39.144821,21.776239,0 39.142925,21.778255,0 39.141029,21.780399,0 39.136253,21.784328,0 39.067959,21.732759,0 39.072624,21.727509,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Firdous</name>
+		<styleUrl>#style14020</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.112335,21.766294,0 39.136112,21.784222,0 39.133884,21.785503,0 39.131516,21.787197,0 39.128529,21.789873,0 39.126205,21.791721,0 39.122265,21.796135,0 39.100586,21.780378,0 39.112335,21.766294,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Shira</name>
+		<styleUrl>#style9022</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.089401,21.748966,0 39.112263,21.766258,0 39.100494,21.780413,0 39.077454,21.763536,0 39.089401,21.748966,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>AlYaqoot</name>
+		<styleUrl>#style11322</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.059265,21.785208,0 39.077377,21.763815,0 39.100239,21.780602,0 39.082199,21.802214,0 39.059265,21.785208,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Sawary</name>
+		<styleUrl>#style18020</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.100491,21.780834,0 39.122177,21.79645,0 39.119381,21.800625,0 39.117764,21.803999,0 39.116806,21.806761,0 39.115665,21.811449,0 39.07608,21.810087,0 39.100491,21.780834,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Zumarad</name>
+		<description>Al Zumarad</description>
+		<styleUrl>#style3140</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.035091,21.808844,0 39.034187,21.809067,0 39.032848,21.808262,0 39.031399,21.807322,0 39.030605,21.806814,0 39.031731,21.805418,0 39.032776,21.805513,0 39.033939,21.804827,0 39.034416,21.803446,0 39.034988,21.802073,0 39.036152,21.802204,0 39.037193,21.799896,0 39.0378,21.798237,0 39.038757,21.797081,0 39.039368,21.79623,0 39.040573,21.795292,0 39.04118,21.794352,0 39.041988,21.792759,0 39.042931,21.790972,0 39.043175,21.789749,0 39.043869,21.787634,0 39.044899,21.786316,0 39.047607,21.782791,0 39.048023,21.782373,0 39.050987,21.779245,0 39.081963,21.802422,0 39.075531,21.810106,0 39.035091,21.808844,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al LuLu</name>
+		<styleUrl>#style14622</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.05722,21.749062,0 39.07737,21.763596,0 39.059273,21.785303,0 39.051254,21.779436,0 39.052574,21.776714,0 39.052952,21.774784,0 39.052574,21.77338,0 39.049644,21.773821,0 39.048981,21.772505,0 39.05172,21.771976,0 39.050774,21.769169,0 39.049728,21.764868,0 39.049347,21.76285,0 39.049347,21.761093,0 39.05722,21.749062,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Amwaj</name>
+		<styleUrl>#style15022</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.06094,21.743959,0 39.062901,21.740438,0 39.0653,21.736713,0 39.067917,21.732786,0 39.089291,21.748924,0 39.077408,21.763527,0 39.057301,21.74897,0 39.06094,21.743959,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Khaldeyah</name>
+		<styleUrl>#style11620</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.134613,21.571884,0 39.126652,21.572041,0 39.125416,21.552006,0 39.126064,21.550066,0 39.127422,21.548506,0 39.129272,21.547031,0 39.143051,21.548552,0 39.142483,21.556459,0 39.143169,21.574427,0 39.134613,21.571884,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Andulus</name>
+		<styleUrl>#style5920</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.17382,21.555849,0 39.152836,21.549686,0 39.143208,21.54833,0 39.129414,21.546644,0 39.120327,21.545635,0 39.11512,21.54578,0 39.114624,21.544687,0 39.115517,21.543798,0 39.114941,21.543255,0 39.113552,21.542847,0 39.111881,21.542305,0 39.113544,21.539038,0 39.115349,21.540394,0 39.116096,21.539373,0 39.116577,21.536457,0 39.117542,21.535238,0 39.118294,21.533684,0 39.119621,21.532131,0 39.12175,21.530647,0 39.124092,21.528898,0 39.126865,21.527351,0 39.128345,21.527643,0 39.129444,21.527437,0 39.130539,21.527233,0 39.131493,21.526554,0 39.132008,21.525944,0 39.131283,21.525269,0 39.130417,21.523918,0 39.129322,21.524191,0 39.128162,21.523584,0 39.128242,21.522572,0 39.12941,21.522232,0 39.130497,21.522839,0 39.132088,21.52486,0 39.13332,21.526075,0 39.134121,21.526007,0 39.133545,21.52479,0 39.131016,21.521421,0 39.12801,21.51552,0 39.12838,21.514986,0 39.133369,21.516447,0 39.134468,21.514708,0 39.135048,21.514572,0 39.134754,21.515642,0 39.136265,21.518187,0 39.137558,21.523432,0 39.138287,21.523767,0 39.13879,21.525524,0 39.139519,21.526876,0 39.140392,21.526808,0 39.139523,21.523968,0 39.13916,21.522215,0 39.139385,21.520597,0 39.140766,21.519653,0 39.14222,21.519518,0 39.143673,21.519314,0 39.144619,21.520588,0 39.145782,21.52173,0 39.146366,21.522066,0 39.14666,21.522942,0 39.146229,21.524698,0 39.145206,21.525784,0 39.145428,21.526527,0 39.14653,21.52951,0 39.145874,21.530125,0 39.145874,21.531008,0 39.144779,21.531897,0 39.143097,21.532377,0 39.140682,21.53129,0 39.139877,21.531088,0 39.140312,21.534292,0 39.140968,21.535112,0 39.141998,21.534904,0 39.142948,21.533606,0 39.144417,21.533876,0 39.144562,21.535173,0 39.146397,21.534693,0 39.146687,21.533871,0 39.147346,21.533665,0 39.148373,21.534346,0 39.150501,21.534615,0 39.152916,21.533997,0 39.154385,21.534538,0 39.155922,21.53433,0 39.156952,21.534739,0 39.169868,21.540339,0 39.176445,21.541773,0 39.174965,21.549253,0 39.17382,21.555849,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Shati</name>
+		<styleUrl>#style3422</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.120468,21.606283,0 39.11142,21.603645,0 39.111145,21.602613,0 39.11039,21.602226,0 39.107838,21.601973,0 39.107159,21.600103,0 39.106274,21.597853,0 39.105877,21.595158,0 39.105968,21.591766,0 39.106873,21.59004,0 39.107628,21.589657,0 39.108387,21.588446,0 39.109024,21.584631,0 39.109928,21.581209,0 39.109734,21.578243,0 39.109608,21.576355,0 39.110161,21.57403,0 39.109852,21.572592,0 39.110001,21.57049,0 39.110012,21.568329,0 39.110779,21.565788,0 39.111195,21.564079,0 39.111065,21.562626,0 39.111073,21.561049,0 39.11137,21.558208,0 39.111919,21.55789,0 39.112881,21.557697,0 39.113293,21.556805,0 39.112473,21.55636,0 39.113567,21.555977,0 39.114529,21.555466,0 39.11412,21.554958,0 39.113094,21.55496,0 39.113232,21.554388,0 39.112686,21.553818,0 39.113167,21.552864,0 39.113308,21.551725,0 39.113243,21.551027,0 39.113995,21.550774,0 39.113449,21.549763,0 39.112774,21.548565,0 39.112911,21.548122,0 39.112228,21.547619,0 39.111824,21.546547,0 39.111488,21.545603,0 39.111286,21.54491,0 39.112038,21.544659,0 39.112991,21.544468,0 39.113529,21.54579,0 39.114349,21.545597,0 39.115166,21.545786,0 39.11898,21.545652,0 39.124363,21.546209,0 39.129475,21.54664,0 39.12669,21.549295,0 39.125057,21.551197,0 39.125217,21.558374,0 39.125931,21.566891,0 39.126457,21.578604,0 39.126423,21.582417,0 39.121166,21.599852,0 39.120468,21.606283,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Faisaileyah</name>
+		<styleUrl>#style12010</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.261997,21.286486,0 39.297005,21.287252,0 39.297112,21.323572,0 39.280811,21.327576,0 39.261143,21.32782,0 39.261997,21.286486,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Taawoon</name>
+		<styleUrl>#style10402</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.261066,21.327768,0 39.280865,21.327534,0 39.280899,21.372911,0 39.26086,21.373693,0 39.261066,21.327768,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Waha</name>
+		<styleUrl>#style14201</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.231632,21.565344,0 39.233585,21.557072,0 39.238609,21.540394,0 39.258389,21.544334,0 39.253155,21.566799,0 39.252789,21.567471,0 39.252167,21.56848,0 39.252151,21.568825,0 39.252041,21.570545,0 39.252048,21.570766,0 39.252731,21.571632,0 39.251896,21.572865,0 39.251862,21.573503,0 39.251091,21.573462,0 39.250057,21.573353,0 39.248314,21.573208,0 39.245319,21.57275,0 39.241447,21.572239,0 39.230793,21.57069,0 39.231632,21.565344,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Ameer Fawaz Northern</name>
+		<styleUrl>#style15400</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.308765,21.426647,0 39.30975,21.425821,0 39.309792,21.426001,0 39.310436,21.426079,0 39.310856,21.426258,0 39.311352,21.426374,0 39.311726,21.426397,0 39.312088,21.426582,0 39.31192,21.427446,0 39.311707,21.42783,0 39.3116,21.428213,0 39.311638,21.428677,0 39.311985,21.429119,0 39.311749,21.430025,0 39.31168,21.430578,0 39.311657,21.431684,0 39.312092,21.43231,0 39.310623,21.435234,0 39.309654,21.43531,0 39.30838,21.435143,0 39.307201,21.435036,0 39.305729,21.435274,0 39.304878,21.435408,0 39.304138,21.436003,0 39.303238,21.436377,0 39.302673,21.436663,0 39.301987,21.437378,0 39.301559,21.43795,0 39.300877,21.438641,0 39.299946,21.43924,0 39.298542,21.439951,0 39.297844,21.440577,0 39.297493,21.441177,0 39.296474,21.442375,0 39.29557,21.442896,0 39.289726,21.444376,0 39.288246,21.440111,0 39.289421,21.43939,0 39.290363,21.439077,0 39.293201,21.438305,0 39.294582,21.437721,0 39.296082,21.437054,0 39.297478,21.436272,0 39.300461,21.434149,0 39.308765,21.426647,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Adal</name>
+		<styleUrl>#style14302</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.279572,21.452265,0 39.281105,21.44795,0 39.281517,21.446735,0 39.282131,21.445597,0 39.282543,21.444826,0 39.282986,21.444054,0 39.28384,21.443146,0 39.28455,21.442455,0 39.28511,21.441904,0 39.285759,21.441462,0 39.28661,21.440792,0 39.287582,21.440441,0 39.288197,21.440067,0 39.289749,21.44442,0 39.29546,21.442928,0 39.295727,21.442789,0 39.29652,21.442347,0 39.296993,21.441795,0 39.297466,21.441191,0 39.297733,21.44079,0 39.297966,21.4405,0 39.298378,21.440142,0 39.298676,21.439865,0 39.299324,21.439507,0 39.299942,21.439232,0 39.300919,21.438623,0 39.301624,21.43788,0 39.302128,21.437218,0 39.302628,21.436722,0 39.302864,21.436527,0 39.303219,21.43639,0 39.303673,21.436218,0 39.303749,21.436476,0 39.303871,21.437668,0 39.303867,21.438822,0 39.30323,21.43924,0 39.303432,21.439541,0 39.303432,21.440235,0 39.30341,21.440418,0 39.303421,21.440632,0 39.303375,21.441031,0 39.303818,21.441586,0 39.304878,21.441658,0 39.305248,21.446791,0 39.295479,21.447651,0 39.279572,21.452265,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Umul Hablain</name>
+		<styleUrl>#style17114</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.221539,21.732525,0 39.219688,21.732149,0 39.222115,21.713869,0 39.212765,21.711611,0 39.215149,21.692892,0 39.215679,21.691265,0 39.222858,21.673258,0 39.271969,21.686443,0 39.271374,21.690754,0 39.269585,21.694403,0 39.266815,21.699268,0 39.264053,21.706106,0 39.260471,21.711279,0 39.25787,21.717964,0 39.256081,21.721766,0 39.25576,21.725563,0 39.255283,21.730728,0 39.255299,21.7365,0 39.253349,21.743187,0 39.251564,21.748962,0 39.249023,21.75737,0 39.214241,21.745131,0 39.221539,21.732525,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Bariman</name>
+		<styleUrl>#style7902</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.205223,21.651234,0 39.207859,21.643881,0 39.218716,21.614981,0 39.22073,21.610077,0 39.221428,21.608707,0 39.225685,21.609947,0 39.226868,21.609884,0 39.228371,21.610043,0 39.230984,21.610788,0 39.244553,21.614534,0 39.253216,21.615452,0 39.264549,21.615385,0 39.266357,21.615437,0 39.270763,21.615541,0 39.278053,21.616917,0 39.283291,21.61776,0 39.286884,21.620087,0 39.286087,21.627834,0 39.283817,21.635586,0 39.282852,21.641359,0 39.27961,21.651999,0 39.277336,21.657471,0 39.274582,21.667196,0 39.272808,21.677683,0 39.273151,21.683302,0 39.271976,21.686447,0 39.222462,21.673069,0 39.210777,21.669371,0 39.209305,21.660236,0 39.208874,21.656254,0 39.204605,21.6539,0 39.205223,21.651234,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Mantra</name>
+		<styleUrl>#style12802</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.269684,21.597788,0 39.269955,21.596024,0 39.26984,21.595236,0 39.269672,21.594721,0 39.269215,21.593889,0 39.268566,21.593182,0 39.268139,21.592892,0 39.267082,21.592344,0 39.26593,21.592062,0 39.26474,21.592077,0 39.264008,21.592421,0 39.263344,21.592764,0 39.262646,21.593124,0 39.261677,21.593164,0 39.260868,21.592888,0 39.261318,21.590666,0 39.261555,21.589136,0 39.26247,21.586748,0 39.263664,21.58576,0 39.264462,21.584536,0 39.265099,21.583374,0 39.267155,21.582161,0 39.267735,21.575783,0 39.272404,21.576393,0 39.274601,21.576694,0 39.278656,21.577282,0 39.283039,21.578117,0 39.2836,21.578239,0 39.287827,21.577812,0 39.291447,21.578686,0 39.295048,21.578573,0 39.297836,21.578674,0 39.298767,21.578695,0 39.303154,21.579466,0 39.301334,21.583443,0 39.30085,21.585115,0 39.298248,21.589373,0 39.295975,21.594997,0 39.291428,21.605335,0 39.288666,21.611418,0 39.286877,21.620033,0 39.283287,21.617754,0 39.279785,21.617172,0 39.275455,21.616423,0 39.272945,21.615942,0 39.270775,21.615534,0 39.264671,21.615398,0 39.266724,21.608435,0 39.269684,21.597788,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Samir</name>
+		<styleUrl>#style6500</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.230328,21.572495,0 39.23056,21.571478,0 39.230824,21.570929,0 39.23103,21.570711,0 39.232651,21.570963,0 39.243328,21.572632,0 39.251823,21.573526,0 39.267696,21.575794,0 39.267197,21.582151,0 39.265076,21.583372,0 39.264423,21.584587,0 39.263611,21.585804,0 39.26247,21.586718,0 39.261494,21.589149,0 39.261333,21.590517,0 39.260853,21.592892,0 39.260315,21.592339,0 39.259018,21.590588,0 39.258495,21.590103,0 39.255203,21.588837,0 39.254311,21.588541,0 39.253586,21.588322,0 39.252937,21.588301,0 39.25248,21.588749,0 39.252346,21.589205,0 39.252258,21.590006,0 39.251568,21.590088,0 39.249706,21.596437,0 39.227119,21.590431,0 39.230328,21.572495,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Obhur South</name>
+		<styleUrl>#style17222</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.115654,21.713121,0 39.117207,21.715124,0 39.11945,21.716724,0 39.120754,21.717304,0 39.12542,21.718866,0 39.128471,21.71983,0 39.13232,21.721268,0 39.136066,21.722561,0 39.14043,21.724054,0 39.142151,21.724823,0 39.143848,21.725643,0 39.145664,21.727264,0 39.146641,21.728779,0 39.146976,21.729946,0 39.147045,21.731567,0 39.147217,21.734459,0 39.147423,21.737162,0 39.1479,21.74225,0 39.148808,21.752922,0 39.149529,21.75856,0 39.149948,21.763277,0 39.149601,21.766474,0 39.148861,21.769047,0 39.148174,21.770166,0 39.147533,21.771673,0 39.146664,21.770424,0 39.145153,21.769278,0 39.144054,21.768896,0 39.142834,21.768614,0 39.141273,21.768265,0 39.140095,21.767529,0 39.139656,21.765842,0 39.139061,21.764467,0 39.138176,21.763159,0 39.136627,21.760874,0 39.13549,21.759211,0 39.134468,21.757818,0 39.134098,21.756937,0 39.133167,21.755943,0 39.133286,21.755611,0 39.132767,21.754635,0 39.132324,21.754238,0 39.132404,21.753666,0 39.132877,21.753489,0 39.133259,21.753023,0 39.133305,21.752119,0 39.132732,21.751293,0 39.13269,21.750063,0 39.132187,21.747972,0 39.13192,21.747261,0 39.130859,21.746201,0 39.12933,21.74367,0 39.128407,21.742134,0 39.127266,21.74074,0 39.126305,21.740231,0 39.125065,21.738575,0 39.123905,21.737505,0 39.122349,21.736786,0 39.12096,21.736267,0 39.120098,21.735636,0 39.118744,21.734272,0 39.117176,21.732235,0 39.116882,21.730869,0 39.117077,21.730427,0 39.116489,21.727591,0 39.115826,21.725414,0 39.115486,21.724007,0 39.116123,21.725071,0 39.11496,21.722942,0 39.114285,21.722118,0 39.113499,21.720516,0 39.111034,21.718702,0 39.109112,21.717812,0 39.107464,21.71743,0 39.105186,21.716749,0 39.102245,21.716415,0 39.100773,21.715616,0 39.099846,21.715975,0 39.098255,21.715889,0 39.09734,21.715141,0 39.097164,21.714605,0 39.097382,21.713537,0 39.09713,21.712362,0 39.096954,21.711624,0 39.097076,21.710913,0 39.098778,21.709558,0 39.100586,21.708775,0 39.103745,21.707233,0 39.106777,21.699854,0 39.109959,21.705242,0 39.110321,21.706371,0 39.110683,21.707712,0 39.114388,21.70899,0 39.114594,21.710272,0 39.114849,21.711342,0 39.115654,21.713121,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Marjan</name>
+		<styleUrl>#style4420</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.096745,21.710796,0 39.096157,21.709473,0 39.095783,21.707844,0 39.094673,21.706474,0 39.09338,21.70562,0 39.091995,21.705364,0 39.090336,21.70528,0 39.088951,21.70537,0 39.087879,21.705904,0 39.086823,21.705961,0 39.085999,21.7054,0 39.085808,21.703918,0 39.086178,21.702545,0 39.095234,21.665571,0 39.095871,21.662502,0 39.096279,21.661026,0 39.096642,21.659775,0 39.109947,21.664579,0 39.110474,21.665724,0 39.109627,21.691217,0 39.109467,21.692062,0 39.107704,21.697245,0 39.10379,21.707165,0 39.10194,21.708078,0 39.10038,21.708885,0 39.099281,21.709356,0 39.098022,21.709986,0 39.096745,21.710796,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Qaida Malik Faisal Bharia</name>
+		<styleUrl>#style11701</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.120026,21.33642,0 39.116894,21.339487,0 39.116615,21.342148,0 39.115623,21.344145,0 39.114483,21.344681,0 39.114227,21.346098,0 39.11438,21.348091,0 39.11364,21.348936,0 39.112068,21.349207,0 39.111069,21.348944,0 39.110065,21.348282,0 39.109207,21.347086,0 39.108345,21.346024,0 39.107346,21.345228,0 39.106625,21.343369,0 39.106194,21.342306,0 39.106613,21.340044,0 39.107182,21.338846,0 39.107464,21.337782,0 39.106747,21.336586,0 39.106457,21.33539,0 39.106449,21.333794,0 39.107452,21.333792,0 39.107311,21.33499,0 39.107601,21.335918,0 39.109032,21.336714,0 39.110462,21.337376,0 39.111889,21.337639,0 39.113461,21.337767,0 39.115028,21.337629,0 39.116745,21.337759,0 39.118027,21.336958,0 39.118881,21.336159,0 39.120586,21.33416,0 39.121555,21.333046,0 39.124981,21.334696,0 39.12711,21.335222,0 39.130749,21.335638,0 39.1917,21.329945,0 39.194618,21.360943,0 39.199177,21.407103,0 39.188137,21.407991,0 39.187775,21.404436,0 39.187344,21.403641,0 39.186344,21.403776,0 39.18478,21.405111,0 39.184788,21.407238,0 39.184509,21.4095,0 39.183369,21.410566,0 39.182365,21.409372,0 39.18222,21.408176,0 39.182358,21.406979,0 39.182636,21.405117,0 39.176788,21.407528,0 39.175934,21.406998,0 39.186771,21.402845,0 39.187332,21.40045,0 39.183319,21.400909,0 39.182884,21.398155,0 39.180794,21.397217,0 39.180656,21.396139,0 39.18251,21.394747,0 39.182529,21.393747,0 39.183723,21.392818,0 39.183765,21.39246,0 39.183781,21.39205,0 39.182415,21.390135,0 39.182243,21.38942,0 39.181461,21.388815,0 39.181351,21.38851,0 39.181396,21.388264,0 39.181137,21.388098,0 39.180748,21.387686,0 39.180706,21.387329,0 39.180302,21.386856,0 39.180077,21.38677,0 39.179729,21.38633,0 39.179688,21.386087,0 39.179714,21.385983,0 39.179447,21.385702,0 39.179501,21.385374,0 39.179169,21.385141,0 39.17865,21.384844,0 39.178425,21.384436,0 39.178551,21.384001,0 39.178852,21.383488,0 39.178574,21.382856,0 39.177998,21.382208,0 39.177788,21.381865,0 39.177776,21.381395,0 39.177315,21.380913,0 39.177189,21.380493,0 39.176277,21.379709,0 39.176247,21.37924,0 39.176109,21.378908,0 39.1759,21.37886,0 39.1758,21.378637,0 39.175694,21.378325,0 39.176235,21.377895,0 39.176548,21.376932,0 39.176395,21.37602,0 39.176239,21.375435,0 39.175037,21.374651,0 39.174095,21.374065,0 39.173489,21.373547,0 39.173164,21.373308,0 39.172989,21.372898,0 39.173145,21.371578,0 39.173038,21.371185,0 39.172749,21.370762,0 39.172859,21.369907,0 39.1726,21.369411,0 39.17239,21.368862,0 39.172153,21.368376,0 39.169312,21.365938,0 39.169106,21.365616,0 39.169159,21.365171,0 39.169369,21.365044,0 39.169876,21.365185,0 39.1698,21.364498,0 39.169651,21.364225,0 39.169083,21.363365,0 39.167728,21.362627,0 39.167038,21.362453,0 39.166225,21.362286,0 39.165508,21.361822,0 39.165443,21.361378,0 39.164703,21.361168,0 39.163601,21.360228,0 39.16235,21.359047,0 39.161671,21.358273,0 39.161003,21.357248,0 39.160141,21.355989,0 39.159645,21.355659,0 39.159157,21.355274,0 39.158882,21.354942,0 39.158562,21.354668,0 39.157936,21.354126,0 39.157387,21.353754,0 39.156292,21.353548,0 39.155289,21.352976,0 39.154213,21.352785,0 39.147507,21.350237,0 39.14547,21.347923,0 39.143764,21.347548,0 39.142406,21.347019,0 39.139767,21.346098,0 39.137268,21.345705,0 39.134842,21.345247,0 39.132698,21.344721,0 39.131485,21.344893,0 39.130028,21.345146,0 39.129204,21.345318,0 39.12867,21.345367,0 39.128277,21.345499,0 39.127808,21.345577,0 39.12743,21.345676,0 39.126957,21.34581,0 39.126778,21.346226,0 39.126652,21.346651,0 39.126495,21.347063,0 39.126495,21.347528,0 39.126644,21.348183,0 39.127228,21.348724,0 39.127865,21.348856,0 39.1283,21.348898,0 39.128777,21.348898,0 39.129162,21.348717,0 39.129234,21.349144,0 39.129242,21.349545,0 39.129131,21.350012,0 39.129173,21.350672,0 39.128574,21.351606,0 39.128117,21.351923,0 39.127483,21.352432,0 39.126911,21.352974,0 39.126862,21.353556,0 39.127918,21.355112,0 39.128769,21.355886,0 39.128742,21.357063,0 39.128918,21.357733,0 39.129185,21.358433,0 39.129639,21.358908,0 39.129993,21.359104,0 39.130383,21.359859,0 39.131027,21.360518,0 39.131466,21.360893,0 39.131901,21.361162,0 39.132336,21.361349,0 39.132996,21.361605,0 39.134949,21.361994,0 39.135632,21.361963,0 39.13538,21.362303,0 39.135242,21.362576,0 39.13546,21.362844,0 39.135708,21.362648,0 39.135895,21.362843,0 39.136112,21.363285,0 39.135899,21.363586,0 39.135654,21.364044,0 39.135513,21.364382,0 39.135525,21.36458,0 39.135662,21.364883,0 39.135563,21.365269,0 39.135479,21.365532,0 39.135193,21.365715,0 39.134598,21.365532,0 39.133991,21.365995,0 39.133739,21.366198,0 39.133114,21.366522,0 39.132504,21.366108,0 39.131157,21.364588,0 39.130676,21.36375,0 39.130539,21.36281,0 39.130436,21.36198,0 39.12981,21.360994,0 39.129173,21.360207,0 39.127949,21.359272,0 39.126801,21.358078,0 39.126083,21.356882,0 39.125366,21.355822,0 39.12479,21.354361,0 39.124664,21.352262,0 39.125,21.351677,0 39.125164,21.350872,0 39.124924,21.350374,0 39.124954,21.3496,0 39.124783,21.349058,0 39.124481,21.348862,0 39.124374,21.348494,0 39.124512,21.348021,0 39.12508,21.346979,0 39.125473,21.346455,0 39.126068,21.34631,0 39.125561,21.34543,0 39.125336,21.344624,0 39.125381,21.344095,0 39.125389,21.34376,0 39.125153,21.343279,0 39.124756,21.342793,0 39.124664,21.342663,0 39.125835,21.342102,0 39.126183,21.341616,0 39.126099,21.341217,0 39.126736,21.341602,0 39.128025,21.34169,0 39.129787,21.341452,0 39.130608,21.341208,0 39.1315,21.340624,0 39.13213,21.33984,0 39.132092,21.3388,0 39.131363,21.337585,0 39.131035,21.337278,0 39.130787,21.336727,0 39.129936,21.336054,0 39.129162,21.335983,0 39.127445,21.336004,0 39.125957,21.335651,0 39.12204,21.333719,0 39.120026,21.33642,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Qawazeen</name>
+		<styleUrl>#style18102</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.139179,21.246969,0 39.13969,21.244438,0 39.193104,21.243862,0 39.192436,21.283314,0 39.153175,21.282475,0 39.153336,21.266424,0 39.15461,21.264046,0 39.138016,21.249834,0 39.139179,21.246969,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Malesa</name>
+		<styleUrl>#style16600</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.193394,21.243866,0 39.232899,21.243759,0 39.232616,21.285265,0 39.192753,21.283733,0 39.193394,21.243866,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Masrah</name>
+		<styleUrl>#style5012</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.233315,21.243988,0 39.26347,21.243641,0 39.262138,21.258656,0 39.262142,21.267082,0 39.261559,21.285975,0 39.23296,21.285339,0 39.233315,21.243988,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Barkah</name>
+		<styleUrl>#style7002</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.262543,21.258364,0 39.263889,21.24369,0 39.297684,21.244106,0 39.296879,21.286638,0 39.261925,21.285995,0 39.262543,21.258364,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Karamah</name>
+		<styleUrl>#style12101</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.297073,21.287275,0 39.326187,21.287266,0 39.334133,21.320162,0 39.307987,21.319941,0 39.297211,21.323406,0 39.297073,21.287275,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Tadamin</name>
+		<styleUrl>#style13131</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.280983,21.372929,0 39.280975,21.327562,0 39.296963,21.323521,0 39.308064,21.319841,0 39.334064,21.320177,0 39.339401,21.343487,0 39.33712,21.345669,0 39.332413,21.349363,0 39.32793,21.350101,0 39.317844,21.351479,0 39.313049,21.352997,0 39.297466,21.358841,0 39.297096,21.359995,0 39.294189,21.361654,0 39.293713,21.363321,0 39.293449,21.364956,0 39.292316,21.366232,0 39.290977,21.366701,0 39.290367,21.367556,0 39.289623,21.368498,0 39.289299,21.370216,0 39.28891,21.371529,0 39.288174,21.37281,0 39.287422,21.373907,0 39.280983,21.372929,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Rahma</name>
+		<styleUrl>#style16700</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.297771,21.24402,0 39.315765,21.243525,0 39.326294,21.287224,0 39.297127,21.286987,0 39.297771,21.24402,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Huda</name>
+		<styleUrl>#style8602</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.287945,21.372938,0 39.28894,21.371584,0 39.28952,21.368898,0 39.290966,21.366695,0 39.292107,21.366245,0 39.293465,21.365103,0 39.293728,21.363756,0 39.294186,21.361731,0 39.297047,21.360104,0 39.29744,21.358831,0 39.298199,21.358536,0 39.313015,21.353046,0 39.322651,21.3755,0 39.297943,21.392313,0 39.287289,21.374163,0 39.287945,21.372938,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Jawaid</name>
+		<styleUrl>#style16501</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.2911,21.396866,0 39.322598,21.37553,0 39.332897,21.400423,0 39.332527,21.402151,0 39.332344,21.403189,0 39.333645,21.40431,0 39.332531,21.404572,0 39.331882,21.405436,0 39.33123,21.4063,0 39.329563,21.406561,0 39.329006,21.407597,0 39.328636,21.408461,0 39.327801,21.409758,0 39.326965,21.410709,0 39.326965,21.411745,0 39.326595,21.412783,0 39.325577,21.413994,0 39.324463,21.414944,0 39.323719,21.415894,0 39.323997,21.416412,0 39.324371,21.417881,0 39.324745,21.419523,0 39.325485,21.4203,0 39.325859,21.421423,0 39.326508,21.422287,0 39.325489,21.42272,0 39.324188,21.422979,0 39.322056,21.423153,0 39.320107,21.423326,0 39.31834,21.423067,0 39.316578,21.423243,0 39.314907,21.423502,0 39.313049,21.423935,0 39.311474,21.424799,0 39.309635,21.425583,0 39.309784,21.424749,0 39.30999,21.424194,0 39.309895,21.42359,0 39.308224,21.423763,0 39.307419,21.423962,0 39.306145,21.424156,0 39.30521,21.423557,0 39.304729,21.42281,0 39.304787,21.421694,0 39.304695,21.420166,0 39.30407,21.418844,0 39.303925,21.417049,0 39.293659,21.420307,0 39.28323,21.399778,0 39.2911,21.396866,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Sharooq</name>
+		<styleUrl>#style5302</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.265633,21.545139,0 39.270649,21.547094,0 39.282299,21.552057,0 39.291847,21.558676,0 39.292816,21.557322,0 39.296219,21.561386,0 39.298481,21.560631,0 39.300262,21.560781,0 39.302689,21.56093,0 39.306412,21.561531,0 39.30965,21.561981,0 39.306416,21.571163,0 39.303185,21.579443,0 39.298813,21.578691,0 39.295254,21.578543,0 39.29137,21.578693,0 39.287807,21.577791,0 39.2836,21.578243,0 39.278423,21.577192,0 39.267254,21.575689,0 39.251835,21.573511,0 39.251915,21.572868,0 39.252716,21.571587,0 39.251961,21.570669,0 39.252197,21.568544,0 39.258675,21.543335,0 39.265633,21.545139,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Mareekh</name>
+		<styleUrl>#style17300</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.270809,21.546946,0 39.274204,21.544838,0 39.276794,21.542881,0 39.278252,21.541225,0 39.280193,21.539118,0 39.282135,21.53686,0 39.284077,21.535204,0 39.284882,21.532797,0 39.28569,21.530087,0 39.28553,21.527981,0 39.285526,21.525421,0 39.28558,21.52157,0 39.286716,21.521254,0 39.289719,21.519594,0 39.293884,21.517319,0 39.296749,21.515751,0 39.299374,21.513941,0 39.300896,21.512314,0 39.302685,21.510502,0 39.302906,21.509586,0 39.304665,21.509583,0 39.305691,21.509789,0 39.307041,21.509117,0 39.307968,21.509155,0 39.30838,21.509865,0 39.312038,21.509979,0 39.315788,21.510044,0 39.314484,21.526012,0 39.313519,21.534891,0 39.312714,21.542868,0 39.312393,21.546631,0 39.311749,21.551146,0 39.311749,21.553553,0 39.309639,21.561972,0 39.305382,21.561344,0 39.302498,21.560902,0 39.300331,21.560778,0 39.298588,21.560638,0 39.296261,21.561371,0 39.292656,21.557173,0 39.291363,21.558228,0 39.283592,21.552662,0 39.270809,21.546946,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Nakheel</name>
+		<styleUrl>#style6111</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.238708,21.540409,0 39.241287,21.532974,0 39.242466,21.528988,0 39.243145,21.526783,0 39.245247,21.52272,0 39.246891,21.519838,0 39.250683,21.514977,0 39.253105,21.512609,0 39.257793,21.513718,0 39.263481,21.515236,0 39.264797,21.515921,0 39.266972,21.517879,0 39.269108,21.519726,0 39.270756,21.520933,0 39.27832,21.521492,0 39.281734,21.521852,0 39.283783,21.521824,0 39.285591,21.521626,0 39.285545,21.525146,0 39.285515,21.527655,0 39.285679,21.530107,0 39.284702,21.533339,0 39.284058,21.53525,0 39.282021,21.536955,0 39.280556,21.538694,0 39.277794,21.541702,0 39.276817,21.542847,0 39.274235,21.544819,0 39.270725,21.547031,0 39.266109,21.545231,0 39.258717,21.543264,0 39.258472,21.544338,0 39.238708,21.540409,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Raghama</name>
+		<styleUrl>#style6301</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.258537,21.505083,0 39.265491,21.49575,0 39.269211,21.488527,0 39.289585,21.486416,0 39.292496,21.485964,0 39.306625,21.482487,0 39.30957,21.483025,0 39.310574,21.483576,0 39.313168,21.483658,0 39.317387,21.483097,0 39.320366,21.482643,0 39.323315,21.481716,0 39.320637,21.487156,0 39.319668,21.489864,0 39.318539,21.492874,0 39.31773,21.496037,0 39.316925,21.499949,0 39.316605,21.504463,0 39.3158,21.510033,0 39.308346,21.509872,0 39.307934,21.509163,0 39.306961,21.509127,0 39.306469,21.509411,0 39.305691,21.509798,0 39.304642,21.509567,0 39.302872,21.509609,0 39.302696,21.510462,0 39.301662,21.511486,0 39.299358,21.513971,0 39.296867,21.51561,0 39.294472,21.516972,0 39.28677,21.521235,0 39.285622,21.521584,0 39.283897,21.52182,0 39.281776,21.521849,0 39.278233,21.521544,0 39.270763,21.520939,0 39.268684,21.519413,0 39.267605,21.518559,0 39.266331,21.517282,0 39.264763,21.515863,0 39.2631,21.515089,0 39.25948,21.514069,0 39.253273,21.51232,0 39.258537,21.505083,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Muntazhat</name>
+		<styleUrl>#style15501</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.279404,21.452578,0 39.282028,21.451635,0 39.284519,21.450994,0 39.285648,21.450768,0 39.288074,21.450014,0 39.290741,21.449207,0 39.293217,21.448406,0 39.295124,21.447905,0 39.297211,21.447613,0 39.299385,21.447378,0 39.302372,21.447083,0 39.304745,21.446865,0 39.307327,21.446838,0 39.308273,21.448835,0 39.307541,21.450153,0 39.307224,21.451286,0 39.307457,21.452841,0 39.306961,21.45491,0 39.307632,21.455648,0 39.308151,21.457163,0 39.308811,21.458376,0 39.309299,21.459763,0 39.308937,21.461206,0 39.30864,21.46183,0 39.308151,21.462618,0 39.308056,21.463896,0 39.30846,21.46438,0 39.307987,21.465031,0 39.310383,21.468884,0 39.306622,21.48246,0 39.299438,21.484196,0 39.292397,21.485994,0 39.290531,21.486317,0 39.287682,21.486567,0 39.281944,21.487169,0 39.268356,21.488617,0 39.279404,21.452578,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Muslim</name>
+		<styleUrl>#style11121</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.310356,21.468775,0 39.30801,21.465015,0 39.308495,21.464338,0 39.308094,21.46393,0 39.308174,21.462727,0 39.308899,21.461372,0 39.309223,21.459867,0 39.308819,21.458439,0 39.30817,21.457161,0 39.307766,21.455883,0 39.306957,21.454906,0 39.307442,21.452801,0 39.307198,21.451145,0 39.307682,21.449942,0 39.308247,21.448889,0 39.307358,21.446934,0 39.308777,21.447123,0 39.309998,21.447353,0 39.313034,21.447994,0 39.314953,21.448359,0 39.316166,21.448584,0 39.319237,21.448732,0 39.322308,21.449183,0 39.325111,21.449739,0 39.326656,21.449745,0 39.327801,21.449406,0 39.329174,21.448427,0 39.331112,21.447073,0 39.333534,21.445116,0 39.33709,21.442406,0 39.340431,21.440052,0 39.344223,21.438437,0 39.346138,21.437691,0 39.345657,21.442402,0 39.344849,21.445635,0 39.344124,21.447666,0 39.343399,21.45015,0 39.342777,21.451569,0 39.338821,21.457514,0 39.336403,21.461725,0 39.323261,21.481701,0 39.320496,21.482616,0 39.318394,21.482983,0 39.317562,21.483025,0 39.314083,21.483589,0 39.312557,21.483625,0 39.31052,21.483559,0 39.309612,21.483046,0 39.308395,21.482805,0 39.306671,21.482552,0 39.310356,21.468775,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Fazal</name>
+		<styleUrl>#style7101</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.304848,21.441631,0 39.303864,21.441626,0 39.303337,21.441038,0 39.303436,21.440176,0 39.303459,21.439625,0 39.303249,21.439243,0 39.303844,21.438885,0 39.30389,21.437405,0 39.303757,21.436378,0 39.304272,21.435942,0 39.30492,21.435369,0 39.306538,21.435118,0 39.307255,21.435019,0 39.309647,21.435312,0 39.310677,21.435211,0 39.312092,21.432325,0 39.31171,21.431719,0 39.31171,21.430908,0 39.311764,21.430099,0 39.311981,21.429138,0 39.311653,21.428734,0 39.3116,21.428177,0 39.311817,21.42762,0 39.312202,21.4265,0 39.311836,21.426435,0 39.31097,21.42631,0 39.3106,21.426119,0 39.309967,21.426065,0 39.309689,21.425827,0 39.310482,21.425323,0 39.31097,21.425047,0 39.311722,21.424713,0 39.312576,21.424229,0 39.313309,21.423836,0 39.314869,21.423506,0 39.316326,21.423265,0 39.318764,21.423161,0 39.322315,21.423037,0 39.324654,21.422787,0 39.325645,21.422688,0 39.327255,21.422157,0 39.32843,21.421774,0 39.329193,21.421408,0 39.330799,21.420322,0 39.33287,21.418747,0 39.335167,21.416927,0 39.337349,21.415808,0 39.339485,21.41523,0 39.341404,21.415226,0 39.342964,21.415482,0 39.345577,21.415815,0 39.347912,21.416288,0 39.350029,21.416538,0 39.34927,21.419575,0 39.34824,21.42322,0 39.346668,21.428635,0 39.346146,21.433659,0 39.346149,21.437654,0 39.342506,21.439074,0 39.339954,21.440392,0 39.337128,21.442392,0 39.331219,21.446978,0 39.329155,21.448431,0 39.328213,21.449242,0 39.326656,21.449703,0 39.325249,21.449734,0 39.323433,21.449455,0 39.32093,21.449203,0 39.318268,21.448801,0 39.314354,21.448347,0 39.310719,21.447441,0 39.308598,21.447132,0 39.307224,21.446863,0 39.305302,21.446903,0 39.30513,21.444088,0 39.304848,21.441631,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Shifa</name>
+		<styleUrl>#style4000</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.324051,21.415337,0 39.325516,21.41407,0 39.326557,21.412905,0 39.327038,21.411655,0 39.326939,21.410744,0 39.327957,21.409664,0 39.328747,21.408175,0 39.329494,21.406544,0 39.331123,21.406368,0 39.332062,21.405266,0 39.332462,21.404633,0 39.333599,21.404387,0 39.332359,21.403191,0 39.33292,21.400499,0 39.322838,21.375916,0 39.31316,21.353233,0 39.317558,21.351559,0 39.332607,21.349304,0 39.339443,21.343473,0 39.343079,21.35696,0 39.346367,21.36945,0 39.349785,21.385935,0 39.35173,21.397806,0 39.352238,21.403555,0 39.352226,21.408075,0 39.351418,21.411963,0 39.349934,21.416569,0 39.347294,21.416178,0 39.344643,21.415705,0 39.340935,21.415171,0 39.338596,21.415421,0 39.336639,21.415998,0 39.335503,21.416588,0 39.333553,21.418062,0 39.33176,21.419376,0 39.329174,21.421408,0 39.3265,21.422333,0 39.325802,21.4214,0 39.325607,21.420572,0 39.324718,21.419458,0 39.324478,21.41851,0 39.324242,21.417267,0 39.323765,21.415974,0 39.324051,21.415337,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Salamah</name>
+		<styleUrl>#style1921</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.1422,21.604527,0 39.144356,21.598324,0 39.144749,21.597845,0 39.144386,21.596773,0 39.144272,21.593189,0 39.143353,21.57482,0 39.16523,21.5809,0 39.159554,21.597635,0 39.15707,21.605013,0 39.155228,21.613686,0 39.141159,21.610786,0 39.1422,21.604527,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+	<Placemark>
+		<name>Al Rawdah</name>
+		<styleUrl>#style10522</styleUrl>
+		<Polygon>
+			<outerBoundaryIs>
+				<LinearRing>
+					<tessellate>1</tessellate>
+					<coordinates>
+						39.143326,21.574427,0 39.142651,21.559187,0 39.143169,21.548706,0 39.149242,21.549191,0 39.152637,21.549709,0 39.173538,21.555761,0 39.170479,21.564331,0 39.165215,21.580729,0 39.143326,21.574427,0 
+					</coordinates>
+				</LinearRing>
+			</outerBoundaryIs>
+		</Polygon>
+	</Placemark>
+</Document>
+</kml>

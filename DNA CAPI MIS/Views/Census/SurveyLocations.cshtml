@@ -1,0 +1,35 @@
+﻿@model IEnumerable<DNA_CAPI_MIS.Models.CityView>
+
+@{
+    ViewBag.Title = "Census RMS Locations";
+}
+
+<script>
+    function GetUrlParams(sParam) {
+        var sPageURL = window.location.search.substring(1);
+        var sURLVariables = sPageURL.split('&');
+        for (var i = 0; i < sURLVariables.length; i++) {
+            var sParameterName = sURLVariables[i].split('=');
+            if (sParameterName[0] == sParam) {
+                return decodeURIComponent(sParameterName[1]);
+            }
+        }
+    }
+
+    function GetUrl(country) {
+        var turl = "/Census/SurveyLocationWise/@ViewBag.CategoryId?language=en-US";
+        turl += '&country=' + country;
+        turl += '&projectId=' + GetUrlParams('projectId');
+        window.location.href = turl;
+    }
+
+</script>
+<h2>Census RMS Locations</h2>
+<h4>For @ViewBag.CensusCategoryName</h4>
+
+<ul class="treeview-menu">
+    @foreach (var ct in Model)
+    {
+        <li style="margin-left:40px;"><a href="javascript:GetUrl('@ct.CountryID')">@ct.CountryName</a></li>
+    }
+</ul>

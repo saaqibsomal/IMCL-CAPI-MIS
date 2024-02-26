@@ -1,0 +1,331 @@
+﻿@model IEnumerable<DNA_CAPI_MIS.Models.SurveyDataView>
+
+@{
+    ViewBag.Title = "Survey Results - Quality Check";
+}
+<link rel="stylesheet" href="~/Content/jqwidgets/jqwidgets/styles/jqx.base.css" type="text/css" />
+
+<p>
+    @Html.ActionLink("All Projects", "OpenProject", "Designer") |
+    @Html.ActionLink("Project Overview", "ProjectOverview", "Designer", new { id = ViewBag.ProjectId }, null)
+</p>
+<h4><strong>@ViewBag.ProjectName</strong></h4>
+<h4>@ViewBag.Title</h4>
+
+<div>
+    <a href="/Survey/SurveyQCFilter/@ViewBag.ProjectId">Modify Data Filters</a>
+    <br />
+</div>
+
+@if (ViewBag.ErrorMessage != null && ViewBag.ErrorMessage.Length > 0)
+{
+    <h4>@ViewBag.ErrorMessage</h4>
+}
+else
+{
+   
+@Styles.Render("~/Content/styles/jqwidgets")
+
+@section Scripts {
+@Scripts.Render("~/bundles/bootstrap/jqwidgets")
+
+<script type="text/javascript">
+    $('#recApprove').on('click', function (e) {
+        UpdateStatus(1);
+    });
+
+    $('#recReject').on('click', function (e) {
+        UpdateStatus(0);
+    });
+    function UpdateStatus(status) {
+        var rowindexes = $('#jqxgrid').jqxGrid('getselectedrowindexes');
+        if (rowindexes.length == 0) {
+            alert('Please select records first by using the checkbox in the first column.');
+        } else {
+            var boundrows = $('#jqxgrid').jqxGrid('getboundrows');
+            var selectedSurveys = new Array();
+            var updatedSurvey = new Object();
+            for (var i = 0; i < rowindexes.length; i++) {
+                var row = boundrows[rowindexes[i]];
+                updatedSurvey = new Object();
+                updatedSurvey.QCStatus = status;
+                updatedSurvey.SurveyId = row['sbjnum'];
+                updatedSurvey.QCRejectReasonId = row['QCRejectReasonId'];
+                updatedSurvey.QCRemarks = row['QCRemarks'];
+                selectedSurveys.push(updatedSurvey);
+                console.log(row['sbjnum']);
+            }
+            var request = $.ajax({
+                url: "/Survey/SurveyQCApprove/@ViewBag.ProjectId",
+                type: "POST",
+                data: Surveys=JSON.stringify(selectedSurveys),
+                contentType: 'application/json;',
+                dataType: "text"
+            });
+            request.done(function (msg) {
+                var boundrows = $('#jqxgrid').jqxGrid('getboundrows');
+                for (var i = 0; i < rowindexes.length; i++) {
+                    dataGrid[rowindexes[i]]['QCStatus'] = (status == 1 ? 'Yes' : 'No');
+                }
+                $('#jqxgrid').jqxGrid('updatebounddata');
+                //initialGridFilter();
+
+            });
+            request.fail(function (jqXHR, textStatus) {
+                alert("Request failed: " + textStatus);
+            });
+        }
+    }
+</script>
+
+<script type="text/javascript">
+    function urldecode(str) {
+        return decodeURIComponent((str + '').replace(/\+/g, '%20'));
+    }
+
+    var dataGrid = new Array();
+
+    function PopulateData() {
+        // prepare the data
+        var data = new Array();
+        var row = {};
+
+        @{
+            var currentSbjnum = 0;
+            var headerPrinted = false;
+            var firstRow = true;
+            var id = 0;
+        }
+        @foreach (var item in Model)
+        {
+            if (currentSbjnum != item.sbjnum)
+            {
+                if (!firstRow)
+                {
+                    WriteLiteral("data[" + id++ + "] = row;\n");
+                }
+                firstRow = false;
+                currentSbjnum = item.sbjnum;
+                WriteLiteral("row = {};");
+                WriteLiteral("row['id'] = " + id + ";");
+                WriteLiteral("row['OpStatus'] = '" + item.OpStatus + "';");
+                WriteLiteral("row['QCStatus'] = '" + item.QCStatus + "';");
+                WriteLiteral("row['QCRejectReasonId'] = " + item.QCRejectReasonId + ";");
+                WriteLiteral("row['QCRemarks'] = '" + item.QCRemarks + "';");
+                WriteLiteral("row['LastQCByUserName'] = '" + item.LastQCByUserName + "';");
+                WriteLiteral("row['LastQCOn'] = '" + (item.LastQCOn.Value.Year < 2000 ? "" : item.LastQCOn.ToString()) + "';");
+                WriteLiteral("row['sbjnum'] = " + item.sbjnum + ";");
+                WriteLiteral("row['sbjnum2'] = " + item.sbjnum + ";");
+                WriteLiteral("row['Created'] = '" + item.Created + "';");
+                WriteLiteral("row['Longitude'] = " + item.Longitude + ";");
+                WriteLiteral("row['Latitude'] = " + item.Latitude + ";");
+                WriteLiteral("row['SurveyorName'] = '" + item.SurveyorName + "';");
+                if (item.CountryName == null)
+                {
+                    WriteLiteral("row['Country'] = '';");
+                }
+                else
+                {
+                    WriteLiteral("row['Country'] = '" + item.CountryName.Replace("'", "\'") + "';");
+                }
+                if (item.CityName == null)
+                {
+                    WriteLiteral("row['City'] = '';");
+                }
+                else
+                {
+                    WriteLiteral("row['City'] = '" + Url.Encode(item.CityName) + "';");
+                }
+                WriteLiteral("row['District'] = '" + Url.Encode(item.DistrictName) + "';");
+            }
+            WriteLiteral("row['_" + item.FieldId + "'] = urldecode(\"" + Url.Encode(item.FieldValue) + "\");");
+        }
+        @if (!firstRow)
+        {
+            WriteLiteral("data[" + id++ + "] = row;\n");
+        }
+
+        return data;
+    }
+
+    $(document).ready(function () {
+
+        var QCRejectionReason = [
+         { value: "0", label: "" },
+         { value: "1", label: "Wrong respondent" },
+         { value: "2", label: "Incorrect/Invalid values" },
+         { value: "3", label: "Missing values" },
+         { value: "4", label: "Other" },
+        ];
+        var QCRejectionReasonSource =
+        {
+            datatype: "array",
+            datafields: [
+                { name: 'label', type: 'string' },
+                { name: 'value', type: 'string' }
+            ],
+            localdata: QCRejectionReason
+        };
+
+        var QCRejectionReasonAdapter = new $.jqx.dataAdapter(QCRejectionReasonSource, {
+            autoBind: true
+        });
+
+        // prepare the data
+        dataGrid = PopulateData();
+
+        var source =
+        {
+            localdata: dataGrid,
+            datafields:
+            [
+            @if (Model.Count() > 0)
+            {
+                currentSbjnum = Model.FirstOrDefault().sbjnum;
+            }    
+            @{headerPrinted = false;}
+            @foreach (var item in Model)
+            {
+                if (currentSbjnum != item.sbjnum) { break; }
+                if (!headerPrinted)
+                {
+                    headerPrinted = true;
+                    WriteLiteral("{ name: 'sbjnum', type: 'number' },");
+                    WriteLiteral("{ name: 'sbjnum2', type: 'number' },");
+                    WriteLiteral("{ name: 'OpStatus', type: 'string' },");
+                    WriteLiteral("{ name: 'QCStatus', type: 'string' },");
+                    WriteLiteral("{ name: 'QCRejectReason', value: 'QCRejectReasonId', values: { source: QCRejectionReasonAdapter.records, value: 'value', name: 'label' } },");
+                    WriteLiteral("{ name: 'QCRejectReasonId', type: 'number'},");
+                    WriteLiteral("{ name: 'QCRemarks', type: 'string' },");
+                    WriteLiteral("{ name: 'LastQCByUserName', type: 'string'},");
+                    WriteLiteral("{ name: 'LastQCOn', type: 'string' },");
+                    WriteLiteral("{ name: 'Created', type: 'string' },");
+                    WriteLiteral("{ name: 'Longitude', type: 'number' },");
+                    WriteLiteral("{ name: 'Latitude', type: 'number' },");
+                    WriteLiteral("{ name: 'SurveyorName', type: 'string' },");
+                    WriteLiteral("{ name: 'Country', type: 'string' },");
+                    WriteLiteral("{ name: 'City', type: 'string' },");
+                    WriteLiteral("{ name: 'District', type: 'string' },");
+                }
+                WriteLiteral("{ name: '_" + item.FieldId + "', type: 'string' },");
+            }
+            ],
+            datatype: "array",
+            updaterow: function (rowid, rowdata) {
+                // synchronize with the server - send update command
+                $.get("/Survey/SurveyQCApprove/" + rowdata['sbjnum'] + "?QCStatus=" + rowdata['QCStatus']);
+            }
+        };
+
+        var dataAdapter = new $.jqx.dataAdapter(source);
+
+        var toThemeProperty = function (className) {
+            return className + " " + className + "-" + theme;
+        }
+
+        var groupsrenderer = function (text, group, expanded, data) {
+        }
+
+        var maplinkrenderer = function (row, column, value) {
+            return '<a target="_blank" href="/Survey/Map/@ViewBag.ProjectId?sid=' + value + '">Map</a>';
+        }
+
+        // initialize jqxGrid
+        $("#jqxgrid").jqxGrid(
+        {
+            theme: 'metro',
+            editable: true,
+            editmode: 'click',
+            width: '100%',
+            source: dataAdapter,
+            groupable: false,
+            columnsresize: true,
+            columnsreorder: true,
+            //groupsrenderer: groupsrenderer,
+            altrows: true,
+            sortable: true,
+            filterable: true,
+            filtermode: 'excel',
+            showfilterrow: false,
+            selectionmode: 'checkbox',
+            columns: [
+            @{headerPrinted = false;}
+            @foreach (var item in Model)
+            {
+                if (currentSbjnum == item.sbjnum)
+                {
+                    if (!headerPrinted)
+                    {
+                        headerPrinted = true;
+                        
+                        WriteLiteral(@"
+                        { text: 'Approved', columntype: 'template', datafield: 'QCStatus', width: 110 },
+                        { text: 'Rejection Reason', datafield: 'QCRejectReasonId', displayfield: 'QCRejectReason', columntype: 'dropdownlist',
+                            createeditor: function (row, cellvalue, editor, celltext, cellwidth, cellheight) {
+                                editor.jqxDropDownList({ source: QCRejectionReasonAdapter, displayMember: 'label', valueMember: 'value' });
+                            }
+                        },
+                        { text: 'QC Remarks', groupable: false, editable: true, datafield: 'QCRemarks', type: 'string', width: 60 },
+                        { text: 'Last QC By', groupable: false, editable: false, datafield: 'LastQCByUserName', type: 'string', width: 80 },
+                        { text: 'Last QC On', groupable: false, editable: false, datafield: 'LastQCOn', type: 'string', width: 120 },
+                        
+                        { text: 'Survey Id', groupable: true, editable: false, datafield: 'sbjnum', type: 'number', width: 80 },
+                        { text: 'Created On', groupable: true, editable: false, datafield: 'Created', type: 'string', width: 120 },
+                        { text: 'Country', groupable: true, editable: false, datafield: 'Country', type: 'string', width: 150 },
+                        { text: 'City', groupable: true, editable: false, datafield: 'City', type: 'string', width: 150 },
+                        { text: 'District', groupable: true, editable: false, datafield: 'District', type: 'string', width: 150 },
+                        { text: 'Longitude', groupable: true, editable: false, datafield: 'Longitude', type: 'number', width: 80 },
+                        { text: 'Latitude', groupable: true, editable: false, datafield: 'Latitude', type: 'number', width: 80 },
+                        { text: 'Map', groupable: true, editable: false, datafield: 'sbjnum2', cellsrenderer: maplinkrenderer, width: 80 },
+                        { text: 'Surveyor Name', groupable: true, editable: false, datafield: 'SurveyorName', type: 'string', width: 80 },
+                        ");
+                    }
+                    WriteLiteral("{ text: '" + item.Title + "', groupable: true, editable: false, datafield: '_" + item.FieldId + "', type: 'string', width: 100 },");
+                }
+            }
+            ]
+        });
+
+        $("#excelExport").click(function () {
+            var exportInfo = $("#jqxgrid").jqxGrid('exportdata', 'xls');
+            download("DataSheet_" + "@DateTime.Today.ToShortDateString().Replace("/", "")" + ".xls", exportInfo);
+        });
+
+        function download(filename, content) {
+            contentType = 'application/octet-stream';
+            var a = document.createElement('a');
+            var blob = new Blob([content], {'type':contentType});
+            a.href = window.URL.createObjectURL(blob);
+            a.download = filename;
+            a.click();
+        }
+
+    });
+</script>
+
+}
+
+    <div id='jqxWidget'>
+        <div id="jqxgrid"></div>
+
+        <div class="form-group">
+
+            <div style="float: left; margin-left: 20px; margin-top: 20px;">
+                <input type="button" value="Approve" id='recApprove' class="btn btn-default" />
+            </div>
+
+            <div style="float: left; margin-left: 20px; margin-top: 20px;">
+                <input type="button" value="Reject" id='recReject' class="btn btn-default" />
+            </div>
+
+            <div style="float: left; margin-left: 20px; margin-top: 20px;">
+                <input type="button" value="Export to Excel" id='excelExport' class="btn btn-default" />
+            </div>
+
+            <div style="float: left; margin-left: 20px; margin-top: 20px;">
+                <input value="Remove Filter" id="clearfilteringbutton" type="button" class="btn btn-default" />
+            </div>
+            <br />
+        </div>
+    </div>
+}

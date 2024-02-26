@@ -1,0 +1,260 @@
+﻿@model IEnumerable<DNA_CAPI_MIS.Models.BasicSingleCrosstab>
+
+@{
+    ViewBag.Title = "Quota Management";
+    Layout = "";
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/bootstrap/jqwidgets")
+}
+
+<link rel="stylesheet" href="~/Content/jqwidgets/jqwidgets/styles/jqx.base.css" type="text/css" />
+
+<style>
+    .readonlyColumn {
+        background-color: rgb(189, 189, 189);
+        z-index: 1 !important;
+    }
+    .editableColumn {
+        z-index: 1 !important;
+    }
+</style>
+<div class="row">
+    <div class="col-md-12">
+        <div class="box-header">
+            <i class="fa fa-bar-chart-o"></i>
+            <h3 class="box-title">Tabulation</h3>
+        </div>
+        <div class="box-body">
+            <div id='jqxWidget'>
+                <div id="jqxgrid"></div>
+
+                <div style="float: left; margin-left: 20px; margin-top: 20px;">
+                    <input type="button" value="Export to Excel" id='excelExport' />
+                </div>
+
+                <div style="float: left; margin-left: 20px; margin-top: 20px;">
+                    <input value="Remove Filter" id="clearfilteringbutton" type="button" />
+                </div>
+                <br />
+            </div>
+        </div><!-- /.box-body-->
+    </div><!-- /.col row-->
+</div>
+
+<script type="text/javascript">
+    
+    function RenderAggregates(aggregates, column, element) {
+        var agvalue = "";
+        $.each(aggregates, function (key, value) {
+            if (key == "sum") {
+                agvalue = value;
+            }
+            //agvalue += parseInt(value);
+        });
+        return '<div style="text-align: right;position: relative; margin: 8px; overflow: hidden;">' + agvalue + '</div>';
+    }
+
+    function PopulateData() {
+        // prepare the data
+        var data = new Array();
+        var row = {};
+
+        @{
+            var currentCol = 0;
+            var firstRow = true;
+            var id = 0;
+            var jqxColumns = new List<DNA_CAPI_MIS.Models.SimpleListWithAggregates>();
+        }
+
+        @*@foreach (var colg in ViewBag.ColumnGroup)
+        {
+            WriteLiteral("row = {};");
+            WriteLiteral("row['id'] = " + id + ";");
+            //WriteLiteral("row['SideGroupId'] = 0;");
+            WriteLiteral("row['SideGroupTitle'] = '';");
+            WriteLiteral("row['SideId'] = 0;");
+            WriteLiteral("row['SideTitle'] = '';");
+            foreach (var item in colg.Items)
+            {
+                WriteLiteral("row['_" + item.Id + "'] = " + item.GroupBaseCount + ";");
+            }
+            WriteLiteral("data[" + id++ + "] = row;");
+        }*@
+        @foreach (var item in Model)
+        {
+            if (!jqxColumns.Exists(x => x.GroupId == item.TopGroupId && x.Id == item.TopId)) {
+                jqxColumns.Add(new DNA_CAPI_MIS.Models.
+                    SimpleListWithAggregates { Id = item.TopId, GroupId = item.TopGroupId, Title = item.TopTitle });
+            }
+
+            if (currentCol != item.SideId)
+            {
+                if (!firstRow)
+                {
+                    WriteLiteral("data[" + id++ + "] = row;\n");
+                }
+                firstRow = false;
+                currentCol = item.SideId;
+                WriteLiteral("row = {};");
+                WriteLiteral("row['id'] = " + id + ";");
+                WriteLiteral("row['SideGroupId'] = '" + item.SideGroupId + "';");
+                WriteLiteral("row['SideGroupTitle'] = urldecode(\"" + Url.Encode(item.SideGroupTitle) + "\");");
+                WriteLiteral("row['SideId'] = " + item.SideId + ";");
+                WriteLiteral("row['SideTitle'] = urldecode(\"" + Url.Encode(item.SideTitle) + "\");");
+            }
+            WriteLiteral("row['" + item.TopGroupId + "__" + item.TopId + "'] = " + Math.Round((double)item.AggregateValue) + ";");
+            WriteLiteral("row['ACT" + item.TopGroupId + "__" + item.TopId + "'] = " + Math.Round((double)item.ActualCount) + ";");
+            WriteLiteral("row['BAL" + item.TopGroupId + "__" + item.TopId + "'] = " + Math.Round((double)item.AggregateValue - (double)item.ActualCount) + ";");
+        }
+        @if (!firstRow)
+        {
+            WriteLiteral("data[" + id++ + "] = row;\n");
+        }
+        return data;
+    }
+
+    //Replacement of     
+
+    if (!(typeof(jQuery) == "undefined")) {
+        $(document).ready(OnInit(event));
+    }
+
+    function OnInit(event) {
+        //Check if jQuery is loaded now
+        if (typeof(jQuery) == "undefined" || typeof($.jqx) == "undefined" || typeof($.jqx._jqxGrid) == "undefined") {
+            setTimeout(function () {
+                OnInit(event);
+                return;
+            }, 3);
+            return;
+        }
+
+        // prepare the data
+        var data = PopulateData();
+
+        var source =
+        {
+            localdata: data,
+            datafields:
+            [
+            @if (Model.Count() > 0)
+            {
+                currentCol = Model.FirstOrDefault().SideId;
+            }
+            { name: 'SideGroupId', type: 'string' },
+            { name: 'SideGroupTitle', type: 'string' },
+            { name: 'SideId', type: 'number' },
+            { name: 'SideTitle', type: 'string' },
+            { name: 'AggregateValue', type: 'number' },
+            @foreach (var colg in jqxColumns)
+            {
+                WriteLiteral("{ name: '" + colg.GroupId + "__" + colg.Id + "', type: 'string' },");
+                WriteLiteral("{ name: 'ACT" + colg.GroupId + "__" + colg.Id + "', type: 'string' },");
+                WriteLiteral("{ name: 'BAL" + colg.GroupId + "__" + colg.Id + "', type: 'string' },");
+            }
+            ],
+            datatype: "array",
+            updaterow: function (rowid, rowdata, commit) {
+                UpdateQuotaCell(@ViewBag.ProjectId, rowid, rowdata, commit);
+                commit(true);
+            },
+        };
+
+        var dataAdapter = new $.jqx.dataAdapter(source);
+
+        var toThemeProperty = function (className) {
+            return className + " " + className + "-" + theme;
+        }
+
+        var groupsrenderer = function (text, group, expanded, data) {
+            expanded = true;
+            if (data.groupcolumn) {
+                return '<div class="' + toThemeProperty('jqx-grid-groups-row') + '" style="position: absolute;"><span>' + group + '</span></div><div class="' + toThemeProperty('jqx-grid-groups-row') + '" style="position: absolute;"><span>' + group + '</span></div>';
+            }
+        }
+
+        // initialize jqxGrid
+        $("#jqxgrid").jqxGrid(
+        {
+            theme: 'metro',
+            editable: true,
+            editmode: 'click',
+            width: '100%',
+            source: dataAdapter,
+            columnsresize: true,
+            columnsreorder: true,
+            groupable: true,
+            groupsrenderer: groupsrenderer,
+            groupsexpandedbydefault: true,
+            showgroupsheader: false,
+            showstatusbar: true,
+            showaggregates: true,
+            altrows: true,
+            sortable: true,
+            filterable: true,
+            showfilterrow: false,
+            selectionmode: 'multiplecellsextended',
+            @if (ViewBag.RowGroup.Count > 0)
+            {
+                WriteLiteral("groups: [");
+                foreach (var rowg in ViewBag.RowGroup)
+                {
+                    WriteLiteral("'" + rowg.Value.Field + "',");
+                    break;
+                }
+                WriteLiteral("],");
+            }
+            columns: [
+            @if (ViewBag.RowGroup.Count > 0)
+            {
+                foreach (var rowg in ViewBag.RowGroup)
+                {
+                    WriteLiteral("{ text: '', groupable: true, datafield: '" + rowg.Value.Field + @"', hidden: true },");
+                    break;
+                }
+            }
+            { text: '', groupable: true, datafield: 'SideTitle', width: 200,
+                aggregatesrenderer: function (aggregates, column, element) {
+                    var renderstring = "<div style='text-align: left;position: relative; margin: 8px; overflow: hidden;'>BASE: All Respondents</div>";
+                    return renderstring;
+                }
+            },
+            @foreach (var colg in jqxColumns)
+            {
+                WriteLiteral("{ editable: true, classname: \"editableColumn\", cellclassname: \"editableColumn\", text: 'Quota " + colg.Title.Replace("'", " ") + "'" 
+                    + (colg.GroupId.Substring(0,3) == "_0_" ? "" : ", columngroup: '" + colg.GroupId + "'") + ", groupable: true, datafield: '" + colg.GroupId + "__" + colg.Id + "', cellsalign: 'right', cellsformat: 'n0', width: 100, aggregates: ['sum'], aggregatesrenderer: RenderAggregates },");
+                if (ViewBag.QueryId != null && ViewBag.QueryId > 0)
+                {
+                    WriteLiteral("{ editable: false, classname: \"readonlyColumn\", cellclassname: \"readonlyColumn\", text: 'Actual " + colg.Title.Replace("'", " ") + "', columngroup: '" + colg.GroupId + "', groupable: true, datafield: 'ACT" + colg.GroupId + "__" + colg.Id + "', cellsalign: 'right', cellsformat: 'n0', width: 100, aggregates: ['sum'], aggregatesrenderer: RenderAggregates },");
+                    WriteLiteral("{ editable: false, classname: \"readonlyColumn\", cellclassname: \"readonlyColumn\", text: 'Balance " + colg.Title.Replace("'", " ") + "', columngroup: '" + colg.GroupId + "', groupable: true, datafield: 'BAL" + colg.GroupId + "__" + colg.Id + "', cellsalign: 'right', cellsformat: 'n0', width: 100, aggregates: ['sum'], aggregatesrenderer: RenderAggregates },");
+                }
+            }
+            ],
+            @{
+                if (ViewBag.jqxDefColumnGroup.Length > 0) { 
+                    WriteLiteral("columngroups: [" + ViewBag.jqxDefColumnGroup + "]");
+                }
+            }
+        });
+
+        $("#excelExport").click(function () {
+            var exportInfo = $("#jqxgrid").jqxGrid('exportdata', 'xls');
+            download("DataSheet_" + "@DateTime.Today.ToShortDateString().Replace("/", "")" + ".xls", exportInfo);
+        });
+
+        function download(filename, content) {
+            contentType = 'application/octet-stream';
+            var a = document.createElement('a');
+            var blob = new Blob([content], { 'type': contentType });
+            a.href = window.URL.createObjectURL(blob);
+            a.download = filename;
+            a.click();
+        }
+    }
+    function urldecode(str) {
+        return decodeURIComponent((str + '').replace(/\+/g, '%20'));
+    }
+
+</script>

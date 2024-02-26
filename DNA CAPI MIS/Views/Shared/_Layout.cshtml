@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Research Pro</title>
+    @Styles.Render("~/Content/styles")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body class="skin-blue">
+    <header class="header">
+        @Html.ActionLink("Research Pro", "Index", "Home", null, new { @class = "logo" })
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <div class="navbar-left">
+                <span class="appname">Management Console</span>
+            </div>
+
+            <div class="navbar-right">
+                @Html.Partial("_LoginPartial")
+            </div>
+        </nav>
+    </header>
+    <div class="wrapper row-offcanvas row-offcanvas-left">
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="left-side sidebar-offcanvas">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                <!-- Sidebar user panel -->
+                <div class="user-panel">
+                    <img src="~/Images/pwd-transparent.png" style="margin-left: auto;margin-right: auto;max-width: 80%;display: block;margin-top: 10px;margin-bottom: 10px;" />
+                </div>
+
+                <!-- sidebar menu: : style can be found in sidebar.less -->
+                <ul class="sidebar-menu">
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-bar-chart-o"></i>
+                                <span>Project Center</span>
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </a>
+                            <ul class="treeview-menu">
+                                @if (User.IsInRole("Admin") || User.IsInRole("Project Manager"))
+                                {
+                                    <li><a href="/Project/Create"><i class="fa fa-angle-double-right"></i> New Project</a></li>
+                                }
+                                <li><a href="/Designer/OpenProject"><i class="fa fa-angle-double-right"></i> Open Project</a></li>
+                                <li><a href="/Designer/Dashboard"><i class="fa fa-angle-double-right"></i> Dashboard</a></li>
+
+
+
+                                <li class="treeview">
+                                    <a href="#">
+                                        <i class="fa fa-bar-chart-o"></i>
+                                        <span>Reports</span>
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </a>
+                                    <ul class="treeview-menu" style="display: block;">
+                                        <li><a href="/Survey/SurveyApproval/7120/en?&astatus=3&rt=0&fv=0&r=1"><i class="fa fa-angle-double-right"></i> RHS-A</a></li>
+                                        <li><a href="/Survey/SurveyApproval/7121/en?&astatus=3&rt=0&fv=0&r=1"><i class="fa fa-angle-double-right"></i> MSU</a></li>
+                                        <li><a href="/Survey/SurveyApproval/7122/en?&astatus=3&rt=0&fv=0&r=1"><i class="fa fa-angle-double-right"></i> FWC</a></li>
+                                    </ul>
+                                </li>
+
+
+                            </ul>
+                        </li>
+
+                        if (User.IsInRole("Admin"))
+                        {
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-bar-chart-o"></i>
+                                    <span>Administration</span>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="/UsersAdmin/Index"><i class="fa fa-angle-double-right"></i> Users</a></li>
+                                    <li><a href="/UsersAdmin/Create"><i class="fa fa-angle-double-right"></i> Create User</a></li>
+                                </ul>
+                            </li>
+                        }
+                        else if (User.IsInRole("Survey Admin"))
+                        {
+                            <li class="treeview">
+                                <a href="#">
+                                    <i class="fa fa-bar-chart-o"></i>
+                                    <span>Administration</span>
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li><a href="/UsersAdmin/Index"><i class="fa fa-angle-double-right"></i> Users</a></li>
+                                    @*<li><a href="/RolesAdmin"><i class="fa fa-angle-double-right"></i> Role</a></li>*@
+                                </ul>
+                            </li>
+                        }
+                    }
+                    else
+                    {
+                        <li class="treeview">
+                            <a href="/Account/Login">
+                                <i class="fa fa-bar-chart-o"></i>
+                                <span>Log in</span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+        <!-- Right side column. Contains the navbar and content of the page -->
+        <aside class="right-side">
+            <!-- Main content -->
+            <section class="content">
+                @RenderBody()
+            </section><!-- /.content -->
+            <hr />
+            <footer>
+                <p style="margin-left:10px;">&copy; @DateTime.Now.Year - Research Pro (beta)</p>
+            </footer>
+        </aside><!-- /.right-side -->
+    </div><!-- ./wrapper -->
+    @Scripts.Render("~/bundles/jquery")
+    @*@Scripts.Render("~/bundles/bootstrap")*@
+    @Scripts.Render("~/bundles/bootstrap/AdminLTE")
+
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>*@
+    @*@Scripts.Render("~/bundles/bootstrap/AdminLTE/morris")*@
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

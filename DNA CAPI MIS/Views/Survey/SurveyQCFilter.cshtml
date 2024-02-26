@@ -1,0 +1,85 @@
+﻿@model IEnumerable<DNA_CAPI_MIS.Models.SurveyDataView>
+
+@{
+    ViewBag.Title = "Survey QC Approval Data Filter";
+}
+
+@Styles.Render("~/Content/styles/filters")
+
+@section Scripts {
+@Scripts.Render("~/bundles/bootstrap/jqwidgets")
+@Scripts.Render("~/bundles/bootstrap/filters")
+
+<script>
+    $(document).ready(function () {
+        $("#surveror").select2();
+    });
+
+    function getdata() {
+        var path = document.location.toString();
+        path = path.replace("SurveyQCFilter", "SurveyQC");
+        path = path.replace("#", "");
+        path += "/en?";
+
+        if ($("#surveror").val() != "" && $("#surveror").val() != null) {
+            path += "&surveyors=" + $("#surveror").val();
+        }
+        if ($("#astatus").val() != "" && $("#astatus").val() != null) {
+            path += "&astatus=" + $("#astatus").val();
+        }
+
+        //alert(path);
+        window.location = path;
+    }
+
+</script>
+}
+
+<p>
+    @Html.ActionLink("All Projects", "OpenProject", "Designer") |
+    @Html.ActionLink("Project Overview", "ProjectOverview", "Designer", new { id = ViewBag.ProjectId }, null)
+</p>
+<h4><strong>@ViewBag.ProjectName</strong></h4>
+<h4>@ViewBag.Title</h4>
+
+@if (ViewBag.ErrorMessage != null && ViewBag.ErrorMessage.Length > 0)
+{
+    <h4>@ViewBag.ErrorMessage</h4>
+}
+else
+{
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-md-2">QC Status</label>
+            <div class="col-md-8">
+                <select id="astatus" style="margin-top: 5px;">
+                    <option value="0">Unchecked</option>
+                    <option value="1">Approved</option>
+                    <option value="2">Rejected</option>
+                    <option value="3">All</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Surveyors</label>
+            <div class="col-md-8">
+                <select id="surveror" multiple="multiple" style="width:100%;height:26px;">
+
+                    @if (ViewBag.Surveyors != null)
+                    {
+                        foreach (var s in ViewBag.Surveyors)
+                        {
+                            <option value="'@s.Name'">@s.Name</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-8">
+                <input type="button" onclick="getdata()" value="View Survey Data" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,134 @@
+﻿@model DNA_CAPI_MIS.Models.Survey
+
+@{
+    ViewBag.Title = "POI Map";
+    Layout = "~/Views/Shared/_Layout_NoMenu.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<body>
+
+
+    <div id="googleMap" style="width:100%;height:550px;"></div>
+   
+    <script>
+         var markers = [{
+    sbjnum: @Model.sbjnum,
+    lat: @Model.Latitude,
+    lng: @Model.Longitude}
+    ];
+        function myMap() {
+            var mapProp = {
+                center: new google.maps.LatLng(markers[0].lat, markers[0].lng),
+                zoom: 15,
+            };
+            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+        }
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&callback=myMap"></script>
+
+</body>
+</html>
+<link href="~/Content/Site.css" rel="stylesheet" />
+
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=drawing&v=3.exp&language=en"></script>
+
+<script type="text/javascript">
+
+    @*var markers = [{
+        sbjnum: @Model.sbjnum,
+        lat: @Model.Latitude,
+        lng: @Model.Longitude}
+    ];*@
+
+    // converting degree to radiun
+    //function deg2rad(deg) {
+    //    return deg * (Math.PI / 180)
+    //}
+
+    //var map;
+
+    //window.onload = function () {
+    //    //Generate markers on the map
+    //    $('#dvMap').height(window.innerHeight - 100);
+
+    //    if (markers.length > 0) {
+    //        var mapOptions = {
+    //            center: new google.maps.LatLng(markers[0].lat, markers[0].lng),
+    //            zoom: 15,
+    //            mapTypeControlOptions: {
+    //                mapTypeIds: [google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE, google.maps.MapTypeId.TERRAIN
+    //                , google.maps.MapTypeId.HYBRID]
+    //            },
+
+    //            mapTypeId: google.maps.MapTypeId.ROADMAP
+    //        };
+    //        var infoWindow = new google.maps.InfoWindow();
+    //        map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
+
+    //        //...
+
+    //        for (i = 0; i < markers.length; i++) {
+    //            var data = markers[i];
+    //            data.sbjnum = decodeURIComponent(data.sbjnum).replace(/\+/g, " ");
+    //            var myLatlng = new google.maps.LatLng(data.lat, data.lng);
+
+    //            var marker = new google.maps.Marker({
+    //                position: myLatlng,
+    //                map: map,
+    //                title: data.sbjnum,
+    //                draggable: true
+    //            });
+    //            marker.metadata = {id: data.sbjnum};
+
+    //            google.maps.event.addListener(marker, 'dragend', function (event) {
+    //                var latLng = event.latLng;
+    //                var lat = latLng.lat();
+    //                var lng = latLng.lng();
+
+    //                // synchronize with the server - send update command
+    //                $.post("/Survey/SurveyApprovalModify/" + marker.metadata.id + "?latitude=" + lat + "&longitude=" + lng);
+    //            });
+    //        }
+    //    }
+    //}
+
+
+    //function initMap() {
+    //    //map..
+    //    var map = new google.maps.Map(document.getElementById('dvMap'), {
+    //        center: {
+    //            lat: 10.9968683,
+    //            lng: 76.00882
+    //        },
+    //        zoom: 15
+    //    });
+    //    //marker..
+    //    var marker = new google.maps.Marker({
+    //        position: {
+    //            lat: 10.9968683,
+    //            lng: 76.00882
+    //        },
+    //        map: map,
+    //        draggable: true
+    //    });
+
+    //    //dragend event of marker
+    //    google.maps.event.addListener(marker, 'dragend', function () {
+    //        var Lats = marker.getPosition().lat();
+    //        var Longs = marker.getPosition().lng();
+    //        $('#Lat').val(Lats);
+    //        $('#Long').val(Longs);
+    //    });
+    //}
+
+</script>
+
+@*<div class="row">
+        <div id="dvMap" style="height: 100vh; float:left; width:100%;">
+        </div>
+    </div>*@
+
+

@@ -1,0 +1,209 @@
+﻿@model IEnumerable<DNA_CAPI_MIS.Models.ProjectField>
+
+@{
+    ViewBag.Title = "Analytic Reports Data Filter";
+}
+
+@Styles.Render("~/Content/styles/filters")
+
+@section Scripts {
+@Scripts.Render("~/bundles/bootstrap/filters")
+@*<script src="js/plugins/jqueryKnob/jquery.knob.js" type="text/javascript"></script>*@
+
+<script>
+    $(document).ready(function () {
+        $("#fromdate").datepicker();
+        $("#todate").datepicker();
+        $(".multi-select").select2();
+
+
+
+        SummaryShowModal();
+
+    });
+
+
+    function getdata() {
+        var path = document.location.toString();
+        path = path.replace("AnalyticReports", "AnalyticReportsView");
+        path = path.replace("#", "");
+
+        if ($("#fromdate").val() != "" && $("#todate").val() != "") {
+            var fromdate = $("#fromdate").val();
+            var spl_fromdate = fromdate.split('/');
+            var day_fromdate = spl_fromdate[1];
+            var month_fromdate = spl_fromdate[0];
+
+            var todate = $("#todate").val();
+            var spl_todate = todate.split('/');
+            var day_todate = spl_todate[1];
+            var month_todate = spl_todate[0];
+
+            path += "&fromdate=" + spl_fromdate[2] + "/" + month_fromdate + "/" + day_fromdate;
+            path += "&todate=" + spl_todate[2] + "/" + month_todate + "/" + day_todate;
+
+        }
+        if ($("#surveror").val() != "" && $("#surveror").val() != null) {
+            path += "&surveyors=" + $("#surveror").val();
+        }
+        if ($("#astatus").val() != "" && $("#astatus").val() != null) {
+            path += "&astatus=" + $("#astatus").val();
+        }
+
+        var totOEFields = document.getElementsByName("chkOEFields");
+        var iOEFields = 0;
+        var sOEFields = "";
+
+        for (iOEFields = 0; iOEFields < totOEFields.length; iOEFields++) {
+            if (totOEFields[iOEFields].checked) {
+                sOEFields += "," + totOEFields[iOEFields].value;
+            }
+        }
+        if (sOEFields.length > 0) {
+            sOEFields = sOEFields.substring(1);     //remove first comma
+        }
+        path += "&oef=" + sOEFields;
+        //alert(path);
+        window.location = path;
+    }
+
+</script>
+<script type="text/javascript">
+    function getFromDate() {
+
+        return document.getElementById('fromdate').value;
+    }
+    function getToDate() {
+        return document.getElementById('todate').value;
+    }
+</script>
+}
+
+<h4><strong>@ViewBag.ProjectName</strong></h4>
+<h4>@ViewBag.Title</h4>
+
+@if (ViewBag.ErrorMessage != null && ViewBag.ErrorMessage.Length > 0)
+{
+    <h4>@ViewBag.ErrorMessage</h4>
+}
+else
+{
+    var sectionIndex = 0;
+    var currentSectionID = 0;
+    var currentSectionName = "";
+    var HeadPrinted = false;
+    using (Html.BeginForm())
+    {
+
+
+    <input id="ProjectID" name="ProjectID" type="hidden" value="@ViewBag.ProjectId" />
+
+    <div class="box box-solid box-info">
+        <div class="box-header">
+            <h3 class="box-title">Survey Submission Dates</h3>
+            <div class="box-tools pull-right">
+                <button class="btn btn-info btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
+            </div>
+        </div>
+        <div class="box-body" style="display:-webkit-box;">
+
+            @*<div class="form-group">
+                    <label class="control-label col-md-2">Surveyors</label>
+                    <div class="col-md-8">
+                        <select id="surveror" multiple="multiple" style="width:100%;height:26px;">
+
+                            @if (ViewBag.Surveyors != null)
+                            {
+                                foreach (var s in ViewBag.Surveyors)
+                                {
+                                    <option value="'@s.Name'">@s.Name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>*@
+
+            <div class="form-group">
+                <label class="control-label col-md-2">From Date</label>
+                <div class="col-md-8">
+                    <input type="text" id="fromdate" name="fromdate" style="width:200px;height:30px;">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">To Date</label>
+                <div class="col-md-8">
+                    <input type="text" id="todate" name="todate" style="width:200px;height:30px;">
+                </div>
+            </div>
+        </div>
+    </div>  
+    foreach (DNA_CAPI_MIS.Models.ProjectFieldSection projectSection in ViewBag.ProjectFieldSection)
+    {
+        HeadPrinted = false;
+        foreach (var item in Model)
+        {
+            if (projectSection.ID == item.SectionID.GetValueOrDefault(0) || (sectionIndex == 0 && sectionIndex == item.SectionID.GetValueOrDefault(0)))
+            {
+                if (currentSectionID == projectSection.ID)
+                {
+                    currentSectionName = projectSection.Name;
+                }
+                var itemName = HttpUtility.UrlDecode(item.Title);
+                if (item.ReportTitle.Length > 0 && item.ReportTitle != item.Title)
+                {
+                    itemName = item.ReportTitle.Trim() + " - " + itemName;
+                }
+                if (itemName.Length > 40)
+                {
+                    itemName = itemName.Substring(0, 40);
+                }
+                if (!HeadPrinted)
+                {
+                    HeadPrinted = true; 
+    WriteLiteral(@"<div class=""box box-solid box-info"">
+        <div class=""box-header"">
+            <h3 class=""box-title"">" + projectSection.Name + @"</h3>
+            <div class=""box-tools pull-right"">
+                <button class=""btn btn-info btn-sm"" data-widget=""collapse""><i class=""fa fa-minus""></i></button>
+            </div>
+        </div>
+        <div class=""box-body"" style=""width:100%;display:table;"">");
+                }
+                <div class="form-group" style="width:100%;display:table;">
+                    <label class="control-label col-md-3">@itemName</label>
+                    @if (item.FieldType == "NUM" || item.FieldType == "SLT" || item.FieldType == "XXX" || item.FieldType == "DAT")
+                    {
+                        <input id="_@item.ID" name="_@item.ID" value="" class="col-md-4" />
+                    }
+                    else
+                    {
+                    <select id="_@item.ID" name="_@item.ID" style="height: 26px; padding-left: 0px;" class="col-md-8 multi-select" multiple="multiple">
+                        <option value="X"></option>
+                        @foreach (DNA_CAPI_MIS.Models.ProjectFieldSample pfs in (List<DNA_CAPI_MIS.Models.ProjectFieldSample>)ViewBag.ProjectFieldSample)
+                        {
+                            if (pfs.FieldID == item.ID)
+                            {
+                                <option value="@pfs.Code">@pfs.Title</option>
+                            }
+                        }
+                    </select>
+                    }
+                </div>
+            }
+        }
+
+        if (HeadPrinted) 
+        {
+            WriteLiteral(@"    </div>
+    </div>");
+        }
+        sectionIndex++;
+    }
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-8">
+            <input type="submit" value="View Survey Data" class="btn btn-default" />
+            
+        </div>
+    </div>
+    }
+}

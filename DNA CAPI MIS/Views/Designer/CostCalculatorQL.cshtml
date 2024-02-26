@@ -1,0 +1,442 @@
+﻿@{
+    ViewBag.Title = "Cost Calculator - Qualitative";
+}
+@section Scripts {
+    <script src="~/Content/DSDS/dsds-costcalculator-ql.js"></script>
+}
+
+
+<link href="~/Content/DSDS/dsds.css" rel="stylesheet" type="text/css" />
+
+<style>
+    .form-group label {
+        margin-top:7px;
+        float:left;
+        width:30%;
+    }
+    .form-group span {
+        margin-top:7px;
+        float:left;
+    }
+    .form-group input {
+        margin-top:2px;
+        float:left;
+        width:50%;
+    }
+    .form-group select {
+        margin-top:2px;
+        float:left;
+        width:50%;
+    }
+
+    .output-group {
+        width:100%;
+        height:32px;
+    }
+    .output-group label {
+        margin-top:7px;
+        float:left;
+        width:40%;
+        height:20px;
+    }
+    .output-group span {
+        width:60%;
+        height:20px;
+        margin-top:7px;
+        margin-top:5px;
+        float:left;
+    }
+
+    .output-subgroup-total {
+        border-top:1px solid black;
+    }
+
+    .output-group-total {
+        width:100%;
+        height:32px;
+        background-color: deepskyblue;
+    }
+    .output-group-total label {
+        margin-top:7px;
+        float:left;
+        width:40%;
+        height:20px;
+        font-weight:bold;
+    }
+    .output-group-total span {
+        width:60%;
+        height:20px;
+        margin-top:7px;
+        margin-top:5px;
+        float:left;
+        font-weight:bold;
+    }
+    .form-group {
+        width: 100%;
+    }
+</style>
+
+@*CSS Class desktop is used for overlay*@
+<div class="row desktop">
+    <div class="col-md-12">
+
+        <div class="row">
+            <section class="col-lg-12 connectedSortable">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="box" style="display: table;">
+                            <div class="box-header">
+                                <h3 class="box-title">Qualitative Project Cost Calculator</h3>
+                            </div><!-- /.box-header -->
+
+                            <div class="box-body table-responsive" style="display:table;width:100%">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label>Number of Groups</label>
+                                        <input name="noofGroups" id="noofGroups" onblur="validateBaseSize()" class="form-control" value="0" />
+                                    </div>
+
+                                    <label>Group Type</label>
+                                    <select id="groupType" name="groupType" class="form-control">
+                                        <option value="-1"></option>
+                                        <option value="0">Full FGD</option>
+                                        <option value="1">Mini FGD</option>
+                                        <option value="2">IDI</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Incidence %</label>
+                                    <input name="incidencePercent" id="incidencePercent" class="form-control" value="0" /><span> %</span>
+                                    <span id="incidenceLevel" style="margin-left:15px;">Easy</span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Service Required</label>
+                                    <select id="surveyType" name="surveyType" class="form-control">
+                                        <option value="-1"></option>
+                                        <option value="0">Field only</option>
+                                        <option value="1">Field and Transcript</option>
+                                        @if (!User.IsInRole("Competitor"))
+                                        {
+                                        <option value="2">Full (without Translation)</option>
+                                        <option value="3">Full</option>
+                                        }
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Transportation Fee</label>
+                                    <input name="transportation" id="transportation" class="form-control" value="0" />
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Other Fee</label>
+                                    <input name="others" id="others" class="form-control" value="0" />
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Priority/Urgency</label>
+                                    <select id="priority" name="priority" class="form-control">
+                                        <option value="0">Normal</option>
+                                        <option value="1">Urgent</option>
+                                        <option value="2">Very Urgent</option>
+                                    </select>
+                                </div>
+
+                                @if (User.IsInRole("Admin") || User.IsInRole("Project Manager"))
+                                {
+                                    <div class="form-group">
+                                        <label>Heavy Client Discount</label>
+                                        <select id="heavyClientDisc" name="heavyClientDisc" class="form-control">
+                                            <option value="0">Low</option>
+                                            <option value="1">Medium</option>
+                                            <option value="2">High Volume</option>
+                                        </select>
+                                    </div>
+                                }
+                            </div>
+
+
+                            <div class="box-footer" style="margin-top:15px;display:table;width:100%">
+                                <button class="btn btn-primary" type="button" id="saveQuestion" onclick="onChange()">Calculate</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <div class="col-md-6">
+                        <div class="box" style="display: table;">
+                            <div class="box-header">
+                                <h5 class="box-title">Costing</h5>
+                            </div><!-- /.box-header -->
+
+                            <div class="box-body table-responsive" style="display:table;width:100%">
+                                <div class="output-group">
+                                    <label>Additional Fee</label>
+                                    <span id="costingAdditional">US$ 0.00</span>
+                                </div>
+                                <div class="output-group">
+                                    <label>Total Fee</label>
+                                    <span id="costingTotal">US$ 0.00</span>
+                                </div>
+
+                                @if (User.IsInRole("Admin") || User.IsInRole("Project Manager"))
+                                {
+                                    <div class="output-group output-subgroup-total">
+                                        <label>Cost after Discount</label>
+                                        <span id="costingAfterDiscount">US$ 0.00</span>
+                                    </div>
+                                }
+
+                                <div class="output-group-total" style="margin-top:5px;">
+                                    <label>&nbsp;Net Fees</label>
+                                    <span id="total-NetFees">US$ 0.00</span>
+                                </div>
+                                <div class="output-group-total">
+                                    <label>&nbsp;CPG</label>
+                                    <span id="total-CPI">US$ 0.00</span>
+                                </div>
+
+                                @if (User.IsInRole("Admin") || User.IsInRole("Project Manager"))
+                                {
+                                    <div class="output-group">
+                                        <label>Cost of Sales</label>
+                                        <span id="costingOfSales">SAR 0.00</span>
+                                    </div>
+                                    <div class="output-group">
+                                        <label>Gross Profit</label>
+                                        <span id="grossProfit">00.0%</span>
+                                    </div>
+                                }
+
+                            </div>
+
+                            <div class="box-footer">
+                                <img src="~/Images/ratecard_footer.jpg" style="max-width:525px;" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </div>
+
+
+    <!-- Loading (remove the following to stop the loading)-->
+    <div class="overlay" style="display:none;"></div>
+    <div class="loading-img" style="display: none;"></div>
+    <!-- end loading -->
+</div><!-- /.col row-->
+
+<div class="row">
+    <div class="col-lg-12">
+        DISCLAIMER: The final pricing shown from this calculator is indicative. Although accurate in the majority of circumstances, however, prices quoted against DNA contracts & proposals will be regarded as final.
+    </div>
+</div>
+
+<script>
+    var incidenceLevel = new Array();
+    incidenceLevel[0] = new Array();
+    incidenceLevel[0][0] = 10;
+    incidenceLevel[0][1] = "Easy";
+    incidenceLevel[1] = new Array();
+    incidenceLevel[1][0] = 4;
+    incidenceLevel[1][1] = "Medium";
+    incidenceLevel[2] = new Array();
+    incidenceLevel[2][0] = 0;
+    incidenceLevel[2][1] = "Hard";
+
+    var slabRate = new Array();
+    slabRate[0] = new Array();        //Full FGD
+    slabRate[0][0] = 8;                 //  Easy
+    slabRate[0][1] = 8;                 //  Medium
+    slabRate[0][2] = 8;                //  Hard
+    slabRate[1] = new Array();        //Mini FGD
+    slabRate[1][0] = 4;
+    slabRate[1][1] = 4;
+    slabRate[1][2] = 4;
+    slabRate[2] = new Array();        //IDI
+    slabRate[2][0] = 1;
+    slabRate[2][1] = 1;
+    slabRate[2][2] = 1;
+
+    var recruiting = new Array();
+    recruiting[0] = new Array();        //Full FGD
+    recruiting[0][0] = 50;                 //  Easy
+    recruiting[0][1] = 100;                 //  Medium
+    recruiting[0][2] = 200;                //  Hard
+    recruiting[1] = new Array();        //Mini FGD
+    recruiting[1][0] = 50;
+    recruiting[1][1] = 100;
+    recruiting[1][2] = 200;
+    recruiting[2] = new Array();        //IDI
+    recruiting[2][0] = 50;
+    recruiting[2][1] = 100;
+    recruiting[2][2] = 200;
+
+    var gifts = new Array();
+    gifts[0] = new Array();        //Full FGD
+    gifts[0][0] = 100;
+    gifts[0][1] = 135;
+    gifts[0][2] = 250;
+    gifts[1] = new Array();        //Mini FGD
+    gifts[1][0] = 100;
+    gifts[1][1] = 135;
+    gifts[1][2] = 250;
+    gifts[2] = new Array();        //IDI
+    gifts[2][0] = 100;
+    gifts[2][1] = 135;
+    gifts[2][2] = 250;
+
+    var venue = new Array();
+    venue[0] = new Array();        //Full FGD
+    venue[0][0] = 300;
+    venue[0][1] = 350;
+    venue[0][2] = 400;
+    venue[1] = new Array();        //Mini FGD
+    venue[1][0] = 300;
+    venue[1][1] = 350;
+    venue[1][2] = 400;
+    venue[2] = new Array();        //IDI
+    venue[2][0] = 0;
+    venue[2][1] = 0;
+    venue[2][2] = 0;
+
+    var refreshments = new Array();
+    refreshments[0] = new Array();        //Full FGD
+    refreshments[0][0] = 25;
+    refreshments[0][1] = 25;
+    refreshments[0][2] = 25;
+    refreshments[1] = new Array();        //Mini FGD
+    refreshments[1][0] = 25;
+    refreshments[1][1] = 25;
+    refreshments[1][2] = 25;
+    refreshments[2] = new Array();        //IDI
+    refreshments[2][0] = 0;
+    refreshments[2][1] = 0;
+    refreshments[2][2] = 0;
+
+    var moderation = new Array();
+    moderation[0] = new Array();        //Full FGD
+    moderation[0][0] = 500;
+    moderation[0][1] = 500;
+    moderation[0][2] = 600;
+    moderation[1] = new Array();        //Mini FGD
+    moderation[1][0] = 500;
+    moderation[1][1] = 500;
+    moderation[1][2] = 600;
+    moderation[2] = new Array();        //IDI
+    moderation[2][0] = 250;
+    moderation[2][1] = 250;
+    moderation[2][2] = 250;
+
+    var transcripts = new Array();
+    transcripts[0] = new Array();        //Full FGD
+    transcripts[0][0] = 350;
+    transcripts[0][1] = 350;
+    transcripts[0][2] = 350;
+    transcripts[1] = new Array();        //Mini FGD
+    transcripts[1][0] = 350;
+    transcripts[1][1] = 350;
+    transcripts[1][2] = 350;
+    transcripts[2] = new Array();        //IDI
+    transcripts[2][0] = 300;
+    transcripts[2][1] = 300;
+    transcripts[2][2] = 300;
+
+    var translation = new Array();
+    translation[0] = new Array();        //Full FGD
+    translation[0][0] = 500;
+    translation[0][1] = 500;
+    translation[0][2] = 500;
+    translation[1] = new Array();        //Mini FGD
+    translation[1][0] = 500;
+    translation[1][1] = 500;
+    translation[1][2] = 500;
+    translation[2] = new Array();        //IDI
+    translation[2][0] = 400;
+    translation[2][1] = 400;
+    translation[2][2] = 400;
+
+    var contentanalysis = new Array();
+    contentanalysis[0] = new Array();        //Full FGD
+    contentanalysis[0][0] = 1000;
+    contentanalysis[0][1] = 1000;
+    contentanalysis[0][2] = 1000;
+    contentanalysis[1] = new Array();        //Mini FGD
+    contentanalysis[1][0] = 1000;
+    contentanalysis[1][1] = 1000;
+    contentanalysis[1][2] = 1000;
+    contentanalysis[2] = new Array();        //IDI
+    contentanalysis[2][0] = 750;
+    contentanalysis[2][1] = 750;
+    contentanalysis[2][2] = 750;
+
+    var reporting = new Array();
+    reporting[0] = new Array();        //Full FGD
+    reporting[0][0] = 1000;
+    reporting[0][1] = 1000;
+    reporting[0][2] = 1000;
+    reporting[1] = new Array();        //Mini FGD
+    reporting[1][0] = 1000;
+    reporting[1][1] = 1000;
+    reporting[1][2] = 1000;
+    reporting[2] = new Array();        //IDI
+    reporting[2][0] = 750;
+    reporting[2][1] = 750;
+    reporting[2][2] = 750;
+
+    var presentation = new Array();
+    presentation[0] = new Array();        //Full FGD
+    presentation[0][0] = 700;
+    presentation[0][1] = 700;
+    presentation[0][2] = 700;
+    presentation[1] = new Array();        //Mini FGD
+    presentation[1][0] = 700;
+    presentation[1][1] = 700;
+    presentation[1][2] = 700;
+    presentation[2] = new Array();        //IDI
+    presentation[2][0] = 700;
+    presentation[2][1] = 700;
+    presentation[2][2] = 700;
+
+    var hcd = new Array();
+    hcd[0] = new Array();
+    hcd[0][0] = 0;
+    hcd[0][1] = 0;
+    hcd[0][2] = 0;
+    hcd[1] = new Array();
+    hcd[1][0] = 15;
+    hcd[1][1] = 15;
+    hcd[1][2] = 15;
+    hcd[2] = new Array();
+    hcd[2][0] = 25;
+    hcd[2][1] = 23;
+    hcd[2][2] = 20;
+
+    var lbd = new Array();      //Discount percent according to base size
+    lbd[0] = new Array();
+    lbd[0][0] = 0;
+    lbd[0][1] = 0;
+    lbd[0][2] = 0;
+    lbd[1] = new Array();
+    lbd[1][0] = 5;
+    lbd[1][1] = 5;
+    lbd[1][2] = 5;
+    lbd[2] = new Array();
+    lbd[2][0] = 10;
+    lbd[2][1] = 10;
+    lbd[2][2] = 10;
+    lbd[3] = new Array();
+    lbd[3][0] = 15;
+    lbd[3][1] = 15;
+    lbd[3][2] = 15;
+
+    var pu = new Array();       //Priority
+    pu[0] = new Array();
+    pu[0][0] = 1;
+    pu[0][1] = 1.2;
+    pu[0][2] = 1.4;
+</script>

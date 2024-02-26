@@ -1,0 +1,65 @@
+﻿@model DNA_CAPI_MIS.Models.ProjectFieldSection
+
+@{
+    Layout = "~/Views/Shared/_Layout_Modal.cshtml";
+}
+@section Scripts {
+
+    <script language="javascript">
+        $(document).ready(function () {
+            // Attach a submit handler to the form
+            $("#createButton").on('click', function (event) {
+
+                // Stop form from submitting normally
+                event.preventDefault();
+
+                // Get some values from elements on the page:
+                var $form = $(this).closest("form"),
+                  url = $form.attr("action");
+
+                // Send the data using post
+                var posting = $.post(url, $form.serialize());
+
+                // Put the results in a div
+                posting.done(function (data) {
+                    BootstrapDialog.closeAll();
+                });
+            });
+        });
+    </script>
+}
+
+<div class="row desktop">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title" style="width:100%">Create Section</h3>
+            </div>
+            <div class="box-body" style="width:100%">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.ProjectID, new { Value = ViewBag.ProjectId })
+                    @Html.HiddenFor(model => model.DisplayOrder, new { Value = ViewBag.DisplayOrder })
+
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true)
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.EditorFor(model => model.Name)
+                                @Html.ValidationMessageFor(model => model.Name)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-10">
+                                <input type="submit" value="Create" class="btn btn-default" id="createButton" />
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div><!-- /.box-body -->
+        </div><!-- /.box -->
+    </div>
+</div>

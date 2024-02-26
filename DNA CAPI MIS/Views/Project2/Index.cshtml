@@ -1,0 +1,125 @@
+﻿@model IEnumerable<DNA_CAPI_MIS.Models.Project2>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Guid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QCRequirement)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.questions_list)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fld_respondent_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fld_respondent_phone1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fld_respondent_phone2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedByUserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedOn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModifiedByUserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModifiedOn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.STGSync)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StatusChangedByUserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StatusChangedOn)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Guid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QCRequirement)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.questions_list)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fld_respondent_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fld_respondent_phone1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fld_respondent_phone2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedByUserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedOn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedByUserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ModifiedOn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.STGSync)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatusChangedByUserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatusChangedOn)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

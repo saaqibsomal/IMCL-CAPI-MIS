@@ -1,0 +1,231 @@
+﻿@model IEnumerable<DNA_CAPI_MIS.Models.CensusCategoriesView>
+
+@{
+    ViewBag.Title = "Census RMS Categories";
+    DNA_CAPI_MIS.Controllers.CensusController census = new DNA_CAPI_MIS.Controllers.CensusController();
+}
+
+<h2>Census MIS</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Zain Luf Luf
+        </th>
+        <th>
+            @Html.ActionLink("Map View", "Map", "Survey", new { id = 4902, country = 2, c = 2 }, null) |
+            @Html.ActionLink("Field Progress", "FieldProgress", "Census", new { id = 4902 }, null)
+        </th>
+    </tr>
+
+
+    @if (User.IsInRole("Admin") || User.IsInRole("Survey Designer") || User.IsInRole("Survey Admin") || User.IsInRole("Field Supervisor") || User.IsInRole("Project Manager") || User.IsInRole("QC"))
+    {
+        <tr>
+            <td></td>
+            <td>
+                @if (User.IsInRole("CanEdit") || User.IsInRole("Admin"))
+                {
+                    @Html.ActionLink("Survey Results", "Survey", "Census", new { id = 12, projectId = 4902 }, null)
+                    WriteLiteral(" | ");
+                    @Html.ActionLink("Quality Check", "SurveyQC", "Census", new { id = 12, projectId = 4902 }, null)
+                    WriteLiteral(" | ");
+                }
+                @Html.ActionLink("Survey Results by Location", "SurveyLocations", "Census", new { id = 12, projectId = 4902 }, null) |
+                <a href="http://85.25.211.247:5303/Reports/Viewer/ReportViewer.aspx?r=@ViewBag.reportId_4902">Progress Report</a>
+            </td>
+        </tr>
+    }
+</table>
+ 
+<table class="table">
+    <tr>
+        <th>
+            Zain Census - 2015 Pilot
+        </th>
+        <th>
+            @Html.ActionLink("Map View", "Map", "Survey", new { id = 3402, country = 2, c = 6 }, null) |
+            @Html.ActionLink("Field Progress", "FieldProgress", "Census", new { id = 3402 }, null)
+        </th>
+    </tr>
+
+
+    @if (User.IsInRole("Admin") || User.IsInRole("Survey Designer") || User.IsInRole("Survey Admin") || User.IsInRole("Field Supervisor") || User.IsInRole("Project Manager") || User.IsInRole("QC"))
+    {
+    <tr>
+        <td>
+            
+        </td>
+        <td>
+            @if (User.IsInRole("CanEdit") || User.IsInRole("Admin"))
+            {
+                @Html.ActionLink("Survey Results", "Survey", "Census", new { id = 12, projectId = 3402 }, null)
+                WriteLiteral(" | ");
+                @Html.ActionLink("Quality Check", "SurveyQC", "Census", new { id = 12, projectId = 3402 }, null)
+                WriteLiteral(" | ");
+            }
+            @Html.ActionLink("Survey Results by Location", "SurveyLocations", "Census", new { id = 12, projectId = 3402 }, null) |
+            <a href="http://85.25.211.247:5303/Reports/Viewer/ReportViewer.aspx?r=@ViewBag.reportId_3402">Progress Report</a>
+        </td>
+    </tr>
+    }
+</table>
+
+@if (User.IsInRole("CanEdit") || User.IsInRole("Admin"))
+{
+<table class="table">
+    <tr>
+        <th>
+            Hoshan - Dec 2014 Test
+        </th>
+        <th>
+            @Html.ActionLink("Map View", "Map", "Survey", new { id = 3766, country = 2, c = 6 }, null) |
+            @Html.ActionLink("Field Progress", "FieldProgress", "Census", new { id = 3766 }, null)
+        </th>
+    </tr>
+
+    <tr>
+        <td>
+            Stationary
+        </td>
+        <td>
+            @if (User.IsInRole("CanEdit") || User.IsInRole("Admin"))
+            {
+                @Html.ActionLink("Survey Results", "Survey", "Census", new { id = 12, projectId = 3766 }, null)
+                WriteLiteral(" | ");
+                @Html.ActionLink("Quality Check", "SurveyQC", "Census", new { id = 12, projectId = 3766 }, null)
+                WriteLiteral(" | ");
+            }
+            @Html.ActionLink("Survey Results by Location", "SurveyLocations", "Census", new { id = 12, projectId = 3766 }, null) |
+            <a href="http://85.25.211.247:5303/Reports/Viewer/ReportViewer.aspx?r=@ViewBag.reportId_3766">Progress Report</a>
+        </td>
+    </tr>
+</table>
+}
+
+<p></p>
+@if (User.IsInRole("CanEdit") || User.IsInRole("Admin"))
+{
+<table class="table">
+    <tr>
+        <th>
+            Pilot Wave
+        </th>
+        <th>
+            @Html.ActionLink("Map View", "Map", "Survey", new { id = 1371,country=2}, null) |
+            @Html.ActionLink("Field Progress", "FieldProgress", "Census", new { id = 1371 }, null)
+        </th>
+    </tr>
+
+    @foreach (var item in Model) {
+        if (item.SampleID == 2 || item.SampleID == 3)
+        { 
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @if (User.IsInRole("CanEdit") || User.IsInRole("Admin")) 
+            {
+                @Html.ActionLink("Survey Results", "Survey", "Census", new { id = item.SampleID, projectId = 1371 }, null)
+                WriteLiteral(" | ");
+              @Html.ActionLink("Quality Check", "SurveyQCFilter", "Census", new { id = item.SampleID, projectId = 1371 }, null)
+                @*@Html.ActionLink("Quality Check", "SurveyQC", "Census", new { id = item.SampleID, projectId = 1371 }, null)*@
+                WriteLiteral(" | ");
+            }
+            @Html.ActionLink("Survey Results by Location", "SurveyLocations", "Census", new { id = item.SampleID, projectId = 1371 }, null) |
+            <a href="http://85.25.211.247:5303/Reports/Viewer/ReportViewer.aspx?r=@ViewBag.reportId_1371">Progress Report</a>
+        </td>
+    </tr>
+        }
+    }
+</table>
+<p></p>
+}
+
+@if (User.IsInRole("CanEdit") || User.IsInRole("Admin"))
+{
+<table class="table">
+    <tr>
+        <th>
+            Wave 2
+        </th>
+        <th>
+            @Html.ActionLink("Map View", "Map", "Survey", new { id = 3390, country = 2, c = 6 }, null) |
+            @Html.ActionLink("Field Progress", "FieldProgress", "Census", new { id = 3390 }, null)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.SampleID == 2 || item.SampleID == 3)
+        { 
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @if (User.IsInRole("CanEdit") || User.IsInRole("Admin"))
+                {
+                    @Html.ActionLink("Survey Results", "Survey", "Census", new { id = item.SampleID, projectId = 3390 }, null)
+                    WriteLiteral(" | ");
+                      @Html.ActionLink("Quality Check", "SurveyQCFilter", "Census", new { id = item.SampleID, projectId = 3390 }, null)
+                    @*@Html.ActionLink("Quality Check", "SurveyQC", "Census", new { id = item.SampleID, projectId = 3390 }, null)*@
+                    WriteLiteral(" | ");
+                }
+                @Html.ActionLink("Survey Results by Location", "SurveyLocations", "Census", new { id = item.SampleID, projectId = 3390 }, null) |
+                <a href="http://85.25.211.247:5303/Reports/Viewer/ReportViewer.aspx?r=@ViewBag.reportId_3390">Progress Report</a>
+            </td>
+        </tr>
+        }
+    }
+</table>
+}
+
+@if (User.IsInRole("CanEdit") || User.IsInRole("Admin"))
+{
+<table class="table">
+    <tr>
+        <th>
+            HRDF
+        </th>
+        <th>
+            @Html.ActionLink("Map View", "Map", "Survey", new { id = 3392, country = 2, c = 6 }, null) |
+            @Html.ActionLink("Field Progress", "FieldProgress", "Census", new { id = 3392 }, null)
+        </th>
+    </tr>
+
+    <tr>
+        <td>
+            Beauty Parlour
+        </td>
+        <td>
+            @if (User.IsInRole("CanEdit") || User.IsInRole("Admin"))
+            {
+                @Html.ActionLink("Survey Results", "Survey", "Census", new { id = 12, projectId = 3392 }, null)
+                WriteLiteral(" | ");
+                @Html.ActionLink("Quality Check", "SurveyQC", "Census", new { id = 12, projectId = 3392 }, null)
+                WriteLiteral(" | ");
+            }
+            @Html.ActionLink("Survey Results by Location", "SurveyLocations", "Census", new { id = 12, projectId = 3392 }, null) |
+            <a href="http://85.25.211.247:5303/Reports/Viewer/ReportViewer.aspx?r=@ViewBag.reportId_3392">Progress Report</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            Tailor Shop
+        </td>
+        <td>
+            @if (User.IsInRole("CanEdit") || User.IsInRole("Admin"))
+            {
+                @Html.ActionLink("Survey Results", "Survey", "Census", new { id = 13, projectId = 3392 }, null)
+                WriteLiteral(" | ");
+                @Html.ActionLink("Quality Check", "SurveyQC", "Census", new { id = 13, projectId = 3392 }, null)
+                WriteLiteral(" | ");
+            }
+            @Html.ActionLink("Survey Results by Location", "SurveyLocations", "Census", new { id = 13, projectId = 3392 }, null) |
+            <a href="http://85.25.211.247:5303/Reports/Viewer/ReportViewer.aspx?r=@ViewBag.reportId_3392">Progress Report</a>
+        </td>
+    </tr>
+</table>
+}

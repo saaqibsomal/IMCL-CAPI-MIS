@@ -1,0 +1,147 @@
+﻿@model DNA_CAPI_MIS.Models.Survey
+
+@{
+    ViewBag.Title = "POI Map";
+    Layout = "~/Views/Shared/_Layout_NoMenu.cshtml";
+}
+
+<link href="~/Content/Site.css" rel="stylesheet" />
+<style>
+    #floating-panel {
+        position: absolute;
+        top: 75px;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+        font-family: "Roboto", "sans-serif";
+        line-height: 30px;
+        padding-left: 10px;
+        margin: 10px;
+    }
+</style>
+
+<script type="text/javascript">
+
+    var markers = [
+        {
+            sbjnum: 0,           @*@Model.sbjnum*@
+            lat: 33.6509,       @*@Model.Latitude*@
+            lng: 72.9513        @*@Model.Longitude*@
+        }
+    ];
+
+    // converting degree to radiun
+    function deg2rad(deg) {
+        return deg * (Math.PI / 180)
+    }
+
+    var map;
+
+    window.onload = function () {
+        //Generate markers on the map
+        $('#dvMap').height(window.innerHeight - 100);
+
+        window.initMap = initMap;
+        initMap();
+
+    }
+
+    function initMap() {
+        const directionsService = new google.maps.DirectionsService();
+        const directionsRenderer = new google.maps.DirectionsRenderer();
+
+        var mapOptions = {
+            zoom: 12,
+            center: { lat: 33.6509, lng: 72.9513 },
+            mapTypeControlOptions: {
+                mapTypeIds: [google.maps.MapTypeId.ROADMAP, google.maps.MapTypeId.SATELLITE, google.maps.MapTypeId.TERRAIN
+                    , google.maps.MapTypeId.HYBRID]
+            },
+            disableDefaultUI: true,
+            mapTypeControl: true,
+            scaleControl: true,
+            zoomControl: true,
+            zoomControlOptions: {
+                style: google.maps.ZoomControlStyle.LARGE
+            },
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+
+        const map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
+
+        const trafficLayer = new google.maps.TrafficLayer();
+
+        trafficLayer.setMap(map);
+
+        directionsRenderer.setMap(map);
+        calculateAndDisplayRoute(directionsService, directionsRenderer, new google.maps.LatLng('33.666951', '73.013298'), new google.maps.LatLng('33.667195', '73.014153'), "p1");
+        calculateAndDisplayRoute(directionsService, directionsRenderer, new google.maps.LatLng('33.666222', '73.012279'), new google.maps.LatLng('33.666746', '73.012796'), "p3");
+        calculateAndDisplayRoute(directionsService, directionsRenderer, new google.maps.LatLng('33.679888', '73.037863'), new google.maps.LatLng('33.680036', '73.038519'), "p2");
+        calculateAndDisplayRoute(directionsService, directionsRenderer, new google.maps.LatLng('33.679209', '73.036955'), new google.maps.LatLng('33.679705', '73.037415'), "p4");
+        calculateAndDisplayRoute(directionsService, directionsRenderer, new google.maps.LatLng('33.615323', '72.993935'), new google.maps.LatLng('33.630574', '73.023120'), "p5");
+        calculateAndDisplayRoute(directionsService, directionsRenderer, new google.maps.LatLng('33.660806', '73.080905'), new google.maps.LatLng('33.615192', '72.994176'), "p6");
+
+        //const onChangeHandler = function () {
+        //    calculateAndDisplayRoute(directionsService, directionsRenderer);
+        //};
+
+        //document.getElementById("start").addEventListener("change", onChangeHandler);
+        //document.getElementById("end").addEventListener("change", onChangeHandler);
+    }
+
+    function calculateAndDisplayRoute(directionsService, directionsRenderer, start, end, poi) {
+        directionsService
+            .route({
+                origin: start,
+                destination: end,
+                travelMode: google.maps.TravelMode.DRIVING,
+                drivingOptions: {
+                    departureTime: new Date(Date.now() + 10000),
+                    trafficModel: 'bestguess'
+                },
+            })
+            .then((response) => {
+                var normalDuration = response.routes[0].legs[0].duration.value;
+                var trafficDuration = response.routes[0].legs[0].duration_in_traffic.value;
+                var traffic = 'Normal';
+                if (trafficDuration > (normalDuration * 1.4) && trafficDuration < (normalDuration * 2)) {
+                    traffic = 'Moderate';
+                } else if (trafficDuration > (normalDuration * 2)) {
+                    traffic = 'High';
+                }
+                directionsRenderer.setDirections(response);
+                return document.getElementById(poi).innerHTML = traffic;
+            })
+            .catch((e) => window.alert("Directions request failed due to " + status));
+    }
+</script>
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDZ75fyPMu_S1ywuI0x-kuekSLSS2kCoM&sensor=false"></script>
+
+
+<div class="row">
+    <div id="floating-panel">
+        <div class="row col-lg-6">
+            <b>Srinagar Highway (Exit from G-10/1): </b><span id="p1"></span>
+        </div>
+        <div class="row col-lg-6">
+            <b>Srinagar Highway (Entry to G-10/1): </b><span id="p2"></span>
+        </div>
+        <div class="row col-lg-6">
+            <b>Srinagar Highway (Exit from G-9): </b><span id="p3"></span>
+        </div>
+        <div class="row col-lg-6">
+            <b>Srinagar Highway (Entry G-9): </b><span id="p4"></span>
+        </div>
+        <div class="row col-lg-6">
+            <b>I.J.P Road (Peshawar Rd to Faizabad): </b><span id="p5"></span>
+        </div>
+        <div class="row col-lg-6">
+            <b>I.J.P Road (Faizabad to Peshawar Rd): </b><span id="p6"></span>
+        </div>
+    </div>
+    <div id="dvMap" style="height: 100vh; float:left; width:100%;">
+    </div>
+</div>
+

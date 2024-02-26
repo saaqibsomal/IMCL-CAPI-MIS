@@ -1,0 +1,143 @@
+﻿@model IEnumerable<object[]>
+
+@{
+    ViewBag.Title = "Field Operations Report - Coding";
+}
+<link rel="stylesheet" href="~/Content/jqwidgets/jqwidgets/styles/jqx.base.css" type="text/css" />
+
+<h4><strong>@ViewBag.ProjectName</strong></h4>
+<h4>Field Operations Report - Coding</h4>
+
+@if (ViewBag.ErrorMessage != null && ViewBag.ErrorMessage.Length > 0)
+{
+    <h4>@ViewBag.ErrorMessage</h4>
+}
+else
+{
+
+@Styles.Render("~/Content/styles/jqwidgets")
+
+@section Scripts {
+@Scripts.Render("~/bundles/bootstrap/jqwidgets")
+
+<script type="text/javascript">
+    function urldecode(str) {
+        return decodeURIComponent((str + '').replace(/\+/g, '%20'));
+    }
+
+    var dataGrid = new Array();
+
+    function PopulateData() {
+        // prepare the data
+        var data = new Array();
+        var row = {};
+
+        @{
+            var id = 0;
+        }
+        @foreach (var row in Model)
+        {
+            WriteLiteral("row = {};");
+            WriteLiteral("row['id'] = " + id + ";");
+            int col = 0;
+            foreach (var column in row)
+            {
+                WriteLiteral("row['_" + col + "'] = urldecode(\"" + Url.Encode(column.ToString()) + "\");");
+                col++;
+            }
+            WriteLiteral("data[" + id++ + "] = row;\n");
+        }
+
+        return data;
+    }
+
+    $(document).ready(function () {
+        // prepare the data
+        dataGrid = PopulateData();
+
+        var source =
+        {
+            localdata: dataGrid,
+            datafields:
+            [
+            @for (int col = 0; col < ViewBag.ProjectFields.Count; col++)
+            {
+                WriteLiteral("{ name: '_" + col + "', type: 'string' },");
+            }
+            ],
+            datatype: "array",
+        };
+
+        var dataAdapter = new $.jqx.dataAdapter(source);
+
+        var toThemeProperty = function (className) {
+            return className + " " + className + "-" + theme;
+        }
+
+        var groupsrenderer = function (text, group, expanded, data) {
+        }
+
+        // initialize jqxGrid
+        $("#jqxgrid").jqxGrid(
+        {
+            theme: 'metro',
+            editable: false,
+            editmode: 'click',
+            width: '100%',
+            source: dataAdapter,
+            groupable: false,
+            columnsresize: true,
+            columnsreorder: true,
+            //groupsrenderer: groupsrenderer,
+            altrows: true,
+            sortable: true,
+            filterable: true,
+            filtermode: 'excel',
+            showfilterrow: false,
+            columns: [
+            @{
+                int c = 0;       
+            }
+            @foreach (var column in ViewBag.ProjectFields)
+            {
+                WriteLiteral("{ text: '" + column.VariableName + "-" + column.Title + "', groupable: true, editable: false, datafield: '_" + c + "', type: 'string', width: 150 },");
+                c++;
+            }
+            ]
+        });
+
+        $("#excelExport").click(function () {
+            var exportInfo = $("#jqxgrid").jqxGrid('exportdata', 'xls');
+            download("DataSheet_" + "@DateTime.Today.ToShortDateString().Replace("/", "")" + ".xls", exportInfo);
+        });
+
+        function download(filename, content) {
+            contentType = 'application/octet-stream';
+            var a = document.createElement('a');
+            var blob = new Blob([content], { 'type': contentType });
+            a.href = window.URL.createObjectURL(blob);
+            a.download = filename;
+            a.click();
+        }
+
+    });
+</script>
+
+}
+
+<div id='jqxWidget'>
+    <div id="jqxgrid"></div>
+
+    <div class="form-group">
+
+        <div style="float: left; margin-left: 20px; margin-top: 20px;">
+            <input type="button" value="Export to Excel" id='excelExport' class="btn btn-default" />
+        </div>
+
+        <div style="float: left; margin-left: 20px; margin-top: 20px;">
+            <input value="Remove Filter" id="clearfilteringbutton" type="button" class="btn btn-default" />
+        </div>
+        <br />
+    </div>
+</div>
+}

@@ -1,0 +1,228 @@
+﻿@model IEnumerable<DNA_CAPI_MIS.Models.SurveyDataView>
+
+@{
+    ViewBag.Title = "Index";
+    var currentSbjnum = 0;
+    var headerPrinted = false;
+
+    if (Model.Count() > 0)
+    {
+        currentSbjnum = Model.FirstOrDefault().sbjnum;
+    }
+    
+}
+@section Scripts {
+<link class="ui-theme" rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/cupertino/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+<link rel="stylesheet" href="/Scripts/tablesorter/docs/css/jq.css">
+<link href="/Scripts/tablesorter/docs/css/prettify.css" rel="stylesheet">
+<script src="/Scripts/tablesorter/docs/js/prettify.js"></script>
+<script src="/Scripts/tablesorter/docs/js/docs.js"></script>
+
+<!-- Tablesorter: required -->
+<link rel="stylesheet" href="/Scripts/tablesorter/css/theme.blue.css">
+<script src="/Scripts/tablesorter/js/jquery.tablesorter.js"></script>
+<script src="/Scripts/tablesorter/js/jquery.tablesorter.widgets.js"></script>
+
+<!-- Tablesorter: optional -->
+<link rel="stylesheet" href="/Scripts/tablesorter/addons/pager/jquery.tablesorter.pager.css">
+<script src="/Scripts/tablesorter/addons/pager/jquery.tablesorter.pager.js"></script>
+
+<script id="js">
+    $(document).ready(function () {
+
+        // **********************************
+        //  Description of ALL pager options
+        // **********************************
+        var pagerOptions = {
+
+            // target the pager markup - see the HTML block below
+            container: $(".pager"),
+
+            // use this url format "http:/mydatabase.com?page={page}&size={size}&{sortList:col}"
+            ajaxUrl: null,
+
+            // modify the url after all processing has been applied
+            customAjaxUrl: function (table, url) { return url; },
+
+            // process ajax so that the data object is returned along with the total number of rows
+            // example: { "data" : [{ "ID": 1, "Name": "Foo", "Last": "Bar" }], "total_rows" : 100 }
+            ajaxProcessing: function (ajax) {
+                if (ajax && ajax.hasOwnProperty('data')) {
+                    // return [ "data", "total_rows" ];
+                    return [ajax.total_rows, ajax.data];
+                }
+            },
+
+            // output string - default is '{page}/{totalPages}'
+            // possible variables: {page}, {totalPages}, {filteredPages}, {startRow}, {endRow}, {filteredRows} and {totalRows}
+            output: '{startRow} to {endRow} ({totalRows})',
+
+            // apply disabled classname to the pager arrows when the rows at either extreme is visible - default is true
+            updateArrows: true,
+
+            // starting page of the pager (zero based index)
+            page: 0,
+
+            // Number of visible rows - default is 10
+            size: 50,
+
+            // Save pager page & size if the storage script is loaded (requires $.tablesorter.storage in jquery.tablesorter.widgets.js)
+            savePages: true,
+
+            //defines custom storage key
+            storageKey: 'tablesorter-pager',
+
+            // if true, the table will remain the same height no matter how many records are displayed. The space is made up by an empty
+            // table row set to a height to compensate; default is false
+            fixedHeight: true,
+
+            // remove rows from the table to speed up the sort of large tables.
+            // setting this to false, only hides the non-visible rows; needed if you plan to add/remove rows with the pager enabled.
+            removeRows: false,
+
+            // css class names of pager arrows
+            cssNext: '.next', // next page arrow
+            cssPrev: '.prev', // previous page arrow
+            cssFirst: '.first', // go to first page arrow
+            cssLast: '.last', // go to last page arrow
+            cssGoto: '.gotoPage', // select dropdown to allow choosing a page
+
+            cssPageDisplay: '.pagedisplay', // location of where the "output" is displayed
+            cssPageSize: '.pagesize', // page size selector - select dropdown that sets the "size" option
+
+            // class added to arrows when at the extremes (i.e. prev/first arrows are "disabled" when on the first page)
+            cssDisabled: 'disabled', // Note there is no period "." in front of this class name
+            cssErrorRow: 'tablesorter-errorRow' // ajax error information row
+
+        };
+
+        // Initialize tablesorter
+        // ***********************
+        $('table')
+            .tablesorter({
+                theme: 'blue',
+                widthFixed: true,
+                widgets: ['zebra', 'filter']
+            })
+
+            // bind to pager events
+            // *********************
+            .bind('pagerChange pagerComplete pagerInitialized pageMoved', function (e, c) {
+                var msg = '"</span> event triggered, ' + (e.type === 'pagerChange' ? 'going to' : 'now on') +
+                    ' page <span class="typ">' + (c.page + 1) + '/' + c.totalPages + '</span>';
+                $('#display')
+                    .append('<li><span class="str">"' + e.type + msg + '</li>')
+                    .find('li:first').remove();
+            })
+
+            // initialize the pager plugin
+            // ****************************
+            .tablesorterPager(pagerOptions);
+
+        // Disable / Enable
+        // **************
+        $('.toggle').click(function () {
+            var mode = /Disable/.test($(this).text());
+            $('table').trigger((mode ? 'disable' : 'enable') + '.pager');
+            $(this).text((mode ? 'Enable' : 'Disable') + 'Pager');
+            return false;
+        });
+        $('table').bind('pagerChange', function () {
+            // pager automatically enables when table is sorted.
+            $('.toggle').text('Disable Pager');
+        });
+
+    });
+</script>
+}
+
+<h2>@ViewBag.CensusCategoryName: Survey Results</h2>
+
+<table class="tablesorter">
+    <thead>
+    <tr>
+        @foreach (var item in Model)
+        {
+            if (currentSbjnum == item.sbjnum)
+            {
+                if (!headerPrinted)
+                {
+                    headerPrinted = true;
+            <th>
+                Survey ID
+            </th>
+            <th>
+                Created On
+            </th>
+            <th>Map</th>
+            <th>
+                Surveyor Name
+            </th>
+                }
+            <th>
+                @item.Title
+            </th>
+            }
+        }
+    </tr>
+    </thead>
+    <tbody>
+        @{
+            var firstRow = true;
+            currentSbjnum = 0;
+        }
+        @foreach (var item in Model)
+        {
+            if (currentSbjnum != item.sbjnum)
+            {
+                currentSbjnum = item.sbjnum;
+                headerPrinted = true;
+                if (!firstRow)
+                {
+                    WriteLiteral("</tr>");
+                }
+                firstRow = false;
+                WriteLiteral("<tr>");
+            <td>@item.sbjnum</td>
+            <td>@item.Created</td>
+            <td>
+            @if (item.Longitude != 0 && item.Longitude != 0)
+            {
+                WriteLiteral("<a href=\"https://www.google.com/maps/place//@" + item.Latitude + "," + item.Longitude + ",185m/data=!3m1!1e3!4m2!3m1!1s0x0:0x0\" target=\"_blank\" >Map</a>");
+            }
+            </td>
+            <td>@item.SurveyorName</td>
+            }
+            <td>
+            @if (item.FieldType.Trim() == "PIC")
+            {
+                if (item.FieldValue.Length > 0)
+                {
+                    WriteLiteral("<a href=\"http://117.20.29.237:3001/Pictures/" + item.FieldValue.Trim() + "\" target=\"_blank\"><img src=\"http://117.20.29.237:3001/Pictures/" + item.FieldValue.Trim() + "\" style=\"max-width:50px;\" /></a>");
+                }
+            }
+            else
+            {
+                @item.FieldValue
+            }
+            </td>
+        }
+        @{WriteLiteral("</tr></tbody>");}
+</table>
+
+<div class="pager">
+    <img src="/Scripts/tablesorter/addons/pager/icons/first.png" class="first" alt="First" />
+    <img src="/Scripts/tablesorter/addons/pager/icons/prev.png" class="prev" alt="Prev" />
+    <span class="pagedisplay"></span> <!-- this can be any element, including an input -->
+    <img src="/Scripts/tablesorter/addons/pager/icons/next.png" class="next" alt="Next" />
+    <img src="/Scripts/tablesorter/addons/pager/icons/last.png" class="last" alt="Last" />
+    <select class="pagesize" title="Select page size">
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="30">30</option>
+        <option value="40">40</option>
+    </select>
+    <select class="gotoPage" title="Select page number"></select>
+</div>

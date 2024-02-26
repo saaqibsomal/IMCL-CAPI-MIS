@@ -1,0 +1,264 @@
+﻿@model IEnumerable<DNA_CAPI_MIS.Models.SurveyDataView>
+
+@{
+    ViewBag.Title = "Survey Approval Data Filter";
+}
+
+@Styles.Render("~/Content/styles/filters")
+<link href="~/Content/bootstrap-multiselect-master/dist/css/bootstrap-multiselect.css" rel="stylesheet" />
+
+@section Scripts {
+@Scripts.Render("~/bundles/bootstrap/jqwidgets")
+@Scripts.Render("~/bundles/bootstrap/filters")
+<script src="~/Content/bootstrap-multiselect-master/dist/js/bootstrap-multiselect.js"></script>
+
+<script>
+    function replaceAll(find, replace, str) {
+        return str.replace(new RegExp(find, 'g'), replace);
+    }
+
+    var citySelectionChanged = false;
+
+    $(document).ready(function () {
+        $("#fromdate").datepicker();
+        $("#todate").datepicker();
+        //$("#surveror").select2();
+        $('#surveror').multiselect({
+            includeSelectAllOption: true,
+            enableCaseInsensitiveFiltering: true,
+            maxHeight: 400
+        });
+        $('#fctlCity').multiselect({
+            includeSelectAllOption: true,
+            enableCaseInsensitiveFiltering: true,
+            enableClickableOptGroups: true,
+            maxHeight: 400,
+            selectAll: true,
+            onChange: function (option, checked) {
+                citySelectionChanged = true;
+            }
+        });
+
+        $('#fctlDistrict').multiselect({
+            includeSelectAllOption: true,
+            enableCaseInsensitiveFiltering: true,
+            enableClickableOptGroups: true,
+            maxHeight: 400,
+            selectAll: true,
+            onDropdownShow: function (event) {
+                if (citySelectionChanged) {
+                    citySelectionChanged = false;
+                    var cityIDs = $("#fctlCity").val().join(',');
+                    cityIDs = replaceAll('_', '', cityIDs);
+
+                    var request = $.ajax({
+                        url: "/District/GetDistrictsFilterByCities",
+                        type: "POST",
+                        data: { "CityIDs": cityIDs },
+                        dataType: "text"
+                    })
+                    .done(function (jsonData) {
+                        var districts = JSON.parse(jsonData);
+                        $.each(districts, function (key, value) {
+                            $('#fctlDistrict')
+                                .append($("<option></option>")
+                                .attr("value", value.ID)
+                                .text(value.Name));
+                        });
+                        $('#fctlDistrict').multiselect('rebuild');
+                    })
+                    .fail(function (jqXHR, textStatus) {
+                        alert("Request failed: " + textStatus);
+                    });
+                }
+            }
+
+        });
+
+    });
+
+    function getdata() {
+        var path = document.location.toString();
+        path = path.replace("SurveyApprovalFilter", "SurveyApproval");
+        path = path.replace("#", "");
+        path += "/en?";
+
+        if ($("#fromdate").val() != "" && $("#todate").val() != "") {
+            var fromdate = $("#fromdate").val();
+            var spl_fromdate = fromdate.split('/');
+            var day_fromdate = spl_fromdate[1];
+            var month_fromdate = spl_fromdate[0];
+
+            var todate = $("#todate").val();
+            var spl_todate = todate.split('/');
+            var day_todate = spl_todate[1];
+            var month_todate = spl_todate[0];
+
+            path += "&fromdate=" + spl_fromdate[2] + "/" + month_fromdate + "/" + day_fromdate;
+            path += "&todate=" + spl_todate[2] + "/" + month_todate + "/" + day_todate;
+
+        }
+        if ($("#surveror").val() != "" && $("#surveror").val() != null) {
+            path += "&surveyors=" + replaceAll('_', '', $("#surveror").val().join(','));
+        }
+        if ($("#astatus").val() != "" && $("#astatus").val() != null) {
+            path += "&astatus=" + $("#astatus").val();
+        }
+        if ($("#reportTitle").val() != "" && $("#reportTitle").val() != null) {
+            path += "&rt=" + $("#reportTitle").val();
+        }
+        if ($("#fieldValue").val() != "" && $("#fieldValue").val() != null) {
+            path += "&fv=" + $("#fieldValue").val();
+        }
+        var reportId = $("input[name=rdoReports]:checked").val();
+        if (reportId.length == 0) reportId = "1";
+        path += "&r=" + reportId;
+
+        if ($("#fctlCity").val() != "" && $("#fctlCity").val() != null) {
+            path += "&city=" + replaceAll('_', '', $("#fctlCity").val().join(','));
+        }
+        if ($("#fctlDistrict").val() != "" && $("#fctlDistrict").val() != null) {
+            path += "&district=" + replaceAll('_', '', $("#fctlDistrict").val().join(','));
+        }
+
+        //alert(path);
+        window.location = path;
+    }
+
+</script>
+<script type="text/javascript">
+    function MyFunction() {
+        alert("fromdate:" + getFromDate() + ",todate:" + gettoDate());
+    }
+    function getFromDate() {
+
+        return document.getElementById('fromdate').value;
+    }
+    function getToDate() {
+        return document.getElementById('todate').value;
+    }
+</script>
+}
+
+<p>
+    @Html.ActionLink("All Projects", "OpenProject", "Designer") |
+    @Html.ActionLink("Project Overview", "ProjectOverview", "Designer", new { id = ViewBag.ProjectId }, null)
+</p>
+<h4><strong>@ViewBag.ProjectName</strong></h4>
+<h4>@ViewBag.Title</h4>
+
+@if (ViewBag.ErrorMessage != null && ViewBag.ErrorMessage.Length > 0)
+{
+    <h4>@ViewBag.ErrorMessage</h4>
+}
+else
+{
+    <div class="form-horizontal">
+        <div class="form-group">
+            <label class="control-label col-md-2">Approval Status</label>
+            <div class="col-md-8">
+                <select id="astatus" style="margin-top: 5px;">
+                    <option value="0">Unchecked</option>
+                    <option value="1">Approved</option>
+                    <option value="2">Rejected</option>
+                    <option value="3">All</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Surveyors</label>
+            <div class="col-md-8">
+                <select id="surveror" multiple="multiple" style="width:200px;height:30px;">
+
+                    @if (ViewBag.Surveyors != null)
+                    {
+                        foreach (var s in ViewBag.Surveyors)
+                        {
+                            <option value="'@s.Name'">@s.Name</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">City</label>
+            <div class="col-md-4">
+                <select id="fctlCity" multiple="multiple" style="width:200px;height:30px;">
+                    @{
+                    var countryName = "";
+                    var firstrow = true;
+                    }
+                    @if (ViewBag.AllCitiesList != null)
+                    {
+                        foreach (var ct in ViewBag.AllCitiesList)
+                        {
+                            if (countryName != ct.CountryName)
+                            {
+                                if (!firstrow)
+                                {
+                                    WriteLiteral("</optgroup>");
+                                }
+                                countryName = ct.CountryName;
+                                firstrow = false;
+                                WriteLiteral("<optgroup label=\"" + countryName + "\">");
+                            }
+                            <option value="_@ct.ID">@ct.Name</option>
+                        }
+                    }
+                </select>
+            </div>
+            <label class="control-label col-md-1">District</label>
+            <div class="col-md-4">
+                <select id="fctlDistrict" multiple="multiple" style="width:200px;height:30px;">
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">From Date</label>
+            <div class="col-md-8">
+                <input type="text" id="fromdate" style="width:200px;height:30px;">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">To Date</label>
+            <div class="col-md-8">
+                <input type="text" id="todate" style="width:200px;height:30px;">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">View Title As</label>
+            <div class="col-md-8">
+                <select id="reportTitle" style="margin-top: 5px;">
+                    <option value="0">Report Title</option>
+                    <option value="1">Title</option>
+                    <option value="2">Report+Title</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">View Data As</label>
+            <div class="col-md-8">
+                <select id="fieldValue" style="margin-top: 5px;">
+                    <option value="0">Field Value</option>
+                    <option value="1">Response Time</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Report Name", new { @class = "control-label col-md-2" })
+            <div class="col-md-8">
+                @Html.RadioButton("rdoReports", "1", true, new { id = "rdoReport1", @class = "form-radio" })&nbsp;<span class="form-radio">Field Survey Data for Monitoring & Approval</span><br/>
+                @Html.RadioButton("rdoReports", "2", false, new { id = "rdoReport2", @class = "form-radio" })&nbsp;<span class="form-radio">Identify new POIs for Field Planning</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-8">
+                <input type="button" onclick="getdata()" value="View Survey Data" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}

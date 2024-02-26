@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    <style>
+        .modal-body {
+          position: relative;
+          padding: 0px;
+        }
+    </style>
+</head>
+<body class="skin-blue">
+    <div class="wrapper row-offcanvas row-offcanvas-left auto-height">
+        <!-- Main content -->
+        <section class="content">
+            @RenderBody()
+        </section><!-- /.content -->
+    </div><!-- ./wrapper -->
+    @Scripts.Render("~/bundles/bootstrap/AdminLTE")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

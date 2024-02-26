@@ -1,0 +1,586 @@
+﻿@{
+
+    Layout = null;
+}
+
+<style>
+    .innertable {
+        width: 100%;
+    }
+
+        .innertable td {
+            text-align: center;
+            width: 50%;
+        }
+</style>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="jarviswidget jarviswidget-color-greenDark col-md-12" id="wid-id-3" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false">
+            <!-- widget options:
+            usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+            data-widget-colorbutton="false"
+            data-widget-editbutton="false"
+            data-widget-togglebutton="false"
+            data-widget-deletebutton="false"
+            data-widget-fullscreenbutton="false"
+            data-widget-custombutton="false"
+            data-widget-collapsed="true"
+            data-widget-sortable="false"
+
+            -->
+            <header style="background-color:#87C440">
+                <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                <h2>Audit Report</h2>
+            </header>
+
+            <!-- widget div-->
+            <div>
+                <!-- widget edit box -->
+                <div class="jarviswidget-editbox">
+                    <!-- This area used as dropdown edit box -->
+                </div>
+                <!-- end widget edit box -->
+                <!-- widget content -->
+                <div class="widget-body no-padding ">
+                    <div id="table_wrapper" style="overflow:auto">
+                        <table id="datatable_tabletools" class="table  table-bordered table-hover" width="100%">
+                            <thead>
+                                <tr>
+                                    <th colspan="1" style="width:5%">&nbsp; #</th>
+                                    <th colspan="1" style="width:2%">+</th>
+                                    <th colspan="1" style="" class="">Audit Item</th>
+                                    <th colspan="1" style=""></th>
+                                    @*<th colspan="1" style="">Points Given</th>*@
+                                    @{
+                                        List<DNA_CAPI_MIS.Models.CustomerBranch> Dealerlst = ViewBag.Dealerlst as List<DNA_CAPI_MIS.Models.CustomerBranch>;//For Parent
+                                        foreach (var item in Dealerlst)
+                                        {
+                                            <th colspan="1" style="">@item.Name</th>
+                                        }
+                                    }
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                @{
+                                    List<DNA_CAPI_MIS.Models.SurveyDetailsAllDealer> SchDetailMain = ViewBag.SurDetailChild as List<DNA_CAPI_MIS.Models.SurveyDetailsAllDealer>;
+
+                                    List<DNA_CAPI_MIS.Models.SurveyDetails> Sdetail = ViewBag.SurDetail as List<DNA_CAPI_MIS.Models.SurveyDetails>;//For Parent
+                                    int number = 1;
+                                    foreach (var item in Sdetail)
+                                    {
+                                        List<DNA_CAPI_MIS.Models.SurveyDetailsAllDealer> SchDetail = ViewBag.SurDetailChild as List<DNA_CAPI_MIS.Models.SurveyDetailsAllDealer>;//For Child
+
+                                        SchDetail = SchDetail.Where(x => x.id == item.id).ToList();
+
+                                        //sum += Convert.ToDouble(SchDetail.Select(x => x.Score).Sum());
+                                        <tr>
+                                            <th>
+                                                @(number++)
+                                            </th>
+
+                                            <th>
+
+                                                <button class="btn btn-default btn-xs" onclick="AddDetails(this,@item.id)"><span class="glyphicon glyphicon-plus"></span></button>
+
+                                            </th>
+
+                                            <th class="">
+                                                Selected Answer
+                                            </th>
+                                            <th>
+
+                                                @item.Section_name
+
+                                            </th>
+                                            @for (int indx = 0; indx < Dealerlst.Count; indx++)
+                                            {
+                                                <th>
+                                                    @{
+                                                double sumDealer = 0;
+                                                SchDetail.ForEach(
+                                                    x =>
+                                                    {
+                                                        sumDealer += (double)(x.DealerLst[indx].Score ?? 0);
+                                                    }
+                                                    );
+
+                                                    }
+                                                    @sumDealer
+                                                </th>
+                                            }
+                                        </tr>
+
+
+
+                                        if (SchDetail.Count > 0)
+                                        {
+                                            <tr class="table-bordered @item.id none collapse" style="background-color:lightgrey">
+                                                <td style="width: 2%;"></td>
+                                                <td></td>
+                                                <td class="">
+                                                    Question
+                                                </td>
+                                                <td></td>
+                                                @for (int indx = 0; indx < Dealerlst.Count; indx++)
+                                                {
+                                                    <td>
+
+
+                                                        <table class="innertable">
+                                                            <tr>
+                                                                <td><b>Option</b></td>
+                                                                <td><b>Score</b></td>
+                                                            </tr>
+                                                        </table>
+
+
+                                                    </td>
+                                                }
+                                            </tr>
+                                        }
+                                        string name = "";
+
+                                        for (int i = 0; i < SchDetail.Count; i++)
+                                        //foreach (var subitem in SchDetail)
+                                        {
+                                            <tr class="table-bordered @item.id none collapse" aria-expanded="false" style="height: 2px; background: rgba(191, 191, 191, 0.290196);">
+                                                <td style="width: 2%;"></td>
+                                                <td class="" aria-expanded="false"></td>
+
+                                                <td class="">
+                                                    @( name == SchDetail[i].Section_name ? "" : SchDetail[i].Section_name)
+
+                                                </td>
+                                                <td>@(SchDetail[i].DealerLst[0].name == null ? "" : SchDetail[i].DealerLst[0].name)</td>
+
+                                                @{
+                                            foreach (var Dealeritem in Dealerlst)
+                                            {
+                                                DNA_CAPI_MIS.Models.DetailsDealersSurvey DealerDetail = SchDetail[i].DealerLst.Where(x => x.dealername == Dealeritem.Name).FirstOrDefault();
+                                                <td>
+
+                                                    <table style="width: 100%;">
+                                                        <tr>
+                                                            <td style="width: 50%;">
+                                                                @( DealerDetail == null ? "" : DealerDetail.options ?? "")
+
+                                                            </td>
+                                                            <td style="width: 50%;">@(DealerDetail == null ? "" : DealerDetail.Score.ToString())</td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            }
+                                                }
+
+
+                                            </tr>
+                                            name = SchDetail[i].Section_name;
+                                        }
+
+
+
+                                        //temp = item.Section_name;
+                                    }
+
+                                    <tr>
+                                        <th></th>
+                                        <th>
+                                            <button class="btn btn-default btn-xs" onclick="AddDetails(this,'@("Grand_Summary_Main")')"><span class="glyphicon glyphicon-plus"></span></button>
+                                        </th>
+                                        <th>
+                                            Grand Total
+                                        </th>
+                                        <th>Total Score</th>
+                                        @for (int indx = 0; indx < Dealerlst.Count; indx++)
+                                        {
+                                            double sumDealer = 0;
+                                            sumDealer = SchDetailMain.Sum(x => x.DealerLst[indx].Score ?? 0);
+                                            <th>
+                                                @sumDealer
+                                            </th>
+
+                                        }
+
+                                    </tr>
+                                    <tr class="table-bordered @("Grand_Summary_Main") none collapse" style="background-color:lightgrey">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>Total Marked Questions</td>
+                                        @for (int indx = 0; indx < Dealerlst.Count; indx++)
+                                        {
+                                            double sumDealerMarked = 0;
+
+                                            sumDealerMarked += (double)SchDetailMain.Sum(x => x.DealerLst[indx].Marked);
+                                            <td>
+                                                @sumDealerMarked
+                                            </td>
+                                        }
+
+                                    </tr>
+
+                                    <tr class="table-bordered @("Grand_Summary_Main") none collapse" style="background-color:lightgrey">
+
+                                        <td></td>
+                                        <td></td>
+                                        <td>Total Questions</td>
+                                        @for (int indx = 0; indx < Dealerlst.Count; indx++)
+                                        {
+                                            int sumDealerQues = 0;
+                                            sumDealerQues = SchDetailMain.Select(x => x.DealerLst[indx].Marked).Count();
+                                            <td>
+                                                @sumDealerQues
+                                            </td>
+                                        }
+
+                                    </tr>
+
+                                    <tr class="table-bordered @("Grand_Summary_Main") none collapse" style="background-color:lightgrey">
+
+                                        <td></td>
+                                        <td></td>
+                                        <td>Total Score Available</td>
+                                        @for (int indx = 0; indx < Dealerlst.Count; indx++)
+                                        {
+                                            int sumDealerQues = 0;
+                                            sumDealerQues = SchDetailMain.Select(x => x.DealerLst[indx].Marked).Count();
+
+                                            <td>
+                                                @sumDealerQues
+                                            </td>
+                                        }
+
+                                    </tr>
+
+                                    <tr class="table-bordered @("Grand_Summary_Main") none collapse" style="background-color:lightgrey">
+
+                                        <td></td>
+                                        <td></td>
+                                        <td>Total Unmarked Questions</td>
+                                        @for (int indx = 0; indx < Dealerlst.Count; indx++)
+                                        {
+                                            int sumUnMarkedQues = 0;
+
+                                            sumUnMarkedQues = SchDetailMain.Select(x => x.DealerLst[indx].Marked).Count() - SchDetailMain.Sum(x => x.DealerLst[indx].Marked);
+                                            <td>
+                                                @sumUnMarkedQues
+                                            </td>
+                                        }
+
+                                    </tr>
+
+                                    <tr class="table-bordered @("Grand_Summary_Main") none collapse" style="background-color:lightgrey">
+
+                                        <td></td>
+                                        <td></td>
+                                        <td>Percentage</td>
+                                        @for (int indx = 0; indx < Dealerlst.Count; indx++)
+                                        {
+                                            int sumDealerQues = 0;
+                                            double sumScore = 0;
+
+                                            sumDealerQues = SchDetailMain.Sum(x => x.DealerLst[indx].Marked);
+                                            sumScore = SchDetailMain.Sum(x => x.DealerLst[indx].Score ?? 0);
+                                            <td>
+                                                @(sumDealerQues != 0 ? Math.Round((sumScore / sumDealerQues) * 100, 2).ToString() : "")
+                                            </td>
+                                        }
+
+                                    </tr>
+
+
+}
+
+                            </tbody>
+
+                        </table>
+
+
+                    </div>
+
+                </div>
+                <!-- end widget content -->
+            </div>
+            <!-- end widget div -->
+
+        </div>
+    </div>
+
+    <div class="jarviswidget jarviswidget-color-greenDark col-md-12" id="wid-id-3" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false">
+        <!-- widget options:
+        usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+        data-widget-colorbutton="false"
+        data-widget-editbutton="false"
+        data-widget-togglebutton="false"
+        data-widget-deletebutton="false"
+        data-widget-fullscreenbutton="false"
+        data-widget-custombutton="false"
+        data-widget-collapsed="true"
+        data-widget-sortable="false"
+
+        -->
+        <header style="background-color:#87C440">
+            <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+            <h2>Audit Report Summary</h2>
+        </header>
+
+        <!-- widget div-->
+        <div>
+            <!-- widget edit box -->
+            <div class="jarviswidget-editbox">
+                <!-- This area used as dropdown edit box -->
+            </div>
+            <!-- end widget edit box -->
+            <!-- widget content -->
+            <div class="widget-body no-padding ">
+                <div id="table_wrapper" style="overflow-x:auto">
+                    <table id="datatable_tabletools" class="table  table-bordered table-hover" width="100%">
+                        <thead>
+                            <tr>
+                                <th colspan="1">&nbsp; </th>
+                                <th colspan="1">Section Name </th>
+                                <th colspan="1">&nbsp; </th>
+                                @foreach (var item in Dealerlst)
+                                {
+                                    <th colspan="1" style="">@item.Name</th>
+                                }
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                //List<DNA_CAPI_MIS.Models.SurveyDetailsAllDealer> SchDetailMain = ViewBag.SurDetailChild as List<DNA_CAPI_MIS.Models.SurveyDetailsAllDealer>;
+                                foreach (var item in Sdetail)
+                                {
+                                    List<DNA_CAPI_MIS.Models.SurveyDetailsAllDealer> SchDetail = ViewBag.SurDetailChild as List<DNA_CAPI_MIS.Models.SurveyDetailsAllDealer>;//For Child
+
+                                    SchDetail = SchDetail.Where(x => x.id == item.id).ToList();
+
+                                    <tr>
+                                        <th>
+                                            <button class="btn btn-default btn-xs" onclick="AddDetails(this,'@(item.id+"_Summary")')"><span class="glyphicon glyphicon-plus"></span></button>
+                                        </th>
+                                        <th>
+                                            @item.Section_name
+                                        </th>
+                                        <th>Total Score</th>
+                                        @for (int indx = 0; indx < Dealerlst.Count; indx++)
+                                        {
+                                            double sumDealer = 0;
+                                            sumDealer = SchDetail.Sum(x => x.DealerLst[indx].Score ?? 0);
+                                            <th>
+                                                @sumDealer
+                                            </th>
+
+                                        }
+
+                                    </tr>
+
+                                    <tr class="table-bordered @(item.id+"_Summary") none collapse" style="background-color:lightgrey">
+
+                                        <td></td>
+                                        <td>Total Marked Questions</td>
+                                        <td></td>
+                                        @for (int indx = 0; indx < Dealerlst.Count; indx++)
+                                        {
+                                            double sumDealerMarked = 0;
+
+                                            sumDealerMarked += (double)SchDetail.Sum(x => x.DealerLst[indx].Marked);
+                                        <td>
+                                            @sumDealerMarked
+                                        </td>
+                                        }
+
+                                    </tr>
+
+                                    <tr class="table-bordered @(item.id+"_Summary") none collapse" style="background-color:lightgrey">
+
+                                        <td></td>
+                                        <td></td>
+                                        <td>Total Questions</td>
+                                        @for (int indx = 0; indx < Dealerlst.Count; indx++)
+                                        {
+                                            int sumDealerQues = 0;
+                                            sumDealerQues = SchDetail.Select(x => x.DealerLst[indx].Marked).Count();
+                                        <td>
+                                            @sumDealerQues
+                                        </td>
+                                        }
+
+                                    </tr>
+
+                                    <tr class="table-bordered @(item.id+"_Summary") none collapse" style="background-color:lightgrey">
+
+                                        <td></td>
+                                        <td></td>
+                                        <td>Total Score Available</td>
+                                        @for (int indx = 0; indx < Dealerlst.Count; indx++)
+                                        {
+                                            int sumDealerQues = 0;
+                                            sumDealerQues = SchDetail.Select(x => x.DealerLst[indx].Marked).Count();
+
+                                        <td>
+                                            @sumDealerQues
+                                        </td>
+                                        }
+
+                                    </tr>
+
+                                    <tr class="table-bordered @(item.id+"_Summary") none collapse" style="background-color:lightgrey">
+
+                                        <td></td>
+                                        <td></td>
+                                        <td>Total Unmarked Questions</td>
+                                        @for (int indx = 0; indx < Dealerlst.Count; indx++)
+                                        {
+                                            int sumUnMarkedQues = 0;
+
+                                            sumUnMarkedQues = SchDetail.Select(x => x.DealerLst[indx].Marked).Count() - SchDetail.Sum(x => x.DealerLst[indx].Marked);
+                                        <td>
+                                            @sumUnMarkedQues
+                                        </td>
+                                        }
+
+                                    </tr>
+
+                                    <tr class="table-bordered @(item.id+"_Summary") none collapse" style="background-color:lightgrey">
+
+                                        <td></td>
+                                        <td></td>
+                                        <td>Percentage</td>
+                                        @for (int indx = 0; indx < Dealerlst.Count; indx++)
+                                        {
+                                            int sumDealerQues = 0;
+                                            double sumScore = 0;
+
+                                            sumDealerQues = SchDetail.Sum(x => x.DealerLst[indx].Marked);
+                                            sumScore = SchDetail.Sum(x => x.DealerLst[indx].Score ?? 0);
+                                        <td>
+                                            @(sumDealerQues != 0 ? Math.Round((sumScore / sumDealerQues) * 100, 2).ToString() : "")
+                                        </td>
+                                        }
+
+                                    </tr>
+                                }
+
+                                <tr>
+                                    <th>
+                                        <button class="btn btn-default btn-xs" onclick="AddDetails(this,'@("Grand_Summary")')"><span class="glyphicon glyphicon-plus"></span></button>
+                                    </th>
+                                    <th>
+                                        Grand Total
+                                    </th>
+                                    <th>Total Score</th>
+                                    @for (int indx = 0; indx < Dealerlst.Count; indx++)
+                                    {
+                                        double sumDealer = 0;
+                                        sumDealer = SchDetailMain.Sum(x => x.DealerLst[indx].Score ?? 0);
+                                        <th>
+                                            @sumDealer
+                                        </th>
+
+                                    }
+
+                                </tr>
+                                <tr class="table-bordered @("Grand_Summary") none collapse" style="background-color:lightgrey">
+
+                                    <td></td>
+                                    <td></td>
+                                    <td>Total Marked Questions</td>
+                                    @for (int indx = 0; indx < Dealerlst.Count; indx++)
+                                    {
+                                        double sumDealerMarked = 0;
+
+                                        sumDealerMarked += (double)SchDetailMain.Sum(x => x.DealerLst[indx].Marked);
+                                        <td>
+                                            @sumDealerMarked
+                                        </td>
+                                    }
+
+                                </tr>
+
+                                <tr class="table-bordered @("Grand_Summary") none collapse" style="background-color:lightgrey">
+
+                                    <td></td>
+                                    <td></td>
+                                    <td>Total Questions</td>
+                                    @for (int indx = 0; indx < Dealerlst.Count; indx++)
+                                    {
+                                        int sumDealerQues = 0;
+                                        sumDealerQues = SchDetailMain.Select(x => x.DealerLst[indx].Marked).Count();
+                                        <td>
+                                            @sumDealerQues
+                                        </td>
+                                    }
+
+                                </tr>
+
+                                <tr class="table-bordered @("Grand_Summary") none collapse" style="background-color:lightgrey">
+
+                                    <td></td>
+                                    <td></td>
+                                    <td>Total Score Available</td>
+                                    @for (int indx = 0; indx < Dealerlst.Count; indx++)
+                                    {
+                                        int sumDealerQues = 0;
+                                        sumDealerQues = SchDetailMain.Select(x => x.DealerLst[indx].Marked).Count();
+
+                                        <td>
+                                            @sumDealerQues
+                                        </td>
+                                    }
+
+                                </tr>
+
+                                <tr class="table-bordered @("Grand_Summary") none collapse" style="background-color:lightgrey">
+
+                                    <td></td>
+                                    <td></td>
+                                    <td>Total Unmarked Questions</td>
+                                    @for (int indx = 0; indx < Dealerlst.Count; indx++)
+                                    {
+                                        int sumUnMarkedQues = 0;
+
+                                        sumUnMarkedQues = SchDetailMain.Select(x => x.DealerLst[indx].Marked).Count() - SchDetailMain.Sum(x => x.DealerLst[indx].Marked);
+                                        <td>
+                                            @sumUnMarkedQues
+                                        </td>
+                                    }
+
+                                </tr>
+
+                                <tr class="table-bordered @("Grand_Summary") none collapse" style="background-color:lightgrey">
+
+                                    <td></td>
+                                    <td></td>
+                                    <td>Percentage</td>
+                                    @for (int indx = 0; indx < Dealerlst.Count; indx++)
+                                    {
+                                        int sumDealerQues = 0;
+                                        double sumScore = 0;
+
+                                        sumDealerQues = SchDetailMain.Sum(x => x.DealerLst[indx].Marked);
+                                        sumScore = SchDetailMain.Sum(x => x.DealerLst[indx].Score ?? 0);
+                                        <td>
+                                            @(sumDealerQues != 0 ? Math.Round((sumScore / sumDealerQues) * 100, 2).ToString() : "")
+                                        </td>
+                                    }
+
+                                </tr>
+
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,53 @@
+﻿
+@model IEnumerable<DNA_CAPI_MIS.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "Dealers";
+}
+
+<h2>Dealers</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreateDealer")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+        <th>
+            Dealer
+        </th>
+        <th>
+
+        </th>
+    </tr>
+
+    @{
+        List<DNA_CAPI_MIS.Models.CustomerUser> dealers = (List<DNA_CAPI_MIS.Models.CustomerUser>)ViewBag.dealerName;
+        int i = 0;
+        string name="";
+
+        foreach (var item in Model)
+        {
+            name = dealers.Where(x => x.UserID == item.Id).Select(x => x.CustomerBranch).Select(x => x.Name).First();
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                
+                 
+                @name
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditDealer", new { id = item.Id }) |
+                @Html.ActionLink("Details", "DetailsDealer", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "DeleteDealer", new { id = item.Id })
+            </td>
+        </tr>
+        i++;
+    }
+        }
+
+</table>

@@ -1,0 +1,594 @@
+﻿@{
+    ViewBag.Title = "Cost Calculator - Quantitative";
+}
+
+@section Scripts {
+    <script src="~/Content/DSDS/dsds-costcalculator.js"></script>
+}
+<link href="~/Content/DSDS/dsds.css" rel="stylesheet" type="text/css" />
+
+<style>
+    .form-group label {
+        margin-top:7px;
+        float:left;
+        width:30%;
+    }
+    .form-group span {
+        margin-top:7px;
+        float:left;
+    }
+    .form-group input {
+        margin-top:2px;
+        float:left;
+        width:50%;
+    }
+    .form-group select {
+        margin-top:2px;
+        float:left;
+        width:50%;
+    }
+
+    .output-group {
+        width:100%;
+        height:32px;
+    }
+    .output-group label {
+        margin-top:7px;
+        float:left;
+        width:40%;
+        height:20px;
+    }
+    .output-group span {
+        width:60%;
+        height:20px;
+        margin-top:7px;
+        margin-top:5px;
+        float:left;
+    }
+
+    .output-subgroup-total {
+        border-top:1px solid black;
+    }
+
+    .output-group-total {
+        width:100%;
+        height:32px;
+        background-color: deepskyblue;
+    }
+    .output-group-total label {
+        margin-top:7px;
+        float:left;
+        width:40%;
+        height:20px;
+        font-weight:bold;
+    }
+    .output-group-total span {
+        width:60%;
+        height:20px;
+        margin-top:7px;
+        margin-top:5px;
+        float:left;
+        font-weight:bold;
+    }
+    .form-group {
+        width: 100%;
+    }
+</style>
+
+@*CSS Class desktop is used for overlay*@
+<div class="row desktop">
+    <div class="col-md-12">
+
+        <div class="row">
+            <section class="col-lg-12 connectedSortable">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="box" style="display: table;">
+                            <div class="box-header">
+                                <h3 class="box-title">Project Cost Calculator</h3>
+                            </div><!-- /.box-header -->
+
+                            <div class="box-body table-responsive" style="display:table;width:100%">
+                                <div class="form-group" style="display: table;">
+                                    <label>Questionnaire Length</label>
+                                    <input name="qnrLength" id="qnrLength" class="form-control" value="" onblur="validateQnrLength()" /><span>mins</span>
+                                </div>
+
+                                <div class="form-group" style="display: table; padding-bottom: 10px;">
+                                    <span><u>Base Size</u></span><br/><br/>
+                                    <label>Metro Only</label>
+                                    <input name="baseSize" id="baseSizeM" class="form-control" value="0" />
+                                    <label>Provincial Towns</label>
+                                    <input name="baseSize" id="baseSizeP" class="form-control" value="0" />
+                                    <label>Rural Villages</label>
+                                    <input name="baseSize" id="baseSizeR" class="form-control" value="0" />
+                                    <label>Total Base Size</label>
+                                    <input disabled="disabled" name="baseSize" id="baseSize" class="form-control" value="0" />
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Incidence %</label>
+                                    <input name="incidencePercent" id="incidencePercent" class="form-control" value="0" /><span> %</span>
+                                    <span id="incidenceLevel" style="margin-left:15px;">Easy</span>
+                                </div>
+
+                                @if (!User.IsInRole("Competitor"))
+                                {
+                                <div class="form-group">
+                                    <label>Questionnaire Type</label>
+                                    <select id="qnrType" name="qnrType" class="form-control">
+                                        <option value="0">Ready (No Development)</option>
+                                        <option value="1">Standard</option>
+                                        <option value="2">Medium</option>
+                                        <option value="3">Customized</option>
+                                    </select>
+                                </div>
+                                }
+                                <div class="form-group">
+                                    <label>Translation</label>
+                                    <select id="translate" name="translate" class="form-control">
+                                        <option value="0">None (No Translation)</option>
+                                        <option value="1">Translation Required</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Data Processing / CAPI</label>
+                                    <select id="dpcapi" name="dpcapi" class="form-control">
+                                        <option value="0">None (No Data Processing)</option>
+                                        <option value="1">Yes ($/Question [2-4 open ends])</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Data Conversion</label>
+                                    <select id="dataconv" name="dataconv" class="form-control">
+                                        <option value="0">None (No Conversion)</option>
+                                        <option value="1">Yes (SPSS / ASCII)</option>
+                                    </select>
+                                </div>
+
+                                @if (!User.IsInRole("Competitor"))
+                                {
+                                <div class="form-group">
+                                    <label>Client Service Hours</label>
+                                    <select id="clientServHrs" name="clientServHrs" class="form-control">
+                                        <option value="0">Standard (&lt;5)</option>
+                                        <option value="1">Medium (6-10)</option>
+                                        <option value="2">High Demand (10+)</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Analysis Type</label>
+                                    <select id="analysisType" name="analysisType" class="form-control">
+                                        <option value="0">None (Data Tabs)</option>
+                                        <option value="1">Standard (Basic Charts)</option>
+                                        <option value="2">Medium (Multiple Breakouts)</option>
+                                        <option value="3">High (Stats Modeling)</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Priority/Urgency</label>
+                                    <select id="priority" name="priority" class="form-control">
+                                        <option value="0">Normal</option>
+                                        <option value="1">Urgent</option>
+                                        <option value="2">Very Urgent</option>
+                                    </select>
+                                </div>
+                                }
+                                
+                                @if (User.IsInRole("Admin") || User.IsInRole("Project Manager"))
+                                {
+                                <div class="form-group">
+                                    <label>Heavy Client Discount</label>
+                                    <select id="heavyClientDisc" name="heavyClientDisc" class="form-control">
+                                        <option value="0">Low Volume (&lt;5K / yr)</option>
+                                        <option value="1">Medium Volume (5000+ / yr)</option>
+                                        <option value="2">High Volume (10,000+ / yr)</option>
+                                    </select>
+                                </div>
+                                }
+                                <div class="form-group">
+                                    <label>Gift Cost</label>
+                                    <input name="costGift" id="costGift" class="form-control" value="0" /><span>US$</span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Venue Type</label>
+                                    <select id="venueType" name="venueType" class="form-control">
+                                        <option value="0">None</option>
+                                        <option value="1">Hotel 4-5 Star</option>
+                                        <option value="2">Mall (A/B/C1)</option>
+                                        <option value="3">Other</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Venue (# of Days)</label>
+                                    <input name="venueDays" id="venueDays" class="form-control" value="0" /><span>days</span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Travelling</label>
+                                    <input name="travelkm" id="travelkm" class="form-control" value="0" /><span>km</span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Night Stays (#)</label>
+                                    <input name="nightnos" id="nightnos" class="form-control" value="0" /><span>nights</span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Other Cost</label>
+                                    <input name="others" id="others" class="form-control" value="0" />
+                                </div>
+                            </div>
+
+
+                            @if (!(User.IsInRole("Admin") || User.IsInRole("Project Manager")))
+                            {
+                            <div class="box-footer" style="margin-top:15px;display:table;width:100%">
+                                <button class="btn btn-primary" type="button" id="saveQuestion" onclick="onChange()">Calculate</button>
+                            </div>
+                            }
+                        </div>
+
+                        @if (User.IsInRole("Admin") || User.IsInRole("Project Manager"))
+                        {
+                            <div class="box" style="display: table;">
+                                <div class="box-header">
+                                    <h3 class="box-title">Cost of Sales</h3>
+                                </div><!-- /.box-header -->
+
+                                <div class="box-body table-responsive" style="display:table;width:100%">
+                                    <div class="form-group">
+                                        <label>Venue Cost</label>
+                                        <input name="VenuePerDayCOS" id="VenuePerDayCOS" class="form-control cos" value="0" /><span>SAR</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Travel Cost</label>
+                                        <input name="travelkmCOS" id="travelkmCOS" class="form-control cos" value="0" /><span>SAR</span>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Nights Cost</label>
+                                        <input name="nightRateCOS" id="nightRateCOS" class="form-control cos" value="0" /><span>SAR</span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Gift Cost</label>
+                                        <input name="costGiftCOS" id="costGiftCOS" class="form-control cos" value="0" /><span>SAR</span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Other Cost</label>
+                                        <input name="othersCOS" id="othersCOS" class="form-control cos" value="0" /><span>SAR</span>
+                                    </div>
+                                </div>
+
+                                <div class="box-footer" style="margin-top:15px;display:table;width:100%">
+                                    <button class="btn btn-primary" type="button" id="saveQuestion" onclick="onChange()">Calculate</button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    
+                    <div class="col-md-6">
+                        <div class="box" style="display: table;">
+                            <div class="box-header">
+                                <h5 class="box-title">Costing</h5>
+                            </div><!-- /.box-header -->
+
+                            <div class="box-body table-responsive" style="display:table;width:100%">
+                                <div class="output-group">
+                                    <label>Incidence</label>
+                                    <span id="costingInc">US$ 0.00</span>
+                                </div>
+                                @if (!User.IsInRole("Competitor"))
+                                {
+                                <div class="output-group">
+                                    <label>Questionnaire</label>
+                                    <span id="costingQnr">US$ 0.00</span>
+                                </div>
+                                }
+                                <div class="output-group">
+                                    <label>Translation</label>
+                                    <span id="costingTrans">US$ 0.00</span>
+                                </div>
+                                <div class="output-group">
+                                    <label>DP / CAPI</label>
+                                    <span id="costingDPCAPI">US$ 0.00</span>
+                                </div>
+                                <div class="output-group">
+                                    <label>Data Conversion</label>
+                                    <span id="costingDataConv">US$ 0.00</span>
+                                </div>
+                                @if (!User.IsInRole("Competitor"))
+                                {
+                                <div class="output-group">
+                                    <label>Client Service Hours</label>
+                                    <span id="costingCSH">US$ 0.00</span>
+                                </div>
+                                <div class="output-group">
+                                    <label>Analysis</label>
+                                    <span id="costingAnalysis">US$ 0.00</span>
+                                </div>
+                                }
+                                <div class="output-group">
+                                    <label>Gifts</label>
+                                    <span id="costingGifts">US$ 0.00</span>
+                                </div>
+                                <div class="output-group">
+                                    <label>Venue</label>
+                                    <span id="costingVenue">US$ 0.00</span>
+                                </div>
+                                <div class="output-group">
+                                    <label>Travel</label>
+                                    <span id="costingTravel">US$ 0.00</span>
+                                </div>
+                                <div class="output-group">
+                                    <label>Night Stay</label>
+                                    <span id="costingNights">US$ 0.00</span>
+                                </div>
+                                <div class="output-group">
+                                    <label>Other Fees</label>
+                                    <span id="costingOthers">US$ 0.00</span>
+                                </div>
+
+                                <div class="output-group output-subgroup-total">
+                                    <label>Total Fees</label>
+                                    <span id="costingTotal">US$ 0.00</span>
+                                </div>
+
+                                @if (User.IsInRole("Admin") || User.IsInRole("Project Manager"))
+                                {
+                                    <div class="output-group output-subgroup-total">
+                                        <label>Cost after Discount</label>
+                                        <span id="costingAfterDiscount">US$ 0.00</span>
+                                    </div>
+                                }
+
+                                <div class="output-group-total" style="margin-top:5px;">
+                                    <label>&nbsp;Net Fees</label>
+                                    <span id="total-NetFees">US$ 0.00</span>
+                                </div>
+                                <div class="output-group-total">
+                                    <label>&nbsp;CPI</label>
+                                    <span id="total-CPI">US$ 0.00</span>
+                                </div>
+
+                            </div>
+
+                            @if (User.IsInRole("Admin") || User.IsInRole("Project Manager"))
+                            {
+                                <div class="box-header">
+                                    <h5 class="box-title">Cost of Sales</h5>
+                                </div><!-- /.box-header -->
+                                <div class="box-body table-responsive" style="display:table;width:100%">
+
+                                    @*<div class="output-group output-subgroup-total">
+                                        <label>Total Cost</label>
+                                        <span id="costingTotalCOS">SAR 0.00</span>
+                                    </div>*@
+
+                                    <div class="output-group-total" style="margin-top:5px;">
+                                        <label>&nbsp;Total Cost</label>
+                                        <span id="total-NetFeesCOS">SAR 0.00</span>
+                                    </div>
+                                    <div class="output-group-total">
+                                        <label>&nbsp;CPI</label>
+                                        <span id="total-CPICOS">SAR 0.00</span>
+                                    </div>
+                                    <div class="output-group-total">
+                                        <label>&nbsp;Gross Profit</label>
+                                        <span id="total-GP">00.0%</span>
+                                    </div>
+                                </div>
+                            }
+
+                            <div class="box-footer">
+                                <img src="~/Images/ratecard_footer.jpg" style="max-width:525px;" />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </div>
+
+
+    <!-- Loading (remove the following to stop the loading)-->
+    <div class="overlay" style="display:none;"></div>
+    <div class="loading-img" style="display: none;"></div>
+    <!-- end loading -->
+</div><!-- /.col row-->
+
+<div class="row">
+    <div class="col-lg-12">
+        DISCLAIMER: The final pricing shown from this calculator is indicative. Although accurate in the majority of circumstances, however, prices quoted against DNA contracts & proposals will be regarded as final.
+    </div>
+</div>
+
+<script>
+    var incidenceLevel = new Array();
+    incidenceLevel[0] = new Array();
+    incidenceLevel[0][0] = 0;
+    incidenceLevel[0][1] = "Hard";
+    incidenceLevel[1] = new Array();
+    incidenceLevel[1][0] = 4;
+    incidenceLevel[1][1] = "Medium";
+    incidenceLevel[2] = new Array();
+    incidenceLevel[2][0] = 10;
+    incidenceLevel[2][1] = "Easy";
+
+    var incidence = new Array();
+    incidence[0] = new Array();
+    incidence[0][1] = 20;
+    incidence[0][2] = 30;
+    incidence[0][3] = 40;
+    incidence[1] = new Array();
+    incidence[1][1] = 15;
+    incidence[1][2] = 25;
+    incidence[1][3] = 35;
+    incidence[2] = new Array();
+    incidence[2][1] = 10;
+    incidence[2][2] = 20;
+    incidence[2][3] = 30;
+
+    var qnr = new Array();
+    qnr[0] = new Array();
+    qnr[0][1] = 0;
+    qnr[0][2] = 0;
+    qnr[0][3] = 0;
+    qnr[1] = new Array();
+    qnr[1][1] = 500;
+    qnr[1][2] = 1000;
+    qnr[1][3] = 1500;
+    qnr[2] = new Array();
+    qnr[2][1] = 1000;
+    qnr[2][2] = 2225;
+    qnr[2][3] = 3250;
+    qnr[3] = new Array();
+    qnr[3][1] = 1500;
+    qnr[3][2] = 3250;
+    qnr[3][3] = 5000;
+
+    var trqnr = new Array();
+    trqnr[0] = new Array();
+    trqnr[0][1] = 0;
+    trqnr[0][2] = 0;
+    trqnr[0][3] = 0;
+    trqnr[1] = new Array();
+    trqnr[1][1] = 150;
+    trqnr[1][2] = 300;
+    trqnr[1][3] = 500;
+
+    var dp = new Array();
+    dp[0] = new Array();
+    dp[0][1] = 0;
+    dp[0][2] = 0;
+    dp[0][3] = 0;
+    dp[1] = new Array();
+    dp[1][1] = 2;
+    dp[1][2] = 4;
+    dp[1][3] = 6;
+
+    var datcnv = new Array();
+    datcnv[0] = new Array();
+    datcnv[0][1] = 0;
+    datcnv[0][2] = 0;
+    datcnv[0][3] = 0;
+    datcnv[1] = new Array();
+    datcnv[1][1] = 500;
+    datcnv[1][2] = 750;
+    datcnv[1][3] = 900;
+
+    var csh = new Array();
+    csh[0] = new Array();
+    csh[0][1] = 0;
+    csh[0][2] = 0;
+    csh[0][3] = 0;
+    csh[1] = new Array();
+    csh[1][1] = 750;
+    csh[1][2] = 1150;
+    csh[1][3] = 1500;
+    csh[2] = new Array();
+    csh[2][1] = 1500;
+    csh[2][2] = 3500;
+    csh[2][3] = 5000;
+
+    var afee = new Array();
+    afee[0] = new Array();
+    afee[0][1] = 0;
+    afee[0][2] = 0;
+    afee[0][3] = 0;
+    afee[1] = new Array();
+    afee[1][1] = 1500;
+    afee[1][2] = 3000;
+    afee[1][3] = 4500;
+    afee[2] = new Array();
+    afee[2][1] = 3000;
+    afee[2][2] = 6000;
+    afee[2][3] = 9000;
+    afee[3] = new Array();
+    afee[3][1] = 4500;
+    afee[3][2] = 9000;
+    afee[3][3] = 13500;
+
+    var pu = new Array();
+    pu[0] = new Array();
+    pu[0][0] = 100;
+    pu[0][1] = 120;
+    pu[0][2] = 140;
+
+    var lbd = new Array();
+    lbd[0] = new Array();
+    lbd[0][1] = 100;
+    lbd[0][2] = 100;
+    lbd[0][3] = 100;
+    lbd[1] = new Array();
+    lbd[1][1] = 93;
+    lbd[1][2] = 93;
+    lbd[1][3] = 93;
+    lbd[2] = new Array();
+    lbd[2][1] = 85;
+    lbd[2][2] = 85;
+    lbd[2][3] = 85;
+
+    var hcd = new Array();
+    hcd[0] = new Array();
+    hcd[0][1] = 100;
+    hcd[0][2] = 100;
+    hcd[0][3] = 100;
+    hcd[1] = new Array();
+    hcd[1][1] = 85;
+    hcd[1][2] = 85;
+    hcd[1][3] = 85;
+    hcd[2] = new Array();
+    hcd[2][1] = 75;
+    hcd[2][2] = 77;
+    hcd[2][3] = 80;
+
+    var venuet = new Array();
+    venuet[0] = new Array();
+    venuet[0][0] = 0;
+    venuet[0][1] = 9333;
+    venuet[0][2] = 1500;
+    venuet[0][3] = 500;
+
+    var fom = new Array();
+    fom[0] = new Array();
+    fom[0][1] = 100;
+    fom[0][2] = 100;
+    fom[0][3] = 100;
+    fom[1] = new Array();
+    fom[1][1] = 110;
+    fom[1][2] = 115;
+    fom[1][3] = 120;
+    fom[2] = new Array();
+    fom[2][1] = 115;
+    fom[2][2] = 120;
+    fom[2][3] = 135;
+
+    var fomrate = new Array();
+    fomrate[0] = new Array();
+    fomrate[0][1] = 0.5;
+    fomrate[0][2] = 0.7;
+    fomrate[0][3] = 0.9;
+    fomrate[1] = new Array();
+    fomrate[1][1] = 70;
+    fomrate[1][2] = 80;
+    fomrate[1][3] = 100;
+
+    //COS values
+
+    var venusPdCOS = new Array();
+    venusPdCOS[0] = new Array();
+    venusPdCOS[0][1] = 30000;
+    venusPdCOS[0][2] = 1500;
+    venusPdCOS[0][3] = 500;
+
+</script>

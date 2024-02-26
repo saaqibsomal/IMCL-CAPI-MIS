@@ -1,0 +1,353 @@
+﻿@model DNA_CAPI_MIS.Models.ProjectsInfo
+
+@{
+    ViewBag.Title = "Project Overview";
+}
+
+<style>
+    #National g.highcharts-series-group rect,
+    #RegionalNorth g.highcharts-series-group rect,
+    #RegionalCentral g.highcharts-series-group rect,
+    #RegionalSouth g.highcharts-series-group rect,
+    #MetroDealerDetail .highcharts-series rect {
+        cursor: pointer;
+    }
+
+    #nationalStatusPie .highcharts-legend-box {
+        overflow-x: scroll;
+    }
+
+    .loader {
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+        background: url('/Content/page loader/page-loader.gif') 50% 50% no-repeat;
+        /*rgb(249,249,249)*/
+    }
+
+    .Section {
+        margin: 10px;
+        border-radius: 4px;
+        background-color: white;
+    }
+
+    .extra {
+        width: 100%;
+        height: 150px;
+        border: 1px solid #ccc;
+        border-left: none;
+        border-bottom: none;
+        border-top: none;
+    }
+
+    .extraCity {
+        width: 100%;
+        border-bottom: none;
+        height: 59px;
+        border: solid 1px #ddd;
+        position: unset;
+    }
+
+    /* Style the tab */
+    div.tabCity {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: white;
+        border-bottom: none;
+    }
+
+        /* Style the buttons inside the tab */
+        div.tabCity button {
+            background-color: #ddd;
+            color: white;
+            float: left;
+            border: 1px solid #ccc;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: medium;
+        }
+
+
+            /* Create an active/current tablink class */
+            div.tabCity button.active {
+                background-color: #ccc;
+            }
+
+    /* Style the tab content */
+    .tabcontentCity {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+    }
+
+    div.tabCity button.active {
+        border: 1px solid white !important;
+    }
+    /* Style the tab */
+    div .tab {
+        float: left;
+        /*border: 1px solid #ccc;*/
+        /*background-color: black;*/
+        width: 5%;
+        height: 100%;
+    }
+
+        /*div.tabCity {
+        width: 7%;
+    }*/
+
+        /* Style the buttons inside the tab */
+        div.tab button {
+            display: block;
+            background-color: #ddd;
+            color: white;
+            padding: 22px 16px;
+            width: 100%;
+            border: 1px solid #ccc;
+            outline: none;
+            text-align: left;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+            /* Change background color of buttons on hover */
+            /*div.tab button:hover {
+                background-color: #ddd;
+                color: inherit;
+            }*/
+
+            /* Create an active/current "tab button" class */
+            div.tab button.active, div.tabCity button.active {
+                background-color: white;
+                color: black;
+                border: solid #cccccc 1px;
+                border-right: none;
+            }
+
+    /* Style the tab content */
+    .tabcontent {
+        float: left;
+        padding: 0px 12px;
+        border: 1px solid #ccc;
+        width: 95%;
+        border-left: none;
+        height: 300px;
+        -webkit-animation: fadeEffect 1s;
+        animation: fadeEffect 1s;
+    }
+    /*.tabcontentCity {
+        width: 93%;
+        height: 400px;
+    }*/
+
+    /* Style the tab content */
+
+    /* Fade in tabs */
+    @@-webkit-keyframes fadeEffect {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    @@keyframes fadeEffect {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+</style>
+<link href="~/Content/Chart/BarPeiStyle.css" rel="stylesheet" />
+<div class="row">
+    <section class="col-lg-9 connectedSortable">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-primary">
+                    <div class="box-header">
+                        <i class="fa fa-inbox"></i>
+                        <h3 class="box-title">Project Overview</h3>
+                    </div>
+                    <div class="box-body">
+                        @if (Model == null)
+                        {
+                            <div class="alert alert-danger alert-dismissable">
+                                <i class="fa fa-ban"></i>
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <b>Alert!</b> The project link is incorrect or no longer valid.
+                            </div>
+                        }
+                        else
+                        {
+                            <h1>@Model.Name</h1>
+                        }
+                    </div><!-- /.box-body-->
+                    @if (Model != null)
+                    {
+                        <div class="box-body">
+                            @*<a class="btn btn-app" href="~/Designer/DesignReport/@Model.Id">
+                                    <i class="fa fa-search"></i> Query
+                                </a>*@
+                            @if (!User.IsInRole("QC"))
+                            {
+                                <a class="btn btn-app" href="~/SBuilder/survey.html?lang=en&pid=@Model.Id">
+                                    <i class="fa fa-pencil"></i> Start Web Survey
+                                </a>
+                            }
+                            @if (User.IsInRole("Admin") || User.IsInRole("Survey Designer") || User.IsInRole("Survey Admin") || User.IsInRole("Project Manager"))
+                            {
+                                <a class="btn btn-app" href="~/Project/Edit/@Model.Id">
+                                    <i class="fa fa-pencil"></i> Edit
+                                </a>
+                                <a class="btn btn-app" href="~/Designer/PQSettings/@Model.Id">
+                                    <i class="fa fa-wrench"></i> Settings
+                                </a>
+                                @*<a class="btn btn-app" href="~/ProjectQuota/Index/@Model.Id">
+                                        <i class="fa fa-inbox"></i> Quota
+                                    </a>*@
+                                <a class="btn btn-app" href="~/Project/Permissions/@Model.Id">
+                                    <i class="fa fa-users"></i> Access Rights
+                                </a>
+                            }
+                            @if (User.IsInRole("Admin") || User.IsInRole("Survey Designer") || User.IsInRole("Survey Admin") || User.IsInRole("Field Supervisor") || User.IsInRole("Project Manager") || User.IsInRole("QC") || User.IsInRole("Customer"))
+                            {
+                                <a class="btn btn-app" href="~/Survey/Index/@Model.Id">
+                                    <i class="fa fa-th-list"></i> Data Sheet
+                                </a>
+                                @*<a class="btn btn-app" href="~/Survey/AnalyticReports/@Model.Id">
+                                        <i class="fa fa-bar-chart-o"></i> Analytic Reports
+                                    </a>*@
+                            }
+                            @if (User.IsInRole("Admin") || User.IsInRole("Field Supervisor") || User.IsInRole("Project Manager"))
+                            {
+                                <a class="btn btn-app" href="~/Survey/SurveysConductedList/@Model.Id/en/0">
+                                    <i class="fa fa-thumbs-o-up"></i> Submitted Surveys
+                                </a>
+                                <a class="btn btn-app" href="~/Survey/SurveyApprovalFilter/@Model.Id">
+                                    <i class="fa fa-thumbs-o-up"></i> Field Approval
+                                </a>
+                            }
+                            @if (User.IsInRole("Admin") || User.IsInRole("QC") || User.IsInRole("Project Manager"))
+                            {
+                                <a class="btn btn-app" href="~/Survey/SurveyQCFilter/@Model.Id">
+                                    <i class="fa fa-check-square-o"></i> Quality Check
+                                </a>
+                            }
+                            <a class="btn btn-app" href="~/Designer/OpenProject">
+                                <i class="fa fa-power-off"></i> Close
+                            </a>
+                        </div>
+                    }
+                </div><!-- /.box -->
+            </div><!-- /.col row-->
+        </div>
+    </section>
+
+    @if (Model != null)
+    {
+        <section class="col-lg-3 connectedSortable">
+            <div class="row">
+                @*
+                    <div class="col-lg-6">
+                        <!-- small box -->
+                        <div class="small-box bg-yellow">
+                            <div class="inner">
+                                <h3>
+                                    @Model.SurveyCount
+                                </h3>
+                                <p>
+                                    Survey Count
+                                </p>
+                            </div>
+                            <div class="icon" style="height:100%;">
+                                <i class="ion ion-person-add"></i>
+                            </div>
+                            <a href="#" class="small-box-footer">
+                            </a>
+                        </div>
+                    </div>
+                *@
+                <div class="col-lg-12">
+                    <!-- small box -->
+                    <div class="small-box bg-red">
+                        <div class="inner">
+                            <h3>
+                                @Model.SurveyCount
+                            </h3>
+                            <p>
+                                Base
+                            </p>
+                        </div>
+                        <div class="icon" style="height:100%;">
+                            <i class="ion ion-pie-graph"></i>
+                        </div>
+                        <a href="#" class="small-box-footer">
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </section>
+
+
+
+
+
+
+        @*<canvas id="StaticBarChart" style="width:100%;max-width:800px"></canvas>*@
+    }
+</div>
+
+ 
+
+
+
+@*<div id="chart-container" style="width: 600px; height: 400px;"></div>
+    <div id="pie-chart-container" style="width: 600px; height: 400px;"></div>*@
+
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/bootstrap/AdminLTE/morris")
+}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+
+   
+
+
+
+
+
+   
+
+
+
+
+
+    
+
+
+   
+
+
+
+
+    }
+
+</script>

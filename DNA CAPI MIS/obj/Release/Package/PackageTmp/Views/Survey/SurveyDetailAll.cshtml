@@ -1,0 +1,170 @@
+﻿@{
+    ViewBag.Title = "Facility Audit Details";
+}
+<link href="~/Content/css/smartadmin-production-plugins.min.css" rel="stylesheet" />
+<link href="~/Content/css/smartadmin-skins.min.css" rel="stylesheet" />
+<link href="~/Scripts/plugin/bootstrap-multiselect-master/dist/css/bootstrap-multiselect.css" rel="stylesheet" />
+<style>
+    .loader {
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+        background: url('/Content/page loader/page-loader.gif') 50% 50% no-repeat;
+        /*rgb(249,249,249)*/
+    }
+</style>
+
+@section scripts{
+    <script src="~/Scripts/plugin/bootstrap-multiselect-master/dist/js/bootstrap-multiselect.js"></script>
+    <script src="~/Scripts/plugin/smartwidgets/jarvis.widget.min.js"></script>
+
+    <script>
+    $("#btnExport").click(function (e) {
+        e.preventDefault();
+
+        var pid =@ViewBag.Projectid;
+
+        
+        window.open(
+'@Url.Action("ExportData")?projectid='+pid+'',
+'_blank' // <- This is what makes it open in a new window.
+        );
+
+            @*$.ajax({
+                url: '@Url.Action("_SurveyDetailTableAll")',
+                type: 'GET',
+                dataType: "html",
+                data: {
+                    projectid:pid
+                },
+                sucess: function (data){
+
+                },
+                error: function(){
+
+                }*@
+
+    //})
+
+
+    //getting data from our table
+    //var data_type = 'data:application/vnd.ms-excel';
+    //var table_div = document.getElementById('table_wrapper');
+
+    ////var table_div = document.getElementsByClassName('datatable_table');
+    //var table_html = table_div.outerHTML.replace(/ /g, '%20');
+
+    //var a = document.createElement('a');
+    //a.href = data_type + ', ' + table_html;
+    //a.download = 'exported_table_' + Math.floor((Math.random() * 9999999) + 1000000) + '.xls';
+    //a.click();
+    });
+    </script>
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+<div class="row">
+
+    <div class="loader" style="display:none"></div>
+    <div class="col-md-12 pad">
+        <div class="col-md-1">
+            <h4>Quarter</h4>
+        </div>
+
+        <div class="col-md-6">
+
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-text-width fa-lg fa-fw"></i></span>
+                <select id="GlobalFilter" class="form-control input-lg " onchange="GetSurvyorResult()">
+                    <option value="1">2017 Quarter 1</option>
+                    <option value="2">2017 Quarter 2</option>
+                    <option value="3">2017 Quarter 3</option>
+                    <option value="4">2017 Quarter 4</option>
+                    <option value="5" selected>2018 Quarter 1</option>
+                    <option value="6">2018 Quarter 2</option>
+                    <option value="7">2018 Quarter 3</option>
+                    <option value="8">2018 Quarter 4</option>
+                </select>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="col-md-12 pad">
+
+        <div class="col-md-6">
+            <button class="btn btn-success" onclick="GetTable()" style="margin-top: 10px;background-color:#87C440">Search</button>
+            <a class="btn btn-success" href="/Survey/SummaryData/@ViewBag.Projectid" style="margin-top: 10px;background-color:#87C440">Go to Summary Report</a>
+
+            <a class="btn btn-success" id="btnExport" style="margin-top: 10px;background-color:#87C440">Excel Export</a>
+
+        </div>
+    </div>
+    <div class="col-md-12 pad datatable_table">
+
+    </div>
+</div>
+
+
+<script>
+    function GetTable()
+    {
+        var pid =@ViewBag.Projectid;
+        var sbjnum = $('#Surveyor').val();
+        var QuanterFilter = $("#GlobalFilter").val();
+        var dealer = $("#Dealers").val();
+        $('.loader').fadeIn();
+
+        $.ajax({
+            url: '@Url.Action("_SurveyDetailTableAll")',
+            type: 'GET',
+            dataType: "html",
+            data: {
+                projectid:pid ,
+                quarterId:QuanterFilter
+
+            },
+            success: function (data) {
+                $(".datatable_table").html("");
+                $(".datatable_table").html(data);
+
+                //drawTable();
+                $('.loader').fadeOut();
+            },
+            error: function (data) { }
+        });
+
+    }
+
+
+    function AddDetails(obj, sectionId) {
+
+        var pid =@ViewBag.Projectid;
+        var sbjnum = $('#Surveyor').val();
+
+
+        if ($(obj).children().hasClass("glyphicon-plus")) {
+
+
+            if (!$("." + sectionId)[0]) {
+                // Do something if class exists
+
+            }
+
+        }
+        $(obj).find('span').toggleClass('glyphicon-plus glyphicon-minus')
+
+        if ($("." + sectionId)[0]) {
+            // Do something if class exists
+            $("." + sectionId).toggleClass('none collapse');
+        }
+
+    }
+
+</script>

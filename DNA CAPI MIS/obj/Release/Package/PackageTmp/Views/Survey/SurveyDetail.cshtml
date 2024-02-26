@@ -1,0 +1,306 @@
+﻿@{
+    ViewBag.Title = "Facility Audit Details";
+}
+<link href="~/Content/css/smartadmin-production-plugins.min.css" rel="stylesheet" />
+<link href="~/Content/css/smartadmin-skins.min.css" rel="stylesheet" />
+<link href="~/Scripts/plugin/bootstrap-multiselect-master/dist/css/bootstrap-multiselect.css" rel="stylesheet" />
+<style>
+    .loader {
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+        background: url('/Content/page loader/page-loader.gif') 50% 50% no-repeat;
+        /*rgb(249,249,249)*/
+    }
+</style>
+
+@section scripts{
+    <script src="~/Scripts/plugin/bootstrap-multiselect-master/dist/js/bootstrap-multiselect.js"></script>
+    <script src="~/Scripts/plugin/smartwidgets/jarvis.widget.min.js"></script>
+
+    <script>
+        $("#btnExport").click(function (e) {
+            e.preventDefault();
+
+            //getting data from our table
+            var data_type = 'data:application/vnd.ms-excel';
+            var table_div = document.getElementById('table_wrapper');
+
+            //var table_div = document.getElementsByClassName('datatable_table');
+            var table_html = table_div.outerHTML.replace(/ /g, '%20');
+
+            var a = document.createElement('a');
+            a.href = data_type + ', ' + table_html;
+            a.download = 'exported_table_' + Math.floor((Math.random() * 9999999) + 1000000) + '.xls';
+            a.click();
+        });
+    </script>
+}
+
+<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">Image Viewer</h4>
+            </div>
+            <div class="modal-body">
+                <img src="" id="imagepreview" style="width: 100%;max-width: 600px;height: 100%;max-height: 500px;">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<h2>@ViewBag.Title</h2>
+
+
+<div class="row">
+
+    <div class="loader" style="display:none"></div>
+    <div class="col-md-12 pad">
+        <div class="col-md-1">
+            <h4>Quarter</h4>
+        </div>
+
+        <div class="col-md-6">
+
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-text-width fa-lg fa-fw"></i></span>
+                <select id="GlobalFilter" class="form-control input-lg " onchange="GetSurvyorResult()">
+                    <option value="1">2017 Quarter 1</option>
+                    <option value="2">2017 Quarter 2</option>
+                    <option value="3">2017 Quarter 3</option>
+                    <option value="4">2017 Quarter 4</option>
+                    <option value="5" selected>2018 Quarter 1</option>
+                    <option value="6">2018 Quarter 2</option>
+                    <option value="7">2018 Quarter 3</option>
+                    <option value="8">2018 Quarter 4</option>
+                </select>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-12 pad">
+        <div class="col-md-1">
+            <h4>Dealer</h4>
+        </div>
+
+        <div class="col-md-6">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-text-width fa-lg fa-fw"></i></span>
+                @Html.DropDownList("Dealers", ViewBag.dealer as IEnumerable<SelectListItem>, "Select", new { @class = "form-control input-lg ", @onchange = "GetSurvyorResult()" })
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-12 pad">
+        <div class="col-md-1">
+            <h4>Survey</h4>
+        </div>
+        <div class="col-md-6">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-text-width fa-lg fa-fw"></i></span>
+                @Html.DropDownList("Surveyor", ViewBag.SurveyDropDown as IEnumerable<SelectListItem>, new { @class = "form-control input-lg " })
+
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <button class="btn btn-success" onclick="GetTable()" style="margin-top: 10px;background-color:#87C440">Search</button>
+            <a class="btn btn-success" href="/Survey/SummaryData/@ViewBag.Projectid" style="margin-top: 10px;background-color:#87C440">Go to Summary Report</a>
+            
+            <a class="btn btn-success" id="btnExport" style="margin-top: 10px;background-color:#87C440">Excel Export</a>
+
+        </div>
+    </div>
+    <div class="col-md-12 pad datatable_table">
+
+    </div>
+</div>
+
+
+<script>
+    function GetSurvyorResult() {
+        var pid = @ViewBag.Projectid;
+        var QuanterFilter = $("#GlobalFilter").val();
+        var dealer = $("#Dealers").val();
+
+        $.ajax({
+            url: '@Url.Action("GetSurveryor")',
+            type: 'GET',
+            data: {
+                ProjectId: pid,
+                Quarterid: QuanterFilter,
+                Dealerid: dealer
+
+            },
+            success: function (data) {
+                var dat = JSON.parse(data);
+                //for (var i = 0; i < dat.length; i++) {
+                //    console.log(dat[i].Value);
+                //    console.log(dat[i].Name)
+
+
+                //}
+
+                $('#Surveyor').empty()
+
+                $.each(dat, function (i, item) {
+                    $('#Surveyor').append($('<option>', {
+                        value: item.Value,
+                        text: item.Name
+                    }));
+
+
+                });
+            },
+            error: function (data) { }
+        });
+    }
+
+    function GetTable()
+    {
+        var pid =@ViewBag.Projectid;
+        var sbjnum = $('#Surveyor').val();
+        var QuanterFilter = $("#GlobalFilter").val();
+        var dealer = $("#Dealers").val();
+        $('.loader').fadeIn();
+
+        $.ajax({
+            url: '@Url.Action("_SurveyDetailTable")',
+            type: 'GET',
+            dataType: "html",
+            data: {
+                id: pid,
+                sbjnum: sbjnum
+            },
+            success: function (data) {
+                $(".datatable_table").html("");
+                $(".datatable_table").html(data);
+
+                //drawTable();
+                $('.loader').fadeOut();
+            },
+            error: function (data) { }
+        });
+
+    }
+
+
+    //Add rows belong to supplier
+    function AddDetails(obj, sectionId) {
+
+            var pid =@ViewBag.Projectid;
+        var sbjnum = $('#Surveyor').val();
+
+
+        if ($(obj).children().hasClass("glyphicon-plus")) {
+
+
+            if (!$("." + sectionId)[0]) {
+                // Do something if class exists
+
+            }
+
+        }
+        $(obj).find('span').toggleClass('glyphicon-plus glyphicon-minus')
+
+        if ($("." + sectionId)[0]) {
+            // Do something if class exists
+            $("." + sectionId).toggleClass('none collapse');
+        }
+
+    }
+
+    function drawTable() {
+
+        //$("arsa").attr("data-target", "#modal-container");
+        //$("arsa").attr("data-toggle", "modal");
+        //document.getElementById("arsa").click();
+
+
+        /* BASIC ;*/
+        var responsiveHelper_dt_basic = undefined;
+        var responsiveHelper_datatable_fixed_column = undefined;
+        var responsiveHelper_datatable_col_reorder = undefined;
+        var responsiveHelper_datatable_tabletools = undefined;
+
+        var breakpointDefinition = {
+            tablet: 1024,
+            phone: 480
+        };
+
+        /* TABLETOOLS */
+        $('#datatable_tabletools').dataTable({
+            /* // DOM Position key index //
+
+l - Length changing (dropdown)
+f - Filtering input (search)
+t - The Table! (datatable)
+i - Information (records)
+p - Pagination (paging)
+r - pRocessing
+< and > - div elements
+<"#id" and > - div with an id
+<"class" and > - div with a class
+<"#id.class" and > - div with an id and class
+
+Also see: http://legacy.datatables.net/usage/features
+*/
+
+            // Tabletools options:
+            //   https://datatables.net/extensions/tabletools/button_options
+            //"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+            "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6 col-md-6'f><'col-md-6 col-sm-6 col-xs-12 hidden-xs'l T>r>" +
+            "t" +
+            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
+
+            "autoWidth": true,
+            "preDrawCallback": function () {
+                // Initialize the responsive datatables helper once.
+                if (!responsiveHelper_datatable_tabletools) {
+                    responsiveHelper_datatable_tabletools = new ResponsiveDatatablesHelper($('#datatable_tabletools'), breakpointDefinition);
+
+                }
+            },
+            "rowCallback": function (nRow) {
+                responsiveHelper_datatable_tabletools.createExpandIcon(nRow);
+            },
+            "drawCallback": function (oSettings) {
+                responsiveHelper_datatable_tabletools.respond();
+
+            }
+        });
+
+
+
+        var Maintable = $('#datatable_tabletools').DataTable();
+        // Apply the filter
+        $("#datatable_tabletools thead th input[type=text]").on('keyup change', function () {
+
+            Maintable
+                .column($(this).parent().index() + ':visible')
+                .search(this.value)
+                .draw();
+
+        });
+
+
+        /* END TABLETOOLS */
+        //
+    }
+    
+    
+    function PopImage(e) {
+        $('#imagepreview').attr('src', $(e).attr('src')); // here asign the image to the modal when the user click the enlarge link
+        $('#imagemodal').modal('show'); // imagemodal is the id attribute assigned to the bootstrap modal, then i use the show function
+    }
+</script>

@@ -1,0 +1,70 @@
+﻿@model IEnumerable<DNA_CAPI_MIS.Models.ProjectFieldSection>
+@{
+    Layout = "~/Views/Shared/_Layout_Modal.cshtml";
+}
+@section Scripts {
+
+<script language="javascript">
+
+    function PopulateDataSection() {
+        // prepare the data
+        var data = new Array();
+        var row = {};
+
+        @{
+            if (Model != null)
+            {
+                var id = 0;
+                foreach (var item in Model)
+                {
+                    WriteLiteral("row = {};");
+                    WriteLiteral("row['rid'] = " + id + ";");
+                    WriteLiteral("row['ID'] = " + item.ID + ";");
+                    WriteLiteral("row['DisplayOrder'] = " + (item.DisplayOrder.HasValue ? item.DisplayOrder.ToString() : "0") + ";");
+                    WriteLiteral("row['Name'] = urldecode(\"" + Url.Encode(item.Name) + "\");");
+                    WriteLiteral("data[" + id++ + "] = row;");
+                }
+            }
+        }
+        return data;
+    }
+</script>
+
+<script src="~/Content/DSDS/pf-sections.js"></script>
+}
+
+<div class="row desktop">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title" style="width:100%">Manage Sections</h3>
+            </div>
+            <div class="box-body" style="width:100%">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <input id="ProjectId" name="ProjectId" type="hidden" value="@ViewBag.ProjectId" />
+                    <input id="FieldSectionData" name="FieldSectionData" type="hidden" value="" />
+
+                    <div id='jqxWidgetSection' class="form-group">
+                        <div style="float: right;margin-bottom: 5px;">
+                            <button class="btn btn-default" type="button" id="btnAddSection" style="float:left;">
+                                Add
+                            </button>
+                            <button class="btn btn-default" type="button" id="btnDeleteSection" style="float:left;">
+                                Delete
+                            </button>
+                        </div>
+                        <div id="jqxgridSection"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div>
+                            <button class="btn btn-primary" type="button" id="saveButton">Save</button>
+                        </div>
+                    </div>
+                }
+            </div><!-- /.box-body -->
+        </div><!-- /.box -->
+    </div>
+</div>

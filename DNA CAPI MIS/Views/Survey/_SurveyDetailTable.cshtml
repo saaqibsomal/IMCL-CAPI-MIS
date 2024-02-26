@@ -1,0 +1,215 @@
+﻿@{
+
+    Layout = null;
+}
+<div class="jarviswidget jarviswidget-color-greenDark col-md-12" id="wid-id-3" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-togglebutton="false" data-widget-deletebutton="false" data-widget-fullscreenbutton="false">
+    <!-- widget options:
+    usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+    data-widget-colorbutton="false"
+    data-widget-editbutton="false"
+    data-widget-togglebutton="false"
+    data-widget-deletebutton="false"
+    data-widget-fullscreenbutton="false"
+    data-widget-custombutton="false"
+    data-widget-collapsed="true"
+    data-widget-sortable="false"
+
+    -->
+    <header style="background-color:#87C440">
+        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+        <h2>Audit Report</h2>
+    </header>
+
+    <!-- widget div-->
+    <div>
+        <!-- widget edit box -->
+        <div class="jarviswidget-editbox">
+            <!-- This area used as dropdown edit box -->
+        </div>
+        <!-- end widget edit box -->
+        <!-- widget content -->
+        <div class="widget-body no-padding ">
+            <div id="table_wrapper">
+                <table id="datatable_tabletools" class="table  table-bordered table-hover" width="100%">
+                    <thead>
+                        <tr>
+                            <th colspan="1" style="width:5%">&nbsp; #</th>
+                            <th colspan="1" style="width:2%">+</th>
+                            <th colspan="1" style="">Audit Item</th>
+                            <th colspan="1" style="">Points Given</th>
+
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @{
+                            List<DNA_CAPI_MIS.Models.SurveyDetails> Sdetail = ViewBag.SurDetail as List<DNA_CAPI_MIS.Models.SurveyDetails>;//For Parent
+                            int number = 1;
+                            double sum = 0, count = 0;
+                            foreach (var item in Sdetail)
+                            {
+                                List<DNA_CAPI_MIS.Models.SurveyDetails> SchDetail = ViewBag.SurDetailChild as List<DNA_CAPI_MIS.Models.SurveyDetails>;//For Child
+
+                                SchDetail = SchDetail.Where(x => x.id == item.id).ToList();
+
+                                sum += Convert.ToDouble(SchDetail.Select(x => x.Score).Sum());
+                                <tr>
+                                    <th>
+                                        @(number++)
+                                    </th>
+
+                                    <th>
+
+                                        <button class="btn btn-default btn-xs" onclick="AddDetails(this,@item.id)"><span class="glyphicon glyphicon-plus"></span></button>
+
+                                    </th>
+                                    <th>
+
+                                        @*@(item.Section_name == temp ? "" : item.Section_name)*@
+                                        @item.Section_name
+
+                                        @*@item.name*@
+                                    </th>
+                                    <th>
+                                        @SchDetail.Select(x => x.Score).Sum()
+                                    </th>
+                                </tr>
+
+                                
+
+                                if (SchDetail.Count > 0)
+                                {
+                                    <tr class="table-bordered @item.id none collapse" style="background-color:lightgrey">
+                                        <td style="width: 2%;"></td>
+                                        <td></td>
+                                        <td>
+                                            <table style="width: 100%;">
+                                                <tr>
+                                                    <td><b>Question </b></td>
+                                                    <td><b>Selected Answer</b></td>
+                                                </tr>
+                                            </table>
+
+                                        </td>
+                                        <td>
+                                            Score
+                                        </td>
+                                    </tr>
+                                }
+                                string name = "";
+
+                                foreach (var subitem in SchDetail)
+                                {
+                                    <tr class="table-bordered @item.id none collapse" aria-expanded="false" style="height: 2px; background: rgba(191, 191, 191, 0.290196);">
+                                        <td style="width: 2%;"></td>
+                                        <td class="" aria-expanded="false"></td>
+
+                                        <td>
+
+                                            <table style="width: 100%;">
+                                                <tr>
+                                                    <td style="width: 40%;">@( name == subitem.Section_name ? "" : subitem.Section_name)</td>
+                                                    <td style="width: 40%;">@subitem.name</td>
+                                                    <td style="width: 20%;">
+
+                                                        @if (subitem.FieldType == "PIC" && subitem.Answer != null)
+                                                        {
+                                                            <a href="#"><img onclick="PopImage(this)" src="http://demo.kcompute.com:8067/pictures/@subitem.Answer" height="50px" width="50px" onerror="this.onerror=null;this.src='/Images/images.png';"></a>
+                                                        }
+                                                        else if (subitem.FieldType == "MLT" && subitem.Answer != null)
+                                                        {
+                                                            @subitem.Answer
+                                                        }
+                                                        else
+                                                        {
+                                                            @subitem.options
+                                                        }
+
+                                                    </td>
+                                              
+                                                </tr>
+                                            </table>
+
+                                        </td>
+                                        <td>
+
+                                          @subitem.Score
+
+                                          
+                                          
+                                            @if (subitem.Score != null)
+                                            {
+                                                count++;
+                                            }
+                                        </td>
+                                    </tr>
+                                                        name = subitem.Section_name;
+                                }
+
+
+
+                                //temp = item.Section_name;
+                            }
+
+                        }
+
+                    </tbody>
+
+                </table>
+
+
+            </div>
+
+        </div>
+        <!-- end widget content -->
+    </div>
+    <!-- end widget div -->
+</div>
+
+
+<div class="row">
+    <div class="col-sm-offset-1 col-sm-11">
+        <div class="col-sm-6">
+            <h4>Count of all questions : <b>@ViewBag.TotalQuestion</b></h4>
+        </div>
+        <div class="col-md-offset-2  col-sm-4">
+            <div class="">
+
+                <h4>Total Score earned : <b>@sum</b> </h4>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-offset-1 col-sm-11">
+
+        <div class="col-sm-6">
+
+            <h4>Count of Marked questions :<b>@ViewBag.MarkedQuestion</b></h4> @*@count*@
+        </div>
+        <div class="col-md-offset-2  col-sm-4">
+            <div class="">
+                <h4>Total Score  available : <b>@ViewBag.MarkedQuestion</b></h4>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-sm-offset-1 col-sm-11">
+
+        <div class="col-sm-6">
+
+            <h4>Count of Unmarked questions :<b>@ViewBag.UnMarkedQuestion</b></h4>
+
+        </div>
+        <div class="col-md-offset-2 col-sm-4">
+            <div class="">
+
+                <h4>Score Percentage : <b>@(Math.Round((sum / (double)ViewBag.MarkedQuestion) * 100,2))%</b></h4>
+
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Project Reports";
+}
+
+<h4><strong>@ViewBag.ProjectName</strong></h4>
+<h4>@ViewBag.Title</h4>
+
+<table class="table">
+    <tr>
+        <td>
+            <strong>Operations Reports</strong>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.ActionLink("Code Frame", "OpsReports", "Survey", new { id = @ViewBag.ProjectId, rc = "Coding", language = "en" }, null)
+        </td>
+    </tr>
+</table>

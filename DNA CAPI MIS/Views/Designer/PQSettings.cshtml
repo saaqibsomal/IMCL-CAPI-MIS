@@ -1,0 +1,605 @@
+﻿@model IEnumerable<DNA_CAPI_MIS.Models.ProjectField>
+
+@{
+    ViewBag.Title = "Survey Designer";
+    var previewFrameSource = "/SBuilder/web.html?pid=" + ViewBag.ProjectId + "&lang=en";
+}
+
+<!-- DSDS drag-drop -->
+<link rel="stylesheet" href="~/Content/jqwidgets/jqwidgets/styles/jqx.base.css" type="text/css" />
+<link href="~/Content/DSDS/dsds.css" rel="stylesheet" type="text/css" />
+
+@Styles.Render("~/Content/styles/bootstrap/dialog")
+<link href="~/Content/bootstrap-fileinput-master/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+
+<style type="text/css" media="screen">
+    .aceeditor {
+        position: absolute;
+        top: 0;
+        right: 5px;
+        bottom: 0;
+        left: 5px;
+        height: 150px;
+    }
+</style>
+
+<style>
+    .dd-Nested {
+        height: 31px;
+        padding: 4px;
+        margin-top: -6px;
+        background: transparent;
+        box-shadow: none;
+    }
+    .ProjectFieldID {
+        color:grey;font-size:smaller;
+        margin-right:5px;
+        margin-left:-5px;
+    }
+</style>
+@*CSS Class desktop is used for overlay*@
+<p>
+    @Html.ActionLink("All Projects", "OpenProject", "Designer") |
+    @Html.ActionLink("Project Overview", "ProjectOverview", "Designer", new { id = ViewBag.ProjectId }, null)
+</p>
+<h4><strong>@ViewBag.ProjectName</strong></h4>
+<h4>@ViewBag.Title</h4>
+
+<div class="row desktop">
+    @if (Model == null)
+    {
+        <div class="alert alert-danger alert-dismissable">
+            <i class="fa fa-ban"></i>
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <b>Alert!</b> No Project is opened yet.
+        </div>
+    }
+    else
+    {
+        using (Html.BeginForm("PQSettings", "Designer", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {            
+            <div class="col-md-5" id="pfAllSections">
+                @{
+                    var sectionIndex = 0;
+                    var currentSectionID = 0;
+                    var currentSectionName = "";
+                    if (ViewBag.ProjectField.SectionID != null)
+                    {
+                        currentSectionID = ViewBag.ProjectField.SectionID;
+                    }
+                }
+                @foreach (DNA_CAPI_MIS.Models.ProjectFieldSection projectSection in ViewBag.ProjectFieldSection)
+                {
+                <div class="box box-solid box-info">
+                    <div class="box-header">
+                        <h3 class="box-title">@projectSection.Name</h3>
+                        <div class="box-tools pull-right">
+                            <button class="btn btn-info btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                        </div>
+                    </div>
+                    <div class="box-body" style="display:-webkit-box;">
+                        <div class="dd pfAll" id="pfAll@projectSection.ID">
+                            <ol class="dd-list NoRemove">
+                                @foreach (var item in Model)
+                                {
+                                    if (projectSection.ID == item.SectionID.GetValueOrDefault(0) || (sectionIndex == 0 && sectionIndex == item.SectionID.GetValueOrDefault(0)))
+                                    { 
+                                    <div style="width: 100%; display: inline-block;">
+                                        <li class="dd-item" data-id="@item.ID">
+                                            <div class="dd-handle">
+                                                <div class="btn-group" style="position:relative;float:left;width:98px;">
+                                                    @*<button type="button" class="btn btn-default btn-checkbox item-unchecked" style="height:30px;"></button>*@
+                                                    <div class="ProjectFieldID" style="float:left;">@item.ID</div>
+                                                    <button type="button" data-action="external-edit" class="btn btn-edit dd-Nested">Edit</button>
+                                                    <button type="button" data-action="external-remove" class="btn btn-remove dd-Nested">Del</button>
+                                                </div>
+                                                @{
+                                                    if (currentSectionID == projectSection.ID)
+                                                    {
+                                                        currentSectionName = projectSection.Name;
+                                                    }
+                                                    var itemName = HttpUtility.UrlDecode(item.Title);
+                                                    if (item.ReportTitle.Length > 0 && item.ReportTitle != item.Title)
+                                                    {
+                                                        itemName = item.ReportTitle.Trim() + " - " + itemName;
+                                                    }
+                                                    if (itemName.Length > 40)
+                                                    {
+                                                        itemName = itemName.Substring(0, 40);
+                                                    }
+                                                }
+                                                @itemName
+                                            </div>
+                                        </li>
+                                    </div>
+                                    }
+                                }
+                            </ol>
+
+                        </div>
+
+                    </div>
+                </div>
+                    sectionIndex++;
+                }
+            </div>
+
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="margin pull-left">
+                            <button id="btnPreview" type="button" class="btn btn-default" onclick="OnPreview()">Preview</button>
+                        </div>
+                        <div class="margin pull-right">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-default">Add Question</button>
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                    <span class="caret"></span>
+                                    <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="/Designer/PQSettings/@ViewBag.ProjectId/0/RDO">Single Choice - Radio</a></li>
+                                    <li><a href="/Designer/PQSettings/@ViewBag.ProjectId/0/DDN">Single Choice - Dropdown</a></li>
+                                    <li><a href="/Designer/PQSettings/@ViewBag.ProjectId/0/NUM">Numeric</a></li>
+                                    <li><a href="/Designer/PQSettings/@ViewBag.ProjectId/0/SLT">Open Ended</a></li>
+                                    <li><a href="/Designer/PQSettings/@ViewBag.ProjectId/0/CHK">Multiple Selection</a></li>
+                                    <li><a href="/Designer/PQSettings/@ViewBag.ProjectId/0/">Rating</a></li>
+                                    <li><a href="/Designer/PQSettings/@ViewBag.ProjectId/0/RGS">Scale</a></li>
+                                    <li><a href="/Designer/PQSettings/@ViewBag.ProjectId/0/">Matrix</a></li>
+                                    <li><a href="/Designer/PQSettings/@ViewBag.ProjectId/0/SCD">Single Choice Dropdown Grid</a></li>
+                                    <li><a href="/Designer/PQSettings/@ViewBag.ProjectId/0/SCG">Single Choice Radio Grid</a></li>
+                                    <li><a href="/Designer/PQSettings/@ViewBag.ProjectId/0/MCG">Multiple Selection Grid</a></li>
+                                    <li><a href="/Designer/PQSettings/@ViewBag.ProjectId/0/XXX">Empty</a></li>
+                                    <li><a href="/Designer/PQSettings/@ViewBag.ProjectId/0/DAT">DateTime</a></li>
+                                    <li><a href="/Designer/PQSettings/@ViewBag.ProjectId/0/CTR">Counters</a></li>
+                                    <li><a href="/Designer/PQSettings/@ViewBag.ProjectId/0/STW">Stoppers</a></li>
+                                    <li><a href="/Designer/PQSettings/@ViewBag.ProjectId/0/">Expression</a></li>
+                                    <li><a href="/Designer/PQSettings/@ViewBag.ProjectId/0/MLT">Open Ended Grid</a></li>
+                                    <li><a href="/Designer/PQSettings/@ViewBag.ProjectId/0/ONG">Numeric Grid</a></li>
+                                    <li><a href="/Designer/PQSettings/@ViewBag.ProjectId/0/PIC">Picture</a></li>
+                                    <li><a href="/Designer/PQSettings/@ViewBag.ProjectId/0/MAP">Location</a></li>
+                                    <li><a href="/Designer/PQSettings/@ViewBag.ProjectId/0/IRT">Image Recognition Test</a></li>
+                                    <li><a href="/Designer/PQSettings/@ViewBag.ProjectId/0/CTM">Custom</a></li>
+                                    @*<li class="divider"></li>*@
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="previewPanel" style="display:none;background-image:url('/SBuilder/img/android-device.jpg');width: 250px;height: 820px;background-repeat: no-repeat;background-size: 100%;">
+                    <iframe id="previewFrame" src="@previewFrameSource" width="440" height="820" style="margin-top: 50px; border: none; margin-left: 17px; width: 218px; height: 350px;"></iframe>
+                </div>
+
+                <div id="editPanel" class="nav-tabs-custom box" style="border-top: none;">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#tabQuestion" id="_tabQuestion" data-toggle="tab">Question</a></li>
+                        <li><a href="#tabScripts" id="_tabScripts" data-toggle="tab" style="display:none;">Scripts</a></li>
+                        <li><a href="#tabVariables" id="_tabVariables" data-toggle="tab" style="display:none;">Variables</a></li>
+                        <li><a href="#tabOptions" id="_tabOptions" data-toggle="tab" style="display:none;">Options</a></li>
+                    </ul>
+                    <div id="fieldData" class="tab-content">
+                        <input id="FieldID" name="FieldID" type="hidden" value="@ViewBag.FieldId" />
+                        <input id="ParentFieldID" name="ParentFieldID" type="hidden" value="@ViewBag.ProjectField.ParentFieldID" />
+                        <input id="FieldType" name="FieldType" type="hidden" value="@ViewBag.ProjectField.FieldType" />
+                        <input id="FieldCodingData" name="FieldCodingData" type="hidden" value="" />
+                        <input id="FieldCodingDataQ" name="FieldCodingDataQ" type="hidden" value="" />
+                        <input id="fieldSection" name="fieldSection" type="hidden" value="@currentSectionName" />
+                        @{
+                            var optionMinLength = "";
+                            if (ViewBag.OptionsJSON != null && ViewBag.OptionsJSON.ContainsKey("MinLength")) 
+                            {
+                                optionMinLength = ViewBag.OptionsJSON["MinLength"].ToString();
+                            }
+                            var optionMaxLength = "";
+                            if (ViewBag.OptionsJSON != null && ViewBag.OptionsJSON.ContainsKey("MaxLength"))
+                            {
+                                optionMaxLength = ViewBag.OptionsJSON["MaxLength"].ToString();
+                            }
+                            var optionInputLines = "";
+                            if (ViewBag.OptionsJSON != null && ViewBag.OptionsJSON.ContainsKey("NoOfLines"))
+                            {
+                                optionInputLines = ViewBag.OptionsJSON["NoOfLines"].ToString();
+                            }
+                            var optionOrientation = "";
+                            if (ViewBag.OptionsJSON != null && ViewBag.OptionsJSON.ContainsKey("Orientation"))
+                            {
+                                optionOrientation = ViewBag.OptionsJSON["Orientation"];
+                            }
+                        }
+                        <input id="Orientation" name="Orientation" type="hidden" value="@optionOrientation" />
+
+                        <script>
+                            var pqSettingsUploadURL = "/Designer/PQSettingsUploadMedia?ProjectID=" + @ViewBag.ProjectId + "&ProjectFieldID=" + @ViewBag.ProjectField.ID + "&PFMediaType=";
+                            var pqSettingsInitialPreview;
+
+                            function InitMedia() {
+                                $('#PFMediaType').val("@ViewBag.MediaFileType");
+                                SetupPFMediaFileUploader($('#PFMediaType').val(), "@ViewBag.MediaFile");
+
+                                $('#PFMediaType').change(function () {
+                                    SetupPFMediaFileUploader(this.value, null);
+                                });
+                            }
+
+                            var OnEntryEditor;
+                            var OnValidateEditor;
+                            var OnExitEditor;
+
+                            function InitEditors() {
+                                OnEntryEditor = ace.edit("scriptOnEntryEditor");
+                                OnEntryEditor.setTheme("ace/theme/eclipse");
+                                OnEntryEditor.getSession().setMode("ace/mode/javascript");
+
+                                OnValidateEditor = ace.edit("scriptOnValidateEditor");
+                                OnValidateEditor.setTheme("ace/theme/eclipse");
+                                OnValidateEditor.getSession().setMode("ace/mode/javascript");
+
+                                OnExitEditor = ace.edit("scriptOnExitEditor");
+                                OnExitEditor.setTheme("ace/theme/eclipse");
+                                OnExitEditor.getSession().setMode("ace/mode/javascript");
+                            }
+                        </script>
+
+                        <script>
+                            function PopulateData() {
+                                // prepare the data
+                                var data = new Array();
+                                var row = {};
+
+                                @{
+                                    if (ViewBag.ProjectFieldSample != null)
+                                    {
+                                        var id = 0;
+                                        List<DNA_CAPI_MIS.Models.Translation> mlTitle;
+                                        foreach (DNA_CAPI_MIS.Models.ProjectFieldSample pfs in (List<DNA_CAPI_MIS.Models.ProjectFieldSample>)ViewBag.ProjectFieldSample)
+                                        {
+                                            WriteLiteral("row = {};");
+                                            WriteLiteral("row['rid'] = " + id + ";");
+                                            WriteLiteral("row['ID'] = " + pfs.ID + ";");
+                                            WriteLiteral("row['ParentSampleId'] = " + (pfs.ParentSampleID.HasValue ? pfs.ParentSampleID.ToString() : "0") + ";");
+                                            WriteLiteral("row['VariableName'] = \"" + pfs.VariableName + "\";");
+                                            WriteLiteral("row['Code'] = \"" + pfs.Code + "\";");
+                                            WriteLiteral("row['DisplayOrder'] = " + (pfs.DisplayOrder.HasValue ? pfs.DisplayOrder.ToString() : "0") + ";");
+                                            WriteLiteral("row['Title'] = urldecode(\"" + Url.Encode(pfs.Title) + "\");");
+
+                                            mlTitle = ViewBag.SampleTitleTranslations;
+                                            DNA_CAPI_MIS.Models.Translation t = mlTitle.Where(x => x.KeyValue == pfs.ID.ToString() && x.Language == "ar-SA").FirstOrDefault<DNA_CAPI_MIS.Models.Translation>();
+
+                                            if (t != null)
+                                            {
+                                                WriteLiteral("row['Title_ar-SA'] = urldecode(\"" + Url.Encode(t.Text) + "\");");
+                                            }
+                                            else
+                                            {
+                                                WriteLiteral("row['Title_ar-SA'] = \"\";");
+                                            }
+                                            WriteLiteral("data[" + id++ + "] = row;");
+                                        }
+                                    }
+                                }
+                                return data;
+                            }
+                            function PopulateDataQ() {
+                                // prepare the data
+                                var data = new Array();
+                                var row = {};
+
+                                @{
+                                    if (ViewBag.ProjectFieldSampleQ != null)
+                                    {
+                                        var id = 0;
+                                        List<DNA_CAPI_MIS.Models.Translation> mlTitle;
+                                        foreach (DNA_CAPI_MIS.Models.ProjectFieldSample pfs in (List<DNA_CAPI_MIS.Models.ProjectFieldSample>)ViewBag.ProjectFieldSampleQ)
+                                        {
+                                            WriteLiteral("row = {};");
+                                            WriteLiteral("row['rid'] = " + id + ";");
+                                            WriteLiteral("row['ID'] = " + pfs.ID + ";");
+                                            WriteLiteral("row['ParentSampleId'] = " + (pfs.ParentSampleID.HasValue ? pfs.ParentSampleID.ToString() : "0") + ";");
+                                            WriteLiteral("row['VariableName'] = \"" + pfs.VariableName + "\";");
+                                            WriteLiteral("row['Code'] = \"" + pfs.Code + "\";");
+                                            WriteLiteral("row['DisplayOrder'] = " + (pfs.DisplayOrder.HasValue ? pfs.DisplayOrder.ToString() : "0") + ";");
+                                            WriteLiteral("row['Title'] = urldecode(\"" + Url.Encode(pfs.Title) + "\");");
+
+                                            mlTitle = ViewBag.SampleTitleTranslations;
+                                            DNA_CAPI_MIS.Models.Translation t = mlTitle.Where(x => x.KeyValue == pfs.ID.ToString() && x.Language == "ar-SA").FirstOrDefault<DNA_CAPI_MIS.Models.Translation>();
+
+                                            if (t != null)
+                                            {
+                                                WriteLiteral("row['Title_ar-SA'] = urldecode(\"" + Url.Encode(t.Text) + "\");");
+                                            }
+                                            else
+                                            {
+                                                WriteLiteral("row['Title_ar-SA'] = \"\";");
+                                            }
+                                            WriteLiteral("data[" + id++ + "] = row;");
+                                        }
+                                    }
+                                }
+                                return data;
+                            }
+                        </script>
+                        <div class="tab-pane active" id="tabQuestion">
+                            <div class="row">
+                                <section class="col-lg-12 connectedSortable">
+                                    <div class="row">
+                                        <div class="col-md-12">
+
+                                            <div class="box-body">
+                                                <div class="form-group">
+                                                    <label>Question Type</label>
+                                                    <select id="questionType" name="questionType" class="form-control">
+                                                        <option value="RDO">Single Choice - Radio</option>
+                                                        <option value="DDN">Single Choice - Dropdown</option>
+                                                        <option value="NUM">Numeric</option>
+                                                        <option value="SLT">Open Ended</option>
+                                                        <option value="CHK">Multiple Selection</option>
+                                                        <option value="">Rating</option>
+                                                        <option value="RGS">Scale</option>
+                                                        <option value="">Matrix</option>
+                                                        <option value="SCD">Single Choice Dropdown Grid</option>
+                                                        <option value="SCG">Single Choice Radio Grid</option>
+                                                        <option value="MCG">Multiple Selection Grid</option>
+                                                        <option value="XXX">Empty</option>
+                                                        <option value="DAT">DateTime</option>
+                                                        <option value="CTR">Counters</option>
+                                                        <option value="STW">Stoppers</option>
+                                                        <option value="">Expression</option>
+                                                        <option value="MLT">Open Ended Grid</option>
+                                                        <option value="ONG">Numeric Grid</option>
+                                                        <option value="PIC">Picture</option>
+                                                        <option value="MAP">Location</option>
+                                                        <option value="IRT">Image Recognition Test</option>
+                                                        <option value="CTM">Custom</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Report Title</label>
+                                                    <input name="reportTitle" class="form-control" value="@ViewBag.ProjectField.ReportTitle" />
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Question Title - English</label>
+                                                    <textarea name="questionTitle-en" class="form-control" rows="3" placeholder="Type here ...">@ViewBag.ProjectField.Title</textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>السؤال العنوان - عربي</label>
+                                                    <textarea name="questionTitle-ar" class="form-control" rows="3" placeholder="اكتب هنا ...">@ViewBag.questionTitle_ar</textarea>
+                                                </div>
+
+                                                <p></p>
+                                                <div class="form-group">
+                                                    <label>Instructions for Surveyor - English</label>
+                                                    <input name="instructions-en" class="form-control" value="@ViewBag.ProjectField.Instructions" />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>تعليمات لمساح - عربي</label>
+                                                    <input name="instructions-ar" class="form-control" value="@ViewBag.instructions_ar" />
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Section</label>
+                                                    <div class="btn-group" style="width:100%">
+                                                        <button type="button" class="btn btn-default btn-flat" style="width:80%;background-color:white;" id="CurrentSectionName">@currentSectionName</button>
+                                                        <button type="button" class="btn btn-default btn-flat dropdown-toggle" data-toggle="dropdown" style="width:10%;background-color: white;">
+                                                            <span class="caret"></span>
+                                                            <span class="sr-only">Toggle Dropdown</span>
+                                                        </button>
+                                                        <ul id="ProjectFieldSection" class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu">
+                                                            @foreach (var projectSection in ViewBag.ProjectFieldSection)
+                                                            {
+                                                                <li><a tabindex="-1" onclick="SetCurrentSection('@projectSection.Name')">@projectSection.Name</a></li>
+                                                            }
+                                                            <li class="divider"></li>
+                                                            <li><a tabindex="-1" onclick="AddNewSection(@ViewBag.ProjectId)">Add new section</a></li>
+                                                        </ul>
+                                                        <button type="button" class="btn btn-primary pull-right" style="width:10%;" onclick="OpenSectionManager()">
+                                                            <i class="fa fa-gear"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div><!-- /.tab-pane -->
+
+                        <div class="tab-pane" id="tabScripts">
+                            <div class="form-group" style="height:180px;">
+                                <label>On Question Entry</label>
+                                <div class="aceeditor" style="top:80px;" id="scriptOnEntryEditor">@ViewBag.ProjectField.ScriptOnEntry</div>
+                                <input type="hidden" name="scriptOnEntry" id="scriptOnEntry" />
+                            </div>
+                            <div class="form-group" style="height:180px;">
+                                <label>On Validation</label>
+                                <div class="aceeditor" style="top:275px;" id="scriptOnValidateEditor">@ViewBag.ProjectField.ScriptOnValidate</div>
+                                <input type="hidden" name="scriptOnValidate" id="scriptOnValidate" />
+                            </div>
+                            <div class="form-group" style="height:180px;">
+                                <label>On Question Exit</label>
+                                <div class="aceeditor" style="top:470px;" id="scriptOnExitEditor">@ViewBag.ProjectField.ScriptOnExit</div>
+                                <input type="hidden" name="scriptOnExit" id="scriptOnExit" />
+                            </div>
+                        </div><!-- /.tab-pane -->
+
+                        <div class="tab-pane" id="tabVariables">
+                            <div class="row">
+                                <section class="col-lg-12 connectedSortable">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="box-body">
+                                                <div class="form-group">
+                                                    <label style="float:left;">Variable Name</label>
+                                                    <label style="float:right;" class="ProjectFieldID">ID: @ViewBag.ProjectField.ID</label>
+                                                    <input type="hidden" name="hidProjectFieldID" id="hidProjectFieldID" class="form-control" value="@ViewBag.ProjectField.ID" />
+                                                    <input name="variableName" class="form-control" value="@ViewBag.ProjectField.VariableName" />
+                                                </div>
+                                                <div id='jqxWidget' class="form-group">
+                                                    <label>Answers</label>
+                                                    <div style="float: right;margin-bottom: 5px;">
+                                                        <button class="btn btn-default" type="button" id="btnAddCoding" style="float:left;">
+                                                            Add
+                                                        </button>
+                                                        <button class="btn btn-default" type="button" id="btnDeleteCoding" style="float:left;">
+                                                            Delete
+                                                        </button>
+                                                        <button class="btn btn-default" type="button" id="btnImportCoding" style="float:left;">
+                                                            Import
+                                                        </button>
+                                                        <div class="btn-group">
+                                                            <button type="button" class="btn btn-default">Copy</button>
+                                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                                <span class="caret"></span>
+                                                                <span class="sr-only">Toggle Dropdown</span>
+                                                            </button>
+                                                            <ul class="dropdown-menu" role="menu">
+                                                            @foreach (var item in Model)
+                                                            {
+                                                                <li><a href="#" name="btnCopyCoding" data-id="@item.ID">@item.ReportTitle</a></li>
+                                                            }
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div id="jqxgrid"></div>
+                                                </div>
+
+                                                <p></p>
+                                                <div id='jqxWidget' class="form-group">
+                                                    <label>Topics</label>
+                                                    <div style="float: right;margin-bottom: 5px;">
+                                                        <button class="btn btn-default" type="button" id="btnQAddCoding" style="float:left;">
+                                                            Add
+                                                        </button>
+                                                        <button class="btn btn-default" type="button" id="btnQDeleteCoding" style="float:left;">
+                                                            Delete
+                                                        </button>
+                                                        <button class="btn btn-default" type="button" id="btnQImportCoding" style="float:left;">
+                                                            Import
+                                                        </button>
+                                                        <div class="btn-group">
+                                                            <button type="button" class="btn btn-default">Copy</button>
+                                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                                <span class="caret"></span>
+                                                                <span class="sr-only">Toggle Dropdown</span>
+                                                            </button>
+                                                            <ul class="dropdown-menu" role="menu">
+                                                                @foreach (var item in Model)
+                                                                {
+                                                                    <li><a href="#" name="btnQCopyCoding" data-id="@item.ID">@item.ReportTitle</a></li>
+                                                                }
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div id="jqxgridQ"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div><!-- /.tab-pane -->
+
+                        <div class="tab-pane" id="tabOptions">
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="IsMandatory" name="IsMandatory" checked="@ViewBag.ProjectField.IsMandatory" />
+                                        Mandatory
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="IsVisible" name="IsVisible" checked="@ViewBag.ProjectField.IsVisible" />
+                                        Visible to surveyor
+                                    </label>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="col-lg-4 form-group" style="padding-left:0px;">
+                                    <label>Min. Text Length</label>
+                                    <input maxlength="4" class="form-control" id="MinValueLength" name="MinValueLength" value="@optionMinLength" />
+                                </div>
+                                <div class="col-lg-4 form-group" style="padding-left:0px;">
+                                    <label>Max. Text Length</label>
+                                    <input maxlength="4" class="form-control" id="MaxValueLength" name="MaxValueLength" value="@optionMaxLength" />
+                                </div>
+                                <div class="col-lg-4 form-group" style="padding-left:0px;">
+                                    <label>Input Lines</label>
+                                    <input maxlength="2" class="form-control" id="InputLines" name="InputLines" value="@optionInputLines" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Orientation</label>
+                                <div class="radio">
+                                    <label class="">
+                                        <div class="iradio_minimal" aria-checked="false" aria-disabled="false" style="position: relative;">
+                                            <input type="radio" name="rdoOrientation" id="rdoOrientationH" value="H" style="position: absolute; opacity: 0;">
+                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+                                        </div>
+                                        Horizontal
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label class="">
+                                        <div class="iradio_minimal" aria-checked="false" aria-disabled="false" style="position: relative;">
+                                            <input type="radio" name="rdoOrientation" id="rdoOrientationV" value="V" style="position: absolute; opacity: 0;">
+                                            <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+                                        </div>
+                                        Vertical
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group" style="padding-right: 15px;">
+                                    <label class="col-lg-4">Attach Media</label>
+                                    <select id="PFMediaType" name="PFMediaType" class="col-lg-3">
+                                        <option>None</option>
+                                        <option>Image</option>
+                                        <option>Audio</option>
+                                        <option>Video</option>
+                                    </select>
+                                </div>
+                                <div class="form-group" id="PFMediaFileControl">
+                                    <div class="col-lg-12">
+                                        <input name="PFMediaFile" id="PFMediaFile" type="file">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div><!-- /.tab-pane -->
+                    </div>
+
+                    <div class="box-footer">
+                        <button class="btn btn-primary" type="button" id="saveQuestion">Save</button>
+                        <button class="btn btn-warning" onclick='javascript: window.navigate("/Designer/PQSettings/@ViewBag.ProjectId")'>Cancel</button>
+                        <input id="ProjectID" name="ProjectID" type="hidden" value="@ViewBag.ProjectId" />
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    <!-- Loading (remove the following to stop the loading)-->
+    <div class="overlay" style="display:none;"></div>
+    <div class="loading-img" style="display: none;"></div>
+    <!-- end loading -->
+</div><!-- /.col row-->
+
+@section Scripts {
+    <script>
+        var previewFrameSource = "@previewFrameSource";
+    </script>
+    <script src="~/Content/DSDS/dsds-pqsettings.js"></script>
+
+    @if (Model != null)
+    {
+        @Scripts.Render("~/bundles/bootstrap/dialog")
+        @Scripts.Render("~/bundles/bootstrap/jqwidgets")
+        <script src="~/Content/ace-builds-master/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="~/Content/bootstrap-fileinput-master/js/fileinput.min.js" type="text/javascript"></script>
+    }
+}

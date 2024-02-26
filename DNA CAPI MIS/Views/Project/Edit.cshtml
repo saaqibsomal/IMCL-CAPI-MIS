@@ -1,0 +1,223 @@
+﻿@model DNA_CAPI_MIS.Models.Project
+
+@{
+    ViewBag.Title = "Edit Project";
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap/jqwidgets")
+    @Scripts.Render("~/bundles/bootstrap/filters")
+    <script src="~/Content/bootstrap-datepicker.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#ActualStartDate").datepicker();
+            $("#ActualEndDate").datepicker();
+        });
+
+        function MyFunction() {
+            alert("fromdate:" + getFromDate() + ",todate:" + gettoDate());
+        }
+        function getFromDate() {
+
+            return document.getElementById('fromdate').value;
+        }
+        function getToDate() {
+            return document.getElementById('todate').value;
+        }
+    </script>
+}
+
+<link href="~/Content/css/datepicker.css" rel="stylesheet" />
+
+<style>
+    .form-radio {
+        margin-top:2px;
+        margin-right: 25px;
+        margin-left: 5px;
+    }
+    .control-label {
+        margin-top: -2px;
+    }
+</style>
+<p>
+    @Html.ActionLink("All Projects", "OpenProject", "Designer") |
+    @Html.ActionLink("Project Overview", "ProjectOverview", "Designer", new { id = Model.ID }, null)
+</p>
+<h4><strong>@Model.Name</strong></h4>
+<h4>@ViewBag.Title</h4>
+
+<div class="row desktop">
+    <div class="col-md-12">
+        <div class="box" style="display: table;">
+            <div class="box-header">
+            </div><!-- /.box-header -->
+
+            <div class="box-body table-responsive" style="display:table;width:100%">
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    @Html.ValidationSummary(true)
+                    @Html.HiddenFor(model => model.ID)
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Guid, new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.Guid, new { @readonly = "readonly", @style = "width: 50%;" })
+                            @Html.ValidationMessageFor(model => model.Guid)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2", @style = "margin-top: -4px;" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(model => model.Name, new { @style = "width: 50%;" })
+                            @Html.ValidationMessageFor(model => model.Name)
+                        </div>
+                    </div>
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.QCRequirement, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.QCRequirement)<span>% per Surveyor</span>
+                @Html.ValidationMessageFor(model => model.QCRequirement)
+            </div>
+        </div>*@
+                    <div class="form-group">
+                        @Html.Label("Actual Dates", new { @class = "control-label col-md-2" })
+                        @{
+                            var startDate = "";
+                            var endDate = "";
+                            if (Model.ActualStartDate.HasValue)
+                            {
+                                startDate = Model.ActualStartDate.Value.ToShortDateString();
+                            }
+                            if (Model.ActualEndDate.HasValue)
+                            {
+                                endDate = Model.ActualEndDate.Value.ToShortDateString();
+                            }
+                        }
+                        <div class="col-md-3">
+                            <span>From:</span>
+                            <input type="text" id="ActualStartDate" name="ActualStartDate" value="@startDate" style="width:100px;height:30px;">
+                        </div>
+                        <div class="col-md-3">
+                            <span>To:</span>
+                            <input type="text" id="ActualEndDate" name="ActualEndDate" value="@endDate" style="width:100px;height:30px;">
+                        </div>
+                    </div>
+
+                    @*<div class="form-group">
+                        @Html.LabelFor(model => model.STGSync, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.STGSync)
+                            @Html.ValidationMessageFor(model => model.STGSync)
+                        </div>
+                    </div>*@
+
+                    <div class="form-group">
+                        @Html.Label("Status", new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("Status")
+                            @Html.ValidationMessageFor(model => model.Status)
+                        </div>
+                    </div>
+
+                    @*<div class="form-group">
+                        @Html.Label("Need Map as Input in Survey?", new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.RadioButtonFor(model => model.NeedMapInput, true, new { @class = "form-radio" })<span class="form-radio">Yes</span>
+                            @Html.RadioButtonFor(model => model.NeedMapInput, false, new { @class = "form-radio" })<span class="form-radio">No</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Need Building Number Search in Survey?", new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.RadioButtonFor(model => model.NeedBuildingSearch, true, new { @class = "form-radio" })<span class="form-radio">Yes</span>
+                            @Html.RadioButtonFor(model => model.NeedBuildingSearch, false, new { @class = "form-radio" })<span class="form-radio">No</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Project Type", new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("Type")
+                            @Html.ValidationMessageFor(model => model.Type)
+                        </div>
+                    </div>*@
+
+
+                    <div class="form-group">
+                        @Html.Label("Roles", new { @class = "control-label col-md-2" })
+                        <span class=" col-md-10">
+                            @foreach (var item in Model.RolesList)
+                            {
+                                <br /><input type="checkbox" name="selectedRolesList" value="@item.Value" checked="@item.Selected" class="checkbox-inline" />
+                                @Html.Label(item.Text, new { @class = "control-label" })
+                            }
+                        </span>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Regions", new { @class = "control-label col-md-2" })
+                        <span class=" col-md-10">
+                            @foreach (var item in Model.RegionsList)
+                            {
+                                <br /><input type="checkbox" name="selectedRegionsList" value="@item.Value" checked="@item.Selected" class="checkbox-inline" />
+                                @Html.Label(item.Text, new { @class = "control-label" })
+                            }
+                        </span>
+                    </div>
+
+
+                    @*<div class="form-group">
+                        @Html.Label("Category field (if any)", new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("CategoryPFId")
+                            @Html.ValidationMessageFor(model => model.CategoryPFId)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Title field (if any)", new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("TitlePFId")
+                            @Html.ValidationMessageFor(model => model.TitlePFId)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Respondent Name field (if any)", new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("RespondentNamePFId")
+                            @Html.ValidationMessageFor(model => model.RespondentNamePFId)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Respondent Mobile field (if any)", new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("RespondentMobilePFId")
+                            @Html.ValidationMessageFor(model => model.RespondentMobilePFId)
+                        </div>
+                    </div>*@
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Save" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+                }
+
+                <div class="box-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
