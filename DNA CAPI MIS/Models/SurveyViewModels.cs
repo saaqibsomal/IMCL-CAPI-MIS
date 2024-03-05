@@ -433,7 +433,7 @@ with cte as (SELECT s.sbjnum,sd.FieldId,sd.FieldValue FROM survey s INNER JOIN s
 
 
 
-        public static string sqlBranchScoreNational = @"DECLARE @myTable SurveyIDType
+        public static string sqlBranchScoreNational = $@"DECLARE @myTable SurveyIDType
 
  insert into  @myTable  SELECT distinct msd.sbjnum FROM surveydata msd 
                 join ProjectField pf on pf.ID=msd.FieldId

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace DNA_CAPI_MIS.Models
 {
@@ -101,5 +102,36 @@ namespace DNA_CAPI_MIS.Models
     {
         public string Title { get; set; }
         public string OpenCenter { get; set; }
+    }
+
+    public class BarChart
+    {
+        public string Title { get; set; }
+        public int OpenCenter { get; set; }
+    }
+
+    public class PieChartOC
+    {
+        public string Title { get; set; }
+        public int OpenClose { get; set; }
+    }
+    public class TotalSurveyDetail
+    {
+        public List<SelectListItem> selectListItems { get; set; }
+        public string Name { get; set; }
+        public int All { get; set; }
+        public int RHS { get; set; }
+        public int MSU { get; set; }
+        public int FWC { get; set; }
+        public int Open { get; set; }
+        public int Close { get; set; }
+        public string OpenTitle { get; set; }
+        public string CloseTitle { get; set; }
+    }
+
+   public class OpenCloseResponse
+    {
+        public int OpenClose { get; set; }
+        public string Title { get; set; }
     }
 }

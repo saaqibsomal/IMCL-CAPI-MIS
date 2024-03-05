@@ -56,7 +56,7 @@ namespace DNA_CAPI_MIS.Controllers
         public ActionResult Dashboard(string name, string status)
         {
             Monitoring();
-
+            OpenClose();
 
             var All = "SELECT SurveyorName, COUNT(*) AS SurveyCount FROM Survey WHERE ProjectID in( 7120,7121,7122) GROUP BY SurveyorName ORDER BY COUNT(*) DESC";
             var RHS = "SELECT SurveyorName, COUNT(*) AS SurveyCount FROM Survey WHERE ProjectID = 7120 GROUP BY SurveyorName ORDER BY COUNT(*) DESC";
@@ -115,7 +115,7 @@ namespace DNA_CAPI_MIS.Controllers
         {
             var val = id.Split(',');
             string CheckList = val[1].ToString().Trim();
-            string Disctrict = val[2].ToString();
+            string Disctrict = val[3].ToString();
             List<DNA_CAPI_MIS.Models.ProjectFieldSample> Central = db.ProjectFieldSample
                                 .Where(x =>  x.IsActive && x.Title.Contains(CheckList) && x.Title.Contains(Disctrict))
                                 .OrderBy(x => x.DisplayOrder)
@@ -127,11 +127,61 @@ namespace DNA_CAPI_MIS.Controllers
             }).ToList();
             return Json(distinctItems);
 
-        }        
-        
-        
+        }
+
+
         [HttpPost]
-        public JsonResult PieChart(int id)
+        public JsonResult OpenClose(string id)
+        {
+
+
+            var Break = id.Split('|');
+            var OC = Break[1];
+            var pro = Break[0];
+
+            string Query = $@"SELECT 
+    CASE 
+        WHEN p.id = 7120 THEN 50577--50446 
+        WHEN p.id = 7121 THEN 50484--50486 
+        WHEN p.id = 7122 THEN 55587--50517 
+        ELSE 0 
+    END AS Id, 
+    [Name] ,
+	RIGHT(p.Name, CHARINDEX(' ', REVERSE(p.Name) + ' ') - 1) as shortName
+INTO #Project
+FROM 
+    Project p
+WHERE 
+    p.id IN ({pro}) 
+ORDER BY 
+    [Name];
+
+ 
+	SELECT   
+    
+    pf.Title,
+ 
+    (SELECT COUNT(*) 
+     FROM ProjectFieldSample 
+     WHERE IsActive in ({OC})  and  Title LIKE '%' + p.shortName + '%' AND Title LIKE '% ' + pf.Title + '%'
+    ) AS OpenCenter 
+FROM 
+    #Project p 
+INNER JOIN 
+    ProjectFieldSample pf ON p.ID = pf.FieldID; ";
+            var Pie = db.Database.SqlQuery<BarChart>(Query);
+
+            var distinctItems = Pie.Select(x => new SelectListItem
+            {
+                Text = x.Title,
+                Value = x.OpenCenter.ToString()
+            }).ToList();
+            return Json(distinctItems);
+
+        }
+
+        [HttpPost]
+        public JsonResult BarChart(int id)
         {
 
 
@@ -165,12 +215,158 @@ FROM
     #Project p 
 INNER JOIN 
     ProjectFieldSample pf ON p.ID = pf.FieldID; ";
-            var Pie = db.Database.SqlQuery<PieChart>(Query);
+            var Pie = db.Database.SqlQuery<BarChart>(Query);
           
             var distinctItems = Pie.Select(x => new SelectListItem
             {
                 Text = x.Title,
-                Value = x.OpenCenter
+                Value = x.OpenCenter.ToString()
+            }).ToList();
+            return Json(distinctItems);
+
+        }
+           
+        
+        
+        [HttpPost]
+        public JsonResult DistrictBarChart(string id)
+        {
+            
+            if(id == "NaN")
+            {
+                id = "";
+            }
+           
+            string where = string.Empty;
+            if (!string.IsNullOrEmpty(id))
+            {
+                where = $"and g.DistrictId in ({id})";
+                
+                 
+            }
+            else
+            {
+                where = "";
+            }
+
+
+            string Query = $@"
+IF OBJECT_ID('tempdb..#Graph') IS NOT NULL
+BEGIN
+    DROP TABLE #Graph;
+END
+
+;with cte as (
+	select s.sbjnum, s.Created, 
+		sd1.fieldId as FieldId1, sd1.fieldValue as FieldValue1, 
+		sd2.fieldId as FieldId2, sd2.fieldValue as FieldValue2,
+		sd3.fieldId as FieldId3, sd3.fieldValue as FieldValue3,
+	row_number() over (partition by sd1.fieldId, sd1.fieldValue, sd2.fieldId, sd2.fieldValue order by s.created desc) as RowNum
+	from survey s
+		inner join SurveyData sd1 on s.sbjnum = sd1.sbjnum and sd1.FieldId in (50446, 50486, 55588)--Center,Center,Center Ids
+		inner join SurveyData sd2 on s.sbjnum = sd2.sbjnum and sd2.FieldId in (50435, 50484, 55587)--District,District,District Ids 
+		inner join SurveyData sd3 on s.sbjnum = sd3.sbjnum and sd3.FieldId in (55570, 50482, 55585)--Open,Open,open close Survey Ids
+)
+select fs1.FieldID as CenterId,fs2.FieldID DistrictId,  fs2.Title as District,fs1.Title as Center,  
+
+fs2.Title as DiscrtictGroup,
+fs3.Title as OpenClose, case when fs3.Title = 'Open' then 1 else  0 end IsOpen,fs3.Title
+ 
+
+    into #Graph
+	from cte
+	inner join ProjectFieldSample fs1 on cte.FieldId1 = fs1.FieldID and fs1.Code IN (cte.FieldValue1)
+	inner join ProjectFieldSample fs2 on cte.FieldId2 = fs2.FieldID and fs2.Code IN (cte.FieldValue2)
+	inner join ProjectFieldSample fs3 on cte.FieldId3 = fs3.FieldID and fs3.Code IN (cte.FieldValue3)
+    where RowNum = 1 
+
+	select  Count(g.IsOpen) OpenClose,g.Title     from  #Graph as g where g.IsOpen in (1,0) {where} 
+	group by  g.IsOpen ,g.Title  
+
+";
+            var Pie = db.Database.SqlQuery<PieChartOC>(Query);
+          
+            var distinctItems = Pie.Select(x => new SelectListItem
+            {
+                Text = x.Title,
+                Value = x.OpenClose.ToString()
+            }).ToList();
+            return Json(distinctItems);
+
+        }       
+        
+        
+        [HttpPost]
+        public JsonResult CenterPieChart(string id)
+        {
+            
+            if(id == "NaN")
+            {
+                id = "";
+            }
+
+            var Text = id.Split(',')[0];
+            var val = id.Split(',')[1];
+
+
+            string where = string.Empty;
+            if (!string.IsNullOrEmpty(id))
+            {
+                where = $"and g.District like '%{Text}%'";
+                
+                 
+            }
+            else
+            {
+                where = "";
+            }
+
+
+            string Query = $@"
+
+IF OBJECT_ID('tempdb..#Graph') IS NOT NULL
+BEGIN
+    DROP TABLE #Graph;
+END
+
+;with cte as (
+	select s.sbjnum, s.Created, 
+		sd1.fieldId as FieldId1, sd1.fieldValue as FieldValue1, 
+		sd2.fieldId as FieldId2, sd2.fieldValue as FieldValue2,
+		sd3.fieldId as FieldId3, sd3.fieldValue as FieldValue3,
+	row_number() over (partition by sd1.fieldId, sd1.fieldValue, sd2.fieldId, sd2.fieldValue order by s.created desc) as RowNum
+	from survey s
+		inner join SurveyData sd1 on s.sbjnum = sd1.sbjnum and sd1.FieldId in (50446, 50486, 55588)--Center,Center,Center Ids
+		inner join SurveyData sd2 on s.sbjnum = sd2.sbjnum and sd2.FieldId in (50435, 50484, 55587)--District,District,District Ids 
+		inner join SurveyData sd3 on s.sbjnum = sd3.sbjnum and sd3.FieldId in (55570, 50482, 55585)--Open,Open,open close Survey Ids
+)
+select fs1.FieldID as CenterId,fs2.FieldID DistrictId,  fs2.Title as District,fs1.Title as Center,  
+
+fs2.Title as DiscrtictGroup,
+fs3.Title as OpenClose, case when fs3.Title = 'Open' then 1 else  0 end IsOpen
+ 
+
+    into #Graph
+	from cte
+	inner join ProjectFieldSample fs1 on cte.FieldId1 = fs1.FieldID and fs1.Code IN (cte.FieldValue1)
+	inner join ProjectFieldSample fs2 on cte.FieldId2 = fs2.FieldID and fs2.Code IN (cte.FieldValue2)
+	inner join ProjectFieldSample fs3 on cte.FieldId3 = fs3.FieldID and fs3.Code IN (cte.FieldValue3)
+    where RowNum = 1 
+
+	select count(g.DiscrtictGroup) DiscrtictGroup ,case when g.IsOpen = 0 then 'Close' else 'Open' end Title, g.IsOpen OpenClose  from  #Graph as g where g.IsOpen in (1,0) and g.DistrictId in ({val})
+	{where}
+	group by g.District , g.IsOpen
+
+
+ 
+
+";
+            var Pie = db.Database.SqlQuery<PieChartOC>(Query);
+          
+            var distinctItems = Pie.Select(x => new SelectListItem
+            {
+                Text = x.Title,
+                Value = x.OpenClose.ToString()
             }).ToList();
             return Json(distinctItems);
 
@@ -179,6 +375,11 @@ INNER JOIN
         [HttpPost]
         public JsonResult GetDistictById(string id)
         {
+            if(string.IsNullOrEmpty(id))
+            {
+                return Json(null);
+            }
+            
             int FieldID = Convert.ToInt32(id.Split(',')[0]);
             List<DNA_CAPI_MIS.Models.ProjectFieldSample> Distict = db.ProjectFieldSample
                                 .Where(x => x.ParentSampleID != 0 && x.IsActive && x.FieldID.Equals(FieldID)  )
@@ -190,10 +391,172 @@ INNER JOIN
                 Text = x.Title,
                 Value = x.FieldID.ToString().Trim()
             }).ToList();
-
+     
             return Json(distinctItems);
 
         }
+
+        [HttpPost]
+        public JsonResult ForAllMonitoring()
+        {
+            var All = "SELECT SurveyorName, COUNT(*) AS SurveyCount FROM Survey WHERE ProjectID in( 7120,7121,7122) GROUP BY SurveyorName ORDER BY COUNT(*) DESC";
+            var RHS = "SELECT SurveyorName, COUNT(*) AS SurveyCount FROM Survey WHERE ProjectID = 7120 GROUP BY SurveyorName ORDER BY COUNT(*) DESC";
+            var MSU = "SELECT SurveyorName, COUNT(*) AS SurveyCount FROM Survey WHERE ProjectID = 7121 GROUP BY SurveyorName ORDER BY COUNT(*) DESC";
+            var FWC = "SELECT SurveyorName, COUNT(*) AS SurveyCount FROM Survey WHERE ProjectID = 7122 GROUP BY SurveyorName ORDER BY COUNT(*) DESC";
+
+            var queryAll = db.Database.SqlQuery<SurveyorStats>(All);
+            var queryRHS = db.Database.SqlQuery<SurveyorStats>(RHS);
+            var queryMSU = db.Database.SqlQuery<SurveyorStats>(MSU);
+            var queryFWC = db.Database.SqlQuery<SurveyorStats>(FWC);
+            TotalSurveyDetail res = new TotalSurveyDetail();
+            if (queryAll.Count() > 0)
+            {
+                res.All = queryAll.Sum(x => x.SurveyCount);
+            }
+            if (queryRHS.Count() > 0)
+            {
+                res.RHS = queryRHS.Sum(x => x.SurveyCount);
+            }
+            if (queryMSU.Count() > 0)
+            {
+                res.MSU = queryMSU.Sum(x => x.SurveyCount);
+            }
+            if (queryFWC.Count() > 0)
+            {
+                res.FWC = queryFWC.Sum(x => x.SurveyCount);
+            }
+
+            return Json(res);
+        }
+        [HttpPost]
+        public JsonResult ForSelectedMonitoring(string id)
+        {
+           
+            //7120 7121 7122
+            if (string.IsNullOrEmpty(id))
+            {
+                return Json(null);
+            }
+            int CenterOpenCloseID = 0;
+            if (id.Split(',')[1].Trim() == "RHS")
+            {
+                CenterOpenCloseID = 55570 ;
+            }
+            else if (id.Split(',')[1].Trim() == "MSU")
+            {
+                CenterOpenCloseID = 50482 ;
+            }
+            else if (id.Split(',')[1].Trim() == "FWC")
+            {
+                CenterOpenCloseID = 55585;
+            }
+            var all = $"SELECT SurveyorName, COUNT(*) AS SurveyCount FROM Survey WHERE ProjectID in ({id.Split(',')[2]}) GROUP BY SurveyorName ORDER BY COUNT(*) DESC";
+
+            var OpenCloseSql = $@"
+IF OBJECT_ID('tempdb..#Graph') IS NOT NULL
+BEGIN
+    DROP TABLE #Graph;
+END
+
+;with cte as (
+	select s.sbjnum, s.Created, 
+		sd1.fieldId as FieldId1, sd1.fieldValue as FieldValue1, 
+		sd2.fieldId as FieldId2, sd2.fieldValue as FieldValue2,
+		sd3.fieldId as FieldId3, sd3.fieldValue as FieldValue3,
+	row_number() over (partition by sd1.fieldId, sd1.fieldValue, sd2.fieldId, sd2.fieldValue order by s.created desc) as RowNum
+	from survey s
+		inner join SurveyData sd1 on s.sbjnum = sd1.sbjnum and sd1.FieldId in (50446, 50486, 55588)--Center,Center,Center Ids
+		inner join SurveyData sd2 on s.sbjnum = sd2.sbjnum and sd2.FieldId in (50435, 50484, 55587)--District,District,District Ids 
+		inner join SurveyData sd3 on s.sbjnum = sd3.sbjnum and sd3.FieldId in ({CenterOpenCloseID})--Open,Open,open close Survey Ids
+)
+select fs1.FieldID as CenterId,fs2.FieldID DistrictId,  fs2.Title as District,fs1.Title as Center,  
+
+fs2.Title as DiscrtictGroup,
+fs3.Title as OpenClose, case when fs3.Title = 'Open' then 1 else  0 end IsOpen,fs3.Title
+ 
+
+    into #Graph
+	from cte
+	inner join ProjectFieldSample fs1 on cte.FieldId1 = fs1.FieldID and fs1.Code IN (cte.FieldValue1)
+	inner join ProjectFieldSample fs2 on cte.FieldId2 = fs2.FieldID and fs2.Code IN (cte.FieldValue2)
+	inner join ProjectFieldSample fs3 on cte.FieldId3 = fs3.FieldID and fs3.Code IN (cte.FieldValue3)
+    where RowNum = 1 
+
+	select  Count(g.IsOpen) OpenClose,g.Title     from  #Graph as g where g.IsOpen in (1,0) and g.DistrictId in (50435)
+	group by  g.IsOpen ,g.Title  
+
+
+";
+
+
+            var Openclose = db.Database.SqlQuery<OpenCloseResponse>(OpenCloseSql);
+            var queryFWC = db.Database.SqlQuery<SurveyorStats>(all);
+            TotalSurveyDetail res = new TotalSurveyDetail();
+            if (queryFWC.Count() > 0)
+            {
+                res.All = queryFWC.Sum(x => x.SurveyCount);
+                res.Name = id.Split(',')[1];
+            }
+            if(Openclose.Count() > 0)
+            {
+                foreach (var item in Openclose.ToList())
+                {
+                    if(item.Title == "Close")
+                    {
+                        res.Close = item.OpenClose;
+                        res.CloseTitle = item.Title;
+                    }
+                    else
+                    {
+                        res.Open = item.OpenClose;
+                        res.OpenTitle = item.Title;
+                    }
+                }
+            }
+            else
+            {
+                res.Close = 0 ;
+                res.CloseTitle = "Close";
+                res.Open = 0;
+                res.OpenTitle = "Open";
+            }
+            return Json(res);
+        }
+
+        public void OpenClose()
+        {
+
+
+            var distinctItems = new List<SelectListItem>();
+
+            distinctItems.Add(new SelectListItem
+            {
+                Text = "Select both",
+                Value = "1,0"
+            });
+            // Hardcode "Open" option with value true
+            distinctItems.Add(new SelectListItem
+            {
+                Text = "Open",
+                Value = "1"
+            });
+
+            // Hardcode "Close" option with value false
+            distinctItems.Add(new SelectListItem
+            {
+                Text = "Close",
+                Value = "0"
+            });
+
+ 
+
+            // Convert the list to a List<SelectListItem>
+            distinctItems = distinctItems.ToList();
+            ViewBag.OpenClose = distinctItems;
+           
+
+        }
+
         public void Central()
         {
             var dummyData = new List<ProjectFieldSample> { new ProjectFieldSample { Title = "select", Code = "1" }, };
@@ -235,18 +598,18 @@ INNER JOIN
         public void Monitoring()
         {
            string sql = @"SELECT case 
-when id = 7114 then 50577 
-when id = 7120 then 50577--50446 
+ 
+when id = 7120 then 50435--50446 
 when id = 7121 then 50484--50486 
 when id = 7122 then 55587--50517 
-else 0 end Id , Name      FROM Project WHERE id in (7120,7121,7122) ORDER BY name"; //7114 ,
+else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122) ORDER BY name"; //7114 ,
             var CheckFor = db.Database.SqlQuery<ProjectsList>(sql);
              
             
             var Checklist = CheckFor.Select(x => new SelectListItem
             {
                 Text = x.Name,
-                Value = x.Id.ToString() + "," + x.Name.Split('-')[1]
+                Value = x.Id.ToString() + "," + x.Name.Split('-')[1] +","+ x.RoleId.ToString(),
             }).ToList();
 
             var dummyData = new List<ProjectFieldSample> { new ProjectFieldSample { Title = "Select District", Code = "0" }, };
@@ -267,7 +630,7 @@ else 0 end Id , Name      FROM Project WHERE id in (7120,7121,7122) ORDER BY nam
 
             ViewBag.Center = Center;
             ViewBag.District = District;
-            ViewBag.Checklist = Checklist; ;
+            ViewBag.Checklist = Checklist;
         }
 
 
