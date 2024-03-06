@@ -482,14 +482,58 @@ fs3.Title as OpenClose, case when fs3.Title = 'Open' then 1 else  0 end IsOpen,f
 	inner join ProjectFieldSample fs3 on cte.FieldId3 = fs3.FieldID and fs3.Code IN (cte.FieldValue3)
     where RowNum = 1 
 
-	select  Count(g.IsOpen) OpenClose,g.Title     from  #Graph as g where g.IsOpen in (1,0) and g.DistrictId in (50435)
+	select  Count(g.IsOpen) OpenClose,g.Title     from  #Graph as g where g.IsOpen in (1,0) and g.DistrictId in ({CenterOpenCloseID})
 	group by  g.IsOpen ,g.Title  
 
 
 ";
 
+            var Status = $@"IF OBJECT_ID('tempdb..#Graph') IS NOT NULL
+BEGIN
+    DROP TABLE #Graph;
+END
+
+;with cte as (
+	select s.sbjnum, s.Created, 
+		sd1.fieldId as FieldId1, sd1.fieldValue as FieldValue1, 
+		sd2.fieldId as FieldId2, sd2.fieldValue as FieldValue2,
+		sd3.fieldId as FieldId3, sd3.fieldValue as FieldValue3,
+		sd4.fieldId as FieldId4, sd4.fieldValue as FieldValue4,
+	row_number() over (partition by sd1.fieldId, sd1.fieldValue, sd2.fieldId, sd2.fieldValue order by s.created desc) as RowNum
+	from survey s
+		inner join SurveyData sd1 on s.sbjnum = sd1.sbjnum and sd1.FieldId in (50446, 50486, 55588)--Center,Center,Center Ids
+		inner join SurveyData sd2 on s.sbjnum = sd2.sbjnum and sd2.FieldId in (50435, 50484, 55587)--District,District,District Ids 
+		inner join SurveyData sd3 on s.sbjnum = sd3.sbjnum and sd3.FieldId in (55570, 50482, 55585)--Open,Open,open close Survey Ids
+		inner join SurveyData sd4 on s.sbjnum = sd4.sbjnum and sd4.FieldId in (50635)
+		
+
+
+)--Abs
+--)
+select fs1.FieldID as CenterId,fs2.FieldID DistrictId,  fs2.Title as District,fs1.Title as Center,  
+
+fs2.Title as DiscrtictGroup,
+fs3.Title as OpenClose, case when fs3.Title = 'Open' then 1 else  0 end IsOpen,
+fs4.Title as Status
+ 
+
+    into #Graph
+	from cte
+	inner join ProjectFieldSample fs1 on cte.FieldId1 = fs1.FieldID and fs1.Code IN (cte.FieldValue1)
+	inner join ProjectFieldSample fs2 on cte.FieldId2 = fs2.FieldID and fs2.Code IN (cte.FieldValue2)
+	inner join ProjectFieldSample fs3 on cte.FieldId3 = fs3.FieldID and fs3.Code IN (cte.FieldValue3)
+	Left join ProjectFieldSample fs4 on cte.FieldId4 = fs4.FieldID and fs4.ParentSampleID=0  and fs4.Code IN (select * from dbo.SplitStringValue(cte.FieldValue4, ',')) 
+    where RowNum = 1
+	
+	select count(Status) cnt ,Status from #Graph where DistrictId = {id.Split(',')[0]} 
+	group by Status--,Center
+";
+
+
+
 
             var Openclose = db.Database.SqlQuery<OpenCloseResponse>(OpenCloseSql);
+            var StatusDt = db.Database.SqlQuery<EmpStatus>(Status);
             var queryFWC = db.Database.SqlQuery<SurveyorStats>(all);
             TotalSurveyDetail res = new TotalSurveyDetail();
             if (queryFWC.Count() > 0)
@@ -520,6 +564,38 @@ fs3.Title as OpenClose, case when fs3.Title = 'Open' then 1 else  0 end IsOpen,f
                 res.Open = 0;
                 res.OpenTitle = "Open";
             }
+
+            if(StatusDt.Count() > 0)
+            {
+                foreach (var item in StatusDt.ToList())
+                {
+                    if (item.Status == "Present")
+                    {
+                        res.Present = item.cnt;
+                    }
+                    else if (item.Status == "Absent")
+                    {
+                        res.Absent = item.cnt;
+                    }
+                    else if (item.Status == "Leave")
+                    {
+                        res.Leave = item.cnt;
+                    }
+                    else if (item.Status == "Vacant")
+                    {
+                        res.Vacant = item.cnt;
+                    }
+                }
+                
+            }
+            else
+            {
+                res.Present = 0;
+                res.Absent = 0;
+                res.Leave = 0;
+                res.Vacant = 0;
+            }
+
             return Json(res);
         }
 

@@ -138,9 +138,9 @@
 
 
 
-                        <div class="col-lg-3">
+                        <div class="col-lg-2">
                             <div style="border: 1px solid black">
-                                <p style="text-align:center; align-items:center; background-color:darkblue; margin: 0; color: white"> Status Of Survey</p>
+                                <p style="text-align:center; align-items:center; background-color:darkblue; margin: 0; color: white"> Total Visit Report submited</p>
                                 <div>
                                     <div class="small-box bg-red" style="margin-bottom:0px">
                                         <div class="inner" style="text-align:center">
@@ -195,7 +195,7 @@
 
                         <div class="col-lg-3">
                             <div style="border: 1px solid black">
-                                <p style="text-align:center; align-items:center; background-color:darkblue; margin: 0; color: white" id="BStatus"> Status Of</p>
+                                <p style="text-align:center; align-items:center; background-color:darkblue; margin: 0; color: white" id="BStatus"> Type of</p>
                                 <div style="display:flex;">
                                     <div class="small-box bg-green" style="width:100%; margin-bottom: 0">
                                         <div class="inner" style="text-align:center">
@@ -223,24 +223,46 @@
 
                         @* premises Status*@
 
-                        <div class="col-lg-3">
+                        <div class="col-lg-4">
                             <div style="border: 1px solid black">
-                                <p style="text-align:center; align-items:center; background-color:darkblue; margin: 0; color: white" id="PStatus"> Status Of premises</p>
+                                <p style="text-align:center; align-items:center; background-color:darkblue; margin: 0; color: white" id="PStatus"> Overall Status</p>
                                 <div style="display:flex;">
                                     <div class="small-box bg-green" style="width:100%; margin-bottom: 0">
                                         <div class="inner" style="text-align:center">
-                                            <h3 id="premisesValue">0</h3>
-                                            <p id="premisesTitle">premises</p>
+                                            <h3 id="PresentValue">0</h3>
+                                            <p id="PresentTitle">Present</p>
                                         </div>
                                         <div class="icon">
                                             <i class="ion ion-pie-graph"></i>
                                         </div>
                                         <a href="#" class="small-box-footer"></a>
                                     </div>
+                                    <div class="small-box bg-blue" style="width: 100%; margin-bottom: 0">
+                                        <div class="inner" style="text-align:center">
+                                            <h3 id="AbsentValue">0</h3>
+                                            <p id="AbsentTitle">Absent</p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="ion ion-pie-graph"></i>
+                                        </div>
+                                        <a href="#" class="small-box-footer"></a>
+                                    </div>
+
+                                    <div class="small-box bg-purple" style="width: 100%; margin-bottom: 0">
+                                        <div class="inner" style="text-align:center">
+                                            <h3 id="LeaveValue">0</h3>
+                                            <p id="LeaveTitle">Leave</p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="ion ion-pie-graph"></i>
+                                        </div>
+                                        <a href="#" class="small-box-footer"></a>
+                                    </div>
+
                                     <div class="small-box bg-red" style="width: 100%; margin-bottom: 0">
                                         <div class="inner" style="text-align:center">
-                                            <h3 id="UnpremisesValue">0</h3>
-                                            <p id="UnpremisesTitle">premises</p>
+                                            <h3 id="VacantValue">0</h3>
+                                            <p id="VacantTitle">Vacant</p>
                                         </div>
                                         <div class="icon">
                                             <i class="ion ion-pie-graph"></i>
@@ -378,6 +400,12 @@
                         $('#OpenValue').text(data.Open);
                         $('#Status').text("Status Of " + data.Name);
                         $('#BStatus').text("Status Of " + data.Name);
+
+
+                        $('#PresentValue').text(data.Present);
+                        $('#AbsentValue').text(data.Absent);
+                        $('#LeaveValue').text(data.Leave);
+                        $('#VacantValue').text(data.Vacant);
 
 
 

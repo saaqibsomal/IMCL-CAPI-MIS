@@ -127,11 +127,23 @@ namespace DNA_CAPI_MIS.Models
         public int Close { get; set; }
         public string OpenTitle { get; set; }
         public string CloseTitle { get; set; }
+
+
+        public int Absent { get; set; }
+        public int Leave { get; set; }
+        public int Present { get; set; }
+        public int Vacant { get; set; }
     }
 
    public class OpenCloseResponse
     {
         public int OpenClose { get; set; }
         public string Title { get; set; }
+    }
+
+    public class EmpStatus
+    {
+        public int cnt { get; set; }
+        public string Status { get; set; }
     }
 }
