@@ -29,7 +29,7 @@
                     <div class="row">
                         <div class="col-10">
                             <div class="col-md-4 col-sm-12">
-                                @Html.DropDownList("Checklist", ViewBag.Checklist as List<SelectListItem>, "Select Monitoring Checklist For", htmlAttributes: new { @class = "form-control", id = "Checklist" })
+                                @Html.DropDownList("Checklist", ViewBag.Checklist as List<SelectListItem>, "Select Monitoring Checklist For All", htmlAttributes: new { @class = "form-control", id = "Checklist" })
 
                             </div>
                         </div>
@@ -62,7 +62,7 @@
                 </div>
 
 
-                <div class="row">
+                @*<div class="row">
                     <div class="col-12">
 
                         <div class="col-10">
@@ -72,9 +72,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div>*@
 
-                <div class="col-lg-12" style="margin-top: 10px;">
+                <div class="col-lg-12" style="margin-top: 10px;" id="AllNote">
                     <h2 style="text-align: center;">Total surveys</h2>
                     <div class="row">
                         <div class="col-lg-3">
@@ -131,338 +131,577 @@
                     </div>
                 </div>
 
-            </div><!-- /.box-header -->
+                <div class="col-lg-12" style="margin-top: 10px; display:none;" id="SelectedNote">
+                    <h2 style="text-align: center;">Total surveys</h2>
+                    <div class="row">
 
 
+
+
+                        <div class="col-lg-2">
+                            <div style="border: 1px solid black">
+                                <p style="text-align:center; align-items:center; background-color:darkblue; margin: 0; color: white"> Total Visit Report submited</p>
+                                <div>
+                                    <div class="small-box bg-red" style="margin-bottom:0px">
+                                        <div class="inner" style="text-align:center">
+                                            <h3 id="MonitoringValue">0</h3>
+                                            <p id="MonitoringName"></p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="ion ion-pie-graph"></i>
+                                        </div>
+                                        <a href="#" class="small-box-footer"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        @* Open Close Status*@
+
+                        <div class="col-lg-3">
+                            <div style="border: 1px solid black">
+                                <p style="text-align:center; align-items:center; background-color:darkblue; margin: 0; color: white" id="Status"> Status Of</p>
+                                <div style="display:flex;">
+                                    <div class="small-box bg-green" style="width:100%; margin-bottom: 0">
+                                        <div class="inner" style="text-align:center">
+                                            <h3 id="OpenValue">0</h3>
+                                            <p id="OpenTitle">Open</p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="ion ion-pie-graph"></i>
+                                        </div>
+                                        <a href="#" class="small-box-footer"></a>
+                                    </div>
+                                    <div class="small-box bg-red" style="width: 100%; margin-bottom: 0">
+                                        <div class="inner" style="text-align:center">
+                                            <h3 id="CloseValue">0</h3>
+                                            <p id="CloseTitle">Close</p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="ion ion-pie-graph"></i>
+                                        </div>
+                                        <a href="#" class="small-box-footer"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                        @* Branded UnBranded Status*@
+
+                        <div class="col-lg-3">
+                            <div style="border: 1px solid black">
+                                <p style="text-align:center; align-items:center; background-color:darkblue; margin: 0; color: white" id="BStatus"> Type of</p>
+                                <div style="display:flex;">
+                                    <div class="small-box bg-green" style="width:100%; margin-bottom: 0">
+                                        <div class="inner" style="text-align:center">
+                                            <h3 id="BrandedValue">0</h3>
+                                            <p id="BrandedTitle">Branded</p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="ion ion-pie-graph"></i>
+                                        </div>
+                                        <a href="#" class="small-box-footer"></a>
+                                    </div>
+                                    <div class="small-box bg-red" style="width: 100%; margin-bottom: 0">
+                                        <div class="inner" style="text-align:center">
+                                            <h3 id="UnBrandedValue">0</h3>
+                                            <p id="UnBrandedTitle">Unbranded</p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="ion ion-pie-graph"></i>
+                                        </div>
+                                        <a href="#" class="small-box-footer"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        @* premises Status*@
+
+                        <div class="col-lg-4">
+                            <div style="border: 1px solid black">
+                                <p style="text-align:center; align-items:center; background-color:darkblue; margin: 0; color: white" id="PStatus"> Overall Status</p>
+                                <div style="display:flex;">
+                                    <div class="small-box bg-green" style="width:100%; margin-bottom: 0">
+                                        <div class="inner" style="text-align:center">
+                                            <h3 id="PresentValue">0</h3>
+                                            <p id="PresentTitle">Present</p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="ion ion-pie-graph"></i>
+                                        </div>
+                                        <a href="#" class="small-box-footer"></a>
+                                    </div>
+                                    <div class="small-box bg-blue" style="width: 100%; margin-bottom: 0">
+                                        <div class="inner" style="text-align:center">
+                                            <h3 id="AbsentValue">0</h3>
+                                            <p id="AbsentTitle">Absent</p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="ion ion-pie-graph"></i>
+                                        </div>
+                                        <a href="#" class="small-box-footer"></a>
+                                    </div>
+
+                                    <div class="small-box bg-purple" style="width: 100%; margin-bottom: 0">
+                                        <div class="inner" style="text-align:center">
+                                            <h3 id="LeaveValue">0</h3>
+                                            <p id="LeaveTitle">Leave</p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="ion ion-pie-graph"></i>
+                                        </div>
+                                        <a href="#" class="small-box-footer"></a>
+                                    </div>
+
+                                    <div class="small-box bg-red" style="width: 100%; margin-bottom: 0">
+                                        <div class="inner" style="text-align:center">
+                                            <h3 id="VacantValue">0</h3>
+                                            <p id="VacantTitle">Vacant</p>
+                                        </div>
+                                        <div class="icon">
+                                            <i class="ion ion-pie-graph"></i>
+                                        </div>
+                                        <a href="#" class="small-box-footer"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div><!-- /.box-header -->
+
+
+
+
+                </div><!-- /.box -->
+                @*<div id="chart-container" style="width: 900px; height: 600px;"></div>*@
+                @*<canvas id="BarChart" style="width:100%;max-width:900px"></canvas>*@
+                @*<canvas id="PeiChart" style="width:100%;max-width:900px"></canvas>*@
+            </div>
             <div style="width: 80%; margin: auto;">
                 <canvas id="myChart" width="400" height="200"></canvas>
+                @*<button id="printPDFButton"> Print</button>*@
             </div>
-
+         
             <div style="width: 50%; margin: auto;">
-                <canvas id="myPieChart" width="400" height="400"></canvas>
+                <canvas id="myPieChart" width="300" height="300"></canvas>
             </div>
-
-        </div><!-- /.box -->
-
-        @*<div id="chart-container" style="width: 900px; height: 600px;"></div>*@
-        @*<canvas id="BarChart" style="width:100%;max-width:900px"></canvas>*@
-        @*<canvas id="PeiChart" style="width:100%;max-width:900px"></canvas>*@
-    </div>
-    <!-- Loading (remove the following to stop the loading)-->
-    <div class="overlay" style="display:none;"></div>
-    <div class="loading-img" style="display: none;"></div>
-    <!-- end loading -->
-</div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.2.2/echarts.min.js"></script>
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script>
-
-
-    $('#Checklist').change(function () {
-        var Checklist = $('#Checklist').val();
-
-        GetDistrict(Checklist);
-
-        var dv = $('#District option').map(function () {
-            return $(this).text();
-        }).get();
-
-        var dvv = $('#District option').map(function () {
-            return $(this).val();
-        }).get();
-
-        OkBarChart(dv.slice(1), dvv.slice(1));
-       // OkPeiChart(Checklist);
-       // PieChart(dv.slice(1));
-       // CharBar2(dv.slice(1));
-        $("#District").empty();
-        $("#Center").empty();
-    });
+            <!-- Loading (remove the following to stop the loading)-->
+            <div class="overlay" style="display:none;"></div>
+            <div class="loading-img" style="display: none;"></div>
+            <!-- end loading -->
+        </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.2.2/echarts.min.js"></script>
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 
 
 
 
-    $('#OpenClose').change(function () {
-        OkBarChartOpenClose("", "");
-    });
+        <script>
+
+            var selectedTex = "";
+            $('#Checklist').change(function () {
+                var Checklist = $('#Checklist').val();
+
+                GetDistrict(Checklist);
+
+                var dv = $('#District option').map(function () {
+                    return $(this).text();
+                }).get();
+
+                var dvv = $('#District option').map(function () {
+                    return $(this).val();
+                }).get();
 
 
-    $('#District').change(function () {
-        var val = $('#Checklist').val();
-        var selectedText = $(this).find('option:selected').text();
-        var com = val + "," + selectedText;
-        $("#Center").empty();
-        GetCenter(com);
-    });
-
-    var Checklist = $('#Checklist option').map(function () {
-        return $(this).text();
-    }).get();
-   // PieChart(Checklist.slice(1));
-   // CharBar2(Checklist.slice(1));
-
-    function GetDistrict(district) {
-        //if (district == 0) {
-        //    $("#District").empty();
-        //    $("#District").append('<option value="' + 0 + '">' + "Select District" + '</option>')
-        //    return;
-        //}
-
-        $.ajax({
-            type: 'POST',
-            url: "/Designer/GetDistictById/" + district,
-            data: {},
-            async: true,
-            success: function (data) {
+                GetAllNotes(Checklist);
+                BarChart(dv.slice(1), dvv.slice(1));
+                BothChart(dv.slice(1), dvv.slice(1));
                 $("#District").empty();
-                $("#District").append('<option value="' + 0 + '">' + "---Select All---" + '</option>')
-                $.each(data, function (i, state) {
-                    $("#District").append('<option value="' + state.Value + '">' + state.Text + '</option>')
-                })
-            }
-        });
-
-    }
-
-
-    function GetCenter(district) {
-        $.ajax({
-            type: 'POST',
-            url: "/Designer/GetCentral/" + district,
-            data: {},
-            success: function (data) {
                 $("#Center").empty();
-                $("#Centrals").append('<option value="' + 0 + '">' + "---Select All---" + '</option>')
-                $.each(data, function (i, state) {
-                    $("#Center").append('<option value="' + state.Value + '">' + state.Text + '</option>')
-                })
+            });
+
+
+
+
+            //$('#OpenClose').change(function () {
+            //    OkBarChartOpenClose("", "");
+            //});
+
+
+            $('#District').change(function () {
+                var val = $('#Checklist').val();
+                var selectedText = $(this).find('option:selected').text();
+                var com = val + "," + selectedText;
+                $("#Center").empty();
+                GetCenter(com);
+            });
+
+            var Checklist = $('#Checklist option').map(function () {
+                return $(this).text();
+            }).get();
+            // PieChart(Checklist.slice(1));
+            // CharBar2(Checklist.slice(1));
+
+            function GetDistrict(district) {
+
+                var dist = district;
+                $.ajax({
+                    type: 'POST',
+                    url: "/Designer/GetDistictById/" + district,
+                    data: {},
+                    async: true,
+                    success: function (data) {
+                        $("#District").empty();
+                        $("#District").append('<option value="' + 0 + '">' + "---Select All---" + '</option>')
+                        $.each(data, function (i, state) {
+                            $("#District").append('<option value="' + state.Value + '">' + state.Text + '</option>')
+                        })
+                    }
+                });
+
             }
-        });
-    }
 
 
+            function GetAllNotes(district) {
 
 
-    function OkBarChart(Text, Value) {
-       
-        var ids = $('#Checklist').val();
-        var id = parseInt(ids.split(',')[2]);
-        var TitleArray = [];
-        var values = [];
-
-        $.ajax({
-            type: 'POST',
-            url: "/Designer/BarChart/" + id,
-            data: {},
-            async: true,
-            success: function (data) {
-                // Extracting values from data using map function
-                values = $.map(data, function (state) {
-                    return state.Value;
-                });
-                // Extracting values from data using map function
-                TitleArray = $.map(data, function (state) {
-                    return state.Text;
-                });
-
-                // Call the function after data is retrieved
-                BarCharfun(TitleArray, values);
-                OkPeiChart(TitleArray, values)
-            },
-            error: function (xhr, status, error) {
-                // Handle error if AJAX request fails
-                console.error("AJAX Error:", error);
-            }
-        });
-      
-    }
-
-    function OkBarChartOpenClose(Text, Value) {
-
-        var ids = $('#Checklist').val();
-        var OpenClose = $('#OpenClose').val();
-        var id = parseInt(ids.split(',')[2]);
-        var TitleArray = [];
-        var values = [];
-
-        $.ajax({
-            type: 'POST',
-            url: "/Designer/OpenClose/" + id + "|" + OpenClose,
-            data: {},
-            async: true,
-            success: function (data) {
-                // Extracting values from data using map function
-                values = $.map(data, function (state) {
-                    return state.Value;
-                });
-                // Extracting values from data using map function
-                TitleArray = $.map(data, function (state) {
-                    return state.Text;
-                });
-
-                // Call the function after data is retrieved
-                BarCharfun(TitleArray, values);
-                OkPeiChart(TitleArray, values)
-            },
-            error: function (xhr, status, error) {
-                // Handle error if AJAX request fails
-                console.error("AJAX Error:", error);
-            }
-        });
-
-    }
-
-
-
-    function BarCharfun(TitleArray, values) {
-        // Data for the chart
-        //var chart = $('#myChart').data('chart');
-        //if (chart) {
-        //    chart.destroy();
-        //}
-
-        var data = {
-            labels: TitleArray,
-            datasets: [{
-                label: 'Bar Chart',
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                borderColor: 'rgba(255, 99, 132, 1)',
-                borderWidth: 1,
-                data: values
-            }]
-        };
-
-        // Configuration options
-        var options = {
-            scales: {
-                y: {
-                    beginAtZero: true
+                if (district == "") {
+                    $('#AllNote').show();
+                    $('#SelectedNote').hide();
                 }
+                $.ajax({
+                    type: 'POST',
+                    url: "/Designer/ForSelectedMonitoring/" + district,
+                    data: {},
+                    async: true,
+                    success: function (data) {
+
+
+
+                        $('#AllNote').hide();
+                        $('#SelectedNote').show();
+                        $('#MonitoringValue').text(data.All);
+                        $('#MonitoringName').text(data.Name);
+
+                        $('#CloseTitle').text(data.CloseTitle);
+                        $('#OpenTitle').text(data.OpenTitle);
+                        $('#CloseValue').text(data.Close);
+                        $('#OpenValue').text(data.Open);
+                        $('#Status').text("Status Of " + data.Name);
+                        $('#BStatus').text("Status Of " + data.Name);
+
+
+                        $('#PresentValue').text(data.Present);
+                        $('#AbsentValue').text(data.Absent);
+                        $('#LeaveValue').text(data.Leave);
+                        $('#VacantValue').text(data.Vacant);
+
+
+
+                    }
+                });
+
             }
-        };
 
-        // Create the chart
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: data,
-            options: options
-        });
-    }
-
-    function OkPeiChart(TitleArray, values) {
-       
-        //var chart = $('#myPieChart').data('chart');
-        //if (chart) {
-        //    chart.destroy();
-        //}
-
-        var data = {
-            labels: TitleArray,
-            datasets: [{
-                label: 'Pie Chart',
-                data: values,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.5)',
-                    'rgba(54, 162, 235, 0.5)',
-                    'rgba(255, 206, 86, 0.5)',
-                    'rgba(75, 192, 192, 0.5)',
-                    'rgba(153, 102, 255, 0.5)',
-                    'rgba(255, 159, 64, 0.5)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
-        };
-
-        // Configuration options
-        var options = {
-            responsive: true
-        };
-
-        // Create the pie chart
-        var ctx = document.getElementById('myPieChart').getContext('2d');
-        var myPieChart = new Chart(ctx, {
-            type: 'pie',
-            data: data,
-            options: options
-        });
-    }
-
-
-    function CharBar2(districtValues) {
+            function GetCenter(district) {
+                $.ajax({
+                    type: 'POST',
+                    url: "/Designer/GetCentral/" + district,
+                    data: {},
+                    success: function (data) {
+                        $("#Center").empty();
+                        $("#Centrals").append('<option value="' + 0 + '">' + "---Select All---" + '</option>')
+                        $.each(data, function (i, state) {
+                            $("#Center").append('<option value="' + state.Value + '">' + state.Text + '</option>')
+                        })
+                    }
+                });
+            }
 
 
 
-        var options = {
-            chart: {
-                type: 'column'
-            },
-            title: {
-                text: 'Bar Chart'
-            },
-            xAxis: {
-                categories: districtValues
-            },
-            yAxis: {
-                title: {
-                    text: 'Value'
-                }
-            },
-            series: [{
-                name: 'Value',
-                data: [10, 20, 30]
-            }]
-        };
 
-        // Initialize Highcharts
-        $('#chart-container').highcharts(options);
+            function BothChart(Text, Value) {
 
-    }
+                var ids = $('#Checklist').val();
+                var id = parseInt(ids.split(',')[0]);
+                var TitleArray = [];
+                var values = [];
+                var Title = $('#Checklist').find('option:selected').text();
+                $.ajax({
+                    type: 'POST',
+                    //url: "/Designer/BarChart/" + id,
+                    url: "/Designer/DistrictBarChart/" + id,
+                    data: {},
+                    async: true,
+                    success: function (data) {
+                        // Extracting values from data using map function
+                        values = $.map(data, function (state) {
+                            return state.Value;
+                        });
+                        // Extracting values from data using map function
+                        TitleArray = $.map(data, function (state) {
+                            return state.Text;
+                        });
+
+                        // Call the function after data is retrieved
+                        //  BarCharfun(TitleArray, values);
+                        OkPieChart(TitleArray, values, Title)
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle error if AJAX request fails
+                        console.error("AJAX Error:", error);
+                    }
+                });
+
+            }
+
+
+            $('#District').change(function () {
+     
+                var District = $('#District').find('option:selected').text();
+                var Value = $('#District').val();
+                CenterPieChart(District, Value)
+ 
+            });
 
 
 
-    function PieChart2(Data) {
-        // Initialize ECharts instance
-        var chart = echarts.init(document.getElementById('pie-chart-container'));
+            function CenterPieChart(District, Value) {
 
-        // Chart configuration
-        var options = {
-            title: {
-                text: 'Pie Chart Example'
-            },
-            tooltip: {
-                trigger: 'item',
-                formatter: '{a} <br/>{b}: {c} ({d}%)'
-            },
-            series: [
-                {
-                    name: 'Value',
+        
+                var TitleArray = [];
+                var values = [];
+    
+                $.ajax({
+                    type: 'POST',
+                    //url: "/Designer/BarChart/" + id,
+                    url: "/Designer/CenterPieChart/" + District + "," + Value,
+                    data: {},
+                    async: true,
+                    success: function (data) {
+                        // Extracting values from data using map function
+                        values = $.map(data, function (state) {
+                            return state.Value;
+                        });
+                        // Extracting values from data using map function
+                        TitleArray = $.map(data, function (state) {
+                            return state.Text;
+                        });
+ 
+                        OkPieChart(TitleArray, values, District)
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle error if AJAX request fails
+                        console.error("AJAX Error:", error);
+                    }
+                });
+
+            }
+
+
+            function BarChart(Text, Value) {
+
+                var ids = $('#Checklist').val();
+                var id = parseInt(ids.split(',')[2]);
+                var TitleArray = [];
+                var values = [];
+                var Title = $('#Checklist').find('option:selected').text();
+                $.ajax({
+                    type: 'POST',
+                    url: "/Designer/BarChart/" + id,
+                    //  url: "/Designer/DistrictBarChart/" + id,
+                    data: {},
+                    async: true,
+                    success: function (data) {
+                        // Extracting values from data using map function
+                        values = $.map(data, function (state) {
+                            return state.Value;
+                        });
+                        // Extracting values from data using map function
+                        TitleArray = $.map(data, function (state) {
+                            return state.Text;
+                        });
+
+                        // Call the function after data is retrieved
+                        BarCharfun(TitleArray, values);
+                        // OkPieChart(TitleArray, values, Title)
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle error if AJAX request fails
+                        console.error("AJAX Error:", error);
+                    }
+                });
+
+            }
+
+
+            function OkBarChartOpenClose(Text, Value) {
+
+                var ids = $('#Checklist').val();
+                var OpenClose = $('#OpenClose').val();
+                var id = parseInt(ids.split(',')[2]);
+                var TitleArray = [];
+                var values = [];
+                var Title = $('#Checklist').find('option:selected').text();
+                $.ajax({
+                    type: 'POST',
+                    url: "/Designer/OpenClose/" + id + "|" + OpenClose,
+                    data: {},
+                    async: true,
+                    success: function (data) {
+                        // Extracting values from data using map function
+                        values = $.map(data, function (state) {
+                            return state.Value;
+                        });
+                        // Extracting values from data using map function
+                        TitleArray = $.map(data, function (state) {
+                            return state.Text;
+                        });
+
+                        // Call the function after data is retrieved
+                        BarCharfun(TitleArray, values);
+                        OkPieChart(TitleArray, values, Title)
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle error if AJAX request fails
+                        console.error("AJAX Error:", error);
+                    }
+                });
+
+            }
+
+
+
+            function BarCharfun(TitleArray, values) {
+                // Data for the chart
+
+                var data = {
+                    labels: TitleArray,
+                    datasets: [{
+                        label: $('#Checklist').find('option:selected').text(),
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1,
+                        data: values
+                    }]
+                };
+
+                // Configuration options
+                var options = {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                };
+
+                // Create the chart
+                var ctx = document.getElementById('myChart').getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: data,
+                    options: options
+                });
+
+
+
+            }
+
+            function OkPieChart(TitleArray, values, Title) {
+
+
+                var data = {
+                    labels: TitleArray,
+                    datasets: [{
+                        label: Title,
+                        data: values,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.5)',
+                            'rgba(54, 162, 235, 0.5)',
+                            'rgba(255, 206, 86, 0.5)',
+                            'rgba(75, 192, 192, 0.5)',
+                            'rgba(153, 102, 255, 0.5)',
+                            'rgba(255, 159, 64, 0.5)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                };
+
+                // Configuration options
+                var options = {
+                    responsive: true
+                };
+
+                // Create the pie chart
+                var ctx = document.getElementById('myPieChart').getContext('2d');
+                var myPieChart = new Chart(ctx, {
                     type: 'pie',
-                    radius: '55%',
-                    data: Data
-                }
-            ]
-        };
-
-        // Set options
-        chart.setOption(options);
-    }
+                    data: data,
+                    options: options
+                });
+            }
 
 
-</script>
 
-<script>
-    $(document).ready(function () {
-      
-    });
-</script>
+
+
+            function printChartAsPDF() {
+                var chartCanvas = document.getElementById('myPieChart');
+
+                //html2canvas(chartCanvas, {
+                //    onrendered: function (canvas) {
+                //        var imgData = canvas.toDataURL('image/png');
+                //        var pdf = new jsPDF('l', 'mm', [canvas.width, canvas.height]);
+                //        pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
+                //        pdf.save('chart.pdf');
+                //    }
+                //});
+
+
+        
+                //html2canvas(chartCanvas)
+                //    .then((canvas) => {
+                //        const imgData = chartCanvas.toDataURL('image/png');
+                //        const pdf = new jsPDF({
+                //            orientation: 'landscape',
+                //        });
+                //        const imgProps = pdf.getImageProperties(imgData);
+                //        const pdfWidth = pdf.internal.pageSize.getWidth();
+                //        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+                //        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+                //        pdf.save('download.pdf');
+                //    });
+
+
+            }
+
+
+            //document.getElementById('printPDFButton').addEventListener('click', printChartAsPDF);
+
+        </script>
+
+        <script>
+            $(document).ready(function () {
+
+            });
+        </script>

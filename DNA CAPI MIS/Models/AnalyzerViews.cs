@@ -128,6 +128,9 @@ namespace DNA_CAPI_MIS.Models
         public string OpenTitle { get; set; }
         public string CloseTitle { get; set; }
 
+        public int UnBrandedCnt{ get; set; }
+        public int BrandedCnt { get; set; }
+
 
         public int Absent { get; set; }
         public int Leave { get; set; }
@@ -145,5 +148,21 @@ namespace DNA_CAPI_MIS.Models
     {
         public int cnt { get; set; }
         public string Status { get; set; }
+    }  
+    
+    public class Branded
+    {
+        public int BrandedCnt { get; set; }
+        public string Name { get; set; }
     }
+
+    public class MonitoringOfficerDto
+    {
+        public string District { get; set; }
+        public string Name { get; set; }
+        public string Status { get; set; }
+        public string OpenClose { get; set; }
+        public string Remarks { get; set; }
+    }
+
 }

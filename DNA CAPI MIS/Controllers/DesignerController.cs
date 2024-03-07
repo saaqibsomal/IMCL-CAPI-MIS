@@ -428,6 +428,50 @@ fs3.Title as OpenClose, case when fs3.Title = 'Open' then 1 else  0 end IsOpen
 
             return Json(res);
         }
+
+        [HttpPost]
+        public JsonResult MonitoringOfficer(string id)
+        {
+            string Sql = $@"IF OBJECT_ID('tempdb..#Graph') IS NOT NULL
+BEGIN
+    DROP TABLE #Graph;
+END
+
+;with cte as (
+	select s.sbjnum, s.Created, 
+       
+		sd2.fieldId as FieldId2, sd2.fieldValue as FieldValue2,
+		sd3.fieldId as FieldId3, sd3.fieldValue as FieldValue3,
+	    sd4.fieldId as FieldId4, sd4.fieldValue as FieldValue4,
+		sd5.fieldId as FieldId5, sd5.fieldValue as FieldValue5,
+		sd6.fieldId as FieldId6, sd6.fieldValue as FieldValue6,
+	row_number() over (partition by  sd2.fieldId, sd2.fieldValue,sd3.fieldId,sd3.fieldValue,sd4.fieldId ,sd5.fieldId,sd5.fieldValue order by s.created desc) as RowNum
+	from survey s
+		inner join SurveyData sd2 on s.sbjnum = sd2.sbjnum and sd2.FieldId in ({id.Split(',')[0]})--50435, 50484, 55587
+		inner join SurveyData sd3 on s.sbjnum = sd3.sbjnum and sd3.FieldId in (55570, 50482, 55585)--Open,Open,open close Survey Ids
+		Inner join SurveyData sd4 on s.sbjnum = sd4.sbjnum and sd4.FieldId in (55590,50634,50437)
+		Inner join SurveyData sd5 on s.sbjnum = sd5.sbjnum and sd5.FieldId in (55582,50480,55620)
+		Inner join SurveyData sd6 on s.sbjnum = sd6.sbjnum and sd6.FieldId in (52569,55584,55626))
+select  fs2.Title as District   ,fs4.Title as Status ,
+fs3.Title as OpenClose, FieldValue5 as Remarks,FieldValue6 as Name
+    into #Graph from cte
+	inner join ProjectFieldSample fs2 on cte.FieldId2 = fs2.FieldID and fs2.Code IN (cte.FieldValue2)
+	inner join ProjectFieldSample fs3 on cte.FieldId3 = fs3.FieldID and fs3.Code IN (cte.FieldValue3)
+    inner join ProjectFieldSample fs4 on cte.FieldId4 = fs4.FieldID and fs4.Code IN (cte.FieldValue4)
+	Left join ProjectFieldSample fs5 on cte.FieldId5 = fs5.FieldID 
+	Left join ProjectFieldSample fs6 on cte.FieldId6 = fs6.FieldID 
+    where RowNum = 1 select * from #Graph   
+ 
+  
+ 
+";
+
+            var Openclose = db.Database.SqlQuery<MonitoringOfficerDto>(Sql).ToList();
+
+            return Json(Openclose);
+        }
+
+
         [HttpPost]
         public JsonResult ForSelectedMonitoring(string id)
         {
@@ -437,18 +481,22 @@ fs3.Title as OpenClose, case when fs3.Title = 'Open' then 1 else  0 end IsOpen
             {
                 return Json(null);
             }
+            int BrandedId = 0;
             int CenterOpenCloseID = 0;
             if (id.Split(',')[1].Trim() == "RHS")
             {
                 CenterOpenCloseID = 55570 ;
+                BrandedId = 50437;
             }
             else if (id.Split(',')[1].Trim() == "MSU")
             {
                 CenterOpenCloseID = 50482 ;
+                BrandedId = 50634;
             }
             else if (id.Split(',')[1].Trim() == "FWC")
             {
                 CenterOpenCloseID = 55585;
+                BrandedId = 55590;
             }
             var all = $"SELECT SurveyorName, COUNT(*) AS SurveyCount FROM Survey WHERE ProjectID in ({id.Split(',')[2]}) GROUP BY SurveyorName ORDER BY COUNT(*) DESC";
 
@@ -482,7 +530,7 @@ fs3.Title as OpenClose, case when fs3.Title = 'Open' then 1 else  0 end IsOpen,f
 	inner join ProjectFieldSample fs3 on cte.FieldId3 = fs3.FieldID and fs3.Code IN (cte.FieldValue3)
     where RowNum = 1 
 
-	select  Count(g.IsOpen) OpenClose,g.Title     from  #Graph as g where g.IsOpen in (1,0) and g.DistrictId in ({CenterOpenCloseID})
+	select  Count(g.IsOpen) OpenClose,g.Title     from  #Graph as g where g.IsOpen in (1,0)  
 	group by  g.IsOpen ,g.Title  
 
 
@@ -502,7 +550,7 @@ END
 	row_number() over (partition by sd1.fieldId, sd1.fieldValue, sd2.fieldId, sd2.fieldValue order by s.created desc) as RowNum
 	from survey s
 		inner join SurveyData sd1 on s.sbjnum = sd1.sbjnum and sd1.FieldId in (50446, 50486, 55588)--Center,Center,Center Ids
-		inner join SurveyData sd2 on s.sbjnum = sd2.sbjnum and sd2.FieldId in (50435, 50484, 55587)--District,District,District Ids 
+		inner join SurveyData sd2 on s.sbjnum = sd2.sbjnum and sd2.FieldId in ({id.Split(',')[0]} )--District,District,District Ids --50435, 50484, 55587 
 		inner join SurveyData sd3 on s.sbjnum = sd3.sbjnum and sd3.FieldId in (55570, 50482, 55585)--Open,Open,open close Survey Ids
 		inner join SurveyData sd4 on s.sbjnum = sd4.sbjnum and sd4.FieldId in (50635)
 		
@@ -523,18 +571,43 @@ fs4.Title as Status
 	inner join ProjectFieldSample fs2 on cte.FieldId2 = fs2.FieldID and fs2.Code IN (cte.FieldValue2)
 	inner join ProjectFieldSample fs3 on cte.FieldId3 = fs3.FieldID and fs3.Code IN (cte.FieldValue3)
 	Left join ProjectFieldSample fs4 on cte.FieldId4 = fs4.FieldID and fs4.ParentSampleID=0  and fs4.Code IN (select * from dbo.SplitStringValue(cte.FieldValue4, ',')) 
-    where RowNum = 1
+    where RowNum = 1 and fs3.Title= 'Open'
 	
-	select count(Status) cnt ,Status from #Graph where DistrictId = {id.Split(',')[0]} 
+	select count(Status) cnt ,Status from #Graph 
 	group by Status--,Center
 ";
 
 
+            var Branded = $@"IF OBJECT_ID('tempdb..#Graph') IS NOT NULL
+BEGIN
+    DROP TABLE #Graph;
+END
 
+;with cte as (
+	select s.sbjnum, s.Created, 
+       
+		sd2.fieldId as FieldId2, sd2.fieldValue as FieldValue2,
+		sd3.fieldId as FieldId3, sd3.fieldValue as FieldValue3,
+	    sd4.fieldId as FieldId4, sd4.fieldValue as FieldValue4,
+	
+	row_number() over (partition by  sd2.fieldId, sd2.fieldValue,sd3.fieldId,sd3.fieldValue,sd4.fieldId order by s.created desc) as RowNum
+	from survey s
+
+		inner join SurveyData sd2 on s.sbjnum = sd2.sbjnum and sd2.FieldId in (50435, 50484, 55587)--District,District,District Ids 
+		inner join SurveyData sd3 on s.sbjnum = sd3.sbjnum and sd3.FieldId in (55570, 50482, 55585)--Open,Open,open close Survey Ids
+		Inner join SurveyData sd4 on s.sbjnum = sd4.sbjnum and sd4.FieldId in ({BrandedId})) 
+ 
+    select  fs2.FieldID DistrictId,  fs2.Title as District   ,fs4.Title as status  into #Graph from cte
+	inner join ProjectFieldSample fs2 on cte.FieldId2 = fs2.FieldID and fs2.Code IN (cte.FieldValue2)
+	inner join ProjectFieldSample fs3 on cte.FieldId3 = fs3.FieldID and fs3.Code IN (cte.FieldValue3)
+    inner join ProjectFieldSample fs4 on cte.FieldId4 = fs4.FieldID and fs4.Code IN (cte.FieldValue4)
+    where RowNum = 1 select status as Name, count(status) as BrandedCnt from #Graph   group by  status 
+ ";
 
             var Openclose = db.Database.SqlQuery<OpenCloseResponse>(OpenCloseSql);
             var StatusDt = db.Database.SqlQuery<EmpStatus>(Status);
             var queryFWC = db.Database.SqlQuery<SurveyorStats>(all);
+            var BrandedSql = db.Database.SqlQuery<Branded>(Branded);
             TotalSurveyDetail res = new TotalSurveyDetail();
             if (queryFWC.Count() > 0)
             {
@@ -594,6 +667,28 @@ fs4.Title as Status
                 res.Absent = 0;
                 res.Leave = 0;
                 res.Vacant = 0;
+            }
+
+
+            if (BrandedSql.Count() > 0)
+            {
+                foreach (var item in BrandedSql.ToList())
+                {
+                    if (item.Name.Trim() == "Branded")
+                    {
+                        res.BrandedCnt = item.BrandedCnt;
+
+                    }
+                    else
+                    {
+                        res.UnBrandedCnt = item.BrandedCnt;
+                    }
+                }
+            }
+            else
+            {
+                res.BrandedCnt = 0;
+                res.UnBrandedCnt = 0;
             }
 
             return Json(res);
