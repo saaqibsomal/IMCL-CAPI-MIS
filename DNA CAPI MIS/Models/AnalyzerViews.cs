@@ -19,7 +19,27 @@ namespace DNA_CAPI_MIS.Models
         public string SurveyorName { get; set; }
         public int SurveyCount { get; set; }
     }
-    
+
+
+    public class SurveyReport
+    {
+        public int sbjnum { get; set; }
+        public string SurveyorName { get; set; }
+        public int FieldId { get; set; }
+        public string Title { get; set; }
+        public string ReportTitle { get; set; }
+        public string FieldValue { get; set; }
+    }
+
+    public class SurveyTitle
+    {
+
+        public string FieldValue { get; set; }
+        public string Title { get; set; }
+        public string Code { get; set; }
+        public int FieldID { get; set; }
+    }
+
     public class ProjectsList
     {
         public int Id { get; set; }
@@ -163,6 +183,15 @@ namespace DNA_CAPI_MIS.Models
         public string Status { get; set; }
         public string OpenClose { get; set; }
         public string Remarks { get; set; }
+    }  
+    
+    
+    public class Contraceptive
+    {
+        public string District { get; set; }
+        public string contraceptive { get; set; }
+        public string FieldValue1 { get; set; }
+
     }
 
 }

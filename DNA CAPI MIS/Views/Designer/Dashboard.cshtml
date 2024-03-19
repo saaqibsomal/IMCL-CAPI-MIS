@@ -37,6 +37,32 @@
     }
 
 </style>
+
+
+<style>
+    /* Style for the table */
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    /* Style for table headers */
+    th {
+        background-color: #007bff; /* Blue header color */
+        color: #fff; /* Text color */
+        font-weight: bold;
+        text-align: left;
+    }
+    /* Style for table cells */
+    td {
+        border: 1px solid #dddddd; /* Border color for cells */
+        padding: 8px;
+    }
+    /* Alternate row color */
+    tr:nth-child(even) {
+        background-color: #f2f2f2; /* Light gray */
+    }
+</style>
+
 <div class="row desktop">
     <div class="col-xs-12">
         <div class="box">
@@ -78,18 +104,8 @@
                     </div>
                 </div>
 
+                <button id="PdfExcel" style="margin-top: 10px;"> Print</button>
 
-                @*<div class="row">
-                <div class="col-12">
-
-                    <div class="col-10">
-                        <div class="col-md-4 col-sm-12">
-                            @Html.DropDownList("OpenClose", ViewBag.OpenClose as List<SelectListItem>, htmlAttributes: new { @class = "form-control" })
-
-                        </div>
-                    </div>
-                </div>
-            </div>*@
 
                 <div class="col-lg-12" style="margin-top: 10px;" id="AllNote">
                     <h2 style="text-align: center;">Total surveys</h2>
@@ -310,7 +326,34 @@
                 <canvas id="myPieChart" width="400" height="200"></canvas>
             </div>
 
+            
+            <div class="col-12" style="text-align: center; margin-top: 10px;">
+                <h1>Stock of Contraceptive District Wise Status</h1>
+                <div class="col-10">
+
+
+                    <table class="table bordered table-condensed table-hover solid-line">
+                        <thead>
+                            <tr>
+                                <th>Name of District</th>
+                                <th id="Condoms">Condoms</th>
+                                <th id="COC">COC</th>
+                                <th id="POP">POP</th>
+                                <th id="ECP">ECP</th>
+                                <th id="Depo">3 Months Inj(Depo)</th>
+                                <th id="Syana">3 Month Inj (Syana Press)</th>
+                                <th id="IUCD">IUCD (CT-380-A)</th>
+                                <th id="Jadelle">Jadelle</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyCond">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
             <div class="col-12" style="text-align:center">
+                <h1>Remarks of Monitoring Officer</h1>
                 <div class="col-10">
 
 
@@ -371,6 +414,7 @@
 
                 try {
                     MnitoringOfficer(Checklist);
+                    ContraceptiveDetail(Checklist)
                 }
                 catch(ex)
                 {
@@ -782,7 +826,91 @@
 
             }
 
+            function ContraceptiveDetail(district) {
 
+
+                var c1 = 0;
+                var c2 = 0;
+                var c3 = 0;
+                var c4 = 0;
+                var c5 = 0;
+                var c6 = 0;
+                var c7 = 0;
+                var c8 = 0;
+
+                $.ajax({
+                    type: 'POST',
+                    url: "/Designer/ContraceptiveDetail/" + district,
+                    data: {},
+                    async: true,
+                    success: function (data) {
+                        $("#tbody").empty();
+                        var html = '';
+                        $.each(data, function (key, item) {
+
+
+                            var Cond = item.FieldValue1.split(",")
+                             c1 += parseInt(Cond[0]);
+                             c2 += parseInt(Cond[1]);
+                             c3 += parseInt(Cond[2]);
+                             c4 += parseInt(Cond[3]);
+                             c5 += parseInt(Cond[4]);
+                             c6 += parseInt(Cond[5]);
+                             c7 += parseInt(Cond[6]);
+                             c8 += parseInt(Cond[7]);
+
+                            html += '<tr>';
+
+                            html += '<td>' + item.District + '</td>';
+                            html += '<td>' + Cond[0] + '</td>';
+                            html += '<td>' + Cond[1]+ '</td>';
+                            html += '<td>' + Cond[2] + '</td>';
+                            html += '<td>' + Cond[3] + '</td>';
+                            html += '<td>' + Cond[4] + '</td>';
+                            html += '<td>' + Cond[5] + '</td>';
+                            html += '<td>' + Cond[6] + '</td>';
+                            html += '<td>' + Cond[7] + '</td>';
+                            html += '</tr>';
+                        });
+
+                        html += '<tr>';
+                        html += '<th>' + "Total" + '</th>';
+                        html += '<th>' + c1 + '</th>';
+                        html += '<th>' + c2 + '</th>';
+                        html += '<th>' + c3 + '</th>';
+                        html += '<th>' + c4 + '</th>';
+                        html += '<th>' + c5 + '</th>';
+                        html += '<th>' + c6 + '</th>';
+                        html += '<th>' + c7 + '</th>';
+                        html += '<th>' + c8 + '</th>';
+                        html += '</tr>';
+                        $('#tbodyCond').html(html);
+
+                    }
+                });
+
+            }
+
+            $('#PdfExcel').click(function () {
+             var Proj =   $('#Checklist').val();
+                var id = Proj + ",1";
+                $.ajax({
+                    type: 'POST',
+                    url: "/Designer/ExcelReport/" + id,
+      
+                   
+                    success: function (data, textStatus, jqXHR) {
+                        var blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+                        var link = document.createElement('a');
+                        link.href = window.URL.createObjectURL(blob);
+                        link.download = 'output.xlsx';
+                        link.click();
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.error('Error:', errorThrown);
+                    }
+                })
+            })
 
         </script>
 

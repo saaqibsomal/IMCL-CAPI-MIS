@@ -134,3 +134,18 @@ C:\Project\DNA_CAPI_MIS\DNA CAPI MIS\bin\Microsoft.Owin.Security.Google.xml
 C:\Project\DNA_CAPI_MIS\DNA CAPI MIS\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Project\DNA_CAPI_MIS\DNA CAPI MIS\bin\System.Net.Http.Formatting.xml
 C:\Project\DNA_CAPI_MIS\DNA CAPI MIS\obj\Debug\PWD CAPI MIS.csproj.CopyComplete
+C:\Project\DNA_CAPI_MIS\DNA CAPI MIS\bin\EPPlus.dll
+C:\Project\DNA_CAPI_MIS\DNA CAPI MIS\bin\EPPlus.Interfaces.dll
+C:\Project\DNA_CAPI_MIS\DNA CAPI MIS\bin\EPPlus.System.Drawing.dll
+C:\Project\DNA_CAPI_MIS\DNA CAPI MIS\bin\Microsoft.IO.RecyclableMemoryStream.dll
+C:\Project\DNA_CAPI_MIS\DNA CAPI MIS\bin\System.Buffers.dll
+C:\Project\DNA_CAPI_MIS\DNA CAPI MIS\bin\System.ComponentModel.Annotations.dll
+C:\Project\DNA_CAPI_MIS\DNA CAPI MIS\bin\System.Memory.dll
+C:\Project\DNA_CAPI_MIS\DNA CAPI MIS\bin\System.Numerics.Vectors.dll
+C:\Project\DNA_CAPI_MIS\DNA CAPI MIS\bin\System.Runtime.CompilerServices.Unsafe.dll
+C:\Project\DNA_CAPI_MIS\DNA CAPI MIS\bin\EPPlus.xml
+C:\Project\DNA_CAPI_MIS\DNA CAPI MIS\bin\Microsoft.IO.RecyclableMemoryStream.xml
+C:\Project\DNA_CAPI_MIS\DNA CAPI MIS\bin\System.Buffers.xml
+C:\Project\DNA_CAPI_MIS\DNA CAPI MIS\bin\System.Memory.xml
+C:\Project\DNA_CAPI_MIS\DNA CAPI MIS\bin\System.Numerics.Vectors.xml
+C:\Project\DNA_CAPI_MIS\DNA CAPI MIS\bin\System.Runtime.CompilerServices.Unsafe.xml

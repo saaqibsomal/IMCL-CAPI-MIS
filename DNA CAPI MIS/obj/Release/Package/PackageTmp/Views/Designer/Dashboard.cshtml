@@ -19,7 +19,50 @@
         padding-right: 15px;
         padding-left: 15px;
     }
+
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+
 </style>
+
+
+<style>
+    /* Style for the table */
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    /* Style for table headers */
+    th {
+        background-color: #007bff; /* Blue header color */
+        color: #fff; /* Text color */
+        font-weight: bold;
+        text-align: left;
+    }
+    /* Style for table cells */
+    td {
+        border: 1px solid #dddddd; /* Border color for cells */
+        padding: 8px;
+    }
+    /* Alternate row color */
+    tr:nth-child(even) {
+        background-color: #f2f2f2; /* Light gray */
+    }
+</style>
+
 <div class="row desktop">
     <div class="col-xs-12">
         <div class="box">
@@ -61,18 +104,8 @@
                     </div>
                 </div>
 
+                <button id="PdfExcel" style="margin-top: 10px;"> Print</button>
 
-                @*<div class="row">
-                    <div class="col-12">
-
-                        <div class="col-10">
-                            <div class="col-md-4 col-sm-12">
-                                @Html.DropDownList("OpenClose", ViewBag.OpenClose as List<SelectListItem>, htmlAttributes: new { @class = "form-control" })
-
-                            </div>
-                        </div>
-                    </div>
-                </div>*@
 
                 <div class="col-lg-12" style="margin-top: 10px;" id="AllNote">
                     <h2 style="text-align: center;">Total surveys</h2>
@@ -285,13 +318,60 @@
                 @*<canvas id="PeiChart" style="width:100%;max-width:900px"></canvas>*@
             </div>
             <div style="width: 80%; margin: auto;">
-                <canvas id="myChart" width="400" height="200"></canvas>
+                <canvas id="myChart" width="400" height="300"></canvas>
                 @*<button id="printPDFButton"> Print</button>*@
             </div>
-         
+
             <div style="width: 50%; margin: auto;">
-                <canvas id="myPieChart" width="300" height="300"></canvas>
+                <canvas id="myPieChart" width="400" height="200"></canvas>
             </div>
+
+            
+            <div class="col-12" style="text-align: center; margin-top: 10px;">
+                <div class="col-10">
+
+
+                    <table class="table bordered table-condensed table-hover solid-line">
+                        <thead>
+                            <tr>
+                                <th>Name of District</th>
+                                <th id="Condoms">Condoms</th>
+                                <th id="COC">COC</th>
+                                <th id="POP">POP</th>
+                                <th id="ECP">ECP</th>
+                                <th id="Depo">3 Months Inj(Depo)</th>
+                                <th id="Syana">3 Month Inj (Syana Press)</th>
+                                <th id="IUCD">IUCD (CT-380-A)</th>
+                                <th id="Jadelle">Jadelle</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyCond">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-12" style="text-align:center">
+                <div class="col-10">
+
+
+                    <table class="table bordered table-condensed table-hover solid-line">
+                        <thead>
+                            <tr>
+                                <th>Name of District</th>
+                                <th id="MName">Name</th>
+                                <th id="MStatus">Status</th>
+                                <th id="MType">Type</th>
+                                <th>Remarks of Monitoring Officer</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
             <!-- Loading (remove the following to stop the loading)-->
             <div class="overlay" style="display:none;"></div>
             <div class="loading-img" style="display: none;"></div>
@@ -323,12 +403,21 @@
                     return $(this).val();
                 }).get();
 
-
+               
                 GetAllNotes(Checklist);
                 BarChart(dv.slice(1), dvv.slice(1));
                 BothChart(dv.slice(1), dvv.slice(1));
                 $("#District").empty();
                 $("#Center").empty();
+
+                try {
+                    MnitoringOfficer(Checklist);
+                    ContraceptiveDetail(Checklist)
+                }
+                catch(ex)
+                {
+
+                }
             });
 
 
@@ -406,6 +495,9 @@
                         $('#AbsentValue').text(data.Absent);
                         $('#LeaveValue').text(data.Leave);
                         $('#VacantValue').text(data.Vacant);
+
+                        $('#BrandedValue').text(data.BrandedCnt);
+                        $('#UnBrandedValue').text(data.UnBrandedCnt);
 
 
 
@@ -697,6 +789,95 @@
 
 
             //document.getElementById('printPDFButton').addEventListener('click', printChartAsPDF);
+
+
+
+            function MnitoringOfficer(district) {
+
+
+                $('#MType').text(district.split(',')[1] + " Type");
+                $('#MStatus').text(district.split(',')[1] + " Status");
+                $('#MName').text(district.split(',')[1] + " Name");
+               
+                $.ajax({
+                    type: 'POST',
+                    url: "/Designer/MonitoringOfficer/" + district,
+                    data: {},
+                    async: true,
+                    success: function (data) {
+                        $("#tbody").empty();
+                        var html = '';
+                        $.each(data, function (key, item) {
+                            html += '<tr>';
+
+                            html += '<td>' + item.District + '</td>';
+                            html += '<td>' + item.Name + '</td>';
+                            html += '<td>' + item.Status + '</td>';
+                            html += '<td>' + item.OpenClose + '</td>';
+                            html += '<td>' + item.Remarks + '</td>';
+                            html += '</tr>';
+                        });
+                        $('#tbody').html(html);
+           
+                    }
+                });
+
+            }
+
+            function ContraceptiveDetail(district) {
+
+
+         
+
+                $.ajax({
+                    type: 'POST',
+                    url: "/Designer/ContraceptiveDetail/" + district,
+                    data: {},
+                    async: true,
+                    success: function (data) {
+                        $("#tbody").empty();
+                        var html = '';
+                        $.each(data, function (key, item) {
+                            html += '<tr>';
+
+                            html += '<td>' + item.District + '</td>';
+                            html += '<td>' + item.contraceptive + '</td>';
+                            html += '<td>' + item.FieldValue1 + '</td>';
+                            html += '<td>' + "" + '</td>';
+                            html += '<td>' + "" + '</td>';
+                            html += '<td>' + "" + '</td>';
+                            html += '<td>' + "" + '</td>';
+                            html += '<td>' + "" + '</td>';
+                            html += '<td>' + "" + '</td>';
+                            html += '</tr>';
+                        });
+                        $('#tbodyCond').html(html);
+
+                    }
+                });
+
+            }
+
+            $('#PdfExcel').click(function () {
+             var Proj =   $('#Checklist').val();
+                var id = Proj + ",1";
+                $.ajax({
+                    type: 'POST',
+                    url: "/Designer/ExcelReport/" + id,
+      
+                   
+                    success: function (data, textStatus, jqXHR) {
+                        var blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+                        var link = document.createElement('a');
+                        link.href = window.URL.createObjectURL(blob);
+                        link.download = 'output.xlsx';
+                        link.click();
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.error('Error:', errorThrown);
+                    }
+                })
+            })
 
         </script>
 

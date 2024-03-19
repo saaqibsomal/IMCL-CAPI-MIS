@@ -12,6 +12,11 @@ using Microsoft.AspNet.Identity;
 using System.IO;
 using System.Text.RegularExpressions;
 using Microsoft.Ajax.Utilities;
+using System.Web.UI.WebControls;
+using OfficeOpenXml;
+using System.Net.Http;
+using System.Text;
+ 
 
 namespace DNA_CAPI_MIS.Controllers
 {
@@ -469,11 +474,54 @@ fs3.Title as OpenClose, FieldValue5 as Remarks,FieldValue6 as Name
             var Openclose = db.Database.SqlQuery<MonitoringOfficerDto>(Sql).ToList();
 
             return Json(Openclose);
+        } 
+        
+        
+        [HttpPost]
+        public JsonResult ContraceptiveDetail(string id)
+        {
+            string Sql = $@"IF OBJECT_ID('tempdb..#Cond') IS NOT NULL
+BEGIN
+    DROP TABLE #Graph;
+END
+
+;with cte as (
+	select s.sbjnum, s.Created, 
+		sd1.fieldId as FieldId1, sd1.fieldValue as FieldValue1, 
+		sd2.fieldId as FieldId2, sd2.fieldValue as FieldValue2,
+		 
+
+	row_number() over (partition by sd1.fieldId, sd1.fieldValue, sd2.fieldId, sd2.fieldValue order by s.created desc) as RowNum
+	from survey s
+		inner join SurveyData sd1 on s.sbjnum = sd1.sbjnum and sd1.FieldId in (50559, 50504, 55601)--Contraceptive Ids
+		inner join SurveyData sd2 on s.sbjnum = sd2.sbjnum and sd2.FieldId in ({id.Split(',')[0]}  )--District,District,District Ids --50435, 50484, 55587
+	
+)
+select fs2.Title as District,fs1.Title as contraceptive ,cte.FieldValue1
+
+    into #Cond
+	from cte
+	inner join ProjectFieldSample fs1 on cte.FieldId1 = fs1.FieldID and fs1.Code IN (select * from dbo.SplitStringValue(cte.FieldValue1, ','))
+	inner join ProjectFieldSample fs2 on cte.FieldId2 = fs2.FieldID and fs2.Code IN (cte.FieldValue2)
+  
+    where RowNum = 1  
+	
+	select * from #Cond 
+ 
+ 
+  
+ 
+";
+
+            var con = db.Database.SqlQuery<Contraceptive>(Sql).ToList();
+
+            return Json(con);
         }
 
 
         [HttpPost]
         public JsonResult ForSelectedMonitoring(string id)
+
         {
            
             //7120 7121 7122
@@ -755,7 +803,7 @@ END
             {
                 string userFilter = "";
                 string uid = User.Identity.GetUserId();
-                userFilter = " AND pur.UserId = " + uid;
+                userFilter = " AND pur.UserId = " + (uid ?? "0");
                 sql = @"SELECT * FROM project p WHERE (name like '%" + name + "%' OR guid like '%" + name + "%') AND isnull(status, 'D') IN (" + status + ")  AND id IN (SELECT ObjectValue FROM DNAShared2.dbo.UserRights pur WHERE pur.ObjectName = 'PROJECT'" + userFilter + ")";
             } 
 
@@ -2122,47 +2170,199 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
             }
         }
 
-        //public string GetProjectJSON(int id, string language)
-        //{
-        //    DSDS_WebAPI.Controllers.SurveyController survey = new DSDS_WebAPI.Controllers.SurveyController();
-        //    string json = survey.GetProject(id, language);
-        //    return json;
-        //}
-        //public string GetProjectSectionFieldsJSON(int id, string language)
-        //{
-        //    DSDS_WebAPI.Controllers.SurveyController survey = new DSDS_WebAPI.Controllers.SurveyController();
-        //    string json = survey.GetProjectSectionFields(id, language);
-        //    return json;
-        //}
-        //public string GetProjectFieldSamplesJSON(int id)
-        //{
-        //    DSDS_WebAPI.Controllers.ProjectController api = new DSDS_WebAPI.Controllers.ProjectController();
-        //    string json = api.GetProjectFieldSamples(id.ToString());
-        //    return json;
-        //}
-        //public string GetProjectFieldSamplesQJSON(int id)
-        //{
-        //    DSDS_WebAPI.Controllers.ProjectController api = new DSDS_WebAPI.Controllers.ProjectController();
-        //    string json = api.GetProjectFieldSamplesQ(id.ToString());
-        //    return json;
-        //}
-        //public string SendData(DSDS_WebAPI.Controllers.CategoryController.Survey survey)
-        //{
-        //    DSDS_WebAPI.Controllers.CategoryController controller = new DSDS_WebAPI.Controllers.CategoryController();
-        //    string result = controller.SaveSurveyData(survey);
-        //    string surveyId = "ERROR";
-        //    if (result != null && result.Length > 0)
-        //    {
-        //        var settings = new JsonSerializerSettings();
-        //        settings.TypeNameHandling = TypeNameHandling.Objects;
-        //        settings.PreserveReferencesHandling = PreserveReferencesHandling.Objects;
-        //        survey = JsonConvert.DeserializeObject<DSDS_WebAPI.Controllers.CategoryController.Survey>(result, settings);
-        //        surveyId = survey.sbjnum;
-        //    }
-        //    return surveyId;
-        //}
+
+        [Authorize]
+        public HttpResponseMessage ExcelReport(string id)
+        {
+            var p = id.Split(',')[2];
+            var s = id.Split(',')[1];
+
+            int ProjectID = Convert.ToInt32(p);
+            int sbjnum = 8226980;
+            var SurveyData = $@"IF OBJECT_ID('tempdb..#pdf') IS NOT NULL
+BEGIN
+    DROP TABLE #pdf;
+END
+
+
+SELECT 
+    s.sbjnum, 
+    s.SurveyorName, 
+    sd.FieldId, 
+   
+    CASE 
+        WHEN t.Text IS NULL THEN pf.Title 
+        ELSE t.Text 
+    END AS Title, 
+    pf.ReportTitle, 
+    sd.FieldValue
+ into #Pdf
+FROM 
+    Survey s 
+INNER JOIN 
+    SurveyData sd ON s.sbjnum = sd.sbjnum 
+LEFT OUTER JOIN 
+    STGSurvey ON s.sbjnum = STGSurvey.SurveyId
+LEFT OUTER JOIN 
+    SurveyLocation sl ON sl.sbjnum = s.sbjnum
+LEFT OUTER JOIN 
+    ProjectField pf ON sd.FieldId = pf.ID 
+LEFT OUTER JOIN 
+    ProjectFieldSection pfn ON pf.SectionId = pfn.id
+LEFT OUTER JOIN 
+    Translation t ON t.EntityName = 'PROJECTFIELD' 
+    AND t.FieldName = 'TITLE' 
+    AND t.Language = 'en' 
+    AND pf.ID = (CASE WHEN ISNUMERIC(t.KeyValue) = 1 THEN CAST(t.KeyValue as int) ELSE 0 END) 
+LEFT OUTER JOIN 
+    City ct ON ct.ID = s.CityID
+LEFT OUTER JOIN 
+    District dt ON dt.ID = s.DistrictID
+LEFT OUTER JOIN 
+    Country cy ON ct.CountryID = cy.ID 
+OUTER APPLY 
+    dbo.SplitStringValue(sd.FieldValue, ',') AS split -- Assuming you have a function to split the values
+WHERE 
+    ISNULL(s.Version, 0) = 0 
+    AND ISNULL(s.Test, 0) = 0 
+    AND s.ProjectID = {ProjectID}
+ORDER BY 
+    s.sbjnum, cy.Name, ct.Name, dt.Name, s.Created DESC, ISNULL(pfn.DisplayOrder, 0), pf.DisplayOrder
+
+	 select * from #pdf p where len(p.FieldValue) > 0  order by p.sbjnum desc --and p.sbjnum = {sbjnum} 
+";
+
+
+            string Titles = $@"SELECT value AS FieldValue,Title,Code,sd.FieldID
+FROM ProjectFieldSample pfs
+INNER JOIN SurveyData sd ON pfs.FieldID = sd.FieldId
+CROSS APPLY dbo.SplitStringValue(sd.FieldValue, ',') AS SplitValues
+order by sd.sbjnum --WHERE sd.sbjnum = {sbjnum} ;
+";
+            var GetSurvey = db.Database.SqlQuery<SurveyReport>(SurveyData);
+            var GetTitle = db.Database.SqlQuery<SurveyTitle>(Titles);
+            var titles = GetTitle.ToArray();
+            string IntToString = "";
+            var Survey = GetSurvey.ToList();
+            foreach (var item in Survey)
+            {
+                int result1;
+
+                bool isNumeric1 = false;
+                if (item.FieldValue.Contains(","))
+                {
+                    IntToString = string.Empty;
+                    foreach (var i in item.FieldValue.Split(','))
+                    {
+
+                        isNumeric1 = int.TryParse(i, out result1);
+                        if (isNumeric1)
+                        {
+                            IntToString += titles.Where(x => x.Code == i && x.FieldID == item.FieldId).Select(x => x.Title).FirstOrDefault() + ",";
+                        }
+                        else
+                        {
+                            IntToString += i + ",";
+                        }
+                    }
+                    item.FieldValue = IntToString.TrimEnd(',');
+                }
+                IntToString = string.Empty;
+                isNumeric1 = int.TryParse(item.FieldValue, out result1);
+                if (isNumeric1)
+                {
+                    IntToString += titles.Where(x => x.Code == item.FieldValue && x.FieldID == item.FieldId).Select(x => x.Title).FirstOrDefault() + ",";
+                    item.FieldValue = IntToString.TrimEnd(',');
+                }
+            }
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            // Create Excel package
+            using (var excelPackage = new ExcelPackage())
+            {
+                // Add a new worksheet
+                var worksheet = excelPackage.Workbook.Worksheets.Add("Sheet1");
+
+                // Add headers
+                worksheet.Cells[1, 1].Value = "SurveyorName";
+                worksheet.Cells[1, 2].Value = "Title";
+                worksheet.Cells[1, 3].Value = "FieldValue";
+
+                // Populate data
+                int row = 2;
+                foreach (var data in Survey)
+                {
+                    worksheet.Cells[row, 1].Value = data.SurveyorName;
+                    worksheet.Cells[row, 2].Value = data.Title;
+                    worksheet.Cells[row, 3].Value = data.FieldValue;
+                    row++;
+                }
+
+                // Save the Excel package to a memory stream
+                var stream = new System.IO.MemoryStream();
+                excelPackage.SaveAs(stream);
+
+                // Set response content
+                HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
+                stream.Position = 0; // Reset the position to the beginning of the stream
+                result.Content = new StreamContent(stream);
+                result.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+                result.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment")
+                {
+                    FileName = "output.xlsx"
+                };
+
+                return result;
+            }
+
+        }
+
+        
     }
+
+
+   
+
+    //public string GetProjectJSON(int id, string language)
+    //{
+    //    DSDS_WebAPI.Controllers.SurveyController survey = new DSDS_WebAPI.Controllers.SurveyController();
+    //    string json = survey.GetProject(id, language);
+    //    return json;
+    //}
+    //public string GetProjectSectionFieldsJSON(int id, string language)
+    //{
+    //    DSDS_WebAPI.Controllers.SurveyController survey = new DSDS_WebAPI.Controllers.SurveyController();
+    //    string json = survey.GetProjectSectionFields(id, language);
+    //    return json;
+    //}
+    //public string GetProjectFieldSamplesJSON(int id)
+    //{
+    //    DSDS_WebAPI.Controllers.ProjectController api = new DSDS_WebAPI.Controllers.ProjectController();
+    //    string json = api.GetProjectFieldSamples(id.ToString());
+    //    return json;
+    //}
+    //public string GetProjectFieldSamplesQJSON(int id)
+    //{
+    //    DSDS_WebAPI.Controllers.ProjectController api = new DSDS_WebAPI.Controllers.ProjectController();
+    //    string json = api.GetProjectFieldSamplesQ(id.ToString());
+    //    return json;
+    //}
+    //public string SendData(DSDS_WebAPI.Controllers.CategoryController.Survey survey)
+    //{
+    //    DSDS_WebAPI.Controllers.CategoryController controller = new DSDS_WebAPI.Controllers.CategoryController();
+    //    string result = controller.SaveSurveyData(survey);
+    //    string surveyId = "ERROR";
+    //    if (result != null && result.Length > 0)
+    //    {
+    //        var settings = new JsonSerializerSettings();
+    //        settings.TypeNameHandling = TypeNameHandling.Objects;
+    //        settings.PreserveReferencesHandling = PreserveReferencesHandling.Objects;
+    //        survey = JsonConvert.DeserializeObject<DSDS_WebAPI.Controllers.CategoryController.Survey>(result, settings);
+    //        surveyId = survey.sbjnum;
+    //    }
+    //    return surveyId;
+    //}
 }
+
 
 
 //--Query where link is between Location data and Questionnaire	
