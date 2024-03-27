@@ -328,6 +328,7 @@
 
             
             <div class="col-12" style="text-align: center; margin-top: 10px;">
+                <h1>Stock of Contraceptive District Wise Status</h1>
                 <div class="col-10">
 
 
@@ -352,6 +353,7 @@
             </div>
 
             <div class="col-12" style="text-align:center">
+                <h1>Remarks of Monitoring Officer</h1>
                 <div class="col-10">
 
 
@@ -827,7 +829,14 @@
             function ContraceptiveDetail(district) {
 
 
-         
+                var c1 = 0;
+                var c2 = 0;
+                var c3 = 0;
+                var c4 = 0;
+                var c5 = 0;
+                var c6 = 0;
+                var c7 = 0;
+                var c8 = 0;
 
                 $.ajax({
                     type: 'POST',
@@ -838,19 +847,43 @@
                         $("#tbody").empty();
                         var html = '';
                         $.each(data, function (key, item) {
+
+
+                            var Cond = item.FieldValue1.split(",")
+                             c1 += parseInt(Cond[0]);
+                             c2 += parseInt(Cond[1]);
+                             c3 += parseInt(Cond[2]);
+                             c4 += parseInt(Cond[3]);
+                             c5 += parseInt(Cond[4]);
+                             c6 += parseInt(Cond[5]);
+                             c7 += parseInt(Cond[6]);
+                             c8 += parseInt(Cond[7]);
+
                             html += '<tr>';
 
                             html += '<td>' + item.District + '</td>';
-                            html += '<td>' + item.contraceptive + '</td>';
-                            html += '<td>' + item.FieldValue1 + '</td>';
-                            html += '<td>' + "" + '</td>';
-                            html += '<td>' + "" + '</td>';
-                            html += '<td>' + "" + '</td>';
-                            html += '<td>' + "" + '</td>';
-                            html += '<td>' + "" + '</td>';
-                            html += '<td>' + "" + '</td>';
+                            html += '<td>' + Cond[0] + '</td>';
+                            html += '<td>' + Cond[1]+ '</td>';
+                            html += '<td>' + Cond[2] + '</td>';
+                            html += '<td>' + Cond[3] + '</td>';
+                            html += '<td>' + Cond[4] + '</td>';
+                            html += '<td>' + Cond[5] + '</td>';
+                            html += '<td>' + Cond[6] + '</td>';
+                            html += '<td>' + Cond[7] + '</td>';
                             html += '</tr>';
                         });
+
+                        html += '<tr>';
+                        html += '<th>' + "Total" + '</th>';
+                        html += '<th>' + c1 + '</th>';
+                        html += '<th>' + c2 + '</th>';
+                        html += '<th>' + c3 + '</th>';
+                        html += '<th>' + c4 + '</th>';
+                        html += '<th>' + c5 + '</th>';
+                        html += '<th>' + c6 + '</th>';
+                        html += '<th>' + c7 + '</th>';
+                        html += '<th>' + c8 + '</th>';
+                        html += '</tr>';
                         $('#tbodyCond').html(html);
 
                     }
