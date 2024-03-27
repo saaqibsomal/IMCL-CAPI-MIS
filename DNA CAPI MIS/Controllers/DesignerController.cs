@@ -2172,13 +2172,151 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
 
 
         [Authorize]
-        public HttpResponseMessage ExcelReport(string id)
+        public ActionResult ExcelReport(string param1)
         {
-            var p = id.Split(',')[2];
-            var s = id.Split(',')[1];
+            var p = param1.Split(',')[2];
+            var s = param1.Split(',')[1];
 
             int ProjectID = Convert.ToInt32(p);
             int sbjnum = 8226980;
+            System.Data.Entity.Infrastructure.DbRawSqlQuery<SurveyReport> GetSurvey;
+            System.Data.Entity.Infrastructure.DbRawSqlQuery<SurveyTitle> GetTitle;
+          
+            CreateDatatable(ProjectID, sbjnum, out GetSurvey, out GetTitle);
+ 
+
+           
+
+
+            var titles = GetTitle.ToArray();
+            string IntToString = "";
+            List<SurveyReport> Survey = GetTitleByIds(GetSurvey, titles, ref IntToString);
+             DataTable dataTable = ToDataTable(Survey.ToList());
+
+
+            //Col to Row
+
+
+            var pivotData = dataTable.AsEnumerable()
+                .GroupBy(row => row.Field<string>("sbjnum"))
+                .Select(group =>
+                {
+                    var rowData = group.First();
+                    var dict = group.ToDictionary(row => row.Field<string>("Title"), row => row.Field<string>("FieldValue"));
+                    return dict;
+                })
+                .ToList();
+
+            // Get distinct titles
+            var titless = dataTable.AsEnumerable().Select(row => row.Field<string>("Title")).Distinct().ToList();
+
+
+            DataTable newDataTable = new DataTable();
+
+            // Add columns to the new DataTable
+            foreach (var title in titless)
+            {
+                if(title.Length > 0)
+                newDataTable.Columns.Add(title, typeof(string)); // Assuming values are integers
+            }
+
+            // Add rows to the new DataTable
+            foreach (var row in pivotData)
+            {
+                var newRow = newDataTable.NewRow();
+                foreach (var title in titless)
+                {
+                    if (row.ContainsKey(title))
+                    {
+
+                            newRow[title] = row[title];
+                    }
+                }
+                newDataTable.Rows.Add(newRow);
+            }
+
+            // Print the new DataTable
+            PrintDataTable(newDataTable);
+
+            //Excel
+
+            string filePaths = Server.MapPath("~/Excel/" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".xlsx");
+           
+
+            var Excel =  ExportDataTableToExcel(newDataTable, filePaths);
+            
+
+            //return Json(filePaths);
+            if (System.IO.File.Exists(filePaths))
+            {
+                // Return the file as a FileStreamResult
+                return File(new FileStream(filePaths, FileMode.Open), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "output.xlsx");
+            }
+            else
+            {
+                // If the file doesn't exist, return a HttpNotFound result
+                return HttpNotFound();
+            }
+
+         
+
+
+           
+
+
+
+
+            
+
+
+        }
+
+        public ActionResult DownloadExcel(string file)
+        {
+            // This action will handle the download request
+            // You can customize it if needed, such as setting headers or logging downloads
+            return File(file, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "output.xlsx");
+        }
+        static DataTable ToDataTable<T>(List<T> items)
+        {
+            DataTable dataTable = new DataTable(typeof(T).Name);
+
+            // Get all the properties
+            var props = typeof(T).GetProperties(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+
+            foreach (var prop in props)
+            {
+                // Adding column names of the DataTable
+                dataTable.Columns.Add(prop.Name);
+            }
+
+            // Adding rows to the DataTable
+            foreach (var item in items)
+            {
+                var values = new object[props.Length];
+                for (int i = 0; i < props.Length; i++)
+                {
+                    // Inserting property values to DataTable rows
+                    values[i] = props[i].GetValue(item, null);
+                }
+                dataTable.Rows.Add(values);
+            }
+
+            return dataTable;
+        }
+        static void PrintDataTable(DataTable table)
+        {
+            foreach (DataRow row in table.Rows)
+            {
+                foreach (DataColumn col in table.Columns)
+                {
+                    Console.Write(row[col] + "\t");
+                }
+                Console.WriteLine();
+            }
+        }
+        private void CreateDatatable(int ProjectID, int sbjnum, out System.Data.Entity.Infrastructure.DbRawSqlQuery<SurveyReport> GetSurvey, out System.Data.Entity.Infrastructure.DbRawSqlQuery<SurveyTitle> GetTitle)
+        {
             var SurveyData = $@"IF OBJECT_ID('tempdb..#pdf') IS NOT NULL
 BEGIN
     DROP TABLE #pdf;
@@ -2229,52 +2367,19 @@ WHERE
 ORDER BY 
     s.sbjnum, cy.Name, ct.Name, dt.Name, s.Created DESC, ISNULL(pfn.DisplayOrder, 0), pf.DisplayOrder
 
-	 select * from #pdf p where len(p.FieldValue) > 0  order by p.sbjnum desc --and p.sbjnum = {sbjnum} 
+	 select DISTINCT CONVERT(nvarchar(max), p.Title ) AS Title, p.SurveyorName,p.FieldValue,p.sbjnum  from #pdf p where len(p.FieldValue) > 0 and p.Title is not null  order by p.sbjnum desc --and p.sbjnum = {sbjnum} 
 ";
 
 
-            string Titles = $@"SELECT value AS FieldValue,Title,Code,sd.FieldID
-FROM ProjectFieldSample pfs
-INNER JOIN SurveyData sd ON pfs.FieldID = sd.FieldId
-CROSS APPLY dbo.SplitStringValue(sd.FieldValue, ',') AS SplitValues
-order by sd.sbjnum --WHERE sd.sbjnum = {sbjnum} ;
-";
-            var GetSurvey = db.Database.SqlQuery<SurveyReport>(SurveyData);
-            var GetTitle = db.Database.SqlQuery<SurveyTitle>(Titles);
-            var titles = GetTitle.ToArray();
-            string IntToString = "";
-            var Survey = GetSurvey.ToList();
-            foreach (var item in Survey)
-            {
-                int result1;
+            string Titles = $@" select p.Title ,p.Code , p.FieldID from ProjectFieldSample p where p. IsActive = 1";
+           
 
-                bool isNumeric1 = false;
-                if (item.FieldValue.Contains(","))
-                {
-                    IntToString = string.Empty;
-                    foreach (var i in item.FieldValue.Split(','))
-                    {
+            GetSurvey = db.Database.SqlQuery<SurveyReport>(SurveyData);
+            GetTitle = db.Database.SqlQuery<SurveyTitle>(Titles);
+        }
 
-                        isNumeric1 = int.TryParse(i, out result1);
-                        if (isNumeric1)
-                        {
-                            IntToString += titles.Where(x => x.Code == i && x.FieldID == item.FieldId).Select(x => x.Title).FirstOrDefault() + ",";
-                        }
-                        else
-                        {
-                            IntToString += i + ",";
-                        }
-                    }
-                    item.FieldValue = IntToString.TrimEnd(',');
-                }
-                IntToString = string.Empty;
-                isNumeric1 = int.TryParse(item.FieldValue, out result1);
-                if (isNumeric1)
-                {
-                    IntToString += titles.Where(x => x.Code == item.FieldValue && x.FieldID == item.FieldId).Select(x => x.Title).FirstOrDefault() + ",";
-                    item.FieldValue = IntToString.TrimEnd(',');
-                }
-            }
+        private static HttpResponseMessage CreateExcel(List<SurveyReport> Survey)
+        {
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             // Create Excel package
             using (var excelPackage = new ExcelPackage())
@@ -2308,15 +2413,73 @@ order by sd.sbjnum --WHERE sd.sbjnum = {sbjnum} ;
                 result.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
                 result.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment")
                 {
-                    FileName = "output.xlsx"
+                    FileName = DateTime.Now.ToString("yyyyMMddhhmmss") + ".xlsx"
                 };
 
                 return result;
             }
+        }
+        private static string ExportDataTableToExcel(DataTable dataTable, string filePath)
+        {
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            // Create a new ExcelPackage
+            string ExcelLocation = "";
+            string DownloadLocation = "";
+            var stream = new System.IO.MemoryStream();
+            using (ExcelPackage excelPackage = new ExcelPackage())
+            {
+                // Add a new worksheet to the ExcelPackage
+                ExcelWorksheet worksheet = excelPackage.Workbook.Worksheets.Add("Sheet1");
 
+                // Load the DataTable into the worksheet starting from cell A1
+                worksheet.Cells["A1"].LoadFromDataTable(dataTable, true);
+
+
+                excelPackage.SaveAs(filePath);
+            }
+            // Set response content
+            
+        
+            return filePath;
+        }
+        private static List<SurveyReport> GetTitleByIds(System.Data.Entity.Infrastructure.DbRawSqlQuery<SurveyReport> GetSurvey, SurveyTitle[] titles, ref string IntToString)
+        {
+            var Survey = GetSurvey.ToList();
+            foreach (var item in Survey)
+            {
+                int result1;
+
+                bool isNumeric1 = false;
+                if (item.FieldValue.Contains(","))
+                {
+                    IntToString = string.Empty;
+                    foreach (var i in item.FieldValue.Split(','))
+                    {
+
+                        isNumeric1 = int.TryParse(i, out result1);
+                        if (isNumeric1)
+                        {
+                            IntToString += titles.Where(x => x.Code == i && x.FieldID == item.FieldId).Select(x => x.Title).FirstOrDefault() + ",";
+                        }
+                        else
+                        {
+                            IntToString += i + ",";
+                        }
+                    }
+                    item.FieldValue = IntToString.TrimEnd(',');
+                }
+                IntToString = string.Empty;
+                isNumeric1 = int.TryParse(item.FieldValue, out result1);
+                if (isNumeric1)
+                {
+                    IntToString += titles.Where(x => x.Code.ToString() == item.FieldValue.ToString() && x.FieldID.ToString() == item.FieldId.ToString()).Select(x => x.Title).FirstOrDefault() + ",";
+                    item.FieldValue = IntToString.TrimEnd(',');
+                }
+            }
+
+            return Survey;
         }
 
-        
     }
 
 

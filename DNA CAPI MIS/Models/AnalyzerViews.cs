@@ -27,7 +27,7 @@ namespace DNA_CAPI_MIS.Models
         public string SurveyorName { get; set; }
         public int FieldId { get; set; }
         public string Title { get; set; }
-        public string ReportTitle { get; set; }
+       
         public string FieldValue { get; set; }
     }
 

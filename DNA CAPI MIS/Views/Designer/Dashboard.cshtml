@@ -104,7 +104,7 @@
                     </div>
                 </div>
 
-                <button id="PdfExcel" style="margin-top: 10px;"> Print</button>
+                <button id="PdfExcel" style="margin-top: 10px;margin-left:20px"> Download Excel </button>
 
 
                 <div class="col-lg-12" style="margin-top: 10px;" id="AllNote">
@@ -892,25 +892,50 @@
             }
 
             $('#PdfExcel').click(function () {
-             var Proj =   $('#Checklist').val();
+                var Proj = $('#Checklist').val();
                 var id = Proj + ",1";
-                $.ajax({
-                    type: 'POST',
+             
                     url: "/Designer/ExcelReport/" + id,
-      
-                   
-                    success: function (data, textStatus, jqXHR) {
-                        var blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-                        var link = document.createElement('a');
-                        link.href = window.URL.createObjectURL(blob);
-                        link.download = 'output.xlsx';
-                        link.click();
-                    },
-                    error: function (jqXHR, textStatus, errorThrown) {
-                        console.error('Error:', errorThrown);
-                    }
-                })
-            })
+
+
+                        $.ajax({
+                            type: "GET",
+                            url: "/Designer/ExcelReport?param1=" +id,
+                            success: function (response) {
+                                // On success, trigger download
+                                window.location = "/Designer/DownloadExcel?file=" + response.fileName;
+                            },
+                            error: function (xhr, status, error) {
+                                console.error(error);
+                            }
+                        });
+
+            });
+
+            //$('#PdfExcel').click(function () {
+            // // var Proj =   $('#Checklist').val();
+            // //   var id = Proj + ",1";
+            //    // Make a GET request to the server-side endpoint
+            //    $.post('/Designer/ExcelReport/0,50435,1')
+            //        .done(function (data) {
+            //            // Create a temporary anchor element
+            //            var a = document.createElement('a');
+            //            a.href = window.URL.createObjectURL(data);
+            //            a.download = 'output.xlsx';
+            //            a.style.display = 'none';
+
+            //            // Append the anchor to the body and click it programmatically
+            //            document.body.appendChild(a);
+            //            a.click();
+
+            //            // Clean up
+            //            window.URL.revokeObjectURL(a.href);
+            //            document.body.removeChild(a);
+            //        })
+            //        .fail(function () {
+            //            alert('Failed to download Excel file.');
+            //        });
+            //});
 
         </script>
 
