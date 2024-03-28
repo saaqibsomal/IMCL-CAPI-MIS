@@ -893,17 +893,18 @@
 
             $('#PdfExcel').click(function () {
                 var Proj = $('#Checklist').val();
-                var id = Proj + ",1";
+                var id = Proj.split(',')[2]  
              
-                    url: "/Designer/ExcelReport/" + id,
+                    
 
 
                         $.ajax({
-                            type: "GET",
-                            url: "/Designer/ExcelReport?param1=" +id,
-                            success: function (response) {
+                            type: "POST",
+                            url: "/Designer/ExcelReport?param1=" + id,
+                            data: {},
+                            success: function (data) {
                                 // On success, trigger download
-                                window.location = "/Designer/DownloadExcel?file=" + response.fileName;
+                                downloadFile(data);
                             },
                             error: function (xhr, status, error) {
                                 console.error(error);
@@ -911,32 +912,33 @@
                         });
 
             });
+ 
 
-            //$('#PdfExcel').click(function () {
-            // // var Proj =   $('#Checklist').val();
-            // //   var id = Proj + ",1";
-            //    // Make a GET request to the server-side endpoint
-            //    $.post('/Designer/ExcelReport/0,50435,1')
-            //        .done(function (data) {
-            //            // Create a temporary anchor element
-            //            var a = document.createElement('a');
-            //            a.href = window.URL.createObjectURL(data);
-            //            a.download = 'output.xlsx';
-            //            a.style.display = 'none';
 
-            //            // Append the anchor to the body and click it programmatically
-            //            document.body.appendChild(a);
-            //            a.click();
+            //
+            function downloadFile(fileName) {
+                fetch(`/Designer/DownloadExcel?fileName=${fileName}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.blob();
+                    })
+                    .then(blob => {
 
-            //            // Clean up
-            //            window.URL.revokeObjectURL(a.href);
-            //            document.body.removeChild(a);
-            //        })
-            //        .fail(function () {
-            //            alert('Failed to download Excel file.');
-            //        });
-            //});
+                        const url = window.URL.createObjectURL(blob);
+                        const link = document.createElement('a');
+                        link.href = url;
+                        link.download = fileName;
+                        link.click();
 
+
+                        window.URL.revokeObjectURL(url);
+                    })
+                    .catch(error => {
+                        console.error('There was a problem with the fetch operation:', error);
+                    });
+            }
         </script>
 
         <script>

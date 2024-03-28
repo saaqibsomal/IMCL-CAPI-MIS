@@ -2174,8 +2174,8 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
         [Authorize]
         public ActionResult ExcelReport(string param1)
         {
-            var p = param1.Split(',')[2];
-            var s = param1.Split(',')[1];
+            var p = param1;
+          
 
             int ProjectID = Convert.ToInt32(p);
             int sbjnum = 8226980;
@@ -2216,7 +2216,7 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
             // Add columns to the new DataTable
             foreach (var title in titless)
             {
-                if(title.Length > 0)
+                if(title.Length > 1)
                 newDataTable.Columns.Add(title, typeof(string)); // Assuming values are integers
             }
 
@@ -2228,7 +2228,7 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
                 {
                     if (row.ContainsKey(title))
                     {
-
+                        if (title.Length > 1)
                             newRow[title] = row[title];
                     }
                 }
@@ -2240,13 +2240,14 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
 
             //Excel
 
-            string filePaths = Server.MapPath("~/Excel/" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".xlsx");
+           // string filePaths = Server.MapPath("~/Excel/" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".xlsx");
+            string filePaths = ("C:/PWD_Excel/" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".xlsx");
            
 
             var Excel =  ExportDataTableToExcel(newDataTable, filePaths);
             
 
-            //return Json(filePaths);
+            return Json(filePaths);
             if (System.IO.File.Exists(filePaths))
             {
                 // Return the file as a FileStreamResult
@@ -2271,11 +2272,13 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
 
         }
 
-        public ActionResult DownloadExcel(string file)
+     
+
+        public ActionResult DownloadExcel(string fileName)
         {
             // This action will handle the download request
             // You can customize it if needed, such as setting headers or logging downloads
-            return File(file, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "output.xlsx");
+            return File(fileName, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "output.xlsx");
         }
         static DataTable ToDataTable<T>(List<T> items)
         {
