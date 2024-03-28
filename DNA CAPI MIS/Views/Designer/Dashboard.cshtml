@@ -11,9 +11,44 @@
 }
 
 <link href="~/Content/DSDS/dsds.css" rel="stylesheet" type="text/css" />
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.3/jspdf.umd.min.js"></script>
 @*CSS Class desktop is used for overlay*@
+<style>
+    .model {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.5);
+    }
 
+    .model-content {
+        background-color: #fefefe;
+        margin: 10% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+
+    .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+</style>
 <style>
     .optionsRadios {
         padding-right: 15px;
@@ -35,7 +70,6 @@
     tr:nth-child(even) {
         background-color: #dddddd;
     }
-
 </style>
 
 
@@ -105,7 +139,7 @@
                 </div>
 
                 <button id="PdfExcel" style="margin-top: 10px;margin-left:20px"> Download Excel </button>
-
+                <button id="PdfGen" style="margin-top: 10px;margin-left:30px"> Download PDF </button>
 
                 <div class="col-lg-12" style="margin-top: 10px;" id="AllNote">
                     <h2 style="text-align: center;">Total surveys</h2>
@@ -326,7 +360,7 @@
                 <canvas id="myPieChart" width="400" height="200"></canvas>
             </div>
 
-            
+
             <div class="col-12" style="text-align: center; margin-top: 10px;">
                 <h1>Stock of Contraceptive District Wise Status</h1>
                 <div class="col-10">
@@ -378,12 +412,22 @@
             <div class="overlay" style="display:none;"></div>
             <div class="loading-img" style="display: none;"></div>
             <!-- end loading -->
+
+
+            <div class="model" id="pdfModel">
+                <div class="model-content">
+                    <span class="close">&times;</span>
+                    <h2 style="text-align:center;">PDF Report</h2>
+                    <button id="downloadPDFBtn">Download PDF</button>
+                </div>
+
+            </div>
+
         </div>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.2.2/echarts.min.js"></script>
         <script src="https://code.highcharts.com/highcharts.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 
 
@@ -405,7 +449,7 @@
                     return $(this).val();
                 }).get();
 
-               
+
                 GetAllNotes(Checklist);
                 BarChart(dv.slice(1), dvv.slice(1));
                 BothChart(dv.slice(1), dvv.slice(1));
@@ -416,8 +460,7 @@
                     MnitoringOfficer(Checklist);
                     ContraceptiveDetail(Checklist)
                 }
-                catch(ex)
-                {
+                catch (ex) {
 
                 }
             });
@@ -563,21 +606,21 @@
 
 
             $('#District').change(function () {
-     
+
                 var District = $('#District').find('option:selected').text();
                 var Value = $('#District').val();
                 CenterPieChart(District, Value)
- 
+
             });
 
 
 
             function CenterPieChart(District, Value) {
 
-        
+
                 var TitleArray = [];
                 var values = [];
-    
+
                 $.ajax({
                     type: 'POST',
                     //url: "/Designer/BarChart/" + id,
@@ -593,7 +636,7 @@
                         TitleArray = $.map(data, function (state) {
                             return state.Text;
                         });
- 
+
                         OkPieChart(TitleArray, values, District)
                     },
                     error: function (xhr, status, error) {
@@ -772,7 +815,7 @@
                 //});
 
 
-        
+
                 //html2canvas(chartCanvas)
                 //    .then((canvas) => {
                 //        const imgData = chartCanvas.toDataURL('image/png');
@@ -800,7 +843,7 @@
                 $('#MType').text(district.split(',')[1] + " Type");
                 $('#MStatus').text(district.split(',')[1] + " Status");
                 $('#MName').text(district.split(',')[1] + " Name");
-               
+
                 $.ajax({
                     type: 'POST',
                     url: "/Designer/MonitoringOfficer/" + district,
@@ -820,7 +863,7 @@
                             html += '</tr>';
                         });
                         $('#tbody').html(html);
-           
+
                     }
                 });
 
@@ -850,20 +893,20 @@
 
 
                             var Cond = item.FieldValue1.split(",")
-                             c1 += parseInt(Cond[0]);
-                             c2 += parseInt(Cond[1]);
-                             c3 += parseInt(Cond[2]);
-                             c4 += parseInt(Cond[3]);
-                             c5 += parseInt(Cond[4]);
-                             c6 += parseInt(Cond[5]);
-                             c7 += parseInt(Cond[6]);
-                             c8 += parseInt(Cond[7]);
+                            c1 += parseInt(Cond[0]);
+                            c2 += parseInt(Cond[1]);
+                            c3 += parseInt(Cond[2]);
+                            c4 += parseInt(Cond[3]);
+                            c5 += parseInt(Cond[4]);
+                            c6 += parseInt(Cond[5]);
+                            c7 += parseInt(Cond[6]);
+                            c8 += parseInt(Cond[7]);
 
                             html += '<tr>';
 
                             html += '<td>' + item.District + '</td>';
                             html += '<td>' + Cond[0] + '</td>';
-                            html += '<td>' + Cond[1]+ '</td>';
+                            html += '<td>' + Cond[1] + '</td>';
                             html += '<td>' + Cond[2] + '</td>';
                             html += '<td>' + Cond[3] + '</td>';
                             html += '<td>' + Cond[4] + '</td>';
@@ -892,27 +935,33 @@
             }
 
             $('#PdfExcel').click(function () {
+
+
+                if ($('#Checklist').val() == '') {
+                    alert("Please select monitoring checklist");
+                    return false;
+                }
                 var Proj = $('#Checklist').val();
-                var id = Proj.split(',')[2]  
-             
-                    
+                var id = Proj.split(',')[2]
 
 
-                        $.ajax({
-                            type: "POST",
-                            url: "/Designer/ExcelReport?param1=" + id,
-                            data: {},
-                            success: function (data) {
-                                // On success, trigger download
-                                downloadFile(data);
-                            },
-                            error: function (xhr, status, error) {
-                                console.error(error);
-                            }
-                        });
+
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Designer/ExcelReport?param1=" + id,
+                    data: {},
+                    success: function (data) {
+                        // On success, trigger download
+                        downloadFile(data);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(error);
+                    }
+                });
 
             });
- 
+
 
 
             //
@@ -943,6 +992,25 @@
 
         <script>
             $(document).ready(function () {
+                $("#PdfGen").click(function () {
+                    $("#pdfModel").css("display", "block");
+                });
 
+                $(".close").click(function () {
+                    $("#pdfModel").css("display", "none");
+                });
+
+                $(window).click(function (event) {
+                    if (event.target == $("#pdfModel")[0]) {
+                        $("#pdfModel").css("display", "none");
+                    }
+                });
+
+                $("#downloadPDFBtn").click(function () {
+                    var doc = new jsPDF();
+                    doc.text("PDF Report", 105, 10, { align: "center" });
+                    doc.fromHTML($("#pdfModel .model-content").html(), 15, 20);
+                    doc.save("pdf_report.pdf");
+                });
             });
         </script>
