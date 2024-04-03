@@ -12,7 +12,7 @@
 
 <link href="~/Content/DSDS/dsds.css" rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.3/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.es.min.js"></script>
 @*CSS Class desktop is used for overlay*@
 <style>
     .model {
@@ -417,7 +417,115 @@
             <div class="model" id="pdfModel">
                 <div class="model-content">
                     <span class="close">&times;</span>
-                    <h2 style="text-align:center;">PDF Report</h2>
+                    <h2 style="text-align:center;">Monitoring Visit Report (RHS-A)</h2>
+
+                    <!-- RHS-A Section -->
+                    <h3>(For RHS-A)</h3>
+                    <table>
+                        <tr>
+                            <td>Name of District:</td>
+                            <td><input type="text" placeholder="Enter District"></td>
+                            <td>RHS-A, Center:</td>
+                            <td><input type="text" placeholder="Enter Center"></td>
+                        </tr>
+                        <tr>
+                            <td>Date of visit:</td>
+                            <td><input type="text" placeholder="Enter Date"></td>
+                            <td>Time:</td>
+                            <td><input type="text" placeholder="Enter Time"></td>
+                        </tr>
+                        <tr>
+                            <td>Status:</td>
+                            <td colspan="3">
+                                <input type="radio" id="open" name="status" value="open">
+                                <label for="open">Open</label>
+                                <input type="radio" id="closed" name="status" value="closed">
+                                <label for="closed">Closed</label>
+                                <input type="radio" id="branded" name="status" value="branded">
+                                <label for="branded">Branded</label>
+                                <input type="radio" id="unbranded" name="status" value="unbranded">
+                                <label for="unbranded">Unbranded</label>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <!-- Staff Position -->
+                    <h3>Staff Position</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Designation</th>
+                                <th>Name</th>
+                                <th>Present/Absent/Leave</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Women Medical Officer</td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Accounts Assistant</td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Theater Nurse</td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>O.T. Technician</td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>Family Welfare Councilor</td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>Family Welfare Worker</td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>Family Welfare Assistant (F)</td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td>Driver</td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td>Helper</td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td>Sweeper</td>
+                                <td><input type="text"></td>
+                                <td><input type="text"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+
                     <button id="downloadPDFBtn">Download PDF</button>
                 </div>
 
@@ -934,60 +1042,12 @@
 
             }
 
-            $('#PdfExcel').click(function () {
-
-
-                if ($('#Checklist').val() == '') {
-                    alert("Please select monitoring checklist");
-                    return false;
-                }
-                var Proj = $('#Checklist').val();
-                var id = Proj.split(',')[2]
-
-
-
-
-                $.ajax({
-                    type: "POST",
-                    url: "/Designer/ExcelReport?param1=" + id,
-                    data: {},
-                    success: function (data) {
-                        // On success, trigger download
-                        downloadFile(data);
-                    },
-                    error: function (xhr, status, error) {
-                        console.error(error);
-                    }
-                });
-
-            });
+           
 
 
 
             //
-            function downloadFile(fileName) {
-                fetch(`/Designer/DownloadExcel?fileName=${fileName}`)
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-                        return response.blob();
-                    })
-                    .then(blob => {
-
-                        const url = window.URL.createObjectURL(blob);
-                        const link = document.createElement('a');
-                        link.href = url;
-                        link.download = fileName;
-                        link.click();
-
-
-                        window.URL.revokeObjectURL(url);
-                    })
-                    .catch(error => {
-                        console.error('There was a problem with the fetch operation:', error);
-                    });
-            }
+            
         </script>
 
         <script>

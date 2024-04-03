@@ -2172,31 +2172,55 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
 
 
         [Authorize]
+        [HttpPost]
         public ActionResult ExcelReport(string param1)
         {
             var p = param1;
-          
+            int ProjectId = 0;
+            if (param1 == "50435")
+            {
+                ProjectId = 7120;
+            }
+            else if (param1 == "50484")
+            {
+                ProjectId = 7121;
+            }
+            else if (param1 == "55587")
+            {
+                ProjectId = 7122;
+            }
 
-            int ProjectID = Convert.ToInt32(p);
-            int sbjnum = 8226980;
+
+            int sbjnum = 0;
+            int disctrict =  Convert.ToInt32(param1);
             System.Data.Entity.Infrastructure.DbRawSqlQuery<SurveyReport> GetSurvey;
             System.Data.Entity.Infrastructure.DbRawSqlQuery<SurveyTitle> GetTitle;
-          
-            CreateDatatable(ProjectID, sbjnum, out GetSurvey, out GetTitle);
- 
 
-           
+            CreateDatatable(ProjectId, sbjnum, out GetSurvey, out GetTitle);
+
+
+
 
 
             var titles = GetTitle.ToArray();
             string IntToString = "";
             List<SurveyReport> Survey = GetTitleByIds(GetSurvey, titles, ref IntToString);
-             DataTable dataTable = ToDataTable(Survey.ToList());
+            DataTable dataTable = ToDataTable(Survey.ToList());
 
 
             //Col to Row
 
 
+            DataTable newDataTable = ColToRow(dataTable);
+            // Print the new DataTable
+            PrintDataTable(newDataTable);
+            string filePaths = ("C:/PWD_Excel/" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".xlsx");
+            var Excel = ExportDataTableToExcel(newDataTable, filePaths);
+            return Json(Excel);
+        }
+
+        private static DataTable ColToRow(DataTable dataTable)
+        {
             var pivotData = dataTable.AsEnumerable()
                 .GroupBy(row => row.Field<string>("sbjnum"))
                 .Select(group =>
@@ -2216,8 +2240,8 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
             // Add columns to the new DataTable
             foreach (var title in titless)
             {
-                if(title.Length > 1)
-                newDataTable.Columns.Add(title, typeof(string)); // Assuming values are integers
+                if (title.Length > 1)
+                    newDataTable.Columns.Add(title, typeof(string)); // Assuming values are integers
             }
 
             // Add rows to the new DataTable
@@ -2235,44 +2259,9 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
                 newDataTable.Rows.Add(newRow);
             }
 
-            // Print the new DataTable
-            PrintDataTable(newDataTable);
-
-            //Excel
-
-           // string filePaths = Server.MapPath("~/Excel/" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".xlsx");
-            string filePaths = ("C:/PWD_Excel/" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".xlsx");
-           
-
-            var Excel =  ExportDataTableToExcel(newDataTable, filePaths);
-            
-
-            return Json(filePaths);
-            if (System.IO.File.Exists(filePaths))
-            {
-                // Return the file as a FileStreamResult
-                return File(new FileStream(filePaths, FileMode.Open), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "output.xlsx");
-            }
-            else
-            {
-                // If the file doesn't exist, return a HttpNotFound result
-                return HttpNotFound();
-            }
-
-         
-
-
-           
-
-
-
-
-            
-
-
+            return newDataTable;
         }
 
-     
 
         public ActionResult DownloadExcel(string fileName)
         {
@@ -2370,7 +2359,7 @@ WHERE
 ORDER BY 
     s.sbjnum, cy.Name, ct.Name, dt.Name, s.Created DESC, ISNULL(pfn.DisplayOrder, 0), pf.DisplayOrder
 
-	 select DISTINCT CONVERT(nvarchar(max), p.Title ) AS Title, p.SurveyorName,p.FieldValue,p.sbjnum  from #pdf p where len(p.FieldValue) > 0 and p.Title is not null  order by p.sbjnum desc --and p.sbjnum = {sbjnum} 
+	 select DISTINCT CONVERT(nvarchar(max), p.Title ) AS Title, p.SurveyorName,p.FieldValue,p.sbjnum,p.FieldId  from #pdf p where len(p.FieldValue) > 0 and p.Title is not null  order by p.sbjnum desc --and p.sbjnum = {sbjnum} 
 ";
 
 
@@ -2483,50 +2472,145 @@ ORDER BY
             return Survey;
         }
 
+
+
+
+        public JsonResult GetExcelCentral(string id)
+        {
+            string Title = string.Empty;
+            var val = id.Split(',');
+            string CheckList = val[0].ToString().Trim();
+
+            if(CheckList == "50435")
+            {
+                Title = "RHS";
+            }
+            else if(CheckList == "50484")
+            {
+                Title = "MSU";
+            }
+            else if (CheckList == "55587")
+            {
+                Title = "FWC";
+            }
+            string District = val[1].ToString();
+            List<DNA_CAPI_MIS.Models.ProjectFieldSample> Central = db.ProjectFieldSample
+                                .Where(x => x.IsActive && x.Title.Contains(Title) && x.Title.Contains(District))
+                                .OrderBy(x => x.DisplayOrder)
+                                .ToList<ProjectFieldSample>();
+            var distinctItems = Central.Select(x => new SelectListItem
+            {
+                Text = x.Title,
+                Value = x.FieldID.ToString()
+            }).ToList();
+            return Json(distinctItems);
+
+        }
+
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult RHS()
+        {
+
+
+
+            int FieldID = Convert.ToInt32(50435);
+            List<DNA_CAPI_MIS.Models.ProjectFieldSample> District = db.ProjectFieldSample
+                                .Where(x => x.ParentSampleID != 0 && x.IsActive && x.FieldID.Equals(FieldID))
+                                .OrderBy(x => x.DisplayOrder)
+                                .ToList<ProjectFieldSample>();
+
+            var RHS_A = District.Select(x => new SelectListItem
+            {
+                Text = x.Title,
+                Value = x.FieldID.ToString().Trim()
+            }).ToList();
+
+            var dummyData2 = new List<ProjectFieldSample> { new ProjectFieldSample { Title = "Select Center", Code = "0" }, };
+            var Center = dummyData2.Select(x => new SelectListItem
+            {
+                Text = x.Title,
+                Value = x.Code.ToString()
+            }).ToList();
+
+
+            ViewBag.Center = Center;
+            ViewBag.District = RHS_A;
+
+            return View();
+        }
+        [Authorize]
+        [HttpGet]
+        public ActionResult MSU()
+        {
+
+
+
+            int FieldID = Convert.ToInt32(50484);
+            List<DNA_CAPI_MIS.Models.ProjectFieldSample> District = db.ProjectFieldSample
+                                .Where(x => x.ParentSampleID != 0 && x.IsActive && x.FieldID.Equals(FieldID))
+                                .OrderBy(x => x.DisplayOrder)
+                                .ToList<ProjectFieldSample>();
+
+            var MSU = District.Select(x => new SelectListItem
+            {
+                Text = x.Title,
+                Value = x.FieldID.ToString().Trim()
+            }).ToList();
+
+            var dummyData2 = new List<ProjectFieldSample> { new ProjectFieldSample { Title = "Select Center", Code = "0" }, };
+            var Center = dummyData2.Select(x => new SelectListItem
+            {
+                Text = x.Title,
+                Value = x.Code.ToString()
+            }).ToList();
+
+
+            ViewBag.Center = Center;
+            ViewBag.MSU = MSU;
+
+            return View();
+        }
+        [Authorize]
+        [HttpGet]
+        public ActionResult FWC()
+        {
+
+
+
+            int FieldID = Convert.ToInt32(55587);
+            List<DNA_CAPI_MIS.Models.ProjectFieldSample> District = db.ProjectFieldSample
+                                .Where(x => x.ParentSampleID != 0 && x.IsActive && x.FieldID.Equals(FieldID))
+                                .OrderBy(x => x.DisplayOrder)
+                                .ToList<ProjectFieldSample>();
+
+            var FWC = District.Select(x => new SelectListItem
+            {
+                Text = x.Title,
+                Value = x.FieldID.ToString().Trim()
+            }).ToList();
+
+            var dummyData2 = new List<ProjectFieldSample> { new ProjectFieldSample { Title = "Select Center", Code = "0" }, };
+            var Center = dummyData2.Select(x => new SelectListItem
+            {
+                Text = x.Title,
+                Value = x.Code.ToString()
+            }).ToList();
+
+
+            ViewBag.Center = Center;
+            ViewBag.FWC = FWC;
+
+            return View();
+        }
+
     }
 
 
    
 
-    //public string GetProjectJSON(int id, string language)
-    //{
-    //    DSDS_WebAPI.Controllers.SurveyController survey = new DSDS_WebAPI.Controllers.SurveyController();
-    //    string json = survey.GetProject(id, language);
-    //    return json;
-    //}
-    //public string GetProjectSectionFieldsJSON(int id, string language)
-    //{
-    //    DSDS_WebAPI.Controllers.SurveyController survey = new DSDS_WebAPI.Controllers.SurveyController();
-    //    string json = survey.GetProjectSectionFields(id, language);
-    //    return json;
-    //}
-    //public string GetProjectFieldSamplesJSON(int id)
-    //{
-    //    DSDS_WebAPI.Controllers.ProjectController api = new DSDS_WebAPI.Controllers.ProjectController();
-    //    string json = api.GetProjectFieldSamples(id.ToString());
-    //    return json;
-    //}
-    //public string GetProjectFieldSamplesQJSON(int id)
-    //{
-    //    DSDS_WebAPI.Controllers.ProjectController api = new DSDS_WebAPI.Controllers.ProjectController();
-    //    string json = api.GetProjectFieldSamplesQ(id.ToString());
-    //    return json;
-    //}
-    //public string SendData(DSDS_WebAPI.Controllers.CategoryController.Survey survey)
-    //{
-    //    DSDS_WebAPI.Controllers.CategoryController controller = new DSDS_WebAPI.Controllers.CategoryController();
-    //    string result = controller.SaveSurveyData(survey);
-    //    string surveyId = "ERROR";
-    //    if (result != null && result.Length > 0)
-    //    {
-    //        var settings = new JsonSerializerSettings();
-    //        settings.TypeNameHandling = TypeNameHandling.Objects;
-    //        settings.PreserveReferencesHandling = PreserveReferencesHandling.Objects;
-    //        survey = JsonConvert.DeserializeObject<DSDS_WebAPI.Controllers.CategoryController.Survey>(result, settings);
-    //        surveyId = survey.sbjnum;
-    //    }
-    //    return surveyId;
-    //}
+    
 }
 
 

@@ -1,0 +1,210 @@
+﻿
+
+@{
+    ViewBag.Title = "Dashboard";
+}
+@section Scripts {
+    <script>
+        var viewURL = "/Designer/Dashboard/";
+    </script>
+
+}
+
+<link href="~/Content/DSDS/dsds.css" rel="stylesheet" type="text/css" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.es.min.js"></script>
+@*CSS Class desktop is used for overlay*@
+<style>
+    .model {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.5);
+    }
+
+    .model-content {
+        background-color: #fefefe;
+        margin: 10% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+
+    .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+</style>
+<style>
+    .optionsRadios {
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+
+
+<style>
+    /* Style for the table */
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    /* Style for table headers */
+    th {
+        background-color: #007bff; /* Blue header color */
+        color: #fff; /* Text color */
+        font-weight: bold;
+        text-align: left;
+    }
+    /* Style for table cells */
+    td {
+        border: 1px solid #dddddd; /* Border color for cells */
+        padding: 8px;
+    }
+    /* Alternate row color */
+    tr:nth-child(even) {
+        background-color: #f2f2f2; /* Light gray */
+    }
+</style>
+
+<div class="row desktop">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title" style="width:100%">Dashboard</h3>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-10">
+                            <div class="col-md-4 col-sm-12">
+                                @Html.DropDownList("District", ViewBag.FWC as List<SelectListItem>, "Select District", htmlAttributes: new { @class = "form-control", id = "District" })
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+
+                        <div class="col-10">
+                            <div class="col-md-4 col-sm-12">
+                                @Html.DropDownList("Center", ViewBag.Center as List<SelectListItem>, htmlAttributes: new { @class = "form-control" })
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button id="PdfExcel" style="margin-top: 10px;margin-left:20px"> Download Excel </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+
+
+    $('#District').change(function () {
+        var val = $(this).find('option:selected').val();
+        var selectedText = $(this).find('option:selected').text();
+        var com = val + "," + selectedText;
+        $("#Center").empty();
+        GetCenter(com);
+    });
+
+    function GetCenter(district) {
+        $.ajax({
+            type: 'POST',
+            url: "/Designer/GetExcelCentral/" + district,
+            data: {},
+            success: function (data) {
+                $("#Center").empty();
+                $("#Centrals").append('<option value="' + 0 + '">' + "---Select All---" + '</option>')
+                $.each(data, function (i, state) {
+                    $("#Center").append('<option value="' + state.Value + '">' + state.Text + '</option>')
+                })
+            }
+        });
+    }
+
+
+    $('#PdfExcel').click(function () {
+
+        var District = $('#District').val();
+        if (District == '') {
+            District = 0;
+        }
+        var Center = $("#Center").find('option:selected').val();
+        $.ajax({
+            type: "POST",
+            url: "/Designer/ExcelReport?param1=" + District + "," + Center,
+            data: {},
+            success: function (data) {
+                // On success, trigger download
+                downloadFile(data);
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+            }
+        });
+
+    });
+
+
+
+    function downloadFile(fileName) {
+        fetch(`/Designer/DownloadExcel?fileName=${fileName}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.blob();
+            })
+            .then(blob => {
+
+                const url = window.URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = fileName;
+                link.click();
+
+
+                window.URL.revokeObjectURL(url);
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+    }
+
+</script>

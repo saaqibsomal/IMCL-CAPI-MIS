@@ -234,6 +234,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BarPeiStyle.css</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\ExcelController.cs" />
     <Compile Include="Controllers\ProjectFieldSectionsController.cs" />
     <Compile Include="Controllers\ProjectQuotaController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
@@ -3311,10 +3312,14 @@
     <Content Include="Views\Survey\_SurveyDetailTableAll.cshtml" />
     <Content Include="Views\Survey\TrafficMap.cshtml" />
     <Content Include="Views\Designer\Dashboard.cshtml" />
+    <Content Include="Views\Designer\RHS.cshtml" />
+    <Content Include="Views\Designer\MSU.cshtml" />
+    <Content Include="Views\Designer\FWC.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Pictures\SurveyMedia\" />
+    <Folder Include="Views\Excel\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
