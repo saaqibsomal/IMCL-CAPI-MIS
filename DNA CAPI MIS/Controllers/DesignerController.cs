@@ -2175,28 +2175,30 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
         [HttpPost]
         public ActionResult ExcelReport(string param1)
         {
-            var p = param1;
+            var Data = param1.Split(',');
             int ProjectId = 0;
-            if (param1 == "50435")
+            string District = Data[0];
+            string Center = Data[1];
+            if (District == "50435")
             {
                 ProjectId = 7120;
             }
-            else if (param1 == "50484")
+            else if (District == "50484")
             {
                 ProjectId = 7121;
             }
-            else if (param1 == "55587")
+            else if (District == "55587")
             {
                 ProjectId = 7122;
             }
 
+            
 
             int sbjnum = 0;
-            int disctrict =  Convert.ToInt32(param1);
             System.Data.Entity.Infrastructure.DbRawSqlQuery<SurveyReport> GetSurvey;
             System.Data.Entity.Infrastructure.DbRawSqlQuery<SurveyTitle> GetTitle;
 
-            CreateDatatable(ProjectId, sbjnum, out GetSurvey, out GetTitle);
+            CreateDatatable(ProjectId, Center, sbjnum, out GetSurvey, out GetTitle);
 
 
 
@@ -2206,8 +2208,16 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
             string IntToString = "";
             List<SurveyReport> Survey = GetTitleByIds(GetSurvey, titles, ref IntToString);
             DataTable dataTable = ToDataTable(Survey.ToList());
+            if(Center == "Select Center")
+            {
+                Center = "";
+            }
 
-
+            if(Center != "")
+            {
+                dataTable = dataTable.AsEnumerable().Where(x => x.ItemArray[34].ToString() == Center).CopyToDataTable(); //35
+            }
+            
             //Col to Row
 
 
@@ -2307,8 +2317,10 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
                 Console.WriteLine();
             }
         }
-        private void CreateDatatable(int ProjectID, int sbjnum, out System.Data.Entity.Infrastructure.DbRawSqlQuery<SurveyReport> GetSurvey, out System.Data.Entity.Infrastructure.DbRawSqlQuery<SurveyTitle> GetTitle)
+        private void CreateDatatable(int ProjectID,string CenterId, int sbjnum, out System.Data.Entity.Infrastructure.DbRawSqlQuery<SurveyReport> GetSurvey, out System.Data.Entity.Infrastructure.DbRawSqlQuery<SurveyTitle> GetTitle)
         {
+           
+
             var SurveyData = $@"IF OBJECT_ID('tempdb..#pdf') IS NOT NULL
 BEGIN
     DROP TABLE #pdf;

@@ -163,10 +163,10 @@
  
             $('#PdfExcel').click(function () {
 
-                var Center = $("#Center").find('option:selected').val();
+                var Center = $("#Center").find('option:selected').text();
                 var District =  $('#District').val();
                 if (District == '') {
-                    District = 0;
+                    District = 50435;
                 }
    
                 $.ajax({
