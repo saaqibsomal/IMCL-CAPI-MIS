@@ -1,18 +1,18 @@
 ﻿
 
 @{
-    ViewBag.Title = "Dashboard";
+    ViewBag.Title = "MSU";
 }
 @section Scripts {
     <script>
-        var viewURL = "/Designer/Dashboard/";
+        var viewURL = "/Designer/Excel/";
     </script>
 
 }
 
 <link href="~/Content/DSDS/dsds.css" rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.es.min.js"></script>
+
 @*CSS Class desktop is used for overlay*@
 <style>
     .model {
@@ -106,7 +106,7 @@
                     <div class="row">
                         <div class="col-10">
                             <div class="col-md-4 col-sm-12">
-                                @Html.DropDownList("District", ViewBag.FWC as List<SelectListItem>, "Select District", htmlAttributes: new { @class = "form-control", id = "District" })
+                                @Html.DropDownList("District", ViewBag.MSU as List<SelectListItem>, "Select District", htmlAttributes: new { @class = "form-control", id = "District" })
 
                             </div>
                         </div>
@@ -135,6 +135,7 @@
 <script>
 
 
+
     $('#District').change(function () {
         var val = $(this).find('option:selected').val();
         var selectedText = $(this).find('option:selected').text();
@@ -161,12 +162,11 @@
 
     $('#PdfExcel').click(function () {
 
-        var Center = $("#Center").find('option:selected').text();
         var District = $('#District').val();
         if (District == '') {
-            District = 55587;
+            District = 50484;
         }
-
+        var Center = $("#Center").find('option:selected').val();
         $.ajax({
             type: "POST",
             url: "/Designer/ExcelReport?param1=" + District + "," + Center,

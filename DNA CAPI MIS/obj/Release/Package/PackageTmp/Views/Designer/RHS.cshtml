@@ -1,11 +1,11 @@
 ﻿
 
 @{
-    ViewBag.Title = "Dashboard";
+    ViewBag.Title = "RHS";
 }
 @section Scripts {
     <script>
-        var viewURL = "/Designer/Dashboard/";
+        var viewURL = "/Designer/Excel/";
     </script>
 
 }
@@ -13,7 +13,6 @@
 <link href="~/Content/DSDS/dsds.css" rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.es.min.js"></script>
-@*CSS Class desktop is used for overlay*@
 <style>
     .model {
         display: none;
@@ -106,12 +105,13 @@
                     <div class="row">
                         <div class="col-10">
                             <div class="col-md-4 col-sm-12">
-                                @Html.DropDownList("District", ViewBag.FWC as List<SelectListItem>, "Select District", htmlAttributes: new { @class = "form-control", id = "District" })
+                                @Html.DropDownList("District", ViewBag.District as List<SelectListItem>, "Select for all District", htmlAttributes: new { @class = "form-control", id = "District" })
 
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="col-12">
 
@@ -124,15 +124,17 @@
                     </div>
                 </div>
                 <button id="PdfExcel" style="margin-top: 10px;margin-left:20px"> Download Excel </button>
+
+         
             </div>
         </div>
     </div>
 </div>
 
 
-
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 <script>
+
 
 
     $('#District').change(function () {
@@ -158,54 +160,56 @@
         });
     }
 
+ 
+            $('#PdfExcel').click(function () {
 
-    $('#PdfExcel').click(function () {
-
-        var Center = $("#Center").find('option:selected').text();
-        var District = $('#District').val();
-        if (District == '') {
-            District = 55587;
-        }
-
-        $.ajax({
-            type: "POST",
-            url: "/Designer/ExcelReport?param1=" + District + "," + Center,
-            data: {},
-            success: function (data) {
-                // On success, trigger download
-                downloadFile(data);
-            },
-            error: function (xhr, status, error) {
-                console.error(error);
-            }
-        });
-
-    });
-
-
-
-    function downloadFile(fileName) {
-        fetch(`/Designer/DownloadExcel?fileName=${fileName}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                var Center = $("#Center").find('option:selected').text();
+                var District =  $('#District').val();
+                if (District == '') {
+                    District = 50435;
                 }
-                return response.blob();
-            })
-            .then(blob => {
+   
+                $.ajax({
+                    type: "POST",
+                    url: "/Designer/ExcelReport?param1=" + District + "," + Center,
+                    data: {},
+                    success: function (data) {
+                        // On success, trigger download
+                        downloadFile(data);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(error);
+                    }
+                });
 
-                const url = window.URL.createObjectURL(blob);
-                const link = document.createElement('a');
-                link.href = url;
-                link.download = fileName;
-                link.click();
-
-
-                window.URL.revokeObjectURL(url);
-            })
-            .catch(error => {
-                console.error('There was a problem with the fetch operation:', error);
             });
-    }
+            
 
+
+            function downloadFile(fileName) {
+                fetch(`/Designer/DownloadExcel?fileName=${fileName}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.blob();
+                    })
+                    .then(blob => {
+
+                        const url = window.URL.createObjectURL(blob);
+                        const link = document.createElement('a');
+                        link.href = url;
+                        link.download = fileName;
+                        link.click();
+
+
+                        window.URL.revokeObjectURL(url);
+                    })
+                    .catch(error => {
+                        console.error('There was a problem with the fetch operation:', error);
+                    });
+            }
+            
 </script>
+
+       

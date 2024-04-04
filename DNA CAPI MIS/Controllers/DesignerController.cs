@@ -16,7 +16,7 @@ using System.Web.UI.WebControls;
 using OfficeOpenXml;
 using System.Net.Http;
 using System.Text;
- 
+using System.Drawing;
 
 namespace DNA_CAPI_MIS.Controllers
 {
@@ -2179,17 +2179,22 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
             int ProjectId = 0;
             string District = Data[0];
             string Center = Data[1];
+
+            string ColName = "";
             if (District == "50435")
             {
                 ProjectId = 7120;
+                ColName = "Name of RHS 'A' Centers";
             }
             else if (District == "50484")
             {
                 ProjectId = 7121;
+                ColName = "Name of MSU Centers";
             }
             else if (District == "55587")
             {
                 ProjectId = 7122;
+                ColName = "Name of FWC Centers";
             }
 
             
@@ -2208,20 +2213,26 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
             string IntToString = "";
             List<SurveyReport> Survey = GetTitleByIds(GetSurvey, titles, ref IntToString);
             DataTable dataTable = ToDataTable(Survey.ToList());
-            if(Center == "Select Center")
+            if(Center == "Select Center" || Center == "0")
             {
                 Center = "";
             }
 
-            if(Center != "")
-            {
-                dataTable = dataTable.AsEnumerable().Where(x => x.ItemArray[34].ToString() == Center).CopyToDataTable(); //35
-            }
-            
+           
             //Col to Row
 
 
             DataTable newDataTable = ColToRow(dataTable);
+
+            if (Center != "")
+            {
+                var newDataTableFilter = newDataTable.AsEnumerable().Where(x => x.ItemArray[34].ToString().Contains(Center)); 
+                if(newDataTableFilter.Count() > 0)
+                {
+                    newDataTable = newDataTableFilter.CopyToDataTable();
+                }
+            }
+
             // Print the new DataTable
             PrintDataTable(newDataTable);
             string filePaths = ("C:/PWD_Excel/" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".xlsx");
@@ -2437,7 +2448,32 @@ ORDER BY
 
                 // Load the DataTable into the worksheet starting from cell A1
                 worksheet.Cells["A1"].LoadFromDataTable(dataTable, true);
+                var headerRow = worksheet.Cells["A1:" + "AN" + "1"];
+                var headerFont = headerRow.Style.Font;
+                headerFont.Bold = true;
+                headerRow.Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                headerRow.Style.Fill.BackgroundColor.SetColor(Color.LightBlue); // Change color as needed
 
+
+
+                for (int row = 2; row <= dataTable.Rows.Count + 1; row++)
+                {
+                    if (row % 2 == 0)
+                    {
+                        var rowRange = worksheet.Cells[row, 1, row, dataTable.Columns.Count];
+                        rowRange.Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                        rowRange.Style.Fill.BackgroundColor.SetColor(Color.LightGray); // Change color as needed
+                    }
+                    else
+                    {
+                        var rowRange = worksheet.Cells[row, 1, row, dataTable.Columns.Count];
+                        rowRange.Style.Fill.PatternType = OfficeOpenXml.Style.ExcelFillStyle.Solid;
+                        rowRange.Style.Fill.BackgroundColor.SetColor(Color.White); // Change color as needed
+                    }
+                }
+
+                // Adjust column widths
+                worksheet.Cells.AutoFitColumns();
 
                 excelPackage.SaveAs(filePath);
             }

@@ -1042,60 +1042,12 @@
 
             }
 
-            $('#PdfExcel').click(function () {
-
-
-                if ($('#Checklist').val() == '') {
-                    alert("Please select monitoring checklist");
-                    return false;
-                }
-                var Proj = $('#Checklist').val();
-                var id = Proj.split(',')[2]
-
-
-
-
-                $.ajax({
-                    type: "POST",
-                    url: "/Designer/ExcelReport?param1=" + id,
-                    data: {},
-                    success: function (data) {
-                        // On success, trigger download
-                        downloadFile(data);
-                    },
-                    error: function (xhr, status, error) {
-                        console.error(error);
-                    }
-                });
-
-            });
+           
 
 
 
             //
-            function downloadFile(fileName) {
-                fetch(`/Designer/DownloadExcel?fileName=${fileName}`)
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-                        return response.blob();
-                    })
-                    .then(blob => {
-
-                        const url = window.URL.createObjectURL(blob);
-                        const link = document.createElement('a');
-                        link.href = url;
-                        link.download = fileName;
-                        link.click();
-
-
-                        window.URL.revokeObjectURL(url);
-                    })
-                    .catch(error => {
-                        console.error('There was a problem with the fetch operation:', error);
-                    });
-            }
+            
         </script>
 
         <script>
