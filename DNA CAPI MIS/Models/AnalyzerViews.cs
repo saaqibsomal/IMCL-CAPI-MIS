@@ -36,7 +36,7 @@ namespace DNA_CAPI_MIS.Models
     public class SurveyResponse
     {
         public List<SurveyReport> RawData  { get; set; }
-        public string[,] DataTitle { get; set; }
+        public List<TitleValue> DataTitle { get; set; }
     }
     public class SurveyTitle
     {
@@ -47,7 +47,16 @@ namespace DNA_CAPI_MIS.Models
         public int FieldID { get; set; }
     }
 
-    public class ProjectsList
+    public class TitleValue
+    {
+       public int sbjnum        { get; set; }
+       public string SurveyorName  { get; set; }
+       public int FieldId       { get; set; }
+       public string Title         { get; set; }
+        public string FieldValue { get; set; }
+    }                        
+
+public class ProjectsList
     {
         public int Id { get; set; }
         public string Name { get; set; }

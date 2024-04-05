@@ -149,3 +149,7 @@ C:\Project\DNA_CAPI_MIS\DNA CAPI MIS\bin\System.Buffers.xml
 C:\Project\DNA_CAPI_MIS\DNA CAPI MIS\bin\System.Memory.xml
 C:\Project\DNA_CAPI_MIS\DNA CAPI MIS\bin\System.Numerics.Vectors.xml
 C:\Project\DNA_CAPI_MIS\DNA CAPI MIS\bin\System.Runtime.CompilerServices.Unsafe.xml
+C:\Project\DNA_CAPI_MIS\DNA CAPI MIS\bin\BouncyCastle.Crypto.dll
+C:\Project\DNA_CAPI_MIS\DNA CAPI MIS\bin\itextsharp.dll
+C:\Project\DNA_CAPI_MIS\DNA CAPI MIS\bin\itextsharp.xmlworker.dll
+C:\Project\DNA_CAPI_MIS\DNA CAPI MIS\bin\itextsharp.xml

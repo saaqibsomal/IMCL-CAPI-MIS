@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -11,12 +10,18 @@ using DNA_CAPI_MIS.Models;
 using Microsoft.AspNet.Identity;
 using System.IO;
 using System.Text.RegularExpressions;
-using Microsoft.Ajax.Utilities;
 using System.Web.UI.WebControls;
 using OfficeOpenXml;
 using System.Net.Http;
-using System.Text;
 using System.Drawing;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.tool.xml;
+using iTextSharp.tool.xml.parser;
+using iTextSharp.tool.xml.pipeline.css;
+using iTextSharp.tool.xml.pipeline.html;
 
 namespace DNA_CAPI_MIS.Controllers
 {
@@ -2659,21 +2664,21 @@ ORDER BY
         [HttpGet]
         public ActionResult PdfReport()
         {
+            string sql = @"SELECT case 
+ 
+when id = 7120 then 7120 
+when id = 7121 then 7121  
+when id = 7122 then 7122  
+else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122) ORDER BY name"; //7114 ,
+            var CheckFor = db.Database.SqlQuery<ProjectsList>(sql);
+            var Checklist = CheckFor.Select(x => new SelectListItem
+            {
+                Text = x.Name,
+                Value = x.Id.ToString(),
+            }).ToList();
 
+            ViewBag.Checklist = Checklist;
 
-            System.Data.Entity.Infrastructure.DbRawSqlQuery<SurveyReport> GetSurvey;
-            System.Data.Entity.Infrastructure.DbRawSqlQuery<SurveyTitle> GetTitle;
-            CreateDatatable(7120, "", 0, out GetSurvey, out GetTitle);
-            var titles = GetTitle.ToArray();
-            string IntToString = "";
-            List<SurveyReport> Survey = GetTitleByIds(GetSurvey, titles, ref IntToString);
-            DataTable dataTable = ToDataTable(Survey.ToList());
-            DataTable newDataTable = ColToRow(dataTable);
-            PrintDataTable(newDataTable);
-
-            string jsonData = JsonConvert.SerializeObject(newDataTable); // Serialize DataTable to JSON
-
-            ViewBag.JsonData = jsonData; // Pass JSON data to the view
 
             return View();
         }
@@ -2749,9 +2754,18 @@ ORDER BY
         [HttpPost]
         public ActionResult CreatePDFBySurvey(int id)
         {
-            id = 7120;
+            string Ids = "";
+            if(id ==  0)
+            {
+                Ids = "'7120','7121','7122'";
+            }
+            else
+            {
+                Ids = id.ToString();
+            }
+             
 
-            string Query = "select s.sbjnum, Convert(varchar,s.Created,101) Created, s.SurveyorName from Survey  s where s.projectID in (7120,7121,7122)";
+            string Query = $"select s.sbjnum, Convert(varchar,s.Created,101) Created, s.SurveyorName from Survey  s where s.projectID in ({Ids}) order by s.Created desc";
             var GetSurvey = db.Database.SqlQuery<PdfDetailReport>(Query);
             var ss = GetSurvey.ToList();
             return Json(GetSurvey);
@@ -2759,7 +2773,7 @@ ORDER BY
 
         [Authorize]
         [HttpPost]
-        public SurveyResponse OpenReport(int id)
+        public ActionResult OpenReport(int id)
         {
 
 
@@ -2776,40 +2790,32 @@ ORDER BY
             PrintDataTable(dataTable);
             SurveyResponse data = new SurveyResponse();
             data.RawData = RawSurvey.ToList();
-            
-            string[,] dataArray = DataTableToArray(dataTable);
-            data.DataTitle = dataArray;
-            return  data ;
+            var json = JsonConvert.SerializeObject(dataTable);
+            data.DataTitle = JsonConvert.DeserializeObject<List<TitleValue>>(json);
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
 
-        static string[,] DataTableToArray(DataTable dataTable)
+        [Authorize]
+        [HttpPost]
+        public ActionResult GeneratePDF(object id)
         {
-            // Create a 2D array with dimensions (number of rows + 1) x (number of columns)
-            string[,] array = new string[dataTable.Rows.Count + 1, dataTable.Columns.Count];
-
-            // Fill the first row with column headers
-            for (int j = 0; j < dataTable.Columns.Count; j++)
+            byte[] bytes;
+            using (MemoryStream ms = new MemoryStream())
             {
-                array[0, j] = dataTable.Columns[j].ColumnName;
-            }
-
-            // Iterate over each row and column to fill the array
-            for (int i = 0; i < dataTable.Rows.Count; i++)
-            {
-                for (int j = 0; j < dataTable.Columns.Count; j++)
+                using (Document document = new Document())
                 {
-                    array[i + 1, j] = Convert.ToString(dataTable.Rows[i][j]); // Convert to string, adjust data type as needed
+                    PdfWriter writer = PdfWriter.GetInstance(document, ms);
+                    document.Open();
+                    using (StringReader sr = new StringReader(id))
+                    {
+                        XMLWorkerHelper.GetInstance().ParseXHtml(writer, document, sr);
+                    }
                 }
+                bytes = ms.ToArray();
             }
-
-            return array;
+            return File(bytes, "application/pdf", "output.pdf");
         }
     }
-
-
-
-
-
-    }
+}
 
  
