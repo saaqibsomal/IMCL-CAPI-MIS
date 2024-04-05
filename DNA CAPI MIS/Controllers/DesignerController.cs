@@ -2792,12 +2792,66 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
             data.RawData = RawSurvey.ToList();
             var json = JsonConvert.SerializeObject(dataTable);
             data.DataTitle = JsonConvert.DeserializeObject<List<TitleValue>>(json);
+            data.Field = BindValues(data.DataTitle);
             return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public ReportField BindValues(List<TitleValue> data)
+        {
+            ReportField field = new ReportField();
+            try
+            {
+                var value = data.Where(x => x.Title.Contains("Name of District") || x.Title.Contains("Name of Distirict")).FirstOrDefault().FieldValue;
+                field.NameOfDistrict = value;    
+                
+                var Center = data.Where(x => x.Title.ToUpper().Contains("Name of".ToUpper()) && x.Title.ToUpper().Contains("Centers".ToUpper())).FirstOrDefault();
+                if(Center != null)
+                {
+                    field.NameOfCenter = Center.FieldValue;
+                }
+                else
+                {
+                    field.NameOfCenter = "N/A";
+                }
+                
+                var DateOfVisit = data.Where(x => x.Title.ToUpper().Contains("Dates Of  Visit".ToUpper())).FirstOrDefault();
+                if(DateOfVisit != null)
+                {
+                    field.DateOfVisit = DateOfVisit.FieldValue.Split(' ')[0];
+                    field.TimeOfVisit = DateOfVisit.FieldValue.Split(' ')[1];
+                }
+                else
+                {
+                    field.DateOfVisit = "N/A";
+                    field.TimeOfVisit = "N/A";
+                }
+
+                var OpenCloseStatus = data.Where(x => x.Title.ToUpper().Contains("Status Of FWC".ToUpper()) || x.Title.ToUpper().Contains("Status Of MSU".ToUpper()) || x.Title.ToUpper().Contains("Status Of RHS".ToUpper())).FirstOrDefault();
+                if (OpenCloseStatus != null)
+                {
+                    field.OpenCloseStatus = OpenCloseStatus.FieldValue ;
+                     
+                }
+                else
+                {
+                    field.OpenCloseStatus = "N/A";
+                }
+
+
+
+            }
+            catch(Exception ex)
+            {
+
+            }
+            return field;
+
         }
 
         [Authorize]
         [HttpPost]
-        public ActionResult GeneratePDF(object id)
+        public ActionResult GeneratePDF(string id)
         {
             byte[] bytes;
             using (MemoryStream ms = new MemoryStream())

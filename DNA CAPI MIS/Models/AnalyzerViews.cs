@@ -37,6 +37,16 @@ namespace DNA_CAPI_MIS.Models
     {
         public List<SurveyReport> RawData  { get; set; }
         public List<TitleValue> DataTitle { get; set; }
+        public ReportField Field { get; set; }
+    }
+
+    public class ReportField
+    {
+        public string NameOfDistrict { get; set; }
+        public string NameOfCenter { get; set; }
+        public string DateOfVisit { get; set; }
+        public string TimeOfVisit { get; set; }
+        public string OpenCloseStatus { get; set; }
     }
     public class SurveyTitle
     {

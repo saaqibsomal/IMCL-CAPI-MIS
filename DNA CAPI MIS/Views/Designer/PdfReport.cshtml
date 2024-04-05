@@ -205,20 +205,20 @@
                         <table>
                             <tr>
                                 <td>Name of District:</td>
-                                <td id="NamefDistrict"> </td>
-                                <td>RHS-A, Center:</td>
+                                <td id="NameOfDistrict"> </td>
+                                <td>Name Of Center:</td>
                                 <td id="NameOfCenter"> </td>
                             </tr>
                             <tr>
                                 <td>Date of visit:</td>
                                 <td id="DateOfVisit"> </td>
                                 <td>Time:</td>
-                                <td id="Time"> </td>
+                                <td id="TimeOfVisit"> </td>
                             </tr>
                             <tr>
                                 <td>Status:</td>
                                 <td colspan="3" id="OpenCloseStatus">
-                                    Open
+                                    N/A
                                 </td>
                             </tr>
                         </table>
@@ -1291,7 +1291,14 @@
 
                 $("#Heading").text("Monitoring Visit Report ("  + Pro + ")");
                 $("#SubHeading").text("(For "+ Pro + ")");
-                var index = findIndexByTitle(data.DataTitle,"Name of Distirict");
+                $("#NameOfDistrict").text(data.Field.NameOfDistrict);
+                $("#NameOfCenter").text(data.Field.NameOfCenter);
+                $("#DateOfVisit").text(data.Field.DateOfVisit);
+                $("#TimeOfVisit").text(data.Field.TimeOfVisit);
+                $("#OpenCloseStatus").text(data.Field.OpenCloseStatus);
+                
+                
+                //var index = findIndexByTitle(data.DataTitle,"Name of Distirict");
 
                   $("#pdfModel").css("display", "block");
 
