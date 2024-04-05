@@ -2759,7 +2759,7 @@ ORDER BY
 
         [Authorize]
         [HttpPost]
-        public ActionResult OpenReport(int id)
+        public SurveyResponse OpenReport(int id)
         {
 
 
@@ -2779,7 +2779,7 @@ ORDER BY
             
             string[,] dataArray = DataTableToArray(dataTable);
             data.DataTitle = dataArray;
-            return Json(data);
+            return  data ;
         }
 
         static string[,] DataTableToArray(DataTable dataTable)
