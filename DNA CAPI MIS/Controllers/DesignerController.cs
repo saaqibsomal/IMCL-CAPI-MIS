@@ -37,12 +37,12 @@ namespace DNA_CAPI_MIS.Controllers
 
             public void Clear()
             {
-                  qsrcjoin = "";
-                  qsmpjoin = "";
-                  qfilter = "";
-                  qgroupby = "";
-                  qorderby = "";
-                  qfields = "";
+                qsrcjoin = "";
+                qsmpjoin = "";
+                qfilter = "";
+                qgroupby = "";
+                qorderby = "";
+                qfields = "";
             }
         }
         //public class ProjectFieldAndSamples : DNA_CAPI_MIS.Models.ProjectField
@@ -75,7 +75,7 @@ namespace DNA_CAPI_MIS.Controllers
 
             if (queryAll.Count() > 0)
             {
-                ViewBag.All = queryAll.Sum(x=>x.SurveyCount);
+                ViewBag.All = queryAll.Sum(x => x.SurveyCount);
             }
             if (queryRHS.Count() > 0)
             {
@@ -96,7 +96,7 @@ namespace DNA_CAPI_MIS.Controllers
 
 
 
-        
+
 
         public void GetDistict()
         {
@@ -107,13 +107,13 @@ namespace DNA_CAPI_MIS.Controllers
 
             var distinctItems = Distict.Select(x => new SelectListItem
             {
-                Text = x.Title, 
+                Text = x.Title,
                 Value = x.Title
             }).ToList();
 
 
             ViewBag.Distict = distinctItems;
-        
+
         }
         [HttpPost]
         public JsonResult GetCentral(string id)
@@ -122,7 +122,7 @@ namespace DNA_CAPI_MIS.Controllers
             string CheckList = val[1].ToString().Trim();
             string Disctrict = val[3].ToString();
             List<DNA_CAPI_MIS.Models.ProjectFieldSample> Central = db.ProjectFieldSample
-                                .Where(x =>  x.IsActive && x.Title.Contains(CheckList) && x.Title.Contains(Disctrict))
+                                .Where(x => x.IsActive && x.Title.Contains(CheckList) && x.Title.Contains(Disctrict))
                                 .OrderBy(x => x.DisplayOrder)
                                 .ToList<ProjectFieldSample>();
             var distinctItems = Central.Select(x => new SelectListItem
@@ -221,7 +221,7 @@ FROM
 INNER JOIN 
     ProjectFieldSample pf ON p.ID = pf.FieldID; ";
             var Pie = db.Database.SqlQuery<BarChart>(Query);
-          
+
             var distinctItems = Pie.Select(x => new SelectListItem
             {
                 Text = x.Title,
@@ -230,24 +230,24 @@ INNER JOIN
             return Json(distinctItems);
 
         }
-           
-        
-        
+
+
+
         [HttpPost]
         public JsonResult DistrictBarChart(string id)
         {
-            
-            if(id == "NaN")
+
+            if (id == "NaN")
             {
                 id = "";
             }
-           
+
             string where = string.Empty;
             if (!string.IsNullOrEmpty(id))
             {
                 where = $"and g.DistrictId in ({id})";
-                
-                 
+
+
             }
             else
             {
@@ -290,7 +290,7 @@ fs3.Title as OpenClose, case when fs3.Title = 'Open' then 1 else  0 end IsOpen,f
 
 ";
             var Pie = db.Database.SqlQuery<PieChartOC>(Query);
-          
+
             var distinctItems = Pie.Select(x => new SelectListItem
             {
                 Text = x.Title,
@@ -298,14 +298,14 @@ fs3.Title as OpenClose, case when fs3.Title = 'Open' then 1 else  0 end IsOpen,f
             }).ToList();
             return Json(distinctItems);
 
-        }       
-        
-        
+        }
+
+
         [HttpPost]
         public JsonResult CenterPieChart(string id)
         {
-            
-            if(id == "NaN")
+
+            if (id == "NaN")
             {
                 id = "";
             }
@@ -318,8 +318,8 @@ fs3.Title as OpenClose, case when fs3.Title = 'Open' then 1 else  0 end IsOpen,f
             if (!string.IsNullOrEmpty(id))
             {
                 where = $"and g.District like '%{Text}%'";
-                
-                 
+
+
             }
             else
             {
@@ -367,7 +367,7 @@ fs3.Title as OpenClose, case when fs3.Title = 'Open' then 1 else  0 end IsOpen
 
 ";
             var Pie = db.Database.SqlQuery<PieChartOC>(Query);
-          
+
             var distinctItems = Pie.Select(x => new SelectListItem
             {
                 Text = x.Title,
@@ -380,14 +380,14 @@ fs3.Title as OpenClose, case when fs3.Title = 'Open' then 1 else  0 end IsOpen
         [HttpPost]
         public JsonResult GetDistictById(string id)
         {
-            if(string.IsNullOrEmpty(id))
+            if (string.IsNullOrEmpty(id))
             {
                 return Json(null);
             }
-            
+
             int FieldID = Convert.ToInt32(id.Split(',')[0]);
             List<DNA_CAPI_MIS.Models.ProjectFieldSample> Distict = db.ProjectFieldSample
-                                .Where(x => x.ParentSampleID != 0 && x.IsActive && x.FieldID.Equals(FieldID)  )
+                                .Where(x => x.ParentSampleID != 0 && x.IsActive && x.FieldID.Equals(FieldID))
                                 .OrderBy(x => x.DisplayOrder)
                                 .ToList<ProjectFieldSample>();
 
@@ -396,7 +396,7 @@ fs3.Title as OpenClose, case when fs3.Title = 'Open' then 1 else  0 end IsOpen
                 Text = x.Title,
                 Value = x.FieldID.ToString().Trim()
             }).ToList();
-     
+
             return Json(distinctItems);
 
         }
@@ -474,9 +474,9 @@ fs3.Title as OpenClose, FieldValue5 as Remarks,FieldValue6 as Name
             var Openclose = db.Database.SqlQuery<MonitoringOfficerDto>(Sql).ToList();
 
             return Json(Openclose);
-        } 
-        
-        
+        }
+
+
         [HttpPost]
         public JsonResult ContraceptiveDetail(string id)
         {
@@ -523,7 +523,7 @@ select fs2.Title as District,fs1.Title as contraceptive ,cte.FieldValue1
         public JsonResult ForSelectedMonitoring(string id)
 
         {
-           
+
             //7120 7121 7122
             if (string.IsNullOrEmpty(id))
             {
@@ -533,12 +533,12 @@ select fs2.Title as District,fs1.Title as contraceptive ,cte.FieldValue1
             int CenterOpenCloseID = 0;
             if (id.Split(',')[1].Trim() == "RHS")
             {
-                CenterOpenCloseID = 55570 ;
+                CenterOpenCloseID = 55570;
                 BrandedId = 50437;
             }
             else if (id.Split(',')[1].Trim() == "MSU")
             {
-                CenterOpenCloseID = 50482 ;
+                CenterOpenCloseID = 50482;
                 BrandedId = 50634;
             }
             else if (id.Split(',')[1].Trim() == "FWC")
@@ -662,11 +662,11 @@ END
                 res.All = queryFWC.Sum(x => x.SurveyCount);
                 res.Name = id.Split(',')[1];
             }
-            if(Openclose.Count() > 0)
+            if (Openclose.Count() > 0)
             {
                 foreach (var item in Openclose.ToList())
                 {
-                    if(item.Title == "Close")
+                    if (item.Title == "Close")
                     {
                         res.Close = item.OpenClose;
                         res.CloseTitle = item.Title;
@@ -680,13 +680,13 @@ END
             }
             else
             {
-                res.Close = 0 ;
+                res.Close = 0;
                 res.CloseTitle = "Close";
                 res.Open = 0;
                 res.OpenTitle = "Open";
             }
 
-            if(StatusDt.Count() > 0)
+            if (StatusDt.Count() > 0)
             {
                 foreach (var item in StatusDt.ToList())
                 {
@@ -707,7 +707,7 @@ END
                         res.Vacant = item.cnt;
                     }
                 }
-                
+
             }
             else
             {
@@ -767,12 +767,12 @@ END
                 Value = "0"
             });
 
- 
+
 
             // Convert the list to a List<SelectListItem>
             distinctItems = distinctItems.ToList();
             ViewBag.OpenClose = distinctItems;
-           
+
 
         }
 
@@ -786,7 +786,7 @@ END
             }).ToList();
             ViewBag.Centrals = Centrals; ;
         }
-    
+
         public ActionResult OpenProject(string name, string status, string viewName = "OpenProject")
         {
             if (string.IsNullOrEmpty(status))
@@ -805,7 +805,7 @@ END
                 string uid = User.Identity.GetUserId();
                 userFilter = " AND pur.UserId = " + (uid ?? "0");
                 sql = @"SELECT * FROM project p WHERE (name like '%" + name + "%' OR guid like '%" + name + "%') AND isnull(status, 'D') IN (" + status + ")  AND id IN (SELECT ObjectValue FROM DNAShared2.dbo.UserRights pur WHERE pur.ObjectName = 'PROJECT'" + userFilter + ")";
-            } 
+            }
 
             var query = db.Database.SqlQuery<ProjectsList>(sql);
             List<ProjectsList> projects = query.ToList<ProjectsList>();
@@ -813,22 +813,22 @@ END
             return View(viewName, projects);
         }
 
-        
+
         public void Monitoring()
         {
-           string sql = @"SELECT case 
+            string sql = @"SELECT case 
  
 when id = 7120 then 50435--50446 
 when id = 7121 then 50484--50486 
 when id = 7122 then 55587--50517 
 else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122) ORDER BY name"; //7114 ,
             var CheckFor = db.Database.SqlQuery<ProjectsList>(sql);
-             
-            
+
+
             var Checklist = CheckFor.Select(x => new SelectListItem
             {
                 Text = x.Name,
-                Value = x.Id.ToString() + "," + x.Name.Split('-')[1] +","+ x.RoleId.ToString(),
+                Value = x.Id.ToString() + "," + x.Name.Split('-')[1] + "," + x.RoleId.ToString(),
             }).ToList();
 
             var dummyData = new List<ProjectFieldSample> { new ProjectFieldSample { Title = "Select District", Code = "0" }, };
@@ -861,7 +861,7 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
             {
                 string sql = "";
 
-                sql = "SELECT p.id, p.name, COUNT(s.sbjnum) AS SurveyCount FROM Project p LEFT OUTER JOIN Survey s ON s.ProjectID = p.id WHERE p.id = " + id + 
+                sql = "SELECT p.id, p.name, COUNT(s.sbjnum) AS SurveyCount FROM Project p LEFT OUTER JOIN Survey s ON s.ProjectID = p.id WHERE p.id = " + id +
                       " GROUP BY p.id, p.name";
 
                 var query1 = db.Database.SqlQuery<ProjectsInfo>(sql);
@@ -880,7 +880,7 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
                 Central();
                 GetDistict();
 
-               
+
                 return View(project);
             }
             else
@@ -918,7 +918,7 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
             sql = "SELECT Id, ParentFieldId, FieldType, Title, DisplayOrder FROM ProjectField WHERE ProjectID = " + pid;
             var pfQuery = db.Database.SqlQuery<ProjectField>(sql);
             List<ProjectField> projectFields = pfQuery.ToList<ProjectField>();
-            
+
             sql = "SELECT aqd.* FROM AnalyzerQueryDimension aqd WHERE 1 = 2";
 
             var aQuery = db.Database.SqlQuery<AnalyzerQueryDimension>(sql);
@@ -1233,7 +1233,7 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
                 }
             }
 
-            
+
             if (fid > 0)
             {
                 pf = db.ProjectField.Find(fid);
@@ -1796,7 +1796,7 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
             {
                 ProjectFieldSample pfs = db.ProjectFieldSample.Find(id);
                 ProjectField pf = db.ProjectField.Find(pfs.FieldID);
-                
+
                 ProjectFieldSampleMediaFile pfsMediaFile = db.ProjectFieldSampleMediaFile
                                             .Where(x => x.FieldSampleID == pfs.ID)
                                             .FirstOrDefault<ProjectFieldSampleMediaFile>();
@@ -1824,7 +1824,7 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
                     ViewBag.MediaFile = "/Pictures/SurveyMedia/" + pfsMediaFile.FileName;
                     ViewBag.MediaFileType = pfsMediaFile.FileType;
                 }
-                
+
                 ViewBag.ProjectFieldName = pf.Title;
                 ViewBag.ProjectFieldId = pf.ID;
                 ViewBag.ProjectFieldSampleID = pfs.ID;
@@ -1925,7 +1925,7 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
                 pfsMediaFile.FileName = fileName;
                 PFSMediaFile.SaveAs(path);
             }
-            
+
             db.SaveChanges();
 
             return View("~/Views/Shared/Blank.cshtml");
@@ -1941,7 +1941,7 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
                 var project = db.Database.SqlQuery<ProjectView>(sql);
                 ViewBag.ProjectName = project.FirstOrDefault<ProjectView>().Name;
                 ViewBag.ProjectId = id;
-                
+
                 return View(GetProjectFieldsWithValues((int)id));
             }
             else
@@ -1971,16 +1971,16 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
 
         [Authorize]
         public ActionResult Tabulation(FormCollection form)
-        {            
+        {
             return View();
         }
 
 
-        protected void GenerateSQL(int SideIndex, int TopIndex, AnalyzerQueryDimension d, ref DimensionSQL sql) 
+        protected void GenerateSQL(int SideIndex, int TopIndex, AnalyzerQueryDimension d, ref DimensionSQL sql)
         {
             if (d.FieldType == "RDO" || d.FieldType == "CHK" || d.FieldType == "DDN" || d.FieldType == "LVW")
             {
-                sql.qfields += (sql.qfields.Length > 0 ? ", " : "") + (d.Position == "Side" ? SideIndex + " AS SideIndex, " + TopIndex + " AS TopIndex, " : "") + 
+                sql.qfields += (sql.qfields.Length > 0 ? ", " : "") + (d.Position == "Side" ? SideIndex + " AS SideIndex, " + TopIndex + " AS TopIndex, " : "") +
                     @"CASE WHEN <pos>SampleSourceParent.ID IS NULL THEN 0 ELSE <pos>SampleSourceParent.ID END AS <pos>GroupID, 
                     N'<ProjectFieldTitle>' + CASE WHEN <pos>SampleSourceParent.ID IS NULL THEN '' ELSE ' > ' + <pos>SampleSourceParent.Title END AS <pos>GroupTitle, 
                     <pos>SampleSource.Id AS <pos>Id, <pos>SampleSource.Title AS <pos>Title ";
@@ -2026,7 +2026,7 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
             }
         }
 
-        protected void ReplacePlaceholders(AnalyzerQueryDimension d, ref DimensionSQL sql) 
+        protected void ReplacePlaceholders(AnalyzerQueryDimension d, ref DimensionSQL sql)
         {
             sql.qfields = sql.qfields.Replace("<pos>", d.Position);
             sql.qfields = sql.qfields.Replace("<ProjectFieldTitle>", d.ProjectFieldTitle);
@@ -2094,7 +2094,7 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
 
             List<ProjectField> pfList = new List<ProjectField>();
             ProjectField pf = new ProjectField();
-            
+
             int fid = 0;
             foreach (ProjectFieldResultSet dr in query.ToList<ProjectFieldResultSet>())
             {
@@ -2197,7 +2197,7 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
                 ColName = "Name of FWC Centers";
             }
 
-            
+
 
             int sbjnum = 0;
             System.Data.Entity.Infrastructure.DbRawSqlQuery<SurveyReport> GetSurvey;
@@ -2213,12 +2213,12 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
             string IntToString = "";
             List<SurveyReport> Survey = GetTitleByIds(GetSurvey, titles, ref IntToString);
             DataTable dataTable = ToDataTable(Survey.ToList());
-            if(Center == "Select Center" || Center == "0")
+            if (Center == "Select Center" || Center == "0")
             {
                 Center = "";
             }
 
-           
+
             //Col to Row
 
 
@@ -2226,8 +2226,8 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
 
             if (Center != "")
             {
-                var newDataTableFilter = newDataTable.AsEnumerable().Where(x => x.ItemArray[34].ToString().Contains(Center)); 
-                if(newDataTableFilter.Count() > 0)
+                var newDataTableFilter = newDataTable.AsEnumerable().Where(x => x.ItemArray[34].ToString().Contains(Center));
+                if (newDataTableFilter.Count() > 0)
                 {
                     newDataTable = newDataTableFilter.CopyToDataTable();
                 }
@@ -2328,9 +2328,9 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
                 Console.WriteLine();
             }
         }
-        private void CreateDatatable(int ProjectID,string CenterId, int sbjnum, out System.Data.Entity.Infrastructure.DbRawSqlQuery<SurveyReport> GetSurvey, out System.Data.Entity.Infrastructure.DbRawSqlQuery<SurveyTitle> GetTitle)
+        private void CreateDatatable(int ProjectID, string CenterId, int sbjnum, out System.Data.Entity.Infrastructure.DbRawSqlQuery<SurveyReport> GetSurvey, out System.Data.Entity.Infrastructure.DbRawSqlQuery<SurveyTitle> GetTitle)
         {
-           
+
 
             var SurveyData = $@"IF OBJECT_ID('tempdb..#pdf') IS NOT NULL
 BEGIN
@@ -2382,17 +2382,82 @@ WHERE
 ORDER BY 
     s.sbjnum, cy.Name, ct.Name, dt.Name, s.Created DESC, ISNULL(pfn.DisplayOrder, 0), pf.DisplayOrder
 
-	 select DISTINCT CONVERT(nvarchar(max), p.Title ) AS Title, p.SurveyorName,p.FieldValue,p.sbjnum,p.FieldId  from #pdf p where len(p.FieldValue) > 0 and p.Title is not null  order by p.sbjnum desc --and p.sbjnum = {sbjnum} 
+	 select DISTINCT CONVERT(nvarchar(max), p.Title ) AS Title, p.SurveyorName,p.FieldValue,p.sbjnum,p.FieldId  from #pdf p where len(p.FieldValue) > 0 and p.Title is not null   order by p.sbjnum desc  
 ";
 
 
             string Titles = $@" select p.Title ,p.Code , p.FieldID from ProjectFieldSample p where p. IsActive = 1";
-           
+
 
             GetSurvey = db.Database.SqlQuery<SurveyReport>(SurveyData);
             GetTitle = db.Database.SqlQuery<SurveyTitle>(Titles);
         }
 
+
+        private void CreateDatatableReport(int ProjectID, string CenterId, int sbjnum, out System.Data.Entity.Infrastructure.DbRawSqlQuery<SurveyReport> GetSurvey, out System.Data.Entity.Infrastructure.DbRawSqlQuery<SurveyTitle> GetTitle)
+        {
+
+
+            var SurveyData = $@"IF OBJECT_ID('tempdb..#pdf') IS NOT NULL
+BEGIN
+    DROP TABLE #pdf;
+END
+
+
+SELECT 
+    s.sbjnum, 
+    s.SurveyorName, 
+    sd.FieldId, 
+   
+    CASE 
+        WHEN t.Text IS NULL THEN pf.Title 
+        ELSE t.Text 
+    END AS Title, 
+    pf.ReportTitle, 
+    sd.FieldValue
+ into #Pdf
+FROM 
+    Survey s 
+INNER JOIN 
+    SurveyData sd ON s.sbjnum = sd.sbjnum 
+LEFT OUTER JOIN 
+    STGSurvey ON s.sbjnum = STGSurvey.SurveyId
+LEFT OUTER JOIN 
+    SurveyLocation sl ON sl.sbjnum = s.sbjnum
+LEFT OUTER JOIN 
+    ProjectField pf ON sd.FieldId = pf.ID 
+LEFT OUTER JOIN 
+    ProjectFieldSection pfn ON pf.SectionId = pfn.id
+LEFT OUTER JOIN 
+    Translation t ON t.EntityName = 'PROJECTFIELD' 
+    AND t.FieldName = 'TITLE' 
+    AND t.Language = 'en' 
+    AND pf.ID = (CASE WHEN ISNUMERIC(t.KeyValue) = 1 THEN CAST(t.KeyValue as int) ELSE 0 END) 
+LEFT OUTER JOIN 
+    City ct ON ct.ID = s.CityID
+LEFT OUTER JOIN 
+    District dt ON dt.ID = s.DistrictID
+LEFT OUTER JOIN 
+    Country cy ON ct.CountryID = cy.ID 
+OUTER APPLY 
+    dbo.SplitStringValue(sd.FieldValue, ',') AS split -- Assuming you have a function to split the values
+WHERE 
+    ISNULL(s.Version, 0) = 0 
+    AND ISNULL(s.Test, 0) = 0 
+    
+ORDER BY 
+    s.sbjnum, cy.Name, ct.Name, dt.Name, s.Created DESC, ISNULL(pfn.DisplayOrder, 0), pf.DisplayOrder
+
+	 select DISTINCT CONVERT(nvarchar(max), p.Title ) AS Title, p.SurveyorName,p.FieldValue,p.sbjnum,p.FieldId  from #pdf p where len(p.FieldValue) > 0 and p.Title is not null and p.sbjnum = {sbjnum}   order by p.sbjnum desc  
+";
+
+
+            string Titles = $@" select p.Title ,p.Code , p.FieldID from ProjectFieldSample p where p. IsActive = 1";
+
+
+            GetSurvey = db.Database.SqlQuery<SurveyReport>(SurveyData);
+            GetTitle = db.Database.SqlQuery<SurveyTitle>(Titles);
+        }
         private static HttpResponseMessage CreateExcel(List<SurveyReport> Survey)
         {
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
@@ -2478,8 +2543,8 @@ ORDER BY
                 excelPackage.SaveAs(filePath);
             }
             // Set response content
-            
-        
+
+
             return filePath;
         }
         private static List<SurveyReport> GetTitleByIds(System.Data.Entity.Infrastructure.DbRawSqlQuery<SurveyReport> GetSurvey, SurveyTitle[] titles, ref string IntToString)
@@ -2529,11 +2594,11 @@ ORDER BY
             var val = id.Split(',');
             string CheckList = val[0].ToString().Trim();
 
-            if(CheckList == "50435")
+            if (CheckList == "50435")
             {
                 Title = "RHS";
             }
-            else if(CheckList == "50484")
+            else if (CheckList == "50484")
             {
                 Title = "MSU";
             }
@@ -2585,6 +2650,30 @@ ORDER BY
 
             ViewBag.Center = Center;
             ViewBag.District = RHS_A;
+
+            return View();
+        }
+
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult PdfReport()
+        {
+
+
+            System.Data.Entity.Infrastructure.DbRawSqlQuery<SurveyReport> GetSurvey;
+            System.Data.Entity.Infrastructure.DbRawSqlQuery<SurveyTitle> GetTitle;
+            CreateDatatable(7120, "", 0, out GetSurvey, out GetTitle);
+            var titles = GetTitle.ToArray();
+            string IntToString = "";
+            List<SurveyReport> Survey = GetTitleByIds(GetSurvey, titles, ref IntToString);
+            DataTable dataTable = ToDataTable(Survey.ToList());
+            DataTable newDataTable = ColToRow(dataTable);
+            PrintDataTable(newDataTable);
+
+            string jsonData = JsonConvert.SerializeObject(newDataTable); // Serialize DataTable to JSON
+
+            ViewBag.JsonData = jsonData; // Pass JSON data to the view
 
             return View();
         }
@@ -2653,39 +2742,74 @@ ORDER BY
             return View();
         }
 
+
+
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult CreatePDFBySurvey(int id)
+        {
+            id = 7120;
+
+            string Query = "select s.sbjnum, Convert(varchar,s.Created,101) Created, s.SurveyorName from Survey  s where s.projectID in (7120,7121,7122)";
+            var GetSurvey = db.Database.SqlQuery<PdfDetailReport>(Query);
+            var ss = GetSurvey.ToList();
+            return Json(GetSurvey);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult OpenReport(int id)
+        {
+
+
+            System.Data.Entity.Infrastructure.DbRawSqlQuery<SurveyReport> GetSurvey;
+            System.Data.Entity.Infrastructure.DbRawSqlQuery<SurveyTitle> GetTitle;
+            CreateDatatableReport(7120, "", id, out GetSurvey, out GetTitle);
+            var titles = GetTitle.ToArray();
+            string IntToString = "";
+
+            var RawSurvey = GetSurvey;
+            List<SurveyReport> Survey = GetTitleByIds(GetSurvey, titles, ref IntToString);
+            DataTable dataTable = ToDataTable(Survey.ToList());
+            //DataTable newDataTable = ColToRow(dataTable);
+            PrintDataTable(dataTable);
+            SurveyResponse data = new SurveyResponse();
+            data.RawData = RawSurvey.ToList();
+            
+            string[,] dataArray = DataTableToArray(dataTable);
+            data.DataTitle = dataArray;
+            return Json(data);
+        }
+
+        static string[,] DataTableToArray(DataTable dataTable)
+        {
+            // Create a 2D array with dimensions (number of rows + 1) x (number of columns)
+            string[,] array = new string[dataTable.Rows.Count + 1, dataTable.Columns.Count];
+
+            // Fill the first row with column headers
+            for (int j = 0; j < dataTable.Columns.Count; j++)
+            {
+                array[0, j] = dataTable.Columns[j].ColumnName;
+            }
+
+            // Iterate over each row and column to fill the array
+            for (int i = 0; i < dataTable.Rows.Count; i++)
+            {
+                for (int j = 0; j < dataTable.Columns.Count; j++)
+                {
+                    array[i + 1, j] = Convert.ToString(dataTable.Rows[i][j]); // Convert to string, adjust data type as needed
+                }
+            }
+
+            return array;
+        }
     }
 
 
-   
-
-    
-}
 
 
 
-//--Query where link is between Location data and Questionnaire	
-//select SideSampleSource.Name, TopSampleSource.Title, count(*) 
-//FROM Survey SurveySource 
-//  INNER JOIN SurveyData TopSurveyLink ON SurveySource.sbjnum = TopSurveyLink.sbjnum 
-//  INNER JOIN City SideSampleSource ON SurveySource.CityID = SideSampleSource.ID
-//  INNER JOIN ProjectFieldSample TopSampleSource ON TopSurveyLink.FieldId = TopSampleSource.FieldID
-//WHERE SurveySource.ProjectID = 1371
-//AND TopSurveyLink.FieldId = 1 AND TopSampleSource.ID IN (SELECT ListMember FROM fnSplitCSV(TopSurveyLink.FieldValue))
-//AND SurveySource.CityID IN (2,6,7)
-//GROUP BY TopSampleSource.Title, SideSampleSource.CountryID, SideSampleSource.Name
-//ORDER BY TopSampleSource.Title, SideSampleSource.CountryID, SideSampleSource.Name
+    }
 
-//--Query where link is between Questionnaire and Questionnaire	
-//select SideSampleSource.Title, TopSampleSource.Title, count(*) 
-//FROM Survey SurveySource 
-//  INNER JOIN SurveyData SideSurveyLink ON SurveySource.sbjnum = SideSurveyLink.sbjnum 
-//  INNER JOIN SurveyData TopSurveyLink ON SurveySource.sbjnum = TopSurveyLink.sbjnum 
-//  INNER JOIN ProjectFieldSample SideSampleSource ON SideSurveyLink.FieldId = SideSampleSource.FieldID
-//  INNER JOIN ProjectFieldSample TopSampleSource ON TopSurveyLink.FieldId = TopSampleSource.FieldID
-//WHERE SurveySource.ProjectID = 1371
-//AND SideSurveyLink.FieldId = 1 AND SideSampleSource.ID IN (SELECT ListMember FROM fnSplitCSV(SideSurveyLink.FieldValue))
-//AND TopSurveyLink.FieldId = 43 AND TopSampleSource.Title = TopSurveyLink.FieldValue
-//GROUP BY TopSampleSource.Title, SideSampleSource.Title
-//ORDER BY TopSampleSource.Title, SideSampleSource.Title
-
-
+ 

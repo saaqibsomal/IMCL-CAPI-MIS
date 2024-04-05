@@ -259,6 +259,11 @@ namespace DNA_CAPI_MIS.Models
     
     }
 
-   
+    public class PdfDetailReport
+    {
+        public int sbjnum { get; set; }
+        public string Created { get; set; }
+        public string SurveyorName { get; set; }
+    }
 
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -31,6 +32,12 @@ namespace DNA_CAPI_MIS.Models
         public string FieldValue { get; set; }
     }
 
+
+    public class SurveyResponse
+    {
+        public List<SurveyReport> RawData  { get; set; }
+        public string[,] DataTitle { get; set; }
+    }
     public class SurveyTitle
     {
 

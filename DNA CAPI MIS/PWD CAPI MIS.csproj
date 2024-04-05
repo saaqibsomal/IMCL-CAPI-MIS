@@ -3315,6 +3315,7 @@
     <Content Include="Views\Designer\RHS.cshtml" />
     <Content Include="Views\Designer\MSU.cshtml" />
     <Content Include="Views\Designer\FWC.cshtml" />
+    <Content Include="Views\Designer\PdfReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -3331,6 +3332,9 @@
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Report.css" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

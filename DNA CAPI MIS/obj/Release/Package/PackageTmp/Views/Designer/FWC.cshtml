@@ -161,11 +161,12 @@
 
     $('#PdfExcel').click(function () {
 
+        var Center = $("#Center").find('option:selected').text();
         var District = $('#District').val();
         if (District == '') {
             District = 55587;
         }
-        var Center = $("#Center").find('option:selected').val();
+
         $.ajax({
             type: "POST",
             url: "/Designer/ExcelReport?param1=" + District + "," + Center,
