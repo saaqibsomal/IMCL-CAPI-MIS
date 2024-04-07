@@ -63,6 +63,11 @@ namespace DNA_CAPI_MIS.Models
         public string DeadStockRegister { get; set; }
         public string IECMaterial { get; set; }
         public string MECWheel { get; set; }
+        public string EquipmentPosition { get; set; }
+        public string Furnitureposition { get; set; }
+        public string TechnicalMonitoringChecklist { get; set; }
+        public string SERVICEDELIVERY { get; set; }
+        
     }
     public class SurveyTitle
     {

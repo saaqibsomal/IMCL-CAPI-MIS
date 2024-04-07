@@ -2793,12 +2793,12 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
             data.RawData = RawSurvey.ToList();
             var json = JsonConvert.SerializeObject(dataTable);
             data.DataTitle = JsonConvert.DeserializeObject<List<TitleValue>>(json);
-            data.Field = BindValues(data.DataTitle);
+            data.Field = BindValues(data.DataTitle, data.RawData);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
 
-        public ReportField BindValues(List<TitleValue> data)
+        public ReportField BindValues(List<TitleValue> data, List<SurveyReport> RawData)
         {
             ReportField field = new ReportField();
             try
@@ -2992,6 +2992,61 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
                 else
                 {
                     field.MECWheel = "N/A";
+                }   
+                
+                var EquipmentPosition = RawData.Where(x => x.Title.ToUpper().Contains("Equipment Position/Condition 1".ToUpper())).FirstOrDefault();
+                if (EquipmentPosition != null)
+                {
+                    field.EquipmentPosition = EquipmentPosition.FieldValue;
+
+                }
+                else
+                {
+                    field.EquipmentPosition = "N/A";
+                }
+                
+                var FurniturePosition = RawData.Where(x => x.Title.ToUpper().Contains("Furniture Position/Condition 1".ToUpper())).FirstOrDefault();
+                if (FurniturePosition != null)
+                {
+                    field.Furnitureposition = FurniturePosition.FieldValue;
+
+                }
+                else
+                {
+                    field.Furnitureposition = "N/A";
+                } 
+                
+                var TechnicalMonitoringChecklist = data.Where(x => x.Title.ToUpper().Contains("Technical Monitoring Checklist".ToUpper())).FirstOrDefault();
+                if (TechnicalMonitoringChecklist != null)
+                {
+                    field.TechnicalMonitoringChecklist = TechnicalMonitoringChecklist.FieldValue;
+
+                }
+                else
+                {
+                    field.TechnicalMonitoringChecklist = "N/A";
+                }  
+                
+                var COUNSELING = RawData.Where(x => x.Title.ToUpper().Contains("COUNSELING".ToUpper())).FirstOrDefault();
+                if (COUNSELING != null)
+                {
+                    field.COUNSELING = COUNSELING.FieldValue;
+
+                }
+                else
+                {
+                    field.COUNSELING = "N/A";
+                }
+
+                var SERVICEDELIVERY = RawData.Where(x => x.Title.ToUpper().Contains("SERVICE DELIVERY".ToUpper())).FirstOrDefault();
+                if (SERVICEDELIVERY != null)
+                {
+                    field.SERVICEDELIVERY = SERVICEDELIVERY.FieldValue;
+
+                }
+                else
+                {
+                    field.SERVICEDELIVERY = "N/A";
                 }
 
             }
