@@ -47,6 +47,22 @@ namespace DNA_CAPI_MIS.Models
         public string DateOfVisit { get; set; }
         public string TimeOfVisit { get; set; }
         public string OpenCloseStatus { get; set; }
+        public string StaffPosition { get; set; }
+
+        public string Indication { get; set; }
+        public string Cleanliness { get; set; }
+        public string COUNSELING { get; set; }
+        public string StockofMedicines { get; set; }
+        public string StockofContraceptives { get; set; }
+        public string StatusofBuilding { get; set; }
+        public string DailyClientRegister { get; set; }
+        public string MonthlyBreakup { get; set; }
+        public string MedicineStockRegister { get; set; }
+        public string ContraceptiveStockRegister { get; set; }
+        public string LogBook { get; set; }
+        public string DeadStockRegister { get; set; }
+        public string IECMaterial { get; set; }
+        public string MECWheel { get; set; }
     }
     public class SurveyTitle
     {

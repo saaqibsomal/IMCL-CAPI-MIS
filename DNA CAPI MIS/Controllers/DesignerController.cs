@@ -22,6 +22,7 @@ using iTextSharp.tool.xml;
 using iTextSharp.tool.xml.parser;
 using iTextSharp.tool.xml.pipeline.css;
 using iTextSharp.tool.xml.pipeline.html;
+using System.Windows.Media.Media3D;
 
 namespace DNA_CAPI_MIS.Controllers
 {
@@ -2838,10 +2839,163 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
                     field.OpenCloseStatus = "N/A";
                 }
 
+                var Indication = data.Where(x => x.Title.ToUpper().Contains("Indication/Sign Board".ToUpper())).FirstOrDefault();
+                if (Indication != null)
+                {
+                    field.Indication = Indication.FieldValue;
 
+                }
+                else
+                {
+                    field.Indication = "N/A";
+                }
+
+
+                var StaffPosition = data.Where(x => x.Title.ToUpper().Contains("Staff Position Names 1".ToUpper())).FirstOrDefault();
+                if (StaffPosition != null)
+                {
+                    field.StaffPosition = StaffPosition.FieldValue;
+
+                }
+                else
+                {
+                    field.StaffPosition = "N/A";
+                }
+
+                var Cleanliness = data.Where(x => x.Title.ToUpper().Contains("Cleanliness".ToUpper())).FirstOrDefault();
+                if (Cleanliness != null)
+                {
+                    field.Cleanliness = Cleanliness.FieldValue;
+
+                }
+                else
+                {
+                    field.Cleanliness = "N/A";
+                }
+
+                var StockOfMedicines = data.Where(x => x.Title.ToUpper().Contains("Stock of Medicine".ToUpper())).FirstOrDefault();
+                if (StockOfMedicines != null)
+                {
+                    field.StockofMedicines = StockOfMedicines.FieldValue;
+
+                }
+                else
+                {
+                    field.StockofMedicines = "N/A";
+                }
+
+                var StatusOfBuilding = data.Where(x => x.Title.ToUpper().Contains("Status of Building".ToUpper())).FirstOrDefault();
+                if (StatusOfBuilding != null)
+                {
+                    field.StatusofBuilding = StatusOfBuilding.FieldValue;
+
+                }
+                else
+                {
+                    field.StatusofBuilding = "N/A";
+                }
+
+                var StockOfContraceptives = data.Where(x => x.Title.ToUpper().Contains("Stock of Contraceptives".ToUpper())).FirstOrDefault();
+                if (StockOfContraceptives != null)
+                {
+                    field.StockofContraceptives = StockOfContraceptives.FieldValue;
+
+                }
+                else
+                {
+                    field.StockofContraceptives = "N/A";
+                }
+
+                var DailyClientRegister = data.Where(x => x.Title.ToUpper().Contains("Daily Client Register/ECR".ToUpper())).FirstOrDefault();
+                if (DailyClientRegister != null)
+                {
+                    field.DailyClientRegister = DailyClientRegister.FieldValue;
+
+                }
+                else
+                {
+                    field.DailyClientRegister = "N/A";
+                }
+
+                var MonthlyBreakup = data.Where(x => x.Title.ToUpper().Contains("Record Keeping - Daily-Monthly break-up".ToUpper())).FirstOrDefault();
+                if (MonthlyBreakup != null)
+                {
+                    field.MonthlyBreakup = MonthlyBreakup.FieldValue;
+
+                }
+                else
+                {
+                    field.MonthlyBreakup = "N/A";
+                }
+
+                var MedicineStockRegister = data.Where(x => x.Title.ToUpper().Contains("Record Keeping - Medicine Stock Reg.".ToUpper())).FirstOrDefault();
+                if (MedicineStockRegister != null)
+                {
+                    field.MedicineStockRegister = MedicineStockRegister.FieldValue;
+
+                }
+                else
+                {
+                    field.MedicineStockRegister = "N/A";
+                }
+
+                var ContraceptiveStockRegister = data.Where(x => x.Title.ToUpper().Contains("Contraceptive Stock Register".ToUpper())).FirstOrDefault();
+                if (ContraceptiveStockRegister != null)
+                {
+                    field.ContraceptiveStockRegister = ContraceptiveStockRegister.FieldValue;
+
+                }
+                else
+                {
+                    field.ContraceptiveStockRegister = "N/A";
+                }
+
+                var LogBook = data.Where(x => x.Title.ToUpper().Contains("Log Book".ToUpper())).FirstOrDefault();
+                if (LogBook != null)
+                {
+                    field.LogBook = LogBook.FieldValue;
+
+                }
+                else
+                {
+                    field.LogBook = "N/A";
+                }
+
+                var DeadStockRegister = data.Where(x => x.Title.ToUpper().Contains("Dead Stock Register".ToUpper())).FirstOrDefault();
+                if (DeadStockRegister != null)
+                {
+                    field.DeadStockRegister = DeadStockRegister.FieldValue;
+
+                }
+                else
+                {
+                    field.DeadStockRegister = "N/A";
+                }
+
+                var IECMaterial = data.Where(x => x.Title.ToUpper().Contains("IEC Material".ToUpper())).FirstOrDefault();
+                if (IECMaterial != null)
+                {
+                    field.IECMaterial = IECMaterial.FieldValue;
+
+                }
+                else
+                {
+                    field.IECMaterial = "N/A";
+                }
+
+                var MECWheel = data.Where(x => x.Title.ToUpper().Contains("MEC Wheel".ToUpper())).FirstOrDefault();
+                if (MECWheel != null)
+                {
+                    field.MECWheel = MECWheel.FieldValue;
+
+                }
+                else
+                {
+                    field.MECWheel = "N/A";
+                }
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }
