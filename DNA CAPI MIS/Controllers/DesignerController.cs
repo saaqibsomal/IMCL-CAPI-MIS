@@ -23,6 +23,7 @@ using iTextSharp.tool.xml.parser;
 using iTextSharp.tool.xml.pipeline.css;
 using iTextSharp.tool.xml.pipeline.html;
 using System.Windows.Media.Media3D;
+using DocumentFormat.OpenXml.Presentation;
 
 namespace DNA_CAPI_MIS.Controllers
 {
@@ -3047,6 +3048,53 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
                 else
                 {
                     field.SERVICEDELIVERY = "N/A";
+                }     
+                
+                
+                var FurniturePositionCondition = RawData.Where(x => x.Title.ToUpper().Contains("Furniture Position/Condition".ToUpper())).FirstOrDefault();
+                if (FurniturePositionCondition != null)
+                {
+                    field.FurniturePositionCondition = FurniturePositionCondition.FieldValue;
+
+                }
+                else
+                {
+                    field.FurniturePositionCondition = "N/A";
+                }
+
+
+                var EquipmentCondition = RawData.Where(x => x.Title.ToUpper().Contains("Equipment Position/Condition".ToUpper())).FirstOrDefault();
+                if (EquipmentCondition != null)
+                {
+                    field.EquipmentCondition = EquipmentCondition.FieldValue;
+
+                }
+                else
+                {
+                    field.EquipmentCondition = "N/A";
+                }
+                
+                
+                var StaffPositionNames = RawData.Where(x => x.Title.ToUpper().Contains("Staff Position Names".ToUpper())).FirstOrDefault();
+                if (StaffPositionNames != null)
+                {
+                    field.StaffPositionNames = StaffPositionNames.FieldValue;
+
+                }
+                else
+                {
+                    field.StaffPositionNames = "N/A";
+                }
+
+                var ClientsPresent = RawData.Where(x => x.Title.ToUpper().Contains("How many Clients found present at the time of visit?".ToUpper())).FirstOrDefault();
+                if (ClientsPresent != null)
+                {
+                    field.ClientsPresent = ClientsPresent.FieldValue;
+
+                }
+                else
+                {
+                    field.ClientsPresent = "N/A";
                 }
 
             }

@@ -19,7 +19,7 @@
     <title>HTML to PDF</title>
     <!-- Include jsPDF library -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
 </head>
 <style>
     .model {
@@ -239,61 +239,61 @@
                                     <td>1</td>
                                     <td>Women Medical Officer</td>
                                     <td id="PName1"></td>
-                                    <td></td>
+                                    <td id="StaffPos1"></td>
                                 </tr>
                                 <tr>
                                     <td>2</td>
                                     <td>Accounts Assistant</td>
                                     <td id="PName2"></td>
-                                    <td></td>
+                                    <td id="StaffPos2"></td>
                                 </tr>
                                 <tr>
                                     <td>3</td>
                                     <td>Theater Nurse</td>
                                     <td id="PName3"></td>
-                                    <td></td>
+                                    <td id="StaffPos3"></td>
                                 </tr>
                                 <tr>
                                     <td>4</td>
                                     <td>O.T. Technician</td>
                                     <td id="PName4"></td>
-                                    <td></td>
+                                    <td id="StaffPos4"></td>
                                 </tr>
                                 <tr>
                                     <td>5</td>
                                     <td>Family Welfare Councilor</td>
                                     <td id="PName5"></td>
-                                    <td></td>
+                                    <td id="StaffPos5"></td>
                                 </tr>
                                 <tr>
                                     <td>6</td>
                                     <td>Family Welfare Worker</td>
                                     <td id="PName6"></td>
-                                    <td></td>
+                                    <td id="StaffPos6"></td>
                                 </tr>
                                 <tr>
                                     <td>7</td>
                                     <td>Family Welfare Assistant (F)</td>
                                     <td id="PName7"></td>
-                                    <td></td>
+                                    <td id="StaffPos7"></td>
                                 </tr>
                                 <tr>
                                     <td>8</td>
                                     <td>Driver</td>
                                     <td  id="PName8"></td>
-                                    <td></td>
+                                    <td id="StaffPos8"></td>
                                 </tr>
                                 <tr>
                                     <td>9</td>
                                     <td>Helper</td>
                                     <td  id="PName9"></td>
-                                    <td></td>
+                                    <td id="StaffPos9"></td>
                                 </tr>
                                 <tr>
                                     <td>10</td>
                                     <td>Sweeper</td>
                                     <td  id="PName10"></td>
-                                    <td></td>
+                                    <td id="StaffPos10"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -635,8 +635,7 @@
                                         <tr>
 
                                             <th></th>
-
-                                            <th>Old</th>
+                                            <th>No</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -644,25 +643,25 @@
                                         <tr>
 
                                             <td>•	General Clients</td>
-                                            <td>  </td>
+                                            <td id="CP1">  </td>
 
                                         </tr>
                                         <tr>
 
                                             <td>•	F.P clients</td>
-                                            <td>  </td>
+                                            <td id="CP2">  </td>
 
                                         </tr>
                                         <tr>
 
                                             <td>•	MCH/RH </td>
-                                            <td>  </td>
+                                            <td id="CP3">  </td>
 
                                         </tr>
                                         <tr>
 
                                             <td>•	C.S cases: </td>
-                                            <td>  </td>
+                                            <td id="CP4">  </td>
 
                                         </tr>
 
@@ -670,50 +669,76 @@
                                 </table>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-6">
 
-                        <h4>•	IEC Material </h4>
+                                <h4>•	IEC Material </h4>
 
-                        <table>
-                            <tr>
-                                <th> </th>
-                                <th> </th>
-                                <th> </th>
-                                <th> </th>
-                                <th> </th>
-                                <th>Availability at facility</th>
-                                <th>Available Quantity </th>
-                                <th>Display at facility</th>
-                            </tr>
-                        </table>
-                        <table border="1">
-                            <tr>
-                                <th> </th>
-                                <th>Yes</th>
-                                <th>No</th>
-                                <th>Sufficient</th>
-                                <th>In-sufficient</th>
-                                <th>Yes</th>
-                                <th>No</th>
-                            </tr>
-                            <tr>
-                                <td>IEC Material</td>
-                                <td  id="IEC1"> </td>
-                                <td  id="IEC2"> </td>
-                                <td  id="IEC3"> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                            </tr>
-                            <tr>
-                                <td>MEC Wheel</td>
-                                <td id="MEC0"></td>
-                                <td id="MEC1"></td>
-                                <td id="MEC2"></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </table>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th> Yes / No </th>
+                                        </tr>
+                                    </thead>
+
+
+                                    <tbody>
+                                        <tr>
+                                            <td>Availability at facility  </td>
+                                            <td id="IecMat1"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Available Quantity </td>
+                                            <td id="IecMat2"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Display at facility</td>
+                                            <td id="IecMat3"> </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="col-md-6">
+
+                                <h4>•	MEC Wheel </h4>
+
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th> Yes/ No </th>
+                                        </tr>
+                                    </thead>
+
+
+                                    <tbody>
+                                        <tr>
+                                            <td>Availability at facility  </td>
+                                            <td id="MecWheel1"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Available Quantity </td>
+                                            <td id="MecWheel2"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>Display at facility</td>
+                                            <td id="MecWheel3"> </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+                        </div>
+                        
 
                         <h1>Record Keeping</h1>
                         <table>
@@ -766,140 +791,123 @@
                                 <th>S.No.</th>
                                 <th>Equipment</th>
                                 <th>Quantity Available</th>
-                                <th>Good</th>
-                                <th>Satisfactory</th>
-                                <th>Poor</th>
+                                <th>Good / Satisfactory / Poor</th>
+                              
                             </tr>
                             <tr>
                                 <td>1</td>
                                 <td>Minilap Kits</td>
                                 <td id="Quantity1"></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="FuniGB1"></td>
+                                
                             </tr>
                             <tr>
                                 <td>2</td>
                                 <td>IUCD Kits</td>
                                 <td id="Quantity2"></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="FuniGB2"></td>
+                                
                             </tr>
 
                             <tr>
                                 <td>3</td>
                                 <td>B.P. Apparatus</td>
                                 <td id="Quantity3"></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="FuniGB3"></td>
+                            
                             </tr>
                             <tr>
                                 <td>3</td>
                                 <td>B.P. Apparatus</td>
                                 <td id="Quantity4"></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="FuniGB4"></td>
+                             
                             </tr>
                             <tr>
                                 <td>5</td>
                                 <td>Thermometer</td>
                                 <td id="Quantity5"></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="FuniGB5"></td>
+                               
                             </tr>
                             <tr>
                                 <td>6</td>
                                 <td>Weighing machine</td>
                                 <td id="Quantity6"></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="FuniGB6"></td>
+                               
                             </tr>
                             <tr>
                                 <td>7</td>
                                 <td>Stove</td>
                                 <td id="Quantity7"></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="FuniGB7"></td>
+                             
                             </tr>
                             <tr>
                                 <td>8</td>
                                 <td>O.T. Lights</td>
                                 <td id="Quantity8"></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="FuniGB8"></td>
+                             
                             </tr>
 
                             <tr>
                                 <td>9</td>
                                 <td>Hydraulic Table</td>
                                 <td id="Quantity9"></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="FuniGB9"></td>
+                            
                             </tr>
                             <tr>
                                 <td>10</td>
                                 <td>Autoclave</td>
                                 <td id="Quantity10"></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="FuniGB10"></td>
+                                
                             </tr>
                             <tr>
                                 <td>11</td>
                                 <td>Oxygen Cylinder</td>
                                 <td id="Quantity11"></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="FuniGB11"></td>
+                             
                             </tr>
                             <tr>
                                 <td>12</td>
                                 <td >Aspirating Pumps</td>
                                 <td id="Quantity12"></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="FuniGB12"></td>
+                              
                             </tr>
                             <tr>
                                 <td>13</td>
                                 <td>Wheel Chair</td>
                                 <td id="Quantity13"></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="FuniGB13"></td>
+                                
                             </tr>
                             <tr>
                                 <td>14</td>
                                 <td>Stretcher</td>
                                 <td id="Quantity14"></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="FuniGB14"></td>
+                            
                             </tr>
                             <tr>
                                 <td>15</td>
                                 <td>Generator</td>
                                 <td id="Quantity15"></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="FuniGB15"></td>
+                              
                             </tr>
 
                             <tr>
                                 <td>16</td>
                                 <td>Screen</td>
                                 <td id="Quantity16"></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="FuniGB16"></td>
+                              
                             </tr>
                         </table>
 
@@ -910,65 +918,51 @@
                                 <th>S.No.</th>
                                 <th>Equipment</th>
                                 <th>Quantity Available</th>
-                                <th>Good</th>
-                                <th>Satisfactory</th>
-                                <th>Poor</th>
+                                <th>Good / Satisfactory /Poor </th>
+          
                             </tr>
                             <tr>
                                 <td>1</td>
                                 <td>Office Table</td>
                                 <td id="FPQuantity1"></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="FunPos1"></td>
+                          
                             </tr>
                             <tr>
                                 <td>2</td>
                                 <td>Office Chairs</td>
                                 <td id="FPQuantity2"></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="FunPos2"></td>
                             </tr>
                             <tr>
                                 <td>3</td>
                                 <td>Benches</td>
                                 <td id="FPQuantity3"></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="FunPos3"></td>
                             </tr>
                             <tr>
                                 <td>4</td>
                                 <td>Examination Table</td>
                                 <td id="FPQuantity4"></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="FunPos4"></td>
                             </tr>
                             <tr>
                                 <td>5</td>
                                 <td>Insertion Table</td>
-                                <td  id="FPQuantity5"></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="FPQuantity5"></td>
+                                <td id="FunPos5"></td>
                             </tr>
                             <tr>
                                 <td>6</td>
                                 <td>Revolving stool</td>
                                 <td id="FPQuantity6"></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="FunPos6"></td>
                             </tr>
                             <tr>
                                 <td>7</td>
                                 <td>Medicine cabinet</td>
-                                <td  id="FPQuantity7"></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td id="FPQuantity7"></td>
+                                <td id="FunPos7"></td>
                             </tr>
                         </table>
                         <h1>Technical Monitoring Checklist</h1>
@@ -1314,15 +1308,15 @@
 
 
                 var IEC = data.Field.IECMaterial.split(',');
-                $("#IEC1").text(IEC[0]);
-                $("#IEC2").text(IEC[1]);
-                $("#IEC3").text(IEC[2]);
+                $("#IecMat1").text(IEC[0]);
+                $("#IecMat2").text(IEC[1]);
+                $("#IecMat3").text(IEC[2]);
 
 
                 var MEC = data.Field.MECWheel.split(',');
-                $("#MEC1").text(MEC[0]);
-                $("#MEC2").text(MEC[1]);
-                $("#MEC3").text(MEC[2]);
+                $("#MecWheel1").text(MEC[0]);
+                $("#MecWheel2").text(MEC[1]);
+                $("#MecWheel3").text(MEC[2]);
 
 
                 var EP = data.Field.EquipmentPosition.split(',');
@@ -1374,27 +1368,122 @@
                 $("#SD4").text(SD[3] == "1" ? "No" : "Yes");
                 $("#SD5").text(SD[4] == "1" ? "No" : "Yes");
 
+                var FuniGB = data.Field.EquipmentCondition.split(',');
+             
+
+                $("#FuniGB1").text(FuniGB[0] == "1" ? "N/A" : FuniGB[0] == "2" ? "Good" : FuniGB[0] == "3" ? "Satisfactory" : "Poor");
+                $("#FuniGB2").text(FuniGB[1] == "1" ? "N/A" : FuniGB[1] == "2" ? "Good" : FuniGB[1] == "3" ? "Satisfactory" : "Poor");
+                $("#FuniGB3").text(FuniGB[2] == "1" ? "N/A" : FuniGB[2] == "2" ? "Good" : FuniGB[2] == "3" ? "Satisfactory" : "Poor");
+                $("#FuniGB4").text(FuniGB[3] == "1" ? "N/A" : FuniGB[3] == "2" ? "Good" : FuniGB[3] == "3" ? "Satisfactory" : "Poor");
+                $("#FuniGB5").text(FuniGB[4] == "1" ? "N/A" : FuniGB[4] == "2" ? "Good" : FuniGB[4] == "3" ? "Satisfactory" : "Poor");
+                $("#FuniGB6").text(FuniGB[5] == "1" ? "N/A" : FuniGB[5] == "2" ? "Good" : FuniGB[5] == "3" ? "Satisfactory" : "Poor");
+                $("#FuniGB7").text(FuniGB[6] == "1" ? "N/A" : FuniGB[6] == "2" ? "Good" : FuniGB[6] == "3" ? "Satisfactory" : "Poor");
+                $("#FuniGB8").text(FuniGB[7] == "1" ? "N/A" : FuniGB[7] == "2" ? "Good" : FuniGB[7] == "3" ? "Satisfactory" : "Poor");
+                $("#FuniGB9").text(FuniGB[8] == "1" ? "N/A" : FuniGB[8] == "2" ? "Good" : FuniGB[8] == "3" ? "Satisfactory" : "Poor");
+                $("#FuniGB10").text(FuniGB[9] == "1" ? "N/A" : FuniGB[9] == "2" ? "Good" : FuniGB[9] == "3" ? "Satisfactory" : "Poor");
+                $("#FuniGB11").text(FuniGB[10] == "1" ? "N/A" : FuniGB[10] == "2" ? "Good" : FuniGB[10] == "3" ? "Satisfactory" : "Poor");
+                $("#FuniGB12").text(FuniGB[11] == "1" ? "N/A" : FuniGB[11] == "2" ? "Good" : FuniGB[11] == "3" ? "Satisfactory" : "Poor");
+                $("#FuniGB13").text(FuniGB[12] == "1" ? "N/A" : FuniGB[12] == "2" ? "Good" : FuniGB[12] == "3" ? "Satisfactory" : "Poor");
+                $("#FuniGB14").text(FuniGB[13] == "1" ? "N/A" : FuniGB[13] == "2" ? "Good" : FuniGB[13] == "3" ? "Satisfactory" : "Poor");
+                $("#FuniGB15").text(FuniGB[14] == "1" ? "N/A" : FuniGB[14] == "2" ? "Good" : FuniGB[14] == "3" ? "Satisfactory" : "Poor");
+                $("#FuniGB16").text(FuniGB[15] == "1" ? "N/A" : FuniGB[15] == "2" ? "Good" : FuniGB[15] == "3" ? "Satisfactory" : "Poor");
+
+                var FunPos = data.Field.FurniturePositionCondition.split(',');
+
+                $("#FunPos1").text(FunPos[0] == "1" ? "N/A" : FunPos[0] == "2" ? "Good" : FunPos[0] == "3" ? "Satisfactory" : "Poor");
+                $("#FunPos2").text(FunPos[1] == "1" ? "N/A" : FunPos[1] == "2" ? "Good" : FunPos[1] == "3" ? "Satisfactory" : "Poor");
+                $("#FunPos3").text(FunPos[2] == "1" ? "N/A" : FunPos[2] == "2" ? "Good" : FunPos[2] == "3" ? "Satisfactory" : "Poor");
+                $("#FunPos4").text(FunPos[3] == "1" ? "N/A" : FunPos[3] == "2" ? "Good" : FunPos[3] == "3" ? "Satisfactory" : "Poor");
+                $("#FunPos5").text(FunPos[4] == "1" ? "N/A" : FunPos[4] == "2" ? "Good" : FunPos[4] == "3" ? "Satisfactory" : "Poor");
+                $("#FunPos6").text(FunPos[5] == "1" ? "N/A" : FunPos[5] == "2" ? "Good" : FunPos[5] == "3" ? "Satisfactory" : "Poor");
+                $("#FunPos7").text(FunPos[6] == "1" ? "N/A" : FunPos[6] == "2" ? "Good" : FunPos[6] == "3" ? "Satisfactory" : "Poor");
+
+
+                var StaffPos = data.Field.StaffPositionNames.split(',');
+
+                $("#StaffPos1").text(FunPos[0] == "1" ? "Present" : StaffPos[0] == "Absent" ? "Good" : StaffPos[0] == "Leave" ? "Satisfactory" : "Vacant");
+                $("#StaffPos2").text(FunPos[1] == "1" ? "Present" : StaffPos[1] == "Absent" ? "Good" : StaffPos[1] == "Leave" ? "Satisfactory" : "Vacant");
+                $("#StaffPos3").text(FunPos[2] == "1" ? "Present" : StaffPos[2] == "Absent" ? "Good" : StaffPos[2] == "Leave" ? "Satisfactory" : "Vacant");
+                $("#StaffPos4").text(FunPos[3] == "1" ? "Present" : StaffPos[3] == "Absent" ? "Good" : StaffPos[3] == "Leave" ? "Satisfactory" : "Vacant");
+                $("#StaffPos5").text(FunPos[4] == "1" ? "Present" : StaffPos[4] == "Absent" ? "Good" : StaffPos[4] == "Leave" ? "Satisfactory" : "Vacant");
+                $("#StaffPos6").text(FunPos[5] == "1" ? "Present" : StaffPos[5] == "Absent" ? "Good" : StaffPos[5] == "Leave" ? "Satisfactory" : "Vacant");
+                $("#StaffPos7").text(FunPos[6] == "1" ? "Present" : StaffPos[6] == "Absent" ? "Good" : StaffPos[6] == "Leave" ? "Satisfactory" : "Vacant");
+                $("#StaffPos8").text(FunPos[7] == "1" ? "Present" : StaffPos[7] == "Absent" ? "Good" : StaffPos[7] == "Leave" ? "Satisfactory" : "Vacant");
+                $("#StaffPos9").text(FunPos[8] == "1" ? "Present" : StaffPos[8] == "Absent" ? "Good" : StaffPos[8] == "Leave" ? "Satisfactory" : "Vacant");
+                $("#StaffPos10").text(FunPos[9] == "1" ? "Present": StaffPos[9] == "Absent" ? "Good" : StaffPos[9] == "Leave" ? "Satisfactory" : "Vacant");
+
+           
+                var CP = data.Field.ClientsPresent.split(',');
+                $("#CP1").text(CP[0]);
+                $("#CP2").text(CP[1]);
+                $("#CP3").text(CP[2]);
+                $("#CP4").text(CP[3]);
+ 
+     
                   $("#pdfModel").css("display", "block");
 
             }
         });
         }
 
+   // function generatePDF() {
+   // // Create a new jsPDF instance
+   //// var doc = new jsPDF();
+   //     var doc = new jsPDF('p', 'pt', 'letter');
+   // // HTML content to be converted to PDF
+   //     var htmlContent = document.getElementById('pdfModel').innerHTML;
+
+   // // Convert HTML to PDF
+   // doc.html(htmlContent, {
+   //     callback: function (doc) {
+   //         // Save the PDF
+   //         doc.save('output.pdf');
+   //     }
+   // });
+//}
+
     function generatePDF() {
-    // Create a new jsPDF instance
-    var doc = new jsPDF();
+        var pdf = new jsPDF('p', 'pt', 'A4');
+        // source can be HTML-formatted string, or a reference
+        // to an actual DOM element from which the text will be scraped.
+        debugger;
+        source = $('#pdfModel')[0];
 
-    // HTML content to be converted to PDF
-    var htmlContent = document.getElementById('content').innerHTML;
+        // we support special element handlers. Register them with jQuery-style 
+        // ID selector for either ID or node name. ("#iAmID", "div", "span" etc.)
+        // There is no support for any other type of selectors 
+        // (class, of compound) at this time.
+        specialElementHandlers = {
+            // element with id of "bypass" - jQuery style selector
+            '#bypassme': function (element, renderer) {
+                // true = "handled elsewhere, bypass text extraction"
+                return true
+            }
+        };
+        margins = {
+            top: 80,
+            bottom: 60,
+            left: 40,
+            width: 800
+        };
+        // all coords and widths are in jsPDF instance's declared units
+        // 'inches' in this case
+        pdf.fromHTML(
+            source, // HTML string or DOM elem ref.
+            margins.left, // x coord
+            margins.top, { // y coord
+            'width': margins.width, // max width of content on PDF
+            'elementHandlers': specialElementHandlers
+        },
 
-    // Convert HTML to PDF
-    doc.html(htmlContent, {
-        callback: function (doc) {
-            // Save the PDF
-            doc.save('output.pdf');
-        }
-    });
-}
+            function (dispose) {
+                // dispose: object with X, Y of the last line add to the PDF 
+                //          this allow the insertion of new lines after html
+                pdf.save('Test.pdf');
+            }, margins
+        );
+    }
+
         function generatePDF1() {
 
     var htmlContent = document.getElementById('pdfModel').innerHTML;

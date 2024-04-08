@@ -67,6 +67,10 @@ namespace DNA_CAPI_MIS.Models
         public string Furnitureposition { get; set; }
         public string TechnicalMonitoringChecklist { get; set; }
         public string SERVICEDELIVERY { get; set; }
+        public string EquipmentCondition { get; set; }
+        public string FurniturePositionCondition { get; set; }
+        public string StaffPositionNames { get; set; }
+        public string ClientsPresent { get; set; }
         
     }
     public class SurveyTitle
