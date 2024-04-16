@@ -1,13 +1,5 @@
-﻿@model System.Data.DataTable
-
-
-@{
-    ViewBag.Title = "RHS";
-}
-@section Scripts {
-    <script>
-        var viewURL = "/Designer/Excel/";
-    </script>
+﻿@{
+    Layout = null;
 
 }
 
@@ -16,46 +8,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTML to PDF</title>
-    <!-- Include jsPDF library -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
 </head>
-<style>
-    .model {
-        display: none;
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0,0,0,0.5);
-    }
 
-    .model-content {
-        background-color: #fefefe;
-        margin: 10% auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 80%;
-    }
-
-    .close {
-        color: #aaaaaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-    }
-
-        .close:hover,
-        .close:focus {
-            color: #000;
-            text-decoration: none;
-            cursor: pointer;
-        }
-</style>
 <style>
     .optionsRadios {
         padding-right: 15px;
@@ -164,41 +119,10 @@
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title" style="width:100%">Report</h3>
                 <h2>Survey Report</h2>
-
-                <div class="col-12">
-                    <div class="row">
-                        <div class="col-10">
-                            <div class="col-md-4 col-sm-12">
-                                @Html.DropDownList("Checklist", ViewBag.Checklist as List<SelectListItem>, "Monitoring Checklist For All", htmlAttributes: new { @class = "form-control", id = "Checklist" })
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-
-                <div style="overflow-x: auto; margin-top: 10px;margin-right:5px;">
-                    <table id="dataTable">
-                        <thead>
-                            <tr>
-                                <th>Print</th>
-                                <th>Survey DateTime</th>
-                                <th>SurveyorName</th>
-
-                            </tr>
-                        </thead>
-                        <tbody id="tbody"></tbody>
-                    </table>
-                </div>
-                <button id="PdfGen" style="margin-top: 10px;margin-left:30px"> Download PDF </button>
-                <div class="model" id="pdfModel"  style="width:60%">
+                <div class="model" id="pdfModel" >
                     <div class="model-content">
                         <button id="downloadPDFBtn">Download PDF</button>
-                        <span class="close">&times;</span>
-
                         <div id="PdfReportDiv">
                             <h3 style="text-align:left;" id="Heading"></h3>
 
@@ -322,7 +246,7 @@
                                             <label id="Cleanliness">N/A</label>
                                         </div>
                                     </li>
- 
+
                                     <li>
                                         <div class="criteria col-6">
                                             <div>Stock of Medicines:</div>
@@ -333,7 +257,7 @@
                                             <label id="StockofContraceptives">N/A</label>
                                         </div>
                                     </li>
-                             
+
                                     <li>
                                         <div class="criteria">
                                             <div>Status of Building:</div>
@@ -345,8 +269,8 @@
 
 
 
-                            <div  style="margin-top:100px;margin-bottom:100px">
-                                <h3 >Status of Building</h3>
+                            <div style="margin-top:100px;margin-bottom:100px">
+                                <h3>Status of Building</h3>
 
                                 <table>
 
@@ -377,7 +301,7 @@
                             </div>
 
                             <div>
-             
+
                                 <h1 style="color:white">.</h1>
 
                                 <h3 style="margin-top:50px;">Stock and Expiry Date of Medicines:(mention those items which are expiring within six months)</h3>
@@ -589,92 +513,92 @@
                                 </tbody>
                             </table>
 
-                          
-                                <div style="margin-top: 300px;">
-                               
-                                    <h3 >Performance of Service outlet during last 6 working days:</h3>
-                                    <table>
-                                        <thead>
-                                            <tr>
 
-                                                <th>Title</th>
-                                                <th>New</th>
-                                                <th>Old</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
+                            <div style="margin-top: 300px;">
 
-                                            <tr>
+                                <h3>Performance of Service outlet during last 6 working days:</h3>
+                                <table>
+                                    <thead>
+                                        <tr>
 
-                                                <td>General Clients</td>
-                                                <td>  </td>
-                                                <td>   </td>
-                                            </tr>
-                                            <tr>
+                                            <th>Title</th>
+                                            <th>New</th>
+                                            <th>Old</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
 
-                                                <td>F.P clients</td>
-                                                <td>  </td>
-                                                <td>     </td>
-                                            </tr>
-                                            <tr>
+                                        <tr>
 
-                                                <td>MCH/RH </td>
-                                                <td>  </td>
-                                                <td>     </td>
-                                            </tr>
-                                            <tr>
+                                            <td>General Clients</td>
+                                            <td>  </td>
+                                            <td>   </td>
+                                        </tr>
+                                        <tr>
 
-                                                <td>C.S cases: </td>
-                                                <td>  </td>
-                                                <td>     </td>
-                                            </tr>
+                                            <td>F.P clients</td>
+                                            <td>  </td>
+                                            <td>     </td>
+                                        </tr>
+                                        <tr>
 
-                                        </tbody>
-                                    </table>
-                                </div>
+                                            <td>MCH/RH </td>
+                                            <td>  </td>
+                                            <td>     </td>
+                                        </tr>
+                                        <tr>
 
-                                <div style="margin-top:100px;">
-                                    <h1 style="color:white">.</h1>
-                                    <h4>Clients found present at the time of visit:</h4>
-                                    <table>
-                                        <thead>
-                                            <tr>
+                                            <td>C.S cases: </td>
+                                            <td>  </td>
+                                            <td>     </td>
+                                        </tr>
 
-                                                <th>Title</th>
-                                                <th>No</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
 
-                                            <tr>
+                            <div style="margin-top:100px;">
+                                <h1 style="color:white">.</h1>
+                                <h4>Clients found present at the time of visit:</h4>
+                                <table>
+                                    <thead>
+                                        <tr>
 
-                                                <td>General Clients</td>
-                                                <td id="CP1">  </td>
+                                            <th>Title</th>
+                                            <th>No</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
 
-                                            </tr>
-                                            <tr>
+                                        <tr>
 
-                                                <td>F.P clients</td>
-                                                <td id="CP2">  </td>
+                                            <td>General Clients</td>
+                                            <td id="CP1">  </td>
 
-                                            </tr>
-                                            <tr>
+                                        </tr>
+                                        <tr>
 
-                                                <td>MCH/RH </td>
-                                                <td id="CP3">  </td>
+                                            <td>F.P clients</td>
+                                            <td id="CP2">  </td>
 
-                                            </tr>
-                                            <tr>
+                                        </tr>
+                                        <tr>
 
-                                                <td>C.S cases: </td>
-                                                <td id="CP4">  </td>
+                                            <td>MCH/RH </td>
+                                            <td id="CP3">  </td>
 
-                                            </tr>
+                                        </tr>
+                                        <tr>
 
-                                        </tbody>
-                                    </table>
-                                </div>
-                
+                                            <td>C.S cases: </td>
+                                            <td id="CP4">  </td>
+
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
                             <div class="row">
                                 <div>
 
@@ -796,7 +720,7 @@
                             <div style="margin-top:150px;">
 
 
-                                <h3 >Equipment Position</h3>
+                                <h3>Equipment Position</h3>
                                 <table>
                                     <tr>
                                         <th>S.No.</th>
@@ -1182,8 +1106,8 @@
 
                         </div>
 
-                </div>
                     </div>
+                </div>
 
 
             </div>
@@ -1193,73 +1117,34 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 
+
 <script>
-            $(document).ready(function () {
-                $("#PdfGen").click(function () {
-                    $("#pdfModel").css("display", "block");
-                });
 
-                $(".close").click(function () {
-                    $("#pdfModel").css("display", "none");
-                });
+    $(document).ready(function () {
 
-                $(window).click(function (event) {
-                    if (event.target == $("#pdfModel")[0]) {
-                        $("#pdfModel").css("display", "none");
-                    }
-                });
+        var urlParams = new URLSearchParams(window.location.search);
 
-                $("#downloadPDFBtn").click(function () {
-                    generatePDF();
-                });
-            });
-</script>
-<script>
-        $(document).ready(function () {
+        // Get the value of a specific parameter, for example, 'id'
+        var id = urlParams.get('id');
+        OpenReport(id);
 
+    })
 
-            $.ajax({
-            type: 'POST',
-            url: "/Designer/CreatePDFBySurvey/" + 0,
-            data: {},
-            success: function (data) {
-
-                $('#tbody').empty();
-                 var tbody = $('#tbody');
-                    $.each(data, function(index, item) {
-                        var row = $('<tr></tr>');
-                         row.append('<td><a href="#" onclick="OpenReport(' + item.sbjnum + ')"> Print </a></td>');
-                        row.append('<td>' + item.Created + '</td>');
-                        row.append('<td>' + item.SurveyorName + '</td>');
-
-                         row.click(function() {
-                            // Call your function here, passing the subject number as a parameter
-                            OpenReport(item.sbjnum);
-                        });
-
-                        tbody.append(row);
-                    });
-            }
-        });
-
-        });
-        //$("#Checklist").find('option:selected').text()
-        function OpenReport(sbjnum)
-        {
-            var Pro;
-            if ($("#Checklist").find('option:selected').text().includes("-")) {
-                Pro = $("#Checklist").find('option:selected').text().split('-')[1];
-            } else {
-                Pro = $("#Checklist").find('option:selected').text();
-            }
-             $.ajax({
+    function OpenReport(sbjnum) {
+        var Pro;
+        if ($("#Checklist").find('option:selected').text().includes("-")) {
+            Pro = $("#Checklist").find('option:selected').text().split('-')[1];
+        } else {
+            Pro = $("#Checklist").find('option:selected').text();
+        }
+        $.ajax({
             type: 'POST',
             url: "/Designer/OpenReport/" + sbjnum,
             data: {},
             success: function (data) {
 
-                $("#Heading").text("Monitoring Visit Report ("  + Pro + ")");
-                $("#SubHeading").text("(For "+ Pro + ")");
+                $("#Heading").text("Monitoring Visit Report (" + Pro + ")");
+                $("#SubHeading").text("(For " + Pro + ")");
                 $("#NameOfDistrict").text(data.Field.NameOfDistrict);
                 $("#NameOfCenter").text(data.Field.NameOfCenter);
                 $("#DateOfVisit").text(data.Field.DateOfVisit);
@@ -1291,7 +1176,7 @@
                 $("#DCR2").text(DCR[1]);
                 $("#DCR3").text(DCR[2]);
 
-                var DMB =  data.Field.MonthlyBreakup.split(',');
+                var DMB = data.Field.MonthlyBreakup.split(',');
                 $("#DMB1").text(DMB[0]);
                 $("#DMB2").text(DMB[1]);
                 $("#DMB3").text(DMB[2]);
@@ -1301,7 +1186,7 @@
                 $("#MSR2").text(MSR[1]);
                 $("#MSR3").text(MSR[2]);
 
-                
+
                 var CSR = data.Field.ContraceptiveStockRegister.split(',');
                 $("#CSR1").text(CSR[0]);
                 $("#CSR2").text(CSR[1]);
@@ -1347,7 +1232,7 @@
                 $("#Quantity14").text(EP[13]);
                 $("#Quantity15").text(EP[14]);
                 $("#Quantity16").text(EP[15]);
-             
+
                 var FP = data.Field.Furnitureposition.split(',');
                 $("#FPQuantity1").text(FP[0]);
                 $("#FPQuantity2").text(FP[1]);
@@ -1371,7 +1256,7 @@
                 $("#cons3").text(cons[2] == "1" ? "No" : "Yes");
                 $("#cons4").text(cons[3] == "1" ? "No" : "Yes");
                 $("#cons5").text(cons[4] == "1" ? "No" : "Yes");
-                 
+
                 var SD = data.Field.SERVICEDELIVERY.split(',');
                 $("#SD1").text(SD[0] == "1" ? "No" : "Yes");
                 $("#SD2").text(SD[1] == "1" ? "No" : "Yes");
@@ -1380,7 +1265,7 @@
                 $("#SD5").text(SD[4] == "1" ? "No" : "Yes");
 
                 var FuniGB = data.Field.EquipmentCondition.split(',');
-             
+
 
                 $("#FuniGB1").text(FuniGB[0] == "1" ? "N/A" : FuniGB[0] == "2" ? "Good" : FuniGB[0] == "3" ? "Satisfactory" : "Poor");
                 $("#FuniGB2").text(FuniGB[1] == "1" ? "N/A" : FuniGB[1] == "2" ? "Good" : FuniGB[1] == "3" ? "Satisfactory" : "Poor");
@@ -1421,107 +1306,34 @@
                 $("#StaffPos7").text(FunPos[6] == "1" ? "Present" : StaffPos[6] == "Absent" ? "Good" : StaffPos[6] == "Leave" ? "Satisfactory" : "Vacant");
                 $("#StaffPos8").text(FunPos[7] == "1" ? "Present" : StaffPos[7] == "Absent" ? "Good" : StaffPos[7] == "Leave" ? "Satisfactory" : "Vacant");
                 $("#StaffPos9").text(FunPos[8] == "1" ? "Present" : StaffPos[8] == "Absent" ? "Good" : StaffPos[8] == "Leave" ? "Satisfactory" : "Vacant");
-                $("#StaffPos10").text(FunPos[9] == "1" ? "Present": StaffPos[9] == "Absent" ? "Good" : StaffPos[9] == "Leave" ? "Satisfactory" : "Vacant");
+                $("#StaffPos10").text(FunPos[9] == "1" ? "Present" : StaffPos[9] == "Absent" ? "Good" : StaffPos[9] == "Leave" ? "Satisfactory" : "Vacant");
 
-           
+
                 var CP = data.Field.ClientsPresent.split(',');
                 $("#CP1").text(CP[0]);
                 $("#CP2").text(CP[1]);
                 $("#CP3").text(CP[2]);
                 $("#CP4").text(CP[3]);
- 
-                var url = 'http://localhost:54050/Designer/Report?id=' + sbjnum;
 
-                // Open the URL in a new tab/window
-                window.open(url, '_blank');
 
-                  $("#pdfModel").css("display", "block");
+                
 
             }
         });
-        }
+    } 
 
+    $('#downloadPDFBtn').click(function () {
 
-    function generatePDF() {
-        var pdf = new jsPDF('p', 'pt', 'letter');
+        $('#downloadPDFBtn').hide();
+        window.print();
+        // Show the button for 5 seconds
+        $('#downloadPDFBtn').show(); // Show the button
+        setTimeout(function () {
+            $('#downloadPDFBtn').hide(); // Hide the button after 5 seconds
+        }, 5000); // 5000 milliseconds = 5 seconds
 
-        var source = $('#PdfReportDiv')[0];
-
-        var specialElementHandlers = {
-            '#bypassme': function (element, renderer) {
-                return true;
-            }
-        };
-
-        var margins = {
-            top: 10,
-            bottom: 20,
-            left: 40,
-            width: 500 // Adjust the width as needed
-        };
-
-        var options = {
-            margin: margins,
-            elementHandlers: specialElementHandlers,
-            autoPaging: true // Enable auto paging
-        };
-
-        pdf.fromHTML(
-            source,
-            margins.left,
-            margins.top,
-            {
-                width: margins.width,
-                elementHandlers: specialElementHandlers
-            },
-            function (dispose) {
-                var now = new Date();
-                pdf.save(now + '.pdf');
-            }
-        );
-    }
-
-  
      
-
-
-        $('#Checklist').change(function(){
-           var id =  $("#Checklist").find('option:selected').val();
-    if(id == "")
-    {
-        id = 0;
-    }
-           $.ajax({
-            type: 'POST',
-            url: "/Designer/CreatePDFBySurvey/" + id,
-            data: {},
-            success: function (data) {
-
-                $('#tbody').empty();
-                 var tbody = $('#tbody');
-                    $.each(data, function(index, item) {
-                        var row = $('<tr></tr>');
-                       row.append('<td><a href="#" onclick="OpenReport(' + item.sbjnum + ')"> Print </a></td>');
-                        row.append('<td>' + item.Created + '</td>');
-                        row.append('<td>' + item.SurveyorName + '</td>');
-
-                         row.click(function() {
-                            // Call your function here, passing the subject number as a parameter
-                            OpenReport(item.sbjnum);
-                        });
-
-                        tbody.append(row);
-                    });
-            }
-        });
-
-        });
-
-
-
-     function findIndexByTitle(dataArray,title) {
-    return dataArray.findIndex(function(item) {
-        return item.title === title;
     });
-    }
+
+
 </script>

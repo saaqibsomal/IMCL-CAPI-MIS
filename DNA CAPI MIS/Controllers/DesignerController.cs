@@ -16,14 +16,8 @@ using System.Net.Http;
 using System.Drawing;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
 using iTextSharp.tool.xml;
-using iTextSharp.tool.xml.parser;
-using iTextSharp.tool.xml.pipeline.css;
-using iTextSharp.tool.xml.pipeline.html;
-using System.Windows.Media.Media3D;
-using DocumentFormat.OpenXml.Presentation;
+
 
 namespace DNA_CAPI_MIS.Controllers
 {
@@ -2772,6 +2766,36 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
             var ss = GetSurvey.ToList();
             return Json(GetSurvey);
         }
+
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult Report(int id =0)
+        {
+
+
+            //System.Data.Entity.Infrastructure.DbRawSqlQuery<SurveyReport> GetSurvey;
+            //System.Data.Entity.Infrastructure.DbRawSqlQuery<SurveyTitle> GetTitle;
+            //CreateDatatableReport(7120, "", id, out GetSurvey, out GetTitle);
+            //var titles = GetTitle.ToArray();
+            //string IntToString = "";
+
+            //var RawSurvey = GetSurvey;
+            //List<SurveyReport> Survey = GetTitleByIds(GetSurvey, titles, ref IntToString);
+            //DataTable dataTable = ToDataTable(Survey.ToList());
+            ////DataTable newDataTable = ColToRow(dataTable);
+            //PrintDataTable(dataTable);
+            //SurveyResponse data = new SurveyResponse();
+            //data.RawData = RawSurvey.ToList();
+            //var json = JsonConvert.SerializeObject(dataTable);
+            //data.DataTitle = JsonConvert.DeserializeObject<List<TitleValue>>(json);
+            //data.Field = BindValues(data.DataTitle, data.RawData);
+            //return Json(data, JsonRequestBehavior.AllowGet);
+
+
+            return View();
+        }
+
 
         [Authorize]
         [HttpPost]
