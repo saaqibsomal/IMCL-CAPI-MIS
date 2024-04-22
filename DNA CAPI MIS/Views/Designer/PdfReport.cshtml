@@ -193,10 +193,10 @@
                         <tbody id="tbody"></tbody>
                     </table>
                 </div>
-                <button id="PdfGen" style="margin-top: 10px;margin-left:30px"> Download PDF </button>
+               
                 <div class="model" id="pdfModel"  style="width:60%">
                     <div class="model-content">
-                        <button id="downloadPDFBtn">Download PDF</button>
+                   
                         <span class="close">&times;</span>
 
                         <div id="PdfReportDiv">
@@ -1258,7 +1258,7 @@
             data: {},
             success: function (data) {
 
-                $("#Heading").text("Monitoring Visit Report ("  + Pro + ")");
+                $("#Heading").text();
                 $("#SubHeading").text("(For "+ Pro + ")");
                 $("#NameOfDistrict").text(data.Field.NameOfDistrict);
                 $("#NameOfCenter").text(data.Field.NameOfCenter);
@@ -1429,13 +1429,13 @@
                 $("#CP2").text(CP[1]);
                 $("#CP3").text(CP[2]);
                 $("#CP4").text(CP[3]);
- 
-                var url = 'http://localhost:54050/Designer/Report?id=' + sbjnum;
+                var heading = Pro;
+                var url = 'http://localhost:54050/Designer/Report?id=' + sbjnum + '&Heading=' + heading;
 
                 // Open the URL in a new tab/window
                 window.open(url, '_blank');
 
-                  $("#pdfModel").css("display", "block");
+              //    $("#pdfModel").css("display", "block");
 
             }
         });

@@ -71,6 +71,12 @@ namespace DNA_CAPI_MIS.Models
         public string FurniturePositionCondition { get; set; }
         public string StaffPositionNames { get; set; }
         public string ClientsPresent { get; set; }
+        public string PerformanceOfService { get; set; }
+        public string NoVisitor { get; set; }
+        public string StockOfMed { get; set; }
+        public string StockOfCon { get; set; }
+        public string Last3Contraceptive { get; set; }
+    
         
     }
     public class SurveyTitle

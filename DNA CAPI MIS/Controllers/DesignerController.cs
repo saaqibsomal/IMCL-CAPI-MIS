@@ -2556,7 +2556,11 @@ ORDER BY
                 int result1;
 
                 bool isNumeric1 = false;
-                if (item.FieldValue.Contains(","))
+                if(item.FieldValue.Contains("|"))
+                {
+
+                }
+               else if (item.FieldValue.Contains(","))
                 {
                     IntToString = string.Empty;
                     foreach (var i in item.FieldValue.Split(','))
@@ -2864,7 +2868,7 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
                     field.OpenCloseStatus = "N/A";
                 }
 
-                var Indication = data.Where(x => x.Title.ToUpper().Contains("Indication/Sign Board".ToUpper())).FirstOrDefault();
+                var Indication = RawData.Where(x => x.Title.ToUpper().Contains("Indication/Sign Board".ToUpper())).FirstOrDefault();
                 if (Indication != null)
                 {
                     field.Indication = Indication.FieldValue;
@@ -2909,7 +2913,7 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
                     field.StockofMedicines = "N/A";
                 }
 
-                var StatusOfBuilding = data.Where(x => x.Title.ToUpper().Contains("Status of Building".ToUpper())).FirstOrDefault();
+                var StatusOfBuilding = RawData.Where(x => x.Title.ToUpper().Contains("Status of Building".ToUpper())).FirstOrDefault();
                 if (StatusOfBuilding != null)
                 {
                     field.StatusofBuilding = StatusOfBuilding.FieldValue;
@@ -3120,6 +3124,66 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
                 {
                     field.ClientsPresent = "N/A";
                 }
+                
+                var PerformanceOfService = RawData.Where(x => x.Title.ToUpper().Contains("Performance of Service".ToUpper())).FirstOrDefault();
+                if (PerformanceOfService != null)
+                {
+                    field.PerformanceOfService = PerformanceOfService.FieldValue;
+
+                }
+                else
+                {
+                    field.PerformanceOfService = "N/A";
+                }
+
+
+                var NoVisitor = RawData.Where(x => x.Title.ToUpper().Contains("No. of visits paid during".ToUpper())).FirstOrDefault();
+                if (NoVisitor != null)
+                {
+                    field.NoVisitor = NoVisitor.FieldValue;
+
+                }
+                else
+                {
+                    field.NoVisitor = "N/A";
+                }
+                
+                var StockOfMed = data.Where(x => x.Title.ToUpper().Contains("Stock and Expiry Date Medicine".ToUpper())).FirstOrDefault();
+                if (StockOfMed != null)
+                {
+                    field.StockOfMed = StockOfMed.FieldValue;
+
+                }
+                else
+                {
+                    field.StockOfMed = "N/A";
+                }
+
+                var StockOfCon = data.Where(x => x.Title.ToUpper().Contains("Stock and Expiry Date of Contraceptive".ToUpper())).FirstOrDefault();
+                if (StockOfCon != null)
+                {
+                    field.StockOfCon = StockOfCon.FieldValue;
+
+                }
+                else
+                {
+                    field.StockOfCon = "N/A";
+                }
+
+                var Last3Contraceptive = data.Where(x => x.Title.ToUpper().Contains("Last 3 months Contraceptive Performance".ToUpper())).FirstOrDefault();
+                if (Last3Contraceptive != null)
+                {
+                    field.Last3Contraceptive = Last3Contraceptive.FieldValue;
+
+                }
+                else
+                {
+                    field.Last3Contraceptive = "N/A";
+                }
+                //"Last 3 months Contraceptive Performance"
+
+
+                //"Performance of Service Outlets during Last 6 working days "
 
             }
             catch (Exception ex)
