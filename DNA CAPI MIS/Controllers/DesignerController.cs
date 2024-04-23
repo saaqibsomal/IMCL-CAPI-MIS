@@ -2857,7 +2857,7 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
                     field.TimeOfVisit = "N/A";
                 }
 
-                var OpenCloseStatus = data.Where(x => x.Title.ToUpper().Contains("Status Of FWC".ToUpper()) || x.Title.ToUpper().Contains("Status Of MSU".ToUpper()) || x.Title.ToUpper().Contains("Status Of RHS".ToUpper())).FirstOrDefault();
+                var OpenCloseStatus = data.Where(x => x.Title.ToUpper().Contains("Status Of Center".ToUpper()) || x.Title.ToUpper().Contains("Status Of MSU".ToUpper()) || x.Title.ToUpper().Contains("Status Of RHS".ToUpper())).FirstOrDefault();
                 if (OpenCloseStatus != null)
                 {
                     field.OpenCloseStatus = OpenCloseStatus.FieldValue ;
@@ -3180,11 +3180,73 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
                 {
                     field.Last3Contraceptive = "N/A";
                 }
-                //"Last 3 months Contraceptive Performance"
 
+                var NoOfSup = RawData.Where(x => x.Title.ToUpper().Contains("No. of Supervisory Visit of".ToUpper())).FirstOrDefault();
+                if (NoOfSup != null)
+                {
+                    field.NoOfSup = NoOfSup.FieldValue;
 
-                //"Performance of Service Outlets during Last 6 working days "
+                }
+                else
+                {
+                    field.NoOfSup = "N/A";
+                }
 
+                var DCIT = RawData.Where(x => x.Title.ToUpper().Contains("No. of Supervisory Visit of".ToUpper())).FirstOrDefault();
+                if (DCIT != null)
+                {
+                    field.DCIT = DCIT.FieldValue;
+
+                }
+                else
+                {
+                    field.DCIT = "N/A";
+                }
+                    
+                
+                var LastThreeMonth = RawData.Where(x => x.Title.ToUpper().Contains("No. of visits paid during last three months by".ToUpper())).FirstOrDefault();
+                if (LastThreeMonth != null)
+                {
+                    field.LastThreeMonth = LastThreeMonth.Title;
+
+                }
+                else
+                {
+                    field.LastThreeMonth = "N/A";
+                }
+
+                var HospitalManagement = RawData.Where(x => x.Title.ToUpper().Contains("Meeting Hospital Management Committee".ToUpper())).FirstOrDefault();
+                if (HospitalManagement != null)
+                {
+                    field.HospitalManagement = HospitalManagement.FieldValue;
+
+                }
+                else
+                {
+                    field.HospitalManagement = "N/A";
+                }   
+                
+                var RemarksofMonitoringOfficer = RawData.Where(x => x.Title.ToUpper().Contains("Remarks of Monitoring Officer".ToUpper())).FirstOrDefault();
+                if (RemarksofMonitoringOfficer != null)
+                {
+                    field.RemarksofMonitoringOfficer = RemarksofMonitoringOfficer.FieldValue;
+
+                }
+                else
+                {
+                    field.RemarksofMonitoringOfficer = "N/A";
+                }
+
+                var Last6Field = RawData.Where(x => x.Title.ToUpper().Contains("No. of visits paid during last three months by".ToUpper())).FirstOrDefault();
+                if (Last6Field != null)
+                {
+                    field.Last6Field = Last6Field.FieldValue;
+
+                }
+                else
+                {
+                    field.Last6Field = "N/A";
+                }
             }
             catch (Exception ex)
             {

@@ -76,6 +76,12 @@ namespace DNA_CAPI_MIS.Models
         public string StockOfMed { get; set; }
         public string StockOfCon { get; set; }
         public string Last3Contraceptive { get; set; }
+        public string NoOfSup { get; set; }
+        public string DCIT { get; set; }
+        public string LastThreeMonth { get; set; }
+        public string HospitalManagement { get; set; }
+        public string RemarksofMonitoringOfficer { get; set; }
+        public string Last6Field { get; set; }
     
         
     }
