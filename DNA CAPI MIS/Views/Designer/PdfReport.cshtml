@@ -302,6 +302,23 @@
 
     });
 
+    function OpenReport(sbjnum) {
+        var Pro;
+        if ($("#Checklist").find('option:selected').text().includes("-")) {
+            Pro = $("#Checklist").find('option:selected').text().split('-')[1];
+        } else {
+            Pro = $("#Checklist").find('option:selected').text();
+        }
 
+        var heading = Pro;
+        var url = 'http://192.168.1.21:8065/Designer/Report?id=' + sbjnum + '&Heading=' + heading;
+
+        // Open the URL in a new tab/window
+        window.open(url, '_blank');
+
+       
+
+    }
+         
 
 </script>
