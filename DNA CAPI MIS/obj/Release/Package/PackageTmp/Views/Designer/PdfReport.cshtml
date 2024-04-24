@@ -190,6 +190,7 @@
                         <thead>
                             <tr>
                                 <th>SN#</th>
+                                <th>Monitoring List</th>
                                 <th>District Name</th>
                                 <th>Center Name</th>
                                 <th>Survey DateTime</th>
@@ -242,6 +243,7 @@
                 $.each(data, function (index, item) {
                     var row = $('<tr></tr>');
                     row.append('<td>' + parseInt(index+1)  + '</td>');
+                    row.append('<td>' + item.Project + '</td>');
                     row.append('<td>' + item.DistrictName + '</td>');
                     row.append('<td>' + item.CenterName + '</td>');
                     row.append('<td>' + item.Created + '</td>');
@@ -284,7 +286,8 @@
                 var tbody = $('#tbody');
                 $.each(data, function (index, item) {
                     var row = $('<tr></tr>');
-                    row.append('<td>' + parseInt(index+1) + '</td>');
+                    row.append('<td>' + parseInt(index + 1) + '</td>');
+                    row.append('<td>' + item.Project + '</td>');
                     row.append('<td>' + item.DistrictName + '</td>');
                     row.append('<td>' + item.CenterName + '</td>');
                     row.append('<td>' + item.Created + '</td>');

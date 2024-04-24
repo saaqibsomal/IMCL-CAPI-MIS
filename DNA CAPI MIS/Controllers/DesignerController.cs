@@ -2775,6 +2775,7 @@ Convert(varchar,isnull((select top 1 sd.FieldValue from SurveyData sd where sd.F
 Convert(varchar,isnull((select top 1 sd.FieldValue from SurveyData sd where sd.FieldId in (50446,50846,55588) and sd.sbjnum = s.sbjnum),0)) as Center,
 Convert(varchar,isnull((select top 1 sd.FieldId from SurveyData sd where sd.FieldId in (50435,50484,55587) and sd.sbjnum = s.sbjnum),0)) as DistrictFieldID,
 Convert(varchar,isnull((select top 1  sd.FieldId from SurveyData sd where sd.FieldId in (50446,50846,55588) and sd.sbjnum = s.sbjnum),0)) as CenterFieldId
+, case when s.projectID = 7120 then 'RHS-S' when  s.projectID = 7121 then 'MSU' when s.projectID = 7122 then 'FWC' else '' end as Project
 into #SurveyReport
 from Survey  s 
 where s.projectID in ({Ids}) order by s.sbjnum desc
