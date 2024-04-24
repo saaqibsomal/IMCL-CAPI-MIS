@@ -264,6 +264,12 @@ namespace DNA_CAPI_MIS.Models
         public int sbjnum { get; set; }
         public string Created { get; set; }
         public string SurveyorName { get; set; }
+        public string District { get; set; }
+        public string DistrictName { get; set; }
+        public string CenterName { get; set; }
+        public string Center { get; set; }
+        public string DistrictFieldID { get; set; }
+        public string CenterFieldId { get; set; }
     }
 
 }

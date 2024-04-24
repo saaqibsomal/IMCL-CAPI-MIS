@@ -2755,17 +2755,33 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
         public ActionResult CreatePDFBySurvey(int id)
         {
             string Ids = "";
-            if(id ==  0)
+            if (id == 0)
             {
                 Ids = "'7120','7121','7122'";
             }
+             
             else
             {
                 Ids = id.ToString();
             }
              
 
-            string Query = $"select s.sbjnum, Convert(varchar,s.Created,101) Created, s.SurveyorName from Survey  s where s.projectID in ({Ids}) order by s.Created desc";
+            string Query = $@"
+IF OBJECT_ID('tempdb..#SurveyReport') IS NOT NULL
+    DROP TABLE #SurveyReport
+
+select s.sbjnum, Convert(varchar,s.Created,101) Created, s.SurveyorName,
+Convert(varchar,isnull((select top 1 sd.FieldValue from SurveyData sd where sd.FieldId in (50435,50484,55587) and sd.sbjnum = s.sbjnum),0)) as District,
+Convert(varchar,isnull((select top 1 sd.FieldValue from SurveyData sd where sd.FieldId in (50446,50846,55588) and sd.sbjnum = s.sbjnum),0)) as Center,
+Convert(varchar,isnull((select top 1 sd.FieldId from SurveyData sd where sd.FieldId in (50435,50484,55587) and sd.sbjnum = s.sbjnum),0)) as DistrictFieldID,
+Convert(varchar,isnull((select top 1  sd.FieldId from SurveyData sd where sd.FieldId in (50446,50846,55588) and sd.sbjnum = s.sbjnum),0)) as CenterFieldId
+into #SurveyReport
+from Survey  s 
+where s.projectID in ({Ids}) order by s.sbjnum desc
+ select sp.*,isnull(pfD.Title,'') DistrictName, isnull(pfC.Title,'') CenterName  from #SurveyReport sp 
+ Left join   ProjectFieldSample pfC on sp.Center = pfC.Code and sp.CenterFieldId = pfC.FieldID
+ Left join ProjectFieldSample pfD on sp.Center = pfD.Code and sp.DistrictFieldID = pfD.FieldID 
+";
             var GetSurvey = db.Database.SqlQuery<PdfDetailReport>(Query);
             var ss = GetSurvey.ToList();
             return Json(GetSurvey);
@@ -3247,6 +3263,20 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
                 {
                     field.Last6Field = "N/A";
                 }
+
+
+                var NameofProj = RawData.Where(x => x.Title.ToUpper().Contains("No. of visits paid during last three months by".ToUpper())).FirstOrDefault();
+                if (NameofProj != null)
+                {
+                    field.NameofProj = NameofProj.FieldValue;
+
+                }
+                else
+                {
+                    field.NameofProj = "N/A";
+                }
+
+
             }
             catch (Exception ex)
             {

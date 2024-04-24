@@ -82,6 +82,7 @@ namespace DNA_CAPI_MIS.Models
         public string HospitalManagement { get; set; }
         public string RemarksofMonitoringOfficer { get; set; }
         public string Last6Field { get; set; }
+        public string NameofProj { get; set; }
     
         
     }
