@@ -248,11 +248,11 @@
                     row.append('<td>' + item.CenterName + '</td>');
                     row.append('<td>' + item.Created + '</td>');
                     row.append('<td>' + item.SurveyorName + '</td>');
-                    row.append('<td><a href="#" onclick="OpenReport(' + item.sbjnum + ')"> Print </a></td>');
+                    row.append('<td><a href="#" onclick="OpenReport(' + item.sbjnum+','+ item.Project + ')"> Print </a></td>');
 
                     row.click(function () {
                         // Call your function here, passing the subject number as a parameter
-                        OpenReport(item.sbjnum);
+                        OpenReport(item.sbjnum, item.Project);
                     });
 
                     tbody.append(row);
@@ -292,10 +292,10 @@
                     row.append('<td>' + item.CenterName + '</td>');
                     row.append('<td>' + item.Created + '</td>');
                     row.append('<td>' + item.SurveyorName + '</td>');
-                    row.append('<td><a href="#" onclick="OpenReport(' + item.sbjnum + ')"> Print </a></td>');
+                    row.append('<td><a href="#" onclick="OpenReport(' + item.sbjnum + ',' +item.Project + ')"> Print </a></td>');
                     row.click(function () {
                         // Call your function here, passing the subject number as a parameter
-                        OpenReport(item.sbjnum);
+                        OpenReport(item.sbjnum,item.Project);
                     });
 
                     tbody.append(row);
@@ -305,7 +305,7 @@
 
     });
 
-    function OpenReport(sbjnum) {
+    function OpenReport(sbjnum, Project) {
         var Pro;
         if ($("#Checklist").find('option:selected').text().includes("-")) {
             Pro = $("#Checklist").find('option:selected').text().split('-')[1];
@@ -314,7 +314,7 @@
         }
 
         var heading = Pro;
-        var url = 'http://localhost:54050/Designer/Report?id=' + sbjnum + '&Heading=' + heading;
+        var url = 'http://localhost:54050/Designer/Report?id=' + sbjnum + '&Heading=' + Project;
 
         // Open the URL in a new tab/window
         window.open(url, '_blank');
