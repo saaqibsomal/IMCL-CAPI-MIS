@@ -270,6 +270,7 @@ namespace DNA_CAPI_MIS.Models
         public string Center { get; set; }
         public string DistrictFieldID { get; set; }
         public string CenterFieldId { get; set; }
+        public string Project { get; set; }
     }
 
 }

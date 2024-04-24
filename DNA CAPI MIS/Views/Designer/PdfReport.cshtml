@@ -189,6 +189,8 @@
                     <table id="dataTable">
                         <thead>
                             <tr>
+                                <th>SN#</th>
+                                <th>Monitoring List</th>
                                 <th>District Name</th>
                                 <th>Center Name</th>
                                 <th>Survey DateTime</th>
@@ -207,7 +209,7 @@
     </div>
 </div>
 
- 
+
 <script src="https://cdn.datatables.net/2.0.5/js/dataTables.min.js"></script>
 <script>
     $(document).ready(function () {
@@ -225,11 +227,8 @@
             }
         });
 
-        $("#downloadPDFBtn").click(function () {
-            generatePDF();
-        });
     });
- 
+
     $(document).ready(function () {
 
 
@@ -243,6 +242,8 @@
                 var tbody = $('#tbody');
                 $.each(data, function (index, item) {
                     var row = $('<tr></tr>');
+                    row.append('<td>' + parseInt(index+1)  + '</td>');
+                    row.append('<td>' + item.Project + '</td>');
                     row.append('<td>' + item.DistrictName + '</td>');
                     row.append('<td>' + item.CenterName + '</td>');
                     row.append('<td>' + item.Created + '</td>');
@@ -261,7 +262,7 @@
             }
         });
 
-     
+
 
     });
 
@@ -285,6 +286,8 @@
                 var tbody = $('#tbody');
                 $.each(data, function (index, item) {
                     var row = $('<tr></tr>');
+                    row.append('<td>' + parseInt(index + 1) + '</td>');
+                    row.append('<td>' + item.Project + '</td>');
                     row.append('<td>' + item.DistrictName + '</td>');
                     row.append('<td>' + item.CenterName + '</td>');
                     row.append('<td>' + item.Created + '</td>');
@@ -311,14 +314,14 @@
         }
 
         var heading = Pro;
-        var url = 'http://192.168.1.21:8065/Designer/Report?id=' + sbjnum + '&Heading=' + heading;
+        var url = 'http://localhost:54050/Designer/Report?id=' + sbjnum + '&Heading=' + heading;
 
         // Open the URL in a new tab/window
         window.open(url, '_blank');
 
-       
+
 
     }
-         
+
 
 </script>

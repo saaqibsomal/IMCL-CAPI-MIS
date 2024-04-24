@@ -2848,43 +2848,75 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
             ReportField field = new ReportField();
             try
             {
-                var value = data.Where(x => x.Title.Contains("Name of District") || x.Title.Contains("Name of Distirict")).FirstOrDefault().FieldValue;
-                field.NameOfDistrict = value;    
-                
-                var Center = data.Where(x => x.Title.ToUpper().Contains("Name of".ToUpper()) && x.Title.ToUpper().Contains("Centers".ToUpper())).FirstOrDefault();
-                if(Center != null)
+                try
                 {
-                    field.NameOfCenter = Center.FieldValue;
+                    var value = data.Where(x => x.Title.Contains("Name of District") || x.Title.Contains("Name of Distirict")).FirstOrDefault();
+                    if (value != null)
+                    {
+                        field.NameOfDistrict = value.FieldValue;
+                    }
                 }
-                else
+                catch(Exception ex)
                 {
-                    field.NameOfCenter = "N/A";
-                }
-                
-                var DateOfVisit = data.Where(x => x.Title.ToUpper().Contains("Dates Of  Visit".ToUpper())).FirstOrDefault();
-                if(DateOfVisit != null)
-                {
-                    field.DateOfVisit = DateOfVisit.FieldValue.Split(' ')[0];
-                    field.TimeOfVisit = DateOfVisit.FieldValue.Split(' ')[1];
-                }
-                else
-                {
-                    field.DateOfVisit = "N/A";
-                    field.TimeOfVisit = "N/A";
-                }
 
-                var OpenCloseStatus = data.Where(x => x.Title.ToUpper().Contains("Status Of Center".ToUpper()) || x.Title.ToUpper().Contains("Status Of MSU".ToUpper()) || x.Title.ToUpper().Contains("Status Of RHS".ToUpper())).FirstOrDefault();
-                if (OpenCloseStatus != null)
-                {
-                    field.OpenCloseStatus = OpenCloseStatus.FieldValue ;
-                     
                 }
-                else
+                try
                 {
-                    field.OpenCloseStatus = "N/A";
-                }
 
-                var Indication = RawData.Where(x => x.Title.ToUpper().Contains("Indication/Sign Board".ToUpper())).FirstOrDefault();
+                    var Center = data.Where(x => x.Title.ToUpper().Contains("Name of".ToUpper()) && x.Title.ToUpper().Contains("Centers".ToUpper())).FirstOrDefault();
+                    if (Center != null)
+                    {
+                        field.NameOfCenter = Center.FieldValue;
+                    }
+                    else
+                    {
+                        field.NameOfCenter = "N/A";
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+                try
+                {
+
+                    var DateOfVisit = data.Where(x => x.Title.ToUpper().Contains("Dates Of  Visit".ToUpper())).FirstOrDefault();
+                    if (DateOfVisit != null)
+                    {
+                        field.DateOfVisit = DateOfVisit.FieldValue.Split(' ')[0];
+                        field.TimeOfVisit = DateOfVisit.FieldValue.Split(' ')[1];
+                    }
+                    else
+                    {
+                        field.DateOfVisit = "N/A";
+                        field.TimeOfVisit = "N/A";
+                    } 
+                }
+                catch (Exception ex)
+                {
+
+                }
+                try
+                {
+
+                    var OpenCloseStatus = data.Where(x => x.Title.ToUpper().Contains("Status Of Center".ToUpper()) || x.Title.ToUpper().Contains("Status Of MSU".ToUpper()) || x.Title.ToUpper().Contains("Status Of RHS".ToUpper())).FirstOrDefault();
+                    if (OpenCloseStatus != null)
+                    {
+                        field.OpenCloseStatus = OpenCloseStatus.FieldValue;
+
+                    }
+                    else
+                    {
+                        field.OpenCloseStatus = "N/A";
+                    } }
+                catch (Exception ex)
+                {
+
+                }
+                try
+                            {
+
+                                var Indication = RawData.Where(x => x.Title.ToUpper().Contains("Indication/Sign Board".ToUpper())).FirstOrDefault();
                 if (Indication != null)
                 {
                     field.Indication = Indication.FieldValue;
@@ -2894,9 +2926,16 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
                     field.Indication = "N/A";
                 }
+                }
+                catch (Exception ex)
+                {
 
+                }
 
-                var StaffPosition = data.Where(x => x.Title.ToUpper().Contains("Staff Position Names 1".ToUpper())).FirstOrDefault();
+                try
+                                {
+
+                                    var StaffPosition = data.Where(x => x.Title.ToUpper().Contains("Staff Position Names 1".ToUpper())).FirstOrDefault();
                 if (StaffPosition != null)
                 {
                     field.StaffPosition = StaffPosition.FieldValue;
@@ -2906,8 +2945,15 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
                     field.StaffPosition = "N/A";
                 }
+                }
+                catch (Exception ex)
+                {
 
-                var Cleanliness = data.Where(x => x.Title.ToUpper().Contains("Cleanliness".ToUpper())).FirstOrDefault();
+                }
+                try
+                                    {
+
+                                        var Cleanliness = data.Where(x => x.Title.ToUpper().Contains("Cleanliness".ToUpper())).FirstOrDefault();
                 if (Cleanliness != null)
                 {
                     field.Cleanliness = Cleanliness.FieldValue;
@@ -2917,8 +2963,15 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
                     field.Cleanliness = "N/A";
                 }
+                }
+                catch (Exception ex)
+                {
 
-                var StockOfMedicines = data.Where(x => x.Title.ToUpper().Contains("Stock of Medicine".ToUpper())).FirstOrDefault();
+                }
+                try
+                                        {
+
+                                            var StockOfMedicines = data.Where(x => x.Title.ToUpper().Contains("Stock of Medicine".ToUpper())).FirstOrDefault();
                 if (StockOfMedicines != null)
                 {
                     field.StockofMedicines = StockOfMedicines.FieldValue;
@@ -2928,8 +2981,15 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
                     field.StockofMedicines = "N/A";
                 }
+                }
+                catch (Exception ex)
+                {
 
-                var StatusOfBuilding = RawData.Where(x => x.Title.ToUpper().Contains("Status of Building".ToUpper())).FirstOrDefault();
+                }
+                try
+                                            {
+
+                                                var StatusOfBuilding = RawData.Where(x => x.Title.ToUpper().Contains("Status of Building".ToUpper())).FirstOrDefault();
                 if (StatusOfBuilding != null)
                 {
                     field.StatusofBuilding = StatusOfBuilding.FieldValue;
@@ -2939,8 +2999,15 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
                     field.StatusofBuilding = "N/A";
                 }
+                }
+                catch (Exception ex)
+                {
 
-                var StockOfContraceptives = data.Where(x => x.Title.ToUpper().Contains("Stock of Contraceptives".ToUpper())).FirstOrDefault();
+                }
+                try
+                                                {
+
+                                                    var StockOfContraceptives = data.Where(x => x.Title.ToUpper().Contains("Stock of Contraceptives".ToUpper())).FirstOrDefault();
                 if (StockOfContraceptives != null)
                 {
                     field.StockofContraceptives = StockOfContraceptives.FieldValue;
@@ -2950,8 +3017,15 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
                     field.StockofContraceptives = "N/A";
                 }
+                }
+                catch (Exception ex)
+                {
 
-                var DailyClientRegister = data.Where(x => x.Title.ToUpper().Contains("Daily Client Register/ECR".ToUpper())).FirstOrDefault();
+                }
+                try
+                                                    {
+
+                                                        var DailyClientRegister = data.Where(x => x.Title.ToUpper().Contains("Daily Client Register/ECR".ToUpper())).FirstOrDefault();
                 if (DailyClientRegister != null)
                 {
                     field.DailyClientRegister = DailyClientRegister.FieldValue;
@@ -2961,8 +3035,15 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
                     field.DailyClientRegister = "N/A";
                 }
+                }
+                catch (Exception ex)
+                {
 
-                var MonthlyBreakup = data.Where(x => x.Title.ToUpper().Contains("Record Keeping - Daily-Monthly break-up".ToUpper())).FirstOrDefault();
+                }
+                try
+                                                        {
+
+                                                            var MonthlyBreakup = data.Where(x => x.Title.ToUpper().Contains("Record Keeping - Daily-Monthly break-up".ToUpper())).FirstOrDefault();
                 if (MonthlyBreakup != null)
                 {
                     field.MonthlyBreakup = MonthlyBreakup.FieldValue;
@@ -2972,7 +3053,16 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
                     field.MonthlyBreakup = "N/A";
                 }
+                }
+                catch (Exception ex)
+                {
 
+                }
+                try
+                                                            
+                {
+
+                                                                
                 var MedicineStockRegister = data.Where(x => x.Title.ToUpper().Contains("Record Keeping - Medicine Stock Reg.".ToUpper())).FirstOrDefault();
                 if (MedicineStockRegister != null)
                 {
@@ -2983,7 +3073,12 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
                     field.MedicineStockRegister = "N/A";
                 }
+                }
+                catch (Exception ex)
+                {
 
+                }
+                try { 
                 var ContraceptiveStockRegister = data.Where(x => x.Title.ToUpper().Contains("Contraceptive Stock Register".ToUpper())).FirstOrDefault();
                 if (ContraceptiveStockRegister != null)
                 {
@@ -2994,7 +3089,12 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
                     field.ContraceptiveStockRegister = "N/A";
                 }
+                }
+                catch (Exception ex)
+                {
 
+                }
+                try { 
                 var LogBook = data.Where(x => x.Title.ToUpper().Contains("Log Book".ToUpper())).FirstOrDefault();
                 if (LogBook != null)
                 {
@@ -3005,7 +3105,12 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
                     field.LogBook = "N/A";
                 }
+                }
+                catch (Exception ex)
+                {
 
+                }
+                try { 
                 var DeadStockRegister = data.Where(x => x.Title.ToUpper().Contains("Dead Stock Register".ToUpper())).FirstOrDefault();
                 if (DeadStockRegister != null)
                 {
@@ -3016,7 +3121,13 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
                     field.DeadStockRegister = "N/A";
                 }
+                }
+                catch (Exception ex)
+                {
 
+                }
+
+                try { 
                 var IECMaterial = data.Where(x => x.Title.ToUpper().Contains("IEC Material".ToUpper())).FirstOrDefault();
                 if (IECMaterial != null)
                 {
@@ -3027,7 +3138,13 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
                     field.IECMaterial = "N/A";
                 }
+                }
+                catch (Exception ex)
+                {
 
+                }
+
+                try { 
                 var MECWheel = data.Where(x => x.Title.ToUpper().Contains("MEC Wheel".ToUpper())).FirstOrDefault();
                 if (MECWheel != null)
                 {
@@ -3037,8 +3154,13 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 else
                 {
                     field.MECWheel = "N/A";
-                }   
-                
+                }
+                }
+                catch (Exception ex)
+                {
+
+                }
+                try { 
                 var EquipmentPosition = RawData.Where(x => x.Title.ToUpper().Contains("Equipment Position/Condition 1".ToUpper())).FirstOrDefault();
                 if (EquipmentPosition != null)
                 {
@@ -3049,7 +3171,12 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
                     field.EquipmentPosition = "N/A";
                 }
-                
+                }
+                catch (Exception ex)
+                {
+
+                }
+                try { 
                 var FurniturePosition = RawData.Where(x => x.Title.ToUpper().Contains("Furniture Position/Condition 1".ToUpper())).FirstOrDefault();
                 if (FurniturePosition != null)
                 {
@@ -3059,8 +3186,13 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 else
                 {
                     field.Furnitureposition = "N/A";
-                } 
-                
+                }
+                }
+                catch (Exception ex)
+                {
+
+                }
+                try { 
                 var TechnicalMonitoringChecklist = data.Where(x => x.Title.ToUpper().Contains("Technical Monitoring Checklist".ToUpper())).FirstOrDefault();
                 if (TechnicalMonitoringChecklist != null)
                 {
@@ -3070,8 +3202,13 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 else
                 {
                     field.TechnicalMonitoringChecklist = "N/A";
-                }  
-                
+                }
+                }
+                catch (Exception ex)
+                {
+
+                }
+                try { 
                 var COUNSELING = RawData.Where(x => x.Title.ToUpper().Contains("COUNSELING".ToUpper())).FirstOrDefault();
                 if (COUNSELING != null)
                 {
@@ -3082,7 +3219,12 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
                     field.COUNSELING = "N/A";
                 }
+                }
+                catch (Exception ex)
+                {
 
+                }
+                try { 
                 var SERVICEDELIVERY = RawData.Where(x => x.Title.ToUpper().Contains("SERVICE DELIVERY".ToUpper())).FirstOrDefault();
                 if (SERVICEDELIVERY != null)
                 {
@@ -3092,9 +3234,14 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 else
                 {
                     field.SERVICEDELIVERY = "N/A";
-                }     
-                
-                
+                }
+                }
+                catch (Exception ex)
+                {
+
+                }
+
+                try { 
                 var FurniturePositionCondition = RawData.Where(x => x.Title.ToUpper().Contains("Furniture Position/Condition".ToUpper())).FirstOrDefault();
                 if (FurniturePositionCondition != null)
                 {
@@ -3105,7 +3252,13 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
                     field.FurniturePositionCondition = "N/A";
                 }
+                }
+                catch (Exception ex)
+                {
 
+                }
+
+                try { 
 
                 var EquipmentCondition = RawData.Where(x => x.Title.ToUpper().Contains("Equipment Position/Condition".ToUpper())).FirstOrDefault();
                 if (EquipmentCondition != null)
@@ -3117,8 +3270,13 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
                     field.EquipmentCondition = "N/A";
                 }
-                
-                
+                }
+                catch (Exception ex)
+                {
+
+                }
+
+                try { 
                 var StaffPositionNames = RawData.Where(x => x.Title.ToUpper().Contains("Staff Position Names".ToUpper())).FirstOrDefault();
                 if (StaffPositionNames != null)
                 {
@@ -3129,7 +3287,13 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
                     field.StaffPositionNames = "N/A";
                 }
+                }
+                catch (Exception ex)
+                {
 
+                }
+
+                try { 
                 var ClientsPresent = RawData.Where(x => x.Title.ToUpper().Contains("How many Clients found present at the time of visit?".ToUpper())).FirstOrDefault();
                 if (ClientsPresent != null)
                 {
@@ -3140,7 +3304,11 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
                     field.ClientsPresent = "N/A";
                 }
-                
+                }
+                catch (Exception ex)
+                {
+
+                }
                 var PerformanceOfService = RawData.Where(x => x.Title.ToUpper().Contains("Performance of Service".ToUpper())).FirstOrDefault();
                 if (PerformanceOfService != null)
                 {
@@ -3152,7 +3320,7 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                     field.PerformanceOfService = "N/A";
                 }
 
-
+                try { 
                 var NoVisitor = RawData.Where(x => x.Title.ToUpper().Contains("No. of visits paid during".ToUpper())).FirstOrDefault();
                 if (NoVisitor != null)
                 {
@@ -3163,7 +3331,12 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
                     field.NoVisitor = "N/A";
                 }
-                
+                }
+                catch (Exception ex)
+                {
+
+                }
+                try { 
                 var StockOfMed = data.Where(x => x.Title.ToUpper().Contains("Stock and Expiry Date Medicine".ToUpper())).FirstOrDefault();
                 if (StockOfMed != null)
                 {
@@ -3174,7 +3347,12 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
                     field.StockOfMed = "N/A";
                 }
+                }
+                catch (Exception ex)
+                {
 
+                }
+                try { 
                 var StockOfCon = data.Where(x => x.Title.ToUpper().Contains("Stock and Expiry Date of Contraceptive".ToUpper())).FirstOrDefault();
                 if (StockOfCon != null)
                 {
@@ -3185,7 +3363,13 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
                     field.StockOfCon = "N/A";
                 }
+                }
+                catch (Exception ex)
+                {
 
+                }
+
+                try { 
                 var Last3Contraceptive = data.Where(x => x.Title.ToUpper().Contains("Last 3 months Contraceptive Performance".ToUpper())).FirstOrDefault();
                 if (Last3Contraceptive != null)
                 {
@@ -3196,7 +3380,12 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
                     field.Last3Contraceptive = "N/A";
                 }
+                }
+                catch (Exception ex)
+                {
 
+                }
+                try { 
                 var NoOfSup = RawData.Where(x => x.Title.ToUpper().Contains("No. of Supervisory Visit of".ToUpper())).FirstOrDefault();
                 if (NoOfSup != null)
                 {
@@ -3207,7 +3396,12 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
                     field.NoOfSup = "N/A";
                 }
+                }
+                catch (Exception ex)
+                {
 
+                }
+                try { 
                 var DCIT = RawData.Where(x => x.Title.ToUpper().Contains("No. of Supervisory Visit of".ToUpper())).FirstOrDefault();
                 if (DCIT != null)
                 {
@@ -3218,8 +3412,13 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
                     field.DCIT = "N/A";
                 }
-                    
-                
+                }
+                catch (Exception ex)
+                {
+
+                }
+
+                try { 
                 var LastThreeMonth = RawData.Where(x => x.Title.ToUpper().Contains("No. of visits paid during last three months by".ToUpper())).FirstOrDefault();
                 if (LastThreeMonth != null)
                 {
@@ -3230,7 +3429,12 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
                     field.LastThreeMonth = "N/A";
                 }
+                }
+                catch (Exception ex)
+                {
 
+                }
+                try { 
                 var HospitalManagement = RawData.Where(x => x.Title.ToUpper().Contains("Meeting Hospital Management Committee".ToUpper())).FirstOrDefault();
                 if (HospitalManagement != null)
                 {
@@ -3240,8 +3444,13 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 else
                 {
                     field.HospitalManagement = "N/A";
-                }   
-                
+                }
+                }
+                catch (Exception ex)
+                {
+
+                }
+                try { 
                 var RemarksofMonitoringOfficer = RawData.Where(x => x.Title.ToUpper().Contains("Remarks of Monitoring Officer".ToUpper())).FirstOrDefault();
                 if (RemarksofMonitoringOfficer != null)
                 {
@@ -3252,7 +3461,12 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
                     field.RemarksofMonitoringOfficer = "N/A";
                 }
+                }
+                catch (Exception ex)
+                {
 
+                }
+                try { 
                 var Last6Field = RawData.Where(x => x.Title.ToUpper().Contains("No. of visits paid during last three months by".ToUpper())).FirstOrDefault();
                 if (Last6Field != null)
                 {
@@ -3263,8 +3477,12 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
                     field.Last6Field = "N/A";
                 }
+                }
+                catch (Exception ex)
+                {
 
-
+                }
+                try { 
                 var NameofProj = RawData.Where(x => x.Title.ToUpper().Contains("No. of visits paid during last three months by".ToUpper())).FirstOrDefault();
                 if (NameofProj != null)
                 {
@@ -3275,7 +3493,11 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
                     field.NameofProj = "N/A";
                 }
+                }
+                catch (Exception ex)
+                {
 
+                }
 
             }
             catch (Exception ex)
