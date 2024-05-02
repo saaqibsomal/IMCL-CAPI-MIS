@@ -58,7 +58,7 @@ namespace DNA_CAPI_MIS.Controllers
             return OpenProject(name, status, "SelectProject");
         }
 
-        [Authorize]
+        [Authorize(Roles = "Project Manager")]
         public ActionResult Dashboard(string name, string status)
         {
             Monitoring();
