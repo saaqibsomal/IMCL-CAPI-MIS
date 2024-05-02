@@ -507,7 +507,7 @@ select fs2.Title as District,fs1.Title as contraceptive ,cte.FieldValue1
   
     where RowNum = 1  
 	
-	select * from #Cond 
+	select * from #Cond c where c.FieldValue1 like '%|%'  and len(FieldValue1) > 46
  
  
   
