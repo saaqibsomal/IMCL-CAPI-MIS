@@ -175,7 +175,7 @@
                 <div class="col-12">
                     <div class="row">
                         <div class="col-10">
-                            <div class="col-md-4 col-sm-12">
+                            <div class="col-md-4 col-sm-12" style="padding-left: 18px">
                                 @Html.DropDownList("Checklist", ViewBag.Checklist as List<SelectListItem>, "Monitoring Checklist For All", htmlAttributes: new { @class = "form-control", id = "Checklist" })
 
                             </div>
@@ -195,7 +195,7 @@
                                 <th>Center Name</th>
                                 <th>Survey DateTime</th>
                                 <th>SurveyorName</th>
-                                <th>Print</th>
+                                <th>View</th>
                             </tr>
                         </thead>
                         <tbody id="tbody"></tbody>
@@ -248,17 +248,25 @@
                     row.append('<td>' + item.CenterName + '</td>');
                     row.append('<td>' + item.Created + '</td>');
                     row.append('<td>' + item.SurveyorName + '</td>');
-                    row.append('<td><a href="#" onclick="OpenReport(' + item.sbjnum+','+ item.Project + ')"> Print </a></td>');
+                    row.append('<td><a href="#"  > View </a></td>');
 
                     row.click(function () {
                         // Call your function here, passing the subject number as a parameter
-                        OpenReport(item.sbjnum, item.Project);
+                        OpenReport(item.sbjnum, item.CenterName);
                     });
 
                     tbody.append(row);
                 });
                 let table = new DataTable('#dataTable');
-                $('.dt-layout-row').css('text-align', 'right');
+              //  $('.dt-layout-row').css('text-align', 'right');
+                $('.dt-length').hide();
+                $('.dt-input').addClass('form-control');
+                $('.dt-search').addClass('col-md-4');
+                $('.dt-search').css('padding-left', '3px');
+                $('.dt-search').css('padding-bottom', '3px');
+
+
+ 
             }
         });
 
@@ -292,14 +300,21 @@
                     row.append('<td>' + item.CenterName + '</td>');
                     row.append('<td>' + item.Created + '</td>');
                     row.append('<td>' + item.SurveyorName + '</td>');
-                    row.append('<td><a href="#" onclick="OpenReport(' + item.sbjnum + ',' +item.Project + ')"> Print </a></td>');
+                    row.append('<td><a href="#" > View </a></td>');
                     row.click(function () {
                         // Call your function here, passing the subject number as a parameter
-                        OpenReport(item.sbjnum,item.Project);
+                        OpenReport(item.sbjnum, item.CenterName);
                     });
 
                     tbody.append(row);
                 });
+                let table = new DataTable('#dataTable');
+                $('.t-search').css('padding-left', '3px');
+  
+                $('.dt-length').hide();
+                $('.dt-input').addClass('form-control');
+                $('.dt-search').addClass('col-md-4');
+                $('.dt-search').css('padding-bottom', '3px');
             }
         });
 

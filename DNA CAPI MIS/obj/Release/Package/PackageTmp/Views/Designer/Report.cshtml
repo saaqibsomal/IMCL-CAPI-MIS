@@ -9,6 +9,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 </head>
 
 <style>
@@ -119,15 +121,15 @@
     <div class="col-xs-12">
         <div class="box">
             <div class="box-header">
-                <h2>Survey Report</h2>
+       
                 <div class="model" id="pdfModel" >
                     <div class="model-content">
-                        <button id="downloadPDFBtn">Download PDF</button>
+                        <button id="downloadPDFBtn" class="fa-2x fa fa-print">  Print</button>
                         <div id="PdfReportDiv">
-                            <h3 style="text-align:left;" id="Heading"></h3>
+                            <h3 style="text-align:center;" id="Heading"></h3>
 
                             <!-- RHS-A Section -->
-                            <h3 id="SubHeading"></h3>
+                            @*<h3 id="SubHeading"></h3>*@
                             <table>
                                 <tr>
                                     <td>Name of District:</td>
@@ -1189,8 +1191,8 @@
             data: {},
             success: function (data) {
 
-                $("#Heading").text("Monitoring Visit Report (" + Heading + ")");
-                $("#SubHeading").text("(For " + Heading + ")");
+                $("#Heading").text("Monitoring Report (" + Heading + ")");
+               // $("#SubHeading").text("(For " + Heading + ")");
                 $("#NameOfDistrict").text(data.Field.NameOfDistrict);
                 $("#NameOfCenter").text(data.Field.NameOfCenter);
                 $("#DateOfVisit").text(data.Field.DateOfVisit);
@@ -1554,7 +1556,7 @@
         // Show the button for 5 seconds
         $('#downloadPDFBtn').show(); // Show the button
         setTimeout(function () {
-            $('#downloadPDFBtn').hide(); // Hide the button after 5 seconds
+            $('#downloadPDFBtn').show(); // Hide the button after 5 seconds
         }, 5000); // 5000 milliseconds = 5 seconds
 
      

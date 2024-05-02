@@ -197,7 +197,7 @@
                 </div>
 
 
-                <button id="PdfGen" style="margin-top: 10px;margin-left:30px"> Download PDF </button>
+          
 
                 <div class="col-lg-12" style="margin-top: 10px;" id="AllNote">
                     <h2 style="text-align: center;">Total surveys</h2>
@@ -1363,31 +1363,58 @@
                         var html = '';
                         $.each(data, function (key, item) {
 
+                            //1-1,2|2-1,2|3-1,2|4-1,2|5-1,2|6-1,2|7-1,2|8-1,2
 
-                            var Cond = item.FieldValue1.split(",")
-                            c1 += parseInt(Cond[0]);
-                            c2 += parseInt(Cond[1]);
-                            c3 += parseInt(Cond[2]);
-                            c4 += parseInt(Cond[3]);
-                            c5 += parseInt(Cond[4]);
-                            c6 += parseInt(Cond[5]);
-                            c7 += parseInt(Cond[6]);
-                            c8 += parseInt(Cond[7]);
 
-                            html += '<tr>';
+                                var PipSplit = item.FieldValue1.split("|");
 
-                            html += '<td>' + item.District + '</td>';
-                            html += '<td>' + Cond[0] + '</td>';
-                            html += '<td>' + Cond[1] + '</td>';
-                            html += '<td>' + Cond[2] + '</td>';
-                            html += '<td>' + Cond[3] + '</td>';
-                            html += '<td>' + Cond[4] + '</td>';
-                            html += '<td>' + Cond[5] + '</td>';
-                            html += '<td>' + Cond[6] + '</td>';
-                            html += '<td>' + Cond[7] + '</td>';
-                            html += '</tr>';
+                                var CommaSplit = PipSplit[0].split('-');
+                                var Cond1 = CommaSplit[1].split(",");
+                                c1 += parseInt(Cond1[1]);
+
+                                var CommaSplit = PipSplit[1].split('-');
+                                var Cond2 = CommaSplit[1].split(",");
+                                c2 += parseInt(Cond2[1]);
+
+                                var CommaSplit = PipSplit[2].split('-');
+                                var Cond3 = CommaSplit[1].split(",");
+                                c3 += parseInt(Cond3[1]);
+
+                                var CommaSplit = PipSplit[3].split('-');
+                                var Cond4 = CommaSplit[1].split(",");
+                                c4 += parseInt(Cond4[1]);
+
+                                var CommaSplit = PipSplit[4].split('-');
+                                var Cond5 = CommaSplit[1].split(",");
+                                c5 += parseInt(Cond5[1]);
+
+                                var CommaSplit = PipSplit[5].split('-');
+                                var Cond6 = CommaSplit[1].split(",");
+                                c6 += parseInt(Cond6[1]);
+
+                                var CommaSplit = PipSplit[6].split('-');
+                                var Cond7 = CommaSplit[1].split(",");
+                                c7 += parseInt(Cond7[1]);
+
+                                var CommaSplit = PipSplit[7].split('-');
+                                var Cond8 = CommaSplit[1].split(",");
+                                c8 += parseInt(Cond8[1]);
+
+                                html += '<tr>';
+
+                                html += '<td>' + item.District + '</td>';
+                                html += '<td>' + Cond1[1] + '</td>';
+                                html += '<td>' + Cond2[1] + '</td>';
+                                html += '<td>' + Cond3[1] + '</td>';
+                                html += '<td>' + Cond4[1] + '</td>';
+                                html += '<td>' + Cond5[1] + '</td>';
+                                html += '<td>' + Cond6[1] + '</td>';
+                                html += '<td>' + Cond7[1] + '</td>';
+                                html += '<td>' + Cond8[1] + '</td>';
+                                html += '</tr>';
+                            
                         });
-
+                  
                         html += '<tr>';
                         html += '<th>' + "Total" + '</th>';
                         html += '<th>' + c1 + '</th>';
@@ -1400,7 +1427,7 @@
                         html += '<th>' + c8 + '</th>';
                         html += '</tr>';
                         $('#tbodyCond').html(html);
-
+                    
                     }
                 });
 

@@ -171,7 +171,7 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row" style="display:none;">
                     <div class="col-12">
 
                         <div class="col-10">
@@ -184,7 +184,7 @@
                 </div>
 
 
-                <div class="row">
+                <div class="row" style="display:none;">
                     <div class="col-12">
 
                         <div class="col-10">
@@ -197,7 +197,7 @@
                 </div>
 
 
-                <button id="PdfGen" style="margin-top: 10px;margin-left:30px"> Download PDF </button>
+          
 
                 <div class="col-lg-12" style="margin-top: 10px;" id="AllNote">
                     <h2 style="text-align: center;">Total surveys</h2>
@@ -1441,22 +1441,4 @@
 
         </script>
 
-        <script>
-        $(document).ready(function () {
-            var jsonData = @Html.Raw(ViewBag.JsonData); // Get JSON data from ViewBag
-
-            // Add table headers
-            var headers = '<th>' + Object.keys(jsonData[0]).join('</th><th>') + '</th>';
-            $('#dataTable thead tr').append(headers);
-
-            // Add table rows
-            $.each(jsonData, function (index, item) {
-                var row = '<tr>';
-                $.each(item, function (key, value) {
-                    row += '<td>' + value + '</td>';
-                });
-                row += '</tr>';
-                $('#dataTable tbody').append(row);
-            });
-        });
-        </script>
+     
