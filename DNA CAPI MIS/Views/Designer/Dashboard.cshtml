@@ -171,7 +171,7 @@
                     </div>
                 </div>
 
-                <div class="row" >
+                <div class="row">
                     <div class="col-12">
 
                         <div class="col-10">
@@ -182,6 +182,51 @@
                         </div>
                     </div>
                 </div>
+
+
+                <div class="row">
+                    <div class="col-12">
+
+                        <!-- Date Range Inputs -->
+                        <div class="col-10">
+                            <div class="col-md-4 col-sm-12">
+                                <label for="startDate" style="margin-left:4px;">  Start Date:</label>
+                                <input type="date" id="startDate" name="startDate" class="form-control">
+                            </div>
+                           
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+
+
+                        <div class="col-md-4 col-sm-12">
+                            <label for="endDate" style="margin-left:4px;">End Date:</label>
+                            <input type="date" id="endDate" name="endDate" class="form-control">
+                        </div>
+
+                    </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+
+                        <!-- Date Range Inputs -->
+
+                        <div class="col-md-2 col-sm-12" style="margin-left:4px;margin-top:4px;">
+
+                            <button id="Search" class="btn btn-success"> Search</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
 
 
                 <div class="row" style="display:none;">
@@ -197,7 +242,7 @@
                 </div>
 
 
-          
+
 
                 <div class="col-lg-12" style="margin-top: 10px;" id="AllNote">
                     <h2 style="text-align: center;">Total surveys to be updated to Monitoring Visits</h2>
@@ -922,7 +967,22 @@
                 }).get();
 
 
-                GetAllNotes(Checklist);
+              
+                var startDate = $("#startDate").val();
+                var endDate = $("#endDate").val();
+                var Checklist = $('#Checklist').val();
+                debugger;
+                //var d = new Date();
+                //var strDate = "01/01/1900";
+                //var edDate = "01/01/2099";
+                //if (startDate == null || startDate == undefined) {
+                //    startDate = strDate;
+                //}
+
+                //if (endDate == null || endDate == undefined) {
+                //    endDate = edDate;
+                //}
+                //GetAllNotes(Checklist, startDate, endDate);
                 BarChart(dv.slice(1), dvv.slice(1));
                 BothChart(dv.slice(1), dvv.slice(1));
                 $("#District").empty();
@@ -938,6 +998,19 @@
             });
 
 
+
+            $('#Search').click(function () {
+
+                var startDate = $("#startDate").val();
+                var endDate = $("#endDate").val();
+                var Checklist = $('#Checklist').val();
+
+                if (Checklist == null) {
+                    alert("Please select Monitoring");
+                }
+
+                GetAllNotes(Checklist, startDate, endDate);
+            })
 
 
             //$('#OpenClose').change(function () {
@@ -979,7 +1052,7 @@
             }
 
 
-            function GetAllNotes(district) {
+            function GetAllNotes(district, startDate, endDate) {
 
 
                 if (district == "") {
@@ -988,7 +1061,7 @@
                 }
                 $.ajax({
                     type: 'POST',
-                    url: "/Designer/ForSelectedMonitoring/" + district,
+                    url: "/Designer/ForSelectedMonitoring/" + district + "," + startDate + "," + endDate,
                     data: {},
                     async: true,
                     success: function (data) {

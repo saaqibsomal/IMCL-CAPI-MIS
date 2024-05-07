@@ -547,7 +547,11 @@ select fs2.Title as District,fs1.Title as contraceptive ,cte.FieldValue1
                 CenterOpenCloseID = 55585;
                 BrandedId = 55590;
             }
-            var all = $"SELECT SurveyorName, COUNT(*) AS SurveyCount FROM Survey WHERE ProjectID in ({id.Split(',')[2]}) GROUP BY SurveyorName ORDER BY COUNT(*) DESC";
+
+
+            string StartDate = id.Split(',')[3];
+            string EndDate = id.Split(',')[4];
+            var all = $"SELECT SurveyorName, COUNT(*) AS SurveyCount FROM Survey WHERE ProjectID in ({id.Split(',')[2]})  and Created between '{StartDate}' and '{EndDate}' GROUP BY SurveyorName ORDER BY COUNT(*) DESC";
 
             var OpenCloseSql = $@"
 IF OBJECT_ID('tempdb..#Graph') IS NOT NULL
