@@ -2664,6 +2664,11 @@ ORDER BY
         [HttpGet]
         public ActionResult PdfReport()
         {
+
+
+           
+          
+
             string sql = @"SELECT case 
  
 when id = 7120 then 7120 
@@ -2754,6 +2759,34 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
         [HttpPost]
         public ActionResult CreatePDFBySurvey(int id)
         {
+
+            var name = User.Identity.Name;
+            bool isAdmin = false;
+            var District = string.Empty;
+            if (User.IsInRole("Admin"))
+            {
+                isAdmin = true;
+            }
+            else
+            {
+                if (name.Contains("_"))
+                {
+                    //name = "dpwo_badin@kcompute.com";
+                    var GetDistrict = name.Split('_');
+                    var removeAtRat = GetDistrict[1].Split('@');
+                    District = removeAtRat[0];
+
+                    isAdmin = false;
+
+                }
+                else
+                {
+                    District = "N/A";
+                }
+            }
+
+
+
             string Ids = "";
             if (id == 0)
             {
@@ -2784,8 +2817,17 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
  Left join ProjectFieldSample pfD on sp.Center = pfD.Code and sp.DistrictFieldID = pfD.FieldID 
 ";
             var GetSurvey = db.Database.SqlQuery<PdfDetailReport>(Query);
-            var ss = GetSurvey.ToList();
-            return Json(GetSurvey);
+            if(isAdmin)
+            {
+                return Json(GetSurvey);
+            }
+            else
+            {
+               var  DistrictWise = GetSurvey.Where(x => x.DistrictName.ToUpper() == District.ToUpper()).ToList();
+                return Json(DistrictWise);
+            }
+      
+           
         }
 
 
