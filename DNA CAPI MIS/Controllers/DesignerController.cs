@@ -243,6 +243,11 @@ INNER JOIN
                 id = "";
             }
 
+
+            var GetDates = id.Split(',');
+            id = GetDates[0];
+            string sdate = GetDates[1];
+            string edate = GetDates[2];
             string where = string.Empty;
             if (!string.IsNullOrEmpty(id))
             {
@@ -272,6 +277,7 @@ END
 		inner join SurveyData sd1 on s.sbjnum = sd1.sbjnum and sd1.FieldId in (50446, 50486, 55588)--Center,Center,Center Ids
 		inner join SurveyData sd2 on s.sbjnum = sd2.sbjnum and sd2.FieldId in (50435, 50484, 55587)--District,District,District Ids 
 		inner join SurveyData sd3 on s.sbjnum = sd3.sbjnum and sd3.FieldId in (55570, 50482, 55585)--Open,Open,open close Survey Ids
+        where s.Created between '{sdate}' and '{edate}'
 )
 select fs1.FieldID as CenterId,fs2.FieldID DistrictId,  fs2.Title as District,fs1.Title as Center,  
 
@@ -551,6 +557,7 @@ select fs2.Title as District,fs1.Title as contraceptive ,cte.FieldValue1
 
             string StartDate = id.Split(',')[3];
             string EndDate = id.Split(',')[4];
+            string District = id.Split(',')[5];
             var all = $"SELECT SurveyorName, COUNT(*) AS SurveyCount FROM Survey WHERE ProjectID in ({id.Split(',')[2]})  and Created between '{StartDate}' and '{EndDate}' GROUP BY SurveyorName ORDER BY COUNT(*) DESC";
 
             var OpenCloseSql = $@"
@@ -569,6 +576,7 @@ END
 		inner join SurveyData sd1 on s.sbjnum = sd1.sbjnum and sd1.FieldId in (50446, 50486, 55588)--Center,Center,Center Ids
 		inner join SurveyData sd2 on s.sbjnum = sd2.sbjnum and sd2.FieldId in (50435, 50484, 55587)--District,District,District Ids 
 		inner join SurveyData sd3 on s.sbjnum = sd3.sbjnum and sd3.FieldId in ({CenterOpenCloseID})--Open,Open,open close Survey Ids
+        where s.Created between '{StartDate}' and '{EndDate}'
 )
 select fs1.FieldID as CenterId,fs2.FieldID DistrictId,  fs2.Title as District,fs1.Title as Center,  
 
@@ -583,7 +591,7 @@ fs3.Title as OpenClose, case when fs3.Title = 'Open' then 1 else  0 end IsOpen,f
 	inner join ProjectFieldSample fs3 on cte.FieldId3 = fs3.FieldID and fs3.Code IN (cte.FieldValue3)
     where RowNum = 1 
 
-	select  Count(g.IsOpen) OpenClose,g.Title     from  #Graph as g where g.IsOpen in (1,0)  
+	select  Count(g.IsOpen) OpenClose,g.Title     from  #Graph as g where g.IsOpen in (1,0)  and  (g.Center like '%{District}% or '' = '{District}')'
 	group by  g.IsOpen ,g.Title  
 
 
@@ -606,7 +614,7 @@ END
 		inner join SurveyData sd2 on s.sbjnum = sd2.sbjnum and sd2.FieldId in ({id.Split(',')[0]} )--District,District,District Ids --50435, 50484, 55587 
 		inner join SurveyData sd3 on s.sbjnum = sd3.sbjnum and sd3.FieldId in (55570, 50482, 55585)--Open,Open,open close Survey Ids
 		inner join SurveyData sd4 on s.sbjnum = sd4.sbjnum and sd4.FieldId in (50635)
-		
+		where s.Created between '{StartDate}' and '{EndDate}'
 
 
 )--Abs
@@ -648,7 +656,7 @@ END
 
 		inner join SurveyData sd2 on s.sbjnum = sd2.sbjnum and sd2.FieldId in (50435, 50484, 55587)--District,District,District Ids 
 		inner join SurveyData sd3 on s.sbjnum = sd3.sbjnum and sd3.FieldId in (55570, 50482, 55585)--Open,Open,open close Survey Ids
-		Inner join SurveyData sd4 on s.sbjnum = sd4.sbjnum and sd4.FieldId in ({BrandedId})) 
+		Inner join SurveyData sd4 on s.sbjnum = sd4.sbjnum and sd4.FieldId in ({BrandedId}) where s.Created between '{StartDate}' and '{EndDate}') 
  
     select  fs2.FieldID DistrictId,  fs2.Title as District   ,fs4.Title as status  into #Graph from cte
 	inner join ProjectFieldSample fs2 on cte.FieldId2 = fs2.FieldID and fs2.Code IN (cte.FieldValue2)
@@ -2775,7 +2783,7 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
             {
                 if (name.Contains("_"))
                 {
-                    //name = "dpwo_badin@kcompute.com";
+                    
                     var GetDistrict = name.Split('_');
                     var removeAtRat = GetDistrict[1].Split('@');
                     District = removeAtRat[0];
@@ -2807,7 +2815,7 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
 IF OBJECT_ID('tempdb..#SurveyReport') IS NOT NULL
     DROP TABLE #SurveyReport
 
-select s.sbjnum, Convert(varchar,s.Created,101) Created, s.SurveyorName,
+select Convert(varchar,s.Longitude) Longitude, Convert(varchar,s.Latitude) Latitude ,s.sbjnum, Convert(varchar,s.Created,101) Created, s.SurveyorName,
 Convert(varchar,isnull((select top 1 sd.FieldValue from SurveyData sd where sd.FieldId in (50435,50484,55587) and sd.sbjnum = s.sbjnum),0)) as District,
 Convert(varchar,isnull((select top 1 sd.FieldValue from SurveyData sd where sd.FieldId in (50446,50846,55588) and sd.sbjnum = s.sbjnum),0)) as Center,
 Convert(varchar,isnull((select top 1 sd.FieldId from SurveyData sd where sd.FieldId in (50435,50484,55587) and sd.sbjnum = s.sbjnum),0)) as DistrictFieldID,

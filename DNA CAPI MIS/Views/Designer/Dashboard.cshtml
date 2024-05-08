@@ -193,7 +193,7 @@
                                 <label for="startDate" style="margin-left:4px;">  Start Date:</label>
                                 <input type="date" id="startDate" name="startDate" class="form-control">
                             </div>
-                           
+
 
                         </div>
 
@@ -211,735 +211,314 @@
 
                     </div>
 
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-12">
-
-                        <!-- Date Range Inputs -->
-
-                        <div class="col-md-2 col-sm-12" style="margin-left:4px;margin-top:4px;">
-
-                            <button id="Search" class="btn btn-success"> Search</button>
-                        </div>
-                    </div>
-
                 </div>
             </div>
 
+            <div class="row">
+                <div class="col-12">
 
-                <div class="row" style="display:none;">
-                    <div class="col-12">
+                    <!-- Date Range Inputs -->
 
-                        <div class="col-10">
-                            <div class="col-md-4 col-sm-12">
-                                @Html.DropDownList("Center", ViewBag.Center as List<SelectListItem>, htmlAttributes: new { @class = "form-control" })
+                    <div class="col-md-2 col-sm-12" style="margin-left:4px;margin-top:4px;">
 
-                            </div>
-                        </div>
+                        <button id="Search" class="btn btn-success"> Search</button>
                     </div>
                 </div>
 
-
-
-
-                <div class="col-lg-12" style="margin-top: 10px;" id="AllNote">
-                    <h2 style="text-align: center;">Total surveys to be updated to Monitoring Visits</h2>
-                    <div class="row">
-                        <div class="col-lg-3">
-                            <div class="small-box bg-red">
-                                <div class="inner">
-                                    <h3>@ViewBag.All</h3>
-                                    <p>All</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-pie-graph"></i>
-                                </div>
-                                <a href="#" class="small-box-footer"></a>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3">
-                            <div class="small-box bg-blue">
-                                <div class="inner">
-                                    <h3>@ViewBag.RHS</h3>
-                                    <p>RHS-A</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-pie-graph"></i>
-                                </div>
-                                <a href="#" class="small-box-footer"></a>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3">
-                            <div class="small-box bg-green">
-                                <div class="inner">
-                                    <h3>@ViewBag.MSU</h3>
-                                    <p>MSU</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-pie-graph"></i>
-                                </div>
-                                <a href="#" class="small-box-footer"></a>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3">
-                            <div class="small-box bg-yellow">
-                                <div class="inner">
-                                    <h3>@ViewBag.FWC</h3>
-                                    <p>FWC</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-pie-graph"></i>
-                                </div>
-                                <a href="#" class="small-box-footer"></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-12" style="margin-top: 10px; display:none;" id="SelectedNote">
-                    <h2 style="text-align: center;">Total surveys</h2>
-                    <div class="row">
-
-
-
-
-                        <div class="col-lg-2">
-                            <div style="border: 1px solid black">
-                                <p style="text-align:center; align-items:center; background-color:darkblue; margin: 0; color: white"> Total Visit Report submited</p>
-                                <div>
-                                    <div class="small-box bg-red" style="margin-bottom:0px">
-                                        <div class="inner" style="text-align:center">
-                                            <h3 id="MonitoringValue">0</h3>
-                                            <p id="MonitoringName"></p>
-                                        </div>
-                                        <div class="icon">
-                                            <i class="ion ion-pie-graph"></i>
-                                        </div>
-                                        <a href="#" class="small-box-footer"></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-                        @* Open Close Status*@
-
-                        <div class="col-lg-3">
-                            <div style="border: 1px solid black">
-                                <p style="text-align:center; align-items:center; background-color:darkblue; margin: 0; color: white" id="Status"> Status Of</p>
-                                <div style="display:flex;">
-                                    <div class="small-box bg-green" style="width:100%; margin-bottom: 0">
-                                        <div class="inner" style="text-align:center">
-                                            <h3 id="OpenValue">0</h3>
-                                            <p id="OpenTitle">Open</p>
-                                        </div>
-                                        <div class="icon">
-                                            <i class="ion ion-pie-graph"></i>
-                                        </div>
-                                        <a href="#" class="small-box-footer"></a>
-                                    </div>
-                                    <div class="small-box bg-red" style="width: 100%; margin-bottom: 0">
-                                        <div class="inner" style="text-align:center">
-                                            <h3 id="CloseValue">0</h3>
-                                            <p id="CloseTitle">Close</p>
-                                        </div>
-                                        <div class="icon">
-                                            <i class="ion ion-pie-graph"></i>
-                                        </div>
-                                        <a href="#" class="small-box-footer"></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-
-                        @* Branded UnBranded Status*@
-
-                        <div class="col-lg-3">
-                            <div style="border: 1px solid black">
-                                <p style="text-align:center; align-items:center; background-color:darkblue; margin: 0; color: white" id="BStatus"> Type of</p>
-                                <div style="display:flex;">
-                                    <div class="small-box bg-green" style="width:100%; margin-bottom: 0">
-                                        <div class="inner" style="text-align:center">
-                                            <h3 id="BrandedValue">0</h3>
-                                            <p id="BrandedTitle">Branded</p>
-                                        </div>
-                                        <div class="icon">
-                                            <i class="ion ion-pie-graph"></i>
-                                        </div>
-                                        <a href="#" class="small-box-footer"></a>
-                                    </div>
-                                    <div class="small-box bg-red" style="width: 100%; margin-bottom: 0">
-                                        <div class="inner" style="text-align:center">
-                                            <h3 id="UnBrandedValue">0</h3>
-                                            <p id="UnBrandedTitle">Unbranded</p>
-                                        </div>
-                                        <div class="icon">
-                                            <i class="ion ion-pie-graph"></i>
-                                        </div>
-                                        <a href="#" class="small-box-footer"></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        @* premises Status*@
-
-                        <div class="col-lg-4">
-                            <div style="border: 1px solid black">
-                                <p style="text-align:center; align-items:center; background-color:darkblue; margin: 0; color: white" id="PStatus"> Overall Status</p>
-                                <div style="display:flex;">
-                                    <div class="small-box bg-green" style="width:100%; margin-bottom: 0">
-                                        <div class="inner" style="text-align:center">
-                                            <h3 id="PresentValue">0</h3>
-                                            <p id="PresentTitle">Present</p>
-                                        </div>
-                                        <div class="icon">
-                                            <i class="ion ion-pie-graph"></i>
-                                        </div>
-                                        <a href="#" class="small-box-footer"></a>
-                                    </div>
-                                    <div class="small-box bg-blue" style="width: 100%; margin-bottom: 0">
-                                        <div class="inner" style="text-align:center">
-                                            <h3 id="AbsentValue">0</h3>
-                                            <p id="AbsentTitle">Absent</p>
-                                        </div>
-                                        <div class="icon">
-                                            <i class="ion ion-pie-graph"></i>
-                                        </div>
-                                        <a href="#" class="small-box-footer"></a>
-                                    </div>
-
-                                    <div class="small-box bg-purple" style="width: 100%; margin-bottom: 0">
-                                        <div class="inner" style="text-align:center">
-                                            <h3 id="LeaveValue">0</h3>
-                                            <p id="LeaveTitle">Leave</p>
-                                        </div>
-                                        <div class="icon">
-                                            <i class="ion ion-pie-graph"></i>
-                                        </div>
-                                        <a href="#" class="small-box-footer"></a>
-                                    </div>
-
-                                    <div class="small-box bg-red" style="width: 100%; margin-bottom: 0">
-                                        <div class="inner" style="text-align:center">
-                                            <h3 id="VacantValue">0</h3>
-                                            <p id="VacantTitle">Vacant</p>
-                                        </div>
-                                        <div class="icon">
-                                            <i class="ion ion-pie-graph"></i>
-                                        </div>
-                                        <a href="#" class="small-box-footer"></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div><!-- /.box-header -->
-
-
-
-
-                </div><!-- /.box -->
-                @*<div id="chart-container" style="width: 900px; height: 600px;"></div>*@
-                @*<canvas id="BarChart" style="width:100%;max-width:900px"></canvas>*@
-                @*<canvas id="PeiChart" style="width:100%;max-width:900px"></canvas>*@
             </div>
-            <div style="width: 80%; margin: auto;">
-                <canvas id="myChart" width="400" height="300"></canvas>
-                @*<button id="printPDFButton"> Print</button>*@
-            </div>
-
-            <div style="width: 50%; margin: auto;">
-                <canvas id="myPieChart" width="400" height="200"></canvas>
-            </div>
+        </div>
 
 
-            <div class="col-12" style="text-align: center; margin-top: 10px;">
-                <h1>Stock of Contraceptive District Wise Status</h1>
+        <div class="row" style="display:none;">
+            <div class="col-12">
+
                 <div class="col-10">
+                    <div class="col-md-4 col-sm-12">
+                        @Html.DropDownList("Center", ViewBag.Center as List<SelectListItem>, htmlAttributes: new { @class = "form-control" })
 
-
-                    <table class="table bordered table-condensed table-hover solid-line">
-                        <thead>
-                            <tr>
-                                <th>Name of District</th>
-                                <th id="Condoms">Condoms</th>
-                                <th id="COC">COC</th>
-                                <th id="POP">POP</th>
-                                <th id="ECP">ECP</th>
-                                <th id="Depo">3 Months Inj(Depo)</th>
-                                <th id="Syana">3 Month Inj (Syana Press)</th>
-                                <th id="IUCD">IUCD (CT-380-A)</th>
-                                <th id="Jadelle">Jadelle</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbodyCond">
-                        </tbody>
-                    </table>
+                    </div>
                 </div>
             </div>
-
-            <div class="col-12" style="text-align:center">
-                <h1>Remarks of Monitoring Officer</h1>
-                <div class="col-10">
+        </div>
 
 
-                    <table class="table bordered table-condensed table-hover solid-line">
-                        <thead>
-                            <tr>
-                                <th>Name of District</th>
-                                <th id="MName">Name</th>
-                                <th id="MStatus">Status</th>
-                                <th id="MType">Type</th>
-                                <th>Remarks of Monitoring Officer</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbody">
-                        </tbody>
-                    </table>
+
+
+        <div class="col-lg-12" style="margin-top: 10px;" id="AllNote">
+            <h2 style="text-align: center;">Total surveys to be updated to Monitoring Visits</h2>
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="small-box bg-red">
+                        <div class="inner">
+                            <h3>@ViewBag.All</h3>
+                            <p>All</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-pie-graph"></i>
+                        </div>
+                        <a href="#" class="small-box-footer"></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="small-box bg-blue">
+                        <div class="inner">
+                            <h3>@ViewBag.RHS</h3>
+                            <p>RHS-A</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-pie-graph"></i>
+                        </div>
+                        <a href="#" class="small-box-footer"></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="small-box bg-green">
+                        <div class="inner">
+                            <h3>@ViewBag.MSU</h3>
+                            <p>MSU</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-pie-graph"></i>
+                        </div>
+                        <a href="#" class="small-box-footer"></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="small-box bg-yellow">
+                        <div class="inner">
+                            <h3>@ViewBag.FWC</h3>
+                            <p>FWC</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-pie-graph"></i>
+                        </div>
+                        <a href="#" class="small-box-footer"></a>
+                    </div>
                 </div>
             </div>
+        </div>
+
+        <div class="col-lg-12" style="margin-top: 10px; display:none;" id="SelectedNote">
+            <h2 style="text-align: center;">Total surveys to be updated to Monitoring Visits</h2>
+            <div class="row">
 
 
-            <!-- Loading (remove the following to stop the loading)-->
-            <div class="overlay" style="display:none;"></div>
-            <div class="loading-img" style="display: none;"></div>
-            <!-- end loading -->
 
 
-            <div class="model" id="pdfModel">
-                <div class="model-content">
-                    <span class="close">&times;</span>
-                    <h2 style="text-align:center;">Monitoring Visit Report (RHS-A)</h2>
-
-                    <!-- RHS-A Section -->
-                    <h3>(For RHS-A)</h3>
-                    <table>
-                        <tr>
-                            <td>Name of District:</td>
-                            <td> </td>
-                            <td>RHS-A, Center:</td>
-                            <td> </td>
-                        </tr>
-                        <tr>
-                            <td>Date of visit:</td>
-                            <td> </td>
-                            <td>Time:</td>
-                            <td> </td>
-                        </tr>
-                        <tr>
-                            <td>Status:</td>
-                            <td colspan="3">
-                                <input type="radio" id="open" name="status" value="open">
-                                <label for="open">Open</label>
-                                <input type="radio" id="closed" name="status" value="closed">
-                                <label for="closed">Closed</label>
-                                <input type="radio" id="branded" name="status" value="branded">
-                                <label for="branded">Branded</label>
-                                <input type="radio" id="unbranded" name="status" value="unbranded">
-                                <label for="unbranded">Unbranded</label>
-                            </td>
-                        </tr>
-                    </table>
-
-                    <!-- Staff Position -->
-                    <h3>Staff Position</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Designation</th>
-                                <th>Name</th>
-                                <th>Present/Absent/Leave</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Women Medical Officer</td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Accounts Assistant</td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Theater Nurse</td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>O.T. Technician</td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>Family Welfare Councilor</td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>6</td>
-                                <td>Family Welfare Worker</td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>7</td>
-                                <td>Family Welfare Assistant (F)</td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>8</td>
-                                <td>Driver</td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>9</td>
-                                <td>Helper</td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>10</td>
-                                <td>Sweeper</td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-
-                    <div class="row">
-                        <div class="col-md-10">
-                            <ul>
-
-                                <li>
-
-                                </li>
-                                <li>
-                                    <div class="criteria">
-                                        <div>• Indication/Sign Board:</div>
-                                        <select id="cleanliness">
-                                            <option value="InstalledNot">(Installed/Not)</option>
-                                            <option value="ProperImproper">(Proper/Improper)</option>
-                                            <option value="MaintainedNot">(Maintained/Not Maintained)</option>
-                                        </select>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <div class="criteria">
-                                        <div>• Cleanliness:</div>
-                                        <select id="cleanliness">
-                                            <option value="satisfactory">Satisfactory</option>
-                                            <option value="not-satisfactory">Not Satisfactory</option>
-                                        </select>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="criteria">
-                                        <div>• Stock of Medicines:</div>
-                                        <select id="medicines">
-                                            <option value="sufficient">Sufficient</option>
-                                            <option value="quite-sufficient">Quite Sufficient</option>
-                                            <option value="poor">Poor</option>
-                                        </select>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="criteria">
-                                        <div>• Stock of Contraceptives:</div>
-                                        <select id="contraceptives">
-                                            <option value="sufficient">Sufficient</option>
-                                            <option value="quite-sufficient">Quite Sufficient</option>
-                                            <option value="poor">Poor</option>
-                                        </select>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="criteria">
-                                        <div>• Status of Building:</div>
-                                        <select id="building-status">
-                                            <option value="good">Good</option>
-                                            <option value="average">Average</option>
-                                            <option value="poor">Poor</option>
-                                        </select>
-                                    </div>
-                                </li>
-                            </ul>
+                <div class="col-lg-2">
+                    <div style="border: 1px solid black">
+                        <p style="text-align:center; align-items:center; background-color:darkblue; margin: 0; color: white"> Total Visit Report submited</p>
+                        <div>
+                            <div class="small-box bg-red" style="margin-bottom:0px">
+                                <div class="inner" style="text-align:center">
+                                    <h3 id="MonitoringValue">0</h3>
+                                    <p id="MonitoringName"></p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-pie-graph"></i>
+                                </div>
+                                <a href="#" class="small-box-footer"></a>
+                            </div>
                         </div>
                     </div>
-
-
-                    <h3>Staff Position</h3>
-                    <table>
-                        <thead>
-                            @*<tr>
-
-                    <th>Designation</th>
-                    <th>Name</th>
-                    <th>Present/Absent/Leave</th>
-                </tr>*@
-                        </thead>
-                        <tbody>
-
-                            <tr>
-
-                                <td>Electricity</td>
-                                <td> Available</td>
-                                <td> Not Available </td>
-                            </tr>
-                            <tr>
-
-                                <td>Gas</td>
-                                <td> Available</td>
-                                <td> Not Available </td>
-                            </tr>
-                            <tr>
-
-                                <td>Water</td>
-                                <td> Available</td>
-                                <td> Not Available </td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-
-
-                    <h3>•	Stock and Expiry Date of Medicines: (mention those items which are expiring within six months)</h3>
-
-
-                    <table>
-                        <thead>
-                            <tr>
-
-                                <th>  Name of Medicine  </th>
-                                <th>Stock</th>
-                                <th>Expiry date</th>
-                                <th>Name of Medicine</th>
-                                <th>Stock</th>
-                                <th>Expiry date</th>
-                                <th>Stock</th>
-                                <th>Name of Medicine</th>
-                                <th>Stock</th>
-                                <th>Expiry date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            <tr>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                            </tr>
-                            <tr>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                            </tr>
-                            <tr>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                            </tr>
-                            <tr>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                            </tr>
-                            <tr>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-
-                    <h2>Contraceptives Stock and Performance</h2>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>S.No.</th>
-                                <th>Contraceptives</th>
-                                <th>Stock</th>
-                                <th>Expiry Date</th>
-                                <th>1st</th>
-                                <th>2nd</th>
-                                <th>3rd</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Condoms</td>
-                                <td></td>
-                                <td> </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Oral Pills (POP)</td>
-                                <td></td>
-                                <td> </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>OP (COC)</td>
-                                <td></td>
-                                <td> </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-
-                            <tr>
-                                <td>4</td>
-                                <td>OP (ECP) (COC)</td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                            </tr>
-
-                            <tr>
-                                <td>5</td>
-                                <td>3 months Inj:/Depo (COC)</td>
-                                <td> </td>
-                                <td>  </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                            </tr>
-
-                            <tr>
-                                <td>6</td>
-                                <td>Syana Press</td>
-                                <td> </td>
-                                <td>  </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                            </tr>
-
-                            <tr>
-                                <td>7</td>
-                                <td>IUCD (CT-380-A)	</td>
-                                <td> </td>
-                                <td>   </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                            </tr>
-
-                            <tr>
-                                <td>8</td>
-                                <td>Jadelle</td>
-                                <td> </td>
-                                <td>   </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                            </tr>
-
-                            <tr>
-                                <td>9</td>
-                                <td>Implanon</td>
-                                <td> </td>
-                                <td>   </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                            </tr>
-
-                            <tr>
-                                <td>10</td>
-                                <td>Tubaligation (TL)</td>
-                                <td> </td>
-                                <td>   </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                            </tr>
-                            <tr>
-                                <td>11</td>
-                                <td>NSV</td>
-                                <td> </td>
-                                <td>   </td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
-                            </tr>
-                            <!-- Add more rows for other contraceptives -->
-                        </tbody>
-                    </table>
-                    <button id="downloadPDFBtn">Download PDF</button>
                 </div>
 
-            </div>
 
+
+                @* Open Close Status*@
+
+                <div class="col-lg-3">
+                    <div style="border: 1px solid black">
+                        <p style="text-align:center; align-items:center; background-color:darkblue; margin: 0; color: white" id="Status"> Status Of</p>
+                        <div style="display:flex;">
+                            <div class="small-box bg-green" style="width:100%; margin-bottom: 0">
+                                <div class="inner" style="text-align:center">
+                                    <h3 id="OpenValue">0</h3>
+                                    <p id="OpenTitle">Open</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-pie-graph"></i>
+                                </div>
+                                <a href="#" class="small-box-footer"></a>
+                            </div>
+                            <div class="small-box bg-red" style="width: 100%; margin-bottom: 0">
+                                <div class="inner" style="text-align:center">
+                                    <h3 id="CloseValue">0</h3>
+                                    <p id="CloseTitle">Close</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-pie-graph"></i>
+                                </div>
+                                <a href="#" class="small-box-footer"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                @* Branded UnBranded Status*@
+
+                <div class="col-lg-3">
+                    <div style="border: 1px solid black">
+                        <p style="text-align:center; align-items:center; background-color:darkblue; margin: 0; color: white" id="BStatus"> Type of</p>
+                        <div style="display:flex;">
+                            <div class="small-box bg-green" style="width:100%; margin-bottom: 0">
+                                <div class="inner" style="text-align:center">
+                                    <h3 id="BrandedValue">0</h3>
+                                    <p id="BrandedTitle">Branded</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-pie-graph"></i>
+                                </div>
+                                <a href="#" class="small-box-footer"></a>
+                            </div>
+                            <div class="small-box bg-red" style="width: 100%; margin-bottom: 0">
+                                <div class="inner" style="text-align:center">
+                                    <h3 id="UnBrandedValue">0</h3>
+                                    <p id="UnBrandedTitle">Unbranded</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-pie-graph"></i>
+                                </div>
+                                <a href="#" class="small-box-footer"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                @* premises Status*@
+
+                <div class="col-lg-4">
+                    <div style="border: 1px solid black">
+                        <p style="text-align:center; align-items:center; background-color:darkblue; margin: 0; color: white" id="PStatus"> Overall Status</p>
+                        <div style="display:flex;">
+                            <div class="small-box bg-green" style="width:100%; margin-bottom: 0">
+                                <div class="inner" style="text-align:center">
+                                    <h3 id="PresentValue">0</h3>
+                                    <p id="PresentTitle">Present</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-pie-graph"></i>
+                                </div>
+                                <a href="#" class="small-box-footer"></a>
+                            </div>
+                            <div class="small-box bg-blue" style="width: 100%; margin-bottom: 0">
+                                <div class="inner" style="text-align:center">
+                                    <h3 id="AbsentValue">0</h3>
+                                    <p id="AbsentTitle">Absent</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-pie-graph"></i>
+                                </div>
+                                <a href="#" class="small-box-footer"></a>
+                            </div>
+
+                            <div class="small-box bg-purple" style="width: 100%; margin-bottom: 0">
+                                <div class="inner" style="text-align:center">
+                                    <h3 id="LeaveValue">0</h3>
+                                    <p id="LeaveTitle">Leave</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-pie-graph"></i>
+                                </div>
+                                <a href="#" class="small-box-footer"></a>
+                            </div>
+
+                            <div class="small-box bg-red" style="width: 100%; margin-bottom: 0">
+                                <div class="inner" style="text-align:center">
+                                    <h3 id="VacantValue">0</h3>
+                                    <p id="VacantTitle">Vacant</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-pie-graph"></i>
+                                </div>
+                                <a href="#" class="small-box-footer"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div><!-- /.box-header -->
+
+
+
+
+        </div><!-- /.box -->
+
+    </div>
+    <div style="width: 80%; margin: auto;">
+        <canvas id="myChart" width="400" height="300"></canvas>
+    </div>
+
+    <div style="width: 50%; margin: auto;">
+        <canvas id="myPieChart" width="400" height="200"></canvas>
+    </div>
+
+    <div style="width: 50%; margin: auto;">
+        <canvas id="ContraceptivePieChart" width="400" height="200"></canvas>
+    </div>
+
+    <div class="col-12" style="text-align: center; margin-top: 10px;">
+        <h1>Stock of Contraceptive District Wise Status</h1>
+        <div class="col-10">
+
+
+            <table class="table bordered table-condensed table-hover solid-line">
+                <thead>
+                    <tr>
+                        <th>Name of District</th>
+                        <th id="Condoms">Condoms</th>
+                        <th id="COC">COC</th>
+                        <th id="POP">POP</th>
+                        <th id="ECP">ECP</th>
+                        <th id="Depo">3 Months Inj(Depo)</th>
+                        <th id="Syana">3 Month Inj (Syana Press)</th>
+                        <th id="IUCD">IUCD (CT-380-A)</th>
+                        <th id="Jadelle">Jadelle</th>
+                    </tr>
+                </thead>
+                <tbody id="tbodyCond">
+                </tbody>
+            </table>
         </div>
     </div>
+
+    <div class="col-12" style="text-align:center">
+        <h1>Remarks of Monitoring Officer</h1>
+        <div class="col-10">
+
+
+            <table class="table bordered table-condensed table-hover solid-line">
+                <thead>
+                    <tr>
+                        <th>Name of District</th>
+                        <th id="MName">Name</th>
+                        <th id="MStatus">Status</th>
+                        <th id="MType">Type</th>
+                        <th>Remarks of Monitoring Officer</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <!-- Loading (remove the following to stop the loading)-->
+    <div class="overlay" style="display:none;"></div>
+    <div class="loading-img" style="display: none;"></div>
+    <!-- end loading -->
+
+
+
+
 
 </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
@@ -967,32 +546,30 @@
                 }).get();
 
 
-              
-                var startDate = $("#startDate").val();
-                var endDate = $("#endDate").val();
-                var Checklist = $('#Checklist').val();
-                debugger;
-                //var d = new Date();
-                //var strDate = "01/01/1900";
-                //var edDate = "01/01/2099";
-                //if (startDate == null || startDate == undefined) {
-                //    startDate = strDate;
-                //}
-
-                //if (endDate == null || endDate == undefined) {
-                //    endDate = edDate;
-                //}
-                //GetAllNotes(Checklist, startDate, endDate);
                 BarChart(dv.slice(1), dvv.slice(1));
-                BothChart(dv.slice(1), dvv.slice(1));
+               // BothChart(dv.slice(1), dvv.slice(1));
                 $("#District").empty();
                 $("#Center").empty();
 
                 try {
-                    MnitoringOfficer(Checklist);
-                    ContraceptiveDetail(Checklist)
+
+                    if (Checklist != "") {
+                        MnitoringOfficer(Checklist);
+                    }
+                  
+                    
                 }
                 catch (ex) {
+
+                }
+
+                try {
+                    if (Checklist != "") {
+                        ContraceptiveDetail(Checklist);
+                    }
+                }
+                catch (ex)
+                {
 
                 }
             });
@@ -1004,12 +581,42 @@
                 var startDate = $("#startDate").val();
                 var endDate = $("#endDate").val();
                 var Checklist = $('#Checklist').val();
+                var District = $('#District :selected').text();
 
-                if (Checklist == null) {
+                if (Checklist == null || Checklist == "") {
                     alert("Please select Monitoring");
+                    return false;
                 }
 
-                GetAllNotes(Checklist, startDate, endDate);
+                if (startDate == "") {
+                    startDate = "01-01-1950";
+                   // alert("Please select Start Date");
+                   // return false;
+                }
+                if (endDate == "") {
+                    endDate = "01-01-2099";
+                  //  alert("Please select End Date");
+                  //  return false;
+                }
+                if (District == '') {
+                    District = "all";
+                }
+
+
+                GetAllNotes(Checklist, startDate, endDate, District);
+
+
+                var dv = $('#District option').map(function () {
+                    return $(this).text();
+                }).get();
+
+                var dvv = $('#District option').map(function () {
+                    return $(this).val();
+                }).get();
+
+                BothChart(dv.slice(1), dvv.slice(1));
+
+
             })
 
 
@@ -1052,16 +659,20 @@
             }
 
 
-            function GetAllNotes(district, startDate, endDate) {
+            function GetAllNotes(monitoring, startDate, endDate, District) {
 
 
-                if (district == "") {
+                if (monitoring == "") {
                     $('#AllNote').show();
                     $('#SelectedNote').hide();
                 }
+
+
+
+
                 $.ajax({
                     type: 'POST',
-                    url: "/Designer/ForSelectedMonitoring/" + district + "," + startDate + "," + endDate,
+                    url: "/Designer/ForSelectedMonitoring/" + monitoring + "," + startDate + "," + endDate + "," + District,
                     data: {},
                     async: true,
                     success: function (data) {
@@ -1073,7 +684,7 @@
                         $('#MonitoringValue').text(data.All);
                         $('#MonitoringName').text(data.Name);
 
-                        $('#CloseTitle').text(data.CloseTitle);
+                       // $('#CloseTitle').text(data.CloseTitle);
                         $('#OpenTitle').text(data.OpenTitle);
                         $('#CloseValue').text(data.Close);
                         $('#OpenValue').text(data.Open);
@@ -1112,11 +723,33 @@
             }
 
 
+  
+          
 
 
             function BothChart(Text, Value) {
 
+                var startDate = $("#startDate").val();
+                var endDate = $("#endDate").val();
+
                 var ids = $('#Checklist').val();
+
+
+
+                if (ids == null || Checklist == "") {
+                    alert("Please select Monitoring");
+                    return false;
+                }
+
+                if (startDate == "") {
+                    alert("Please select Start Date");
+                    return false;
+                }
+                if (endDate == "") {
+                    alert("Please select End Date");
+                    return false;
+                }
+
                 var id = parseInt(ids.split(',')[0]);
                 var TitleArray = [];
                 var values = [];
@@ -1124,7 +757,7 @@
                 $.ajax({
                     type: 'POST',
                     //url: "/Designer/BarChart/" + id,
-                    url: "/Designer/DistrictBarChart/" + id,
+                    url: "/Designer/DistrictBarChart/" + id + "," + startDate + "," + endDate,
                     data: {},
                     async: true,
                     success: function (data) {
@@ -1342,43 +975,6 @@
                     options: options
                 });
             }
-
-
-
-
-
-            function printChartAsPDF() {
-                var chartCanvas = document.getElementById('myPieChart');
-
-                //html2canvas(chartCanvas, {
-                //    onrendered: function (canvas) {
-                //        var imgData = canvas.toDataURL('image/png');
-                //        var pdf = new jsPDF('l', 'mm', [canvas.width, canvas.height]);
-                //        pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
-                //        pdf.save('chart.pdf');
-                //    }
-                //});
-
-
-
-                //html2canvas(chartCanvas)
-                //    .then((canvas) => {
-                //        const imgData = chartCanvas.toDataURL('image/png');
-                //        const pdf = new jsPDF({
-                //            orientation: 'landscape',
-                //        });
-                //        const imgProps = pdf.getImageProperties(imgData);
-                //        const pdfWidth = pdf.internal.pageSize.getWidth();
-                //        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-                //        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-                //        pdf.save('download.pdf');
-                //    });
-
-
-            }
-
-
-            //document.getElementById('printPDFButton').addEventListener('click', printChartAsPDF);
 
 
 
