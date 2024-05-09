@@ -248,6 +248,7 @@ INNER JOIN
             id = GetDates[0];
             string sdate = GetDates[1];
             string edate = GetDates[2];
+            string District = GetDates[3];
             string where = string.Empty;
             if (!string.IsNullOrEmpty(id))
             {
@@ -292,7 +293,7 @@ fs3.Title as OpenClose, case when fs3.Title = 'Open' then 1 else  0 end IsOpen,f
 	inner join ProjectFieldSample fs3 on cte.FieldId3 = fs3.FieldID and fs3.Code IN (cte.FieldValue3)
     where RowNum = 1 
 
-	select  Count(g.IsOpen) OpenClose,g.Title     from  #Graph as g where g.IsOpen in (1,0) {where} 
+	select  Count(g.IsOpen) OpenClose,g.Title     from  #Graph as g where g.IsOpen in (1,0) {where} and (g.District like '%{District}%' or '---Select All---' = '{District}')
 	group by  g.IsOpen ,g.Title  
 
 ";
@@ -591,7 +592,7 @@ fs3.Title as OpenClose, case when fs3.Title = 'Open' then 1 else  0 end IsOpen,f
 	inner join ProjectFieldSample fs3 on cte.FieldId3 = fs3.FieldID and fs3.Code IN (cte.FieldValue3)
     where RowNum = 1 
 
-	select  Count(g.IsOpen) OpenClose,g.Title     from  #Graph as g where g.IsOpen in (1,0)  and  (g.Center like '%{District}% or '' = '{District}')'
+	select  Count(g.IsOpen) OpenClose,g.Title     from  #Graph as g where g.IsOpen in (1,0)  and  (g.Center like '%{District}%' or '' = '{District}')
 	group by  g.IsOpen ,g.Title  
 
 
@@ -635,6 +636,7 @@ fs4.Title as Status
     where RowNum = 1 and fs3.Title= 'Open'
 	
 	select count(Status) cnt ,Status from #Graph 
+    where  (Center like '%{District}%' or '---Select All---' = '{District}')
 	group by Status--,Center
 ";
 
@@ -662,7 +664,7 @@ END
 	inner join ProjectFieldSample fs2 on cte.FieldId2 = fs2.FieldID and fs2.Code IN (cte.FieldValue2)
 	inner join ProjectFieldSample fs3 on cte.FieldId3 = fs3.FieldID and fs3.Code IN (cte.FieldValue3)
     inner join ProjectFieldSample fs4 on cte.FieldId4 = fs4.FieldID and fs4.Code IN (cte.FieldValue4)
-    where RowNum = 1 select status as Name, count(status) as BrandedCnt from #Graph   group by  status 
+    where RowNum = 1 select status as Name, count(status) as BrandedCnt from #Graph  where  (District like '%{District}%' or '---Select All---' = '{District}') group by  status 
  ";
 
             var Openclose = db.Database.SqlQuery<OpenCloseResponse>(OpenCloseSql);

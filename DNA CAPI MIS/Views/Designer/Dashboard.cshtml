@@ -742,22 +742,25 @@
                 }
 
                 if (startDate == "") {
-                    alert("Please select Start Date");
-                    return false;
+                    startDate = "01-01-1950";
+                   // alert("Please select Start Date");
+                   // return false;
                 }
                 if (endDate == "") {
-                    alert("Please select End Date");
-                    return false;
+                    endDate = "01-01-2099";
+                 //   alert("Please select End Date");
+                  //  return false;
                 }
 
                 var id = parseInt(ids.split(',')[0]);
                 var TitleArray = [];
                 var values = [];
                 var Title = $('#Checklist').find('option:selected').text();
+                var District = $('#District :selected').text();
                 $.ajax({
                     type: 'POST',
                     //url: "/Designer/BarChart/" + id,
-                    url: "/Designer/DistrictBarChart/" + id + "," + startDate + "," + endDate,
+                    url: "/Designer/DistrictBarChart/" + id + "," + startDate + "," + endDate + "," + District,
                     data: {},
                     async: true,
                     success: function (data) {
