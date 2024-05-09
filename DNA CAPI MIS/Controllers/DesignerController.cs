@@ -503,7 +503,7 @@ END
 	from survey s
 		inner join SurveyData sd1 on s.sbjnum = sd1.sbjnum and sd1.FieldId in (50559, 50504, 55601)--Contraceptive Ids
 		inner join SurveyData sd2 on s.sbjnum = sd2.sbjnum and sd2.FieldId in ({id.Split(',')[0]}  )--District,District,District Ids --50435, 50484, 55587
-	
+	    where s.Created between '{id.Split(',')[4]}' and '{id.Split(',')[5]}'
 )
 select fs2.Title as District,fs1.Title as contraceptive ,cte.FieldValue1
 
@@ -514,7 +514,7 @@ select fs2.Title as District,fs1.Title as contraceptive ,cte.FieldValue1
   
     where RowNum = 1  
 	
-	select * from #Cond c where c.FieldValue1 like '%|%'  and len(FieldValue1) > 46 and (c.District like '%{id.Split(',')[3]}%' or '' = '{id.Split(',')[3]}')
+	select * from #Cond c where c.FieldValue1 like '%|%'  and len(FieldValue1) > 46 and (c.District like '%{id.Split(',')[3]}%' or '---Select All---' = '{id.Split(',')[3]}')
  
  
   

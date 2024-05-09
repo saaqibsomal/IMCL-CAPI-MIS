@@ -614,7 +614,7 @@
 
                 try {
                     if (Checklist != "") {
-                        ContraceptiveDetail(Checklist, District);
+                        ContraceptiveDetail(Checklist, District, startDate, endDate,);
                     }
                 }
                 catch (ex) {
@@ -812,11 +812,11 @@
             }
 
 
-            $('#District').change(function () {
+            //$('#District').change(function () {
 
              
 
-            });
+            //});
 
 
 
@@ -1037,13 +1037,13 @@
 
             }
          
-            function ContraceptiveDetail(district, DistrictWise) {
+            function ContraceptiveDetail(district, DistrictWise, sDate, eDate) {
 
  
 
                 $.ajax({
                     type: 'POST',
-                    url: "/Designer/ContraceptiveDetail/" + district + "," + DistrictWise,
+                    url: "/Designer/ContraceptiveDetail/" + district + "," + DistrictWise + "," + sDate + "," + eDate,
                     data: {},
                     async: true,
                     success: function (data) {
