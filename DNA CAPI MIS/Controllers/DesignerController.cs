@@ -514,7 +514,7 @@ select fs2.Title as District,fs1.Title as contraceptive ,cte.FieldValue1
   
     where RowNum = 1  
 	
-	select * from #Cond c where c.FieldValue1 like '%|%'  and len(FieldValue1) > 46
+	select * from #Cond c where c.FieldValue1 like '%|%'  and len(FieldValue1) > 46 and (c.District like '%{id.Split(',')[3]}%' or '' = '{id.Split(',')[3]}')
  
  
   
@@ -523,7 +523,81 @@ select fs2.Title as District,fs1.Title as contraceptive ,cte.FieldValue1
 
             var con = db.Database.SqlQuery<Contraceptive>(Sql).ToList();
 
-            return Json(con);
+
+          var Contraceptive =  GetContraceptivePei(con, id.Split(',')[3]);
+
+            var ContraceptiveItems = Contraceptive.Select(x => new SelectListItem
+            {
+                Text = x.Contraceptive,
+                Value = x.Qty.ToString()
+            }).ToList();
+
+            return Json(ContraceptiveItems);
+        }
+
+
+
+        public List<ContraceptivePie> GetContraceptivePei(List<Contraceptive> data,string District)
+        {
+            List<ContraceptivePie> Pie = new List<ContraceptivePie>();
+
+   
+            string ConType = "";
+            foreach (var item in data)
+            {
+
+                var PipSplit = item.FieldValue1.Split('|');
+                int i = 0;
+                foreach (var type in PipSplit)
+                {
+
+                    if (i == 0)
+                    {
+                        ConType = "Condoms";
+                    }
+                    else if (i == 1)
+                    {
+                        ConType = "COC";
+                    }
+                    else if (i == 2)
+                    {
+                        ConType = "POP";
+                    }
+                    else if (i == 3)
+                    {
+                        ConType = "ECP";
+                    }
+                    else if (i == 4)
+                    {
+                        ConType = "3 Months Inj(Depo)";
+                    }
+                    else if (i == 5)
+                    {
+                        ConType = "3 Month Inj (Syana Press)";
+                    }
+                    else if (i == 6)
+                    {
+                        ConType = "IUCD (CT-380-A)";
+                    }
+                    else if (i == 6)
+                    {
+                        ConType = "Jadelle";
+                    }
+                    Pie.Add(new ContraceptivePie { Contraceptive = ConType, Qty = Convert.ToInt32(type.Split(',')[1]) });
+                    i++;
+                }
+                
+
+            }
+
+            var groupedData = Pie.GroupBy(x => x.Contraceptive)
+                     .Select(g => new ContraceptivePie
+                     {
+                         Contraceptive = g.Key, // The group key (value of 'Contraceptive')
+                         Qty = g.Sum(x => x.Qty) // The sum of 'Qty' for each group
+                     })
+                     .ToList();
+            return groupedData;
         }
 
 

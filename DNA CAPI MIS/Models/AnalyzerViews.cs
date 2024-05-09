@@ -258,4 +258,12 @@ public class ProjectsList
 
     }
 
+
+    public class ContraceptivePie
+    {
+
+        public string Contraceptive { get; set; }
+        public int  Qty { get; set; }
+    }
+
 }

@@ -195,6 +195,7 @@
                                 <th>Center Name</th>
                                 <th>Survey DateTime</th>
                                 <th>SurveyorName</th>
+                                <th>Coordinate</th>
                                 <th>View</th>
                             </tr>
                         </thead>
@@ -248,7 +249,8 @@
                     row.append('<td>' + item.CenterName + '</td>');
                     row.append('<td>' + item.Created + '</td>');
                     row.append('<td>' + item.SurveyorName + '</td>');
-                    row.append('<td><a href="#"  > View </a></td>');
+                    row.append('<td>' + item.Latitude + "," + item.Longitude  + '</td>');
+                    row.append('<td><a href="#"   > View </a></td>');
 
                     row.click(function () {
                         // Call your function here, passing the subject number as a parameter
@@ -300,7 +302,8 @@
                     row.append('<td>' + item.CenterName + '</td>');
                     row.append('<td>' + item.Created + '</td>');
                     row.append('<td>' + item.SurveyorName + '</td>');
-                    row.append('<td><a href="#" > View </a></td>');
+                    row.append('<td>' + item.Latitude + "," + item.Longitude + '</td>');
+                    row.append('<td><a href="#" onclick= > View </a></td>');
                     row.click(function () {
                         // Call your function here, passing the subject number as a parameter
                         OpenReport(item.sbjnum, item.CenterName);

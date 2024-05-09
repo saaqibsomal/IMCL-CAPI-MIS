@@ -456,15 +456,33 @@
         <canvas id="myChart" width="400" height="300"></canvas>
     </div>
 
-    <div style="width: 50%; margin: auto;">
-        <canvas id="myPieChart" width="400" height="200"></canvas>
+
+    <div class="col-md-12">
+
+
+        <div class="col-md-6" style="text-align:center">
+            <h3>Pie Chart for Open Close Status</h3>
+            <div style="width: 100%; margin: auto;">
+                <canvas id="myPieChart" width="400" height="200"></canvas>
+            </div>
+        </div>
+
+        <div class="col-md-6" style="text-align:center">
+            <h3>Stock of Contraceptive District Wise Status</h3>
+            <div style="width: 100%; margin: auto;">
+                <canvas id="ContraceptivePieChart" width="400" height="200"></canvas>
+            </div>
+        </div>
+
     </div>
 
-    <div style="width: 50%; margin: auto;">
-        <canvas id="ContraceptivePieChart" width="400" height="200"></canvas>
-    </div>
 
-    <div class="col-12" style="text-align: center; margin-top: 10px;">
+
+
+
+
+
+    @*<div class="col-12" style="text-align: center; margin-top: 10px;">
         <h1>Stock of Contraceptive District Wise Status</h1>
         <div class="col-10">
 
@@ -487,7 +505,7 @@
                 </tbody>
             </table>
         </div>
-    </div>
+    </div>*@
 
     <div class="col-12" style="text-align:center">
         <h1>Remarks of Monitoring Officer</h1>
@@ -563,15 +581,7 @@
 
                 }
 
-                try {
-                    if (Checklist != "") {
-                        ContraceptiveDetail(Checklist);
-                    }
-                }
-                catch (ex)
-                {
-
-                }
+               
             });
 
 
@@ -590,19 +600,26 @@
 
                 if (startDate == "") {
                     startDate = "01-01-1950";
-                   // alert("Please select Start Date");
-                   // return false;
+                    // alert("Please select Start Date");
+                    // return false;
                 }
                 if (endDate == "") {
                     endDate = "01-01-2099";
-                  //  alert("Please select End Date");
-                  //  return false;
+                    //  alert("Please select End Date");
+                    //  return false;
                 }
                 if (District == '') {
                     District = "all";
                 }
 
+                try {
+                    if (Checklist != "") {
+                        ContraceptiveDetail(Checklist, District);
+                    }
+                }
+                catch (ex) {
 
+                }
                 GetAllNotes(Checklist, startDate, endDate, District);
 
 
@@ -617,7 +634,16 @@
                 BothChart(dv.slice(1), dvv.slice(1));
 
 
-            })
+                try {
+                    var District = $('#District').find('option:selected').text();
+                    var Value = $('#District').val();
+                    CenterPieChart(District, Value)
+                }
+                catch (ex) {
+
+                }
+
+            });
 
 
             //$('#OpenClose').change(function () {
@@ -788,9 +814,7 @@
 
             $('#District').change(function () {
 
-                var District = $('#District').find('option:selected').text();
-                var Value = $('#District').val();
-                CenterPieChart(District, Value)
+             
 
             });
 
@@ -1012,104 +1036,75 @@
                 });
 
             }
+         
+            function ContraceptiveDetail(district, DistrictWise) {
 
-            function ContraceptiveDetail(district) {
-
-
-                var c1 = 0;
-                var c2 = 0;
-                var c3 = 0;
-                var c4 = 0;
-                var c5 = 0;
-                var c6 = 0;
-                var c7 = 0;
-                var c8 = 0;
+ 
 
                 $.ajax({
                     type: 'POST',
-                    url: "/Designer/ContraceptiveDetail/" + district,
+                    url: "/Designer/ContraceptiveDetail/" + district + "," + DistrictWise,
                     data: {},
                     async: true,
                     success: function (data) {
-                        $("#tbody").empty();
-                        var html = '';
-                        $.each(data, function (key, item) {
 
-                            //1-1,2|2-1,2|3-1,2|4-1,2|5-1,2|6-1,2|7-1,2|8-1,2
-
-
-                                var PipSplit = item.FieldValue1.split("|");
-
-                                var CommaSplit = PipSplit[0].split('-');
-                                var Cond1 = CommaSplit[1].split(",");
-                                c1 += parseInt(Cond1[1]);
-
-                                var CommaSplit = PipSplit[1].split('-');
-                                var Cond2 = CommaSplit[1].split(",");
-                                c2 += parseInt(Cond2[1]);
-
-                                var CommaSplit = PipSplit[2].split('-');
-                                var Cond3 = CommaSplit[1].split(",");
-                                c3 += parseInt(Cond3[1]);
-
-                                var CommaSplit = PipSplit[3].split('-');
-                                var Cond4 = CommaSplit[1].split(",");
-                                c4 += parseInt(Cond4[1]);
-
-                                var CommaSplit = PipSplit[4].split('-');
-                                var Cond5 = CommaSplit[1].split(",");
-                                c5 += parseInt(Cond5[1]);
-
-                                var CommaSplit = PipSplit[5].split('-');
-                                var Cond6 = CommaSplit[1].split(",");
-                                c6 += parseInt(Cond6[1]);
-
-                                var CommaSplit = PipSplit[6].split('-');
-                                var Cond7 = CommaSplit[1].split(",");
-                                c7 += parseInt(Cond7[1]);
-
-                                var CommaSplit = PipSplit[7].split('-');
-                                var Cond8 = CommaSplit[1].split(",");
-                                c8 += parseInt(Cond8[1]);
-
-                                html += '<tr>';
-
-                                html += '<td>' + item.District + '</td>';
-                                html += '<td>' + Cond1[1] + '</td>';
-                                html += '<td>' + Cond2[1] + '</td>';
-                                html += '<td>' + Cond3[1] + '</td>';
-                                html += '<td>' + Cond4[1] + '</td>';
-                                html += '<td>' + Cond5[1] + '</td>';
-                                html += '<td>' + Cond6[1] + '</td>';
-                                html += '<td>' + Cond7[1] + '</td>';
-                                html += '<td>' + Cond8[1] + '</td>';
-                                html += '</tr>';
-                            
+                        // Extracting values from data using map function
+                        values = $.map(data, function (state) {
+                            return state.Value;
                         });
-                  
-                        html += '<tr>';
-                        html += '<th>' + "Total" + '</th>';
-                        html += '<th>' + c1 + '</th>';
-                        html += '<th>' + c2 + '</th>';
-                        html += '<th>' + c3 + '</th>';
-                        html += '<th>' + c4 + '</th>';
-                        html += '<th>' + c5 + '</th>';
-                        html += '<th>' + c6 + '</th>';
-                        html += '<th>' + c7 + '</th>';
-                        html += '<th>' + c8 + '</th>';
-                        html += '</tr>';
-                        $('#tbodyCond').html(html);
-                    
+                        // Extracting values from data using map function
+                        TitleArray = $.map(data, function (state) {
+                            return state.Text;
+                        });
+
+                        ContraceptivePieChart(TitleArray, values, "");
                     }
                 });
 
             }
 
 
+            function ContraceptivePieChart(TitleArray, values, Title) {
 
 
+                var data = {
+                    labels: TitleArray,
+                    datasets: [{
+                        label: Title,
+                        data: values,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.5)',
+                            'rgba(54, 162, 235, 0.5)',
+                            'rgba(255, 206, 86, 0.5)',
+                            'rgba(75, 192, 192, 0.5)',
+                            'rgba(153, 102, 255, 0.5)',
+                            'rgba(255, 159, 64, 0.5)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                };
 
-            //
+                // Configuration options
+                var options = {
+                    responsive: true
+                };
+
+                // Create the pie chart
+                var ctx = document.getElementById('ContraceptivePieChart').getContext('2d');
+                var ContraceptivePieChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: data,
+                    options: options
+                });
+            }
 
         </script>
 
