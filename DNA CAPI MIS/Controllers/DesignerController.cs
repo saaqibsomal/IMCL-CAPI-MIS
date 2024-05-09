@@ -592,7 +592,7 @@ fs3.Title as OpenClose, case when fs3.Title = 'Open' then 1 else  0 end IsOpen,f
 	inner join ProjectFieldSample fs3 on cte.FieldId3 = fs3.FieldID and fs3.Code IN (cte.FieldValue3)
     where RowNum = 1 
 
-	select  Count(g.IsOpen) OpenClose,g.Title     from  #Graph as g where g.IsOpen in (1,0)  and  (g.Center like '%{District}%' or '' = '{District}')
+	select  Count(g.IsOpen) OpenClose,g.Title     from  #Graph as g where g.IsOpen in (1,0)  and  (g.District like '%{District}%' or '---Select All---' = '{District}')
 	group by  g.IsOpen ,g.Title  
 
 
@@ -636,7 +636,7 @@ fs4.Title as Status
     where RowNum = 1 and fs3.Title= 'Open'
 	
 	select count(Status) cnt ,Status from #Graph 
-    where  (Center like '%{District}%' or '---Select All---' = '{District}')
+    where  (District like '%{District}%' or '---Select All---' = '{District}')
 	group by Status--,Center
 ";
 
