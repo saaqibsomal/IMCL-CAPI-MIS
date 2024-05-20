@@ -259,6 +259,13 @@ public class ProjectsList
     }
 
 
+    public class StuffPosition
+    {
+        public string District { get; set; }
+        public string Center { get; set; }
+        public string Remarks { get; set; }
+
+    }
     public class ContraceptivePie
     {
 

@@ -1,0 +1,641 @@
+﻿
+
+@{
+    ViewBag.Title = "Dashboard";
+}
+@section Scripts {
+    <script>
+        var viewURL = "/Designer/Dashboard/";
+    </script>
+
+}
+
+<link href="~/Content/DSDS/dsds.css" rel="stylesheet" type="text/css" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
+@*CSS Class desktop is used for overlay*@
+
+<style>
+    .model {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.5);
+    }
+
+    .model-content {
+        background-color: #fefefe;
+        margin: 10% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+
+    .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+</style>
+<style>
+    .optionsRadios {
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+
+
+<style>
+    /* Style for the table */
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    /* Style for table headers */
+    th {
+        background-color: #007bff; /* Blue header color */
+        color: #fff; /* Text color */
+        font-weight: bold;
+        text-align: left;
+    }
+    /* Style for table cells */
+    td {
+        border: 1px solid #dddddd; /* Border color for cells */
+        padding: 8px;
+    }
+    /* Alternate row color */
+    tr:nth-child(even) {
+        background-color: #f2f2f2; /* Light gray */
+    }
+</style>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+
+    .container {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    ul {
+        list-style-type: none;
+        padding-left: 0;
+    }
+
+    li {
+        margin-bottom: 20px;
+    }
+
+    .criteria {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+
+        .criteria label {
+            font-weight: bold;
+        }
+
+        .criteria select {
+            padding: 5px;
+            width: 180px;
+        }
+
+        .criteria .sufficient {
+            color: green;
+        }
+
+        .criteria .quite-sufficient {
+            color: orange;
+        }
+
+        .criteria .poor {
+            color: red;
+        }
+</style>
+<div class="row desktop">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title" style="width:100%">Dashboard</h3>
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-10">
+                            <div class="col-md-4 col-sm-12">
+                                @Html.DropDownList("Checklist", ViewBag.Checklist as List<SelectListItem>, "Select Monitoring Checklist For All", htmlAttributes: new { @class = "form-control", id = "Checklist" })
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+
+                        <div class="col-10">
+                            <div class="col-md-4 col-sm-12">
+                                @Html.DropDownList("District", ViewBag.District as List<SelectListItem>, htmlAttributes: new { @class = "form-control", id = "District" })
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-12">
+
+                        <div class="col-10">
+                            <div class="col-md-4 col-sm-12">
+                                @Html.DropDownList("Center", ViewBag.Center as List<SelectListItem>, htmlAttributes: new { @class = "form-control", id = "Center" })
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-12">
+
+                        <!-- Date Range Inputs -->
+                        <div class="col-10">
+                            <div class="col-md-4 col-sm-12">
+                                <label for="startDate" style="margin-left:4px;">  Start Date:</label>
+                                <input type="date" id="startDate" name="startDate" class="form-control">
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+
+
+                        <div class="col-md-4 col-sm-12">
+                            <label for="endDate" style="margin-left:4px;">End Date:</label>
+                            <input type="date" id="endDate" name="endDate" class="form-control">
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+
+                    <!-- Date Range Inputs -->
+
+                    <div class="col-md-2 col-sm-12" style="margin-left:4px;margin-top:4px;">
+
+                        <button id="Search" class="btn btn-success"> Search</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        @*<div class="row" style="display:none;">
+            <div class="col-12">
+
+                <div class="col-10">
+                    <div class="col-md-4 col-sm-12">
+                        @Html.DropDownList("Center", ViewBag.Center as List<SelectListItem>, htmlAttributes: new { @class = "form-control" })
+
+                    </div>
+                </div>
+            </div>
+        </div>*@
+
+
+
+
+
+
+        <div class="col-lg-12" style="margin-top: 10px; display:none;" id="SelectedNote">
+            <h2 style="text-align: center;">Total surveys to be updated to Monitoring Visits</h2>
+            <div class="row">
+
+
+
+
+
+
+
+
+
+
+            </div><!-- /.box -->
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+        <div class="col-12" style="text-align:center;">
+            <h1>Staff Position</h1>
+            <div class="col-10">
+
+
+                <table id="dataTable" class="table bordered table-condensed table-hover solid-line">
+                    <thead>
+                        <tr>
+                            <th>Name of District</th>
+                            <th>Center Name</th>
+                            <th>Staff Position 1</th>
+                            <th>Staff Position 2</th>
+                            <th>Staff Position 3</th>
+                            <th>Staff Position 4</th>
+                            <th>Staff Position 5</th>
+                            <th>Staff Position 6</th>
+                            <th>Staff Position 7</th>
+                            <th>Staff Position 8</th>
+                            <th>Staff Position 9</th>
+                            <th>Staff Position 10</th>
+
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <!-- Loading (remove the following to stop the loading)-->
+        <div class="overlay" style="display:none;"></div>
+        <div class="loading-img" style="display: none;"></div>
+        <!-- end loading -->
+
+
+
+
+
+    </div>
+
+
+    <script src="https://cdn.datatables.net/2.0.5/js/dataTables.min.js"></script>
+
+
+    <script>
+
+
+        $(document).ready(function () {
+            MnitoringOfficer(0);
+        })
+
+        var selectedTex = "";
+        $('#Checklist').change(function () {
+            var Checklist = $('#Checklist').val();
+
+            GetDistrict(Checklist);
+
+            var dv = $('#District option').map(function () {
+                return $(this).text();
+            }).get();
+
+            var dvv = $('#District option').map(function () {
+                return $(this).val();
+            }).get();
+            $("#District").empty();
+            $("#Center").empty();
+
+            try {
+
+                if (Checklist != "") {
+                    MnitoringOfficer(Checklist);
+
+                }
+
+
+            }
+            catch (ex) {
+
+            }
+
+
+        });
+
+
+
+
+
+
+        $('#District').change(function () {
+            var val = $('#Checklist').val();
+            var selectedText = $(this).find('option:selected').text();
+            var com = val + "," + selectedText;
+            $("#Center").empty();
+            GetCenter(com);
+        });
+
+        var Checklist = $('#Checklist option').map(function () {
+            return $(this).text();
+        }).get();
+
+
+        function GetDistrict(district) {
+
+            var dist = district;
+            $.ajax({
+                type: 'POST',
+                url: "/Designer/GetDistictById/" + district,
+                data: {},
+                async: true,
+                success: function (data) {
+                    $("#District").empty();
+                    $("#District").append('<option value="' + 0 + '">' + "---Select All---" + '</option>')
+                    $.each(data, function (i, state) {
+                        $("#District").append('<option value="' + state.Value + '">' + state.Text + '</option>')
+                    })
+                }
+            });
+
+        }
+
+
+
+        function GetCenter(district) {
+            $.ajax({
+                type: 'POST',
+                url: "/Designer/GetCentral/" + district,
+                data: {},
+                success: function (data) {
+                    $("#Center").empty();
+                    $("#Centrals").append('<option value="' + 0 + '">' + "---Select All---" + '</option>')
+                    $.each(data, function (i, state) {
+                        $("#Center").append('<option value="' + state.Value + '">' + state.Text + '</option>')
+                    })
+                }
+            });
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        function MnitoringOfficer(district) {
+
+
+
+
+            $.ajax({
+                type: 'POST',
+                url: "/Designer/StuffDetailReportData/" + 0,
+                data: {},
+                async: true,
+                success: function (data) {
+                    $("#tbody").empty();
+                    var html = '';
+                    $.each(data, function (key, item) {
+                        html += '<tr>';
+
+                        var PLAV = item.Remarks.split(',');
+
+                        var s1 = PLAV[0];
+                        var s2 = PLAV[1];
+                        var s3 = PLAV[2];
+                        var s4 = PLAV[3];
+                        var s5 = PLAV[4];
+                        var s6 = PLAV[5];
+                        var s7 = PLAV[6];
+                        var s8 = PLAV[7];
+                        var s9 = PLAV[8];
+                        var s10 = PLAV[9];
+
+
+
+                        html += '<td>' + item.District + '</td>';
+                        html += '<td>' + item.Center + '</td>';
+
+                        if (s1 == "1") {
+                            html += '<td>' + "Present" + '</td>';
+                        }
+                        else if (s1 == "2") {
+                            html += '<td>' + "Absent" + '</td>';
+                        }
+                        else if (s1 == "3") {
+                            html += '<td>' + "Leave" + '</td>';
+                        }
+                        else if (s1 == "4") {
+                            html += '<td>' + "Vcant" + '</td>';
+                        }
+
+
+                        if (s2 == "1") {
+                            html += '<td>' + "Present" + '</td>';
+                        }
+                        else if (s2 == "2") {
+                            html += '<td>' + "Absent" + '</td>';
+                        }
+                        else if (s2 == "3") {
+                            html += '<td>' + "Leave" + '</td>';
+                        }
+                        else if (s2 == "4") {
+                            html += '<td>' + "Vcant" + '</td>';
+                        }
+
+
+                        if (s3 == "1") {
+                            html += '<td>' + "Present" + '</td>';
+                        }
+                        else if (s3 == "2") {
+                            html += '<td>' + "Absent" + '</td>';
+                        }
+                        else if (s3 == "3") {
+                            html += '<td>' + "Leave" + '</td>';
+                        }
+                        else if (s3 == "4") {
+                            html += '<td>' + "Vcant" + '</td>';
+                        }
+
+
+
+                        if (s4 == "1") {
+                            html += '<td>' + "Present" + '</td>';
+                        }
+                        else if (s4 == "2") {
+                            html += '<td>' + "Absent" + '</td>';
+                        }
+                        else if (s4 == "3") {
+                            html += '<td>' + "Leave" + '</td>';
+                        }
+                        else if (s4 == "4") {
+                            html += '<td>' + "Vcant" + '</td>';
+                        }
+
+
+                        if (s5 == "1") {
+                            html += '<td>' + "Present" + '</td>';
+                        }
+                        else if (s5 == "2") {
+                            html += '<td>' + "Absent" + '</td>';
+                        }
+                        else if (s5 == "3") {
+                            html += '<td>' + "Leave" + '</td>';
+                        }
+                        else if (s5 == "4") {
+                            html += '<td>' + "Vcant" + '</td>';
+                        }
+
+
+                        if (s6 == "1") {
+                            html += '<td>' + "Present" + '</td>';
+                        }
+                        else if (s6 == "2") {
+                            html += '<td>' + "Absent" + '</td>';
+                        }
+                        else if (s6 == "3") {
+                            html += '<td>' + "Leave" + '</td>';
+                        }
+                        else if (s6 == "4") {
+                            html += '<td>' + "Vcant" + '</td>';
+                        }
+
+
+                        if (s7 == "1") {
+                            html += '<td>' + "Present" + '</td>';
+                        }
+                        else if (s7 == "2") {
+                            html += '<td>' + "Absent" + '</td>';
+                        }
+                        else if (s7 == "3") {
+                            html += '<td>' + "Leave" + '</td>';
+                        }
+                        else if (s7 == "4") {
+                            html += '<td>' + "Vcant" + '</td>';
+                        }
+
+
+                        if (s8 == "1") {
+                            html += '<td>' + "Present" + '</td>';
+                        }
+                        else if (s8 == "2") {
+                            html += '<td>' + "Absent" + '</td>';
+                        }
+                        else if (s8 == "3") {
+                            html += '<td>' + "Leave" + '</td>';
+                        }
+                        else if (s8 == "4") {
+                            html += '<td>' + "Vcant" + '</td>';
+                        }
+
+                        if (s9 == "1") {
+                            html += '<td>' + "Present" + '</td>';
+                        }
+                        else if (s9 == "2") {
+                            html += '<td>' + "Absent" + '</td>';
+                        }
+                        else if (s9 == "3") {
+                            html += '<td>' + "Leave" + '</td>';
+                        }
+                        else if (s9 == "4") {
+                            html += '<td>' + "Vcant" + '</td>';
+                        }
+
+
+                        if (s10 == "1") {
+                            html += '<td>' + "Present" + '</td>';
+                        }
+                        else if (s10 == "2") {
+                            html += '<td>' + "Absent" + '</td>';
+                        }
+                        else if (s10 == "3") {
+                            html += '<td>' + "Leave" + '</td>';
+                        }
+                        else if (s10 == "4") {
+                            html += '<td>' + "Vcant" + '</td>';
+                        }
+
+                        html += '</tr>';
+                    });
+                    $('#tbody').html(html);
+
+                }
+
+
+            });
+            //let table = new DataTable('#dataTable');
+            ////  $('.dt-layout-row').css('text-align', 'right');
+            //$('.dt-length').hide();
+            //$('.dt-input').addClass('form-control');
+            //$('.dt-search').addClass('col-md-4');
+            //$('.dt-search').css('padding-left', '3px');
+            //$('.dt-search').css('padding-bottom', '3px');
+        }
+
+
+
+
+
+
+    </script>
+

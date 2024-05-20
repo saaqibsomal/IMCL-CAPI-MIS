@@ -61,36 +61,36 @@
                                 }
 
 
-                                    @*<li class="treeview">
-                <a href="#">
-                    <i class="fa fa-bar-chart-o"></i>
-                    <span>Reports</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu" style="display: block;">
-                    <li><a href="/Survey/SurveyApproval/7120/en?&astatus=3&rt=0&fv=0&r=1"><i class="fa fa-angle-double-right"></i> RHS-A</a></li>
-                    <li><a href="/Survey/SurveyApproval/7121/en?&astatus=3&rt=0&fv=0&r=1"><i class="fa fa-angle-double-right"></i> MSU</a></li>
-                    <li><a href="/Survey/SurveyApproval/7122/en?&astatus=3&rt=0&fv=0&r=1"><i class="fa fa-angle-double-right"></i> FWC</a></li>
-                </ul>
-            </li>*@
-                                    @if (User.IsInRole("Surveyor") || User.IsInRole("Project Manager"))
-                                    {
-                                        <li class="treeview">
-                                            <a href="#">
-                                                <i class="fa fa-bar-chart-o"></i>
-                                                <span>Reports</span>
-                                                <i class="fa fa-angle-left pull-right"></i>
-                                            </a>
-                                            <ul class="treeview-menu" style="display: block;">
-                                                @*<li><a href="/Designer/RHS"><i class="fa fa-angle-double-right"></i> RHS-A</a></li>
-                        <li><a href="/Designer/MSU"><i class="fa fa-angle-double-right"></i> MSU</a></li>
-                        <li><a href="/Designer/FWC"><i class="fa fa-angle-double-right"></i> FWC</a></li>*@
-                                                <li><a href="/Designer/PdfReport"><i class="fa fa-angle-double-right"></i> Report</a></li>
-                                            </ul>
-                                        </li>
-                                    }
 
-                                </ul>
+                                @if (User.IsInRole("Surveyor") || User.IsInRole("Project Manager"))
+                                {
+                                    <li class="treeview">
+                                        <a href="#">
+                                            <i class="fa fa-bar-chart-o"></i>
+                                            <span>Reports</span>
+                                            <i class="fa fa-angle-left pull-right"></i>
+                                        </a>
+                                        <ul class="treeview-menu" style="display: block;">
+                                            <li><a href="/Designer/PdfReport"><i class="fa fa-angle-double-right"></i> Report</a></li>
+                                        </ul>
+                                    </li>
+                                }
+
+                                @if (User.IsInRole("Surveyor") || User.IsInRole("Project Manager"))
+                                {
+                                    <li class="treeview">
+                                        <a href="#">
+                                            <i class="fa fa-bar-chart-o"></i>
+                                            <span>Detail Report</span>
+                                            <i class="fa fa-angle-left pull-right"></i>
+                                        </a>
+                                        <ul class="treeview-menu" style="display: block;">
+                                            <li><a href="/Designer/StuffDetailReport"><i class="fa fa-angle-double-right"></i> Stuff Detail Report</a></li>
+                                        </ul>
+                                    </li>
+                                }
+
+                            </ul>
                         </li>
 
                         if (User.IsInRole("Admin"))
@@ -117,7 +117,7 @@
                                 </a>
                                 <ul class="treeview-menu">
                                     <li><a href="/UsersAdmin/Index"><i class="fa fa-angle-double-right"></i> Users</a></li>
-                                    @*<li><a href="/RolesAdmin"><i class="fa fa-angle-double-right"></i> Role</a></li>*@
+                                 
                                 </ul>
                             </li>
                         }

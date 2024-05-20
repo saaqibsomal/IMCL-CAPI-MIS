@@ -3326,6 +3326,7 @@
     <Content Include="Views\Designer\FWC.cshtml" />
     <Content Include="Views\Designer\PdfReport.cshtml" />
     <Content Include="Views\Designer\Report.cshtml" />
+    <Content Include="Views\Designer\StuffDetailReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

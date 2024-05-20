@@ -524,7 +524,7 @@ select fs2.Title as District,fs1.Title as contraceptive ,cte.FieldValue1
             var con = db.Database.SqlQuery<Contraceptive>(Sql).ToList();
 
 
-          var Contraceptive =  GetContraceptivePei(con, id.Split(',')[3]);
+            var Contraceptive = GetContraceptivePei(con, id.Split(',')[3]);
 
             var ContraceptiveItems = Contraceptive.Select(x => new SelectListItem
             {
@@ -537,11 +537,11 @@ select fs2.Title as District,fs1.Title as contraceptive ,cte.FieldValue1
 
 
 
-        public List<ContraceptivePie> GetContraceptivePei(List<Contraceptive> data,string District)
+        public List<ContraceptivePie> GetContraceptivePei(List<Contraceptive> data, string District)
         {
             List<ContraceptivePie> Pie = new List<ContraceptivePie>();
 
-   
+
             string ConType = "";
             foreach (var item in data)
             {
@@ -586,7 +586,7 @@ select fs2.Title as District,fs1.Title as contraceptive ,cte.FieldValue1
                     Pie.Add(new ContraceptivePie { Contraceptive = ConType, Qty = Convert.ToInt32(type.Split(',')[1]) });
                     i++;
                 }
-                
+
 
             }
 
@@ -2644,11 +2644,11 @@ ORDER BY
                 int result1;
 
                 bool isNumeric1 = false;
-                if(item.FieldValue.Contains("|"))
+                if (item.FieldValue.Contains("|"))
                 {
 
                 }
-               else if (item.FieldValue.Contains(","))
+                else if (item.FieldValue.Contains(","))
                 {
                     IntToString = string.Empty;
                     foreach (var i in item.FieldValue.Split(','))
@@ -2754,8 +2754,8 @@ ORDER BY
         {
 
 
-           
-          
+
+
 
             string sql = @"SELECT case 
  
@@ -2859,7 +2859,7 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
             {
                 if (name.Contains("_"))
                 {
-                    
+
                     var GetDistrict = name.Split('_');
                     var removeAtRat = GetDistrict[1].Split('@');
                     District = removeAtRat[0];
@@ -2880,12 +2880,12 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
             {
                 Ids = "'7120','7121','7122'";
             }
-             
+
             else
             {
                 Ids = id.ToString();
             }
-             
+
 
             string Query = $@"
 IF OBJECT_ID('tempdb..#SurveyReport') IS NOT NULL
@@ -2905,23 +2905,23 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
  Left join ProjectFieldSample pfD on sp.Center = pfD.Code and sp.DistrictFieldID = pfD.FieldID 
 ";
             var GetSurvey = db.Database.SqlQuery<PdfDetailReport>(Query);
-            if(isAdmin)
+            if (isAdmin)
             {
                 return Json(GetSurvey);
             }
             else
             {
-               var  DistrictWise = GetSurvey.Where(x => x.DistrictName.ToUpper() == District.ToUpper()).ToList();
+                var DistrictWise = GetSurvey.Where(x => x.DistrictName.ToUpper() == District.ToUpper()).ToList();
                 return Json(DistrictWise);
             }
-      
-           
+
+
         }
 
 
         [Authorize]
         [HttpGet]
-        public ActionResult Report(int id =0)
+        public ActionResult Report(int id = 0)
         {
 
 
@@ -2987,7 +2987,7 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                         field.NameOfDistrict = value.FieldValue;
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
 
                 }
@@ -3021,7 +3021,7 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                     {
                         field.DateOfVisit = "N/A";
                         field.TimeOfVisit = "N/A";
-                    } 
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -3045,18 +3045,18 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
 
                 }
                 try
-                            {
-
-                                var Indication = RawData.Where(x => x.Title.ToUpper().Contains("Indication/Sign Board".ToUpper())).FirstOrDefault();
-                if (Indication != null)
                 {
-                    field.Indication = Indication.FieldValue;
 
-                }
-                else
-                {
-                    field.Indication = "N/A";
-                }
+                    var Indication = RawData.Where(x => x.Title.ToUpper().Contains("Indication/Sign Board".ToUpper())).FirstOrDefault();
+                    if (Indication != null)
+                    {
+                        field.Indication = Indication.FieldValue;
+
+                    }
+                    else
+                    {
+                        field.Indication = "N/A";
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -3064,377 +3064,377 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 }
 
                 try
-                                {
-
-                                    var StaffPosition = data.Where(x => x.Title.ToUpper().Contains("Staff Position Names 1".ToUpper())).FirstOrDefault();
-                if (StaffPosition != null)
                 {
-                    field.StaffPosition = StaffPosition.FieldValue;
 
-                }
-                else
-                {
-                    field.StaffPosition = "N/A";
-                }
+                    var StaffPosition = data.Where(x => x.Title.ToUpper().Contains("Staff Position Names 1".ToUpper())).FirstOrDefault();
+                    if (StaffPosition != null)
+                    {
+                        field.StaffPosition = StaffPosition.FieldValue;
+
+                    }
+                    else
+                    {
+                        field.StaffPosition = "N/A";
+                    }
                 }
                 catch (Exception ex)
                 {
 
                 }
                 try
-                                    {
-
-                                        var Cleanliness = data.Where(x => x.Title.ToUpper().Contains("Cleanliness".ToUpper())).FirstOrDefault();
-                if (Cleanliness != null)
                 {
-                    field.Cleanliness = Cleanliness.FieldValue;
 
-                }
-                else
-                {
-                    field.Cleanliness = "N/A";
-                }
+                    var Cleanliness = data.Where(x => x.Title.ToUpper().Contains("Cleanliness".ToUpper())).FirstOrDefault();
+                    if (Cleanliness != null)
+                    {
+                        field.Cleanliness = Cleanliness.FieldValue;
+
+                    }
+                    else
+                    {
+                        field.Cleanliness = "N/A";
+                    }
                 }
                 catch (Exception ex)
                 {
 
                 }
                 try
-                                        {
-
-                                            var StockOfMedicines = data.Where(x => x.Title.ToUpper().Contains("Stock of Medicine".ToUpper())).FirstOrDefault();
-                if (StockOfMedicines != null)
                 {
-                    field.StockofMedicines = StockOfMedicines.FieldValue;
 
-                }
-                else
-                {
-                    field.StockofMedicines = "N/A";
-                }
+                    var StockOfMedicines = data.Where(x => x.Title.ToUpper().Contains("Stock of Medicine".ToUpper())).FirstOrDefault();
+                    if (StockOfMedicines != null)
+                    {
+                        field.StockofMedicines = StockOfMedicines.FieldValue;
+
+                    }
+                    else
+                    {
+                        field.StockofMedicines = "N/A";
+                    }
                 }
                 catch (Exception ex)
                 {
 
                 }
                 try
-                                            {
-
-                                                var StatusOfBuilding = RawData.Where(x => x.Title.ToUpper().Contains("Status of Building".ToUpper())).FirstOrDefault();
-                if (StatusOfBuilding != null)
                 {
-                    field.StatusofBuilding = StatusOfBuilding.FieldValue;
 
-                }
-                else
-                {
-                    field.StatusofBuilding = "N/A";
-                }
+                    var StatusOfBuilding = RawData.Where(x => x.Title.ToUpper().Contains("Status of Building".ToUpper())).FirstOrDefault();
+                    if (StatusOfBuilding != null)
+                    {
+                        field.StatusofBuilding = StatusOfBuilding.FieldValue;
+
+                    }
+                    else
+                    {
+                        field.StatusofBuilding = "N/A";
+                    }
                 }
                 catch (Exception ex)
                 {
 
                 }
                 try
-                                                {
-
-                                                    var StockOfContraceptives = data.Where(x => x.Title.ToUpper().Contains("Stock of Contraceptives".ToUpper())).FirstOrDefault();
-                if (StockOfContraceptives != null)
                 {
-                    field.StockofContraceptives = StockOfContraceptives.FieldValue;
 
-                }
-                else
-                {
-                    field.StockofContraceptives = "N/A";
-                }
+                    var StockOfContraceptives = data.Where(x => x.Title.ToUpper().Contains("Stock of Contraceptives".ToUpper())).FirstOrDefault();
+                    if (StockOfContraceptives != null)
+                    {
+                        field.StockofContraceptives = StockOfContraceptives.FieldValue;
+
+                    }
+                    else
+                    {
+                        field.StockofContraceptives = "N/A";
+                    }
                 }
                 catch (Exception ex)
                 {
 
                 }
                 try
-                                                    {
-
-                                                        var DailyClientRegister = data.Where(x => x.Title.ToUpper().Contains("Daily Client Register/ECR".ToUpper())).FirstOrDefault();
-                if (DailyClientRegister != null)
                 {
-                    field.DailyClientRegister = DailyClientRegister.FieldValue;
 
-                }
-                else
-                {
-                    field.DailyClientRegister = "N/A";
-                }
+                    var DailyClientRegister = data.Where(x => x.Title.ToUpper().Contains("Daily Client Register/ECR".ToUpper())).FirstOrDefault();
+                    if (DailyClientRegister != null)
+                    {
+                        field.DailyClientRegister = DailyClientRegister.FieldValue;
+
+                    }
+                    else
+                    {
+                        field.DailyClientRegister = "N/A";
+                    }
                 }
                 catch (Exception ex)
                 {
 
                 }
                 try
-                                                        {
-
-                                                            var MonthlyBreakup = data.Where(x => x.Title.ToUpper().Contains("Record Keeping - Daily-Monthly break-up".ToUpper())).FirstOrDefault();
-                if (MonthlyBreakup != null)
                 {
-                    field.MonthlyBreakup = MonthlyBreakup.FieldValue;
 
-                }
-                else
-                {
-                    field.MonthlyBreakup = "N/A";
-                }
+                    var MonthlyBreakup = data.Where(x => x.Title.ToUpper().Contains("Record Keeping - Daily-Monthly break-up".ToUpper())).FirstOrDefault();
+                    if (MonthlyBreakup != null)
+                    {
+                        field.MonthlyBreakup = MonthlyBreakup.FieldValue;
+
+                    }
+                    else
+                    {
+                        field.MonthlyBreakup = "N/A";
+                    }
                 }
                 catch (Exception ex)
                 {
 
                 }
                 try
-                                                            
+
                 {
 
-                                                                
-                var MedicineStockRegister = data.Where(x => x.Title.ToUpper().Contains("Record Keeping - Medicine Stock Reg.".ToUpper())).FirstOrDefault();
-                if (MedicineStockRegister != null)
-                {
-                    field.MedicineStockRegister = MedicineStockRegister.FieldValue;
 
-                }
-                else
-                {
-                    field.MedicineStockRegister = "N/A";
-                }
+                    var MedicineStockRegister = data.Where(x => x.Title.ToUpper().Contains("Record Keeping - Medicine Stock Reg.".ToUpper())).FirstOrDefault();
+                    if (MedicineStockRegister != null)
+                    {
+                        field.MedicineStockRegister = MedicineStockRegister.FieldValue;
+
+                    }
+                    else
+                    {
+                        field.MedicineStockRegister = "N/A";
+                    }
                 }
                 catch (Exception ex)
                 {
 
                 }
-                try { 
-                var ContraceptiveStockRegister = data.Where(x => x.Title.ToUpper().Contains("Contraceptive Stock Register".ToUpper())).FirstOrDefault();
-                if (ContraceptiveStockRegister != null)
-                {
-                    field.ContraceptiveStockRegister = ContraceptiveStockRegister.FieldValue;
+                try {
+                    var ContraceptiveStockRegister = data.Where(x => x.Title.ToUpper().Contains("Contraceptive Stock Register".ToUpper())).FirstOrDefault();
+                    if (ContraceptiveStockRegister != null)
+                    {
+                        field.ContraceptiveStockRegister = ContraceptiveStockRegister.FieldValue;
 
-                }
-                else
-                {
-                    field.ContraceptiveStockRegister = "N/A";
-                }
+                    }
+                    else
+                    {
+                        field.ContraceptiveStockRegister = "N/A";
+                    }
                 }
                 catch (Exception ex)
                 {
 
                 }
-                try { 
-                var LogBook = data.Where(x => x.Title.ToUpper().Contains("Log Book".ToUpper())).FirstOrDefault();
-                if (LogBook != null)
-                {
-                    field.LogBook = LogBook.FieldValue;
+                try {
+                    var LogBook = data.Where(x => x.Title.ToUpper().Contains("Log Book".ToUpper())).FirstOrDefault();
+                    if (LogBook != null)
+                    {
+                        field.LogBook = LogBook.FieldValue;
 
-                }
-                else
-                {
-                    field.LogBook = "N/A";
-                }
+                    }
+                    else
+                    {
+                        field.LogBook = "N/A";
+                    }
                 }
                 catch (Exception ex)
                 {
 
                 }
-                try { 
-                var DeadStockRegister = data.Where(x => x.Title.ToUpper().Contains("Dead Stock Register".ToUpper())).FirstOrDefault();
-                if (DeadStockRegister != null)
-                {
-                    field.DeadStockRegister = DeadStockRegister.FieldValue;
+                try {
+                    var DeadStockRegister = data.Where(x => x.Title.ToUpper().Contains("Dead Stock Register".ToUpper())).FirstOrDefault();
+                    if (DeadStockRegister != null)
+                    {
+                        field.DeadStockRegister = DeadStockRegister.FieldValue;
 
-                }
-                else
-                {
-                    field.DeadStockRegister = "N/A";
-                }
-                }
-                catch (Exception ex)
-                {
-
-                }
-
-                try { 
-                var IECMaterial = data.Where(x => x.Title.ToUpper().Contains("IEC Material".ToUpper())).FirstOrDefault();
-                if (IECMaterial != null)
-                {
-                    field.IECMaterial = IECMaterial.FieldValue;
-
-                }
-                else
-                {
-                    field.IECMaterial = "N/A";
-                }
+                    }
+                    else
+                    {
+                        field.DeadStockRegister = "N/A";
+                    }
                 }
                 catch (Exception ex)
                 {
 
                 }
 
-                try { 
-                var MECWheel = data.Where(x => x.Title.ToUpper().Contains("MEC Wheel".ToUpper())).FirstOrDefault();
-                if (MECWheel != null)
-                {
-                    field.MECWheel = MECWheel.FieldValue;
+                try {
+                    var IECMaterial = data.Where(x => x.Title.ToUpper().Contains("IEC Material".ToUpper())).FirstOrDefault();
+                    if (IECMaterial != null)
+                    {
+                        field.IECMaterial = IECMaterial.FieldValue;
 
-                }
-                else
-                {
-                    field.MECWheel = "N/A";
-                }
-                }
-                catch (Exception ex)
-                {
-
-                }
-                try { 
-                var EquipmentPosition = RawData.Where(x => x.Title.ToUpper().Contains("Equipment Position/Condition 1".ToUpper())).FirstOrDefault();
-                if (EquipmentPosition != null)
-                {
-                    field.EquipmentPosition = EquipmentPosition.FieldValue;
-
-                }
-                else
-                {
-                    field.EquipmentPosition = "N/A";
-                }
-                }
-                catch (Exception ex)
-                {
-
-                }
-                try { 
-                var FurniturePosition = RawData.Where(x => x.Title.ToUpper().Contains("Furniture Position/Condition 1".ToUpper())).FirstOrDefault();
-                if (FurniturePosition != null)
-                {
-                    field.Furnitureposition = FurniturePosition.FieldValue;
-
-                }
-                else
-                {
-                    field.Furnitureposition = "N/A";
-                }
-                }
-                catch (Exception ex)
-                {
-
-                }
-                try { 
-                var TechnicalMonitoringChecklist = data.Where(x => x.Title.ToUpper().Contains("Technical Monitoring Checklist".ToUpper())).FirstOrDefault();
-                if (TechnicalMonitoringChecklist != null)
-                {
-                    field.TechnicalMonitoringChecklist = TechnicalMonitoringChecklist.FieldValue;
-
-                }
-                else
-                {
-                    field.TechnicalMonitoringChecklist = "N/A";
-                }
-                }
-                catch (Exception ex)
-                {
-
-                }
-                try { 
-                var COUNSELING = RawData.Where(x => x.Title.ToUpper().Contains("COUNSELING".ToUpper())).FirstOrDefault();
-                if (COUNSELING != null)
-                {
-                    field.COUNSELING = COUNSELING.FieldValue;
-
-                }
-                else
-                {
-                    field.COUNSELING = "N/A";
-                }
-                }
-                catch (Exception ex)
-                {
-
-                }
-                try { 
-                var SERVICEDELIVERY = RawData.Where(x => x.Title.ToUpper().Contains("SERVICE DELIVERY".ToUpper())).FirstOrDefault();
-                if (SERVICEDELIVERY != null)
-                {
-                    field.SERVICEDELIVERY = SERVICEDELIVERY.FieldValue;
-
-                }
-                else
-                {
-                    field.SERVICEDELIVERY = "N/A";
-                }
+                    }
+                    else
+                    {
+                        field.IECMaterial = "N/A";
+                    }
                 }
                 catch (Exception ex)
                 {
 
                 }
 
-                try { 
-                var FurniturePositionCondition = RawData.Where(x => x.Title.ToUpper().Contains("Furniture Position/Condition".ToUpper())).FirstOrDefault();
-                if (FurniturePositionCondition != null)
+                try {
+                    var MECWheel = data.Where(x => x.Title.ToUpper().Contains("MEC Wheel".ToUpper())).FirstOrDefault();
+                    if (MECWheel != null)
+                    {
+                        field.MECWheel = MECWheel.FieldValue;
+
+                    }
+                    else
+                    {
+                        field.MECWheel = "N/A";
+                    }
+                }
+                catch (Exception ex)
                 {
-                    field.FurniturePositionCondition = FurniturePositionCondition.FieldValue;
 
                 }
-                else
-                {
-                    field.FurniturePositionCondition = "N/A";
+                try {
+                    var EquipmentPosition = RawData.Where(x => x.Title.ToUpper().Contains("Equipment Position/Condition 1".ToUpper())).FirstOrDefault();
+                    if (EquipmentPosition != null)
+                    {
+                        field.EquipmentPosition = EquipmentPosition.FieldValue;
+
+                    }
+                    else
+                    {
+                        field.EquipmentPosition = "N/A";
+                    }
                 }
+                catch (Exception ex)
+                {
+
+                }
+                try {
+                    var FurniturePosition = RawData.Where(x => x.Title.ToUpper().Contains("Furniture Position/Condition 1".ToUpper())).FirstOrDefault();
+                    if (FurniturePosition != null)
+                    {
+                        field.Furnitureposition = FurniturePosition.FieldValue;
+
+                    }
+                    else
+                    {
+                        field.Furnitureposition = "N/A";
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+                try {
+                    var TechnicalMonitoringChecklist = data.Where(x => x.Title.ToUpper().Contains("Technical Monitoring Checklist".ToUpper())).FirstOrDefault();
+                    if (TechnicalMonitoringChecklist != null)
+                    {
+                        field.TechnicalMonitoringChecklist = TechnicalMonitoringChecklist.FieldValue;
+
+                    }
+                    else
+                    {
+                        field.TechnicalMonitoringChecklist = "N/A";
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+                try {
+                    var COUNSELING = RawData.Where(x => x.Title.ToUpper().Contains("COUNSELING".ToUpper())).FirstOrDefault();
+                    if (COUNSELING != null)
+                    {
+                        field.COUNSELING = COUNSELING.FieldValue;
+
+                    }
+                    else
+                    {
+                        field.COUNSELING = "N/A";
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+                try {
+                    var SERVICEDELIVERY = RawData.Where(x => x.Title.ToUpper().Contains("SERVICE DELIVERY".ToUpper())).FirstOrDefault();
+                    if (SERVICEDELIVERY != null)
+                    {
+                        field.SERVICEDELIVERY = SERVICEDELIVERY.FieldValue;
+
+                    }
+                    else
+                    {
+                        field.SERVICEDELIVERY = "N/A";
+                    }
                 }
                 catch (Exception ex)
                 {
 
                 }
 
-                try { 
+                try {
+                    var FurniturePositionCondition = RawData.Where(x => x.Title.ToUpper().Contains("Furniture Position/Condition".ToUpper())).FirstOrDefault();
+                    if (FurniturePositionCondition != null)
+                    {
+                        field.FurniturePositionCondition = FurniturePositionCondition.FieldValue;
 
-                var EquipmentCondition = RawData.Where(x => x.Title.ToUpper().Contains("Equipment Position/Condition".ToUpper())).FirstOrDefault();
-                if (EquipmentCondition != null)
-                {
-                    field.EquipmentCondition = EquipmentCondition.FieldValue;
-
-                }
-                else
-                {
-                    field.EquipmentCondition = "N/A";
-                }
+                    }
+                    else
+                    {
+                        field.FurniturePositionCondition = "N/A";
+                    }
                 }
                 catch (Exception ex)
                 {
 
                 }
 
-                try { 
-                var StaffPositionNames = RawData.Where(x => x.Title.ToUpper().Contains("Staff Position Names".ToUpper())).FirstOrDefault();
-                if (StaffPositionNames != null)
-                {
-                    field.StaffPositionNames = StaffPositionNames.FieldValue;
+                try {
 
-                }
-                else
-                {
-                    field.StaffPositionNames = "N/A";
-                }
+                    var EquipmentCondition = RawData.Where(x => x.Title.ToUpper().Contains("Equipment Position/Condition".ToUpper())).FirstOrDefault();
+                    if (EquipmentCondition != null)
+                    {
+                        field.EquipmentCondition = EquipmentCondition.FieldValue;
+
+                    }
+                    else
+                    {
+                        field.EquipmentCondition = "N/A";
+                    }
                 }
                 catch (Exception ex)
                 {
 
                 }
 
-                try { 
-                var ClientsPresent = RawData.Where(x => x.Title.ToUpper().Contains("How many Clients found present at the time of visit?".ToUpper())).FirstOrDefault();
-                if (ClientsPresent != null)
+                try {
+                    var StaffPositionNames = RawData.Where(x => x.Title.ToUpper().Contains("Staff Position Names".ToUpper())).FirstOrDefault();
+                    if (StaffPositionNames != null)
+                    {
+                        field.StaffPositionNames = StaffPositionNames.FieldValue;
+
+                    }
+                    else
+                    {
+                        field.StaffPositionNames = "N/A";
+                    }
+                }
+                catch (Exception ex)
                 {
-                    field.ClientsPresent = ClientsPresent.FieldValue;
 
                 }
-                else
-                {
-                    field.ClientsPresent = "N/A";
-                }
+
+                try {
+                    var ClientsPresent = RawData.Where(x => x.Title.ToUpper().Contains("How many Clients found present at the time of visit?".ToUpper())).FirstOrDefault();
+                    if (ClientsPresent != null)
+                    {
+                        field.ClientsPresent = ClientsPresent.FieldValue;
+
+                    }
+                    else
+                    {
+                        field.ClientsPresent = "N/A";
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -3451,179 +3451,179 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                     field.PerformanceOfService = "N/A";
                 }
 
-                try { 
-                var NoVisitor = RawData.Where(x => x.Title.ToUpper().Contains("No. of visits paid during".ToUpper())).FirstOrDefault();
-                if (NoVisitor != null)
-                {
-                    field.NoVisitor = NoVisitor.FieldValue;
+                try {
+                    var NoVisitor = RawData.Where(x => x.Title.ToUpper().Contains("No. of visits paid during".ToUpper())).FirstOrDefault();
+                    if (NoVisitor != null)
+                    {
+                        field.NoVisitor = NoVisitor.FieldValue;
 
-                }
-                else
-                {
-                    field.NoVisitor = "N/A";
-                }
+                    }
+                    else
+                    {
+                        field.NoVisitor = "N/A";
+                    }
                 }
                 catch (Exception ex)
                 {
 
                 }
-                try { 
-                var StockOfMed = data.Where(x => x.Title.ToUpper().Contains("Stock and Expiry Date Medicine".ToUpper())).FirstOrDefault();
-                if (StockOfMed != null)
-                {
-                    field.StockOfMed = StockOfMed.FieldValue;
+                try {
+                    var StockOfMed = data.Where(x => x.Title.ToUpper().Contains("Stock and Expiry Date Medicine".ToUpper())).FirstOrDefault();
+                    if (StockOfMed != null)
+                    {
+                        field.StockOfMed = StockOfMed.FieldValue;
 
-                }
-                else
-                {
-                    field.StockOfMed = "N/A";
-                }
+                    }
+                    else
+                    {
+                        field.StockOfMed = "N/A";
+                    }
                 }
                 catch (Exception ex)
                 {
 
                 }
-                try { 
-                var StockOfCon = data.Where(x => x.Title.ToUpper().Contains("Stock and Expiry Date of Contraceptive".ToUpper())).FirstOrDefault();
-                if (StockOfCon != null)
-                {
-                    field.StockOfCon = StockOfCon.FieldValue;
+                try {
+                    var StockOfCon = data.Where(x => x.Title.ToUpper().Contains("Stock and Expiry Date of Contraceptive".ToUpper())).FirstOrDefault();
+                    if (StockOfCon != null)
+                    {
+                        field.StockOfCon = StockOfCon.FieldValue;
 
-                }
-                else
-                {
-                    field.StockOfCon = "N/A";
-                }
-                }
-                catch (Exception ex)
-                {
-
-                }
-
-                try { 
-                var Last3Contraceptive = data.Where(x => x.Title.ToUpper().Contains("Last 3 months Contraceptive Performance".ToUpper())).FirstOrDefault();
-                if (Last3Contraceptive != null)
-                {
-                    field.Last3Contraceptive = Last3Contraceptive.FieldValue;
-
-                }
-                else
-                {
-                    field.Last3Contraceptive = "N/A";
-                }
-                }
-                catch (Exception ex)
-                {
-
-                }
-                try { 
-                var NoOfSup = RawData.Where(x => x.Title.ToUpper().Contains("No. of Supervisory Visit of".ToUpper())).FirstOrDefault();
-                if (NoOfSup != null)
-                {
-                    field.NoOfSup = NoOfSup.FieldValue;
-
-                }
-                else
-                {
-                    field.NoOfSup = "N/A";
-                }
-                }
-                catch (Exception ex)
-                {
-
-                }
-                try { 
-                var DCIT = RawData.Where(x => x.Title.ToUpper().Contains("No. of Supervisory Visit of".ToUpper())).FirstOrDefault();
-                if (DCIT != null)
-                {
-                    field.DCIT = DCIT.FieldValue;
-
-                }
-                else
-                {
-                    field.DCIT = "N/A";
-                }
+                    }
+                    else
+                    {
+                        field.StockOfCon = "N/A";
+                    }
                 }
                 catch (Exception ex)
                 {
 
                 }
 
-                try { 
-                var LastThreeMonth = RawData.Where(x => x.Title.ToUpper().Contains("No. of visits paid during last three months by".ToUpper())).FirstOrDefault();
-                if (LastThreeMonth != null)
-                {
-                    field.LastThreeMonth = LastThreeMonth.Title;
+                try {
+                    var Last3Contraceptive = data.Where(x => x.Title.ToUpper().Contains("Last 3 months Contraceptive Performance".ToUpper())).FirstOrDefault();
+                    if (Last3Contraceptive != null)
+                    {
+                        field.Last3Contraceptive = Last3Contraceptive.FieldValue;
 
-                }
-                else
-                {
-                    field.LastThreeMonth = "N/A";
-                }
+                    }
+                    else
+                    {
+                        field.Last3Contraceptive = "N/A";
+                    }
                 }
                 catch (Exception ex)
                 {
 
                 }
-                try { 
-                var HospitalManagement = RawData.Where(x => x.Title.ToUpper().Contains("Meeting Hospital Management Committee".ToUpper())).FirstOrDefault();
-                if (HospitalManagement != null)
-                {
-                    field.HospitalManagement = HospitalManagement.FieldValue;
+                try {
+                    var NoOfSup = RawData.Where(x => x.Title.ToUpper().Contains("No. of Supervisory Visit of".ToUpper())).FirstOrDefault();
+                    if (NoOfSup != null)
+                    {
+                        field.NoOfSup = NoOfSup.FieldValue;
 
-                }
-                else
-                {
-                    field.HospitalManagement = "N/A";
-                }
+                    }
+                    else
+                    {
+                        field.NoOfSup = "N/A";
+                    }
                 }
                 catch (Exception ex)
                 {
 
                 }
-                try { 
-                var RemarksofMonitoringOfficer = RawData.Where(x => x.Title.ToUpper().Contains("Remarks of Monitoring Officer".ToUpper())).FirstOrDefault();
-                if (RemarksofMonitoringOfficer != null)
-                {
-                    field.RemarksofMonitoringOfficer = RemarksofMonitoringOfficer.FieldValue;
+                try {
+                    var DCIT = RawData.Where(x => x.Title.ToUpper().Contains("No. of Supervisory Visit of".ToUpper())).FirstOrDefault();
+                    if (DCIT != null)
+                    {
+                        field.DCIT = DCIT.FieldValue;
 
-                }
-                else
-                {
-                    field.RemarksofMonitoringOfficer = "N/A";
-                }
+                    }
+                    else
+                    {
+                        field.DCIT = "N/A";
+                    }
                 }
                 catch (Exception ex)
                 {
 
                 }
-                try { 
-                var Last6Field = RawData.Where(x => x.Title.ToUpper().Contains("No. of visits paid during last three months by".ToUpper())).FirstOrDefault();
-                if (Last6Field != null)
-                {
-                    field.Last6Field = Last6Field.FieldValue;
 
-                }
-                else
-                {
-                    field.Last6Field = "N/A";
-                }
+                try {
+                    var LastThreeMonth = RawData.Where(x => x.Title.ToUpper().Contains("No. of visits paid during last three months by".ToUpper())).FirstOrDefault();
+                    if (LastThreeMonth != null)
+                    {
+                        field.LastThreeMonth = LastThreeMonth.Title;
+
+                    }
+                    else
+                    {
+                        field.LastThreeMonth = "N/A";
+                    }
                 }
                 catch (Exception ex)
                 {
 
                 }
-                try { 
-                var NameofProj = RawData.Where(x => x.Title.ToUpper().Contains("No. of visits paid during last three months by".ToUpper())).FirstOrDefault();
-                if (NameofProj != null)
+                try {
+                    var HospitalManagement = RawData.Where(x => x.Title.ToUpper().Contains("Meeting Hospital Management Committee".ToUpper())).FirstOrDefault();
+                    if (HospitalManagement != null)
+                    {
+                        field.HospitalManagement = HospitalManagement.FieldValue;
+
+                    }
+                    else
+                    {
+                        field.HospitalManagement = "N/A";
+                    }
+                }
+                catch (Exception ex)
                 {
-                    field.NameofProj = NameofProj.FieldValue;
 
                 }
-                else
-                {
-                    field.NameofProj = "N/A";
+                try {
+                    var RemarksofMonitoringOfficer = RawData.Where(x => x.Title.ToUpper().Contains("Remarks of Monitoring Officer".ToUpper())).FirstOrDefault();
+                    if (RemarksofMonitoringOfficer != null)
+                    {
+                        field.RemarksofMonitoringOfficer = RemarksofMonitoringOfficer.FieldValue;
+
+                    }
+                    else
+                    {
+                        field.RemarksofMonitoringOfficer = "N/A";
+                    }
                 }
+                catch (Exception ex)
+                {
+
+                }
+                try {
+                    var Last6Field = RawData.Where(x => x.Title.ToUpper().Contains("No. of visits paid during last three months by".ToUpper())).FirstOrDefault();
+                    if (Last6Field != null)
+                    {
+                        field.Last6Field = Last6Field.FieldValue;
+
+                    }
+                    else
+                    {
+                        field.Last6Field = "N/A";
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+                try {
+                    var NameofProj = RawData.Where(x => x.Title.ToUpper().Contains("No. of visits paid during last three months by".ToUpper())).FirstOrDefault();
+                    if (NameofProj != null)
+                    {
+                        field.NameofProj = NameofProj.FieldValue;
+
+                    }
+                    else
+                    {
+                        field.NameofProj = "N/A";
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -3659,6 +3659,87 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
             }
             return File(bytes, "application/pdf", "output.pdf");
         }
+
+        [Authorize(Roles = "Project Manager")]
+        public ActionResult StuffDetailReport()
+        {
+            string sql = @"SELECT case 
+ 
+when id = 7120 then 50435--50446 
+when id = 7121 then 50484--50486 
+when id = 7122 then 55587--50517 
+else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122) ORDER BY name"; //7114 ,
+            var CheckFor = db.Database.SqlQuery<ProjectsList>(sql);
+
+
+            var Checklist = CheckFor.Select(x => new SelectListItem
+            {
+                Text = x.Name,
+                Value = x.Id.ToString() + "," + x.Name.Split('-')[1] + "," + x.RoleId.ToString(),
+            }).ToList();
+
+            var dummyData = new List<ProjectFieldSample> { new ProjectFieldSample { Title = "Select District", Code = "0" }, };
+            var District = dummyData.Select(x => new SelectListItem
+            {
+                Text = x.Title,
+                Value = x.Code.ToString()
+            }).ToList();
+
+
+            var dummyData2 = new List<ProjectFieldSample> { new ProjectFieldSample { Title = "Select Center", Code = "0" }, };
+            var Center = dummyData2.Select(x => new SelectListItem
+            {
+                Text = x.Title,
+                Value = x.Code.ToString()
+            }).ToList();
+
+
+            ViewBag.Center = Center;
+            ViewBag.District = District;
+            ViewBag.Checklist = Checklist;
+
+            return View();
+        }
+
+        [HttpPost]
+        public JsonResult StuffDetailReportData(string id)
+        {
+            string Sql = $@"IF OBJECT_ID('tempdb..#Graph') IS NOT NULL
+BEGIN
+    DROP TABLE #Graph;
+END
+
+;with cte as (
+	select  s.sbjnum, s.Created, 
+       
+		sd2.fieldId as FieldId2, sd2.fieldValue as FieldValue2,
+		sd3.fieldId as FieldId3, sd3.fieldValue as FieldValue3,
+	   
+		sd5.fieldId as FieldId5, sd5.fieldValue as FieldValue5,
+	
+	row_number() over (partition by  sd2.fieldId, sd2.fieldValue,sd3.fieldId,sd3.fieldValue ,sd5.fieldId,sd5.fieldValue order by s.created desc) as RowNum
+	from survey s
+		inner join SurveyData sd2 on s.sbjnum = sd2.sbjnum and sd2.FieldId in (50435, 50484, 55587)--District
+		inner join SurveyData sd3 on s.sbjnum = sd3.sbjnum and sd3.FieldId in (50446, 50486, 55588)--Center close Survey Ids
+		Inner join SurveyData sd5 on s.sbjnum = sd5.sbjnum and sd5.FieldId in (55592,50496,50635))
+		
+select   fs2.Title as District ,fs3.Title as Center, 
+ FieldValue5 
+ as Remarks
+    into #Graph from cte
+	inner join ProjectFieldSample fs2 on cte.FieldId2 = fs2.FieldID and fs2.Code IN (cte.FieldValue2)
+	inner join ProjectFieldSample fs3 on cte.FieldId3 = fs3.FieldID and fs3.Code IN (cte.FieldValue3)
+	Left join ProjectFieldSample fs5 on cte.FieldId5 = fs5.FieldID and fs5.Code IN (cte.FieldValue5)
+
+    where RowNum = 1 and len(FieldValue5)  between 17 and 19 select * from #Graph   
+
+ 
+";
+
+            var con = db.Database.SqlQuery<StuffPosition>(Sql).ToList();
+            return Json(con);
+        }
+
     }
 }
 
