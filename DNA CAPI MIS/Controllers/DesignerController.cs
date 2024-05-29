@@ -3704,6 +3704,38 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
         [HttpPost]
         public JsonResult StuffDetailReportData(string id)
         {
+
+            var Des = "";
+            var Cen = "";
+            var sd = "";
+            var ed = "";
+            if(id == "0" || id == "50435, RHS,7120"  || id == "55587, FWC,7122" || id == "50484, MSU,7121")
+            {
+                sd = "01/01/1950";
+                ed = "01/01/2060";
+            }
+            else
+            {
+
+       
+
+                Des = id.Split(',')[0];
+                Cen = id.Split(',')[1];
+                if(Cen == "---Select All---")
+                {
+                    Cen = "";
+                }
+                if (Des == "---Select All---")
+                {
+                    Des = "";
+                }
+                sd = id.Split(',')[2];
+                ed = id.Split(',')[3];
+
+
+
+            }
+
             string Sql = $@"IF OBJECT_ID('tempdb..#Graph') IS NOT NULL
 BEGIN
     DROP TABLE #Graph;
@@ -3719,7 +3751,7 @@ END
 	
 	row_number() over (partition by  sd2.fieldId, sd2.fieldValue,sd3.fieldId,sd3.fieldValue ,sd5.fieldId,sd5.fieldValue order by s.created desc) as RowNum
 	from survey s
-		inner join SurveyData sd2 on s.sbjnum = sd2.sbjnum and sd2.FieldId in (50435, 50484, 55587)--District
+		inner join SurveyData sd2 on s.sbjnum = sd2.sbjnum and sd2.FieldId in (50435, 50484, 55587) --District
 		inner join SurveyData sd3 on s.sbjnum = sd3.sbjnum and sd3.FieldId in (50446, 50486, 55588)--Center close Survey Ids
 		Inner join SurveyData sd5 on s.sbjnum = sd5.sbjnum and sd5.FieldId in (55592,50496,50635))
 		
@@ -3731,12 +3763,12 @@ select   fs2.Title as District ,fs3.Title as Center,
 	inner join ProjectFieldSample fs3 on cte.FieldId3 = fs3.FieldID and fs3.Code IN (cte.FieldValue3)
 	Left join ProjectFieldSample fs5 on cte.FieldId5 = fs5.FieldID and fs5.Code IN (cte.FieldValue5)
 
-    where RowNum = 1 and len(FieldValue5)  between 17 and 19 select * from #Graph   
+    where RowNum = 1 and len(FieldValue5)  between 17 and 19 and created between '{sd}' and '{ed}' select * from #Graph   
 
  
 ";
 
-            var con = db.Database.SqlQuery<StuffPosition>(Sql).ToList();
+            var con = db.Database.SqlQuery<StuffPosition>(Sql).ToList().Where(x=>x.District.Contains(Des) && x.Center.Contains(Cen));
             return Json(con);
         }
 
