@@ -242,12 +242,12 @@
         </div>
 
 
-   
 
 
 
 
-         
+
+
 
 
 
@@ -289,6 +289,31 @@
         </div>
 
 
+        <div class="col-12" style="text-align:center;">
+            <h1>Status</h1>
+            <div class="col-10">
+
+
+                <table id="dataTprojectable" class="table bordered table-condensed table-hover solid-line">
+                    <thead>
+                        <tr>
+                            <th>Project</th>
+                            <th>Name of District</th>
+                            <th>Center Name</th>
+                            <th>Status of Center</th>
+                            <th>Premises</th>
+                            <th>Status of Building</th>
+              
+
+                        </tr>
+                    </thead>
+                    <tbody id="tbody2">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
         <!-- Loading (remove the following to stop the loading)-->
         <div class="overlay" style="display:none;"></div>
         <div class="loading-img" style="display: none;"></div>
@@ -309,6 +334,7 @@
 
         $(document).ready(function () {
             MnitoringOfficer("0");
+            Grid2("0");
         });
 
         var selectedTex = "";
@@ -598,6 +624,65 @@
         }
 
 
+        function Grid2(Filter) {
+
+
+
+
+            $.ajax({
+                type: 'POST',
+                url: "/Designer/Grid2/" + Filter,
+                data: {},
+                async: true,
+                success: function (data) {
+                    $("#tbody2").empty();
+                    var html = '';
+                    $.each(data, function (key, item) {
+
+                        var EGV = item.StatusOfBuilding.split(",");
+                        var Electric = EGV[0];
+                        var Gas = EGV[1];
+                        var Water = EGV[2];
+
+
+                        if (Electric == "1") {
+                            Electric = "Electricity (A)"
+                        }
+                        else {
+                            Electric = "Electricity (N/A)"
+                        }
+
+                        if (Gas == "1") {
+                            Gas = "Gas (A)"
+                        }
+                        else {
+                            Gas = "Gas (N/A)"
+                        }
+
+                        if (Water == "1") {
+                            Water = "Water (A)"
+                        }
+                        else {
+                            Water = "Water (N/A)"
+                        }
+
+                        html += '<tr>';
+                        html += '<td>' + item.ProjectName + '</td>';
+                        html += '<td>' + item.District + '</td>';
+                        html += '<td>' + item.Center + '</td>';
+                        html += '<td>' + item.Premises + '</td>';
+                        html += '<td>' + item.OpenClose + '</td>';
+                        html += '<td>' + Electric + " | " + Gas + " | " + Water +'</td>';
+                        html += '</tr>';
+                    });
+                    $('#tbody2').html(html);
+
+                }
+
+
+            });
+
+        }
 
 
         $('#Search').click(function () {
@@ -626,6 +711,8 @@
 
 
                 MnitoringOfficer(Filter)
+
+                Grid2(Filter);
             }
             catch (ex) {
 

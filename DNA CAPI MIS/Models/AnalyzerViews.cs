@@ -266,6 +266,18 @@ public class ProjectsList
         public string Remarks { get; set; }
 
     }
+
+    public class Grid2
+    {
+        public string ProjectName { get; set; }
+        public string District { get; set; }
+        public string Center { get; set; }
+        public string Premises { get; set; }
+        public string OpenClose { get; set; }
+        public string StatusOfBuilding { get; set; }
+
+    }
+
     public class ContraceptivePie
     {
 
