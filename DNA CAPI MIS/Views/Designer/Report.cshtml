@@ -130,26 +130,33 @@
 
                             <!-- RHS-A Section -->
                             @*<h3 id="SubHeading"></h3>*@
-                            <table>
-                                <tr>
-                                    <td>Name of District:</td>
-                                    <td id="NameOfDistrict"> </td>
-                                    <td>Name Of Center:</td>
-                                    <td id="NameOfCenter"> </td>
-                                </tr>
-                                <tr>
-                                    <td>Date of visit:</td>
-                                    <td id="DateOfVisit"> </td>
-                                    <td>Time:</td>
-                                    <td id="TimeOfVisit"> </td>
-                                </tr>
-                                <tr>
-                                    <td>Status:</td>
-                                    <td colspan="3" id="OpenCloseStatus">
-                                        N/A
-                                    </td>
-                                </tr>
-                            </table>
+                        <table>
+                            <tr>
+                                <td>Name of District:</td>
+                                <td id="NameOfDistrict"> </td>
+                                <td>Name Of Center:</td>
+                                <td id="NameOfCenter"> </td>
+                            </tr>
+                            <tr>
+                                <td>Date of visit:</td>
+                                <td id="DateOfVisit"> </td>
+                                <td>Time:</td>
+                                <td id="TimeOfVisit"> </td>
+                            </tr>
+                            <tr>
+                                <td>Status:</td>
+                                <td   id="OpenCloseStatus">
+                                    N/A
+                                </td>
+                                <td>Coordinate:</td>
+                                <td   id="Coordinate">
+                                    N/A
+                                </td>
+                            </tr>
+
+                             
+
+                        </table>
 
                             <div>
 
@@ -1198,7 +1205,11 @@
                 $("#DateOfVisit").text(data.Field.DateOfVisit);
                 $("#TimeOfVisit").text(data.Field.TimeOfVisit);
                 $("#OpenCloseStatus").text(data.Field.OpenCloseStatus);
+                try {
+                    $('#Coordinate').text(data.RawData[0].Longitude + "," + data.RawData[0].Latitude);
+                } catch (ex) {
 
+                }
                 var PositionName = data.Field.StaffPosition.split(',');
 
                 $("#PName1").text(PositionName[0]);
@@ -1544,7 +1555,12 @@
                 }
                 catch (ex) {
                 }
+
+
+               
             }
+
+             
             
         });
     } 

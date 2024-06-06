@@ -28,6 +28,8 @@ namespace DNA_CAPI_MIS.Models
         public string SurveyorName { get; set; }
         public int FieldId { get; set; }
         public string Title { get; set; }
+        public string Longitude { get; set; }
+        public string Latitude { get; set; }
        
         public string FieldValue { get; set; }
     }
@@ -278,6 +280,40 @@ public class ProjectsList
 
     }
 
+    public class Grid3
+    {
+        public string asDate { get; set; }
+        public string ProjectName { get; set; }
+        public string District { get; set; }
+        public string Center { get; set; }
+        public string IndicateSign { get; set; }
+        public string StatusOfBuilding { get; set; }
+        public string Cleanliness { get; set; }
+
+    }
+    public class Grid4
+    {
+        public string asDate { get; set; }
+        public string ProjectName { get; set; }
+        public string District { get; set; }
+        public string Center { get; set; }
+        public string GC { get; set; }
+        public string FB { get; set; }
+        public string MCH { get; set; }
+        public string CS { get; set; }
+
+    }
+    public class Grid5
+    {
+        public string asDate { get; set; }
+        public string ProjectName { get; set; }
+        public string District { get; set; }
+        public string Center { get; set; }
+        public string IECMatrial { get; set; }
+        public string MECWheel { get; set; }
+
+
+    }
     public class ContraceptivePie
     {
 

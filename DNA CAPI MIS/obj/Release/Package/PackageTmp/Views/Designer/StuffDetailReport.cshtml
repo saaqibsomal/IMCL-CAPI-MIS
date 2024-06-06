@@ -162,9 +162,10 @@
                 <h3 class="box-title" style="width:100%">Dashboard</h3>
                 <div class="col-12">
                     <div class="row">
+                        <div class="col-md-12" style="margin-left:4px;margin-top:2px"><b> Type of SDP</b></div>
                         <div class="col-10">
                             <div class="col-md-4 col-sm-12">
-                                @Html.DropDownList("Checklist", ViewBag.Checklist as List<SelectListItem>, "Select Monitoring Checklist For All", htmlAttributes: new { @class = "form-control", id = "Checklist" })
+                                @Html.DropDownList("Checklist", ViewBag.Checklist as List<SelectListItem>, "Select SDP Type For All", htmlAttributes: new { @class = "form-control", id = "Checklist" })
 
                             </div>
                         </div>
@@ -173,7 +174,7 @@
 
                 <div class="row">
                     <div class="col-12">
-
+                        <div class="col-md-12" style="margin-left:4px;margin-top:2px"><b> District</b></div>
                         <div class="col-10">
                             <div class="col-md-4 col-sm-12">
                                 @Html.DropDownList("District", ViewBag.District as List<SelectListItem>, htmlAttributes: new { @class = "form-control", id = "District" })
@@ -185,6 +186,7 @@
 
 
                 <div class="row">
+                    <div class="col-md-12" style="margin-left:4px;margin-top:2px"><b> Center</b></div>
                     <div class="col-12">
 
                         <div class="col-10">
@@ -203,7 +205,7 @@
                         <!-- Date Range Inputs -->
                         <div class="col-10">
                             <div class="col-md-4 col-sm-12">
-                                <label for="startDate" style="margin-left:4px;">  Start Date:</label>
+                                <label for="startDate" style="margin-left: 4px; margin-top: 4px">  Start Date:</label>
                                 <input type="date" id="startDate" name="startDate" class="form-control">
                             </div>
 
@@ -218,7 +220,7 @@
 
 
                         <div class="col-md-4 col-sm-12">
-                            <label for="endDate" style="margin-left:4px;">End Date:</label>
+                            <label for="endDate" style="margin-left: 4px; margin-top: 4px">End Date:</label>
                             <input type="date" id="endDate" name="endDate" class="form-control">
                         </div>
 
@@ -243,22 +245,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         <div class="col-12" style="text-align:center;">
             <h1>Staff Position</h1>
             <div class="col-10">
@@ -275,7 +261,7 @@
                             <th>O.T Technician</th>
                             <th>Family Welfare Councilor</th>
                             <th>Family welfare Worker</th>
-                            <th>Familu Welfare Worker Assistant</th>
+                            <th>Family Welfare Worker Assistant</th>
                             <th>Driver</th>
                             <th>Help</th>
                             <th>Sweep</th>
@@ -290,24 +276,63 @@
 
 
         <div class="col-12" style="text-align:center;">
-            <h1>Status</h1>
+            <h1>Status of SDPs Visited</h1>
             <div class="col-10">
 
 
                 <table id="dataTprojectable" class="table bordered table-condensed table-hover solid-line">
                     <thead>
                         <tr>
-                            <th>Project</th>
+                            <th>SDP Type</th>
                             <th>Name of District</th>
                             <th>Center Name</th>
-                            <th>Status of Center</th>
                             <th>Premises</th>
+                            <th>Status of Center</th>
                             <th>Status of Building</th>
-              
+
 
                         </tr>
                     </thead>
                     <tbody id="tbody2">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <div class="col-12" style="text-align:center;">
+            <h1 style="text-align:center">Status of Building</h1>
+            <div class="col-10">
+
+                <table id="TableGrid3" class="table bordered table-condensed table-hover solid-line">
+                    <thead>
+                        <tr>
+                            <th class="header" colspan="11">Status of Building</th>
+                        </tr>
+                        <tr>
+                            <th>Date</th>
+                            <th>SDP Type</th>
+                            <th>District</th>
+                            <th>SDP Name</th>
+                            <th colspan="3" style="text-align:center">Indication/ Sign Board</th>
+                            <th colspan="4" style="text-align:center">Utilities</th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>(Installed)</th>
+                            <th>Proper</th>
+                            <th>Maintain</th>
+                            <th>Electricity</th>
+                            <th>Gas</th>
+                            <th>Water</th>
+                            <th>Cleanlines</th>
+                        </tr>
+                       
+                    </thead>
+                    <tbody id="tbody3">
                     </tbody>
                 </table>
             </div>
@@ -335,6 +360,7 @@
         $(document).ready(function () {
             MnitoringOfficer("0");
             Grid2("0");
+            Grid3("0")
         });
 
         var selectedTex = "";
@@ -623,7 +649,7 @@
             //$('.dt-search').css('padding-bottom', '3px');
         }
 
-
+        
         function Grid2(Filter) {
 
 
@@ -646,24 +672,24 @@
 
 
                         if (Electric == "1") {
-                            Electric = "Electricity (A)"
+                            Electric = "Electricity (Yes)"
                         }
                         else {
-                            Electric = "Electricity (N/A)"
+                            Electric = "Electricity (No)"
                         }
 
                         if (Gas == "1") {
-                            Gas = "Gas (A)"
+                            Gas = "Gas (Yes)"
                         }
                         else {
-                            Gas = "Gas (N/A)"
+                            Gas = "Gas (No)"
                         }
 
                         if (Water == "1") {
-                            Water = "Water (A)"
+                            Water = "Water (Yes)"
                         }
                         else {
-                            Water = "Water (N/A)"
+                            Water = "Water (No)"
                         }
 
                         html += '<tr>';
@@ -684,7 +710,105 @@
 
         }
 
+        function Grid3(Filter) {
 
+
+
+
+            $.ajax({
+                type: 'POST',
+                url: "/Designer/Grid3/" + Filter,
+                data: {},
+                async: true,
+                success: function (data) {
+                    $("#tbody3").empty();
+                    var html = '';
+                    $.each(data, function (key, item) {
+
+                        var EGV = item.StatusOfBuilding.split(",");
+                        var Electric = EGV[0];
+                        var Gas = EGV[1];
+                        var Water = EGV[2];
+
+
+                        if (Electric == "1") {
+                            Electric = "Yes"
+                        }
+                        else {
+                            Electric = "No"
+                        }
+
+                        if (Gas == "1") {
+                            Gas = "Yes"
+                        }
+                        else {
+                            Gas = "No"
+                        }
+
+                        if (Water == "1") {
+                            Water = "Yes"
+                        }
+                        else {
+                            Water = "No"
+                        }
+
+
+                        var IPM = item.IndicateSign.split(",");
+                        var Installed = IPM[0];
+                        var Proper = IPM[1];
+                        var Maintained = IPM[2];
+
+
+                        if (Installed == "1") {
+                            Installed = "Yes"
+                        }
+                        else {
+                            Installed = "No"
+                        }
+
+                        if (Proper == "1") {
+                            Proper = "Yes"
+                        }
+                        else {
+                            Proper = "No"
+                        }
+
+                        if (Maintained == "1") {
+                            Maintained = "Yes"
+                        }
+                        else {
+                            Maintained = "No"
+                        }
+
+                        //1-Installed
+                        //2-Proper
+                        //3-Maintained
+
+                        html += '<tr>';
+                        html += '<td>' + item.asDate + '</td>';
+                        html += '<td>' + item.ProjectName + '</td>';
+                        html += '<td>' + item.District + '</td>';
+                        html += '<td>' + item.Center + '</td>';
+
+                        html += '<td>' + Installed + '</td>';
+                        html += '<td>' + Proper + '</td>';
+                        html += '<td>' + Maintained + '</td>';
+
+                        html += '<td>' + Electric + '</td>';
+                        html += '<td>' + Gas + '</td>';
+                        html += '<td>' + Water + '</td>';
+
+                        html += '<td>' + item.Cleanliness +'</td>';
+                        html += '</tr>';
+                    });
+                    $('#tbody3').html(html);
+
+                }
+
+
+            });
+
+        }
         $('#Search').click(function () {
 
             var startDate = $("#startDate").val();
@@ -713,6 +837,7 @@
                 MnitoringOfficer(Filter)
 
                 Grid2(Filter);
+                Grid3(Filter);
             }
             catch (ex) {
 
