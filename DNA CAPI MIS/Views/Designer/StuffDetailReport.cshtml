@@ -288,7 +288,7 @@
                             <th>Center Name</th>
                             <th>Premises</th>
                             <th>Status of Center</th>
-                            <th>Status of Building</th>
+                            <th>Status</th>
 
 
                         </tr>
@@ -381,6 +381,36 @@
         <div class="col-12" style="text-align:center;">
 
             <div class="col-12">
+                <table class="table bordered table-condensed table-hover solid-line">
+                    <thead>
+                        <tr class="header" style="text-align:center;">
+                            <th colspan="12">Clients Found Present at The SDPs at the Time of Visit</th>
+                        </tr>
+                        <tr>
+                            <th>Date</th>
+                            <th>District</th>
+                            <th>SDP Type</th>
+                            <th>SDP Name</th>
+                            <th>General Clients</th>
+                            <th>F.P Clients</th>
+                            <th>MCH/RH</th>
+                            <th>C.S Cases</th>
+                        </tr>
+                      
+
+                    </thead>
+                    <tbody id="tbody5">
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+
+
+
+        <div class="col-12" style="text-align:center;">
+
+            <div class="col-12">
                 <table>
                     <thead>
                         <tr class="header">
@@ -404,7 +434,7 @@
                         </tr>
 
                     </thead>
-                    <tbody id="tbody5">
+                    <tbody id="tbody6">
                     </tbody>
 
 
@@ -413,6 +443,74 @@
             </div>
 
         </div>
+
+
+        <div class="col-12" style="text-align:center;">
+
+            <div class="col-12">
+                <table>
+                    <thead>
+                        <tr class="header">
+                            <th colspan="12">No. of Meeting with Hospital Management Committee</th>
+                        </tr>
+                        <tr>
+                            <th rowspan="2">Date</th>
+                            <th rowspan="2">District</th>
+                            <th rowspan="3">SDP Type</th>
+                            <th rowspan="3">SDP Name</th>
+                            <th colspan="2">No of Meeting</th>
+
+                        </tr>
+
+
+                    </thead>
+                    <tbody id="tbody12">
+                    </tbody>
+
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-12" style="text-align:center;">
+
+            <div class="col-12">
+                <table>
+                    <thead>
+                        <tr class="header">
+                            <th colspan="12">Technical Monitoring Checklist</th>
+                        </tr>
+                        <tr>
+                            <th>Date</th>
+                            <th rowspan="2">District</th>
+                            <th rowspan="3">SDP Type</th>
+                            <th rowspan="2">SDP Name</th>
+                            <th rowspan="1">Hand Washing </th>
+                            <th rowspan="1">Decontamination </th>
+                            <th rowspan="1">Cleaning (Instruments) </th>
+                            <th rowspan="1">High level disinfection </th>
+                            <th rowspan="1">Waste disposal </th>
+
+                        </tr>
+
+
+                    </thead>
+                    <tbody id="tbody11">
+                    </tbody>
+
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+
+
         <!-- Loading (remove the following to stop the loading)-->
         <div class="overlay" style="display:none;"></div>
         <div class="loading-img" style="display: none;"></div>
@@ -436,7 +534,10 @@
                     Grid2("0");
                     Grid3("0");
                     Grid4("0")
-                    Grid5("0")
+                    Grid5("0");
+                    Grid6("0");
+                    Grid11("0");
+                    Grid12("0");
                 });
 
                 var selectedTex = "";
@@ -741,31 +842,39 @@
                             var html = '';
                             $.each(data, function (key, item) {
 
-                                var EGV = item.StatusOfBuilding.split(",");
-                                var Electric = EGV[0];
-                                var Gas = EGV[1];
-                                var Water = EGV[2];
+                                //var EGV = item.StatusOfBuilding.split(",");
+                                //var Electric = EGV[0];
+                                //var Gas = EGV[1];
+                                //var Water = EGV[2];
 
 
-                                if (Electric == "1") {
-                                    Electric = "Electricity (Yes)"
+                                //if (Electric == "1") {
+                                //    Electric = "Electricity (Yes)"
+                                //}
+                                //else {
+                                //    Electric = "Electricity (No)"
+                                //}
+
+                                //if (Gas == "1") {
+                                //    Gas = "Gas (Yes)"
+                                //}
+                                //else {
+                                //    Gas = "Gas (No)"
+                                //}
+
+                                //if (Water == "1") {
+                                //    Water = "Water (Yes)"
+                                //}
+                                //else {
+                                //    Water = "Water (No)"
+                                //}
+
+                                var Branded = "";
+                                if (item.Status == "1") {
+                                    Branded = "Branded";
                                 }
                                 else {
-                                    Electric = "Electricity (No)"
-                                }
-
-                                if (Gas == "1") {
-                                    Gas = "Gas (Yes)"
-                                }
-                                else {
-                                    Gas = "Gas (No)"
-                                }
-
-                                if (Water == "1") {
-                                    Water = "Water (Yes)"
-                                }
-                                else {
-                                    Water = "Water (No)"
+                                    Branded = "UnBranded";
                                 }
 
                                 html += '<tr>';
@@ -774,7 +883,7 @@
                                 html += '<td>' + item.Center + '</td>';
                                 html += '<td>' + item.Premises + '</td>';
                                 html += '<td>' + item.OpenClose + '</td>';
-                                html += '<td>' + Electric + " | " + Gas + " | " + Water + '</td>';
+                                html += '<td>' + Branded + '</td>';
                                 html += '</tr>';
                             });
                             $('#tbody2').html(html);
@@ -900,6 +1009,11 @@
                             $("#tbody4").empty();
                             var html = '';
                             $.each(data, function (key, item) {
+                                var New = item.CS.split(',');
+                                var new0 = New[0];
+                                var new1 = New[1];
+                                var new2 = New[2];
+                                var new3 = New[3];
 
 
                                 html += '<tr>';
@@ -908,18 +1022,18 @@
                                 html += '<td>' + item.District + '</td>';
 
                                 html += '<td>' + item.Center + '</td>';
-                                html += '<td>' + item.Center + '</td>';
 
-                                html += '<td>' + item.Center + '</td>';
-                                html += '<td>' + item.Center + '</td>';
+                                html += '<td>' + new0 + '</td>';
+                                html += '<td>' + "" + '</td>';
 
+                                html += '<td>' + new1 + '</td>';
+                                html += '<td>' + "" + '</td>';
 
-                                html += '<td>' + item.Center + '</td>';
-                                html += '<td>' + item.Center + '</td>';
+                                html += '<td>' + new2 + '</td>';
+                                html += '<td>' + "" + '</td>';
 
-                                html += '<td>' + item.Center + '</td>';
-                                html += '<td>' + item.Center + '</td>';
-                                html += '<td>' + item.Center + '</td>';
+                                html += '<td>' + new3 + '</td>';
+                                html += '<td>' + "" + '</td>';
 
 
                                 html += '</tr>';
@@ -933,7 +1047,6 @@
 
                 }
 
-
                 function Grid5(Filter) {
 
                     $.ajax({
@@ -943,6 +1056,75 @@
                         async: true,
                         success: function (data) {
                             $("#tbody5").empty();
+                            var html = '';
+                            $.each(data, function (key, item) {
+
+
+                                var CS = item.CS.split(',');
+                                var GC = CS[0];
+                                var FP = CS[1];
+                                var RH = CS[2];
+                                var cSS = CS[3];
+
+                                if (GC == "1") {
+                                    GC = "New (Count)";
+                                }
+                                else {
+                                    GC = "Old (Count)";
+                                }
+
+                                if (FP == "1") {
+                                    FP = "New (Count)";
+                                }
+                                else {
+                                    FP = "Old (Count)";
+                                }
+
+                                if (RH == "1") {
+                                    RH = "New (Count)";
+                                }
+                                else {
+                                    RH = "Old (Count)";
+                                }
+
+                                if (cSS == "1") {
+                                    cSS = "New (Count)";
+                                }
+                                else {
+                                    cSS = "Old (Count)";
+                                }
+
+                                html += '<tr>';
+                                html += '<td>' + item.asDate + '</td>';
+                                html += '<td>' + item.ProjectName + '</td>';
+                                html += '<td>' + item.District + '</td>';
+                                html += '<td>' + item.Center + '</td>';
+
+                                html += '<td>' + GC + '</td>';
+                                html += '<td>' + FP + '</td>';
+                                html += '<td>' + RH + '</td>';
+                                html += '<td>' + cSS + '</td>';
+
+                                html += '</tr>';
+                            });
+                            $('#tbody5').html(html);
+
+                        }
+
+
+                    });
+
+                }
+
+                function Grid6(Filter) {
+
+                    $.ajax({
+                        type: 'POST',
+                        url: "/Designer/Grid6/" + Filter,
+                        data: {},
+                        async: true,
+                        success: function (data) {
+                            $("#tbody6").empty();
                             var html = '';
                             $.each(data, function (key, item) {
 
@@ -1022,7 +1204,79 @@
 
                                 html += '</tr>';
                             });
-                            $('#tbody5').html(html);
+                            $('#tbody6').html(html);
+
+                        }
+
+
+                    });
+
+                }
+
+
+                function Grid12(Filter) {
+
+                    $.ajax({
+                        type: 'POST',
+                        url: "/Designer/Grid12/" + Filter,
+                        data: {},
+                        async: true,
+                        success: function (data) {
+                            $("#tbody12").empty();
+                            var html = '';
+                            $.each(data, function (key, item) {
+
+
+                                html += '<tr>';
+                                html += '<td>' + item.asDate + '</td>';
+                                html += '<td>' + item.District + '</td>';
+                                html += '<td>' + item.ProjectName + '</td>';
+                                html += '<td>' + item.Center + '</td>';
+                                html += '<td>' + item.HMC + '</td>';
+                       
+
+
+                                html += '</tr>';
+                            });
+                            $('#tbody12').html(html);
+
+                        }
+
+
+                    });
+
+                }
+
+
+                function Grid11(Filter) {
+
+                    $.ajax({
+                        type: 'POST',
+                        url: "/Designer/Grid11/" + Filter,
+                        data: {},
+                        async: true,
+                        success: function (data) {
+                            $("#tbody11").empty();
+                            var html = '';
+                            $.each(data, function (key, item) {
+
+
+                                html += '<tr>';
+                                html += '<td>' + item.asDate + '</td>';
+                                html += '<td>' + item.District + '</td>';
+                                html += '<td>' + item.ProjectName + '</td>';
+                                html += '<td>' + item.Center + '</td>';
+                                html += '<td>' + item.Technical.split(',')[0] + '</td>';
+                                html += '<td>' + item.Technical.split(',')[1] + '</td>';
+                                html += '<td>' + item.Technical.split(',')[2] + '</td>';
+                                html += '<td>' + item.Technical.split(',')[3] + '</td>';
+                                html += '<td>' + item.Technical.split(',')[4] + '</td>';
+
+
+
+                                html += '</tr>';
+                            });
+                            $('#tbody11').html(html);
 
                         }
 
@@ -1061,6 +1315,9 @@
 
                         Grid2(Filter);
                         Grid3(Filter);
+
+                        Grid11(Filter);
+                        Grid12(Filter);
                     }
                     catch (ex) {
 

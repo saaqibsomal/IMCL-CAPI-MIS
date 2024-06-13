@@ -276,7 +276,7 @@ public class ProjectsList
         public string Center { get; set; }
         public string Premises { get; set; }
         public string OpenClose { get; set; }
-        public string StatusOfBuilding { get; set; }
+        public string Status { get; set; }
 
     }
 
@@ -303,7 +303,17 @@ public class ProjectsList
         public string CS { get; set; }
 
     }
+
     public class Grid5
+    {
+        public string asDate { get; set; }
+        public string ProjectName { get; set; }
+        public string District { get; set; }
+        public string Center { get; set; }
+        public string CS { get; set; }
+
+    }
+    public class Grid6
     {
         public string asDate { get; set; }
         public string ProjectName { get; set; }
@@ -311,6 +321,30 @@ public class ProjectsList
         public string Center { get; set; }
         public string IECMatrial { get; set; }
         public string MECWheel { get; set; }
+
+
+    }
+
+    public class Grid11
+    {
+        public string asDate { get; set; }
+        public string ProjectName { get; set; }
+        public string District { get; set; }
+        public string Center { get; set; }
+        public string Technical { get; set; }
+
+
+
+    }  
+    
+    public class Grid12
+    {
+        public string asDate { get; set; }
+        public string ProjectName { get; set; }
+        public string District { get; set; }
+        public string Center { get; set; }
+        public string HMC { get; set; }
+
 
 
     }
