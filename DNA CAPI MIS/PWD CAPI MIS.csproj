@@ -3327,6 +3327,13 @@
     <Content Include="Views\Designer\PdfReport.cshtml" />
     <Content Include="Views\Designer\Report.cshtml" />
     <Content Include="Views\Designer\StuffDetailReport.cshtml" />
+    <Content Include="Views\Shared\_ReportPartial.cshtml" />
+    <Content Include="Views\Designer\StatusOfSDPs.cshtml" />
+    <Content Include="Views\Designer\IECMECMaterialStatus.cshtml" />
+    <Content Include="Views\Designer\ContraceptiveStockPosition.cshtml" />
+    <Content Include="Views\Designer\StatusofBuilding.cshtml" />
+    <Content Include="Views\Designer\VisitingOfficers.cshtml" />
+    <Content Include="Views\Designer\MedicalOfficer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

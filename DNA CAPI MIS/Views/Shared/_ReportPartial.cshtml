@@ -1,0 +1,218 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title" style="width:100%">Dashboard</h3>
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-md-12" style="margin-left:4px;margin-top:2px"><b> Type of SDP</b></div>
+                            <div class="col-10">
+                                <div class="col-md-4 col-sm-12">
+                                    @Html.DropDownList("Checklist", ViewBag.Checklist as List<SelectListItem>, "Select SDP Type For All", htmlAttributes: new { @class = "form-control", id = "Checklist" })
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="col-md-12" style="margin-left:4px;margin-top:2px"><b> District</b></div>
+                            <div class="col-10">
+                                <div class="col-md-4 col-sm-12">
+                                    @Html.DropDownList("District", ViewBag.District as List<SelectListItem>, htmlAttributes: new { @class = "form-control", id = "District" })
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-12" style="margin-left:4px;margin-top:2px"><b> Center</b></div>
+                        <div class="col-12">
+
+                            <div class="col-10">
+                                <div class="col-md-4 col-sm-12">
+                                    @Html.DropDownList("Center", ViewBag.Center as List<SelectListItem>, htmlAttributes: new { @class = "form-control", id = "Center" })
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-12">
+
+                            <!-- Date Range Inputs -->
+                            <div class="col-10">
+                                <div class="col-md-4 col-sm-12">
+                                    <label for="startDate" style="margin-left: 4px; margin-top: 4px">  Start Date:</label>
+                                    <input type="date" id="startDate" name="startDate" class="form-control">
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+
+
+                            <div class="col-md-4 col-sm-12">
+                                <label for="endDate" style="margin-left: 4px; margin-top: 4px">End Date:</label>
+                                <input type="date" id="endDate" name="endDate" class="form-control">
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+
+                        <!-- Date Range Inputs -->
+
+                        <div class="col-md-2 col-sm-12" style="margin-left:4px;margin-top:4px;">
+
+                            <button id="Search" class="btn btn-success"> Search</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+}
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+<script>
+    
+
+
+    $(document).ready(function () {
+      //  Grid2("0");
+ 
+
+        $('#exportButton').click(function () {
+            var wb = XLSX.utils.table_to_book(document.getElementById('grid'), { sheet: "Sheet1" });
+            var wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
+
+            function s2ab(s) {
+                var buf = new ArrayBuffer(s.length);
+                var view = new Uint8Array(buf);
+                for (var i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
+                return buf;
+            }
+
+            saveAs(new Blob([s2ab(wbout)], { type: "application/octet-stream" }), 'IEC_MEC_Material_Status.xlsx');
+        });
+    });
+
+    $('#District').change(function () {
+        var val = $('#Checklist').val();
+        var selectedText = $(this).find('option:selected').text();
+        var com = val + "," + selectedText;
+        $("#Center").empty();
+        GetCenter(com);
+    });
+
+    var Checklist = $('#Checklist option').map(function () {
+        return $(this).text();
+    }).get();
+
+
+    function GetDistrict(district) {
+
+        var dist = district;
+        $.ajax({
+            type: 'POST',
+            url: "/Designer/GetDistictById/" + district,
+            data: {},
+            async: true,
+            success: function (data) {
+                $("#District").empty();
+                $("#District").append('<option value="' + 0 + '">' + "---Select All---" + '</option>')
+                $.each(data, function (i, state) {
+                    $("#District").append('<option value="' + state.Value + '">' + state.Text + '</option>')
+                })
+            }
+        });
+
+    }
+
+    function GetCenter(district) {
+        $.ajax({
+            type: 'POST',
+            url: "/Designer/GetCentral/" + district,
+            data: {},
+            success: function (data) {
+                $("#Center").empty();
+                $("#Center").append('<option value="' + 0 + '">' + "---Select All---" + '</option>')
+                $.each(data, function (i, state) {
+                    $("#Center").append('<option value="' + state.Value + '">' + state.Text + '</option>')
+                })
+            }
+        });
+    }
+
+
+
+
+    $('#Search').click(function () {
+
+        var startDate = $("#startDate").val();
+        var endDate = $("#endDate").val();
+
+        if (startDate == "") {
+            startDate = "01-01-1950";
+        }
+        if (endDate == "") {
+            endDate = "01-01-2099";
+        }
+
+
+
+
+
+
+
+        try {
+            var District = $('#District').find('option:selected').text();
+            var Center = $('#Center').find('option:selected').text();
+
+            var Filter = District + "," + Center + "," + startDate + "," + endDate;
+
+            try {
+                Grid2(Filter);
+                Grid3(Filter);
+                Grid13(Filter);
+            }
+            catch (ex) {
+
+            }
+
+        }
+        catch (ex) {
+
+        }
+
+    });
+
+
+</script>

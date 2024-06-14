@@ -3709,6 +3709,85 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
             return View();
         }
 
+
+        public ActionResult StatusOfSDPs()
+        {
+
+            ReportDropdown();
+            return View();
+        }
+        public ActionResult IECMECMaterialStatus()
+        {
+
+            ReportDropdown();
+            return View();
+        }
+        //Status of Building
+
+        public ActionResult StatusofBuilding()
+        {
+
+            ReportDropdown();
+            return View();
+        }   
+        public ActionResult VisitingOfficers()
+        {
+
+            ReportDropdown();
+            return View();
+        }
+
+        public ActionResult ContraceptiveStockPosition()
+        {
+
+            ReportDropdown();
+            return View();
+        }
+         public ActionResult MedicalOfficer()
+        {
+
+            ReportDropdown();
+            return View();
+        }
+
+        public void ReportDropdown()
+        {
+            string sql = @"SELECT case 
+ 
+when id = 7120 then 50435--50446 
+when id = 7121 then 50484--50486 
+when id = 7122 then 55587--50517 
+else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122) ORDER BY name"; //7114 ,
+            var CheckFor = db.Database.SqlQuery<ProjectsList>(sql);
+
+
+            var Checklist = CheckFor.Select(x => new SelectListItem
+            {
+                Text = x.Name,
+                Value = x.Id.ToString() + "," + x.Name.Split('-')[1] + "," + x.RoleId.ToString(),
+            }).ToList();
+
+            var dummyData = new List<ProjectFieldSample> { new ProjectFieldSample { Title = "Select District", Code = "0" }, };
+            var District = dummyData.Select(x => new SelectListItem
+            {
+                Text = x.Title,
+                Value = x.Code.ToString()
+            }).ToList();
+
+
+            var dummyData2 = new List<ProjectFieldSample> { new ProjectFieldSample { Title = "Select Center", Code = "0" }, };
+            var Center = dummyData2.Select(x => new SelectListItem
+            {
+                Text = x.Title,
+                Value = x.Code.ToString()
+            }).ToList();
+
+
+            ViewBag.Center = Center;
+            ViewBag.District = District;
+            ViewBag.Checklist = Checklist;
+        }
+
         [HttpPost]
         public JsonResult StuffDetailReportData(string id)
         {
@@ -3779,8 +3858,6 @@ select   fs2.Title as District ,fs3.Title as Center,
             var con = db.Database.SqlQuery<StuffPosition > (Sql).ToList().Where(x=>x.District.Contains(Des) && x.Center.Contains(Cen));
             return Json(con);
         }
-
-
         public JsonResult Grid2(string id)
         {
 
@@ -3856,7 +3933,6 @@ case when FieldValue6 =1 then 'Open' else 'Close' end as OpenClose,
             var con = db.Database.SqlQuery<Grid2>(Sql).ToList().Where(x => x.District.Contains(Des) && x.Center.Contains(Cen));
             return Json(con);
         }
-
         public JsonResult Grid3(string id)
         {
 
@@ -3934,8 +4010,6 @@ FieldValue6 as StatusOfBuilding,
             var con = db.Database.SqlQuery<Grid3>(Sql).ToList().Where(x => x.District.Contains(Des) && x.Center.Contains(Cen));
             return Json(con);
         }
-
-
         public JsonResult Grid4(string id)
         {
 
@@ -4013,8 +4087,6 @@ select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as Project
             var con = db.Database.SqlQuery<Grid4>(Sql).ToList().Where(x => x.District.Contains(Des) && x.Center.Contains(Cen));
             return Json(con);
         }
-
-
         public JsonResult Grid5(string id)
         {
 
@@ -4169,9 +4241,6 @@ FieldValue6 as MECWheel,
             var con = db.Database.SqlQuery<Grid6>(Sql).ToList().Where(x => x.District.Contains(Des) && x.Center.Contains(Cen));
             return Json(con);
         }
-
-
-
         public JsonResult Grid11(string id)
         {
 
@@ -4246,9 +4315,6 @@ select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as Project
             var con = db.Database.SqlQuery<Grid11>(Sql).ToList().Where(x => x.District.Contains(Des) && x.Center.Contains(Cen));
             return Json(con);
         }
-
-
-
         public JsonResult Grid12(string id)
         {
 
@@ -4326,9 +4392,7 @@ select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as Project
             var con = db.Database.SqlQuery<Grid12>(Sql).ToList().Where(x => x.District.Contains(Des) && x.Center.Contains(Cen));
             return Json(con);
         }
-
-    
-    public JsonResult Grid14(string id)
+         public JsonResult Grid14(string id)
         {
 
             var Des = "";
@@ -4403,6 +4467,241 @@ select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as Project
 ";
 
             var con = db.Database.SqlQuery<Grid5>(Sql).ToList().Where(x => x.District.Contains(Des) && x.Center.Contains(Cen));
+            return Json(con);
+        }
+        public JsonResult Grid12Medical(string id)
+        {
+
+            var Des = "";
+            var Cen = "";
+            var sd = "";
+            var ed = "";
+            if (id == "0" || id == "50435, RHS,7120" || id == "55587, FWC,7122" || id == "50484, MSU,7121")
+            {
+                sd = "01/01/1950";
+                ed = "01/01/2060";
+            }
+            else
+            {
+
+
+
+                Des = id.Split(',')[0];
+                Cen = id.Split(',')[1];
+                if (Cen == "---Select All---")
+                {
+                    Cen = "";
+                }
+                if (Des == "---Select All---")
+                {
+                    Des = "";
+                }
+                sd = id.Split(',')[2];
+                ed = id.Split(',')[3];
+
+
+
+            }
+
+            string Sql = $@"IF OBJECT_ID('tempdb..#Graph') IS NOT NULL
+BEGIN
+    DROP TABLE #Graph;
+END
+
+;with cte as (
+	  select s.ProjectID,  s.sbjnum, s.Created, 
+       
+		sd2.fieldId as FieldId2, sd2.fieldValue as FieldValue2,
+		sd3.fieldId as FieldId3, sd3.fieldValue as FieldValue3,
+	   
+		sd5.fieldId as FieldId5, sd5.fieldValue as FieldValue5,
+	
+
+	row_number() over (partition by  sd2.fieldId, sd2.fieldValue,sd3.fieldId,sd3.fieldValue ,sd5.fieldId,sd5.fieldValue order by s.created desc) as RowNum
+	from survey s
+		inner join SurveyData sd2 on s.sbjnum = sd2.sbjnum and sd2.FieldId in (50435, 50484, 55587) --District
+		inner join SurveyData sd3 on s.sbjnum = sd3.sbjnum and sd3.FieldId in (50446, 50486, 55588)--Center close Survey Ids
+		Inner join SurveyData sd5 on s.sbjnum = sd5.sbjnum and sd5.FieldId in (50479,55581,58569) -- GC
+
+		
+		)
+select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as ProjectName, fs2.Title as District ,fs3.Title as Center, 
+ FieldValue5 
+ as Monitoring,
+ cte.FieldId5,
+
+  convert(varchar, Created,101) asDate,
+ sbjnum
+    into #Graph from cte
+	inner join ProjectFieldSample fs2 on cte.FieldId2 = fs2.FieldID and fs2.Code IN (cte.FieldValue2)
+	inner join ProjectFieldSample fs3 on cte.FieldId3 = fs3.FieldID and fs3.Code IN (cte.FieldValue3)
+	inner join ProjectFieldSample fs5 on cte.FieldId5 = fs5.FieldID -- and fs5.Code IN (cte.FieldValue5)
+
+	
+    where RowNum = 1 and len(FieldValue5) > 33 and LEFT(FieldValue5, 1) = '1' and created between '{sd}' and '{ed}' select distinct g.Monitoring as mon, * from #Graph g  
+
+ 
+";
+
+            var con = db.Database.SqlQuery<Grid13>(Sql).ToList().Where(x => x.District.Contains(Des) && x.Center.Contains(Cen));
+            return Json(con);
+        }
+
+        public JsonResult Grid13(string id)
+        {
+
+            var Des = "";
+            var Cen = "";
+            var sd = "";
+            var ed = "";
+            if (id == "0" || id == "50435, RHS,7120" || id == "55587, FWC,7122" || id == "50484, MSU,7121")
+            {
+                sd = "01/01/1950";
+                ed = "01/01/2060";
+            }
+            else
+            {
+
+
+
+                Des = id.Split(',')[0];
+                Cen = id.Split(',')[1];
+                if (Cen == "---Select All---")
+                {
+                    Cen = "";
+                }
+                if (Des == "---Select All---")
+                {
+                    Des = "";
+                }
+                sd = id.Split(',')[2];
+                ed = id.Split(',')[3];
+
+
+
+            }
+
+            string Sql = $@"IF OBJECT_ID('tempdb..#Graph') IS NOT NULL
+BEGIN
+    DROP TABLE #Graph;
+END
+
+;with cte as (
+	  select s.ProjectID,  s.sbjnum, s.Created, 
+       
+		sd2.fieldId as FieldId2, sd2.fieldValue as FieldValue2,
+		sd3.fieldId as FieldId3, sd3.fieldValue as FieldValue3,
+	   
+		sd5.fieldId as FieldId5, sd5.fieldValue as FieldValue5,
+	
+
+	row_number() over (partition by  sd2.fieldId, sd2.fieldValue,sd3.fieldId,sd3.fieldValue ,sd5.fieldId,sd5.fieldValue order by s.created desc) as RowNum
+	from survey s
+		inner join SurveyData sd2 on s.sbjnum = sd2.sbjnum and sd2.FieldId in (50435, 50484, 55587) --District
+		inner join SurveyData sd3 on s.sbjnum = sd3.sbjnum and sd3.FieldId in (50446, 50486, 55588)--Center close Survey Ids
+		Inner join SurveyData sd5 on s.sbjnum = sd5.sbjnum and sd5.FieldId in (50479,55581,58569) -- GC
+
+		
+		)
+select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as ProjectName, fs2.Title as District ,fs3.Title as Center, 
+ FieldValue5 
+ as Monitoring,
+ cte.FieldId5,
+
+  convert(varchar, Created,101) asDate,
+ sbjnum
+    into #Graph from cte
+	inner join ProjectFieldSample fs2 on cte.FieldId2 = fs2.FieldID and fs2.Code IN (cte.FieldValue2)
+	inner join ProjectFieldSample fs3 on cte.FieldId3 = fs3.FieldID and fs3.Code IN (cte.FieldValue3)
+	inner join ProjectFieldSample fs5 on cte.FieldId5 = fs5.FieldID -- and fs5.Code IN (cte.FieldValue5)
+
+	
+    where RowNum = 1 and len(FieldValue5) > 33 and LEFT(FieldValue5, 1) = '1' and created between '{sd}' and '{ed}' select * from #Graph   
+
+ 
+";
+
+            var con = db.Database.SqlQuery<Grid13>(Sql).ToList().Where(x => x.District.Contains(Des) && x.Center.Contains(Cen));
+            return Json(con);
+        }
+
+
+        public JsonResult grid8(string id)
+        {
+
+            var Des = "";
+            var Cen = "";
+            var sd = "";
+            var ed = "";
+            if (id == "0" || id == "50435, RHS,7120" || id == "55587, FWC,7122" || id == "50484, MSU,7121")
+            {
+                sd = "01/01/1950";
+                ed = "01/01/2060";
+            }
+            else
+            {
+
+
+
+                Des = id.Split(',')[0];
+                Cen = id.Split(',')[1];
+                if (Cen == "---Select All---")
+                {
+                    Cen = "";
+                }
+                if (Des == "---Select All---")
+                {
+                    Des = "";
+                }
+                sd = id.Split(',')[2];
+                ed = id.Split(',')[3];
+
+
+
+            }
+
+            string Sql = $@"IF OBJECT_ID('tempdb..#Graph') IS NOT NULL
+BEGIN
+    DROP TABLE #Graph;
+END
+
+;with cte as (
+	  select s.ProjectID,  s.sbjnum, s.Created, 
+       
+		sd2.fieldId as FieldId2, sd2.fieldValue as FieldValue2,
+		sd3.fieldId as FieldId3, sd3.fieldValue as FieldValue3,
+	   
+		sd5.fieldId as FieldId5, sd5.fieldValue as FieldValue5,
+	
+
+	row_number() over (partition by  sd2.fieldId, sd2.fieldValue,sd3.fieldId,sd3.fieldValue ,sd5.fieldId,sd5.fieldValue order by s.created desc) as RowNum
+	from survey s
+		inner join SurveyData sd2 on s.sbjnum = sd2.sbjnum and sd2.FieldId in (50435, 50484, 55587) --District
+		inner join SurveyData sd3 on s.sbjnum = sd3.sbjnum and sd3.FieldId in (50446, 50486, 55588)--Center close Survey Ids
+		Inner join SurveyData sd5 on s.sbjnum = sd5.sbjnum and sd5.FieldId in (50559,50502,55601) -- GC
+
+		
+		)
+select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as ProjectName, fs2.Title as District ,fs3.Title as Center, 
+ FieldValue5 
+ as CTP,
+ cte.FieldId5,
+
+  convert(varchar, Created,101) asDate,
+ sbjnum
+    into #Graph from cte
+	inner join ProjectFieldSample fs2 on cte.FieldId2 = fs2.FieldID and fs2.Code IN (cte.FieldValue2)
+	inner join ProjectFieldSample fs3 on cte.FieldId3 = fs3.FieldID and fs3.Code IN (cte.FieldValue3)
+	left join ProjectFieldSample fs5 on cte.FieldId5 = fs5.FieldID   and fs5.Code IN (cte.FieldValue5)
+
+	
+    where RowNum = 1 and len(FieldValue5) > 33 and LEFT(FieldValue5, 1) = '1' and created between '{sd}' and '{ed}' 
+	select distinct g.CTP as mon, * from #Graph g    
+
+ 
+";
+
+            var con = db.Database.SqlQuery<Grid8>(Sql).ToList().Where(x => x.District.Contains(Des) && x.Center.Contains(Cen));
             return Json(con);
         }
 
