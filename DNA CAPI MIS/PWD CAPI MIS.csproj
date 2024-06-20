@@ -3338,6 +3338,7 @@
     <Content Include="Views\Designer\SDPWorkingDays.cshtml" />
     <Content Include="Views\Designer\SDPTimeVisit.cshtml" />
     <Content Include="Views\Designer\ContraceptiveStockPerformance.cshtml" />
+    <Content Include="Views\Designer\IECMECMaterialStatus2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
