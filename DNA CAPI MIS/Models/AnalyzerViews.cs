@@ -287,6 +287,15 @@ public class ProjectsList
         public string District { get; set; }
         public string Center { get; set; }
         public string Monitoring { get; set; }
+    }   
+    
+    public class Grid8
+    {
+        public string asDate { get; set; }
+        public string ProjectName { get; set; }
+        public string District { get; set; }
+        public string Center { get; set; }
+        public string CTP { get; set; }
     }
 
     public class Grid3
@@ -322,6 +331,18 @@ public class ProjectsList
         public string CS { get; set; }
 
     }
+
+    public class Grid7
+    {
+        public string asDate { get; set; }
+        public string ProjectName { get; set; }
+        public string District { get; set; }
+        public string Center { get; set; }
+        public string ConStockPosition { get; set; }
+
+    }
+
+
     public class Grid6
     {
         public string asDate { get; set; }

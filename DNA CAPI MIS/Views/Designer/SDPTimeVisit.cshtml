@@ -1,7 +1,7 @@
 ﻿
 
 @{
-    ViewBag.Title = "Dashboard";
+    ViewBag.Title = "SDP Working Days";
 }
 @section Scripts {
     <script>
@@ -163,28 +163,35 @@
 
 
         <div class="col-12" style="text-align:center;">
-            <h1>Status of SDPs Visited</h1>
-            <div class="col-10">
 
-
-                <table id="Grid" class="table bordered table-condensed table-hover solid-line">
+            <div class="col-12">
+                <table class="table bordered table-condensed table-hover solid-line">
                     <thead>
-                        <tr>
-                            <th>SDP Type</th>
-                            <th>Name of District</th>
-                            <th>Center Name</th>
-                            <th>Premises</th>
-                            <th>Status of Center</th>
-                            <th>Status</th>
-
-
+                        <tr class="header" style="text-align:center;">
+                            <th colspan="12">Clients Found Present at The SDPs at the Time of Visit</th>
                         </tr>
+                        <tr>
+                            <th>Date</th>
+                            <th>District</th>
+                            <th>SDP Type</th>
+                            <th>SDP Name</th>
+                            <th>General Clients</th>
+                            <th>F.P Clients</th>
+                            <th>MCH/RH</th>
+                            <th>C.S Cases</th>
+                        </tr>
+
+
                     </thead>
-                    <tbody id="tbody2">
+                    <tbody id="tbody5">
                     </tbody>
+
                 </table>
             </div>
         </div>
+
+
+
 
         <button id="exportButton">Download as Excel</button>
         <!-- Loading (remove the following to stop the loading)-->
@@ -204,10 +211,10 @@
 
             <script>
 
+
                 $(document).ready(function () {
-                    Grid2("0")
+                    Grid5("0");
                 });
-               
 
                 var selectedTex = "";
                 $('#Checklist').change(function () {
@@ -223,37 +230,45 @@
 
                 });
 
+                function Grid5(Filter) {
 
-                function Grid2(Filter) {
                     $.ajax({
                         type: 'POST',
-                        url: "/Designer/Grid2/" + Filter,
+                        url: "/Designer/Grid4/" + Filter,
                         data: {},
                         async: true,
                         success: function (data) {
-                            $("#tbody2").empty();
+                            $("#tbody5").empty();
                             var html = '';
                             $.each(data, function (key, item) {
-                                var Branded = "";
-                                if (item.Status == "1") {
-                                    Branded = "Branded";
-                                }
-                                else {
-                                    Branded = "UnBranded";
-                                }
+
+
+                                var New = item.CS.split(',');
+                                var new0 = New[0];
+                                var new1 = New[1];
+                                var new2 = New[2];
+                                var new3 = New[3];
+
                                 html += '<tr>';
+                                html += '<td>' + item.asDate + '</td>';
                                 html += '<td>' + item.ProjectName + '</td>';
                                 html += '<td>' + item.District + '</td>';
                                 html += '<td>' + item.Center + '</td>';
-                                html += '<td>' + item.Premises + '</td>';
-                                html += '<td>' + item.OpenClose + '</td>';
-                                html += '<td>' + Branded + '</td>';
+
+                                html += '<td>' + new0 + '</td>';
+                                html += '<td>' + new1 + '</td>';
+                                html += '<td>' + new2 + '</td>';
+                                html += '<td>' + new3 + '</td>';
+
                                 html += '</tr>';
                             });
-                            $('#tbody2').html(html);
+                            $('#tbody5').html(html);
 
                         }
+
+
                     });
+
                 }
 
             </script>

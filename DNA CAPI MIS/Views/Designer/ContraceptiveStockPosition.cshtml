@@ -178,16 +178,14 @@
                             <th>Oral Pills (POP) Stock</th>
                             <th>OP (COC) Stock</th>
                             <th>OP (ECP) Stock</th>
+                            <th>3 Months Inj(Depo)</th>
                             <th>3 months Inj-Defo Stock</th>
-                            <th>Syana Press Stock</th>
                             <th>IUD (CT-380-A) Stock</th>
                             <th>Jadelle Stock</th>
-                            <th>Implanon Stock</th>
-                            <th>Bilateral Tubal Ligation (BTL) Stock</th>
-                            <th>NSV Stock</th>
+           
                         </tr>
                     </thead>
-                    <tbody id="grid8">
+                    <tbody id="grid7">
               
                     </tbody>
                 </table>
@@ -216,7 +214,7 @@
 
 
                 $(document).ready(function () {
-               
+                    grid7("0");
                 });
 
                 var selectedTex = "";
@@ -233,30 +231,31 @@
 
                 });
 
-                function grid8(Filter) {
+                function grid7(Filter) {
                     $.ajax({
                         type: 'POST',
-                        url: "/Designer/grid8/" + Filter,
+                        url: "/Designer/grid7/" + Filter,
                         data: {},
                         async: true,
                         success: function (data) {
-                            $("#grid8").empty();
+                            $("#grid7").empty();
                             var html = '';
                             $.each(data, function (key, item) {
 
-                                var Monitoring = item.Monitoring.split('|');
-                                var Mon1 = Monitoring[0].split('-')[1].split(',')[0]
-                                var Mon2 = Monitoring[1].split('-')[1].split(',')[0]
-                                var Mon3 = Monitoring[2].split('-')[1].split(',')[0]
-                                var Mon4 = Monitoring[3].split('-')[1].split(',')[0]
-                                var Mon5 = Monitoring[4].split('-')[1].split(',')[0]
+                                var ConStockPosition = item.ConStockPosition.split('|');
+
+                                var Mon1 = ConStockPosition[0].split('-')[1].split(',')[0]
+                                var Mon2 = ConStockPosition[1].split('-')[1].split(',')[0]
+                                var Mon3 = ConStockPosition[2].split('-')[1].split(',')[0]
+                                var Mon4 = ConStockPosition[3].split('-')[1].split(',')[0]
+                                var Mon5 = ConStockPosition[4].split('-')[1].split(',')[0]
+                                var Mon6 = ConStockPosition[5].split('-')[1].split(',')[0]
+                                var Mon7 = ConStockPosition[6].split('-')[1].split(',')[0]
+                                var Mon8 = ConStockPosition[7].split('-')[1].split(',')[0]
 
 
-                                var Name1 = Monitoring[0].split('-')[1].split(',')[1]
-                                var Name2 = Monitoring[1].split('-')[1].split(',')[1]
-                                var Name3 = Monitoring[2].split('-')[1].split(',')[1]
-                                var Name4 = Monitoring[3].split('-')[1].split(',')[1]
-                                var Name5 = Monitoring[4].split('-')[1].split(',')[1]
+
+
 
                                 html += '<tr>';
                                 html += '<td>' + item.asDate + '</td>';
@@ -264,24 +263,19 @@
                                 html += '<td>' + item.District + '</td>';
                                 html += '<td>' + item.Center + '</td>';
 
+
                                 html += '<td>' + Mon1 + '</td>';
-                                html += '<td>' + Name1 + '</td>';
-
                                 html += '<td>' + Mon2 + '</td>';
-                                html += '<td>' + Name2 + '</td>';
-
                                 html += '<td>' + Mon3 + '</td>';
-                                html += '<td>' + Name3 + '</td>';
-
                                 html += '<td>' + Mon4 + '</td>';
-                                html += '<td>' + Name4 + '</td>';
-
                                 html += '<td>' + Mon5 + '</td>';
-                                html += '<td>' + Name5 + '</td>';
+                                html += '<td>' + Mon6 + '</td>';
+                                html += '<td>' + Mon7 + '</td>';
+                                html += '<td>' + Mon8 + '</td>';
 
                                 html += '</tr>';
                             });
-                            $('#grid8').html(html);
+                            $('#grid7').html(html);
 
                         }
 

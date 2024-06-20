@@ -3334,6 +3334,10 @@
     <Content Include="Views\Designer\StatusofBuilding.cshtml" />
     <Content Include="Views\Designer\VisitingOfficers.cshtml" />
     <Content Include="Views\Designer\MedicalOfficer.cshtml" />
+    <Content Include="Views\Designer\StuffPositionReport.cshtml" />
+    <Content Include="Views\Designer\SDPWorkingDays.cshtml" />
+    <Content Include="Views\Designer\SDPTimeVisit.cshtml" />
+    <Content Include="Views\Designer\ContraceptiveStockPerformance.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
