@@ -4553,6 +4553,96 @@ FieldValue6 as MECWheel,
         }
 
 
+        public JsonResult GridIECandStock(string id)
+        {
+
+            var Des = "";
+            var Cen = "";
+            var sd = "";
+            var ed = "";
+            if (id == "0" || id == "50435, RHS,7120" || id == "55587, FWC,7122" || id == "50484, MSU,7121")
+            {
+                sd = "01/01/1950";
+                ed = "01/01/2060";
+            }
+            else
+            {
+
+
+
+                Des = id.Split(',')[0];
+                Cen = id.Split(',')[1];
+                if (Cen == "---Select All---")
+                {
+                    Cen = "";
+                }
+                if (Des == "---Select All---")
+                {
+                    Des = "";
+                }
+                sd = id.Split(',')[2];
+                ed = id.Split(',')[3];
+
+
+
+            }
+
+            string Sql = $@"IF OBJECT_ID('tempdb..#Graph') IS NOT NULL
+BEGIN
+    DROP TABLE #Graph;
+END
+
+;with cte as (
+	  select s.ProjectID,  s.sbjnum, s.Created, 
+       
+		sd2.fieldId as FieldId2, sd2.fieldValue as FieldValue2,
+		sd3.fieldId as FieldId3, sd3.fieldValue as FieldValue3,
+		sd5.fieldId as FieldId5, sd5.fieldValue as FieldValue5,
+		sd6.fieldId as FieldId6, sd6.fieldValue as FieldValue6,
+		sd7.fieldId as FieldId7, sd7.fieldValue as FieldValue7,
+		sd8.fieldId as FieldId8, sd8.fieldValue as FieldValue8,
+		sd9.fieldId as FieldId9, sd9.fieldValue as FieldValue9,
+		sd4.fieldId as FieldId4, sd4.fieldValue as FieldValue4,
+	row_number() over (partition by  sd2.fieldId, sd2.fieldValue,sd3.fieldId,sd3.fieldValue ,sd5.fieldId,sd5.fieldValue order by s.created desc) as RowNum
+	from survey s
+		inner join SurveyData sd2 on s.sbjnum = sd2.sbjnum and sd2.FieldId in (50435, 50484, 55587) --District
+		inner join SurveyData sd3 on s.sbjnum = sd3.sbjnum and sd3.FieldId in (50446, 50486, 55588)--Center close Survey Ids
+		Inner join SurveyData sd5 on s.sbjnum = sd5.sbjnum and sd5.FieldId in (50468,50616,55607) -- dailyClient
+	    Inner join SurveyData sd6 on s.sbjnum = sd6.sbjnum and sd6.FieldId in (50470,50506,55608) -- MediStock
+		Inner join SurveyData sd7 on s.sbjnum = sd7.sbjnum and sd7.FieldId in (52586,50507,55609) -- BreakUp
+		Inner join SurveyData sd8 on s.sbjnum = sd8.sbjnum and sd8.FieldId in (50550,50508,55610) -- StockReg
+
+		Inner join SurveyData sd9 on s.sbjnum = sd9.sbjnum and sd9.FieldId in (50551,50617,55611) -- LogBook
+		Inner join SurveyData sd4 on s.sbjnum = sd4.sbjnum and sd4.FieldId in (50552,50618,55612) -- DeadStock
+
+		)
+select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as ProjectName, fs2.Title as District ,fs3.Title as Center, 
+ FieldValue5 
+ as dailyClient,
+FieldValue6 as MediStock,
+FieldValue7 as BreakUp,
+FieldValue8 as StockReg,
+FieldValue9 as LogBook,
+FieldValue4 as DeadStock,
+  convert(varchar, Created,101) asDate,
+ sbjnum
+    into #Graph from cte
+	inner join ProjectFieldSample fs2 on cte.FieldId2 = fs2.FieldID and fs2.Code IN (cte.FieldValue2)
+	inner join ProjectFieldSample fs3 on cte.FieldId3 = fs3.FieldID and fs3.Code IN (cte.FieldValue3)
+	left join ProjectFieldSample fs5 on cte.FieldId5 = fs5.FieldID and fs5.Code IN (cte.FieldValue5)
+	left join ProjectFieldSample fs6 on cte.FieldId6 = fs6.FieldID and fs6.Code IN (cte.FieldValue6)
+	left join ProjectFieldSample fs7 on cte.FieldId7 = fs7.FieldID and fs7.Code IN (cte.FieldValue7)
+	left join ProjectFieldSample fs8 on cte.FieldId8 = fs8.FieldID and fs8.Code IN (cte.FieldValue7)
+    where RowNum = 1 and  len(FieldValue5) > 4 and created between '{sd}' and '{ed}' select * from #Graph   
+
+ 
+";
+
+            var con = db.Database.SqlQuery<IECStock>(Sql).ToList().Where(x => x.District.Contains(Des) && x.Center.Contains(Cen));
+            return Json(con);
+        }
+
+
         public JsonResult Grid11(string id)
         {
 

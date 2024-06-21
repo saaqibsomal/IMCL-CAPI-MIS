@@ -1,7 +1,7 @@
 ﻿
 
 @{
-    ViewBag.Title = "Dashboard";
+    ViewBag.Title = "SDP Working Days";
 }
 @section Scripts {
     <script>
@@ -163,52 +163,42 @@
 
 
         <div class="col-12" style="text-align:center;">
-            <h1>Status of SDPs Visited</h1>
-            <div class="col-10" style="overflow:auto">
 
-                <table id="Grid" >
+            <div class="col-12">
+                <table class="table bordered table-condensed table-hover solid-line">
                     <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>District</th>
-                            <th>SDP Type</th>
-                            <th>SDP Name</th>
-                            <th colspan="3">Daily Client Register/ECR</th>
-                            <th colspan="3">Daily #/Monthly Break-Up</th>
-                            <th colspan="3">Medicine Stock Register</th>
-                            <th colspan="3">Contraceptive Stock Register</th>
-                            <th colspan="3">Log Book</th>
-                            <th colspan="3">Dead Stock Register</th>
+                        <tr class="header" style="text-align:center;">
+                            <th colspan="12">Performance of SDP during last 6 Working Days</th>
                         </tr>
                         <tr>
-                            <th colspan="4"></th>
-                            <th>Available</th>
-                            <th>Maintained</th>
-                            <th>Proper</th>
-                            <th>Available</th>
-                            <th>Maintained</th>
-                            <th>Proper</th>
-                            <th>Available</th>
-                            <th>Maintained</th>
-                            <th>Proper</th>
-                            <th>Available</th>
-                            <th>Maintained</th>
-                            <th>Proper</th>
-                            <th>Available</th>
-                            <th>Maintained</th>
-                            <th>Proper</th>
-                            <th>Available</th>
-                            <th>Maintained</th>
-                            <th>Proper</th>
+                            <th rowspan="2">Date</th>
+                            <th rowspan="2">District</th>
+                            <th rowspan="2">SDP Type</th>
+                            <th rowspan="2">SDP Name</th>
+                            <th colspan="2">General Clients</th>
+                            <th colspan="2">F.P Clients</th>
+                            <th colspan="2">MCH/RH</th>
+                            <th colspan="2">C.S Cases</th>
                         </tr>
-                    </thead>
-                    <tbody id="Grid9">
-                        
-                    </tbody>
-                </table>
+                        <tr>
+                            <th>New</th>
+                            <th>Old</th>
+                            <th>New</th>
+                            <th>Old</th>
+                            <th>New</th>
+                            <th>Old</th>
+                            <th>New</th>
+                            <th>Old</th>
+                        </tr>
 
+                    </thead>
+                    <tbody id="tbody4">
+                    </tbody>
+
+                </table>
             </div>
         </div>
+
 
         <button id="exportButton">Download as Excel</button>
         <!-- Loading (remove the following to stop the loading)-->
@@ -230,7 +220,7 @@
 
 
                 $(document).ready(function () {
-                    GridIECandStock("0")
+                    Grid4("0");
                 });
 
                 var selectedTex = "";
@@ -247,88 +237,50 @@
 
                 });
 
-
-                function GridIECandStock(Filter) {
+                function Grid4(Filter) {
 
                     $.ajax({
                         type: 'POST',
-                        url: "/Designer/GridIECandStock/" + Filter,
+                        url: "/Designer/Grid5/" + Filter,
                         data: {},
                         async: true,
                         success: function (data) {
-                            $("#Grid9").empty();
+                            $("#tbody4").empty();
                             var html = '';
                             $.each(data, function (key, item) {
 
+                                var New = item.CS.split('|');
+                                var new0 = New[0];
+                                var new1 = New[1];
+                                var new2 = New[2];
+                                var new3 = New[3];
 
-                                var DC = item.dailyClient.split(",");
-                                var DC1 = DC[0];
-                                var DC2 = DC[1];
-                                var DC3 = DC[2];
-
-
-
-                                var MS = item.MediStock.split(",");
-                                var MS1 = MS[0];
-                                var MS2 = MS[1];
-                                var MS3 = MS[2];
-                                
-                                var BU = item.BreakUp.split(",");
-                                var BU1 = BU[0];
-                                var BU2 = BU[1];
-                                var BU3 = BU[2];
-
-                                var SR = item.StockReg.split(",");
-                                var SR1 = SR[0];
-                                var SR2 = SR[1];
-                                var SR3 = SR[2];
-
-                                var LB = item.LogBook.split(",");
-                                var LB1 = LB[0];
-                                var LB2 = LB[1];
-                                var LB3 = LB[2];
-
-                                var DS = item.DeadStock.split(",");
-                                var DS1 = DS[0];
-                                var DS2 = DS[1];
-                                var DS3 = DS[2];
+                                var NewOld0 = new0.split('-');
+                                var NewOld1 = new1.split('-');
+                                var NewOld2 = new2.split('-');
+                                var NewOld3 = new3.split('-');
 
 
                                 html += '<tr>';
                                 html += '<td>' + item.asDate + '</td>';
                                 html += '<td>' + item.ProjectName + '</td>';
                                 html += '<td>' + item.District + '</td>';
+
                                 html += '<td>' + item.Center + '</td>';
 
-                                html += '<td>' + (DC1 == "1" ? "Yes" : "No") + '</td>';
-                                html += '<td>' + (DC2 == "1" ? "Yes" : "No") + '</td>';
-                                html += '<td>' + (DC3 == "1" ? "Yes" : "No") + '</td>';
+                                html += '<td>' + NewOld0[1].split(',')[0] + '</td>';
+                                html += '<td>' + NewOld0[1].split(',')[1] + '</td>';
+                                html += '<td>' + NewOld1[1].split(',')[0] + '</td>';
+                                html += '<td>' + NewOld1[1].split(',')[1] + '</td>';
+                                html += '<td>' + NewOld2[1].split(',')[0] + '</td>';
+                                html += '<td>' + NewOld2[1].split(',')[1] + '</td>';
+                                html += '<td>' + NewOld3[1].split(',')[0] + '</td>';
+                                html += '<td>' + NewOld3[1].split(',')[1] + '</td>';
 
-
-                                html += '<td>' + (MS1 == "1" ? "Yes" : "No") + '</td>';
-                                html += '<td>' + (MS2 == "1" ? "Yes" : "No") + '</td>';
-                                html += '<td>' + (MS3 == "1" ? "Yes" : "No") + '</td>';
-
-
-                                html += '<td>' + (BU1 == "1" ? "Yes" : "No") + '</td>';
-                                html += '<td>' + (BU2 == "1" ? "Yes" : "No") + '</td>';
-                                html += '<td>' + (BU3 == "1" ? "Yes" : "No") + '</td>';
-
-                                html += '<td>' + (SR1 == "1" ? "Yes" : "No") + '</td>';
-                                html += '<td>' + (SR2 == "1" ? "Yes" : "No") + '</td>';
-                                html += '<td>' + (SR3 == "1" ? "Yes" : "No") + '</td>';
-
-                                html += '<td>' + (LB1 == "1" ? "Yes" : "No") + '</td>';
-                                html += '<td>' + (LB2 == "1" ? "Yes" : "No") + '</td>';
-                                html += '<td>' + (LB3 == "1" ? "Yes" : "No") + '</td>';
-
-                                html += '<td>' + (DS1 == "1" ? "Yes" : "No") + '</td>';
-                                html += '<td>' + (DS2 == "1" ? "Yes" : "No") + '</td>';
-                                html += '<td>' + (DS3 == "1" ? "Yes" : "No") + '</td>';
 
                                 html += '</tr>';
                             });
-                            $('#Grid9').html(html);
+                            $('#tbody4').html(html);
 
                         }
 
@@ -336,6 +288,7 @@
                     });
 
                 }
+
 
             </script>
 

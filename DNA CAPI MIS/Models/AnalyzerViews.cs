@@ -355,6 +355,22 @@ public class ProjectsList
 
     }
 
+    public class IECStock
+    {
+        public string asDate { get; set; }
+        public string ProjectName { get; set; }
+        public string District { get; set; }
+        public string Center { get; set; }
+        public string dailyClient { get; set; }
+        public string MediStock { get; set; }
+        public string BreakUp { get; set; }
+        public string StockReg { get; set; }
+        public string LogBook { get; set; }
+        public string DeadStock { get; set; }
+
+
+    }
+
     public class Grid11
     {
         public string asDate { get; set; }

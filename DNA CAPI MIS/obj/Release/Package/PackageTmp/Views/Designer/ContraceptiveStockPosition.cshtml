@@ -163,49 +163,33 @@
 
 
         <div class="col-12" style="text-align:center;">
-            <h1>Status of SDPs Visited</h1>
-            <div class="col-10" style="overflow:auto">
+            <h1>Contraceptive Stock Position</h1>
+            <div class="col-12" style="overflow:auto">
 
-                <table id="Grid" >
+                <table id="grid">
+                    <caption>Contraceptive Stock Position</caption>
                     <thead>
                         <tr>
                             <th>Date</th>
                             <th>District</th>
                             <th>SDP Type</th>
                             <th>SDP Name</th>
-                            <th colspan="3">Daily Client Register/ECR</th>
-                            <th colspan="3">Daily #/Monthly Break-Up</th>
-                            <th colspan="3">Medicine Stock Register</th>
-                            <th colspan="3">Contraceptive Stock Register</th>
-                            <th colspan="3">Log Book</th>
-                            <th colspan="3">Dead Stock Register</th>
-                        </tr>
-                        <tr>
-                            <th colspan="4"></th>
-                            <th>Available</th>
-                            <th>Maintained</th>
-                            <th>Proper</th>
-                            <th>Available</th>
-                            <th>Maintained</th>
-                            <th>Proper</th>
-                            <th>Available</th>
-                            <th>Maintained</th>
-                            <th>Proper</th>
-                            <th>Available</th>
-                            <th>Maintained</th>
-                            <th>Proper</th>
-                            <th>Available</th>
-                            <th>Maintained</th>
-                            <th>Proper</th>
-                            <th>Available</th>
-                            <th>Maintained</th>
-                            <th>Proper</th>
+                            <th>Condoms Stock</th>
+                            <th>Oral Pills (POP) Stock</th>
+                            <th>OP (COC) Stock</th>
+                            <th>OP (ECP) Stock</th>
+                            <th>3 Months Inj(Depo)</th>
+                            <th>3 months Inj-Defo Stock</th>
+                            <th>IUD (CT-380-A) Stock</th>
+                            <th>Jadelle Stock</th>
+           
                         </tr>
                     </thead>
-                    <tbody id="Grid9">
-                        
+                    <tbody id="grid7">
+              
                     </tbody>
                 </table>
+
 
             </div>
         </div>
@@ -230,7 +214,7 @@
 
 
                 $(document).ready(function () {
-                    GridIECandStock("0")
+                    grid7("0");
                 });
 
                 var selectedTex = "";
@@ -247,51 +231,30 @@
 
                 });
 
-
-                function GridIECandStock(Filter) {
-
+                function grid7(Filter) {
                     $.ajax({
                         type: 'POST',
-                        url: "/Designer/GridIECandStock/" + Filter,
+                        url: "/Designer/grid7/" + Filter,
                         data: {},
                         async: true,
                         success: function (data) {
-                            $("#Grid9").empty();
+                            $("#grid7").empty();
                             var html = '';
                             $.each(data, function (key, item) {
 
+                                var ConStockPosition = item.ConStockPosition.split('|');
 
-                                var DC = item.dailyClient.split(",");
-                                var DC1 = DC[0];
-                                var DC2 = DC[1];
-                                var DC3 = DC[2];
+                                var Mon1 = ConStockPosition[0].split('-')[1].split(',')[0]
+                                var Mon2 = ConStockPosition[1].split('-')[1].split(',')[0]
+                                var Mon3 = ConStockPosition[2].split('-')[1].split(',')[0]
+                                var Mon4 = ConStockPosition[3].split('-')[1].split(',')[0]
+                                var Mon5 = ConStockPosition[4].split('-')[1].split(',')[0]
+                                var Mon6 = ConStockPosition[5].split('-')[1].split(',')[0]
+                                var Mon7 = ConStockPosition[6].split('-')[1].split(',')[0]
+                                var Mon8 = ConStockPosition[7].split('-')[1].split(',')[0]
 
 
 
-                                var MS = item.MediStock.split(",");
-                                var MS1 = MS[0];
-                                var MS2 = MS[1];
-                                var MS3 = MS[2];
-                                
-                                var BU = item.BreakUp.split(",");
-                                var BU1 = BU[0];
-                                var BU2 = BU[1];
-                                var BU3 = BU[2];
-
-                                var SR = item.StockReg.split(",");
-                                var SR1 = SR[0];
-                                var SR2 = SR[1];
-                                var SR3 = SR[2];
-
-                                var LB = item.LogBook.split(",");
-                                var LB1 = LB[0];
-                                var LB2 = LB[1];
-                                var LB3 = LB[2];
-
-                                var DS = item.DeadStock.split(",");
-                                var DS1 = DS[0];
-                                var DS2 = DS[1];
-                                var DS3 = DS[2];
 
 
                                 html += '<tr>';
@@ -300,35 +263,19 @@
                                 html += '<td>' + item.District + '</td>';
                                 html += '<td>' + item.Center + '</td>';
 
-                                html += '<td>' + (DC1 == "1" ? "Yes" : "No") + '</td>';
-                                html += '<td>' + (DC2 == "1" ? "Yes" : "No") + '</td>';
-                                html += '<td>' + (DC3 == "1" ? "Yes" : "No") + '</td>';
 
-
-                                html += '<td>' + (MS1 == "1" ? "Yes" : "No") + '</td>';
-                                html += '<td>' + (MS2 == "1" ? "Yes" : "No") + '</td>';
-                                html += '<td>' + (MS3 == "1" ? "Yes" : "No") + '</td>';
-
-
-                                html += '<td>' + (BU1 == "1" ? "Yes" : "No") + '</td>';
-                                html += '<td>' + (BU2 == "1" ? "Yes" : "No") + '</td>';
-                                html += '<td>' + (BU3 == "1" ? "Yes" : "No") + '</td>';
-
-                                html += '<td>' + (SR1 == "1" ? "Yes" : "No") + '</td>';
-                                html += '<td>' + (SR2 == "1" ? "Yes" : "No") + '</td>';
-                                html += '<td>' + (SR3 == "1" ? "Yes" : "No") + '</td>';
-
-                                html += '<td>' + (LB1 == "1" ? "Yes" : "No") + '</td>';
-                                html += '<td>' + (LB2 == "1" ? "Yes" : "No") + '</td>';
-                                html += '<td>' + (LB3 == "1" ? "Yes" : "No") + '</td>';
-
-                                html += '<td>' + (DS1 == "1" ? "Yes" : "No") + '</td>';
-                                html += '<td>' + (DS2 == "1" ? "Yes" : "No") + '</td>';
-                                html += '<td>' + (DS3 == "1" ? "Yes" : "No") + '</td>';
+                                html += '<td>' + Mon1 + '</td>';
+                                html += '<td>' + Mon2 + '</td>';
+                                html += '<td>' + Mon3 + '</td>';
+                                html += '<td>' + Mon4 + '</td>';
+                                html += '<td>' + Mon5 + '</td>';
+                                html += '<td>' + Mon6 + '</td>';
+                                html += '<td>' + Mon7 + '</td>';
+                                html += '<td>' + Mon8 + '</td>';
 
                                 html += '</tr>';
                             });
-                            $('#Grid9').html(html);
+                            $('#grid7').html(html);
 
                         }
 
@@ -336,6 +283,7 @@
                     });
 
                 }
+                
 
             </script>
 

@@ -1002,13 +1002,18 @@
 
                     $.ajax({
                         type: 'POST',
-                        url: "/Designer/Grid4/" + Filter,
+                        url: "/Designer/Grid5/" + Filter,
                         data: {},
                         async: true,
                         success: function (data) {
                             $("#tbody4").empty();
                             var html = '';
                             $.each(data, function (key, item) {
+                                var New = item.CS.split(',');
+                                var new0 = New[0];
+                                var new1 = New[1];
+                                var new2 = New[2];
+                                var new3 = New[3];
 
 
                                 html += '<tr>';
@@ -1017,18 +1022,18 @@
                                 html += '<td>' + item.District + '</td>';
 
                                 html += '<td>' + item.Center + '</td>';
-                                html += '<td>' + item.Center + '</td>';
 
-                                html += '<td>' + item.Center + '</td>';
-                                html += '<td>' + item.Center + '</td>';
+                                html += '<td>' + new0 + '</td>';
+                                html += '<td>' + "" + '</td>';
 
+                                html += '<td>' + new1 + '</td>';
+                                html += '<td>' + "" + '</td>';
 
-                                html += '<td>' + item.Center + '</td>';
-                                html += '<td>' + item.Center + '</td>';
+                                html += '<td>' + new2 + '</td>';
+                                html += '<td>' + "" + '</td>';
 
-                                html += '<td>' + item.Center + '</td>';
-                                html += '<td>' + item.Center + '</td>';
-                                html += '<td>' + item.Center + '</td>';
+                                html += '<td>' + new3 + '</td>';
+                                html += '<td>' + "" + '</td>';
 
 
                                 html += '</tr>';
@@ -1046,7 +1051,7 @@
 
                     $.ajax({
                         type: 'POST',
-                        url: "/Designer/Grid5/" + Filter,
+                        url: "/Designer/Grid4/" + Filter,
                         data: {},
                         async: true,
                         success: function (data) {
@@ -1055,39 +1060,11 @@
                             $.each(data, function (key, item) {
 
 
-                                var CS = item.CS.split(',');
-                                var GC = CS[0];
-                                var FP = CS[1];
-                                var RH = CS[2];
-                                var cSS = CS[3];
-
-                                if (GC == "1") {
-                                    GC = "New (Count)";
-                                }
-                                else {
-                                    GC = "Old (Count)";
-                                }
-
-                                if (FP == "1") {
-                                    FP = "New (Count)";
-                                }
-                                else {
-                                    FP = "Old (Count)";
-                                }
-
-                                if (RH == "1") {
-                                    RH = "New (Count)";
-                                }
-                                else {
-                                    RH = "Old (Count)";
-                                }
-
-                                if (cSS == "1") {
-                                    cSS = "New (Count)";
-                                }
-                                else {
-                                    cSS = "Old (Count)";
-                                }
+                                var New = item.CS.split(',');
+                                var new0 = New[0];
+                                var new1 = New[1];
+                                var new2 = New[2];
+                                var new3 = New[3];
 
                                 html += '<tr>';
                                 html += '<td>' + item.asDate + '</td>';
@@ -1095,10 +1072,10 @@
                                 html += '<td>' + item.District + '</td>';
                                 html += '<td>' + item.Center + '</td>';
 
-                                html += '<td>' + GC + '</td>';
-                                html += '<td>' + FP + '</td>';
-                                html += '<td>' + RH + '</td>';
-                                html += '<td>' + cSS + '</td>';
+                                html += '<td>' + new0 + '</td>';
+                                html += '<td>' + new1 + '</td>';
+                                html += '<td>' + new2 + '</td>';
+                                html += '<td>' + new3 + '</td>';
 
                                 html += '</tr>';
                             });
