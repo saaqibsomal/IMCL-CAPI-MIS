@@ -3800,8 +3800,14 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
             return View();
         }
 
-        
+        public ActionResult FuniturePosition()
+        {
 
+            ReportDropdown();
+            return View();
+        }
+
+        
 
 
         public ActionResult ContraceptiveStockPosition()
@@ -5017,7 +5023,7 @@ select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as Project
 	inner join ProjectFieldSample fs5 on cte.FieldId5 = fs5.FieldID -- and fs5.Code IN (cte.FieldValue5)
 
 	
-    where RowNum = 1 and len(FieldValue5) > 33 and LEFT(FieldValue5, 1) = '1' and created between '{sd}' and '{ed}' select * from #Graph   
+    where RowNum = 1 and len(FieldValue5) > 33 and LEFT(FieldValue5, 1) = '1' and created between '{sd}' and '{ed}' select distinct * from #Graph   
 
  
 ";
@@ -5025,84 +5031,163 @@ select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as Project
             var con = db.Database.SqlQuery<Grid13>(Sql).ToList().Where(x => x.District.Contains(Des) && x.Center.Contains(Cen));
             return Json(con);
         }
-//        public JsonResult grid8(string id)
-//        {
 
-//            var Des = "";
-//            var Cen = "";
-//            var sd = "";
-//            var ed = "";
-//            if (id == "0" || id == "50435, RHS,7120" || id == "55587, FWC,7122" || id == "50484, MSU,7121")
-//            {
-//                sd = "01/01/1950";
-//                ed = "01/01/2060";
-//            }
-//            else
-//            {
+        public JsonResult FuniturePositionGrid(string id)
+        {
 
-
-
-//                Des = id.Split(',')[0];
-//                Cen = id.Split(',')[1];
-//                if (Cen == "---Select All---")
-//                {
-//                    Cen = "";
-//                }
-//                if (Des == "---Select All---")
-//                {
-//                    Des = "";
-//                }
-//                sd = id.Split(',')[2];
-//                ed = id.Split(',')[3];
+            var Des = "";
+            var Cen = "";
+            var sd = "";
+            var ed = "";
+            if (id == "0" || id == "50435, RHS,7120" || id == "55587, FWC,7122" || id == "50484, MSU,7121")
+            {
+                sd = "01/01/1950";
+                ed = "01/01/2060";
+            }
+            else
+            {
 
 
 
-//            }
+                Des = id.Split(',')[0];
+                Cen = id.Split(',')[1];
+                if (Cen == "---Select All---")
+                {
+                    Cen = "";
+                }
+                if (Des == "---Select All---")
+                {
+                    Des = "";
+                }
+                sd = id.Split(',')[2];
+                ed = id.Split(',')[3];
 
-//            string Sql = $@"IF OBJECT_ID('tempdb..#Graph') IS NOT NULL
-//BEGIN
-//    DROP TABLE #Graph;
-//END
 
-//;with cte as (
-//	  select s.ProjectID,  s.sbjnum, s.Created, 
+
+            }
+
+            string Sql = $@"IF OBJECT_ID('tempdb..#Graph') IS NOT NULL
+BEGIN
+    DROP TABLE #Graph;
+END
+
+;with cte as (
+	  select s.ProjectID,  s.sbjnum, s.Created, 
        
-//		sd2.fieldId as FieldId2, sd2.fieldValue as FieldValue2,
-//		sd3.fieldId as FieldId3, sd3.fieldValue as FieldValue3,
-	   
-//		sd5.fieldId as FieldId5, sd5.fieldValue as FieldValue5,
-	
+		sd2.fieldId as FieldId2, sd2.fieldValue as FieldValue2,
+		sd3.fieldId as FieldId3, sd3.fieldValue as FieldValue3,
+		sd5.fieldId as FieldId5, sd5.fieldValue as FieldValue5,
+	    sd6.fieldId as FieldId6, sd6.fieldValue as FieldValue6,
 
-//	row_number() over (partition by  sd2.fieldId, sd2.fieldValue,sd3.fieldId,sd3.fieldValue ,sd5.fieldId,sd5.fieldValue order by s.created desc) as RowNum
-//	from survey s
-//		inner join SurveyData sd2 on s.sbjnum = sd2.sbjnum and sd2.FieldId in (50435, 50484, 55587) --District
-//		inner join SurveyData sd3 on s.sbjnum = sd3.sbjnum and sd3.FieldId in (50446, 50486, 55588)--Center close Survey Ids
-//		Inner join SurveyData sd5 on s.sbjnum = sd5.sbjnum and sd5.FieldId in (50559,50502,55601) -- GC
-
+	row_number() over (partition by  sd2.fieldId, sd2.fieldValue,sd3.fieldId,sd3.fieldValue ,sd5.fieldId,sd5.fieldValue order by s.created desc) as RowNum
+	from survey s
+		inner join SurveyData sd2 on s.sbjnum = sd2.sbjnum and sd2.FieldId in (50435, 50484, 55587) --District
+		inner join SurveyData sd3 on s.sbjnum = sd3.sbjnum and sd3.FieldId in (50446, 50486, 55588)--Center close Survey Ids
+		Inner join SurveyData sd5 on s.sbjnum = sd5.sbjnum and sd5.FieldId in (50512,50474,55615) -- FP
+		Inner join SurveyData sd6 on s.sbjnum = sd6.sbjnum and sd6.FieldId in (50513,53570,55616) -- FPQ
 		
-//		)
-//select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as ProjectName, fs2.Title as District ,fs3.Title as Center, 
-// FieldValue5 
-// as CTP,
-// cte.FieldId5,
+		)
+select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as ProjectName, fs2.Title as District ,fs3.Title as Center, 
+ FieldValue5 as FP,
+  FieldValue6 as FPQ,
+ cte.FieldId5,
 
-//  convert(varchar, Created,101) asDate,
-// sbjnum
-//    into #Graph from cte
-//	inner join ProjectFieldSample fs2 on cte.FieldId2 = fs2.FieldID and fs2.Code IN (cte.FieldValue2)
-//	inner join ProjectFieldSample fs3 on cte.FieldId3 = fs3.FieldID and fs3.Code IN (cte.FieldValue3)
-//	left join ProjectFieldSample fs5 on cte.FieldId5 = fs5.FieldID   and fs5.Code IN (cte.FieldValue5)
-
+  convert(varchar, Created,101) asDate,
+ sbjnum
+    into #Graph from cte
+	inner join ProjectFieldSample fs2 on cte.FieldId2 = fs2.FieldID and fs2.Code IN (cte.FieldValue2)
+	inner join ProjectFieldSample fs3 on cte.FieldId3 = fs3.FieldID and fs3.Code IN (cte.FieldValue3)
+	inner join ProjectFieldSample fs5 on cte.FieldId5 = fs5.FieldID 
+	inner join ProjectFieldSample fs6 on cte.FieldId6 = fs6.FieldID 
 	
-//    where RowNum = 1 and len(FieldValue5) > 33 and LEFT(FieldValue5, 1) = '1' and created between '{sd}' and '{ed}' 
-//	select distinct g.CTP as mon, * from #Graph g    
+    where RowNum = 1 and len(FieldValue6) > 13 and created between '{sd}' and '{ed}' select distinct * from #Graph   
 
  
-//";
+";
 
-//            var con = db.Database.SqlQuery<Grid8>(Sql).ToList().Where(x => x.District.Contains(Des) && x.Center.Contains(Cen));
-//            return Json(con);
-//        }
+            var con = db.Database.SqlQuery<Grid14>(Sql).ToList().Where(x => x.District.Contains(Des) && x.Center.Contains(Cen));
+            return Json(con);
+        }
+
+        
+        //        public JsonResult grid8(string id)
+        //        {
+
+        //            var Des = "";
+        //            var Cen = "";
+        //            var sd = "";
+        //            var ed = "";
+        //            if (id == "0" || id == "50435, RHS,7120" || id == "55587, FWC,7122" || id == "50484, MSU,7121")
+        //            {
+        //                sd = "01/01/1950";
+        //                ed = "01/01/2060";
+        //            }
+        //            else
+        //            {
+
+
+
+        //                Des = id.Split(',')[0];
+        //                Cen = id.Split(',')[1];
+        //                if (Cen == "---Select All---")
+        //                {
+        //                    Cen = "";
+        //                }
+        //                if (Des == "---Select All---")
+        //                {
+        //                    Des = "";
+        //                }
+        //                sd = id.Split(',')[2];
+        //                ed = id.Split(',')[3];
+
+
+
+        //            }
+
+        //            string Sql = $@"IF OBJECT_ID('tempdb..#Graph') IS NOT NULL
+        //BEGIN
+        //    DROP TABLE #Graph;
+        //END
+
+        //;with cte as (
+        //	  select s.ProjectID,  s.sbjnum, s.Created, 
+
+        //		sd2.fieldId as FieldId2, sd2.fieldValue as FieldValue2,
+        //		sd3.fieldId as FieldId3, sd3.fieldValue as FieldValue3,
+
+        //		sd5.fieldId as FieldId5, sd5.fieldValue as FieldValue5,
+
+
+        //	row_number() over (partition by  sd2.fieldId, sd2.fieldValue,sd3.fieldId,sd3.fieldValue ,sd5.fieldId,sd5.fieldValue order by s.created desc) as RowNum
+        //	from survey s
+        //		inner join SurveyData sd2 on s.sbjnum = sd2.sbjnum and sd2.FieldId in (50435, 50484, 55587) --District
+        //		inner join SurveyData sd3 on s.sbjnum = sd3.sbjnum and sd3.FieldId in (50446, 50486, 55588)--Center close Survey Ids
+        //		Inner join SurveyData sd5 on s.sbjnum = sd5.sbjnum and sd5.FieldId in (50559,50502,55601) -- GC
+
+
+        //		)
+        //select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as ProjectName, fs2.Title as District ,fs3.Title as Center, 
+        // FieldValue5 
+        // as CTP,
+        // cte.FieldId5,
+
+        //  convert(varchar, Created,101) asDate,
+        // sbjnum
+        //    into #Graph from cte
+        //	inner join ProjectFieldSample fs2 on cte.FieldId2 = fs2.FieldID and fs2.Code IN (cte.FieldValue2)
+        //	inner join ProjectFieldSample fs3 on cte.FieldId3 = fs3.FieldID and fs3.Code IN (cte.FieldValue3)
+        //	left join ProjectFieldSample fs5 on cte.FieldId5 = fs5.FieldID   and fs5.Code IN (cte.FieldValue5)
+
+
+        //    where RowNum = 1 and len(FieldValue5) > 33 and LEFT(FieldValue5, 1) = '1' and created between '{sd}' and '{ed}' 
+        //	select distinct g.CTP as mon, * from #Graph g    
+
+
+        //";
+
+        //            var con = db.Database.SqlQuery<Grid8>(Sql).ToList().Where(x => x.District.Contains(Des) && x.Center.Contains(Cen));
+        //            return Json(con);
+        //        }
 
     }
 

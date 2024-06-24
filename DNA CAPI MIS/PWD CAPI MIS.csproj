@@ -3339,6 +3339,7 @@
     <Content Include="Views\Designer\SDPTimeVisit.cshtml" />
     <Content Include="Views\Designer\ContraceptiveStockPerformance.cshtml" />
     <Content Include="Views\Designer\IECMECMaterialStatus2.cshtml" />
+    <Content Include="Views\Designer\FuniturePosition.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

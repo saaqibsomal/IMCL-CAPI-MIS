@@ -287,6 +287,16 @@ public class ProjectsList
         public string District { get; set; }
         public string Center { get; set; }
         public string Monitoring { get; set; }
+    }  
+    
+    public class Grid14
+    {
+        public string asDate { get; set; }
+        public string ProjectName { get; set; }
+        public string District { get; set; }
+        public string Center { get; set; }
+        public string FP { get; set; }
+        public string FPQ { get; set; }
     }   
     
     public class Grid8

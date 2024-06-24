@@ -412,5 +412,36 @@
         }
 
 
+        $('#Search').click(function () {
+
+            var startDate = $("#startDate").val();
+            var endDate = $("#endDate").val();
+
+            if (startDate == "") {
+                startDate = "01-01-1950";
+            }
+            if (endDate == "") {
+                endDate = "01-01-2099";
+            }
+
+            try {
+                var District = $('#District').find('option:selected').text();
+                var Center = $('#Center').find('option:selected').text();
+
+                var Filter = District + "," + Center + "," + startDate + "," + endDate;
+
+                try {
+                    grid8(Filter);
+                }
+                catch (ex) {
+
+                }
+
+            }
+            catch (ex) {
+
+            }
+
+        });
     </script>
 

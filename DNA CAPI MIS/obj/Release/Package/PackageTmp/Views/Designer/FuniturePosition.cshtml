@@ -1,0 +1,465 @@
+﻿
+
+@{
+    ViewBag.Title = "Dashboard";
+}
+@section Scripts {
+    <script>
+        var viewURL = "/Designer/Dashboard/";
+    </script>
+
+}
+
+<link href="~/Content/DSDS/dsds.css" rel="stylesheet" type="text/css" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
+@*CSS Class desktop is used for overlay*@
+
+<style>
+    .model {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.5);
+    }
+
+    .model-content {
+        background-color: #fefefe;
+        margin: 10% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+
+    .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+</style>
+<style>
+    .optionsRadios {
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+
+
+<style>
+    /* Style for the table */
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    /* Style for table headers */
+    th {
+        background-color: #007bff; /* Blue header color */
+        color: #fff; /* Text color */
+        font-weight: bold;
+        text-align: left;
+    }
+    /* Style for table cells */
+    td {
+        border: 1px solid #dddddd; /* Border color for cells */
+        padding: 8px;
+    }
+    /* Alternate row color */
+    tr:nth-child(even) {
+        background-color: #f2f2f2; /* Light gray */
+    }
+</style>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+
+    .container {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    ul {
+        list-style-type: none;
+        padding-left: 0;
+    }
+
+    li {
+        margin-bottom: 20px;
+    }
+
+    .criteria {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+
+        .criteria label {
+            font-weight: bold;
+        }
+
+        .criteria select {
+            padding: 5px;
+            width: 180px;
+        }
+
+        .criteria .sufficient {
+            color: green;
+        }
+
+        .criteria .quite-sufficient {
+            color: orange;
+        }
+
+        .criteria .poor {
+            color: red;
+        }
+</style>
+<div class="row desktop">
+    <div class="col-xs-12">
+
+        @Html.Partial("_ReportPartial")
+
+
+
+        <div class="col-12" style="text-align:center;">
+            <h1>Funiture Position</h1>
+            <div class="col-10" style="overflow:auto">
+
+                <table id="Grid">
+                    <thead>
+                        <tr>
+                            <th rowspan="2">Date</th>
+                            <th rowspan="2">District</th>
+                            <th rowspan="2">SDP Type</th>
+                            <th rowspan="2">SDP Name</th>
+                            <th colspan="2">Office Table</th>
+                            <th colspan="2">Office Chairs</th>
+                            <th colspan="2">Benches</th>
+                            <th colspan="2">Examination Table</th>
+                            <th colspan="2">Insertion Table</th>
+                            <th colspan="2">Revolving Stool</th>
+                            <th colspan="2">Medicine Cabinet</th>
+                        </tr>
+                        <tr>
+                            <th>Quantity Available</th>
+                            <th>(Good/Satisfactory/Poor)</th>
+                            <th>Quantity Available</th>
+                            <th>(Good/Satisfactory/Poor)</th>
+                            <th>Quantity Available</th>
+                            <th>(Good/Satisfactory/Poor)</th>
+                            <th>Quantity Available</th>
+                            <th>(Good/Satisfactory/Poor)</th>
+                            <th>Quantity Available</th>
+                            <th>(Good/Satisfactory/Poor)</th>
+                            <th>Quantity Available</th>
+                            <th>(Good/Satisfactory/Poor)</th>
+                            <th>Quantity Available</th>
+                            <th>(Good/Satisfactory/Poor)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="FuniturePositionGrid">
+                        
+                    </tbody>
+
+                   
+                </table>
+
+            </div>
+        </div>
+
+        <button id="exportButton">Download as Excel</button>
+        <!-- Loading (remove the following to stop the loading)-->
+        <div class="overlay" style="display:none;"></div>
+        <div class="loading-img" style="display: none;"></div>
+        <!-- end loading -->
+
+
+
+
+
+    </div>
+
+
+            <script src="https://cdn.datatables.net/2.0.5/js/dataTables.min.js"></script>
+
+
+            <script>
+
+
+                $(document).ready(function () {
+                    FuniturePositionGrid("0")
+                });
+
+                var selectedTex = "";
+                $('#Checklist').change(function () {
+                    var Checklist = $('#Checklist').val();
+
+                    GetDistrict(Checklist);
+                    $("#District").empty();
+                    $("#Center").empty();
+
+                  
+                    
+
+
+                });
+
+
+                function FuniturePositionGrid(Filter) {
+
+                    $.ajax({
+                        type: 'POST',
+                        url: "/Designer/FuniturePositionGrid/" + Filter,
+                        data: {},
+                        async: true,
+                        success: function (data) {
+                            $("#FuniturePositionGrid").empty();
+                            var html = '';
+                            $.each(data, function (key, item) {
+
+
+                                var PF = item.PF.split(",");
+                                var PF0 = PF[0];
+                                var PF1 = PF[1];
+                                var PF2 = PF[2];
+                                var PF3 = PF[3];
+                                var PF4 = PF[4];
+                                var PF5 = PF[5];
+                                var PF6 = PF[6];
+                              
+
+
+                                if (PF0 == "1") {
+                                    PF0 = "N/A";
+                                }
+                                else if (PF0 == "2") {
+                                    PF0 = "Good";
+                                }
+                                else if (PF0 == "3") {
+                                    PF0 = "Satisfactory";
+                                }
+                                else if (PF0 == "4") {
+                                    PF0 = "Poor";
+                                }
+                               
+
+                                if (PF1 == "1") {
+                                    PF1 = "N/A";
+                                }
+                                else if (PF1 == "2") {
+                                    PF1 = "Good";
+                                }
+                                else if (PF1 == "3") {
+                                    PF1 = "Satisfactory";
+                                }
+                                else if (PF1 == "4") {
+                                    PF1 = "Poor";
+                                }
+
+
+
+                                if (PF2 == "1") {
+                                    PF2 = "N/A";
+                                }
+                                else if (PF2 == "2") {
+                                    PF2 = "Good";
+                                }
+                                else if (PF2 == "3") {
+                                    PF2 = "Satisfactory";
+                                }
+                                else if (PF2 == "4") {
+                                    PF2 = "Poor";
+                                }
+
+
+                                if (PF3 == "1") {
+                                    PF3 = "N/A";
+                                }
+                                else if (PF3 == "2") {
+                                    PF3 = "Good";
+                                }
+                                else if (PF3 == "3") {
+                                    PF3 = "Satisfactory";
+                                }
+                                else if (PF3 == "4") {
+                                    PF3 = "Poor";
+                                }
+
+
+
+                                if (PF4 == "1") {
+                                    PF4 = "N/A";
+                                }
+                                else if (PF4 == "2") {
+                                    PF4 = "Good";
+                                }
+                                else if (PF4 == "3") {
+                                    PF4 = "Satisfactory";
+                                }
+                                else if (PF4 == "4") {
+                                    PF4 = "Poor";
+                                }
+
+                                if (PF5 == "1") {
+                                    PF5 = "N/A";
+                                }
+                                else if (PF5 == "2") {
+                                    PF5 = "Good";
+                                }
+                                else if (PF5 == "3") {
+                                    PF5 = "Satisfactory";
+                                }
+                                else if (PF5 == "4") {
+                                    PF5 = "Poor";
+                                }
+
+
+                                if (PF6 == "1") {
+                                    PF6 = "N/A";
+                                }
+                                else if (PF6 == "2") {
+                                    PF6 = "Good";
+                                }
+                                else if (PF6 == "3") {
+                                    PF6 = "Satisfactory";
+                                }
+                                else if (PF6 == "4") {
+                                    PF6 = "Poor";
+                                }
+
+
+                                var PFQ = item.PFQ.split(",");
+                                var PFQ0 = PFQ[0];
+                                var PFQ1 = PFQ[1];
+                                var PFQ2 = PFQ[2];
+                                var PFQ3 = PFQ[3];
+                                var PFQ4 = PFQ[4];
+                                var PFQ5 = PFQ[5];
+                                var PFQ6 = PFQ[6];
+
+
+                                var PFQ = item.PF.split(",");
+                                
+
+                                html += '<tr>';
+                                html += '<td>' + item.asDate + '</td>';
+                                html += '<td>' + item.ProjectName + '</td>';
+                                html += '<td>' + item.District + '</td>';
+                                html += '<td>' + item.Center + '</td>';
+
+                                html += '<td>' + PF1 + '</td>';
+                                html += '<td>' + PFQ0 + '</td>';
+                       
+
+                                html += '<td>' + PF2 + '</td>';
+                                html += '<td>' + PFQ1 + '</td>';
+
+
+                                html += '<td>' + PF3 + '</td>';
+                                html += '<td>' + PFQ2 + '</td>';
+
+
+                                html += '<td>' + PF4 + '</td>';
+                                html += '<td>' + PFQ3 + '</td>';
+
+
+                                html += '<td>' + PF5 + '</td>';
+                                html += '<td>' + PFQ4 + '</td>';
+
+
+                                html += '<td>' + PF6 + '</td>';
+                                html += '<td>' + PFQ5 + '</td>';
+
+
+                                html += '<td>' + PF7 + '</td>';
+                                html += '<td>' + PFQ6 + '</td>';
+
+
+                                html += '</tr>';
+                            });
+                            $('#FuniturePositionGrid').html(html);
+
+                        }
+
+
+                    });
+
+                }
+
+
+
+                $('#Search').click(function () {
+
+                    var startDate = $("#startDate").val();
+                    var endDate = $("#endDate").val();
+
+                    if (startDate == "") {
+                        startDate = "01-01-1950";
+                    }
+                    if (endDate == "") {
+                        endDate = "01-01-2099";
+                    }
+
+                    try {
+                        var District = $('#District').find('option:selected').text();
+                        var Center = $('#Center').find('option:selected').text();
+
+                        var Filter = District + "," + Center + "," + startDate + "," + endDate;
+
+                        try {
+                            FuniturePositionGrid(Filter);
+                        }
+                        catch (ex) {
+
+                        }
+
+                    }
+                    catch (ex) {
+
+                    }
+
+                });
+
+            </script>
+

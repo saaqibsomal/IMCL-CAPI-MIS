@@ -163,7 +163,7 @@
 
 
         <div class="col-12" style="text-align:center;">
-            <h1>Status of SDPs Visited</h1>
+            <h1>IEC & MEC Material Status</h1>
             <div class="col-10" style="overflow:auto">
 
                 <table id="Grid" >
@@ -173,36 +173,24 @@
                             <th>District</th>
                             <th>SDP Type</th>
                             <th>SDP Name</th>
-                            <th colspan="3">Daily Client Register/ECR</th>
-                            <th colspan="3">Daily #/Monthly Break-Up</th>
-                            <th colspan="3">Medicine Stock Register</th>
-                            <th colspan="3">Contraceptive Stock Register</th>
-                            <th colspan="3">Log Book</th>
-                            <th colspan="3">Dead Stock Register</th>
+                            <th colspan="3">IEC Material</th>
+                            <th colspan="3">MEC wheel</th>
+    
                         </tr>
                         <tr>
                             <th colspan="4"></th>
-                            <th>Available</th>
-                            <th>Maintained</th>
-                            <th>Proper</th>
-                            <th>Available</th>
-                            <th>Maintained</th>
-                            <th>Proper</th>
-                            <th>Available</th>
-                            <th>Maintained</th>
-                            <th>Proper</th>
-                            <th>Available</th>
-                            <th>Maintained</th>
-                            <th>Proper</th>
-                            <th>Available</th>
-                            <th>Maintained</th>
-                            <th>Proper</th>
-                            <th>Available</th>
-                            <th>Maintained</th>
-                            <th>Proper</th>
+                            <th>Availability at facility</th>
+                            <th>Available Quantity</th>
+                            <th>Display at facility</th>
+
+                            <th>Availability at facility</th>
+                            <th>Available Quantity</th>
+                            <th>Display at facility</th>
+
+
                         </tr>
                     </thead>
-                    <tbody id="Grid7">
+                    <tbody id="Grid6">
                         
                     </tbody>
                 </table>
@@ -230,7 +218,7 @@
 
 
                 $(document).ready(function () {
-                  //  Grid2("0")
+                    Grid6("0")
                 });
 
                 var selectedTex = "";
@@ -248,37 +236,135 @@
                 });
 
 
-                //function Grid2(Filter) {
-                //    $.ajax({
-                //        type: 'POST',
-                //        url: "/Designer/Grid2/" + Filter,
-                //        data: {},
-                //        async: true,
-                //        success: function (data) {
-                //            $("#tbody2").empty();
-                //            var html = '';
-                //            $.each(data, function (key, item) {
-                //                var Branded = "";
-                //                if (item.Status == "1") {
-                //                    Branded = "Branded";
-                //                }
-                //                else {
-                //                    Branded = "UnBranded";
-                //                }
-                //                html += '<tr>';
-                //                html += '<td>' + item.ProjectName + '</td>';
-                //                html += '<td>' + item.District + '</td>';
-                //                html += '<td>' + item.Center + '</td>';
-                //                html += '<td>' + item.Premises + '</td>';
-                //                html += '<td>' + item.OpenClose + '</td>';
-                //                html += '<td>' + Branded + '</td>';
-                //                html += '</tr>';
-                //            });
-                //            $('#tbody2').html(html);
+                function Grid6(Filter) {
 
-                //        }
-                //    });
-                //}
+                    $.ajax({
+                        type: 'POST',
+                        url: "/Designer/Grid6/" + Filter,
+                        data: {},
+                        async: true,
+                        success: function (data) {
+                            $("#Grid6").empty();
+                            var html = '';
+                            $.each(data, function (key, item) {
+
+
+                                var IEC = item.IECMatrial.split(",");
+                                var AF = IEC[0];
+                                var AQ = IEC[1];
+                                var DF = IEC[2];
+
+                                if (AF == "1") {
+                                    AF = "Yes";
+                                }
+                                else {
+                                    AF = "No";
+                                }
+
+                                if (AQ == "1") {
+                                    AQ = "Yes";
+                                }
+                                else {
+                                    AQ = "No";
+                                }
+
+                                if (DF == "1") {
+                                    DF = "Yes";
+                                }
+                                else {
+                                    DF = "No";
+                                }
+
+
+                                var MEC = item.MECWheel.split(",");
+                                var AF1 = MEC[0];
+                                var AQ2 = MEC[1];
+                                var DF3 = MEC[2];
+
+
+                                if (AF1 == "1") {
+                                    AF1 = "Yes";
+                                }
+                                else {
+                                    AF1 = "No";
+                                }
+
+                                if (AQ2 == "1") {
+                                    AQ2 = "Yes";
+                                }
+                                else {
+                                    AQ2 = "No";
+                                }
+
+                                if (DF3 == "1") {
+                                    DF3 = "Yes";
+                                }
+                                else {
+                                    DF3 = "No";
+                                }
+
+                                html += '<tr>';
+                                html += '<td>' + item.asDate + '</td>';
+                                html += '<td>' + item.ProjectName + '</td>';
+                                html += '<td>' + item.District + '</td>';
+                                html += '<td>' + item.Center + '</td>';
+
+                                html += '<td>' + AF + '</td>';
+                                html += '<td>' + AQ + '</td>';
+                                html += '<td>' + DF + '</td>';
+
+
+                                html += '<td>' + AF1 + '</td>';
+                                html += '<td>' + AQ2 + '</td>';
+                                html += '<td>' + DF3 + '</td>';
+
+
+
+
+                                html += '</tr>';
+                            });
+                            $('#Grid6').html(html);
+
+                        }
+
+
+                    });
+
+                }
+
+
+                $('#Search').click(function () {
+
+                    var startDate = $("#startDate").val();
+                    var endDate = $("#endDate").val();
+
+                    if (startDate == "") {
+                        startDate = "01-01-1950";
+                    }
+                    if (endDate == "") {
+                        endDate = "01-01-2099";
+                    }
+
+                    try {
+                        var District = $('#District').find('option:selected').text();
+                        var Center = $('#Center').find('option:selected').text();
+
+                        var Filter = District + "," + Center + "," + startDate + "," + endDate;
+
+                        try {
+                            Grid6(Filter);
+                        }
+                        catch (ex) {
+
+                        }
+
+                    }
+                    catch (ex) {
+
+                    }
+
+                });
+
 
             </script>
 
