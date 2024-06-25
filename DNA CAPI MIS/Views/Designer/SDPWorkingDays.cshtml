@@ -165,10 +165,14 @@
         <div class="col-12" style="text-align:center;">
 
             <div class="col-12">
-                <table class="table bordered table-condensed table-hover solid-line">
+                <table id="grid" class="table bordered table-condensed table-hover solid-line">
                     <thead>
-                        <tr class="header" style="text-align:center;">
-                            <th colspan="12">Performance of SDP during last 6 Working Days</th>
+
+                        <tr >
+                            <th class="header" style="text-align:center" colspan="12">Performance of SDP during last 6 Working Days</th>
+                        </tr>
+                        <tr>
+                            <th style="text-align: center" class="header" colspan="13">Summary Report of SDP Working Days of SDPs Visits During  <span id="Start"> </span>  to <span id="End">  </span> in District <span id="disP"></span></th>
                         </tr>
                         <tr>
                             <th rowspan="2">Date</th>
@@ -263,8 +267,8 @@
 
                                 html += '<tr>';
                                 html += '<td>' + item.asDate + '</td>';
-                                html += '<td>' + item.ProjectName + '</td>';
                                 html += '<td>' + item.District + '</td>';
+                                html += '<td>' + item.ProjectName + '</td>';
 
                                 html += '<td>' + item.Center + '</td>';
 
@@ -301,10 +305,14 @@
                         endDate = "01-01-2099";
                     }
 
+                   
+                   
+
+
                     try {
                         var District = $('#District').find('option:selected').text();
                         var Center = $('#Center').find('option:selected').text();
-
+                     
                         var Filter = District + "," + Center + "," + startDate + "," + endDate;
 
                         try {

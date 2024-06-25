@@ -163,11 +163,18 @@
 
 
         <div class="col-12" style="text-align:center;">
-            <h1>Status of SDPs Visited</h1>
+        
             <div class="col-10" style="overflow:auto">
 
-                <table id="Grid" >
+                <table id="grid" >
                     <thead>
+                        <tr>
+                            <th style="text-align: center" class="header" colspan="22">IEC & MEC Material Status
+</tr>
+
+                        <tr>
+                            <th style="text-align: center" class="header" colspan="22">Summary Report of IEC & MEC Material Status of SDPs Visits During  <span id="Start"> </span>  to <span id="End">  </span> in District <span id="disP"></span></th>
+                        </tr>
                         <tr>
                             <th>Date</th>
                             <th>District</th>
@@ -296,8 +303,8 @@
 
                                 html += '<tr>';
                                 html += '<td>' + item.asDate + '</td>';
-                                html += '<td>' + item.ProjectName + '</td>';
                                 html += '<td>' + item.District + '</td>';
+                                html += '<td>' + item.ProjectName + '</td>';
                                 html += '<td>' + item.Center + '</td>';
 
                                 html += '<td>' + (DC1 == "1" ? "Yes" : "No") + '</td>';
@@ -352,6 +359,10 @@
                     try {
                         var District = $('#District').find('option:selected').text();
                         var Center = $('#Center').find('option:selected').text();
+
+                        $('#Start').text(startDate);
+                        $('#End').text(endDate);
+                        $('#disP').text(District);
 
                         var Filter = District + "," + Center + "," + startDate + "," + endDate;
 

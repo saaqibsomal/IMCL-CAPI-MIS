@@ -165,11 +165,15 @@
         <div class="col-12" style="text-align:center;">
 
             <div class="col-12">
-                <table class="table bordered table-condensed table-hover solid-line">
+                <table id="grid" class="table bordered table-condensed table-hover solid-line">
                     <thead>
-                        <tr class="header" style="text-align:center;">
-                            <th colspan="12">Clients Found Present at The SDPs at the Time of Visit</th>
+                        <tr >
+                            <th  style="text-align: center" class="header" colspan="12">Clients Found Present at The SDPs at the Time of Visit</th>
                         </tr>
+                        <tr>
+                            <th style="text-align: center" class="header" colspan="8">Summary Report of Time visit of SDPs Visits During  <span id="Start"> </span>  to <span id="End">  </span> in District <span id="disP"></span></th>
+                        </tr>
+
                         <tr>
                             <th>Date</th>
                             <th>District</th>
@@ -251,8 +255,8 @@
 
                                 html += '<tr>';
                                 html += '<td>' + item.asDate + '</td>';
-                                html += '<td>' + item.ProjectName + '</td>';
                                 html += '<td>' + item.District + '</td>';
+                                html += '<td>' + item.ProjectName + '</td>';
                                 html += '<td>' + item.Center + '</td>';
 
                                 html += '<td>' + new0 + '</td>';
@@ -285,6 +289,10 @@
                     try {
                         var District = $('#District').find('option:selected').text();
                         var Center = $('#Center').find('option:selected').text();
+
+                        $('#Start').text(startDate);
+                        $('#End').text(endDate);
+                        $('#disP').text(District);
 
                         var Filter = District + "," + Center + "," + startDate + "," + endDate;
 

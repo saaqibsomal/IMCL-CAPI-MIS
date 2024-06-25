@@ -163,18 +163,24 @@
 
 
         <div class="col-12" style="text-align:center;">
-            <h1 style="text-align:center">Status of Building</h1>
+        
+            <h1 style="text-align:center"> </h1>
             <div class="col-10">
 
-                <table id="Grid" class="table bordered table-condensed table-hover solid-line">
+                <table id="grid" class="table bordered table-condensed table-hover solid-line">
                     <thead>
+
                         <tr>
-                            <th class="header" colspan="11">Status of Building</th>
+                            <th style="text-align: center" class="header" colspan="12">Status of Building
+</tr>
+
+                        <tr>
+                            <th style="text-align: center" class="header" colspan="12">Summary Report od status of building of SDPs Visits During  <span id="Start"> </span>  to <span id="End">  </span> in District <span id="disP"></span></th>
                         </tr>
                         <tr>
                             <th>Date</th>
-                            <th>SDP Type</th>
                             <th>District</th>
+                            <th>SDP Type</th>
                             <th>SDP Name</th>
                             <th colspan="3" style="text-align:center">Indication/ Sign Board</th>
                             <th colspan="4" style="text-align:center">Utilities</th>
@@ -313,8 +319,8 @@
 
                                 html += '<tr>';
                                 html += '<td>' + item.asDate + '</td>';
-                                html += '<td>' + item.ProjectName + '</td>';
                                 html += '<td>' + item.District + '</td>';
+                                html += '<td>' + item.ProjectName + '</td>';
                                 html += '<td>' + item.Center + '</td>';
 
                                 html += '<td>' + Installed + '</td>';
@@ -353,7 +359,9 @@
                     try {
                         var District = $('#District').find('option:selected').text();
                         var Center = $('#Center').find('option:selected').text();
-
+                        $('#Start').text(startDate);
+                        $('#End').text(endDate);
+                        $('#disP').text(District);
                         var Filter = District + "," + Center + "," + startDate + "," + endDate;
 
                         try {

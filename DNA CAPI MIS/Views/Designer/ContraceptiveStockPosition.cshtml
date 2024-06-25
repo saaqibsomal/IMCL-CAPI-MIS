@@ -163,12 +163,20 @@
 
 
         <div class="col-12" style="text-align:center;">
-            <h1>Contraceptive Stock Position</h1>
+            @*<h1>Contraceptive Stock Position</h1>*@
             <div class="col-12" style="overflow:auto">
 
                 <table id="grid">
-                    <caption>Contraceptive Stock Position</caption>
+                    @*<caption>Contraceptive Stock Position</caption>*@
                     <thead>
+
+                        <tr>
+                            <th style="text-align: center" class="header" colspan="12"> Contraceptive Stock Position
+
+<tr>
+                            <th style="text-align: center" class="header" colspan="12">Summary Report of Contraceptive Stock Position of SDPs Visits During  <span id="Start"> </span>  to <span id="End">  </span> in District <span id="disP"></span></th>
+                        </tr>
+
                         <tr>
                             <th>Date</th>
                             <th>District</th>
@@ -182,7 +190,7 @@
                             <th>3 months Inj-Defo Stock</th>
                             <th>IUD (CT-380-A) Stock</th>
                             <th>Jadelle Stock</th>
-           
+
                         </tr>
                     </thead>
                     <tbody id="grid7">
@@ -259,8 +267,8 @@
 
                                 html += '<tr>';
                                 html += '<td>' + item.asDate + '</td>';
-                                html += '<td>' + item.ProjectName + '</td>';
                                 html += '<td>' + item.District + '</td>';
+                                html += '<td>' + item.ProjectName + '</td>';
                                 html += '<td>' + item.Center + '</td>';
 
 
@@ -299,6 +307,10 @@
                     try {
                         var District = $('#District').find('option:selected').text();
                         var Center = $('#Center').find('option:selected').text();
+
+                        $('#Start').text(startDate);
+                        $('#End').text(endDate);
+                        $('#disP').text(District);
 
                         var Filter = District + "," + Center + "," + startDate + "," + endDate;
 

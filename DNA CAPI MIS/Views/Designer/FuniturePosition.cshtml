@@ -163,11 +163,19 @@
 
 
         <div class="col-12" style="text-align:center;">
-            <h1>Funiture Position</h1>
+
             <div class="col-10" style="overflow:auto">
 
-                <table id="Grid">
+                <table id="grid">
                     <thead>
+                        <tr>
+                            <th style="text-align: center" class="header" colspan="18">Furniture Position
+                        </tr>
+
+                        <tr>
+                            <th style="text-align: center" class="header" colspan="18">Summary Report of Funiture Position of SDPs Visits During  <span id="Start"> </span>  to <span id="End">  </span> in District <span id="disP"></span></th>
+                        </tr>
+
                         <tr>
                             <th rowspan="2">Date</th>
                             <th rowspan="2">District</th>
@@ -199,10 +207,9 @@
                         </tr>
                     </thead>
                     <tbody id="FuniturePositionGrid">
-                        
                     </tbody>
 
-                   
+
                 </table>
 
             </div>
@@ -221,245 +228,249 @@
     </div>
 
 
-            <script src="https://cdn.datatables.net/2.0.5/js/dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/2.0.5/js/dataTables.min.js"></script>
 
 
-            <script>
+    <script>
 
 
-                $(document).ready(function () {
-                    FuniturePositionGrid("0")
-                });
+        $(document).ready(function () {
+            FuniturePositionGrid("0")
+        });
 
-                var selectedTex = "";
-                $('#Checklist').change(function () {
-                    var Checklist = $('#Checklist').val();
+        var selectedTex = "";
+        $('#Checklist').change(function () {
+            var Checklist = $('#Checklist').val();
 
-                    GetDistrict(Checklist);
-                    $("#District").empty();
-                    $("#Center").empty();
-
-                  
-                    
-
-
-                });
-
-
-                function FuniturePositionGrid(Filter) {
-
-                    $.ajax({
-                        type: 'POST',
-                        url: "/Designer/FuniturePositionGrid/" + Filter,
-                        data: {},
-                        async: true,
-                        success: function (data) {
-                            $("#FuniturePositionGrid").empty();
-                            var html = '';
-                            $.each(data, function (key, item) {
-
-
-                                var PF = item.FP.split(",");
-                                var PF0 = PF[0];
-                                var PF1 = PF[1];
-                                var PF2 = PF[2];
-                                var PF3 = PF[3];
-                                var PF4 = PF[4];
-                                var PF5 = PF[5];
-                                var PF6 = PF[6];
-                              
-
-
-                                if (PF0 == "1") {
-                                    PF0 = "N/A";
-                                }
-                                else if (PF0 == "2") {
-                                    PF0 = "Good";
-                                }
-                                else if (PF0 == "3") {
-                                    PF0 = "Satisfactory";
-                                }
-                                else if (PF0 == "4") {
-                                    PF0 = "Poor";
-                                }
-                               
-
-                                if (PF1 == "1") {
-                                    PF1 = "N/A";
-                                }
-                                else if (PF1 == "2") {
-                                    PF1 = "Good";
-                                }
-                                else if (PF1 == "3") {
-                                    PF1 = "Satisfactory";
-                                }
-                                else if (PF1 == "4") {
-                                    PF1 = "Poor";
-                                }
+            GetDistrict(Checklist);
+            $("#District").empty();
+            $("#Center").empty();
 
 
 
-                                if (PF2 == "1") {
-                                    PF2 = "N/A";
-                                }
-                                else if (PF2 == "2") {
-                                    PF2 = "Good";
-                                }
-                                else if (PF2 == "3") {
-                                    PF2 = "Satisfactory";
-                                }
-                                else if (PF2 == "4") {
-                                    PF2 = "Poor";
-                                }
 
 
-                                if (PF3 == "1") {
-                                    PF3 = "N/A";
-                                }
-                                else if (PF3 == "2") {
-                                    PF3 = "Good";
-                                }
-                                else if (PF3 == "3") {
-                                    PF3 = "Satisfactory";
-                                }
-                                else if (PF3 == "4") {
-                                    PF3 = "Poor";
-                                }
+        });
+
+
+        function FuniturePositionGrid(Filter) {
+
+            $.ajax({
+                type: 'POST',
+                url: "/Designer/FuniturePositionGrid/" + Filter,
+                data: {},
+                async: true,
+                success: function (data) {
+                    $("#FuniturePositionGrid").empty();
+                    var html = '';
+                    $.each(data, function (key, item) {
+
+
+                        var PF = item.FP.split(",");
+                        var PF0 = PF[0];
+                        var PF1 = PF[1];
+                        var PF2 = PF[2];
+                        var PF3 = PF[3];
+                        var PF4 = PF[4];
+                        var PF5 = PF[5];
+                        var PF6 = PF[6];
 
 
 
-                                if (PF4 == "1") {
-                                    PF4 = "N/A";
-                                }
-                                else if (PF4 == "2") {
-                                    PF4 = "Good";
-                                }
-                                else if (PF4 == "3") {
-                                    PF4 = "Satisfactory";
-                                }
-                                else if (PF4 == "4") {
-                                    PF4 = "Poor";
-                                }
-
-                                if (PF5 == "1") {
-                                    PF5 = "N/A";
-                                }
-                                else if (PF5 == "2") {
-                                    PF5 = "Good";
-                                }
-                                else if (PF5 == "3") {
-                                    PF5 = "Satisfactory";
-                                }
-                                else if (PF5 == "4") {
-                                    PF5 = "Poor";
-                                }
-
-
-                                if (PF6 == "1") {
-                                    PF6 = "N/A";
-                                }
-                                else if (PF6 == "2") {
-                                    PF6 = "Good";
-                                }
-                                else if (PF6 == "3") {
-                                    PF6 = "Satisfactory";
-                                }
-                                else if (PF6 == "4") {
-                                    PF6 = "Poor";
-                                }
-
-
-                                var PFQ = item.FPQ.split(",");
-                                var PFQ0 = PFQ[0];
-                                var PFQ1 = PFQ[1];
-                                var PFQ2 = PFQ[2];
-                                var PFQ3 = PFQ[3];
-                                var PFQ4 = PFQ[4];
-                                var PFQ5 = PFQ[5];
-                                var PFQ6 = PFQ[6];
-
-
-                
-                                
-
-                                html += '<tr>';
-                                html += '<td>' + item.asDate + '</td>';
-                                html += '<td>' + item.ProjectName + '</td>';
-                                html += '<td>' + item.District + '</td>';
-                                html += '<td>' + item.Center + '</td>';
-
-                                html += '<td>' + PF0 + '</td>';
-                                html += '<td>' + PFQ0 + '</td>';
-                       
-
-                                html += '<td>' + PF1 + '</td>';
-                                html += '<td>' + PFQ1 + '</td>';
-
-
-                                html += '<td>' + PF2 + '</td>';
-                                html += '<td>' + PFQ2 + '</td>';
-
-
-                                html += '<td>' + PF3 + '</td>';
-                                html += '<td>' + PFQ3 + '</td>';
-
-
-                                html += '<td>' + PF4 + '</td>';
-                                html += '<td>' + PFQ4 + '</td>';
-
-
-                                html += '<td>' + PF5 + '</td>';
-                                html += '<td>' + PFQ5 + '</td>';
-
-
-                                html += '<td>' + PF6 + '</td>';
-                                html += '<td>' + PFQ6 + '</td>';
-
-
-                                html += '</tr>';
-                            });
-                            $('#FuniturePositionGrid').html(html);
-
+                        if (PF0 == "1") {
+                            PF0 = "N/A";
+                        }
+                        else if (PF0 == "2") {
+                            PF0 = "Good";
+                        }
+                        else if (PF0 == "3") {
+                            PF0 = "Satisfactory";
+                        }
+                        else if (PF0 == "4") {
+                            PF0 = "Poor";
                         }
 
 
+                        if (PF1 == "1") {
+                            PF1 = "N/A";
+                        }
+                        else if (PF1 == "2") {
+                            PF1 = "Good";
+                        }
+                        else if (PF1 == "3") {
+                            PF1 = "Satisfactory";
+                        }
+                        else if (PF1 == "4") {
+                            PF1 = "Poor";
+                        }
+
+
+
+                        if (PF2 == "1") {
+                            PF2 = "N/A";
+                        }
+                        else if (PF2 == "2") {
+                            PF2 = "Good";
+                        }
+                        else if (PF2 == "3") {
+                            PF2 = "Satisfactory";
+                        }
+                        else if (PF2 == "4") {
+                            PF2 = "Poor";
+                        }
+
+
+                        if (PF3 == "1") {
+                            PF3 = "N/A";
+                        }
+                        else if (PF3 == "2") {
+                            PF3 = "Good";
+                        }
+                        else if (PF3 == "3") {
+                            PF3 = "Satisfactory";
+                        }
+                        else if (PF3 == "4") {
+                            PF3 = "Poor";
+                        }
+
+
+
+                        if (PF4 == "1") {
+                            PF4 = "N/A";
+                        }
+                        else if (PF4 == "2") {
+                            PF4 = "Good";
+                        }
+                        else if (PF4 == "3") {
+                            PF4 = "Satisfactory";
+                        }
+                        else if (PF4 == "4") {
+                            PF4 = "Poor";
+                        }
+
+                        if (PF5 == "1") {
+                            PF5 = "N/A";
+                        }
+                        else if (PF5 == "2") {
+                            PF5 = "Good";
+                        }
+                        else if (PF5 == "3") {
+                            PF5 = "Satisfactory";
+                        }
+                        else if (PF5 == "4") {
+                            PF5 = "Poor";
+                        }
+
+
+                        if (PF6 == "1") {
+                            PF6 = "N/A";
+                        }
+                        else if (PF6 == "2") {
+                            PF6 = "Good";
+                        }
+                        else if (PF6 == "3") {
+                            PF6 = "Satisfactory";
+                        }
+                        else if (PF6 == "4") {
+                            PF6 = "Poor";
+                        }
+
+
+                        var PFQ = item.FPQ.split(",");
+                        var PFQ0 = PFQ[0];
+                        var PFQ1 = PFQ[1];
+                        var PFQ2 = PFQ[2];
+                        var PFQ3 = PFQ[3];
+                        var PFQ4 = PFQ[4];
+                        var PFQ5 = PFQ[5];
+                        var PFQ6 = PFQ[6];
+
+
+
+
+
+                        html += '<tr>';
+                        html += '<td>' + item.asDate + '</td>';
+                        html += '<td>' + item.District + '</td>';
+                        html += '<td>' + item.ProjectName + '</td>';
+                        html += '<td>' + item.Center + '</td>';
+
+                        html += '<td>' + PF0 + '</td>';
+                        html += '<td>' + PFQ0 + '</td>';
+
+
+                        html += '<td>' + PF1 + '</td>';
+                        html += '<td>' + PFQ1 + '</td>';
+
+
+                        html += '<td>' + PF2 + '</td>';
+                        html += '<td>' + PFQ2 + '</td>';
+
+
+                        html += '<td>' + PF3 + '</td>';
+                        html += '<td>' + PFQ3 + '</td>';
+
+
+                        html += '<td>' + PF4 + '</td>';
+                        html += '<td>' + PFQ4 + '</td>';
+
+
+                        html += '<td>' + PF5 + '</td>';
+                        html += '<td>' + PFQ5 + '</td>';
+
+
+                        html += '<td>' + PF6 + '</td>';
+                        html += '<td>' + PFQ6 + '</td>';
+
+
+                        html += '</tr>';
                     });
+                    $('#FuniturePositionGrid').html(html);
 
                 }
 
 
+            });
 
-                $('#Search').click(function () {
+        }
 
-                    var startDate = $("#startDate").val();
-                    var endDate = $("#endDate").val();
 
-                    if (startDate == "") {
-                        startDate = "01-01-1950";
-                    }
-                    if (endDate == "") {
-                        endDate = "01-01-2099";
-                    }
 
-                    try {
-                        var District = $('#District').find('option:selected').text();
-                        var Center = $('#Center').find('option:selected').text();
+        $('#Search').click(function () {
 
-                        var Filter = District + "," + Center + "," + startDate + "," + endDate;
+            var startDate = $("#startDate").val();
+            var endDate = $("#endDate").val();
 
-                        try {
-                            FuniturePositionGrid(Filter);
-                        }
-                        catch (ex) {
+            if (startDate == "") {
+                startDate = "01-01-1950";
+            }
+            if (endDate == "") {
+                endDate = "01-01-2099";
+            }
 
-                        }
+            try {
+                var District = $('#District').find('option:selected').text();
+                var Center = $('#Center').find('option:selected').text();
 
-                    }
-                    catch (ex) {
+                $('#Start').text(startDate);
+                $('#End').text(endDate);
+                $('#disP').text(District);
 
-                    }
+                var Filter = District + "," + Center + "," + startDate + "," + endDate;
 
-                });
+                try {
+                    FuniturePositionGrid(Filter);
+                }
+                catch (ex) {
 
-            </script>
+                }
+
+            }
+            catch (ex) {
+
+            }
+
+        });
+
+    </script>
 

@@ -163,12 +163,19 @@
 
 
         <div class="col-12" style="text-align:center;">
-            <h1 style="text-align:center">No. of Visit by Medical Officer</h1>
+     
             <div class="col-10">
 
                 <table id="grid">
          
                     <thead>
+                        <tr>
+                            <th style="text-align: center" class="header" colspan="14">No. of Visit by Medical Officer
+</tr>
+
+                        <tr>
+                            <th style="text-align: center" class="header" colspan="14">Summary Report of Medical Officer of SDPs Visits During  <span id="Start"> </span>  to <span id="End">  </span> in District <span id="disP"></span></th>
+                        </tr>
                         <tr>
                             <th rowspan="2">Date</th>
                             <th rowspan="2">District</th>
@@ -231,8 +238,7 @@
                     $("#District").empty();
                     $("#Center").empty();
 
-                  
-                    
+              
 
 
                 });
@@ -264,8 +270,8 @@
 
                                 html += '<tr>';
                                 html += '<td>' + item.asDate + '</td>';
-                                html += '<td>' + item.ProjectName + '</td>';
                                 html += '<td>' + item.District + '</td>';
+                                html += '<td>' + item.ProjectName + '</td>';
                                 html += '<td>' + item.Center + '</td>';
 
                                 html += '<td>' + Mon1 + '</td>';
@@ -293,6 +299,42 @@
                     });
 
                 }
+
+                $('#Search').click(function () {
+
+                    var startDate = $("#startDate").val();
+                    var endDate = $("#endDate").val();
+
+                    if (startDate == "") {
+                        startDate = "01-01-1950";
+                    }
+                    if (endDate == "") {
+                        endDate = "01-01-2099";
+                    }
+
+                    try {
+                        var District = $('#District').find('option:selected').text();
+                        var Center = $('#Center').find('option:selected').text();
+
+                        $('#Start').text(startDate);
+                        $('#End').text(endDate);
+                        $('#disP').text(District);
+
+                        var Filter = District + "," + Center + "," + startDate + "," + endDate;
+
+                        try {
+                            Grid13(Filter);
+                        }
+                        catch (ex) {
+
+                        }
+
+                    }
+                    catch (ex) {
+
+                    }
+
+                });
 
 
             </script>
