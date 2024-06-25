@@ -170,6 +170,7 @@
                 <table id="Grid" class="table bordered table-condensed table-hover solid-line">
                     <thead>
                         <tr>
+                            <th> Date</th>
                             <th>SDP Type</th>
                             <th>Name of District</th>
                             <th>Center Name</th>
@@ -242,6 +243,7 @@
                                     Branded = "UnBranded";
                                 }
                                 html += '<tr>';
+                                html += '<td>' + item.asDate + '</td>';
                                 html += '<td>' + item.ProjectName + '</td>';
                                 html += '<td>' + item.District + '</td>';
                                 html += '<td>' + item.Center + '</td>';

@@ -3923,7 +3923,7 @@ END
 		inner join SurveyData sd3 on s.sbjnum = sd3.sbjnum and sd3.FieldId in (50446, 50486, 55588)--Center close Survey Ids
 		Inner join SurveyData sd5 on s.sbjnum = sd5.sbjnum and sd5.FieldId in (55592,50496,50635))
 		
-select   fs2.Title as District ,fs3.Title as Center, 
+select  convert(varchar, Created,101) asDate,  fs2.Title as District ,fs3.Title as Center, 
  FieldValue5 
  as Remarks
     into #Graph from cte
@@ -3936,7 +3936,7 @@ select   fs2.Title as District ,fs3.Title as Center,
  
 ";
 
-            var con = db.Database.SqlQuery<StuffPosition > (Sql).ToList().Where(x=>x.District.Contains(Des) && x.Center.Contains(Cen));
+            var con = db.Database.SqlQuery<StuffPosition> (Sql).ToList().Where(x=>x.District.Contains(Des) && x.Center.Contains(Cen));
             return Json(con);
         }
         public JsonResult Grid2(string id)
@@ -3999,7 +3999,7 @@ select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as Project
  FieldValue5 
  as Premises,
 case when FieldValue6 =1 then 'Open' else 'Close' end as OpenClose,
- FieldValue7 as Status
+ FieldValue7 as Status, convert(varchar, Created,101) asDate
     into #Graph from cte
 	inner join ProjectFieldSample fs2 on cte.FieldId2 = fs2.FieldID and fs2.Code IN (cte.FieldValue2)
 	inner join ProjectFieldSample fs3 on cte.FieldId3 = fs3.FieldID and fs3.Code IN (cte.FieldValue3)

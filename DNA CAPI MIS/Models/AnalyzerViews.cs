@@ -263,6 +263,7 @@ public class ProjectsList
 
     public class StuffPosition
     {
+        public string asDate { get; set; }
         public string District { get; set; }
         public string Center { get; set; }
         public string Remarks { get; set; }
@@ -271,6 +272,7 @@ public class ProjectsList
 
     public class Grid2
     {
+        public string asDate { get; set; }
         public string ProjectName { get; set; }
         public string District { get; set; }
         public string Center { get; set; }

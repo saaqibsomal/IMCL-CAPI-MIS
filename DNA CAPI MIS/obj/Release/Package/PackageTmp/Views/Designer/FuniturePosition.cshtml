@@ -259,7 +259,7 @@
                             $.each(data, function (key, item) {
 
 
-                                var PF = item.PF.split(",");
+                                var PF = item.FP.split(",");
                                 var PF0 = PF[0];
                                 var PF1 = PF[1];
                                 var PF2 = PF[2];
@@ -369,7 +369,7 @@
                                 }
 
 
-                                var PFQ = item.PFQ.split(",");
+                                var PFQ = item.FPQ.split(",");
                                 var PFQ0 = PFQ[0];
                                 var PFQ1 = PFQ[1];
                                 var PFQ2 = PFQ[2];
@@ -379,7 +379,7 @@
                                 var PFQ6 = PFQ[6];
 
 
-                                var PFQ = item.PF.split(",");
+                
                                 
 
                                 html += '<tr>';
@@ -388,31 +388,31 @@
                                 html += '<td>' + item.District + '</td>';
                                 html += '<td>' + item.Center + '</td>';
 
-                                html += '<td>' + PF1 + '</td>';
+                                html += '<td>' + PF0 + '</td>';
                                 html += '<td>' + PFQ0 + '</td>';
                        
 
-                                html += '<td>' + PF2 + '</td>';
+                                html += '<td>' + PF1 + '</td>';
                                 html += '<td>' + PFQ1 + '</td>';
 
 
-                                html += '<td>' + PF3 + '</td>';
+                                html += '<td>' + PF2 + '</td>';
                                 html += '<td>' + PFQ2 + '</td>';
 
 
-                                html += '<td>' + PF4 + '</td>';
+                                html += '<td>' + PF3 + '</td>';
                                 html += '<td>' + PFQ3 + '</td>';
 
 
-                                html += '<td>' + PF5 + '</td>';
+                                html += '<td>' + PF4 + '</td>';
                                 html += '<td>' + PFQ4 + '</td>';
 
 
-                                html += '<td>' + PF6 + '</td>';
+                                html += '<td>' + PF5 + '</td>';
                                 html += '<td>' + PFQ5 + '</td>';
 
 
-                                html += '<td>' + PF7 + '</td>';
+                                html += '<td>' + PF6 + '</td>';
                                 html += '<td>' + PFQ6 + '</td>';
 
 
