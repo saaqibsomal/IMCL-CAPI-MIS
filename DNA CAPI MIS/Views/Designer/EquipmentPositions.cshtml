@@ -1,0 +1,439 @@
+﻿
+
+@{
+    ViewBag.Title = "Dashboard";
+}
+@section Scripts {
+    <script>
+        var viewURL = "/Designer/Dashboard/";
+    </script>
+
+}
+
+<link href="~/Content/DSDS/dsds.css" rel="stylesheet" type="text/css" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
+@*CSS Class desktop is used for overlay*@
+
+<style>
+    .model {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.5);
+    }
+
+    .model-content {
+        background-color: #fefefe;
+        margin: 10% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+
+    .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+</style>
+<style>
+    .optionsRadios {
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+
+
+<style>
+    /* Style for the table */
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    /* Style for table headers */
+    th {
+        background-color: #007bff; /* Blue header color */
+        color: #fff; /* Text color */
+        font-weight: bold;
+        text-align: left;
+    }
+    /* Style for table cells */
+    td {
+        border: 1px solid #dddddd; /* Border color for cells */
+        padding: 8px;
+    }
+    /* Alternate row color */
+    tr:nth-child(even) {
+        background-color: #f2f2f2; /* Light gray */
+    }
+</style>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+
+    .container {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    ul {
+        list-style-type: none;
+        padding-left: 0;
+    }
+
+    li {
+        margin-bottom: 20px;
+    }
+
+    .criteria {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+
+        .criteria label {
+            font-weight: bold;
+        }
+
+        .criteria select {
+            padding: 5px;
+            width: 180px;
+        }
+
+        .criteria .sufficient {
+            color: green;
+        }
+
+        .criteria .quite-sufficient {
+            color: orange;
+        }
+
+        .criteria .poor {
+            color: red;
+        }
+</style>
+<div class="row desktop">
+    <div class="col-xs-12">
+
+        @Html.Partial("_ReportPartial")
+
+
+
+        <div class="col-12" style="text-align:center ; overflow:auto">
+
+            <div class="col-10">
+
+                <table id="grid">
+
+                    <thead>
+
+                        <tr>
+                            <th style="text-align: center" class="header" colspan="34"> Equipment Positions
+
+                        <tr>
+                            <th style="text-align: center" class="header" colspan="34">Summary Report of Equipment Positions of SDPs Visits During  <span id="Start"> </span>  to <span id="End">  </span> in District <span id="disP"></span></th>
+                        </tr>
+
+                        <tr>
+                            <th style="text-align: center" class="header" colspan="34">Summary Report of Equipment Positions of SDPs Visits During  <span id="Start"> </span>  to <span id="End">  </span> in District <span id="disP"></span></th>
+                        </tr>
+
+                        <tr>
+                            <th rowspan="2">Date</th>
+                            <th rowspan="2">District</th>
+                            <th rowspan="2">SDP Type</th>
+                            <th rowspan="2">SDP Name</th>
+                            <th colspan="2">Minilap Kits</th>
+                            <th colspan="2">IUCD Kits</th>
+                            <th colspan="2">B.P Apparatus</th>
+                            <th colspan="2">Thermometer</th>
+                            <th colspan="2">Weighing Machine</th>
+                            <th colspan="2">Stove</th>
+                            <th colspan="2">O.T Lights</th>
+                            <th colspan="2">Hydraulic Table</th>
+                            <th colspan="2">Auto Clove</th>
+                            <th colspan="2">Oxygen Cylinder</th>
+                            <th colspan="2">Aspirating Pumps</th>
+                            <th colspan="2">Wheel Chair</th>
+                            <th colspan="2">Stretcher</th>
+                            <th colspan="2">Generator</th>
+                            <th colspan="2">Screen</th>
+                        </tr>
+                        <tr>
+                            <th>Quantity Available</th>
+                            <th>(Good/Satisfactory/Poor)</th>
+                            <th>Quantity Available</th>
+                            <th>(Good/Satisfactory/Poor)</th>
+                            <th>Quantity Available</th>
+                            <th>(Good/Satisfactory/Poor)</th>
+                            <th>Quantity Available</th>
+                            <th>(Good/Satisfactory/Poor)</th>
+                            <th>Quantity Available</th>
+                            <th>(Good/Satisfactory/Poor)</th>
+                            <th>Quantity Available</th>
+                            <th>(Good/Satisfactory/Poor)</th>
+                            <th>Quantity Available</th>
+                            <th>(Good/Satisfactory/Poor)</th>
+                            <th>Quantity Available</th>
+                            <th>(Good/Satisfactory/Poor)</th>
+                            <th>Quantity Available</th>
+                            <th>(Good/Satisfactory/Poor)</th>
+                            <th>Quantity Available</th>
+                            <th>(Good/Satisfactory/Poor)</th>
+                            <th>Quantity Available</th>
+                            <th>(Good/Satisfactory/Poor)</th>
+                            <th>Quantity Available</th>
+                            <th>(Good/Satisfactory/Poor)</th>
+                            <th>Quantity Available</th>
+                            <th>(Good/Satisfactory/Poor)</th>
+                            <th>Quantity Available</th>
+                            <th>(Good/Satisfactory/Poor)</th>
+                            <th>Quantity Available</th>
+                            <th>(Good/Satisfactory/Poor)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="grid15">
+                </tbody>
+                </table>
+
+            </div>
+        </div>
+
+        <button id="exportButton">Download as Excel</button>
+        <!-- Loading (remove the following to stop the loading)-->
+        <div class="overlay" style="display:none;"></div>
+        <div class="loading-img" style="display: none;"></div>
+        <!-- end loading -->
+
+
+
+
+
+    </div>
+
+
+            <script src="https://cdn.datatables.net/2.0.5/js/dataTables.min.js"></script>
+
+
+            <script>
+
+
+                $(document).ready(function () {
+                 Grid15("0");
+                });
+
+                var selectedTex = "";
+                $('#Checklist').change(function () {
+                    var Checklist = $('#Checklist').val();
+
+                    GetDistrict(Checklist);
+                    $("#District").empty();
+                    $("#Center").empty();
+
+                  
+                    
+
+
+                });
+
+ function Grid15(Filter) {
+
+
+
+
+                    $.ajax({
+                        type: 'POST',
+                        url: "/Designer/Grid15/" + Filter,
+                        data: {},
+                        async: true,
+                        success: function (data) {
+                            $("#grid15").empty();
+                            var html = '';
+                            $.each(data, function (key, item) {
+
+
+
+                                var FunitureQuan = item.FunitureQuan.split(',');
+                                var FuniturQual =  item.FuniturQual.split(',');
+                                var Quality = 0;
+
+                                var Quality0 = FuniturQual[0] == "1" ? "No" :
+                                    FuniturQual[0] == "2" ? "Yes" :
+                                        FuniturQual[0] == "3" ? "Satisfactory" :
+                                            FuniturQual[0] == "4" ? "Poor" :
+                                                Quality;
+
+
+                                var Quality1 = FuniturQual[1] == "1" ? "No" :
+                                    FuniturQual[1] == "2" ? "Yes" :
+                                        FuniturQual[1] == "3" ? "Satisfactory" :
+                                            FuniturQual[1] == "4" ? "Poor" :
+                                                Quality;
+
+                                var Quality2 = FuniturQual[2] == "1" ? "No" :   FuniturQual[2] == "2" ? "Yes" :  FuniturQual[0] == "3" ? "Satisfactory" : FuniturQual[0] == "4" ? "Poor" :  Quality;
+
+                                var Quality3 = FuniturQual[3] == "1" ? "No" :
+                                    FuniturQual[3] == "2" ? "Yes" :
+                                        FuniturQual[3] == "3" ? "Satisfactory" :
+                                            FuniturQual[3] == "4" ? "Poor" :
+                                                Quality;
+
+                                var Quality4 = FuniturQual[4] == "1" ? "No" :
+                                    FuniturQual[4] == "2" ? "Yes" :
+                                        FuniturQual[4] == "3" ? "Satisfactory" :
+                                            FuniturQual[4] == "4" ? "Poor" :
+                                                Quality;
+
+                                var Quality5 = FuniturQual[5] == "1" ? "No" :
+                                    FuniturQual[5] == "2" ? "Yes" :
+                                        FuniturQual[5] == "3" ? "Satisfactory" :
+                                            FuniturQual[5] == "4" ? "Poor" :
+                                                Quality;
+
+                                var Quality6 = FuniturQual[6] == "1" ? "No" :
+                                    FuniturQual[6] == "2" ? "Yes" :
+                                        FuniturQual[6] == "3" ? "Satisfactory" :
+                                            FuniturQual[6] == "4" ? "Poor" :
+                                                Quality;
+
+                                var Quality7 = FuniturQual[7] == "1" ? "No" :
+                                    FuniturQual[7] == "2" ? "Yes" :
+                                        FuniturQual[7] == "3" ? "Satisfactory" :
+                                            FuniturQual[7] == "4" ? "Poor" :
+                                                Quality;
+
+                                var Quality8 = FuniturQual[8] == "1" ? "No" :
+                                    FuniturQual[8] == "2" ? "Yes" :
+                                        FuniturQual[8] == "3" ? "Satisfactory" :
+                                            FuniturQual[8] == "4" ? "Poor" :
+                                                Quality;
+
+
+                                html += '<tr>';
+                                html += '<td>' + item.asDate + '</td>';
+                                html += '<td>' + item.District + '</td>';
+                                html += '<td>' + item.ProjectName + '</td>';
+                                html += '<td>' + item.Center + '</td>';
+
+                                html += '<td>' + FunitureQuan[0] + '</td>';
+                                html += '<td>' + Quality0 + '</td>';
+
+                                html += '<td>' + FunitureQuan[1] + '</td>';
+                                html += '<td>' + Quality1 + '</td>';
+
+                                html += '<td>' + FunitureQuan[2] + '</td>';
+                                html += '<td>' + Quality2 + '</td>';
+
+                                html += '<td>' + FunitureQuan[3] + '</td>';
+                                html += '<td>' + Quality3 + '</td>';
+
+                                html += '<td>' + FunitureQuan[4] + '</td>';
+                                html += '<td>' + Quality3 + '</td>';
+
+                                html += '<td>' + FunitureQuan[5] + '</td>';
+                                html += '<td>' + Quality5 + '</td>';
+
+                                html += '<td>' + FunitureQuan[6] + '</td>';
+                                html += '<td>' + Quality6 + '</td>';
+
+                                html += '<td>' + FunitureQuan[7] + '</td>';
+                                html += '<td>' + Quality7 + '</td>';
+
+                                html += '<td>' + FunitureQuan[8] + '</td>';
+                                html += '<td>' + Quality8 + '</td>';
+                    
+
+                                html += '</tr>';
+                            });
+                            $('#grid15').html(html);
+
+                        }
+
+
+                    });
+
+                }
+
+
+                $('#Search').click(function () {
+
+                    var startDate = $("#startDate").val();
+                    var endDate = $("#endDate").val();
+
+                    if (startDate == "") {
+                        startDate = "01-01-1950";
+                    }
+                    if (endDate == "") {
+                        endDate = "01-01-2099";
+                    }
+
+                    try {
+                        var District = $('#District').find('option:selected').text();
+                        var Center = $('#Center').find('option:selected').text();
+
+                        $('#Start').text(startDate);
+                        $('#End').text(endDate);
+                        $('#disP').text(District);
+
+                        var Filter = District + "," + Center + "," + startDate + "," + endDate;
+
+                        try {
+                            Grid15(Filter);
+                        }
+                        catch (ex) {
+
+                        }
+
+                    }
+                    catch (ex) {
+
+                    }
+
+                });
+
+
+            </script>
+

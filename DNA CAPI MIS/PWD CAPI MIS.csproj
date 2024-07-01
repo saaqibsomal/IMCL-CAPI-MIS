@@ -3341,6 +3341,7 @@
     <Content Include="Views\Designer\IECMECMaterialStatus2.cshtml" />
     <Content Include="Views\Designer\FuniturePosition.cshtml" />
     <Content Include="Views\Designer\TechnicalMonitoringChecklist.cshtml" />
+    <Content Include="Views\Designer\EquipmentPositions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

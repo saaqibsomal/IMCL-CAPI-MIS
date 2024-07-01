@@ -235,8 +235,60 @@
 
                 });
 
-                function Grid11(Filter) {
+                //function Grid11(Filter) {
 
+                //    $.ajax({
+                //        type: 'POST',
+                //        url: "/Designer/Grid11/" + Filter,
+                //        data: {},
+                //        async: true,
+                //        success: function (data) {
+                //            $("#tbody11").empty();
+                //            var html = '';
+                //            $.each(data, function (key, item) {
+
+
+                //                var technicalArray = item.Technical.split(',');
+                //                var totalTechnical = technicalArray.length;
+                //                var yesCount = technicalArray.filter(function (val) { return val.trim() === '1'; }).length;
+                //                var yesPercentage = (yesCount / totalTechnical) * 100;
+
+
+
+                //                html += '<tr>';
+                //                html += '<td>' + item.asDate + '</td>';
+                //                html += '<td>' + item.District + '</td>';
+                //                html += '<td>' + item.ProjectName + '</td>';
+                //                html += '<td>' + item.Center + '</td>';
+                //                //html += '<td>' + item.Technical.split(',')[0] + '</td>';
+                //                //html += '<td>' + item.Technical.split(',')[1] + '</td>';
+                //                //html += '<td>' + item.Technical.split(',')[2] + '</td>';
+                //                //html += '<td>' + item.Technical.split(',')[3] + '</td>';
+                //                //html += '<td>' + item.Technical.split(',')[4] + '</td>';
+
+                //                // Display individual technical fields
+                //                for (var i = 0; i < totalTechnical; i++) {
+                //                    html += '<td>' + technicalArray[i] + '</td>';
+                //                }
+
+                //                // Add a new column for the percentage of "Yes"
+                //                html += '<td>' + yesPercentage.toFixed(2) + '%</td>';
+
+
+
+                //                html += '</tr>';
+                //            });
+                //            $('#tbody11').html(html);
+
+                //        }
+
+
+                //    });
+
+                //}
+
+
+                function Grid11(Filter) {
                     $.ajax({
                         type: 'POST',
                         url: "/Designer/Grid11/" + Filter,
@@ -245,46 +297,50 @@
                         success: function (data) {
                             $("#tbody11").empty();
                             var html = '';
+                            var totalRows = data.length;
+                            var handWashingYesCount = 0;
+                            var decontaminationYesCount = 0;
+                            var cleaningYesCount = 0;
+                            var disinfectionYesCount = 0;
+                            var wasteDisposalYesCount = 0;
+
                             $.each(data, function (key, item) {
-
-
                                 var technicalArray = item.Technical.split(',');
-                                var totalTechnical = technicalArray.length;
-                                var yesCount = technicalArray.filter(function (val) { return val.trim() === '1'; }).length;
-                                var yesPercentage = (yesCount / totalTechnical) * 100;
 
-
+                                // Count Yes (1) for each technical field
+                                if (technicalArray[0].trim() === '1') handWashingYesCount++;
+                                if (technicalArray[1].trim() === '1') decontaminationYesCount++;
+                                if (technicalArray[2].trim() === '1') cleaningYesCount++;
+                                if (technicalArray[3].trim() === '1') disinfectionYesCount++;
+                                if (technicalArray[4].trim() === '1') wasteDisposalYesCount++;
 
                                 html += '<tr>';
                                 html += '<td>' + item.asDate + '</td>';
                                 html += '<td>' + item.District + '</td>';
                                 html += '<td>' + item.ProjectName + '</td>';
                                 html += '<td>' + item.Center + '</td>';
-                                //html += '<td>' + item.Technical.split(',')[0] + '</td>';
-                                //html += '<td>' + item.Technical.split(',')[1] + '</td>';
-                                //html += '<td>' + item.Technical.split(',')[2] + '</td>';
-                                //html += '<td>' + item.Technical.split(',')[3] + '</td>';
-                                //html += '<td>' + item.Technical.split(',')[4] + '</td>';
 
                                 // Display individual technical fields
-                                for (var i = 0; i < totalTechnical; i++) {
-                                    html += '<td>' + technicalArray[i] + '</td>';
+                                for (var i = 0; i < technicalArray.length-1; i++) {
+                                    html += '<td>' + (technicalArray[i] == "1" ? "Yes" : "No") + '</td>';
                                 }
-
-                                // Add a new column for the percentage of "Yes"
-                                html += '<td>' + yesPercentage.toFixed(2) + '%</td>';
-
-
 
                                 html += '</tr>';
                             });
+
+                            // Append the calculated row with percentages
+                            html += '<tr>';
+                            html += '<td colspan="4"><strong>Total Percentage</strong></td>';
+                            html += '<td>' + ((handWashingYesCount / totalRows) * 100).toFixed(2) + '%</td>';
+                            html += '<td>' + ((decontaminationYesCount / totalRows) * 100).toFixed(2) + '%</td>';
+                            html += '<td>' + ((cleaningYesCount / totalRows) * 100).toFixed(2) + '%</td>';
+                            html += '<td>' + ((disinfectionYesCount / totalRows) * 100).toFixed(2) + '%</td>';
+                            html += '<td>' + ((wasteDisposalYesCount / totalRows) * 100).toFixed(2) + '%</td>';
+                            html += '</tr>';
+
                             $('#tbody11').html(html);
-
                         }
-
-
                     });
-
                 }
 
 

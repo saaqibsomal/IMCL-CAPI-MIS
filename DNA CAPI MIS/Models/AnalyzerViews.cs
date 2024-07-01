@@ -394,6 +394,18 @@ public class ProjectsList
 
 
     }  
+    public class Grid15
+    {
+        public string asDate { get; set; }
+        public string ProjectName { get; set; }
+        public string District { get; set; }
+        public string Center { get; set; }
+        public string FunitureQuan { get; set; }
+        public string FuniturQual { get; set; }
+
+
+
+    }  
     
     public class Grid12
     {
