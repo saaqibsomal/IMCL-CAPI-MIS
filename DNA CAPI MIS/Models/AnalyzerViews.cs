@@ -259,6 +259,17 @@ public class ProjectsList
         public string FieldValue1 { get; set; }
 
     }
+      
+    
+    public class ContraceptiveQ
+    {
+        public string District { get; set; }
+        public string Medicen { get; set; }
+ 
+        public string Concept { get; set; }
+ 
+
+    }
 
 
     public class StuffPosition

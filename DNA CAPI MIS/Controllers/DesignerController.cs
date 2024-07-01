@@ -545,6 +545,68 @@ select fs2.Title as District,fs1.Title as contraceptive ,cte.FieldValue1
 
 
 
+        [HttpPost]
+        public JsonResult ContraceptiveDetailQuantity(string id)
+        {
+            string Sql = $@" IF OBJECT_ID('tempdb..#Graph') IS NOT NULL
+BEGIN
+    DROP TABLE #Graph;
+END
+
+;with cte as (
+	  select s.ProjectID,  s.sbjnum, s.Created, 
+       
+		sd2.fieldId as FieldId2, sd2.fieldValue as FieldValue2,
+		sd3.fieldId as FieldId3, sd3.fieldValue as FieldValue3,
+	   
+		sd5.fieldId as FieldId5, sd5.fieldValue as FieldValue5,
+		sd6.fieldId as FieldId6, sd6.fieldValue as FieldValue6,
+	
+	row_number() over (partition by  sd2.fieldId, sd2.fieldValue,sd3.fieldId,sd3.fieldValue ,sd5.fieldId,sd5.fieldValue order by s.created desc) as RowNum
+	from survey s
+		inner join SurveyData sd2 on s.sbjnum = sd2.sbjnum and sd2.FieldId in (50435, 50484, 55587) --District
+		inner join SurveyData sd3 on s.sbjnum = sd3.sbjnum and sd3.FieldId in (50446, 50486, 55588)--Center close Survey Ids
+		Inner join SurveyData sd5 on s.sbjnum = sd5.sbjnum and sd5.FieldId in (50558,50502,55598) -- Medicen
+	    Inner join SurveyData sd6 on s.sbjnum = sd6.sbjnum  and sd6.FieldId in (50559,50504,55601) -- Concept
+		
+		)
+select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as ProjectName, fs2.Title as District ,fs3.Title as Center, 
+ FieldValue5 
+ as Medicen,
+FieldValue6 as Concept,
+
+  convert(varchar, Created,101) asDate,
+ sbjnum
+    into #Graph from cte
+	inner join ProjectFieldSample fs2 on cte.FieldId2 = fs2.FieldID and fs2.Code IN (cte.FieldValue2)
+	inner join ProjectFieldSample fs3 on cte.FieldId3 = fs3.FieldID and fs3.Code IN (cte.FieldValue3)
+	left join ProjectFieldSample fs5 on cte.FieldId5 = fs5.FieldID --and fs5.Code IN (cte.FieldValue5)
+	left join ProjectFieldSample fs6 on cte.FieldId6 = fs6.FieldID --and fs6.Code IN (cte.FieldValue6)
+
+    where RowNum = 1  
+
+  and created  between '{id.Split(',')[4]}' and '{id.Split(',')[5]}' select distinct * from #Graph g  where len(g.Medicen) > 29
+  and (District like '%{id.Split(',')[3]}%' or '---Select All---' = '{id.Split(',')[3]}') 
+ 
+
+ 
+";
+
+            var con = db.Database.SqlQuery<ContraceptiveQ>(Sql).ToList();
+
+
+            var Contraceptive = GetContraceptiveQuantityPei(con, id.Split(',')[3]);
+
+            var ContraceptiveItems = Contraceptive.Select(x => new SelectListItem
+            {
+                Text = x.Contraceptive,
+                Value = x.Qty.ToString()
+            }).ToList();
+
+            return Json(ContraceptiveItems);
+        }
+
+
         public List<ContraceptivePie> GetContraceptivePei(List<Contraceptive> data, string District)
         {
             List<ContraceptivePie> Pie = new List<ContraceptivePie>();
@@ -597,6 +659,74 @@ select fs2.Title as District,fs1.Title as contraceptive ,cte.FieldValue1
 
 
             }
+
+            var groupedData = Pie.GroupBy(x => x.Contraceptive)
+                     .Select(g => new ContraceptivePie
+                     {
+                         Contraceptive = g.Key, // The group key (value of 'Contraceptive')
+                         Qty = g.Sum(x => x.Qty) // The sum of 'Qty' for each group
+                     })
+                     .ToList();
+            return groupedData;
+        }
+        public List<ContraceptivePie> GetContraceptiveQuantityPei(List<ContraceptiveQ> data, string District)
+        {
+            List<ContraceptivePie> Pie = new List<ContraceptivePie>();
+
+
+            string ConType = "";
+            foreach (var item in data)
+            {
+
+                var PipSplit = item.Concept.Split('|');
+                int i = 0;
+                foreach (var type in PipSplit)
+                {
+
+                    if (i == 0)
+                    {
+                        ConType = "Condoms";
+                    }
+                    else if (i == 1)
+                    {
+                        ConType = "COC";
+                    }
+                    else if (i == 2)
+                    {
+                        ConType = "POP";
+                    }
+                    else if (i == 3)
+                    {
+                        ConType = "ECP";
+                    }
+                    else if (i == 4)
+                    {
+                        ConType = "3 Months Inj(Depo)";
+                    }
+                    else if (i == 5)
+                    {
+                        ConType = "3 Month Inj (Syana Press)";
+                    }
+                    else if (i == 6)
+                    {
+                        ConType = "IUCD (CT-380-A)";
+                    }
+                    else if (i == 6)
+                    {
+                        ConType = "Jadelle";
+                    }
+                    Pie.Add(new ContraceptivePie { Contraceptive = ConType, Qty = Convert.ToInt32(type.Split(',')[0].Split('-')[1]) });
+                    i++;
+                }
+
+
+            }
+
+
+
+
+
+
 
             var groupedData = Pie.GroupBy(x => x.Contraceptive)
                      .Select(g => new ContraceptivePie
