@@ -3829,6 +3829,14 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
 
             ReportDropdown();
             return View();
+        }   
+        
+        
+        public ActionResult TechnicalMonitoringChecklist()
+        {
+
+            ReportDropdown();
+            return View();
         }
 
         public void ReportDropdown()
@@ -4715,7 +4723,7 @@ select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as Project
 	inner join ProjectFieldSample fs1 on cte.FieldId1 = fs1.FieldID and fs1.Code IN (cte.FieldValue1)
 	inner join ProjectFieldSample fs2 on cte.FieldId2 = fs2.FieldID and fs2.Code IN (cte.FieldValue2)
 	inner join ProjectFieldSample fs3 on cte.FieldId3 = fs3.FieldID --and fs3.Code IN (cte.FieldValue3)  
-  and created between '{sd}' and '{ed}' select * from #Graph   
+  and created between '{sd}' and '{ed}' select distinct * from #Graph g where len(g.Technical) > 10
 
  
 ";

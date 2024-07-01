@@ -120,7 +120,7 @@
                 return buf;
             }
 
-            saveAs(new Blob([s2ab(wbout)], { type: "application/octet-stream" }), 'IEC_MEC_Material_Status.xlsx');
+            saveAs(new Blob([s2ab(wbout)], { type: "application/octet-stream" }), 'ExportExcelReport.xlsx');
         });
     });
 
@@ -171,47 +171,6 @@
         });
     }
 
-
-
-
-    //$('#Search').click(function () {
-
-    //    var startDate = $("#startDate").val();
-    //    var endDate = $("#endDate").val();
-
-    //    if (startDate == "") {
-    //        startDate = "01-01-1950";
-    //    }
-    //    if (endDate == "") {
-    //        endDate = "01-01-2099";
-    //    }
-
-    //    try {
-    //        var District = $('#District').find('option:selected').text();
-    //        var Center = $('#Center').find('option:selected').text();
-
-    //        var Filter = District + "," + Center + "," + startDate + "," + endDate;
-
-    //        try {
-    //            Grid2(Filter);
-    //            Grid3(Filter);
-    //            Grid4(Filter);
-    //            Grid6(Filter);
-    //            Grid13(Filter);
-    //            Grid5(Filter);
-    //            grid7(Filter);
-    //            GridIECandStock(Filter);
-    //        }
-    //        catch (ex) {
-
-    //        }
-
-    //    }
-    //    catch (ex) {
-
-    //    }
-
-    //});
 
 
 </script>

@@ -177,12 +177,21 @@
 
 
         <div class="col-12" style="text-align:center;">
-            <h1>Contraceptive Stock Position</h1>
+          
             <div class="col-12" style="overflow:auto">
 
                 <table id="grid">
               
                     <thead>
+
+                        <tr>
+                            <th style="text-align: center" class="header" colspan="34"> Contraceptive Stock Performance
+</tr>
+
+                        <tr>
+                            <th style="text-align: center" class="header" colspan="34">Summary Report of Contraceptive Stock Performance of SDPs Visits During  <span id="Start"> </span>  to <span id="End">  </span> in District <span id="disP"></span></th>
+                        </tr>
+
                         <tr class="header-row">
                             <th colspan="2"></th>
                             <th colspan="2"></th>
@@ -235,8 +244,8 @@
                             <th>2nd</th>
                             <th>3rd</th>
                             @*<th>1st</th>
-                            <th>2nd</th>
-                            <th>3rd</th>*@
+            <th>2nd</th>
+            <th>3rd</th>*@
                         </tr>
                     </thead>
 
@@ -350,8 +359,8 @@
 
                         html += '<tr>';
                         html += '<td>' + item.asDate + '</td>';
-                        html += '<td>' + item.ProjectName + '</td>';
                         html += '<td>' + item.District + '</td>';
+                        html += '<td>' + item.ProjectName + '</td>';
                         html += '<td>' + item.Center + '</td>';
 
 
@@ -427,6 +436,11 @@
             try {
                 var District = $('#District').find('option:selected').text();
                 var Center = $('#Center').find('option:selected').text();
+
+
+                $('#Start').text(startDate);
+                $('#End').text(endDate);
+                $('#disP').text(District);
 
                 var Filter = District + "," + Center + "," + startDate + "," + endDate;
 

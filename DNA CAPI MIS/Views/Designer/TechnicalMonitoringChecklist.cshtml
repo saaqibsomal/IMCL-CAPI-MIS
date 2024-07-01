@@ -163,57 +163,38 @@
 
 
         <div class="col-12" style="text-align:center;">
-        
-            <div class="col-10" style="overflow:auto">
+          
+            <div class="col-10">
 
-                <table id="grid" >
+                <table id="grid">
+              
                     <thead>
+
                         <tr>
-                            <th style="text-align: center" class="header" colspan="22">IEC & MEC Material Status
+                            <th style="text-align: center" class="header" colspan="9">Technical Monitoring Checklist
 </tr>
 
                         <tr>
-                            <th style="text-align: center" class="header" colspan="22">Summary Report of IEC & MEC Material Status of SDPs Visits During  <span id="Start"> </span>  to <span id="End">  </span> in District <span id="disP"></span></th>
+                            <th style="text-align: center" class="header" colspan="9">Technical Monitoring Checklist of SDPs Visits During  <span id="Start"> </span>  to <span id="End">  </span> in District <span id="disP"></span></th>
                         </tr>
                         <tr>
                             <th>Date</th>
-                            <th>District</th>
-                            <th>SDP Type</th>
-                            <th>SDP Name</th>
-                            <th colspan="3">Daily Client Register/ECR</th>
-                            <th colspan="3">Daily #/Monthly Break-Up</th>
-                            <th colspan="3">Medicine Stock Register</th>
-                            <th colspan="3">Contraceptive Stock Register</th>
-                            <th colspan="3">Log Book</th>
-                            <th colspan="3">Dead Stock Register</th>
-                        </tr>
-                        <tr>
-                            <th colspan="4"></th>
-                            <th>Available</th>
-                            <th>Maintained</th>
-                            <th>Proper</th>
-                            <th>Available</th>
-                            <th>Maintained</th>
-                            <th>Proper</th>
-                            <th>Available</th>
-                            <th>Maintained</th>
-                            <th>Proper</th>
-                            <th>Available</th>
-                            <th>Maintained</th>
-                            <th>Proper</th>
-                            <th>Available</th>
-                            <th>Maintained</th>
-                            <th>Proper</th>
-                            <th>Available</th>
-                            <th>Maintained</th>
-                            <th>Proper</th>
+                            <th rowspan="2">District</th>
+                            <th rowspan="3">SDP Type</th>
+                            <th rowspan="2">SDP Name</th>
+                            <th rowspan="1">Hand Washing </th>
+                            <th rowspan="1">Decontamination </th>
+                            <th rowspan="1">Cleaning (Instruments) </th>
+                            <th rowspan="1">High level disinfection </th>
+                            <th rowspan="1">Waste disposal </th>
+                  
                         </tr>
                     </thead>
-                    <tbody id="Grid9">
-                        
+                    <tbody id="tbody11">
+                    
                     </tbody>
                 </table>
-
+               
             </div>
         </div>
 
@@ -237,7 +218,7 @@
 
 
                 $(document).ready(function () {
-                    GridIECandStock("0")
+                    Grid11("0");
                 });
 
                 var selectedTex = "";
@@ -254,51 +235,24 @@
 
                 });
 
-
-                function GridIECandStock(Filter) {
+                function Grid11(Filter) {
 
                     $.ajax({
                         type: 'POST',
-                        url: "/Designer/GridIECandStock/" + Filter,
+                        url: "/Designer/Grid11/" + Filter,
                         data: {},
                         async: true,
                         success: function (data) {
-                            $("#Grid9").empty();
+                            $("#tbody11").empty();
                             var html = '';
                             $.each(data, function (key, item) {
 
 
-                                var DC = item.dailyClient.split(",");
-                                var DC1 = DC[0];
-                                var DC2 = DC[1];
-                                var DC3 = DC[2];
+                                var technicalArray = item.Technical.split(',');
+                                var totalTechnical = technicalArray.length;
+                                var yesCount = technicalArray.filter(function (val) { return val.trim() === '1'; }).length;
+                                var yesPercentage = (yesCount / totalTechnical) * 100;
 
-
-
-                                var MS = item.MediStock.split(",");
-                                var MS1 = MS[0];
-                                var MS2 = MS[1];
-                                var MS3 = MS[2];
-                                
-                                var BU = item.BreakUp.split(",");
-                                var BU1 = BU[0];
-                                var BU2 = BU[1];
-                                var BU3 = BU[2];
-
-                                var SR = item.StockReg.split(",");
-                                var SR1 = SR[0];
-                                var SR2 = SR[1];
-                                var SR3 = SR[2];
-
-                                var LB = item.LogBook.split(",");
-                                var LB1 = LB[0];
-                                var LB2 = LB[1];
-                                var LB3 = LB[2];
-
-                                var DS = item.DeadStock.split(",");
-                                var DS1 = DS[0];
-                                var DS2 = DS[1];
-                                var DS3 = DS[2];
 
 
                                 html += '<tr>';
@@ -306,36 +260,25 @@
                                 html += '<td>' + item.District + '</td>';
                                 html += '<td>' + item.ProjectName + '</td>';
                                 html += '<td>' + item.Center + '</td>';
+                                //html += '<td>' + item.Technical.split(',')[0] + '</td>';
+                                //html += '<td>' + item.Technical.split(',')[1] + '</td>';
+                                //html += '<td>' + item.Technical.split(',')[2] + '</td>';
+                                //html += '<td>' + item.Technical.split(',')[3] + '</td>';
+                                //html += '<td>' + item.Technical.split(',')[4] + '</td>';
 
-                                html += '<td>' + (DC1 == "1" ? "Yes" : "No") + '</td>';
-                                html += '<td>' + (DC2 == "1" ? "Yes" : "No") + '</td>';
-                                html += '<td>' + (DC3 == "1" ? "Yes" : "No") + '</td>';
+                                // Display individual technical fields
+                                for (var i = 0; i < totalTechnical; i++) {
+                                    html += '<td>' + technicalArray[i] + '</td>';
+                                }
+
+                                // Add a new column for the percentage of "Yes"
+                                html += '<td>' + yesPercentage.toFixed(2) + '%</td>';
 
 
-                                html += '<td>' + (MS1 == "1" ? "Yes" : "No") + '</td>';
-                                html += '<td>' + (MS2 == "1" ? "Yes" : "No") + '</td>';
-                                html += '<td>' + (MS3 == "1" ? "Yes" : "No") + '</td>';
-
-
-                                html += '<td>' + (BU1 == "1" ? "Yes" : "No") + '</td>';
-                                html += '<td>' + (BU2 == "1" ? "Yes" : "No") + '</td>';
-                                html += '<td>' + (BU3 == "1" ? "Yes" : "No") + '</td>';
-
-                                html += '<td>' + (SR1 == "1" ? "Yes" : "No") + '</td>';
-                                html += '<td>' + (SR2 == "1" ? "Yes" : "No") + '</td>';
-                                html += '<td>' + (SR3 == "1" ? "Yes" : "No") + '</td>';
-
-                                html += '<td>' + (LB1 == "1" ? "Yes" : "No") + '</td>';
-                                html += '<td>' + (LB2 == "1" ? "Yes" : "No") + '</td>';
-                                html += '<td>' + (LB3 == "1" ? "Yes" : "No") + '</td>';
-
-                                html += '<td>' + (DS1 == "1" ? "Yes" : "No") + '</td>';
-                                html += '<td>' + (DS2 == "1" ? "Yes" : "No") + '</td>';
-                                html += '<td>' + (DS3 == "1" ? "Yes" : "No") + '</td>';
 
                                 html += '</tr>';
                             });
-                            $('#Grid9').html(html);
+                            $('#tbody11').html(html);
 
                         }
 
@@ -343,6 +286,8 @@
                     });
 
                 }
+
+
 
                 $('#Search').click(function () {
 
@@ -367,7 +312,7 @@
                         var Filter = District + "," + Center + "," + startDate + "," + endDate;
 
                         try {
-                            GridIECandStock(Filter);
+                            Grid11(Filter);
                         }
                         catch (ex) {
 

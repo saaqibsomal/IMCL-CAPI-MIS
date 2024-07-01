@@ -3340,6 +3340,7 @@
     <Content Include="Views\Designer\ContraceptiveStockPerformance.cshtml" />
     <Content Include="Views\Designer\IECMECMaterialStatus2.cshtml" />
     <Content Include="Views\Designer\FuniturePosition.cshtml" />
+    <Content Include="Views\Designer\TechnicalMonitoringChecklist.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

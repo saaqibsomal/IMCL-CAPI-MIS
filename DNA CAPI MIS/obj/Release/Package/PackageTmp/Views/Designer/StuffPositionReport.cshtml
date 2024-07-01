@@ -156,467 +156,390 @@
         }
 </style>
 <div class="row desktop">
-    <div class="col-xs-12">
-        <div class="box">
-            <div class="box-header">
-                <h3 class="box-title" style="width:100%">Dashboard</h3>
-                <div class="col-12">
-                    <div class="row">
-                        <div class="col-md-12" style="margin-left:4px;margin-top:2px"><b> Type of SDP</b></div>
-                        <div class="col-10">
-                            <div class="col-md-4 col-sm-12">
-                                @Html.DropDownList("Checklist", ViewBag.Checklist as List<SelectListItem>, "Select SDP Type For All", htmlAttributes: new { @class = "form-control", id = "Checklist" })
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-12">
-                        <div class="col-md-12" style="margin-left:4px;margin-top:2px"><b> District</b></div>
-                        <div class="col-10">
-                            <div class="col-md-4 col-sm-12">
-                                @Html.DropDownList("District", ViewBag.District as List<SelectListItem>, htmlAttributes: new { @class = "form-control", id = "District" })
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    @Html.Partial("_ReportPartial")
 
 
-                <div class="row">
-                    <div class="col-md-12" style="margin-left:4px;margin-top:2px"><b> Center</b></div>
-                    <div class="col-12">
+    <div class="col-12" style="text-align:center;">
 
-                        <div class="col-10">
-                            <div class="col-md-4 col-sm-12">
-                                @Html.DropDownList("Center", ViewBag.Center as List<SelectListItem>, htmlAttributes: new { @class = "form-control", id = "Center" })
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="col-10">
 
 
-                <div class="row">
-                    <div class="col-12">
+            <table id="grid" class="table bordered table-condensed table-hover solid-line">
+                <thead>
+                    <tr>
+                        <th style="text-align: center" class="header" colspan="13"> Staff Position
+                    </tr>
+                    <tr>
+                        <th style="text-align: center" class="header" colspan="13">Summary Report of Staff Position of SDPs Visits During  <span id="Start"> </span>  to <span id="End">  </span> in District <span id="disP"></span></th>
+                    </tr>
+                    <tr>
+                        <th>Date</th>
+                        <th>Name of District</th>
+                        <th>Center Name</th>
+                        <th>Women Medical Officer</th>
+                        <th>Accounts Assitant</th>
+                        <th>Theater Nurse</th>
+                        <th>O.T Technician</th>
+                        <th>Family Welfare Councilor</th>
+                        <th>Family welfare Worker</th>
+                        <th>Family Welfare Worker Assistant</th>
+                        <th>Driver</th>
+                        <th>Help</th>
+                        <th>Sweep</th>
 
-                        <!-- Date Range Inputs -->
-                        <div class="col-10">
-                            <div class="col-md-4 col-sm-12">
-                                <label for="startDate" style="margin-left: 4px; margin-top: 4px">  Start Date:</label>
-                                <input type="date" id="startDate" name="startDate" class="form-control">
-                            </div>
-
-
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-12">
-
-
-                        <div class="col-md-4 col-sm-12">
-                            <label for="endDate" style="margin-left: 4px; margin-top: 4px">End Date:</label>
-                            <input type="date" id="endDate" name="endDate" class="form-control">
-                        </div>
-
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12">
-
-                    <!-- Date Range Inputs -->
-
-                    <div class="col-md-2 col-sm-12" style="margin-left:4px;margin-top:4px;">
-
-                        <button id="Search" class="btn btn-success"> Search</button>
-                    </div>
-                </div>
-
-            </div>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                </tbody>
+            </table>
         </div>
-
-
-
-        <div class="col-12" style="text-align:center;">
-            <h1>Staff Position</h1>
-            <div class="col-10">
-
-
-                <table id="dataTable" class="table bordered table-condensed table-hover solid-line">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Name of District</th>
-                            <th>Center Name</th>
-                            <th>Women Medical Officer</th>
-                            <th>Accounts Assitant</th>
-                            <th>Theater Nurse</th>
-                            <th>O.T Technician</th>
-                            <th>Family Welfare Councilor</th>
-                            <th>Family welfare Worker</th>
-                            <th>Family Welfare Worker Assistant</th>
-                            <th>Driver</th>
-                            <th>Help</th>
-                            <th>Sweep</th>
-
-                        </tr>
-                    </thead>
-                    <tbody id="tbody">
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-
-
-
-
-
-        <!-- Loading (remove the following to stop the loading)-->
-        <div class="overlay" style="display:none;"></div>
-        <div class="loading-img" style="display: none;"></div>
-        <!-- end loading -->
-
-
-
-
-
     </div>
 
 
-            <script src="https://cdn.datatables.net/2.0.5/js/dataTables.min.js"></script>
 
 
-            <script>
+
+    <button id="exportButton">Download as Excel</button>
+    <!-- Loading (remove the following to stop the loading)-->
+    <div class="overlay" style="display:none;"></div>
+    <div class="loading-img" style="display: none;"></div>
+    <!-- end loading -->
 
 
-                $(document).ready(function () {
-                    MnitoringOfficer("0");
-                });
 
-                var selectedTex = "";
-                $('#Checklist').change(function () {
-                    var Checklist = $('#Checklist').val();
 
-                    GetDistrict(Checklist);
+
+</div>
+
+
+    <script src="https://cdn.datatables.net/2.0.5/js/dataTables.min.js"></script>
+
+
+    <script>
+
+
+        $(document).ready(function () {
+            MnitoringOfficer("0");
+        });
+
+        var selectedTex = "";
+        $('#Checklist').change(function () {
+            var Checklist = $('#Checklist').val();
+
+            GetDistrict(Checklist);
+            $("#District").empty();
+            $("#Center").empty();
+
+            try {
+
+                if (Checklist != "") {
+                    MnitoringOfficer(Checklist);
+
+                }
+
+
+            }
+            catch (ex) {
+
+            }
+
+
+        });
+
+
+
+
+
+
+        $('#District').change(function () {
+            var val = $('#Checklist').val();
+            var selectedText = $(this).find('option:selected').text();
+            var com = val + "," + selectedText;
+            $("#Center").empty();
+            GetCenter(com);
+        });
+
+        var Checklist = $('#Checklist option').map(function () {
+            return $(this).text();
+        }).get();
+
+
+        function GetDistrict(district) {
+
+            var dist = district;
+            $.ajax({
+                type: 'POST',
+                url: "/Designer/GetDistictById/" + district,
+                data: {},
+                async: true,
+                success: function (data) {
                     $("#District").empty();
-                    $("#Center").empty();
-
-                    try {
-
-                        if (Checklist != "") {
-                            MnitoringOfficer(Checklist);
-
-                        }
-
-
-                    }
-                    catch (ex) {
-
-                    }
-
-
-                });
-
-
-
-
-
-
-                $('#District').change(function () {
-                    var val = $('#Checklist').val();
-                    var selectedText = $(this).find('option:selected').text();
-                    var com = val + "," + selectedText;
-                    $("#Center").empty();
-                    GetCenter(com);
-                });
-
-                var Checklist = $('#Checklist option').map(function () {
-                    return $(this).text();
-                }).get();
-
-
-                function GetDistrict(district) {
-
-                    var dist = district;
-                    $.ajax({
-                        type: 'POST',
-                        url: "/Designer/GetDistictById/" + district,
-                        data: {},
-                        async: true,
-                        success: function (data) {
-                            $("#District").empty();
-                            $("#District").append('<option value="' + 0 + '">' + "---Select All---" + '</option>')
-                            $.each(data, function (i, state) {
-                                $("#District").append('<option value="' + state.Value + '">' + state.Text + '</option>')
-                            })
-                        }
-                    });
-
-                }
-
-
-
-                function GetCenter(district) {
-                    $.ajax({
-                        type: 'POST',
-                        url: "/Designer/GetCentral/" + district,
-                        data: {},
-                        success: function (data) {
-                            $("#Center").empty();
-                            $("#Center").append('<option value="' + 0 + '">' + "---Select All---" + '</option>')
-                            $.each(data, function (i, state) {
-                                $("#Center").append('<option value="' + state.Value + '">' + state.Text + '</option>')
-                            })
-                        }
-                    });
-                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                function MnitoringOfficer(Filter) {
-
-
-
-                    $.ajax({
-                        type: 'POST',
-                        url: "/Designer/StuffDetailReportData/" + Filter,
-                        data: {},
-                        async: true,
-                        success: function (data) {
-                            $("#tbody").empty();
-                            var html = '';
-                            $.each(data, function (key, item) {
-                                html += '<tr>';
-
-                                var PLAV = item.Remarks.split(',');
-
-                                var s1 = PLAV[0];
-                                var s2 = PLAV[1];
-                                var s3 = PLAV[2];
-                                var s4 = PLAV[3];
-                                var s5 = PLAV[4];
-                                var s6 = PLAV[5];
-                                var s7 = PLAV[6];
-                                var s8 = PLAV[7];
-                                var s9 = PLAV[8];
-                                var s10 = PLAV[9];
-
-
-                                html += '<td>' + item.asDate + '</td>';
-                                html += '<td>' + item.District + '</td>';
-                                html += '<td>' + item.Center + '</td>';
-
-                                if (s1 == "1") {
-                                    html += '<td>' + "Present" + '</td>';
-                                }
-                                else if (s1 == "2") {
-                                    html += '<td>' + "Absent" + '</td>';
-                                }
-                                else if (s1 == "3") {
-                                    html += '<td>' + "Leave" + '</td>';
-                                }
-                                else if (s1 == "4") {
-                                    html += '<td>' + "Vcant" + '</td>';
-                                }
-
-
-                                if (s2 == "1") {
-                                    html += '<td>' + "Present" + '</td>';
-                                }
-                                else if (s2 == "2") {
-                                    html += '<td>' + "Absent" + '</td>';
-                                }
-                                else if (s2 == "3") {
-                                    html += '<td>' + "Leave" + '</td>';
-                                }
-                                else if (s2 == "4") {
-                                    html += '<td>' + "Vcant" + '</td>';
-                                }
-
-
-                                if (s3 == "1") {
-                                    html += '<td>' + "Present" + '</td>';
-                                }
-                                else if (s3 == "2") {
-                                    html += '<td>' + "Absent" + '</td>';
-                                }
-                                else if (s3 == "3") {
-                                    html += '<td>' + "Leave" + '</td>';
-                                }
-                                else if (s3 == "4") {
-                                    html += '<td>' + "Vcant" + '</td>';
-                                }
-
-
-
-                                if (s4 == "1") {
-                                    html += '<td>' + "Present" + '</td>';
-                                }
-                                else if (s4 == "2") {
-                                    html += '<td>' + "Absent" + '</td>';
-                                }
-                                else if (s4 == "3") {
-                                    html += '<td>' + "Leave" + '</td>';
-                                }
-                                else if (s4 == "4") {
-                                    html += '<td>' + "Vcant" + '</td>';
-                                }
-
-
-                                if (s5 == "1") {
-                                    html += '<td>' + "Present" + '</td>';
-                                }
-                                else if (s5 == "2") {
-                                    html += '<td>' + "Absent" + '</td>';
-                                }
-                                else if (s5 == "3") {
-                                    html += '<td>' + "Leave" + '</td>';
-                                }
-                                else if (s5 == "4") {
-                                    html += '<td>' + "Vcant" + '</td>';
-                                }
-
-
-                                if (s6 == "1") {
-                                    html += '<td>' + "Present" + '</td>';
-                                }
-                                else if (s6 == "2") {
-                                    html += '<td>' + "Absent" + '</td>';
-                                }
-                                else if (s6 == "3") {
-                                    html += '<td>' + "Leave" + '</td>';
-                                }
-                                else if (s6 == "4") {
-                                    html += '<td>' + "Vcant" + '</td>';
-                                }
-
-
-                                if (s7 == "1") {
-                                    html += '<td>' + "Present" + '</td>';
-                                }
-                                else if (s7 == "2") {
-                                    html += '<td>' + "Absent" + '</td>';
-                                }
-                                else if (s7 == "3") {
-                                    html += '<td>' + "Leave" + '</td>';
-                                }
-                                else if (s7 == "4") {
-                                    html += '<td>' + "Vcant" + '</td>';
-                                }
-
-
-                                if (s8 == "1") {
-                                    html += '<td>' + "Present" + '</td>';
-                                }
-                                else if (s8 == "2") {
-                                    html += '<td>' + "Absent" + '</td>';
-                                }
-                                else if (s8 == "3") {
-                                    html += '<td>' + "Leave" + '</td>';
-                                }
-                                else if (s8 == "4") {
-                                    html += '<td>' + "Vcant" + '</td>';
-                                }
-
-                                if (s9 == "1") {
-                                    html += '<td>' + "Present" + '</td>';
-                                }
-                                else if (s9 == "2") {
-                                    html += '<td>' + "Absent" + '</td>';
-                                }
-                                else if (s9 == "3") {
-                                    html += '<td>' + "Leave" + '</td>';
-                                }
-                                else if (s9 == "4") {
-                                    html += '<td>' + "Vcant" + '</td>';
-                                }
-
-
-                                if (s10 == "1") {
-                                    html += '<td>' + "Present" + '</td>';
-                                }
-                                else if (s10 == "2") {
-                                    html += '<td>' + "Absent" + '</td>';
-                                }
-                                else if (s10 == "3") {
-                                    html += '<td>' + "Leave" + '</td>';
-                                }
-                                else if (s10 == "4") {
-                                    html += '<td>' + "Vcant" + '</td>';
-                                }
-
-                                html += '</tr>';
-                            });
-                            $('#tbody').html(html);
-
-                        }
-
-
+                    $("#District").append('<option value="' + 0 + '">' + "---Select All---" + '</option>')
+                    $.each(data, function (i, state) {
+                        $("#District").append('<option value="' + state.Value + '">' + state.Text + '</option>')
                     })
                 }
+            });
 
-
-               
-         
-
-
-
-
-                $('#Search').click(function () {
-
-                    var startDate = $("#startDate").val();
-                    var endDate = $("#endDate").val();
-
-                    if (startDate == "") {
-                        startDate = "01-01-1950";
-                    }
-                    if (endDate == "") {
-                        endDate = "01-01-2099";
-                    }
+        }
 
 
 
+        function GetCenter(district) {
+            $.ajax({
+                type: 'POST',
+                url: "/Designer/GetCentral/" + district,
+                data: {},
+                success: function (data) {
+                    $("#Center").empty();
+                    $("#Center").append('<option value="' + 0 + '">' + "---Select All---" + '</option>')
+                    $.each(data, function (i, state) {
+                        $("#Center").append('<option value="' + state.Value + '">' + state.Text + '</option>')
+                    })
+                }
+            });
+        }
 
 
 
 
-                    try {
-                        var District = $('#District').find('option:selected').text();
-                        var Center = $('#Center').find('option:selected').text();
 
-                        var Filter = District + "," + Center + "," + startDate + "," + endDate;
-                        MnitoringOfficer(Filter);
-                    }
-                    catch (ex) {
 
-                    }
 
-                });
 
-            </script>
+
+
+
+
+
+
+
+
+
+
+
+        function MnitoringOfficer(Filter) {
+
+
+
+            $.ajax({
+                type: 'POST',
+                url: "/Designer/StuffDetailReportData/" + Filter,
+                data: {},
+                async: true,
+                success: function (data) {
+                    $("#tbody").empty();
+                    var html = '';
+                    $.each(data, function (key, item) {
+                        html += '<tr>';
+
+                        var PLAV = item.Remarks.split(',');
+
+                        var s1 = PLAV[0];
+                        var s2 = PLAV[1];
+                        var s3 = PLAV[2];
+                        var s4 = PLAV[3];
+                        var s5 = PLAV[4];
+                        var s6 = PLAV[5];
+                        var s7 = PLAV[6];
+                        var s8 = PLAV[7];
+                        var s9 = PLAV[8];
+                        var s10 = PLAV[9];
+
+
+                        html += '<td>' + item.asDate + '</td>';
+                        html += '<td>' + item.District + '</td>';
+                        html += '<td>' + item.Center + '</td>';
+
+                        if (s1 == "1") {
+                            html += '<td>' + "Present" + '</td>';
+                        }
+                        else if (s1 == "2") {
+                            html += '<td>' + "Absent" + '</td>';
+                        }
+                        else if (s1 == "3") {
+                            html += '<td>' + "Leave" + '</td>';
+                        }
+                        else if (s1 == "4") {
+                            html += '<td>' + "Vcant" + '</td>';
+                        }
+
+
+                        if (s2 == "1") {
+                            html += '<td>' + "Present" + '</td>';
+                        }
+                        else if (s2 == "2") {
+                            html += '<td>' + "Absent" + '</td>';
+                        }
+                        else if (s2 == "3") {
+                            html += '<td>' + "Leave" + '</td>';
+                        }
+                        else if (s2 == "4") {
+                            html += '<td>' + "Vcant" + '</td>';
+                        }
+
+
+                        if (s3 == "1") {
+                            html += '<td>' + "Present" + '</td>';
+                        }
+                        else if (s3 == "2") {
+                            html += '<td>' + "Absent" + '</td>';
+                        }
+                        else if (s3 == "3") {
+                            html += '<td>' + "Leave" + '</td>';
+                        }
+                        else if (s3 == "4") {
+                            html += '<td>' + "Vcant" + '</td>';
+                        }
+
+
+
+                        if (s4 == "1") {
+                            html += '<td>' + "Present" + '</td>';
+                        }
+                        else if (s4 == "2") {
+                            html += '<td>' + "Absent" + '</td>';
+                        }
+                        else if (s4 == "3") {
+                            html += '<td>' + "Leave" + '</td>';
+                        }
+                        else if (s4 == "4") {
+                            html += '<td>' + "Vcant" + '</td>';
+                        }
+
+
+                        if (s5 == "1") {
+                            html += '<td>' + "Present" + '</td>';
+                        }
+                        else if (s5 == "2") {
+                            html += '<td>' + "Absent" + '</td>';
+                        }
+                        else if (s5 == "3") {
+                            html += '<td>' + "Leave" + '</td>';
+                        }
+                        else if (s5 == "4") {
+                            html += '<td>' + "Vcant" + '</td>';
+                        }
+
+
+                        if (s6 == "1") {
+                            html += '<td>' + "Present" + '</td>';
+                        }
+                        else if (s6 == "2") {
+                            html += '<td>' + "Absent" + '</td>';
+                        }
+                        else if (s6 == "3") {
+                            html += '<td>' + "Leave" + '</td>';
+                        }
+                        else if (s6 == "4") {
+                            html += '<td>' + "Vcant" + '</td>';
+                        }
+
+
+                        if (s7 == "1") {
+                            html += '<td>' + "Present" + '</td>';
+                        }
+                        else if (s7 == "2") {
+                            html += '<td>' + "Absent" + '</td>';
+                        }
+                        else if (s7 == "3") {
+                            html += '<td>' + "Leave" + '</td>';
+                        }
+                        else if (s7 == "4") {
+                            html += '<td>' + "Vcant" + '</td>';
+                        }
+
+
+                        if (s8 == "1") {
+                            html += '<td>' + "Present" + '</td>';
+                        }
+                        else if (s8 == "2") {
+                            html += '<td>' + "Absent" + '</td>';
+                        }
+                        else if (s8 == "3") {
+                            html += '<td>' + "Leave" + '</td>';
+                        }
+                        else if (s8 == "4") {
+                            html += '<td>' + "Vcant" + '</td>';
+                        }
+
+                        if (s9 == "1") {
+                            html += '<td>' + "Present" + '</td>';
+                        }
+                        else if (s9 == "2") {
+                            html += '<td>' + "Absent" + '</td>';
+                        }
+                        else if (s9 == "3") {
+                            html += '<td>' + "Leave" + '</td>';
+                        }
+                        else if (s9 == "4") {
+                            html += '<td>' + "Vcant" + '</td>';
+                        }
+
+
+                        if (s10 == "1") {
+                            html += '<td>' + "Present" + '</td>';
+                        }
+                        else if (s10 == "2") {
+                            html += '<td>' + "Absent" + '</td>';
+                        }
+                        else if (s10 == "3") {
+                            html += '<td>' + "Leave" + '</td>';
+                        }
+                        else if (s10 == "4") {
+                            html += '<td>' + "Vcant" + '</td>';
+                        }
+
+                        html += '</tr>';
+                    });
+                    $('#tbody').html(html);
+
+                }
+
+
+            })
+        }
+
+
+
+
+
+
+
+
+        $('#Search').click(function () {
+
+            var startDate = $("#startDate").val();
+            var endDate = $("#endDate").val();
+
+            if (startDate == "") {
+                startDate = "01-01-1950";
+            }
+            if (endDate == "") {
+                endDate = "01-01-2099";
+            }
+
+
+
+
+
+
+
+            try {
+                var District = $('#District').find('option:selected').text();
+                var Center = $('#Center').find('option:selected').text();
+                $('#Start').text(startDate);
+                $('#End').text(endDate);
+                $('#disP').text(District);
+                var Filter = District + "," + Center + "," + startDate + "," + endDate;
+                MnitoringOfficer(Filter);
+            }
+            catch (ex) {
+
+            }
+
+        });
+
+    </script>
 
