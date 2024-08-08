@@ -3445,3 +3445,5 @@
 /.vs/IMCL CAPI MIS/config/applicationhost.config
 /DNA CAPI MIS/obj/Debug/PWD CAPI MIS.csproj.AssemblyReference.cache
 *.wsuo
+/DNA CAPI MIS/obj/Debug/PWD CAPI MIS.csproj.CoreCompileInputs.cache
+/DNA CAPI MIS/obj/Debug/PWD CAPI MIS.csproj.FileListAbsolute.txt
