@@ -140,7 +140,6 @@ namespace DNA_CAPI_MIS.Controllers
         public JsonResult OpenClose(string id)
         {
 
-
             var Break = id.Split('|');
             var OC = Break[1];
             var pro = Break[0];
@@ -2202,7 +2201,6 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
             return View();
         }
 
-
         protected void GenerateSQL(int SideIndex, int TopIndex, AnalyzerQueryDimension d, ref DimensionSQL sql)
         {
             if (d.FieldType == "RDO" || d.FieldType == "CHK" || d.FieldType == "DDN" || d.FieldType == "LVW")
@@ -2252,7 +2250,6 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
 
             }
         }
-
         protected void ReplacePlaceholders(AnalyzerQueryDimension d, ref DimensionSQL sql)
         {
             sql.qfields = sql.qfields.Replace("<pos>", d.Position);
@@ -2266,7 +2263,6 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
             sql.qorderby = sql.qorderby.Replace("<pos>", d.Position);
             sql.qgroupby = sql.qgroupby.Replace("<pos>", d.Position);
         }
-
 
         private void PopulateDimension(ref List<AnalyzerQueryDimension> rdx, List<QueryDesignerFields> qf, List<ProjectField> projectFields, string pos)
         {
@@ -2363,7 +2359,6 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
 
             return pfList;
         }
-
         internal void PopulateAttributeList(Dictionary<string, Object> list, dynamic jsonObject)
         {
             foreach (var opt in jsonObject)
@@ -2396,7 +2391,6 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
                 }
             }
         }
-
 
         [Authorize]
         [HttpPost]
@@ -2510,7 +2504,6 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
             return newDataTable;
         }
 
-
         public ActionResult DownloadExcel(string fileName)
         {
             // This action will handle the download request
@@ -2619,7 +2612,6 @@ ORDER BY
             GetSurvey = db.Database.SqlQuery<SurveyReport>(SurveyData);
             GetTitle = db.Database.SqlQuery<SurveyTitle>(Titles);
         }
-
 
         private void CreateDatatableReport(int ProjectID, string CenterId, int sbjnum, out System.Data.Entity.Infrastructure.DbRawSqlQuery<SurveyReport> GetSurvey, out System.Data.Entity.Infrastructure.DbRawSqlQuery<SurveyTitle> GetTitle)
         {
@@ -2815,10 +2807,6 @@ ORDER BY
 
             return Survey;
         }
-
-
-
-
         public JsonResult GetExcelCentral(string id)
         {
             string Title = string.Empty;
@@ -2850,7 +2838,6 @@ ORDER BY
             return Json(distinctItems);
 
         }
-
 
         [Authorize]
         [HttpGet]
@@ -2884,7 +2871,6 @@ ORDER BY
 
             return View();
         }
-
 
         [Authorize]
         [HttpGet]
@@ -2978,9 +2964,6 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
             return View();
         }
 
-
-
-
         [Authorize]
         [HttpPost]
         public ActionResult CreatePDFBySurvey(int id)
@@ -3056,7 +3039,6 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
 
         }
 
-
         [Authorize]
         [HttpGet]
         public ActionResult Report(int id = 0)
@@ -3085,7 +3067,6 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
             return View();
         }
 
-
         [Authorize]
         [HttpPost]
         public ActionResult OpenReport(int id)
@@ -3110,8 +3091,6 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
             data.Field = BindValues(data.DataTitle, data.RawData);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
-
-
         public ReportField BindValues(List<TitleValue> data, List<SurveyReport> RawData)
         {
             ReportField field = new ReportField();
@@ -3298,7 +3277,6 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                     if (DailyClientRegister != null)
                     {
                         field.DailyClientRegister = DailyClientRegister.FieldValue;
-
                     }
                     else
                     {
@@ -3316,7 +3294,6 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                     if (MonthlyBreakup != null)
                     {
                         field.MonthlyBreakup = MonthlyBreakup.FieldValue;
-
                     }
                     else
                     {
@@ -3336,7 +3313,6 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                     if (MedicineStockRegister != null)
                     {
                         field.MedicineStockRegister = MedicineStockRegister.FieldValue;
-
                     }
                     else
                     {
@@ -3352,7 +3328,6 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                     if (ContraceptiveStockRegister != null)
                     {
                         field.ContraceptiveStockRegister = ContraceptiveStockRegister.FieldValue;
-
                     }
                     else
                     {
@@ -3368,7 +3343,6 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                     if (LogBook != null)
                     {
                         field.LogBook = LogBook.FieldValue;
-
                     }
                     else
                     {
@@ -3401,7 +3375,6 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                     if (IECMaterial != null)
                     {
                         field.IECMaterial = IECMaterial.FieldValue;
-
                     }
                     else
                     {
@@ -3418,7 +3391,6 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                     if (MECWheel != null)
                     {
                         field.MECWheel = MECWheel.FieldValue;
-
                     }
                     else
                     {
@@ -3434,7 +3406,6 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                     if (EquipmentPosition != null)
                     {
                         field.EquipmentPosition = EquipmentPosition.FieldValue;
-
                     }
                     else
                     {
@@ -3450,7 +3421,6 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                     if (FurniturePosition != null)
                     {
                         field.Furnitureposition = FurniturePosition.FieldValue;
-
                     }
                     else
                     {
@@ -3466,7 +3436,6 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                     if (TechnicalMonitoringChecklist != null)
                     {
                         field.TechnicalMonitoringChecklist = TechnicalMonitoringChecklist.FieldValue;
-
                     }
                     else
                     {
@@ -3482,7 +3451,6 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                     if (COUNSELING != null)
                     {
                         field.COUNSELING = COUNSELING.FieldValue;
-
                     }
                     else
                     {
@@ -3498,7 +3466,6 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                     if (SERVICEDELIVERY != null)
                     {
                         field.SERVICEDELIVERY = SERVICEDELIVERY.FieldValue;
-
                     }
                     else
                     {
@@ -3515,7 +3482,6 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                     if (FurniturePositionCondition != null)
                     {
                         field.FurniturePositionCondition = FurniturePositionCondition.FieldValue;
-
                     }
                     else
                     {
@@ -3533,7 +3499,6 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                     if (EquipmentCondition != null)
                     {
                         field.EquipmentCondition = EquipmentCondition.FieldValue;
-
                     }
                     else
                     {
@@ -3550,7 +3515,6 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                     if (StaffPositionNames != null)
                     {
                         field.StaffPositionNames = StaffPositionNames.FieldValue;
-
                     }
                     else
                     {
@@ -3567,7 +3531,6 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                     if (ClientsPresent != null)
                     {
                         field.ClientsPresent = ClientsPresent.FieldValue;
-
                     }
                     else
                     {
@@ -3582,7 +3545,6 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 if (PerformanceOfService != null)
                 {
                     field.PerformanceOfService = PerformanceOfService.FieldValue;
-
                 }
                 else
                 {
@@ -3594,7 +3556,6 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                     if (NoVisitor != null)
                     {
                         field.NoVisitor = NoVisitor.FieldValue;
-
                     }
                     else
                     {
@@ -3626,7 +3587,6 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                     if (StockOfCon != null)
                     {
                         field.StockOfCon = StockOfCon.FieldValue;
-
                     }
                     else
                     {
@@ -3643,7 +3603,6 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                     if (Last3Contraceptive != null)
                     {
                         field.Last3Contraceptive = Last3Contraceptive.FieldValue;
-
                     }
                     else
                     {
@@ -3659,7 +3618,6 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                     if (NoOfSup != null)
                     {
                         field.NoOfSup = NoOfSup.FieldValue;
-
                     }
                     else
                     {
@@ -3692,7 +3650,6 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                     if (LastThreeMonth != null)
                     {
                         field.LastThreeMonth = LastThreeMonth.Title;
-
                     }
                     else
                     {
@@ -3708,7 +3665,6 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                     if (HospitalManagement != null)
                     {
                         field.HospitalManagement = HospitalManagement.FieldValue;
-
                     }
                     else
                     {
@@ -3724,7 +3680,6 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                     if (RemarksofMonitoringOfficer != null)
                     {
                         field.RemarksofMonitoringOfficer = RemarksofMonitoringOfficer.FieldValue;
-
                     }
                     else
                     {
@@ -3767,7 +3722,6 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
 
                 }
-
             }
             catch (Exception ex)
             {
@@ -3838,8 +3792,6 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
 
             return View();
         }
-
-
         public ActionResult StuffPositionReport()
         {
             string sql = @"SELECT case 
@@ -3849,7 +3801,6 @@ when id = 7121 then 50484--50486
 when id = 7122 then 55587--50517 
 else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122) ORDER BY name"; //7114 ,
             var CheckFor = db.Database.SqlQuery<ProjectsList>(sql);
-
 
             var Checklist = CheckFor.Select(x => new SelectListItem
             {
@@ -3863,7 +3814,6 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
                 Text = x.Title,
                 Value = x.Code.ToString()
             }).ToList();
-
 
             var dummyData2 = new List<ProjectFieldSample> { new ProjectFieldSample { Title = "Select Center", Code = "0" }, };
             var Center = dummyData2.Select(x => new SelectListItem
@@ -3879,12 +3829,8 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
 
             return View();
         }
-
-
-        
         public ActionResult StatusOfSDPs()
         {
-
             ReportDropdown();
             return View();
         }
@@ -3901,45 +3847,33 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
             return View();
         }
         //Status of Building
-
         public ActionResult StatusofBuilding()
         {
-
             ReportDropdown();
             return View();
         }   
         public ActionResult VisitingOfficers()
         {
-
             ReportDropdown();
             return View();
         }
-
-
         public ActionResult SDPWorkingDays()
         {
-
             ReportDropdown();
             return View();
         }
 
         public ActionResult SDPTimeVisit()
         {
-
             ReportDropdown();
             return View();
         }
 
         public ActionResult FuniturePosition()
         {
-
             ReportDropdown();
             return View();
         }
-
-        
-
-
         public ActionResult ContraceptiveStockPosition()
         {
 
@@ -3948,34 +3882,26 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
         }
         public ActionResult ContraceptiveStockPerformance()
         {
-
             ReportDropdown();
             return View();
         }
-
-        
          public ActionResult MedicalOfficer()
         {
-
             ReportDropdown();
             return View();
         }   
-        
-        
         public ActionResult TechnicalMonitoringChecklist()
         {
 
             ReportDropdown();
             return View();
-        }
-              
+        } 
         public ActionResult EquipmentPositions()
         {
 
             ReportDropdown();
             return View();
         }
-
         public void ReportDropdown()
         {
             string sql = @"SELECT case 
@@ -4029,9 +3955,6 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
             }
             else
             {
-
-       
-
                 Des = id.Split(',')[0];
                 Cen = id.Split(',')[1];
                 if(Cen == "---Select All---")
@@ -4044,9 +3967,6 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
                 }
                 sd = id.Split(',')[2];
                 ed = id.Split(',')[3];
-
-
-
             }
 
             string Sql = $@"IF OBJECT_ID('tempdb..#Graph') IS NOT NULL
@@ -4098,9 +4018,6 @@ select  convert(varchar, Created,101) asDate,  fs2.Title as District ,fs3.Title 
             }
             else
             {
-
-
-
                 Des = id.Split(',')[0];
                 Cen = id.Split(',')[1];
                 if (Cen == "---Select All---")
@@ -4113,9 +4030,6 @@ select  convert(varchar, Created,101) asDate,  fs2.Title as District ,fs3.Title 
                 }
                 sd = id.Split(',')[2];
                 ed = id.Split(',')[3];
-
-
-
             }
 
             string Sql = $@"IF OBJECT_ID('tempdb..#Graph') IS NOT NULL
@@ -4173,9 +4087,6 @@ case when FieldValue6 =1 then 'Open' else 'Close' end as OpenClose,
             }
             else
             {
-
-
-
                 Des = id.Split(',')[0];
                 Cen = id.Split(',')[1];
                 if (Cen == "---Select All---")
@@ -4188,9 +4099,6 @@ case when FieldValue6 =1 then 'Open' else 'Close' end as OpenClose,
                 }
                 sd = id.Split(',')[2];
                 ed = id.Split(',')[3];
-
-
-
             }
 
             string Sql = $@"IF OBJECT_ID('tempdb..#Graph') IS NOT NULL
@@ -4250,9 +4158,6 @@ FieldValue6 as StatusOfBuilding,
             }
             else
             {
-
-
-
                 Des = id.Split(',')[0];
                 Cen = id.Split(',')[1];
                 if (Cen == "---Select All---")
@@ -4265,9 +4170,6 @@ FieldValue6 as StatusOfBuilding,
                 }
                 sd = id.Split(',')[2];
                 ed = id.Split(',')[3];
-
-
-
             }
 
             string Sql = $@"IF OBJECT_ID('tempdb..#Graph') IS NOT NULL
@@ -4309,7 +4211,6 @@ select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as Project
 
  
 ";
-
             var con = db.Database.SqlQuery<Grid4>(Sql).ToList().Where(x => x.District.Contains(Des) && x.Center.Contains(Cen));
             return Json(con);
         }
@@ -4327,9 +4228,6 @@ select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as Project
             }
             else
             {
-
-
-
                 Des = id.Split(',')[0];
                 Cen = id.Split(',')[1];
                 if (Cen == "---Select All---")
@@ -4342,9 +4240,6 @@ select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as Project
                 }
                 sd = id.Split(',')[2];
                 ed = id.Split(',')[3];
-
-
-
             }
 
             string Sql = $@"IF OBJECT_ID('tempdb..#Graph') IS NOT NULL
@@ -4383,8 +4278,6 @@ select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as Project
 
 	
     where RowNum = 1 and len(FieldValue5) > 20 and created between '{sd}' and '{ed}' select * from #Graph   
-
- 
 ";
 
             var con = db.Database.SqlQuery<Grid5>(Sql).ToList().Where(x => x.District.Contains(Des) && x.Center.Contains(Cen));
@@ -4392,7 +4285,6 @@ select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as Project
         }
         public JsonResult Grid7(string id)
         {
-
             var Des = "";
             var Cen = "";
             var sd = "";
@@ -4404,9 +4296,6 @@ select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as Project
             }
             else
             {
-
-
-
                 Des = id.Split(',')[0];
                 Cen = id.Split(',')[1];
                 if (Cen == "---Select All---")
@@ -4419,9 +4308,6 @@ select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as Project
                 }
                 sd = id.Split(',')[2];
                 ed = id.Split(',')[3];
-
-
-
             }
 
             string Sql = $@"IF OBJECT_ID('tempdb..#Graph') IS NOT NULL
@@ -4467,8 +4353,6 @@ select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as Project
             var con = db.Database.SqlQuery<Grid7>(Sql).ToList().Where(x => x.District.Contains(Des) && x.Center.Contains(Cen));
             return Json(con);
         }
-
-
         public JsonResult Grid8(string id)
         {
 
@@ -4483,9 +4367,6 @@ select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as Project
             }
             else
             {
-
-
-
                 Des = id.Split(',')[0];
                 Cen = id.Split(',')[1];
                 if (Cen == "---Select All---")
@@ -4498,9 +4379,6 @@ select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as Project
                 }
                 sd = id.Split(',')[2];
                 ed = id.Split(',')[3];
-
-
-
             }
 
             string Sql = $@"IF OBJECT_ID('tempdb..#Graph') IS NOT NULL
@@ -4542,7 +4420,6 @@ select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as Project
 
  
 ";
-
             var con = db.Database.SqlQuery<Grid7>(Sql).ToList().Where(x => x.District.Contains(Des) && x.Center.Contains(Cen));
             return Json(con);
         }
@@ -4561,8 +4438,6 @@ select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as Project
             else
             {
 
-
-
                 Des = id.Split(',')[0];
                 Cen = id.Split(',')[1];
                 if (Cen == "---Select All---")
@@ -4575,9 +4450,6 @@ select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as Project
                 }
                 sd = id.Split(',')[2];
                 ed = id.Split(',')[3];
-
-
-
             }
 
             string Sql = $@"IF OBJECT_ID('tempdb..#Graph') IS NOT NULL
@@ -4616,15 +4488,11 @@ FieldValue6 as MECWheel,
 	left join ProjectFieldSample fs6 on cte.FieldId6 = fs6.FieldID and fs6.Code IN (cte.FieldValue6)
 
     where RowNum = 1 and  len(FieldValue5) > 4 and created between '{sd}' and '{ed}' select * from #Graph   
-
- 
 ";
 
             var con = db.Database.SqlQuery<Grid6>(Sql).ToList().Where(x => x.District.Contains(Des) && x.Center.Contains(Cen));
             return Json(con);
         }
-
-
         public JsonResult GridIEC(string id)
         {
 
@@ -4640,8 +4508,6 @@ FieldValue6 as MECWheel,
             else
             {
 
-
-
                 Des = id.Split(',')[0];
                 Cen = id.Split(',')[1];
                 if (Cen == "---Select All---")
@@ -4654,9 +4520,6 @@ FieldValue6 as MECWheel,
                 }
                 sd = id.Split(',')[2];
                 ed = id.Split(',')[3];
-
-
-
             }
 
             string Sql = $@"IF OBJECT_ID('tempdb..#Graph') IS NOT NULL
@@ -4702,8 +4565,6 @@ FieldValue6 as MECWheel,
             var con = db.Database.SqlQuery<Grid6>(Sql).ToList().Where(x => x.District.Contains(Des) && x.Center.Contains(Cen));
             return Json(con);
         }
-
-
         public JsonResult GridIECandStock(string id)
         {
 
@@ -4718,9 +4579,6 @@ FieldValue6 as MECWheel,
             }
             else
             {
-
-
-
                 Des = id.Split(',')[0];
                 Cen = id.Split(',')[1];
                 if (Cen == "---Select All---")
@@ -4733,9 +4591,6 @@ FieldValue6 as MECWheel,
                 }
                 sd = id.Split(',')[2];
                 ed = id.Split(',')[3];
-
-
-
             }
 
             string Sql = $@"IF OBJECT_ID('tempdb..#Graph') IS NOT NULL
@@ -4786,17 +4641,12 @@ FieldValue4 as DeadStock,
 	left join ProjectFieldSample fs8 on cte.FieldId8 = fs8.FieldID and fs8.Code IN (cte.FieldValue7)
     where RowNum = 1 and  len(FieldValue5) > 4 and created between '{sd}' and '{ed}' select * from #Graph   
 
- 
 ";
-
             var con = db.Database.SqlQuery<IECStock>(Sql).ToList().Where(x => x.District.Contains(Des) && x.Center.Contains(Cen));
             return Json(con);
         }
-
-
         public JsonResult Grid11(string id)
         {
-
             var Des = "";
             var Cen = "";
             var sd = "";
@@ -4808,9 +4658,6 @@ FieldValue4 as DeadStock,
             }
             else
             {
-
-
-
                 Des = id.Split(',')[0];
                 Cen = id.Split(',')[1];
                 if (Cen == "---Select All---")
@@ -4823,9 +4670,6 @@ FieldValue4 as DeadStock,
                 }
                 sd = id.Split(',')[2];
                 ed = id.Split(',')[3];
-
-
-
             }
 
             string Sql = $@"IF OBJECT_ID('tempdb..#Graph') IS NOT NULL
@@ -4882,9 +4726,6 @@ select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as Project
             }
             else
             {
-
-
-
                 Des = id.Split(',')[0];
                 Cen = id.Split(',')[1];
                 if (Cen == "---Select All---")
@@ -4897,9 +4738,6 @@ select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as Project
                 }
                 sd = id.Split(',')[2];
                 ed = id.Split(',')[3];
-
-
-
             }
 
             string Sql = $@"IF OBJECT_ID('tempdb..#Graph') IS NOT NULL
@@ -4959,9 +4797,6 @@ select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as Project
             }
             else
             {
-
-
-
                 Des = id.Split(',')[0];
                 Cen = id.Split(',')[1];
                 if (Cen == "---Select All---")
@@ -4974,9 +4809,6 @@ select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as Project
                 }
                 sd = id.Split(',')[2];
                 ed = id.Split(',')[3];
-
-
-
             }
 
             string Sql = $@"IF OBJECT_ID('tempdb..#Graph') IS NOT NULL
@@ -5012,11 +4844,8 @@ select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as Project
 	inner join ProjectFieldSample fs2 on cte.FieldId3 = fs2.FieldID and fs2.Code IN (cte.FieldValue3)
 	left join ProjectFieldSample fs3 on cte.FieldId5 = fs3.FieldID and fs3.Code IN (cte.FieldValue5)
 	
-
     where RowNum = 1  
   and created between '{sd}' and '{ed}' select * from #Graph   
-
- 
 ";
 
             var con = db.Database.SqlQuery<Grid5>(Sql).ToList().Where(x => x.District.Contains(Des) && x.Center.Contains(Cen));
@@ -5036,9 +4865,6 @@ select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as Project
             }
             else
             {
-
-
-
                 Des = id.Split(',')[0];
                 Cen = id.Split(',')[1];
                 if (Cen == "---Select All---")
@@ -5051,9 +4877,6 @@ select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as Project
                 }
                 sd = id.Split(',')[2];
                 ed = id.Split(',')[3];
-
-
-
             }
 
             string Sql = $@"IF OBJECT_ID('tempdb..#Graph') IS NOT NULL
@@ -5093,9 +4916,7 @@ select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as Project
 	
     where RowNum = 1 and len(FieldValue5) > 33 and LEFT(FieldValue5, 1) = '1' and created between '{sd}' and '{ed}' select distinct g.Monitoring as mon, * from #Graph g  
 
- 
 ";
-
             var con = db.Database.SqlQuery<Grid13>(Sql).ToList().Where(x => x.District.Contains(Des) && x.Center.Contains(Cen));
             return Json(con);
         }
@@ -5114,8 +4935,6 @@ select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as Project
             else
             {
 
-
-
                 Des = id.Split(',')[0];
                 Cen = id.Split(',')[1];
                 if (Cen == "---Select All---")
@@ -5128,9 +4947,6 @@ select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as Project
                 }
                 sd = id.Split(',')[2];
                 ed = id.Split(',')[3];
-
-
-
             }
 
             string Sql = $@"IF OBJECT_ID('tempdb..#Graph') IS NOT NULL
@@ -5172,11 +4988,9 @@ select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as Project
 
  
 ";
-
             var con = db.Database.SqlQuery<Grid13>(Sql).ToList().Where(x => x.District.Contains(Des) && x.Center.Contains(Cen));
             return Json(con);
         }
-
         public JsonResult FuniturePositionGrid(string id)
         {
 
@@ -5192,8 +5006,6 @@ select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as Project
             else
             {
 
-
-
                 Des = id.Split(',')[0];
                 Cen = id.Split(',')[1];
                 if (Cen == "---Select All---")
@@ -5206,9 +5018,6 @@ select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as Project
                 }
                 sd = id.Split(',')[2];
                 ed = id.Split(',')[3];
-
-
-
             }
 
             string Sql = $@"IF OBJECT_ID('tempdb..#Graph') IS NOT NULL
@@ -5249,93 +5058,9 @@ select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as Project
 
  
 ";
-
             var con = db.Database.SqlQuery<Grid14>(Sql).ToList().Where(x => x.District.Contains(Des) && x.Center.Contains(Cen));
             return Json(con);
         }
-
-
-        //        public JsonResult grid8(string id)
-        //        {
-
-        //            var Des = "";
-        //            var Cen = "";
-        //            var sd = "";
-        //            var ed = "";
-        //            if (id == "0" || id == "50435, RHS,7120" || id == "55587, FWC,7122" || id == "50484, MSU,7121")
-        //            {
-        //                sd = "01/01/1950";
-        //                ed = "01/01/2060";
-        //            }
-        //            else
-        //            {
-
-
-
-        //                Des = id.Split(',')[0];
-        //                Cen = id.Split(',')[1];
-        //                if (Cen == "---Select All---")
-        //                {
-        //                    Cen = "";
-        //                }
-        //                if (Des == "---Select All---")
-        //                {
-        //                    Des = "";
-        //                }
-        //                sd = id.Split(',')[2];
-        //                ed = id.Split(',')[3];
-
-
-
-        //            }
-
-        //            string Sql = $@"IF OBJECT_ID('tempdb..#Graph') IS NOT NULL
-        //BEGIN
-        //    DROP TABLE #Graph;
-        //END
-
-        //;with cte as (
-        //	  select s.ProjectID,  s.sbjnum, s.Created, 
-
-        //		sd2.fieldId as FieldId2, sd2.fieldValue as FieldValue2,
-        //		sd3.fieldId as FieldId3, sd3.fieldValue as FieldValue3,
-
-        //		sd5.fieldId as FieldId5, sd5.fieldValue as FieldValue5,
-
-
-        //	row_number() over (partition by  sd2.fieldId, sd2.fieldValue,sd3.fieldId,sd3.fieldValue ,sd5.fieldId,sd5.fieldValue order by s.created desc) as RowNum
-        //	from survey s
-        //		inner join SurveyData sd2 on s.sbjnum = sd2.sbjnum and sd2.FieldId in (50435, 50484, 55587) --District
-        //		inner join SurveyData sd3 on s.sbjnum = sd3.sbjnum and sd3.FieldId in (50446, 50486, 55588)--Center close Survey Ids
-        //		Inner join SurveyData sd5 on s.sbjnum = sd5.sbjnum and sd5.FieldId in (50559,50502,55601) -- GC
-
-
-        //		)
-        //select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as ProjectName, fs2.Title as District ,fs3.Title as Center, 
-        // FieldValue5 
-        // as CTP,
-        // cte.FieldId5,
-
-        //  convert(varchar, Created,101) asDate,
-        // sbjnum
-        //    into #Graph from cte
-        //	inner join ProjectFieldSample fs2 on cte.FieldId2 = fs2.FieldID and fs2.Code IN (cte.FieldValue2)
-        //	inner join ProjectFieldSample fs3 on cte.FieldId3 = fs3.FieldID and fs3.Code IN (cte.FieldValue3)
-        //	left join ProjectFieldSample fs5 on cte.FieldId5 = fs5.FieldID   and fs5.Code IN (cte.FieldValue5)
-
-
-        //    where RowNum = 1 and len(FieldValue5) > 33 and LEFT(FieldValue5, 1) = '1' and created between '{sd}' and '{ed}' 
-        //	select distinct g.CTP as mon, * from #Graph g    
-
-
-        //";
-
-        //            var con = db.Database.SqlQuery<Grid8>(Sql).ToList().Where(x => x.District.Contains(Des) && x.Center.Contains(Cen));
-        //            return Json(con);
-        //        }
-
-
-
         public JsonResult Grid15(string id)
         {
 
@@ -5350,9 +5075,6 @@ select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as Project
             }
             else
             {
-
-
-
                 Des = id.Split(',')[0];
                 Cen = id.Split(',')[1];
                 if (Cen == "---Select All---")
@@ -5365,9 +5087,6 @@ select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as Project
                 }
                 sd = id.Split(',')[2];
                 ed = id.Split(',')[3];
-
-
-
             }
 
             string Sql = $@" IF OBJECT_ID('tempdb..#Graph') IS NOT NULL
@@ -5416,6 +5135,11 @@ FieldValue6 as FuniturQual,
             return Json(con);
         }
 
+        public ActionResult CloseCenter()
+        {
+            ReportDropdown();
+            return View();
+        }
 
     }
 

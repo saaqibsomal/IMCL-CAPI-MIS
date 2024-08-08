@@ -3342,6 +3342,7 @@
     <Content Include="Views\Designer\FuniturePosition.cshtml" />
     <Content Include="Views\Designer\TechnicalMonitoringChecklist.cshtml" />
     <Content Include="Views\Designer\EquipmentPositions.cshtml" />
+    <Content Include="Views\Designer\CloseCenter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

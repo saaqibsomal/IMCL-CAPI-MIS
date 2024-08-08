@@ -1,0 +1,301 @@
+﻿
+
+@{
+    ViewBag.Title = "CloseCenter";
+}
+@section Scripts {
+    <script>
+        var viewURL = "/Designer/CloseCEnter/";
+    </script>
+
+}
+
+<link href="~/Content/DSDS/dsds.css" rel="stylesheet" type="text/css" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css">
+@*CSS Class desktop is used for overlay*@
+
+<style>
+    .model {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.5);
+    }
+
+    .model-content {
+        background-color: #fefefe;
+        margin: 10% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+
+    .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+</style>
+<style>
+    .optionsRadios {
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+
+
+<style>
+    /* Style for the table */
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    /* Style for table headers */
+    th {
+        background-color: #007bff; /* Blue header color */
+        color: #fff; /* Text color */
+        font-weight: bold;
+        text-align: left;
+    }
+    /* Style for table cells */
+    td {
+        border: 1px solid #dddddd; /* Border color for cells */
+        padding: 8px;
+    }
+    /* Alternate row color */
+    tr:nth-child(even) {
+        background-color: #f2f2f2; /* Light gray */
+    }
+</style>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+
+    .container {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    ul {
+        list-style-type: none;
+        padding-left: 0;
+    }
+
+    li {
+        margin-bottom: 20px;
+    }
+
+    .criteria {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+
+        .criteria label {
+            font-weight: bold;
+        }
+
+        .criteria select {
+            padding: 5px;
+            width: 180px;
+        }
+
+        .criteria .sufficient {
+            color: green;
+        }
+
+        .criteria .quite-sufficient {
+            color: orange;
+        }
+
+        .criteria .poor {
+            color: red;
+        }
+</style>
+<div class="row desktop">
+    <div class="col-xs-12">
+
+        @Html.Partial("_ReportPartial")
+
+
+
+        <div class="col-12" style="text-align:center;">
+     
+            <div class="col-10">
+
+                <table id="grid">
+         
+                    <thead>
+                        <tr>
+                            <th style="text-align: center" class="header" colspan="14">No. of Visit by Medical Officer
+</tr>
+
+                        <tr>
+                            <th style="text-align: center" class="header" colspan="14">Summary Report of Medical Officer of SDPs Visits During  <span id="Start"> </span>  to <span id="End">  </span> in District <span id="disP"></span></th>
+                        </tr>
+                        <tr>
+                            <th rowspan="2">Date</th>
+                            <th rowspan="2">District</th>
+                            <th rowspan="2">SDP Type</th>
+                            <th rowspan="2">SDP Name</th>
+                            <th rowspan="2">Image</th>
+
+                        </tr>
+                       
+                    </thead>
+                    <tbody id="CloseCenter">
+                    </tbody>
+                </table>
+               
+            </div>
+        </div>
+
+        <button id="exportButton">Download as Excel</button>
+        <!-- Loading (remove the following to stop the loading)-->
+        <div class="overlay" style="display:none;"></div>
+        <div class="loading-img" style="display: none;"></div>
+        <!-- end loading -->
+
+
+
+
+
+    </div>
+
+
+            <script src="https://cdn.datatables.net/2.0.5/js/dataTables.min.js"></script>
+
+
+            <script>
+
+
+                $(document).ready(function () {
+                    CloseCenter("0");
+                });
+
+                var selectedTex = "";
+                $('#Checklist').change(function () {
+                    var Checklist = $('#Checklist').val();
+
+                    GetDistrict(Checklist);
+                    $("#District").empty();
+                    $("#Center").empty();
+
+              
+
+
+                });
+
+                function CloseCenter(Filter) {
+                    $.ajax({
+                        type: 'POST',
+                        url: "/Designer/Grid12Medical/" + Filter,
+                        data: {},
+                        async: true,
+                        success: function (data) {
+                            $("#CloseCenter").empty();
+                            var html = '';
+                            $.each(data, function (key, item) {
+
+
+                                html += '<tr>';
+                                html += '<td>' + item.asDate + '</td>';
+                                html += '<td>' + item.District + '</td>';
+                                html += '<td>' + item.ProjectName + '</td>';
+                                html += '<td>' + item.Center + '</td>';
+                                html += '<td>' + item.Image + '</td>';
+
+
+                                html += '</tr>';
+                            });
+                            $('#CloseCenter').html(html);
+
+                        }
+
+
+                    });
+
+                }
+
+                $('#Search').click(function () {
+
+                    var startDate = $("#startDate").val();
+                    var endDate = $("#endDate").val();
+
+                    if (startDate == "") {
+                        startDate = "01-01-1950";
+                    }
+                    if (endDate == "") {
+                        endDate = "01-01-2099";
+                    }
+
+                    try {
+                        var District = $('#District').find('option:selected').text();
+                        var Center = $('#Center').find('option:selected').text();
+
+                        $('#Start').text(startDate);
+                        $('#End').text(endDate);
+                        $('#disP').text(District);
+
+                        var Filter = District + "," + Center + "," + startDate + "," + endDate;
+
+                        try {
+                            Grid13(Filter);
+                        }
+                        catch (ex) {
+
+                        }
+
+                    }
+                    catch (ex) {
+
+                    }
+
+                });
+
+
+            </script>
+
