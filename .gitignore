@@ -3442,3 +3442,6 @@
 /.vs/IMCL CAPI MIS/v17/.suo
 /DNA CAPI MIS/Properties/PublishProfiles/FolderProfile.pubxml.user
 *.cache
+/.vs/IMCL CAPI MIS/config/applicationhost.config
+/DNA CAPI MIS/obj/Debug/PWD CAPI MIS.csproj.AssemblyReference.cache
+*.wsuo
