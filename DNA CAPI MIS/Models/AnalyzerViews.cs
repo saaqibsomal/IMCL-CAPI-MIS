@@ -281,6 +281,18 @@ public class ProjectsList
 
     }
 
+    public class CloseCenterImages
+    {
+        public string asDate { get; set; }
+        public string ProjectName { get; set; }
+        public string District { get; set; }
+        public string Center { get; set; }
+        public string Images { get; set; }
+
+    }
+
+
+  
     public class Grid2
     {
         public string asDate { get; set; }

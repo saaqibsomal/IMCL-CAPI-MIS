@@ -170,12 +170,10 @@
          
                     <thead>
                         <tr>
-                            <th style="text-align: center" class="header" colspan="14">No. of Visit by Medical Officer
+                            <th style="text-align: center" class="header" colspan="14">Close Center
 </tr>
 
-                        <tr>
-                            <th style="text-align: center" class="header" colspan="14">Summary Report of Medical Officer of SDPs Visits During  <span id="Start"> </span>  to <span id="End">  </span> in District <span id="disP"></span></th>
-                        </tr>
+                
                         <tr>
                             <th rowspan="2">Date</th>
                             <th rowspan="2">District</th>
@@ -223,16 +221,12 @@
                     GetDistrict(Checklist);
                     $("#District").empty();
                     $("#Center").empty();
-
-              
-
-
                 });
 
                 function CloseCenter(Filter) {
                     $.ajax({
                         type: 'POST',
-                        url: "/Designer/Grid12Medical/" + Filter,
+                        url: "/Designer/GridOpenClose/" + Filter,
                         data: {},
                         async: true,
                         success: function (data) {
@@ -246,9 +240,7 @@
                                 html += '<td>' + item.District + '</td>';
                                 html += '<td>' + item.ProjectName + '</td>';
                                 html += '<td>' + item.Center + '</td>';
-                                html += '<td>' + item.Image + '</td>';
-
-
+                                html += '<td><img src="data:image/png;base64,' + item.Images + '" alt="Image"  width="100" height="100" /></td>';
                                 html += '</tr>';
                             });
                             $('#CloseCenter').html(html);

@@ -301,6 +301,7 @@
     <Compile Include="surveyproxy.aspx.designer.cs">
       <DependentUpon>surveyproxy.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Utility\Common.cs" />
     <Compile Include="Utility\PermissionHelper.cs" />
     <Compile Include="Models\SurveyViewModels.cs" />
   </ItemGroup>
