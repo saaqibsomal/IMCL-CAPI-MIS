@@ -3447,3 +3447,10 @@
 *.wsuo
 /DNA CAPI MIS/obj/Debug/PWD CAPI MIS.csproj.CoreCompileInputs.cache
 /DNA CAPI MIS/obj/Debug/PWD CAPI MIS.csproj.FileListAbsolute.txt
+/DNA CAPI MIS/bin/System.Net.Http.Formatting.dll
+/DNA CAPI MIS/bin/System.Net.Http.Formatting.xml
+/.vs/IMCL CAPI MIS/v17/fileList.bin
+/DNA CAPI MIS/Views/Designer/StuffDetailReport.zip
+/DNA CAPI MIS/obj/Release/PWD CAPI MIS.csproj.FileListAbsolute.txt
+/DNA CAPI MIS/PWD CAPI MIS.csproj.user
+/DNA CAPI MIS/obj/Release/Package/PackageTmp/bin/System.Net.Http.Formatting.dll
