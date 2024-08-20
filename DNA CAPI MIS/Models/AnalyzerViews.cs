@@ -288,6 +288,7 @@ public class ProjectsList
         public string District { get; set; }
         public string Center { get; set; }
         public string Images { get; set; }
+        public string Remarks { get; set; }
 
     }
 

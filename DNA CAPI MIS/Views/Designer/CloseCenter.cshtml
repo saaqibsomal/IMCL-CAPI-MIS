@@ -221,6 +221,7 @@
                             <th rowspan="2">District</th>
                             <th rowspan="2">SDP Type</th>
                             <th rowspan="2">SDP Name</th>
+                            <th rowspan="2">Remarks</th>
                             <th rowspan="2">Image</th>
 
                         </tr>
@@ -276,6 +277,7 @@
                             html += '<td>' + item.District + '</td>';
                             html += '<td>' + item.ProjectName + '</td>';
                             html += '<td>' + item.Center + '</td>';
+                            html += '<td>' + item.Remarks + '</td>';
                             html += `
                 <td>
                     <img src="data:image/png;base64,${item.Images}" alt="Image" style="width:100px; height:100px;" class="thumbnail" />
