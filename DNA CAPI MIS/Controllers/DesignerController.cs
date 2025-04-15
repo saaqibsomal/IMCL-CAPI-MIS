@@ -395,7 +395,7 @@ fs3.Title as OpenClose, case when fs3.Title = 'Open' then 1 else  0 end IsOpen
             // dpwo_sukkur
             var GetDis = User.Identity.Name.Split('@')[0];
             string District = string.Empty;
-            if(GetDis.Contains("_"))
+            if (GetDis.Contains("_"))
             {
                 District = GetDis.Split('_')[1];
             }
@@ -715,18 +715,20 @@ FieldValue6 as Concept,
                     {
                         ConType = "Jadelle";
                     }
-                    Pie.Add(new ContraceptivePie { Contraceptive = ConType, Qty = Convert.ToInt32(type.Split(',')[0].Split('-')[1]) });
+
+                    try
+                    {
+                        Pie.Add(new ContraceptivePie { Contraceptive = ConType, Qty = Convert.ToInt32(type.Split(',')[0].Split('-')[1]) });
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
                     i++;
                 }
 
 
             }
-
-
-
-
-
-
 
             var groupedData = Pie.GroupBy(x => x.Contraceptive)
                      .Select(g => new ContraceptivePie
@@ -3157,7 +3159,8 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                     else
                     {
                         field.OpenCloseStatus = "N/A";
-                    } }
+                    }
+                }
                 catch (Exception ex)
                 {
 
@@ -3324,7 +3327,8 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
 
                 }
-                try {
+                try
+                {
                     var ContraceptiveStockRegister = data.Where(x => x.Title.ToUpper().Contains("Contraceptive Stock Register".ToUpper())).FirstOrDefault();
                     if (ContraceptiveStockRegister != null)
                     {
@@ -3339,7 +3343,8 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
 
                 }
-                try {
+                try
+                {
                     var LogBook = data.Where(x => x.Title.ToUpper().Contains("Log Book".ToUpper())).FirstOrDefault();
                     if (LogBook != null)
                     {
@@ -3354,7 +3359,8 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
 
                 }
-                try {
+                try
+                {
                     var DeadStockRegister = data.Where(x => x.Title.ToUpper().Contains("Dead Stock Register".ToUpper())).FirstOrDefault();
                     if (DeadStockRegister != null)
                     {
@@ -3371,7 +3377,8 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
 
                 }
 
-                try {
+                try
+                {
                     var IECMaterial = data.Where(x => x.Title.ToUpper().Contains("IEC Material".ToUpper())).FirstOrDefault();
                     if (IECMaterial != null)
                     {
@@ -3387,7 +3394,8 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
 
                 }
 
-                try {
+                try
+                {
                     var MECWheel = data.Where(x => x.Title.ToUpper().Contains("MEC Wheel".ToUpper())).FirstOrDefault();
                     if (MECWheel != null)
                     {
@@ -3402,7 +3410,8 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
 
                 }
-                try {
+                try
+                {
                     var EquipmentPosition = RawData.Where(x => x.Title.ToUpper().Contains("Equipment Position/Condition 1".ToUpper())).FirstOrDefault();
                     if (EquipmentPosition != null)
                     {
@@ -3417,7 +3426,8 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
 
                 }
-                try {
+                try
+                {
                     var FurniturePosition = RawData.Where(x => x.Title.ToUpper().Contains("Furniture Position/Condition 1".ToUpper())).FirstOrDefault();
                     if (FurniturePosition != null)
                     {
@@ -3432,7 +3442,8 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
 
                 }
-                try {
+                try
+                {
                     var TechnicalMonitoringChecklist = data.Where(x => x.Title.ToUpper().Contains("Technical Monitoring Checklist".ToUpper())).FirstOrDefault();
                     if (TechnicalMonitoringChecklist != null)
                     {
@@ -3447,7 +3458,8 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
 
                 }
-                try {
+                try
+                {
                     var COUNSELING = RawData.Where(x => x.Title.ToUpper().Contains("COUNSELING".ToUpper())).FirstOrDefault();
                     if (COUNSELING != null)
                     {
@@ -3462,7 +3474,8 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
 
                 }
-                try {
+                try
+                {
                     var SERVICEDELIVERY = RawData.Where(x => x.Title.ToUpper().Contains("SERVICE DELIVERY".ToUpper())).FirstOrDefault();
                     if (SERVICEDELIVERY != null)
                     {
@@ -3478,7 +3491,8 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
 
                 }
 
-                try {
+                try
+                {
                     var FurniturePositionCondition = RawData.Where(x => x.Title.ToUpper().Contains("Furniture Position/Condition".ToUpper())).FirstOrDefault();
                     if (FurniturePositionCondition != null)
                     {
@@ -3494,7 +3508,8 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
 
                 }
 
-                try {
+                try
+                {
 
                     var EquipmentCondition = RawData.Where(x => x.Title.ToUpper().Contains("Equipment Position/Condition".ToUpper())).FirstOrDefault();
                     if (EquipmentCondition != null)
@@ -3511,7 +3526,8 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
 
                 }
 
-                try {
+                try
+                {
                     var StaffPositionNames = RawData.Where(x => x.Title.ToUpper().Contains("Staff Position Names".ToUpper())).FirstOrDefault();
                     if (StaffPositionNames != null)
                     {
@@ -3527,7 +3543,8 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
 
                 }
 
-                try {
+                try
+                {
                     var ClientsPresent = RawData.Where(x => x.Title.ToUpper().Contains("How many Clients found present at the time of visit?".ToUpper())).FirstOrDefault();
                     if (ClientsPresent != null)
                     {
@@ -3552,7 +3569,8 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                     field.PerformanceOfService = "N/A";
                 }
 
-                try {
+                try
+                {
                     var NoVisitor = RawData.Where(x => x.Title.ToUpper().Contains("No. of visits paid during".ToUpper())).FirstOrDefault();
                     if (NoVisitor != null)
                     {
@@ -3567,7 +3585,8 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
 
                 }
-                try {
+                try
+                {
                     var StockOfMed = data.Where(x => x.Title.ToUpper().Contains("Stock and Expiry Date Medicine".ToUpper())).FirstOrDefault();
                     if (StockOfMed != null)
                     {
@@ -3583,7 +3602,8 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
 
                 }
-                try {
+                try
+                {
                     var StockOfCon = data.Where(x => x.Title.ToUpper().Contains("Stock and Expiry Date of Contraceptive".ToUpper())).FirstOrDefault();
                     if (StockOfCon != null)
                     {
@@ -3599,7 +3619,8 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
 
                 }
 
-                try {
+                try
+                {
                     var Last3Contraceptive = data.Where(x => x.Title.ToUpper().Contains("Last 3 months Contraceptive Performance".ToUpper())).FirstOrDefault();
                     if (Last3Contraceptive != null)
                     {
@@ -3614,7 +3635,8 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
 
                 }
-                try {
+                try
+                {
                     var NoOfSup = RawData.Where(x => x.Title.ToUpper().Contains("No. of Supervisory Visit of".ToUpper())).FirstOrDefault();
                     if (NoOfSup != null)
                     {
@@ -3629,7 +3651,8 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
 
                 }
-                try {
+                try
+                {
                     var DCIT = RawData.Where(x => x.Title.ToUpper().Contains("No. of Supervisory Visit of".ToUpper())).FirstOrDefault();
                     if (DCIT != null)
                     {
@@ -3646,7 +3669,8 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
 
                 }
 
-                try {
+                try
+                {
                     var LastThreeMonth = RawData.Where(x => x.Title.ToUpper().Contains("No. of visits paid during last three months by".ToUpper())).FirstOrDefault();
                     if (LastThreeMonth != null)
                     {
@@ -3661,7 +3685,8 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
 
                 }
-                try {
+                try
+                {
                     var HospitalManagement = RawData.Where(x => x.Title.ToUpper().Contains("Meeting Hospital Management Committee".ToUpper())).FirstOrDefault();
                     if (HospitalManagement != null)
                     {
@@ -3676,7 +3701,8 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
 
                 }
-                try {
+                try
+                {
                     var RemarksofMonitoringOfficer = RawData.Where(x => x.Title.ToUpper().Contains("Remarks of Monitoring Officer".ToUpper())).FirstOrDefault();
                     if (RemarksofMonitoringOfficer != null)
                     {
@@ -3691,7 +3717,8 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
 
                 }
-                try {
+                try
+                {
                     var Last6Field = RawData.Where(x => x.Title.ToUpper().Contains("No. of visits paid during last three months by".ToUpper())).FirstOrDefault();
                     if (Last6Field != null)
                     {
@@ -3707,7 +3734,8 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 {
 
                 }
-                try {
+                try
+                {
                     var NameofProj = RawData.Where(x => x.Title.ToUpper().Contains("No. of visits paid during last three months by".ToUpper())).FirstOrDefault();
                     if (NameofProj != null)
                     {
@@ -3852,7 +3880,7 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
         {
             ReportDropdown();
             return View();
-        }   
+        }
         public ActionResult VisitingOfficers()
         {
             ReportDropdown();
@@ -3886,17 +3914,17 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
             ReportDropdown();
             return View();
         }
-         public ActionResult MedicalOfficer()
+        public ActionResult MedicalOfficer()
         {
             ReportDropdown();
             return View();
-        }   
+        }
         public ActionResult TechnicalMonitoringChecklist()
         {
 
             ReportDropdown();
             return View();
-        } 
+        }
         public ActionResult EquipmentPositions()
         {
 
@@ -3949,7 +3977,7 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
             var Cen = "";
             var sd = "";
             var ed = "";
-            if(id == "0" || id == "50435, RHS,7120"  || id == "55587, FWC,7122" || id == "50484, MSU,7121")
+            if (id == "0" || id == "50435, RHS,7120" || id == "55587, FWC,7122" || id == "50484, MSU,7121")
             {
                 sd = "01/01/1950";
                 ed = "01/01/2060";
@@ -3958,11 +3986,11 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
             {
                 Des = id.Split(',')[0];
                 Cen = id.Split(',')[1];
-                if(Cen == "---Select All---")
+                if (Cen == "---Select All---" || Cen == "Select Center")
                 {
                     Cen = "";
                 }
-                if (Des == "---Select All---")
+                if (Des == "---Select All---" || Des == "Select District")
                 {
                     Des = "";
                 }
@@ -3997,12 +4025,12 @@ select  convert(varchar, Created,101) asDate,  fs2.Title as District ,fs3.Title 
 	inner join ProjectFieldSample fs3 on cte.FieldId3 = fs3.FieldID and fs3.Code IN (cte.FieldValue3)
 	Left join ProjectFieldSample fs5 on cte.FieldId5 = fs5.FieldID and fs5.Code IN (cte.FieldValue5)
 
-    where RowNum = 1 and len(FieldValue5)  between 17 and 19 and created between '{sd}' and '{ed}' select * from #Graph
+    where RowNum = 1 and len(FieldValue5)  between 1 and 19 and created between '{sd}' and '{ed}' select * from #Graph
 
  
 ";
 
-            var con = db.Database.SqlQuery<StuffPosition> (Sql).ToList().Where(x=>x.District.Contains(Des) && x.Center.Contains(Cen));
+            var con = db.Database.SqlQuery<StuffPosition>(Sql).ToList().Where(x => x.District.Contains(Des) && x.Center.Contains(Cen));
             return Json(con);
         }
         public JsonResult Grid2(string id)
@@ -4784,7 +4812,7 @@ select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as Project
             var con = db.Database.SqlQuery<Grid12>(Sql).ToList().Where(x => x.District.Contains(Des) && x.Center.Contains(Cen));
             return Json(con);
         }
-         public JsonResult Grid14(string id)
+        public JsonResult Grid14(string id)
         {
 
             var Des = "";
@@ -5216,7 +5244,7 @@ select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as Project
                 Common com = new Common();
 
                 string Path = imagesPath + item.Images;
-                if(System.IO.File.Exists(Path))
+                if (System.IO.File.Exists(Path))
                 {
                     byte[] data = com.Photo(imagesPath + item.Images);
                     string base64String = Convert.ToBase64String(data);
@@ -5226,7 +5254,7 @@ select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as Project
                 {
                     item.Images = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAgAB/zeVCeQAAAAASUVORK5CYII=";
                 }
-       
+
             }
             return Json(con);
         }
@@ -5236,4 +5264,4 @@ select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as Project
 
 }
 
- 
+
