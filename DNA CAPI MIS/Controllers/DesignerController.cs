@@ -250,7 +250,7 @@ INNER JOIN
             string edate = GetDates[2];
             string District = GetDates[3];
             string where = string.Empty;
-            if (!string.IsNullOrEmpty(id))
+            if (!string.IsNullOrEmpty(id) && id != "NaN")
             {
                 where = $"and g.DistrictId in ({id})";
 
@@ -312,7 +312,7 @@ fs3.Title as OpenClose, case when fs3.Title = 'Open' then 1 else  0 end IsOpen,f
         [HttpPost]
         public JsonResult CenterPieChart(string id)
         {
-
+            // 1st value distrct 2- value
             if (id == "NaN")
             {
                 id = "";
@@ -323,9 +323,9 @@ fs3.Title as OpenClose, case when fs3.Title = 'Open' then 1 else  0 end IsOpen,f
 
 
             string where = string.Empty;
-            if (!string.IsNullOrEmpty(id))
+            if (!string.IsNullOrEmpty(Text))
             {
-                where = $"and g.District like '%{Text}%'";
+                where = $"and (g.District like '%{Text}%' or '{Text}' = '---Select All---' ) ";
 
 
             }
@@ -548,6 +548,12 @@ select fs2.Title as District,fs1.Title as contraceptive ,cte.FieldValue1
         [HttpPost]
         public JsonResult ContraceptiveDetailQuantity(string id)
         {
+
+            string ProjectID = id.Split(',')[2];
+            if(ProjectID=="0")
+            {
+                ProjectID = "7122,7121,7120";
+            }
             string Sql = $@" IF OBJECT_ID('tempdb..#Graph') IS NOT NULL
 BEGIN
     DROP TABLE #Graph;
@@ -568,7 +574,7 @@ END
 		inner join SurveyData sd3 on s.sbjnum = sd3.sbjnum and sd3.FieldId in (50446, 50486, 55588)--Center close Survey Ids
 		Inner join SurveyData sd5 on s.sbjnum = sd5.sbjnum and sd5.FieldId in (50558,50502,55598) -- Medicen
 	    Inner join SurveyData sd6 on s.sbjnum = sd6.sbjnum  and sd6.FieldId in (50559,50504,55601) -- Concept
-		
+		where s.ProjectID in ({ProjectID})
 		)
 select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as ProjectName, fs2.Title as District ,fs3.Title as Center, 
  FieldValue5 
@@ -580,8 +586,8 @@ FieldValue6 as Concept,
     into #Graph from cte
 	inner join ProjectFieldSample fs2 on cte.FieldId2 = fs2.FieldID and fs2.Code IN (cte.FieldValue2)
 	inner join ProjectFieldSample fs3 on cte.FieldId3 = fs3.FieldID and fs3.Code IN (cte.FieldValue3)
-	left join ProjectFieldSample fs5 on cte.FieldId5 = fs5.FieldID --and fs5.Code IN (cte.FieldValue5)
-	left join ProjectFieldSample fs6 on cte.FieldId6 = fs6.FieldID --and fs6.Code IN (cte.FieldValue6)
+	left join ProjectFieldSample fs5 on cte.FieldId5 = fs5.FieldID and fs5.Code IN (cte.FieldValue5)
+	left join ProjectFieldSample fs6 on cte.FieldId6 = fs6.FieldID and fs6.Code IN (cte.FieldValue6)
 
     where RowNum = 1  
 
@@ -745,30 +751,51 @@ FieldValue6 as Concept,
         public JsonResult ForSelectedMonitoring(string id)
 
         {
-
+            //    url: "/Designer/ForSelectedMonitoring/" + monitoring + "," + startDate + "," + endDate + "," + District,
             //7120 7121 7122
             if (string.IsNullOrEmpty(id))
             {
                 return Json(null);
             }
+            string StatusDiscrict = "0";
+            var District_Id = id.Split(',')[5];
             int BrandedId = 0;
             int CenterOpenCloseID = 0;
             if (id.Split(',')[1].Trim() == "RHS")
             {
+                StatusDiscrict = "50435";
                 CenterOpenCloseID = 55570;
                 BrandedId = 50437;
             }
             else if (id.Split(',')[1].Trim() == "MSU")
             {
+                StatusDiscrict = "50484";
                 CenterOpenCloseID = 50482;
                 BrandedId = 50634;
             }
             else if (id.Split(',')[1].Trim() == "FWC")
             {
+                StatusDiscrict = "55587";
                 CenterOpenCloseID = 55585;
                 BrandedId = 55590;
             }
+            else
+            {
+              
+                if(string.IsNullOrEmpty(District_Id) || District_Id== "---Select All---")
+                {
+                    StatusDiscrict = "50435, 50484, 55587 ";
+                }
 
+
+            }
+            if (string.IsNullOrEmpty(District_Id) || District_Id == "---Select All---")
+            {
+                StatusDiscrict = "50435, 50484, 55587 ";
+            }
+
+
+        
 
             string StartDate = id.Split(',')[3];
             string EndDate = id.Split(',')[4];
@@ -826,7 +853,7 @@ END
 	row_number() over (partition by sd1.fieldId, sd1.fieldValue, sd2.fieldId, sd2.fieldValue order by s.created desc) as RowNum
 	from survey s
 		inner join SurveyData sd1 on s.sbjnum = sd1.sbjnum and sd1.FieldId in (50446, 50486, 55588)--Center,Center,Center Ids
-		inner join SurveyData sd2 on s.sbjnum = sd2.sbjnum and sd2.FieldId in ({id.Split(',')[0]} )--District,District,District Ids --50435, 50484, 55587 
+		inner join SurveyData sd2 on s.sbjnum = sd2.sbjnum and sd2.FieldId in ({StatusDiscrict} )--District,District,District Ids --50435, 50484, 55587 
 		inner join SurveyData sd3 on s.sbjnum = sd3.sbjnum and sd3.FieldId in (55570, 50482, 55585)--Open,Open,open close Survey Ids
 		inner join SurveyData sd4 on s.sbjnum = sd4.sbjnum and sd4.FieldId in (50635)
 		where s.Created between '{StartDate}' and '{EndDate}'
@@ -1060,7 +1087,7 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
                 Value = x.Id.ToString() + "," + x.Name.Split('-')[1] + "," + x.RoleId.ToString(),
             }).ToList();
 
-            var dummyData = new List<ProjectFieldSample> { new ProjectFieldSample { Title = "Select District", Code = "0" }, };
+            var dummyData = new List<ProjectFieldSample> { new ProjectFieldSample { Title = "---Select All---", Code = "0" }, };
             var District = dummyData.Select(x => new SelectListItem
             {
                 Text = x.Title,
@@ -3017,9 +3044,9 @@ IF OBJECT_ID('tempdb..#SurveyReport') IS NOT NULL
 
 select Convert(varchar,s.Longitude) Longitude, Convert(varchar,s.Latitude) Latitude ,s.sbjnum, Convert(varchar,s.Created,101) Created, s.SurveyorName,
 Convert(varchar,isnull((select top 1 sd.FieldValue from SurveyData sd where sd.FieldId in (50435,50484,55587) and sd.sbjnum = s.sbjnum),0)) as District,
-Convert(varchar,isnull((select top 1 sd.FieldValue from SurveyData sd where sd.FieldId in (50446,50846,55588) and sd.sbjnum = s.sbjnum),0)) as Center,
+Convert(varchar,isnull((select top 1 sd.FieldValue from SurveyData sd where sd.FieldId in (50446,50486,55588) and sd.sbjnum = s.sbjnum),0)) as Center,
 Convert(varchar,isnull((select top 1 sd.FieldId from SurveyData sd where sd.FieldId in (50435,50484,55587) and sd.sbjnum = s.sbjnum),0)) as DistrictFieldID,
-Convert(varchar,isnull((select top 1  sd.FieldId from SurveyData sd where sd.FieldId in (50446,50846,55588) and sd.sbjnum = s.sbjnum),0)) as CenterFieldId
+Convert(varchar,isnull((select top 1  sd.FieldId from SurveyData sd where sd.FieldId in (50446,50486,55588) and sd.sbjnum = s.sbjnum),0)) as CenterFieldId
 , case when s.projectID = 7120 then 'RHS-S' when  s.projectID = 7121 then 'MSU' when s.projectID = 7122 then 'FWC' else '' end as Project
 into #SurveyReport
 from Survey  s 
@@ -3588,7 +3615,7 @@ where s.projectID in ({Ids}) order by s.sbjnum desc
                 }
                 try
                 {
-                    var StockOfMed = data.Where(x => x.Title.ToUpper().Contains("Stock and Expiry Date Medicine".ToUpper())).FirstOrDefault();
+                    var StockOfMed = data.Where(x => x.Title.ToUpper().Contains("Stock and Expiry Date".ToUpper()) && x.Title.ToUpper().Contains("Medicine".ToUpper())).FirstOrDefault();
                     if (StockOfMed != null)
                     {
                         field.StockOfMed = StockOfMed.FieldValue;

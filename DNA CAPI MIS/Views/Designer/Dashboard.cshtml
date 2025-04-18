@@ -597,8 +597,10 @@
                 var District = $('#District :selected').text();
 
                 if (Checklist == null || Checklist == "") {
-                    alert("Please select Monitoring");
-                    return false;
+
+                    Checklist = "0,0,0"
+                   // alert("Please select Monitoring");
+                  //  return false;
                 }
 
                 if (startDate == "") {
@@ -612,19 +614,25 @@
                     //  return false;
                 }
                 if (District == '') {
-                    District = "all";
+                    District = "---Select All---";
                 }
 
                 try {
                     if (Checklist != "") {
+                       // Done Work Fine
                         ContraceptiveDetail(Checklist, District, startDate, endDate,);
                     }
                 }
                 catch (ex) {
 
                 }
-                GetAllNotes(Checklist, startDate, endDate, District);
+                try {
+                    // Done Work Fine
+                    GetAllNotes(Checklist, startDate, endDate, District);
+                }
+                catch (ex) {
 
+                }
 
                 var dv = $('#District option').map(function () {
                     return $(this).text();
@@ -634,13 +642,19 @@
                     return $(this).val();
                 }).get();
 
-                BothChart(dv.slice(1), dvv.slice(1));
+                try {
 
+                    // Done Work Fine
+                   BothChart(dv.slice(1), dvv.slice(1));
+                }
+                catch (ex) {
+
+                }
 
                 try {
                     var District = $('#District').find('option:selected').text();
                     var Value = $('#District').val();
-                    CenterPieChart(District, Value)
+                    // CenterPieChart(District, Value)
                 }
                 catch (ex) {
 
@@ -691,7 +705,7 @@
             function GetAllNotes(monitoring, startDate, endDate, District) {
 
 
-                if (monitoring == "") {
+                if (monitoring == "0,0,0") {
                     $('#AllNote').show();
                     $('#SelectedNote').hide();
                 }
@@ -707,9 +721,11 @@
                     success: function (data) {
 
 
+                        if (monitoring != "0,0,0") {
+                            $('#AllNote').hide();
+                            $('#SelectedNote').show();
+                        }
 
-                        $('#AllNote').hide();
-                        $('#SelectedNote').show();
                         $('#MonitoringValue').text(data.All);
                         $('#MonitoringName').text(data.Name);
 
