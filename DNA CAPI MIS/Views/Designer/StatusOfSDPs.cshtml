@@ -245,18 +245,31 @@
                             var html = '';
                             $.each(data, function (key, item) {
                                 var Branded = "";
+                                var Premises = "";
                                 if (item.Status == "1") {
                                     Branded = "Branded";
                                 }
                                 else {
                                     Branded = "UnBranded";
                                 }
+
+
+                                if (item.Premises == "1") {
+                                    Premises = "Goverment";
+                                }
+                                else if (item.Premises == "2") {
+                                    Premises = "Rented";
+                                }
+                                else if (item.Premises == "3") {
+                                    Premises = "Pvt (Free Of Cost)";
+                                }
+
                                 html += '<tr>';
                                 html += '<td>' + item.asDate + '</td>';
                                 html += '<td>' + item.District + '</td>';
                                 html += '<td>' + item.ProjectName + '</td>';
                                 html += '<td>' + item.Center + '</td>';
-                                html += '<td>' + item.Premises + '</td>';
+                                html += '<td>' + Premises + '</td>';
                                 html += '<td>' + item.OpenClose + '</td>';
                                 html += '<td>' + Branded + '</td>';
                                 html += '</tr>';

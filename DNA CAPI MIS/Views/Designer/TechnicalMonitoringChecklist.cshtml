@@ -303,10 +303,10 @@
                             var cleaningYesCount = 0;
                             var disinfectionYesCount = 0;
                             var wasteDisposalYesCount = 0;
-
+                            var jj = 0;
                             $.each(data, function (key, item) {
                                 var technicalArray = item.Technical.split(',');
-
+                                jj = 1;
                                 // Count Yes (1) for each technical field
                                 if (technicalArray[0].trim() === '1') handWashingYesCount++;
                                 if (technicalArray[1].trim() === '1') decontaminationYesCount++;
@@ -329,16 +329,19 @@
                             });
 
                             // Append the calculated row with percentages
-                            html += '<tr>';
-                            html += '<td colspan="4"><strong>Total Percentage</strong></td>';
-                            html += '<td>' + ((handWashingYesCount / totalRows) * 100).toFixed(2) + '%</td>';
-                            html += '<td>' + ((decontaminationYesCount / totalRows) * 100).toFixed(2) + '%</td>';
-                            html += '<td>' + ((cleaningYesCount / totalRows) * 100).toFixed(2) + '%</td>';
-                            html += '<td>' + ((disinfectionYesCount / totalRows) * 100).toFixed(2) + '%</td>';
-                            html += '<td>' + ((wasteDisposalYesCount / totalRows) * 100).toFixed(2) + '%</td>';
-                            html += '</tr>';
 
-                            $('#tbody11').html(html);
+                            if (jj > 0) {
+                                html += '<tr>';
+                                html += '<td colspan="4"><strong>Total Percentage</strong></td>';
+                                html += '<td>' + ((handWashingYesCount / totalRows) * 100).toFixed(2) + '%</td>';
+                                html += '<td>' + ((decontaminationYesCount / totalRows) * 100).toFixed(2) + '%</td>';
+                                html += '<td>' + ((cleaningYesCount / totalRows) * 100).toFixed(2) + '%</td>';
+                                html += '<td>' + ((disinfectionYesCount / totalRows) * 100).toFixed(2) + '%</td>';
+                                html += '<td>' + ((wasteDisposalYesCount / totalRows) * 100).toFixed(2) + '%</td>';
+                                html += '</tr>';
+
+                                $('#tbody11').html(html);
+                            }
                         }
                     });
                 }
@@ -360,12 +363,17 @@
                     try {
                         var District = $('#District').find('option:selected').text();
                         var Center = $('#Center').find('option:selected').text();
+                        var Checklist = $('#Checklist').val();
+
+                        if (Checklist == undefined) {
+                            Checklist = "0,0,0"
+                        }
 
                         $('#Start').text(startDate);
                         $('#End').text(endDate);
                         $('#disP').text(District);
 
-                        var Filter = District + "," + Center + "," + startDate + "," + endDate;
+                        var Filter = District + "," + Center + "," + startDate + "," + endDate + "," + Checklist.split(',')[2];
 
                         try {
                             Grid11(Filter);
