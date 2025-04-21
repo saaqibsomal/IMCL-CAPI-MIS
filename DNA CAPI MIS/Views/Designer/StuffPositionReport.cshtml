@@ -231,18 +231,16 @@
             $("#District").empty();
             $("#Center").empty();
 
-            try {
+            //try {
 
-                if (Checklist != "") {
-                    MnitoringOfficer(Checklist);
+            //    if (Checklist != "") {
+            //        MnitoringOfficer(Checklist);
 
-                }
+            //    }
+            //}
+            //catch (ex) {
 
-
-            }
-            catch (ex) {
-
-            }
+            //}
 
 
         });
@@ -300,20 +298,6 @@
                 }
             });
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -522,17 +506,26 @@
 
 
 
-
-
-
-
             try {
                 var District = $('#District').find('option:selected').text();
                 var Center = $('#Center').find('option:selected').text();
+                var Project = $('#Checklist').val();
+
+                if (District == "") {
+                    District = "0";
+                }
+                if (Center == "") {
+                    Center = "0";
+                }
+
+                if (Project == "") {
+                    Project = "0,0,0";
+                }
+
                 $('#Start').text(startDate);
                 $('#End').text(endDate);
                 $('#disP').text(District);
-                var Filter = District + "," + Center + "," + startDate + "," + endDate;
+                var Filter = Project + ","   + District + "," + Center + "," + startDate + "," + endDate;
                 MnitoringOfficer(Filter);
             }
             catch (ex) {

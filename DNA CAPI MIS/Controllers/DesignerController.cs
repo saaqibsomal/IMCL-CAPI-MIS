@@ -4080,25 +4080,32 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
             var Cen = "";
             var sd = "";
             var ed = "";
-            if (id == "0" || id == "50435, RHS,7120" || id == "55587, FWC,7122" || id == "50484, MSU,7121")
+            var project = "";
+            string Where = " where  s.ProjectID in (7120,7121,7122)";
+
+            if (id == "0" || id == "50435, RHS,7120" || id == "55587, FWC,7122" || id == "50484, MSU,7121" || id.Split(',')[0] == "0")
             {
                 sd = "01/01/1950";
                 ed = "01/01/2060";
+                Where = "where s.ProjectID in (7120,7121,7122)";
             }
             else
             {
-                Des = id.Split(',')[0];
-                Cen = id.Split(',')[1];
-                if (Cen == "---Select All---" || Cen == "Select Center")
+                Des = id.Split(',')[3];
+                Cen = id.Split(',')[4];
+                if (Cen == "---Select All---" || Cen == "Select Center" || Cen =="0")
                 {
                     Cen = "";
                 }
-                if (Des == "---Select All---" || Des == "Select District")
+                if (Des == "---Select All---" || Des == "Select District" || Des == "0")
                 {
                     Des = "";
                 }
-                sd = id.Split(',')[2];
-                ed = id.Split(',')[3];
+                sd = id.Split(',')[5];
+                ed = id.Split(',')[6];
+                project = id.Split(',')[2];
+                Where = $"where s.ProjectID in ({project})";
+
             }
 
             string Sql = $@"IF OBJECT_ID('tempdb..#Graph') IS NOT NULL
@@ -4107,7 +4114,7 @@ BEGIN
 END
 
 ;with cte as (
-	select  s.sbjnum, s.Created, 
+	select  s.sbjnum, s.Created, s.ProjectID,
        
 		sd2.fieldId as FieldId2, sd2.fieldValue as FieldValue2,
 		sd3.fieldId as FieldId3, sd3.fieldValue as FieldValue3,
@@ -4118,8 +4125,9 @@ END
 	from survey s
 		inner join SurveyData sd2 on s.sbjnum = sd2.sbjnum and sd2.FieldId in (50435, 50484, 55587) --District
 		inner join SurveyData sd3 on s.sbjnum = sd3.sbjnum and sd3.FieldId in (50446, 50486, 55588)--Center close Survey Ids
-		Inner join SurveyData sd5 on s.sbjnum = sd5.sbjnum and sd5.FieldId in (55592,50496,50635))
-		
+		Inner join SurveyData sd5 on s.sbjnum = sd5.sbjnum and sd5.FieldId in (55592,50496,50635) {Where})
+         	
+
 select  convert(varchar, Created,101) asDate,  fs2.Title as District ,fs3.Title as Center, 
  FieldValue5 
  as Remarks
@@ -4143,25 +4151,30 @@ select  convert(varchar, Created,101) asDate,  fs2.Title as District ,fs3.Title 
             var Cen = "";
             var sd = "";
             var ed = "";
-            if (id == "0" || id == "50435, RHS,7120" || id == "55587, FWC,7122" || id == "50484, MSU,7121")
+            string project = "";
+            string Where = " where  s.ProjectID in (7120,7121,7122)";
+            if (id == "0" || id == "50435, RHS,7120" || id == "55587, FWC,7122" || id == "50484, MSU,7121" || id.Split(',')[0] == "0")
             {
                 sd = "01/01/1950";
                 ed = "01/01/2060";
+                Where = "where s.ProjectID in (7120,7121,7122)";
             }
             else
             {
-                Des = id.Split(',')[0];
-                Cen = id.Split(',')[1];
-                if (Cen == "---Select All---")
+                Des = id.Split(',')[3];
+                Cen = id.Split(',')[4];
+                if (Cen == "---Select All---" || Cen == "Select Center" || Cen == "0")
                 {
                     Cen = "";
                 }
-                if (Des == "---Select All---")
+                if (Des == "---Select All---" || Des == "Select District" || Des == "0")
                 {
                     Des = "";
                 }
-                sd = id.Split(',')[2];
-                ed = id.Split(',')[3];
+                sd = id.Split(',')[5];
+                ed = id.Split(',')[6];
+                project = id.Split(',')[2];
+                Where = $"where s.ProjectID in ({project})";
             }
 
             string Sql = $@"IF OBJECT_ID('tempdb..#Graph') IS NOT NULL
@@ -4185,7 +4198,7 @@ END
 		Inner join SurveyData sd5 on s.sbjnum = sd5.sbjnum and sd5.FieldId in (55591,50495,52571) -- Premises
 	    Inner join SurveyData sd6 on s.sbjnum = sd6.sbjnum and sd6.FieldId in (55570,50482,55585) -- Open Close Center Status
 		Inner join SurveyData sd7 on s.sbjnum = sd7.sbjnum and sd7.FieldId in (50437,50634,55590) -- Status 
-		)
+		{Where})
 select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as ProjectName, fs2.Title as District ,fs3.Title as Center, 
  FieldValue5 
  as Premises,
@@ -5142,26 +5155,30 @@ select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as Project
             var Cen = "";
             var sd = "";
             var ed = "";
-            if (id == "0" || id == "50435, RHS,7120" || id == "55587, FWC,7122" || id == "50484, MSU,7121")
+            string project = "";
+            string Where = " where  s.ProjectID in (7120,7121,7122)";
+            if (id == "0" || id == "50435, RHS,7120" || id == "55587, FWC,7122" || id == "50484, MSU,7121" || id.Split(',')[0] == "0")
             {
                 sd = "01/01/1950";
                 ed = "01/01/2060";
+                Where = "where s.ProjectID in (7120,7121,7122)";
             }
             else
             {
-
-                Des = id.Split(',')[0];
-                Cen = id.Split(',')[1];
-                if (Cen == "---Select All---")
+                Des = id.Split(',')[3];
+                Cen = id.Split(',')[4];
+                if (Cen == "---Select All---" || Cen == "Select Center" || Cen == "0")
                 {
                     Cen = "";
                 }
-                if (Des == "---Select All---")
+                if (Des == "---Select All---" || Des == "Select District" || Des == "0")
                 {
                     Des = "";
                 }
-                sd = id.Split(',')[2];
-                ed = id.Split(',')[3];
+                sd = id.Split(',')[5];
+                ed = id.Split(',')[6];
+                project = id.Split(',')[2];
+                Where = $"where s.ProjectID in ({project})";
             }
 
             string Sql = $@"IF OBJECT_ID('tempdb..#Graph') IS NOT NULL
@@ -5183,7 +5200,7 @@ END
 		inner join SurveyData sd3 on s.sbjnum = sd3.sbjnum and sd3.FieldId in (50446, 50486, 55588)--Center close Survey Ids
 		Inner join SurveyData sd5 on s.sbjnum = sd5.sbjnum and sd5.FieldId in (50512,50474,55615) -- FP
 		Inner join SurveyData sd6 on s.sbjnum = sd6.sbjnum and sd6.FieldId in (50513,53570,55616) -- FPQ
-		
+		{Where}
 		)
 select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as ProjectName, fs2.Title as District ,fs3.Title as Center, 
  FieldValue5 as FP,
@@ -5198,7 +5215,7 @@ select  (select top 1 p.[Name] from Project p where p.Id=  ProjectID) as Project
 	inner join ProjectFieldSample fs5 on cte.FieldId5 = fs5.FieldID 
 	inner join ProjectFieldSample fs6 on cte.FieldId6 = fs6.FieldID 
 	
-    where RowNum = 1 and len(FieldValue6) > 13 and created between '{sd}' and '{ed}' select distinct * from #Graph   
+    where RowNum = 1 and len(FieldValue6) > 5 and created between '{sd}' and '{ed}' select distinct * from #Graph   
 
  
 ";
