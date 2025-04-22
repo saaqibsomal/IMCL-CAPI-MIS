@@ -3,6 +3,26 @@
   "WorkspaceRootPath": "D:\\PWD\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{6B31FE2B-FC69-40F6-A9A7-DE94A2B5BF6B}|DNA CAPI MIS\\PWD CAPI MIS.csproj|d:\\pwd\\dna capi mis\\views\\designer\\medicalofficer.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6B31FE2B-FC69-40F6-A9A7-DE94A2B5BF6B}|DNA CAPI MIS\\PWD CAPI MIS.csproj|solutionrelative:dna capi mis\\views\\designer\\medicalofficer.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6B31FE2B-FC69-40F6-A9A7-DE94A2B5BF6B}|DNA CAPI MIS\\PWD CAPI MIS.csproj|d:\\pwd\\dna capi mis\\views\\designer\\iecmecmaterialstatus.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6B31FE2B-FC69-40F6-A9A7-DE94A2B5BF6B}|DNA CAPI MIS\\PWD CAPI MIS.csproj|solutionrelative:dna capi mis\\views\\designer\\iecmecmaterialstatus.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6B31FE2B-FC69-40F6-A9A7-DE94A2B5BF6B}|DNA CAPI MIS\\PWD CAPI MIS.csproj|d:\\pwd\\dna capi mis\\views\\designer\\equipmentpositions.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6B31FE2B-FC69-40F6-A9A7-DE94A2B5BF6B}|DNA CAPI MIS\\PWD CAPI MIS.csproj|solutionrelative:dna capi mis\\views\\designer\\equipmentpositions.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6B31FE2B-FC69-40F6-A9A7-DE94A2B5BF6B}|DNA CAPI MIS\\PWD CAPI MIS.csproj|d:\\pwd\\dna capi mis\\views\\designer\\contraceptivestockposition.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6B31FE2B-FC69-40F6-A9A7-DE94A2B5BF6B}|DNA CAPI MIS\\PWD CAPI MIS.csproj|solutionrelative:dna capi mis\\views\\designer\\contraceptivestockposition.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6B31FE2B-FC69-40F6-A9A7-DE94A2B5BF6B}|DNA CAPI MIS\\PWD CAPI MIS.csproj|d:\\pwd\\dna capi mis\\views\\designer\\contraceptivestockperformance.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6B31FE2B-FC69-40F6-A9A7-DE94A2B5BF6B}|DNA CAPI MIS\\PWD CAPI MIS.csproj|solutionrelative:dna capi mis\\views\\designer\\contraceptivestockperformance.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{6B31FE2B-FC69-40F6-A9A7-DE94A2B5BF6B}|DNA CAPI MIS\\PWD CAPI MIS.csproj|d:\\pwd\\dna capi mis\\controllers\\designercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6B31FE2B-FC69-40F6-A9A7-DE94A2B5BF6B}|DNA CAPI MIS\\PWD CAPI MIS.csproj|solutionrelative:dna capi mis\\controllers\\designercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -11,16 +31,16 @@
       "RelativeMoniker": "D:0:0:{6B31FE2B-FC69-40F6-A9A7-DE94A2B5BF6B}|DNA CAPI MIS\\PWD CAPI MIS.csproj|solutionrelative:dna capi mis\\views\\designer\\stuffpositionreport.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6B31FE2B-FC69-40F6-A9A7-DE94A2B5BF6B}|DNA CAPI MIS\\PWD CAPI MIS.csproj|d:\\pwd\\dna capi mis\\views\\designer\\statusofsdps.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{6B31FE2B-FC69-40F6-A9A7-DE94A2B5BF6B}|DNA CAPI MIS\\PWD CAPI MIS.csproj|solutionrelative:dna capi mis\\views\\designer\\statusofsdps.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{6B31FE2B-FC69-40F6-A9A7-DE94A2B5BF6B}|DNA CAPI MIS\\PWD CAPI MIS.csproj|d:\\pwd\\dna capi mis\\views\\shared\\_reportpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6B31FE2B-FC69-40F6-A9A7-DE94A2B5BF6B}|DNA CAPI MIS\\PWD CAPI MIS.csproj|solutionrelative:dna capi mis\\views\\shared\\_reportpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6B31FE2B-FC69-40F6-A9A7-DE94A2B5BF6B}|DNA CAPI MIS\\PWD CAPI MIS.csproj|d:\\pwd\\dna capi mis\\views\\designer\\report.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6B31FE2B-FC69-40F6-A9A7-DE94A2B5BF6B}|DNA CAPI MIS\\PWD CAPI MIS.csproj|solutionrelative:dna capi mis\\views\\designer\\report.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6B31FE2B-FC69-40F6-A9A7-DE94A2B5BF6B}|DNA CAPI MIS\\PWD CAPI MIS.csproj|d:\\pwd\\dna capi mis\\views\\designer\\pdfreport.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{6B31FE2B-FC69-40F6-A9A7-DE94A2B5BF6B}|DNA CAPI MIS\\PWD CAPI MIS.csproj|solutionrelative:dna capi mis\\views\\designer\\pdfreport.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6B31FE2B-FC69-40F6-A9A7-DE94A2B5BF6B}|DNA CAPI MIS\\PWD CAPI MIS.csproj|D:\\PWD\\dna capi mis\\views\\designer\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{6B31FE2B-FC69-40F6-A9A7-DE94A2B5BF6B}|DNA CAPI MIS\\PWD CAPI MIS.csproj|solutionrelative:dna capi mis\\views\\designer\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6B31FE2B-FC69-40F6-A9A7-DE94A2B5BF6B}|DNA CAPI MIS\\PWD CAPI MIS.csproj|D:\\PWD\\dna capi mis\\controllers\\districtcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -34,11 +54,23 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 13,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
-              "Name": "ST:131:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+              "Name": "ST:132:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             },
             {
               "$type": "Bookmark",
@@ -46,102 +78,147 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:131:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+              "Name": "ST:1869956712:0:{81164725-9a96-4ece-a4cb-440d8fd285e5}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:132:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "MedicalOfficer.cshtml",
+              "DocumentMoniker": "D:\\PWD\\DNA CAPI MIS\\Views\\Designer\\MedicalOfficer.cshtml",
+              "RelativeDocumentMoniker": "DNA CAPI MIS\\Views\\Designer\\MedicalOfficer.cshtml",
+              "ToolTip": "D:\\PWD\\DNA CAPI MIS\\Views\\Designer\\MedicalOfficer.cshtml",
+              "RelativeToolTip": "DNA CAPI MIS\\Views\\Designer\\MedicalOfficer.cshtml",
+              "ViewState": "AgIAANcAAAAAAAAAAAAAABMAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-22T16:12:19.692Z",
+              "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:133:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:134:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:135:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "IECMECMaterialStatus.cshtml",
+              "DocumentMoniker": "D:\\PWD\\DNA CAPI MIS\\Views\\Designer\\IECMECMaterialStatus.cshtml",
+              "RelativeDocumentMoniker": "DNA CAPI MIS\\Views\\Designer\\IECMECMaterialStatus.cshtml",
+              "ToolTip": "D:\\PWD\\DNA CAPI MIS\\Views\\Designer\\IECMECMaterialStatus.cshtml",
+              "RelativeToolTip": "DNA CAPI MIS\\Views\\Designer\\IECMECMaterialStatus.cshtml",
+              "ViewState": "AgIAANIAAAAAAAAAAAAAABUAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-22T16:12:13.324Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "StatusOfSDPs.cshtml",
-              "DocumentMoniker": "D:\\PWD\\DNA CAPI MIS\\Views\\Designer\\StatusOfSDPs.cshtml",
-              "RelativeDocumentMoniker": "DNA CAPI MIS\\Views\\Designer\\StatusOfSDPs.cshtml",
-              "ToolTip": "D:\\PWD\\DNA CAPI MIS\\Views\\Designer\\StatusOfSDPs.cshtml",
-              "RelativeToolTip": "DNA CAPI MIS\\Views\\Designer\\StatusOfSDPs.cshtml",
-              "ViewState": "AgIAAB0BAAAAAAAAAAAAAC8BAAAAAAAAAAAAAA==",
+              "Title": "EquipmentPositions.cshtml",
+              "DocumentMoniker": "D:\\PWD\\DNA CAPI MIS\\Views\\Designer\\EquipmentPositions.cshtml",
+              "RelativeDocumentMoniker": "DNA CAPI MIS\\Views\\Designer\\EquipmentPositions.cshtml",
+              "ToolTip": "D:\\PWD\\DNA CAPI MIS\\Views\\Designer\\EquipmentPositions.cshtml",
+              "RelativeToolTip": "DNA CAPI MIS\\Views\\Designer\\EquipmentPositions.cshtml",
+              "ViewState": "AgIAAMIAAAAAAAAAAAAAABMAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-21T17:44:52.309Z",
+              "WhenOpened": "2025-04-22T16:12:03.969Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "ContraceptiveStockPosition.cshtml",
+              "DocumentMoniker": "D:\\PWD\\DNA CAPI MIS\\Views\\Designer\\ContraceptiveStockPosition.cshtml",
+              "RelativeDocumentMoniker": "DNA CAPI MIS\\Views\\Designer\\ContraceptiveStockPosition.cshtml",
+              "ToolTip": "D:\\PWD\\DNA CAPI MIS\\Views\\Designer\\ContraceptiveStockPosition.cshtml",
+              "RelativeToolTip": "DNA CAPI MIS\\Views\\Designer\\ContraceptiveStockPosition.cshtml",
+              "ViewState": "AgIAANYAAAAAAAAAAAAAACoAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-22T16:11:54.017Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ContraceptiveStockPerformance.cshtml",
+              "DocumentMoniker": "D:\\PWD\\DNA CAPI MIS\\Views\\Designer\\ContraceptiveStockPerformance.cshtml",
+              "RelativeDocumentMoniker": "DNA CAPI MIS\\Views\\Designer\\ContraceptiveStockPerformance.cshtml",
+              "ToolTip": "D:\\PWD\\DNA CAPI MIS\\Views\\Designer\\ContraceptiveStockPerformance.cshtml",
+              "RelativeToolTip": "DNA CAPI MIS\\Views\\Designer\\ContraceptiveStockPerformance.cshtml",
+              "ViewState": "AgIAAA4BAAAAAAAAAAAAACEBAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-22T16:11:34.654Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "_ReportPartial.cshtml",
+              "DocumentMoniker": "D:\\PWD\\DNA CAPI MIS\\Views\\Shared\\_ReportPartial.cshtml",
+              "RelativeDocumentMoniker": "DNA CAPI MIS\\Views\\Shared\\_ReportPartial.cshtml",
+              "ToolTip": "D:\\PWD\\DNA CAPI MIS\\Views\\Shared\\_ReportPartial.cshtml",
+              "RelativeToolTip": "DNA CAPI MIS\\Views\\Shared\\_ReportPartial.cshtml",
+              "ViewState": "AgIAAHoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-22T16:08:39.813Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Report.cshtml",
+              "DocumentMoniker": "D:\\PWD\\DNA CAPI MIS\\Views\\Designer\\Report.cshtml",
+              "RelativeDocumentMoniker": "DNA CAPI MIS\\Views\\Designer\\Report.cshtml",
+              "ToolTip": "D:\\PWD\\DNA CAPI MIS\\Views\\Designer\\Report.cshtml",
+              "RelativeToolTip": "DNA CAPI MIS\\Views\\Designer\\Report.cshtml",
+              "ViewState": "AgIAAGcFAAAAAAAAAAAAwFwFAACPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-04-22T15:48:39.238Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "PdfReport.cshtml",
               "DocumentMoniker": "D:\\PWD\\DNA CAPI MIS\\Views\\Designer\\PdfReport.cshtml",
               "RelativeDocumentMoniker": "DNA CAPI MIS\\Views\\Designer\\PdfReport.cshtml",
               "ToolTip": "D:\\PWD\\DNA CAPI MIS\\Views\\Designer\\PdfReport.cshtml",
               "RelativeToolTip": "DNA CAPI MIS\\Views\\Designer\\PdfReport.cshtml",
-              "ViewState": "AgIAAJMAAAAAAAAAAAAAAKwAAAAeAAAAAAAAAA==",
+              "ViewState": "AgIAAOYAAAAAAAAAAAAAAKwAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-04-18T18:03:56Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 6,
               "Title": "StuffPositionReport.cshtml",
               "DocumentMoniker": "D:\\PWD\\DNA CAPI MIS\\Views\\Designer\\StuffPositionReport.cshtml",
               "RelativeDocumentMoniker": "DNA CAPI MIS\\Views\\Designer\\StuffPositionReport.cshtml",
               "ToolTip": "D:\\PWD\\DNA CAPI MIS\\Views\\Designer\\StuffPositionReport.cshtml",
               "RelativeToolTip": "DNA CAPI MIS\\Views\\Designer\\StuffPositionReport.cshtml",
-              "ViewState": "AgIAAPwBAAAAAAAAAAAAAA8CAAAcAAAAAAAAAA==",
+              "ViewState": "AgIAAF0BAAAAAAAAAAAAAHABAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-04-14T14:23:04.277Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Dashboard.cshtml",
-              "DocumentMoniker": "D:\\PWD\\DNA CAPI MIS\\Views\\Designer\\Dashboard.cshtml",
-              "RelativeDocumentMoniker": "DNA CAPI MIS\\Views\\Designer\\Dashboard.cshtml",
-              "ToolTip": "D:\\PWD\\DNA CAPI MIS\\Views\\Designer\\Dashboard.cshtml",
-              "RelativeToolTip": "DNA CAPI MIS\\Views\\Designer\\Dashboard.cshtml",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAswCQAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-11T16:40:18.886Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 10,
               "Title": "DistrictController.cs",
               "DocumentMoniker": "D:\\PWD\\DNA CAPI MIS\\Controllers\\DistrictController.cs",
               "RelativeDocumentMoniker": "DNA CAPI MIS\\Controllers\\DistrictController.cs",
               "ToolTip": "D:\\PWD\\DNA CAPI MIS\\Controllers\\DistrictController.cs",
               "RelativeToolTip": "DNA CAPI MIS\\Controllers\\DistrictController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAiAAAAAAAAAA==",
+              "ViewState": "AgIAAGkAAAAAAAAAAAAAAAwAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-21T14:22:16.147Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
               "Title": "DesignerController.cs",
               "DocumentMoniker": "D:\\PWD\\DNA CAPI MIS\\Controllers\\DesignerController.cs",
               "RelativeDocumentMoniker": "DNA CAPI MIS\\Controllers\\DesignerController.cs",
               "ToolTip": "D:\\PWD\\DNA CAPI MIS\\Controllers\\DesignerController.cs",
               "RelativeToolTip": "DNA CAPI MIS\\Controllers\\DesignerController.cs",
-              "ViewState": "AgIAADcQAAAAAAAAAADwv00QAAAmAAAAAAAAAA==",
+              "ViewState": "AgIAADwAAAAAAAAAAAAYwIYAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-20T16:48:20.682Z",
               "EditorCaption": ""

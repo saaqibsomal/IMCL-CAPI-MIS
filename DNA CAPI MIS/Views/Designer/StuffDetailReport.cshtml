@@ -1271,7 +1271,18 @@
                     }
 
 
+                    var Project = $('#Checklist').val();
 
+                    if (District == "") {
+                        District = "0";
+                    }
+                    if (Center == "") {
+                        Center = "0";
+                    }
+
+                    if (Project == "") {
+                        Project = "0,0,0";
+                    }
 
 
 
@@ -1280,7 +1291,7 @@
                         var District = $('#District').find('option:selected').text();
                         var Center = $('#Center').find('option:selected').text();
 
-                        var Filter = District + "," + Center + "," + startDate + "," + endDate;
+                        var Filter = Project + "," + District + "," + Center + "," + startDate + "," + endDate;
 
 
                         MnitoringOfficer(Filter)

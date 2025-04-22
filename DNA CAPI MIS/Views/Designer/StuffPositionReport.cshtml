@@ -230,74 +230,57 @@
             GetDistrict(Checklist);
             $("#District").empty();
             $("#Center").empty();
-
-            //try {
-
-            //    if (Checklist != "") {
-            //        MnitoringOfficer(Checklist);
-
-            //    }
-            //}
-            //catch (ex) {
-
-            //}
-
-
         });
 
 
+        //$('#District').change(function () {
+        //    var val = $('#Checklist').val();
+        //    var selectedText = $(this).find('option:selected').text();
+        //    var com = val + "," + selectedText;
+        //    $("#Center").empty();
+        //    GetCenter(com);
+        //});
+
+        //var Checklist = $('#Checklist option').map(function () {
+        //    return $(this).text();
+        //}).get();
+
+
+        //function GetDistrict(district) {
+
+        //    var dist = district;
+        //    $.ajax({
+        //        type: 'POST',
+        //        url: "/Designer/GetDistictById/" + district,
+        //        data: {},
+        //        async: true,
+        //        success: function (data) {
+        //            $("#District").empty();
+        //            $("#District").append('<option value="' + 0 + '">' + "---Select All---" + '</option>')
+        //            $.each(data, function (i, state) {
+        //                $("#District").append('<option value="' + state.Value + '">' + state.Text + '</option>')
+        //            })
+        //        }
+        //    });
+
+        //}
 
 
 
-
-        $('#District').change(function () {
-            var val = $('#Checklist').val();
-            var selectedText = $(this).find('option:selected').text();
-            var com = val + "," + selectedText;
-            $("#Center").empty();
-            GetCenter(com);
-        });
-
-        var Checklist = $('#Checklist option').map(function () {
-            return $(this).text();
-        }).get();
-
-
-        function GetDistrict(district) {
-
-            var dist = district;
-            $.ajax({
-                type: 'POST',
-                url: "/Designer/GetDistictById/" + district,
-                data: {},
-                async: true,
-                success: function (data) {
-                    $("#District").empty();
-                    $("#District").append('<option value="' + 0 + '">' + "---Select All---" + '</option>')
-                    $.each(data, function (i, state) {
-                        $("#District").append('<option value="' + state.Value + '">' + state.Text + '</option>')
-                    })
-                }
-            });
-
-        }
-
-
-
-        function GetCenter(district) {
-            $.ajax({
-                type: 'POST',
-                url: "/Designer/GetCentral/" + district,
-                data: {},
-                success: function (data) {
-                    $("#Center").empty();
-                    $("#Center").append('<option value="' + 0 + '">' + "---Select All---" + '</option>')
-                    $.each(data, function (i, state) {
-                        $("#Center").append('<option value="' + state.Value + '">' + state.Text + '</option>')
-                    })
-                }
-            });
-        }
+        //function GetCenter(district) {
+        //    $.ajax({
+        //        type: 'POST',
+        //        url: "/Designer/GetCentral/" + district,
+        //        data: {},
+        //        success: function (data) {
+        //            $("#Center").empty();
+        //            $("#Center").append('<option value="' + 0 + '">' + "---Select All---" + '</option>')
+        //            $.each(data, function (i, state) {
+        //                $("#Center").append('<option value="' + state.Value + '">' + state.Text + '</option>')
+        //            })
+        //        }
+        //    });
+        //}
 
 
 

@@ -228,10 +228,6 @@
                     $("#District").empty();
                     $("#Center").empty();
 
-                  
-                    
-
-
                 });
 
                 function Grid5(Filter) {
@@ -259,10 +255,10 @@
                                 html += '<td>' + item.ProjectName + '</td>';
                                 html += '<td>' + item.Center + '</td>';
 
-                                html += '<td>' + new0 + '</td>';
-                                html += '<td>' + new1 + '</td>';
-                                html += '<td>' + new2 + '</td>';
-                                html += '<td>' + new3 + '</td>';
+                                html += '<td>' + (new0 == undefined ? "0" : (new0 == "" ? "0" : new0)) + '</td>';
+                                html += '<td>' + (new1 == undefined ? "0" : new1) + '</td>';
+                                html += '<td>' + (new2 == undefined ? "0" : new2) + '</td>';
+                                html += '<td>' + (new3 == undefined ? "0" : new3) + '</td>';
 
                                 html += '</tr>';
                             });
@@ -286,6 +282,20 @@
                         endDate = "01-01-2099";
                     }
 
+
+                     var Project = $('#Checklist').val();
+
+                     if (District == "") {
+                         District = "0";
+                     }
+                     if (Center == "") {
+                         Center = "0";
+                     }
+
+                     if (Project == "") {
+                         Project = "0,0,0";
+                     }
+
                     try {
                         var District = $('#District').find('option:selected').text();
                         var Center = $('#Center').find('option:selected').text();
@@ -294,7 +304,7 @@
                         $('#End').text(endDate);
                         $('#disP').text(District);
 
-                        var Filter = District + "," + Center + "," + startDate + "," + endDate;
+                        var Filter = Project + "," + District + "," + Center + "," + startDate + "," + endDate;
 
                         try {
                             Grid5(Filter);
