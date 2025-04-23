@@ -191,36 +191,56 @@ INNER JOIN
         {
 
 
-            string Query = $@"SELECT 
+            string Query = $@"IF OBJECT_ID('tempdb..#Project') IS NOT NULL
+BEGIN
+    DROP TABLE #Project;
+END
+
+DECLARE @Field AS VARCHAR(20) = '';
+
+-- Assign the value to @Field separately
+SELECT @Field = 
     CASE 
-        WHEN p.id = 7120 THEN 50577--50446 
-        WHEN p.id = 7121 THEN 50484--50486 
-        WHEN p.id = 7122 THEN 55587--50517 
+        WHEN p.id = 7120 THEN '50446' 
+        WHEN p.id = 7121 THEN '50486' 
+        WHEN p.id = 7122 THEN '55588'
+        ELSE '0' 
+    END
+FROM Project p
+WHERE p.id IN ({id}); -- Limit to relevant IDs
+
+-- Create #Project table
+SELECT 
+    CASE 
+        WHEN p.id = 7120 THEN 50577
+        WHEN p.id = 7121 THEN 50484
+        WHEN p.id = 7122 THEN 55587
         ELSE 0 
     END AS Id, 
-    [Name] ,
-	RIGHT(p.Name, CHARINDEX(' ', REVERSE(p.Name) + ' ') - 1) as shortName
+    [Name],
+    RIGHT(p.Name, CHARINDEX(' ', REVERSE(p.Name) + ' ') - 1) AS shortName
 INTO #Project
-FROM 
-    Project p
-WHERE 
-    p.id IN ({id}) 
-ORDER BY 
-    [Name];
+FROM Project p
+WHERE p.id IN ({id})
+ORDER BY [Name];
 
- 
-	SELECT   
-    
+-- Use the @Field variable here
+SELECT   
     pf.Title,
- 
-    (SELECT COUNT(*) 
-     FROM ProjectFieldSample 
-     WHERE Title LIKE '%' + p.shortName + '%' AND Title LIKE '% ' + pf.Title + '%'
+    p.shortName,
+    pf.FieldID,
+    (
+        SELECT COUNT(*) 
+        FROM ProjectFieldSample 
+        WHERE Title LIKE '%' + p.shortName + '%' 
+          AND Title LIKE '%' + pf.Title + '%' 
+          AND FieldID = CAST(@Field AS INT)
     ) AS OpenCenter 
 FROM 
     #Project p 
 INNER JOIN 
-    ProjectFieldSample pf ON p.ID = pf.FieldID; ";
+    ProjectFieldSample pf ON p.ID = pf.FieldID;
+ ";
             var Pie = db.Database.SqlQuery<BarChart>(Query);
 
             var distinctItems = Pie.Select(x => new SelectListItem
@@ -260,44 +280,92 @@ INNER JOIN
             {
                 where = "";
             }
+            string Project = "";
+            string StatusDiscrict = "0";
+            int CenterOpenCloseID = 0;
+            string CenterId = "50446, 50486, 55588"; 
+            if (id  == "50435")
+            {
+                StatusDiscrict = "50435";
+                CenterOpenCloseID = 55570;
+                Project = "7120";
+                CenterId = "50446";
+            }
+            else if (id  == "50484")
+            {
+                StatusDiscrict = "50484";
+                CenterOpenCloseID = 50482;
+                Project = "7121";
+                CenterId = "50486";
+            }
+            else if (id== "55587")
+            {
+                StatusDiscrict = "55587";
+                CenterOpenCloseID = 55585;
+                Project = "7122";
+                CenterId = "55588";
+            }
 
 
-            string Query = $@"
-IF OBJECT_ID('tempdb..#Graph') IS NOT NULL
-BEGIN
-    DROP TABLE #Graph;
-END
-
-;with cte as (
-	select s.sbjnum, s.Created, 
-		sd1.fieldId as FieldId1, sd1.fieldValue as FieldValue1, 
-		sd2.fieldId as FieldId2, sd2.fieldValue as FieldValue2,
-		sd3.fieldId as FieldId3, sd3.fieldValue as FieldValue3,
-	row_number() over (partition by sd1.fieldId, sd1.fieldValue, sd2.fieldId, sd2.fieldValue order by s.created desc) as RowNum
-	from survey s
-		inner join SurveyData sd1 on s.sbjnum = sd1.sbjnum and sd1.FieldId in (50446, 50486, 55588)--Center,Center,Center Ids
-		inner join SurveyData sd2 on s.sbjnum = sd2.sbjnum and sd2.FieldId in (50435, 50484, 55587)--District,District,District Ids 
-		inner join SurveyData sd3 on s.sbjnum = sd3.sbjnum and sd3.FieldId in (55570, 50482, 55585)--Open,Open,open close Survey Ids
-        where s.Created between '{sdate}' and '{edate}'
+            #region
+            string OpenClose = $@"WITH cte AS (
+    SELECT 
+        sd.sbjnum,
+        MAX(CASE WHEN sd.FieldId = {CenterOpenCloseID} THEN sd.[FieldValue] END) AS IsOpen,
+        MAX(CASE WHEN sd.FieldId = {StatusDiscrict} THEN sd.[FieldValue] END) AS District,
+        MAX(CASE WHEN sd.FieldId = {CenterId} THEN sd.[FieldValue] END) AS Center
+    FROM 
+        SurveyData sd
+    WHERE 
+        sd.sbjnum IN (
+            SELECT s.sbjnum FROM survey s WHERE ProjectID = {Project} and s.Created between '{sdate}' and '{edate}'
+        )
+       AND sd.FieldId IN ({CenterOpenCloseID}, {StatusDiscrict}, {CenterId}) --1 Present Quest 2- District 3- Center
+    GROUP BY 
+        sd.sbjnum
+),
+cte_with_titles AS (
+    SELECT 
+        cte.sbjnum,
+        cte.IsOpen,
+        p.Title AS DistrictTitle,
+        pp.Title AS CenterTitle
+    FROM 
+        cte
+  INNER JOIN ProjectFieldSample p ON cte.District = p.Code AND p.FieldID = {StatusDiscrict} --50435
+    INNER JOIN ProjectFieldSample pp ON cte.Center = pp.Code AND pp.FieldID =  {CenterId} --50446
+    where p.Title like '%{District}%' or '---Select All---' = '{District}'
+),
+SplitStatus AS (
+    SELECT 
+        cwt.DistrictTitle,
+        cwt.CenterTitle,
+        value AS StatusCode
+    FROM 
+        cte_with_titles cwt
+    CROSS APPLY dbo.SplitStringValue(cwt.IsOpen, ',')
 )
-select fs1.FieldID as CenterId,fs2.FieldID DistrictId,  fs2.Title as District,fs1.Title as Center,  
-
-fs2.Title as DiscrtictGroup,
-fs3.Title as OpenClose, case when fs3.Title = 'Open' then 1 else  0 end IsOpen,fs3.Title
+SELECT 
  
+    CASE 
+        WHEN StatusCode = '1' THEN 'Open'
+        ELSE 'Close'
+    END AS Title,
+    COUNT(*) AS OpenClose
+FROM 
+    SplitStatus ss
+  where (ss.DistrictTitle like '%---Select All---%'  or '---Select All---' = '---Select All---')
+GROUP BY 
+ 
+    CASE 
+        WHEN StatusCode = '1' THEN 'Open'
+        ELSE 'Close'
+    END
+ORDER BY 
+   Title;";
 
-    into #Graph
-	from cte
-	inner join ProjectFieldSample fs1 on cte.FieldId1 = fs1.FieldID and fs1.Code IN (cte.FieldValue1)
-	inner join ProjectFieldSample fs2 on cte.FieldId2 = fs2.FieldID and fs2.Code IN (cte.FieldValue2)
-	inner join ProjectFieldSample fs3 on cte.FieldId3 = fs3.FieldID and fs3.Code IN (cte.FieldValue3)
-    where RowNum = 1 
-
-	select  Count(g.IsOpen) OpenClose,g.Title     from  #Graph as g where g.IsOpen in (1,0) {where} and (g.District like '%{District}%' or '---Select All---' = '{District}')
-	group by  g.IsOpen ,g.Title  
-
-";
-            var Pie = db.Database.SqlQuery<PieChartOC>(Query);
+            #endregion
+            var Pie = db.Database.SqlQuery<PieChartOC>(OpenClose);
 
             var distinctItems = Pie.Select(x => new SelectListItem
             {
@@ -749,10 +817,7 @@ FieldValue6 as Concept,
 
         [HttpPost]
         public JsonResult ForSelectedMonitoring(string id)
-
         {
-            //    url: "/Designer/ForSelectedMonitoring/" + monitoring + "," + startDate + "," + endDate + "," + District,
-            //7120 7121 7122
             string Project = "";
             if (string.IsNullOrEmpty(id))
             {
@@ -760,15 +825,13 @@ FieldValue6 as Concept,
             }
             string StaffID = "";
             string StatusDiscrict = "0";
-            string StatusDiscrictPresent = "0";
             var District_Id = id.Split(',')[5];
             int BrandedId = 0;
             int CenterOpenCloseID = 0;
-            string CenterId = "50446, 50486, 55588"; // 
+            string CenterId = "50446, 50486, 55588"; 
             if (id.Split(',')[1].Trim() == "RHS")
             {
                 StatusDiscrict = "50435";
-                StatusDiscrictPresent = "50435";
                 CenterOpenCloseID = 55570;
                 BrandedId = 50437;
                 Project = "7120";
@@ -778,7 +841,6 @@ FieldValue6 as Concept,
             else if (id.Split(',')[1].Trim() == "MSU")
             {
                 StatusDiscrict = "50484";
-                StatusDiscrictPresent = "50484";
                 CenterOpenCloseID = 50482;
                 BrandedId = 50634;
                 Project = "7121";
@@ -788,112 +850,20 @@ FieldValue6 as Concept,
             else if (id.Split(',')[1].Trim() == "FWC")
             {
                 StatusDiscrict = "55587";
-                StatusDiscrictPresent = "55587";
                 CenterOpenCloseID = 55585;
                 BrandedId = 55590;
                 Project = "7122";
                 StaffID = "55592";
                 CenterId = "55588";
             }
-            else
-            {
-              
-                if(string.IsNullOrEmpty(District_Id) || District_Id== "---Select All---")
-                {
-                    StatusDiscrict = "50435, 50484, 55587 ";
-                }
 
-
-            }
-            if (string.IsNullOrEmpty(District_Id) || District_Id == "---Select All---")
-            {
-                //StatusDiscrict = "50435, 50484, 55587";
-            }
+    
 
             string StartDate = id.Split(',')[3];
             string EndDate = id.Split(',')[4];
             string District = id.Split(',')[5];
             var all = $"SELECT SurveyorName, COUNT(*) AS SurveyCount FROM Survey WHERE ProjectID in ({id.Split(',')[2]})  and Created between '{StartDate}' and '{EndDate}' GROUP BY SurveyorName ORDER BY COUNT(*) DESC";
-
-            var OpenCloseSql = $@"
-IF OBJECT_ID('tempdb..#Graph') IS NOT NULL
-BEGIN
-    DROP TABLE #Graph;
-END
-
-;with cte as (
-	select s.sbjnum, s.Created, 
-		sd1.fieldId as FieldId1, sd1.fieldValue as FieldValue1, 
-		sd2.fieldId as FieldId2, sd2.fieldValue as FieldValue2,
-		sd3.fieldId as FieldId3, sd3.fieldValue as FieldValue3,
-	row_number() over (partition by sd1.fieldId, sd1.fieldValue, sd2.fieldId, sd2.fieldValue order by s.created desc) as RowNum
-	from survey s
-		inner join SurveyData sd1 on s.sbjnum = sd1.sbjnum and sd1.FieldId in (50446, 50486, 55588)--Center,Center,Center Ids
-		inner join SurveyData sd2 on s.sbjnum = sd2.sbjnum and sd2.FieldId in (50435, 50484, 55587)--District,District,District Ids 
-		inner join SurveyData sd3 on s.sbjnum = sd3.sbjnum and sd3.FieldId in ({CenterOpenCloseID})--Open,Open,open close Survey Ids
-        where s.Created between '{StartDate}' and '{EndDate}'
-)
-select fs1.FieldID as CenterId,fs2.FieldID DistrictId,  fs2.Title as District,fs1.Title as Center,  
-
-fs2.Title as DiscrtictGroup,
-fs3.Title as OpenClose, case when fs3.Title = 'Open' then 1 else  0 end IsOpen,fs3.Title
  
-
-    into #Graph
-	from cte
-	inner join ProjectFieldSample fs1 on cte.FieldId1 = fs1.FieldID and fs1.Code IN (cte.FieldValue1)
-	inner join ProjectFieldSample fs2 on cte.FieldId2 = fs2.FieldID and fs2.Code IN (cte.FieldValue2)
-	inner join ProjectFieldSample fs3 on cte.FieldId3 = fs3.FieldID and fs3.Code IN (cte.FieldValue3)
-    where RowNum = 1 
-
-	select  Count(g.IsOpen) OpenClose,g.Title     from  #Graph as g where g.IsOpen in (1,0)  and  (g.District like '%{District}%' or '---Select All---' = '{District}')
-	group by  g.IsOpen ,g.Title  
-
-
-";
-            #region
-            //            var Status = $@"IF OBJECT_ID('tempdb..#Graph') IS NOT NULL
-            //BEGIN
-            //    DROP TABLE #Graph;
-            //END
-
-            //;with cte as (
-            //	select s.sbjnum, s.Created,s.ProjectID,
-            //		sd1.fieldId as FieldId1, sd1.fieldValue as FieldValue1, 
-            //		sd2.fieldId as FieldId2, sd2.fieldValue as FieldValue2,
-            //		sd3.fieldId as FieldId3, sd3.fieldValue as FieldValue3,
-            //		sd4.fieldId as FieldId4, sd4.fieldValue as FieldValue4,
-            //	row_number() over (partition by sd1.fieldId, sd1.fieldValue, sd2.fieldId, sd2.fieldValue order by s.created desc) as RowNum
-            //	from survey s
-            //		inner join SurveyData sd1 on s.sbjnum = sd1.sbjnum and sd1.FieldId in (50446, 50486, 55588)--Center,Center,Center Ids
-            //		inner join SurveyData sd2 on s.sbjnum = sd2.sbjnum and sd2.FieldId in ({StatusDiscrict})--District,District,District Ids --50435, 50484, 55587 
-            //		inner join SurveyData sd3 on s.sbjnum = sd3.sbjnum and sd3.FieldId in (55570, 50482, 55585)--Open,Open,open close Survey Ids
-            //		inner join SurveyData sd4 on s.sbjnum = sd4.sbjnum and sd4.FieldId in ({StaffID})
-            //		where s.Created between '{StartDate}' and '{EndDate}' and  s.ProjectID =  {Project}
-
-
-            //)--Abs
-            //--)
-            //select fs1.FieldID as CenterId,fs2.FieldID DistrictId,  fs2.Title as District,fs1.Title as Center,  
-
-            //fs2.Title as DiscrtictGroup,
-            //fs3.Title as OpenClose, case when fs3.Title = 'Open' then 1 else  0 end IsOpen,
-            //fs4.Title as Status
-
-
-            //    into #Graph
-            //	from cte
-            //	inner join ProjectFieldSample fs1 on cte.FieldId1 = fs1.FieldID and fs1.Code IN (cte.FieldValue1)
-            //	inner join ProjectFieldSample fs2 on cte.FieldId2 = fs2.FieldID and fs2.Code IN (cte.FieldValue2)
-            //	inner join ProjectFieldSample fs3 on cte.FieldId3 = fs3.FieldID and fs3.Code IN (cte.FieldValue3)
-            //	Left join ProjectFieldSample fs4 on cte.FieldId4 = fs4.FieldID and fs4.ParentSampleID=0  and fs4.Code IN (select * from dbo.SplitStringValue(cte.FieldValue4, ',')) 
-            //    where RowNum = 1 and fs3.Title= 'Open'
-
-            //	select count(Status) cnt ,Status from #Graph 
-            //    //where  (District like '%{District}%' or '---Select All---' = '{District}')
-            //	group by Status--,Center
-            //";
-            #endregion
 
             string Status = $@"WITH cte AS (
     SELECT 
@@ -905,7 +875,7 @@ fs3.Title as OpenClose, case when fs3.Title = 'Open' then 1 else  0 end IsOpen,f
         SurveyData sd
     WHERE 
         sd.sbjnum IN (
-            SELECT sbjnum FROM survey WHERE ProjectID = {Project}
+               SELECT s.sbjnum FROM survey s WHERE ProjectID = {Project} and s.Created between '{StartDate}' and '{EndDate}'
         )
         AND sd.FieldId IN ({StaffID}, {StatusDiscrict}, {CenterId}) --1 Present Quest 2- District 3- Center
     GROUP BY 
@@ -921,6 +891,7 @@ cte_with_titles AS (
         cte
     INNER JOIN ProjectFieldSample p ON cte.District = p.Code AND p.FieldID = {StatusDiscrict} --50435
     INNER JOIN ProjectFieldSample pp ON cte.Center = pp.Code AND pp.FieldID =  {CenterId} --50446
+    where p.Title like '%{District_Id}%' or '---Select All---' = '{District_Id}'
 ),
 SplitStatus AS (
     SELECT 
@@ -956,34 +927,123 @@ GROUP BY
 ORDER BY 
    Status;
 ";
-
-            var Branded = $@"IF OBJECT_ID('tempdb..#Graph') IS NOT NULL
-BEGIN
-    DROP TABLE #Graph;
-END
-
-;with cte as (
-	select s.sbjnum, s.Created, 
-       
-		sd2.fieldId as FieldId2, sd2.fieldValue as FieldValue2,
-		sd3.fieldId as FieldId3, sd3.fieldValue as FieldValue3,
-	    sd4.fieldId as FieldId4, sd4.fieldValue as FieldValue4,
-	
-	row_number() over (partition by  sd2.fieldId, sd2.fieldValue,sd3.fieldId,sd3.fieldValue,sd4.fieldId order by s.created desc) as RowNum
-	from survey s
-
-		inner join SurveyData sd2 on s.sbjnum = sd2.sbjnum and sd2.FieldId in (50435, 50484, 55587)--District,District,District Ids 
-		inner join SurveyData sd3 on s.sbjnum = sd3.sbjnum and sd3.FieldId in (55570, 50482, 55585)--Open,Open,open close Survey Ids
-		Inner join SurveyData sd4 on s.sbjnum = sd4.sbjnum and sd4.FieldId in ({BrandedId}) where s.Created between '{StartDate}' and '{EndDate}') 
+            #region
+            
+            string Branded = $@"WITH cte AS (
+    SELECT 
+        sd.sbjnum,
+        MAX(CASE WHEN sd.FieldId = {BrandedId} THEN sd.[FieldValue] END) AS IsOpen,
+        MAX(CASE WHEN sd.FieldId = {StatusDiscrict} THEN sd.[FieldValue] END) AS District,
+        MAX(CASE WHEN sd.FieldId = {CenterId} THEN sd.[FieldValue] END) AS Center
+    FROM 
+        SurveyData sd
+    WHERE 
+        sd.sbjnum IN (
+          SELECT s.sbjnum FROM survey s WHERE ProjectID = {Project} and s.Created between '{StartDate}' and '{EndDate}'
+        )
+       AND sd.FieldId IN ({BrandedId}, {StatusDiscrict}, {CenterId}) --1 Present Quest 2- District 3- Center
+    GROUP BY 
+        sd.sbjnum
+),
+cte_with_titles AS (
+    SELECT 
+        cte.sbjnum,
+        cte.IsOpen,
+        p.Title AS DistrictTitle,
+        pp.Title AS CenterTitle
+    FROM 
+        cte
+  INNER JOIN ProjectFieldSample p ON cte.District = p.Code AND p.FieldID = {StatusDiscrict} --50435
+    INNER JOIN ProjectFieldSample pp ON cte.Center = pp.Code AND pp.FieldID =  {CenterId} --50446
+     where p.Title like '%{District_Id}%' or '---Select All---' = '{District_Id}'
+),
+SplitStatus AS (
+    SELECT 
+        cwt.DistrictTitle,
+        cwt.CenterTitle,
+        value AS StatusCode
+    FROM 
+        cte_with_titles cwt
+    CROSS APPLY dbo.SplitStringValue(cwt.IsOpen, ',')
+)
+SELECT 
  
-    select  fs2.FieldID DistrictId,  fs2.Title as District   ,fs4.Title as status  into #Graph from cte
-	inner join ProjectFieldSample fs2 on cte.FieldId2 = fs2.FieldID and fs2.Code IN (cte.FieldValue2)
-	inner join ProjectFieldSample fs3 on cte.FieldId3 = fs3.FieldID and fs3.Code IN (cte.FieldValue3)
-    inner join ProjectFieldSample fs4 on cte.FieldId4 = fs4.FieldID and fs4.Code IN (cte.FieldValue4)
-    where RowNum = 1 select status as Name, count(status) as BrandedCnt from #Graph  where  (District like '%{District}%' or '---Select All---' = '{District}') group by  status 
- ";
+    CASE 
+        WHEN StatusCode = '1' THEN 'Branded'
+        ELSE 'Unbranded'
+    END AS Name,
+    COUNT(*) AS BrandedCnt
+FROM 
+    SplitStatus ss
+  where (ss.DistrictTitle like '%---Select All---%'  or '---Select All---' = '---Select All---')
+GROUP BY 
+ 
+    CASE 
+        WHEN StatusCode = '1' THEN 'Branded'
+        ELSE 'Unbranded'
+    END
+ORDER BY 
+   Name;";
 
-            var Openclose = db.Database.SqlQuery<OpenCloseResponse>(OpenCloseSql);
+            #endregion
+
+            string OpenClose = $@"WITH cte AS (
+    SELECT 
+        sd.sbjnum,
+        MAX(CASE WHEN sd.FieldId = {CenterOpenCloseID} THEN sd.[FieldValue] END) AS IsOpen,
+        MAX(CASE WHEN sd.FieldId = {StatusDiscrict} THEN sd.[FieldValue] END) AS District,
+        MAX(CASE WHEN sd.FieldId = {CenterId} THEN sd.[FieldValue] END) AS Center
+    FROM 
+        SurveyData sd
+    WHERE 
+        sd.sbjnum IN (
+            SELECT s.sbjnum FROM survey s WHERE ProjectID = {Project} and s.Created between '{StartDate}' and '{EndDate}'
+        )
+       AND sd.FieldId IN ({CenterOpenCloseID}, {StatusDiscrict}, {CenterId}) --1 Present Quest 2- District 3- Center
+    GROUP BY 
+        sd.sbjnum
+),
+cte_with_titles AS (
+    SELECT 
+        cte.sbjnum,
+        cte.IsOpen,
+        p.Title AS DistrictTitle,
+        pp.Title AS CenterTitle
+    FROM 
+        cte
+  INNER JOIN ProjectFieldSample p ON cte.District = p.Code AND p.FieldID = {StatusDiscrict} --50435
+    INNER JOIN ProjectFieldSample pp ON cte.Center = pp.Code AND pp.FieldID =  {CenterId} --50446
+   where p.Title like '%{District_Id}%' or '---Select All---' = '{District_Id}'
+),
+SplitStatus AS (
+    SELECT 
+        cwt.DistrictTitle,
+        cwt.CenterTitle,
+        value AS StatusCode
+    FROM 
+        cte_with_titles cwt
+    CROSS APPLY dbo.SplitStringValue(cwt.IsOpen, ',')
+)
+SELECT 
+ 
+    CASE 
+        WHEN StatusCode = '1' THEN 'Open'
+        ELSE 'Close'
+    END AS Title,
+    COUNT(*) AS OpenClose
+FROM 
+    SplitStatus ss
+  where (ss.DistrictTitle like '%---Select All---%'  or '---Select All---' = '---Select All---')
+GROUP BY 
+ 
+    CASE 
+        WHEN StatusCode = '1' THEN 'Open'
+        ELSE 'Close'
+    END
+ORDER BY 
+   Title;";
+
+            var Openclose = db.Database.SqlQuery<OpenCloseResponse>(OpenClose);
             var StatusDt = db.Database.SqlQuery<EmpStatus>(Status);
             var queryFWC = db.Database.SqlQuery<SurveyorStats>(all);
             var BrandedSql = db.Database.SqlQuery<Branded>(Branded);
