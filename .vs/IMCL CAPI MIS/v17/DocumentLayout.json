@@ -3,20 +3,20 @@
   "WorkspaceRootPath": "D:\\PWD\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{6B31FE2B-FC69-40F6-A9A7-DE94A2B5BF6B}|DNA CAPI MIS\\PWD CAPI MIS.csproj|d:\\pwd\\dna capi mis\\views\\shared\\_reportpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6B31FE2B-FC69-40F6-A9A7-DE94A2B5BF6B}|DNA CAPI MIS\\PWD CAPI MIS.csproj|solutionrelative:dna capi mis\\views\\shared\\_reportpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6B31FE2B-FC69-40F6-A9A7-DE94A2B5BF6B}|DNA CAPI MIS\\PWD CAPI MIS.csproj|D:\\PWD\\dna capi mis\\views\\designer\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{6B31FE2B-FC69-40F6-A9A7-DE94A2B5BF6B}|DNA CAPI MIS\\PWD CAPI MIS.csproj|solutionrelative:dna capi mis\\views\\designer\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{6B31FE2B-FC69-40F6-A9A7-DE94A2B5BF6B}|DNA CAPI MIS\\PWD CAPI MIS.csproj|d:\\pwd\\dna capi mis\\controllers\\designercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6B31FE2B-FC69-40F6-A9A7-DE94A2B5BF6B}|DNA CAPI MIS\\PWD CAPI MIS.csproj|solutionrelative:dna capi mis\\controllers\\designercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6B31FE2B-FC69-40F6-A9A7-DE94A2B5BF6B}|DNA CAPI MIS\\PWD CAPI MIS.csproj|d:\\pwd\\dna capi mis\\views\\designer\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{6B31FE2B-FC69-40F6-A9A7-DE94A2B5BF6B}|DNA CAPI MIS\\PWD CAPI MIS.csproj|solutionrelative:dna capi mis\\views\\designer\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{6B31FE2B-FC69-40F6-A9A7-DE94A2B5BF6B}|DNA CAPI MIS\\PWD CAPI MIS.csproj|D:\\PWD\\dna capi mis\\views\\designer\\stuffpositionreport.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{6B31FE2B-FC69-40F6-A9A7-DE94A2B5BF6B}|DNA CAPI MIS\\PWD CAPI MIS.csproj|solutionrelative:dna capi mis\\views\\designer\\stuffpositionreport.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6B31FE2B-FC69-40F6-A9A7-DE94A2B5BF6B}|DNA CAPI MIS\\PWD CAPI MIS.csproj|d:\\pwd\\dna capi mis\\views\\designer\\contraceptivestockperformance.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{6B31FE2B-FC69-40F6-A9A7-DE94A2B5BF6B}|DNA CAPI MIS\\PWD CAPI MIS.csproj|solutionrelative:dna capi mis\\views\\designer\\contraceptivestockperformance.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6B31FE2B-FC69-40F6-A9A7-DE94A2B5BF6B}|DNA CAPI MIS\\PWD CAPI MIS.csproj|D:\\PWD\\dna capi mis\\controllers\\districtcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -30,11 +30,23 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 12,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
-              "Name": "ST:131:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+              "Name": "ST:132:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             },
             {
               "$type": "Bookmark",
@@ -42,27 +54,20 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:131:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+              "Name": "ST:1869956712:0:{81164725-9a96-4ece-a4cb-440d8fd285e5}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:132:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:133:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:134:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:135:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "_ReportPartial.cshtml",
+              "DocumentMoniker": "D:\\PWD\\DNA CAPI MIS\\Views\\Shared\\_ReportPartial.cshtml",
+              "RelativeDocumentMoniker": "DNA CAPI MIS\\Views\\Shared\\_ReportPartial.cshtml",
+              "ToolTip": "D:\\PWD\\DNA CAPI MIS\\Views\\Shared\\_ReportPartial.cshtml",
+              "RelativeToolTip": "DNA CAPI MIS\\Views\\Shared\\_ReportPartial.cshtml",
+              "ViewState": "AgIAAEAAAAAAAAAAAAAAAE8AAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-05-01T17:47:12.241Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -72,7 +77,7 @@
               "RelativeDocumentMoniker": "DNA CAPI MIS\\Views\\Designer\\Dashboard.cshtml",
               "ToolTip": "D:\\PWD\\DNA CAPI MIS\\Views\\Designer\\Dashboard.cshtml",
               "RelativeToolTip": "DNA CAPI MIS\\Views\\Designer\\Dashboard.cshtml",
-              "ViewState": "AgIAAHADAAAAAAAAAAAAwIMDAAAsAAAAAAAAAA==",
+              "ViewState": "AgIAAC8CAAAAAAAAAAAAANsAAABtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-04-23T15:33:14.515Z",
               "EditorCaption": ""
@@ -80,19 +85,6 @@
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "ContraceptiveStockPerformance.cshtml",
-              "DocumentMoniker": "D:\\PWD\\DNA CAPI MIS\\Views\\Designer\\ContraceptiveStockPerformance.cshtml",
-              "RelativeDocumentMoniker": "DNA CAPI MIS\\Views\\Designer\\ContraceptiveStockPerformance.cshtml",
-              "ToolTip": "D:\\PWD\\DNA CAPI MIS\\Views\\Designer\\ContraceptiveStockPerformance.cshtml",
-              "RelativeToolTip": "DNA CAPI MIS\\Views\\Designer\\ContraceptiveStockPerformance.cshtml",
-              "ViewState": "AgIAAA4BAAAAAAAAAAAAACEBAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-04-22T16:11:34.654Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "StuffPositionReport.cshtml",
               "DocumentMoniker": "D:\\PWD\\DNA CAPI MIS\\Views\\Designer\\StuffPositionReport.cshtml",
               "RelativeDocumentMoniker": "DNA CAPI MIS\\Views\\Designer\\StuffPositionReport.cshtml",
@@ -118,13 +110,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "DesignerController.cs",
               "DocumentMoniker": "D:\\PWD\\DNA CAPI MIS\\Controllers\\DesignerController.cs",
               "RelativeDocumentMoniker": "DNA CAPI MIS\\Controllers\\DesignerController.cs",
               "ToolTip": "D:\\PWD\\DNA CAPI MIS\\Controllers\\DesignerController.cs",
               "RelativeToolTip": "DNA CAPI MIS\\Controllers\\DesignerController.cs",
-              "ViewState": "AgIAAFEBAAAAAAAAAADwv3MBAAAfAAAAAAAAAA==",
+              "ViewState": "AgIAABIEAAAAAAAAAAAvwCIEAABCAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-08-20T16:48:20.682Z",
               "EditorCaption": ""

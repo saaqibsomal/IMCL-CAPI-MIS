@@ -12,7 +12,7 @@
 
 <link href="~/Content/DSDS/dsds.css" rel="stylesheet" type="text/css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
- 
+
 @*CSS Class desktop is used for overlay*@
 
 <style>
@@ -160,25 +160,21 @@
         <div class="box">
             <div class="box-header">
                 <h3 class="box-title" style="width:100%">Dashboard</h3>
-                <div class="col-12">
-                    <div class="row">
-                        <div class="col-md-12" style="margin-left:4px;margin-top:2px"><b> Type of SDP</b></div>
+                <div class="row" style="margin-left:2px;margin-top:4px">
+                    <div class="col-6" >
                         <div class="col-10">
-                           
                             <div class="col-md-4 col-sm-12">
+                                <label for="startDate" >  Type of SDP:</label>
                                 @Html.DropDownList("Checklist", ViewBag.Checklist as List<SelectListItem>, "Select Type of SDP", htmlAttributes: new { @class = "form-control", id = "Checklist" })
-
                             </div>
                         </div>
+
                     </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-md-12" style="margin-left:4px;margin-top:2px"><b> District</b></div>
-                    <div class="col-12">
-
+                    <div class="col-6" >
                         <div class="col-10">
                             <div class="col-md-4 col-sm-12">
+                                <label for="startDate" >  District:</label>
                                 @Html.DropDownList("District", ViewBag.District as List<SelectListItem>, htmlAttributes: new { @class = "form-control", id = "District" })
 
                             </div>
@@ -186,14 +182,13 @@
                     </div>
                 </div>
 
-
-                <div class="row">
-                    <div class="col-12">
+                <div class="row" style="margin-left:2px;margin-top:4px">
+                    <div class="col-6"  >
 
                         <!-- Date Range Inputs -->
                         <div class="col-10">
                             <div class="col-md-4 col-sm-12">
-                                <label for="startDate" style="margin-left:4px;margin-top:4px">  Start Date:</label>
+                                <label for="startDate"  >  Start Date:</label>
                                 <input type="date" id="startDate" name="startDate" class="form-control">
                             </div>
 
@@ -201,28 +196,28 @@
                         </div>
 
                     </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-12">
+                    <div class="col-6" >
 
 
                         <div class="col-md-4 col-sm-12">
-                            <label for="endDate" style="margin-left:4px;margin-top:4px">End Date:</label>
+                            <label for="endDate"  >End Date:</label>
                             <input type="date" id="endDate" name="endDate" class="form-control">
                         </div>
 
                     </div>
-
                 </div>
+
+
             </div>
 
             <div class="row">
-                <div class="col-12">
+            
+                <div class="col-md-6">
 
                     <!-- Date Range Inputs -->
 
-                    <div class="col-md-2 col-sm-12" style="margin-left:4px;margin-top:4px;">
+                    <div class="col-md-2 col-sm-12" style="margin-left:1%;margin-top:4px;margin-bottom:4px;">
 
                         <button id="Search" class="btn btn-success"> Search</button>
                     </div>
@@ -486,29 +481,29 @@
 
 
     @*<div class="col-12" style="text-align: center; margin-top: 10px;">
-        <h1>Stock of Contraceptive District Wise Status</h1>
-        <div class="col-10">
+            <h1>Stock of Contraceptive District Wise Status</h1>
+            <div class="col-10">
 
 
-            <table class="table bordered table-condensed table-hover solid-line">
-                <thead>
-                    <tr>
-                        <th>Name of District</th>
-                        <th id="Condoms">Condoms</th>
-                        <th id="COC">COC</th>
-                        <th id="POP">POP</th>
-                        <th id="ECP">ECP</th>
-                        <th id="Depo">3 Months Inj(Depo)</th>
-                        <th id="Syana">3 Month Inj (Syana Press)</th>
-                        <th id="IUCD">IUCD (CT-380-A)</th>
-                        <th id="Jadelle">Jadelle</th>
-                    </tr>
-                </thead>
-                <tbody id="tbodyCond">
-                </tbody>
-            </table>
-        </div>
-    </div>*@
+                <table class="table bordered table-condensed table-hover solid-line">
+                    <thead>
+                        <tr>
+                            <th>Name of District</th>
+                            <th id="Condoms">Condoms</th>
+                            <th id="COC">COC</th>
+                            <th id="POP">POP</th>
+                            <th id="ECP">ECP</th>
+                            <th id="Depo">3 Months Inj(Depo)</th>
+                            <th id="Syana">3 Month Inj (Syana Press)</th>
+                            <th id="IUCD">IUCD (CT-380-A)</th>
+                            <th id="Jadelle">Jadelle</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyCond">
+                    </tbody>
+                </table>
+            </div>
+        </div>*@
 
     <div class="col-12" style="text-align:center;display:none">
         <h1>Remarks of Monitoring Officer</h1>
@@ -542,621 +537,620 @@
 
 
 </div>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.2.2/echarts.min.js"></script>
-        <script src="https://code.highcharts.com/highcharts.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.2.2/echarts.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
 
 
 
 
-        <script>
+<script>
 
-            var selectedTex = "";
-            $('#Checklist').change(function () {
-                var Checklist = $('#Checklist').val();
+    var selectedTex = "";
+    $('#Checklist').change(function () {
+        var Checklist = $('#Checklist').val();
 
-                GetDistrict(Checklist);
+        GetDistrict(Checklist);
 
-                var dv = $('#District option').map(function () {
-                    return $(this).text();
-                }).get();
+        var dv = $('#District option').map(function () {
+            return $(this).text();
+        }).get();
 
-                var dvv = $('#District option').map(function () {
-                    return $(this).val();
-                }).get();
-                if (myBarChart) {
-                    myBarChart.destroy();
-                }
+        var dvv = $('#District option').map(function () {
+            return $(this).val();
+        }).get();
+        if (myBarChart) {
+            myBarChart.destroy();
+        }
 
-                BarChart(dv.slice(1), dvv.slice(1));
-               // BothChart(dv.slice(1), dvv.slice(1));
+        BarChart(dv.slice(1), dvv.slice(1));
+        // BothChart(dv.slice(1), dvv.slice(1));
+        $("#District").empty();
+        $("#Center").empty();
+
+        try {
+
+            if (Checklist != "") {
+                MnitoringOfficer(Checklist);
+            }
+
+
+        }
+        catch (ex) {
+
+        }
+
+
+    });
+
+
+
+    $('#Search').click(function () {
+
+        var startDate = $("#startDate").val();
+        var endDate = $("#endDate").val();
+        var Checklist = $('#Checklist').val();
+        var District = $('#District :selected').text();
+
+
+
+
+        // Destroy the existing chart instance if it exists
+        if (contraceptivePieChartInstance) {
+            contraceptivePieChartInstance.destroy();
+        }
+
+        // If chart already exists, destroy it before creating a new one
+        if (myPieChart) {
+            myPieChart.destroy();
+        }
+
+
+
+
+
+        if (Checklist == null || Checklist == "") {
+
+            Checklist = "0,0,0"
+            // alert("Please select Monitoring");
+            //  return false;
+        }
+
+        if (startDate == "") {
+            startDate = "01-01-1950";
+            // alert("Please select Start Date");
+            // return false;
+        }
+        if (endDate == "") {
+            endDate = "01-01-2099";
+            //  alert("Please select End Date");
+            //  return false;
+        }
+        if (District == '') {
+            District = "---Select All---";
+        }
+
+        try {
+            if (Checklist != "") {
+                // Done Work Fine
+                ContraceptiveDetail(Checklist, District, startDate, endDate,);
+            }
+        }
+        catch (ex) {
+
+        }
+        try {
+            // Done Work Fine
+            GetAllNotes(Checklist, startDate, endDate, District);
+        }
+        catch (ex) {
+
+        }
+
+        var dv = $('#District option').map(function () {
+            return $(this).text();
+        }).get();
+
+        var dvv = $('#District option').map(function () {
+            return $(this).val();
+        }).get();
+
+        try {
+
+            // Done Work Fine Pie Chart
+            BothChart(dv.slice(1), dvv.slice(1));
+        }
+        catch (ex) {
+
+        }
+
+        try {
+            var District = $('#District').find('option:selected').text();
+            var Value = $('#District').val();
+            // CenterPieChart(District, Value)
+        }
+        catch (ex) {
+
+        }
+
+    });
+
+
+
+
+    $('#District').change(function () {
+        var val = $('#Checklist').val();
+        var selectedText = $(this).find('option:selected').text();
+        var com = val + "," + selectedText;
+        $("#Center").empty();
+        GetCenter(com);
+    });
+
+    var Checklist = $('#Checklist option').map(function () {
+        return $(this).text();
+    }).get();
+    // PieChart(Checklist.slice(1));
+    // CharBar2(Checklist.slice(1));
+
+    function GetDistrict(district) {
+
+        var dist = district;
+        $.ajax({
+            type: 'POST',
+            url: "/Designer/GetDistictById/" + district,
+            data: {},
+            async: true,
+            success: function (data) {
                 $("#District").empty();
+                $("#District").append('<option value="' + 0 + '">' + "---Select All---" + '</option>')
+                $.each(data, function (i, state) {
+                    $("#District").append('<option value="' + state.Value + '">' + state.Text + '</option>')
+                })
+            }
+        });
+
+    }
+
+
+    function GetAllNotes(monitoring, startDate, endDate, District) {
+
+
+        if (monitoring == "0,0,0") {
+            $('#AllNote').show();
+            $('#SelectedNote').hide();
+        }
+
+
+
+
+        $.ajax({
+            type: 'POST',
+            url: "/Designer/ForSelectedMonitoring/" + monitoring + "," + startDate + "," + endDate + "," + District,
+            data: {},
+            async: true,
+            success: function (data) {
+
+
+                if (monitoring != "0,0,0") {
+                    $('#AllNote').hide();
+                    $('#SelectedNote').show();
+                }
+
+                $('#MonitoringValue').text(data.All);
+                $('#MonitoringName').text(data.Name);
+
+                // $('#CloseTitle').text(data.CloseTitle);
+                $('#OpenTitle').text(data.OpenTitle);
+                $('#CloseValue').text(data.Close);
+                $('#OpenValue').text(data.Open);
+                $('#Status').text("Status Of " + data.Name);
+                $('#BStatus').text("Status Of " + data.Name);
+
+
+                $('#PresentValue').text(data.Present);
+                $('#AbsentValue').text(data.Absent);
+                $('#LeaveValue').text(data.Leave);
+                $('#VacantValue').text(data.Vacant);
+
+                $('#BrandedValue').text(data.BrandedCnt);
+                $('#UnBrandedValue').text(data.UnBrandedCnt);
+
+
+
+            }
+        });
+
+    }
+
+    function GetCenter(district) {
+        $.ajax({
+            type: 'POST',
+            url: "/Designer/GetCentral/" + district,
+            data: {},
+            success: function (data) {
                 $("#Center").empty();
-
-                try {
-
-                    if (Checklist != "") {
-                        MnitoringOfficer(Checklist);
-                    }
-                  
-                    
-                }
-                catch (ex) {
-
-                }
-
-               
-            });
-
-
-
-            $('#Search').click(function () {
-
-                var startDate = $("#startDate").val();
-                var endDate = $("#endDate").val();
-                var Checklist = $('#Checklist').val();
-                var District = $('#District :selected').text();
+                $("#Centrals").append('<option value="' + 0 + '">' + "---Select All---" + '</option>')
+                $.each(data, function (i, state) {
+                    $("#Center").append('<option value="' + state.Value + '">' + state.Text + '</option>')
+                })
+            }
+        });
+    }
 
 
 
 
-                // Destroy the existing chart instance if it exists
-                if (contraceptivePieChartInstance) {
-                    contraceptivePieChartInstance.destroy();
-                }
 
-                // If chart already exists, destroy it before creating a new one
-                if (myPieChart) {
-                    myPieChart.destroy();
-                }
 
-          
+    function BothChart(Text, Value) {
+
+        var startDate = $("#startDate").val();
+        var endDate = $("#endDate").val();
+
+        var ids = $('#Checklist').val();
 
 
 
-                if (Checklist == null || Checklist == "") {
+        if (ids == null || Checklist == "") {
+            alert("Please select Monitoring");
+            return false;
+        }
 
-                    Checklist = "0,0,0"
-                   // alert("Please select Monitoring");
-                  //  return false;
-                }
+        if (startDate == "") {
+            startDate = "01-01-1950";
+            // alert("Please select Start Date");
+            // return false;
+        }
+        if (endDate == "") {
+            endDate = "01-01-2099";
+            //   alert("Please select End Date");
+            //  return false;
+        }
 
-                if (startDate == "") {
-                    startDate = "01-01-1950";
-                    // alert("Please select Start Date");
-                    // return false;
-                }
-                if (endDate == "") {
-                    endDate = "01-01-2099";
-                    //  alert("Please select End Date");
-                    //  return false;
-                }
-                if (District == '') {
-                    District = "---Select All---";
-                }
-
-                try {
-                    if (Checklist != "") {
-                       // Done Work Fine
-                        ContraceptiveDetail(Checklist, District, startDate, endDate,);
-                    }
-                }
-                catch (ex) {
-
-                }
-                try {
-                    // Done Work Fine
-                    GetAllNotes(Checklist, startDate, endDate, District);
-                }
-                catch (ex) {
-
-                }
-
-                var dv = $('#District option').map(function () {
-                    return $(this).text();
-                }).get();
-
-                var dvv = $('#District option').map(function () {
-                    return $(this).val();
-                }).get();
-
-                try {
-
-                    // Done Work Fine Pie Chart
-                   BothChart(dv.slice(1), dvv.slice(1));
-                }
-                catch (ex) {
-
-                }
-
-                try {
-                    var District = $('#District').find('option:selected').text();
-                    var Value = $('#District').val();
-                    // CenterPieChart(District, Value)
-                }
-                catch (ex) {
-
-                }
-
-            });
-
-
-
-
-            $('#District').change(function () {
-                var val = $('#Checklist').val();
-                var selectedText = $(this).find('option:selected').text();
-                var com = val + "," + selectedText;
-                $("#Center").empty();
-                GetCenter(com);
-            });
-
-            var Checklist = $('#Checklist option').map(function () {
-                return $(this).text();
-            }).get();
-            // PieChart(Checklist.slice(1));
-            // CharBar2(Checklist.slice(1));
-
-            function GetDistrict(district) {
-
-                var dist = district;
-                $.ajax({
-                    type: 'POST',
-                    url: "/Designer/GetDistictById/" + district,
-                    data: {},
-                    async: true,
-                    success: function (data) {
-                        $("#District").empty();
-                        $("#District").append('<option value="' + 0 + '">' + "---Select All---" + '</option>')
-                        $.each(data, function (i, state) {
-                            $("#District").append('<option value="' + state.Value + '">' + state.Text + '</option>')
-                        })
-                    }
+        var id = parseInt(ids.split(',')[0]);
+        var TitleArray = [];
+        var values = [];
+        var Title = $('#Checklist').find('option:selected').text();
+        var District = $('#District :selected').text();
+        $.ajax({
+            type: 'POST',
+            //url: "/Designer/BarChart/" + id,
+            url: "/Designer/DistrictBarChart/" + id + "," + startDate + "," + endDate + "," + District,
+            data: {},
+            async: true,
+            success: function (data) {
+                // Extracting values from data using map function
+                values = $.map(data, function (state) {
+                    return state.Value;
+                });
+                // Extracting values from data using map function
+                TitleArray = $.map(data, function (state) {
+                    return state.Text;
                 });
 
+                // Call the function after data is retrieved
+                //  BarCharfun(TitleArray, values);
+                OkPieChart(TitleArray, values, Title)
+            },
+            error: function (xhr, status, error) {
+                // Handle error if AJAX request fails
+                console.error("AJAX Error:", error);
             }
+        });
+
+    }
 
 
-            function GetAllNotes(monitoring, startDate, endDate, District) {
+    //$('#District').change(function () {
 
 
-                if (monitoring == "0,0,0") {
-                    $('#AllNote').show();
-                    $('#SelectedNote').hide();
+
+    //});
+
+
+
+    function CenterPieChart(District, Value) {
+
+
+        var TitleArray = [];
+        var values = [];
+
+        $.ajax({
+            type: 'POST',
+            //url: "/Designer/BarChart/" + id,
+            url: "/Designer/CenterPieChart/" + District + "," + Value,
+            data: {},
+            async: true,
+            success: function (data) {
+                // Extracting values from data using map function
+                values = $.map(data, function (state) {
+                    return state.Value;
+                });
+                // Extracting values from data using map function
+                TitleArray = $.map(data, function (state) {
+                    return state.Text;
+                });
+
+                OkPieChart(TitleArray, values, District)
+            },
+            error: function (xhr, status, error) {
+                // Handle error if AJAX request fails
+                console.error("AJAX Error:", error);
+            }
+        });
+
+    }
+
+
+    function BarChart(Text, Value) {
+
+        var ids = $('#Checklist').val();
+        var id = parseInt(ids.split(',')[2]);
+        var TitleArray = [];
+        var values = [];
+        var Title = $('#Checklist').find('option:selected').text();
+        $.ajax({
+            type: 'POST',
+            url: "/Designer/BarChart/" + id,
+            //  url: "/Designer/DistrictBarChart/" + id,
+            data: {},
+            async: true,
+            success: function (data) {
+                // Extracting values from data using map function
+                values = $.map(data, function (state) {
+                    return state.Value;
+                });
+                // Extracting values from data using map function
+                TitleArray = $.map(data, function (state) {
+                    return state.Text;
+                });
+
+                // Call the function after data is retrieved
+                BarCharfun(TitleArray, values);
+                // OkPieChart(TitleArray, values, Title)
+            },
+            error: function (xhr, status, error) {
+                // Handle error if AJAX request fails
+                console.error("AJAX Error:", error);
+            }
+        });
+
+    }
+
+
+    function OkBarChartOpenClose(Text, Value) {
+
+        var ids = $('#Checklist').val();
+        var OpenClose = $('#OpenClose').val();
+        var id = parseInt(ids.split(',')[2]);
+        var TitleArray = [];
+        var values = [];
+        var Title = $('#Checklist').find('option:selected').text();
+        $.ajax({
+            type: 'POST',
+            url: "/Designer/OpenClose/" + id + "|" + OpenClose,
+            data: {},
+            async: true,
+            success: function (data) {
+                // Extracting values from data using map function
+                values = $.map(data, function (state) {
+                    return state.Value;
+                });
+                // Extracting values from data using map function
+                TitleArray = $.map(data, function (state) {
+                    return state.Text;
+                });
+
+                // Call the function after data is retrieved
+                BarCharfun(TitleArray, values);
+                OkPieChart(TitleArray, values, Title)
+            },
+            error: function (xhr, status, error) {
+                // Handle error if AJAX request fails
+                console.error("AJAX Error:", error);
+            }
+        });
+
+    }
+
+
+
+    // Declare chart globally so we can destroy it later
+    var myBarChart = null;
+
+    function BarCharfun(TitleArray, values) {
+        // If chart already exists, destroy it before creating a new one
+        if (myBarChart) {
+            myBarChart.destroy();
+        }
+
+        // Data for the chart
+        var data = {
+            labels: TitleArray,
+            datasets: [{
+                label: $('#Checklist').find('option:selected').text(),
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1,
+                data: values
+            }]
+        };
+
+        // Configuration options
+        var options = {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
                 }
+            }
+        };
+
+        // Create the chart
+        var ctx = document.getElementById('myChart').getContext('2d');
+        myBarChart = new Chart(ctx, {
+            type: 'bar',
+            data: data,
+            options: options
+        });
+    }
+
+
+
+    var myPieChart = null;
+
+    function OkPieChart(TitleArray, values, Title) {
+        // If chart already exists, destroy it before creating a new one
+        if (myPieChart) {
+            myPieChart.destroy();
+        }
+
+        var data = {
+            labels: TitleArray,
+            datasets: [{
+                label: Title,
+                data: values,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(153, 102, 255, 0.5)',
+                    'rgba(255, 159, 64, 0.5)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        var options = {
+            responsive: true
+        };
+
+        var ctx = document.getElementById('myPieChart').getContext('2d');
+        myPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: data,
+            options: options
+        });
+    }
 
 
 
 
-                $.ajax({
-                    type: 'POST',
-                    url: "/Designer/ForSelectedMonitoring/" + monitoring + "," + startDate + "," + endDate + "," + District,
-                    data: {},
-                    async: true,
-                    success: function (data) {
+    function MnitoringOfficer(district) {
 
 
-                        if (monitoring != "0,0,0") {
-                            $('#AllNote').hide();
-                            $('#SelectedNote').show();
-                        }
+        $('#MType').text(district.split(',')[1] + " Type");
+        $('#MStatus').text(district.split(',')[1] + " Status");
+        $('#MName').text(district.split(',')[1] + " Name");
 
-                        $('#MonitoringValue').text(data.All);
-                        $('#MonitoringName').text(data.Name);
+        $.ajax({
+            type: 'POST',
+            url: "/Designer/MonitoringOfficer/" + district,
+            data: {},
+            async: true,
+            success: function (data) {
+                $("#tbody").empty();
+                var html = '';
+                $.each(data, function (key, item) {
+                    html += '<tr>';
 
-                       // $('#CloseTitle').text(data.CloseTitle);
-                        $('#OpenTitle').text(data.OpenTitle);
-                        $('#CloseValue').text(data.Close);
-                        $('#OpenValue').text(data.Open);
-                        $('#Status').text("Status Of " + data.Name);
-                        $('#BStatus').text("Status Of " + data.Name);
-
-
-                        $('#PresentValue').text(data.Present);
-                        $('#AbsentValue').text(data.Absent);
-                        $('#LeaveValue').text(data.Leave);
-                        $('#VacantValue').text(data.Vacant);
-
-                        $('#BrandedValue').text(data.BrandedCnt);
-                        $('#UnBrandedValue').text(data.UnBrandedCnt);
-
-
-
-                    }
+                    html += '<td>' + item.District + '</td>';
+                    html += '<td>' + item.Name + '</td>';
+                    html += '<td>' + item.Status + '</td>';
+                    html += '<td>' + item.OpenClose + '</td>';
+                    html += '<td>' + item.Remarks + '</td>';
+                    html += '</tr>';
                 });
+                $('#tbody').html(html);
 
             }
+        });
 
-            function GetCenter(district) {
-                $.ajax({
-                    type: 'POST',
-                    url: "/Designer/GetCentral/" + district,
-                    data: {},
-                    success: function (data) {
-                        $("#Center").empty();
-                        $("#Centrals").append('<option value="' + 0 + '">' + "---Select All---" + '</option>')
-                        $.each(data, function (i, state) {
-                            $("#Center").append('<option value="' + state.Value + '">' + state.Text + '</option>')
-                        })
-                    }
+    }
+
+    function ContraceptiveDetail(district, DistrictWise, sDate, eDate) {
+
+
+
+        $.ajax({
+            type: 'POST',
+            url: "/Designer/ContraceptiveDetailQuantity/" + district + "," + DistrictWise + "," + sDate + "," + eDate,
+            data: {},
+            async: true,
+            success: function (data) {
+
+                // Extracting values from data using map function
+                values = $.map(data, function (state) {
+                    return state.Value;
                 });
-            }
-
-
-  
-          
-
-
-            function BothChart(Text, Value) {
-
-                var startDate = $("#startDate").val();
-                var endDate = $("#endDate").val();
-
-                var ids = $('#Checklist').val();
-
-
-
-                if (ids == null || Checklist == "") {
-                    alert("Please select Monitoring");
-                    return false;
-                }
-
-                if (startDate == "") {
-                    startDate = "01-01-1950";
-                   // alert("Please select Start Date");
-                   // return false;
-                }
-                if (endDate == "") {
-                    endDate = "01-01-2099";
-                 //   alert("Please select End Date");
-                  //  return false;
-                }
-
-                var id = parseInt(ids.split(',')[0]);
-                var TitleArray = [];
-                var values = [];
-                var Title = $('#Checklist').find('option:selected').text();
-                var District = $('#District :selected').text();
-                $.ajax({
-                    type: 'POST',
-                    //url: "/Designer/BarChart/" + id,
-                    url: "/Designer/DistrictBarChart/" + id + "," + startDate + "," + endDate + "," + District,
-                    data: {},
-                    async: true,
-                    success: function (data) {
-                        // Extracting values from data using map function
-                        values = $.map(data, function (state) {
-                            return state.Value;
-                        });
-                        // Extracting values from data using map function
-                        TitleArray = $.map(data, function (state) {
-                            return state.Text;
-                        });
-
-                        // Call the function after data is retrieved
-                        //  BarCharfun(TitleArray, values);
-                        OkPieChart(TitleArray, values, Title)
-                    },
-                    error: function (xhr, status, error) {
-                        // Handle error if AJAX request fails
-                        console.error("AJAX Error:", error);
-                    }
+                // Extracting values from data using map function
+                TitleArray = $.map(data, function (state) {
+                    return state.Text;
                 });
 
+                ContraceptivePieChart(TitleArray, values, "");
             }
+        });
+
+    }
 
 
-            //$('#District').change(function () {
+    // Declare chart globally so we can destroy it later
+    var contraceptivePieChartInstance = null;
 
-             
+    function ContraceptivePieChart(TitleArray, values, Title) {
+        // Destroy the existing chart instance if it exists
+        if (contraceptivePieChartInstance) {
+            contraceptivePieChartInstance.destroy();
+        }
 
-            //});
+        var data = {
+            labels: TitleArray,
+            datasets: [{
+                label: Title,
+                data: values,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(153, 102, 255, 0.5)',
+                    'rgba(255, 159, 64, 0.5)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        };
 
+        var options = {
+            responsive: true
+        };
 
-
-            function CenterPieChart(District, Value) {
-
-
-                var TitleArray = [];
-                var values = [];
-
-                $.ajax({
-                    type: 'POST',
-                    //url: "/Designer/BarChart/" + id,
-                    url: "/Designer/CenterPieChart/" + District + "," + Value,
-                    data: {},
-                    async: true,
-                    success: function (data) {
-                        // Extracting values from data using map function
-                        values = $.map(data, function (state) {
-                            return state.Value;
-                        });
-                        // Extracting values from data using map function
-                        TitleArray = $.map(data, function (state) {
-                            return state.Text;
-                        });
-
-                        OkPieChart(TitleArray, values, District)
-                    },
-                    error: function (xhr, status, error) {
-                        // Handle error if AJAX request fails
-                        console.error("AJAX Error:", error);
-                    }
-                });
-
-            }
-
-
-            function BarChart(Text, Value) {
-
-                var ids = $('#Checklist').val();
-                var id = parseInt(ids.split(',')[2]);
-                var TitleArray = [];
-                var values = [];
-                var Title = $('#Checklist').find('option:selected').text();
-                $.ajax({
-                    type: 'POST',
-                    url: "/Designer/BarChart/" + id,
-                    //  url: "/Designer/DistrictBarChart/" + id,
-                    data: {},
-                    async: true,
-                    success: function (data) {
-                        // Extracting values from data using map function
-                        values = $.map(data, function (state) {
-                            return state.Value;
-                        });
-                        // Extracting values from data using map function
-                        TitleArray = $.map(data, function (state) {
-                            return state.Text;
-                        });
-
-                        // Call the function after data is retrieved
-                        BarCharfun(TitleArray, values);
-                        // OkPieChart(TitleArray, values, Title)
-                    },
-                    error: function (xhr, status, error) {
-                        // Handle error if AJAX request fails
-                        console.error("AJAX Error:", error);
-                    }
-                });
-
-            }
+        var ctx = document.getElementById('ContraceptivePieChart').getContext('2d');
+        contraceptivePieChartInstance = new Chart(ctx, {
+            type: 'pie',
+            data: data,
+            options: options
+        });
+    }
 
 
-            function OkBarChartOpenClose(Text, Value) {
+</script>
 
-                var ids = $('#Checklist').val();
-                var OpenClose = $('#OpenClose').val();
-                var id = parseInt(ids.split(',')[2]);
-                var TitleArray = [];
-                var values = [];
-                var Title = $('#Checklist').find('option:selected').text();
-                $.ajax({
-                    type: 'POST',
-                    url: "/Designer/OpenClose/" + id + "|" + OpenClose,
-                    data: {},
-                    async: true,
-                    success: function (data) {
-                        // Extracting values from data using map function
-                        values = $.map(data, function (state) {
-                            return state.Value;
-                        });
-                        // Extracting values from data using map function
-                        TitleArray = $.map(data, function (state) {
-                            return state.Text;
-                        });
-
-                        // Call the function after data is retrieved
-                        BarCharfun(TitleArray, values);
-                        OkPieChart(TitleArray, values, Title)
-                    },
-                    error: function (xhr, status, error) {
-                        // Handle error if AJAX request fails
-                        console.error("AJAX Error:", error);
-                    }
-                });
-
-            }
-
-
-
-            // Declare chart globally so we can destroy it later
-            var myBarChart = null;
-
-            function BarCharfun(TitleArray, values) {
-                // If chart already exists, destroy it before creating a new one
-                if (myBarChart) {
-                    myBarChart.destroy();
-                }
-
-                // Data for the chart
-                var data = {
-                    labels: TitleArray,
-                    datasets: [{
-                        label: $('#Checklist').find('option:selected').text(),
-                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        borderWidth: 1,
-                        data: values
-                    }]
-                };
-
-                // Configuration options
-                var options = {
-                    responsive: true,
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
-                };
-
-                // Create the chart
-                var ctx = document.getElementById('myChart').getContext('2d');
-                myBarChart = new Chart(ctx, {
-                    type: 'bar',
-                    data: data,
-                    options: options
-                });
-            }
-
-
-
-            var myPieChart = null;
-
-            function OkPieChart(TitleArray, values, Title) {
-                // If chart already exists, destroy it before creating a new one
-                if (myPieChart) {
-                    myPieChart.destroy();
-                }
-
-                var data = {
-                    labels: TitleArray,
-                    datasets: [{
-                        label: Title,
-                        data: values,
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.5)',
-                            'rgba(54, 162, 235, 0.5)',
-                            'rgba(255, 206, 86, 0.5)',
-                            'rgba(75, 192, 192, 0.5)',
-                            'rgba(153, 102, 255, 0.5)',
-                            'rgba(255, 159, 64, 0.5)'
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                };
-
-                var options = {
-                    responsive: true
-                };
-
-                var ctx = document.getElementById('myPieChart').getContext('2d');
-                myPieChart = new Chart(ctx, {
-                    type: 'pie',
-                    data: data,
-                    options: options
-                });
-            }
-
-            
-
-
-            function MnitoringOfficer(district) {
-
-
-                $('#MType').text(district.split(',')[1] + " Type");
-                $('#MStatus').text(district.split(',')[1] + " Status");
-                $('#MName').text(district.split(',')[1] + " Name");
-
-                $.ajax({
-                    type: 'POST',
-                    url: "/Designer/MonitoringOfficer/" + district,
-                    data: {},
-                    async: true,
-                    success: function (data) {
-                        $("#tbody").empty();
-                        var html = '';
-                        $.each(data, function (key, item) {
-                            html += '<tr>';
-
-                            html += '<td>' + item.District + '</td>';
-                            html += '<td>' + item.Name + '</td>';
-                            html += '<td>' + item.Status + '</td>';
-                            html += '<td>' + item.OpenClose + '</td>';
-                            html += '<td>' + item.Remarks + '</td>';
-                            html += '</tr>';
-                        });
-                        $('#tbody').html(html);
-
-                    }
-                });
-
-            }
-         
-            function ContraceptiveDetail(district, DistrictWise, sDate, eDate) {
-
- 
-
-                $.ajax({
-                    type: 'POST',
-                    url: "/Designer/ContraceptiveDetailQuantity/" + district + "," + DistrictWise + "," + sDate + "," + eDate,
-                    data: {},
-                    async: true,
-                    success: function (data) {
-
-                        // Extracting values from data using map function
-                        values = $.map(data, function (state) {
-                            return state.Value;
-                        });
-                        // Extracting values from data using map function
-                        TitleArray = $.map(data, function (state) {
-                            return state.Text;
-                        });
-
-                        ContraceptivePieChart(TitleArray, values, "");
-                    }
-                });
-
-            }
-
-
-            // Declare chart globally so we can destroy it later
-            var contraceptivePieChartInstance = null;
-
-            function ContraceptivePieChart(TitleArray, values, Title) {
-                // Destroy the existing chart instance if it exists
-                if (contraceptivePieChartInstance) {
-                    contraceptivePieChartInstance.destroy();
-                }
-
-                var data = {
-                    labels: TitleArray,
-                    datasets: [{
-                        label: Title,
-                        data: values,
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.5)',
-                            'rgba(54, 162, 235, 0.5)',
-                            'rgba(255, 206, 86, 0.5)',
-                            'rgba(75, 192, 192, 0.5)',
-                            'rgba(153, 102, 255, 0.5)',
-                            'rgba(255, 159, 64, 0.5)'
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                };
-
-                var options = {
-                    responsive: true
-                };
-
-                var ctx = document.getElementById('ContraceptivePieChart').getContext('2d');
-                contraceptivePieChartInstance = new Chart(ctx, {
-                    type: 'pie',
-                    data: data,
-                    options: options
-                });
-            }
-
-
-        </script>
-
-     

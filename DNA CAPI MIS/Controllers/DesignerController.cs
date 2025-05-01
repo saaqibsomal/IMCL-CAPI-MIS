@@ -1048,11 +1048,19 @@ ORDER BY
             var queryFWC = db.Database.SqlQuery<SurveyorStats>(all);
             var BrandedSql = db.Database.SqlQuery<Branded>(Branded);
             TotalSurveyDetail res = new TotalSurveyDetail();
+            
             if (queryFWC.Count() > 0)
             {
-                res.All = queryFWC.Sum(x => x.SurveyCount);
+                int cnt = 0;
+                foreach (var item in Openclose.ToList())
+                {
+                    cnt = cnt + item.OpenClose;
+                }
+                res.All = cnt;// queryFWC.Sum(x => x.SurveyCount);
                 res.Name = id.Split(',')[1];
             }
+            
+            
             if (Openclose.Count() > 0)
             {
                 foreach (var item in Openclose.ToList())
