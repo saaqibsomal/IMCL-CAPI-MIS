@@ -477,7 +477,18 @@
                     if (endDate == "") {
                         endDate = "01-01-2099";
                     }
+                    var Project = $('#Checklist').val();
 
+                    if (District == "") {
+                        District = "0";
+                    }
+                    if (Center == "") {
+                        Center = "0";
+                    }
+
+                    if (Project == "") {
+                        Project = "0,0,0";
+                    }
                     try {
                         var District = $('#District').find('option:selected').text();
                         var Center = $('#Center').find('option:selected').text();
@@ -486,7 +497,7 @@
                         $('#End').text(endDate);
                         $('#disP').text(District);
 
-                        var Filter = District + "," + Center + "," + startDate + "," + endDate;
+                        var Filter = Project + "," + District + "," + Center + "," + startDate + "," + endDate;
 
                         try {
                             Grid15(Filter);

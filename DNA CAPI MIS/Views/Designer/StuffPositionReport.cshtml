@@ -276,9 +276,11 @@
                             var s10 = PLAV[9];
 
 
+                            //onclick="openModal(\'' + item.Center + '\', \'' + Project + '\', \'' + District + '\', \'' + Center + '\', \'' + startDate + '\', \'' + endDate + '\')
+
                             html += '<td>' + item.asDate + '</td>';
                             html += '<td>' + item.District + '</td>';
-                            html += '<td onclick="openModal(\'' + item.Center + '\', \'' + Project + '\', \'' + District + '\', \'' + Center + '\', \'' + startDate + '\', \'' + endDate + '\')">' + item.Center + '</td>';
+                            html += '<td>' + item.Center + '</td>';
                             if (s1 == "1") {
                                 html += '<td>' + "Present" + '</td>';
                             }

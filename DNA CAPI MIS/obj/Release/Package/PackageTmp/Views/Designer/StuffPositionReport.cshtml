@@ -207,332 +207,275 @@
     <!-- end loading -->
 
 
-
-
+    <div id="staffModal" style="display:none; position:fixed; background:#fff; border:1px solid #ccc; padding:20px;">
+        <h2 id="modalTitle">Staff Info</h2>
+        <!-- Your staff table content goes here -->
+    </div>
 
 </div>
-
-
-    <script src="https://cdn.datatables.net/2.0.5/js/dataTables.min.js"></script>
-
-
-    <script>
-
-
-        $(document).ready(function () {
-            MnitoringOfficer("0");
-        });
-
-        var selectedTex = "";
-        $('#Checklist').change(function () {
-            var Checklist = $('#Checklist').val();
-
-            GetDistrict(Checklist);
-            $("#District").empty();
-            $("#Center").empty();
-
-            //try {
-
-            //    if (Checklist != "") {
-            //        MnitoringOfficer(Checklist);
-
-            //    }
-            //}
-            //catch (ex) {
-
-            //}
-
-
-        });
-
-
-
-
-
-
-        $('#District').change(function () {
-            var val = $('#Checklist').val();
-            var selectedText = $(this).find('option:selected').text();
-            var com = val + "," + selectedText;
-            $("#Center").empty();
-            GetCenter(com);
-        });
-
-        var Checklist = $('#Checklist option').map(function () {
-            return $(this).text();
-        }).get();
-
-
-        function GetDistrict(district) {
-
-            var dist = district;
-            $.ajax({
-                type: 'POST',
-                url: "/Designer/GetDistictById/" + district,
-                data: {},
-                async: true,
-                success: function (data) {
-                    $("#District").empty();
-                    $("#District").append('<option value="' + 0 + '">' + "---Select All---" + '</option>')
-                    $.each(data, function (i, state) {
-                        $("#District").append('<option value="' + state.Value + '">' + state.Text + '</option>')
-                    })
-                }
-            });
-
-        }
-
-
-
-        function GetCenter(district) {
-            $.ajax({
-                type: 'POST',
-                url: "/Designer/GetCentral/" + district,
-                data: {},
-                success: function (data) {
-                    $("#Center").empty();
-                    $("#Center").append('<option value="' + 0 + '">' + "---Select All---" + '</option>')
-                    $.each(data, function (i, state) {
-                        $("#Center").append('<option value="' + state.Value + '">' + state.Text + '</option>')
-                    })
-                }
-            });
-        }
-
-
-
-
-
-        function MnitoringOfficer(Filter) {
-
-
-
-            $.ajax({
-                type: 'POST',
-                url: "/Designer/StuffDetailReportData/" + Filter,
-                data: {},
-                async: true,
-                success: function (data) {
-                    $("#tbody").empty();
-                    var html = '';
-                    $.each(data, function (key, item) {
-                        html += '<tr>';
-
-                        var PLAV = item.Remarks.split(',');
-
-                        var s1 = PLAV[0];
-                        var s2 = PLAV[1];
-                        var s3 = PLAV[2];
-                        var s4 = PLAV[3];
-                        var s5 = PLAV[4];
-                        var s6 = PLAV[5];
-                        var s7 = PLAV[6];
-                        var s8 = PLAV[7];
-                        var s9 = PLAV[8];
-                        var s10 = PLAV[9];
-
-
-                        html += '<td>' + item.asDate + '</td>';
-                        html += '<td>' + item.District + '</td>';
-                        html += '<td>' + item.Center + '</td>';
-
-                        if (s1 == "1") {
-                            html += '<td>' + "Present" + '</td>';
-                        }
-                        else if (s1 == "2") {
-                            html += '<td>' + "Absent" + '</td>';
-                        }
-                        else if (s1 == "3") {
-                            html += '<td>' + "Leave" + '</td>';
-                        }
-                        else if (s1 == "4") {
-                            html += '<td>' + "Vcant" + '</td>';
-                        }
-
-
-                        if (s2 == "1") {
-                            html += '<td>' + "Present" + '</td>';
-                        }
-                        else if (s2 == "2") {
-                            html += '<td>' + "Absent" + '</td>';
-                        }
-                        else if (s2 == "3") {
-                            html += '<td>' + "Leave" + '</td>';
-                        }
-                        else if (s2 == "4") {
-                            html += '<td>' + "Vcant" + '</td>';
-                        }
-
-
-                        if (s3 == "1") {
-                            html += '<td>' + "Present" + '</td>';
-                        }
-                        else if (s3 == "2") {
-                            html += '<td>' + "Absent" + '</td>';
-                        }
-                        else if (s3 == "3") {
-                            html += '<td>' + "Leave" + '</td>';
-                        }
-                        else if (s3 == "4") {
-                            html += '<td>' + "Vcant" + '</td>';
-                        }
-
-
-
-                        if (s4 == "1") {
-                            html += '<td>' + "Present" + '</td>';
-                        }
-                        else if (s4 == "2") {
-                            html += '<td>' + "Absent" + '</td>';
-                        }
-                        else if (s4 == "3") {
-                            html += '<td>' + "Leave" + '</td>';
-                        }
-                        else if (s4 == "4") {
-                            html += '<td>' + "Vcant" + '</td>';
-                        }
-
-
-                        if (s5 == "1") {
-                            html += '<td>' + "Present" + '</td>';
-                        }
-                        else if (s5 == "2") {
-                            html += '<td>' + "Absent" + '</td>';
-                        }
-                        else if (s5 == "3") {
-                            html += '<td>' + "Leave" + '</td>';
-                        }
-                        else if (s5 == "4") {
-                            html += '<td>' + "Vcant" + '</td>';
-                        }
-
-
-                        if (s6 == "1") {
-                            html += '<td>' + "Present" + '</td>';
-                        }
-                        else if (s6 == "2") {
-                            html += '<td>' + "Absent" + '</td>';
-                        }
-                        else if (s6 == "3") {
-                            html += '<td>' + "Leave" + '</td>';
-                        }
-                        else if (s6 == "4") {
-                            html += '<td>' + "Vcant" + '</td>';
-                        }
-
-
-                        if (s7 == "1") {
-                            html += '<td>' + "Present" + '</td>';
-                        }
-                        else if (s7 == "2") {
-                            html += '<td>' + "Absent" + '</td>';
-                        }
-                        else if (s7 == "3") {
-                            html += '<td>' + "Leave" + '</td>';
-                        }
-                        else if (s7 == "4") {
-                            html += '<td>' + "Vcant" + '</td>';
-                        }
-
-
-                        if (s8 == "1") {
-                            html += '<td>' + "Present" + '</td>';
-                        }
-                        else if (s8 == "2") {
-                            html += '<td>' + "Absent" + '</td>';
-                        }
-                        else if (s8 == "3") {
-                            html += '<td>' + "Leave" + '</td>';
-                        }
-                        else if (s8 == "4") {
-                            html += '<td>' + "Vcant" + '</td>';
-                        }
-
-                        if (s9 == "1") {
-                            html += '<td>' + "Present" + '</td>';
-                        }
-                        else if (s9 == "2") {
-                            html += '<td>' + "Absent" + '</td>';
-                        }
-                        else if (s9 == "3") {
-                            html += '<td>' + "Leave" + '</td>';
-                        }
-                        else if (s9 == "4") {
-                            html += '<td>' + "Vcant" + '</td>';
-                        }
-
-
-                        if (s10 == "1") {
-                            html += '<td>' + "Present" + '</td>';
-                        }
-                        else if (s10 == "2") {
-                            html += '<td>' + "Absent" + '</td>';
-                        }
-                        else if (s10 == "3") {
-                            html += '<td>' + "Leave" + '</td>';
-                        }
-                        else if (s10 == "4") {
-                            html += '<td>' + "Vcant" + '</td>';
-                        }
-
-                        html += '</tr>';
-                    });
-                    $('#tbody').html(html);
-
-                }
-
-
-            })
-        }
-
-
-
-
-
-
-
-
-        $('#Search').click(function () {
-
-            var startDate = $("#startDate").val();
-            var endDate = $("#endDate").val();
-
-            if (startDate == "") {
-                startDate = "01-01-1950";
-            }
-            if (endDate == "") {
-                endDate = "01-01-2099";
+<script src="https://cdn.datatables.net/2.0.5/js/dataTables.min.js"></script>
+<script>
+
+            function openModal(center, project, district, centerCode, startDate, endDate) {
+                // Log or use the values
+                console.log("Center:", center);
+                console.log("Project:", project);
+                console.log("District:", district);
+
+                // Show the modal
+                document.getElementById("staffModal").style.display = "block";
+
+                // You can also populate modal values dynamically here
+                // For example:
+                document.getElementById("modalTitle").innerText = "Staff Info for: " + center;
             }
 
 
+            $(document).ready(function () {
+                MnitoringOfficer("0");
+            });
 
-            try {
+            var selectedTex = "";
+            $('#Checklist').change(function () {
+                var Checklist = $('#Checklist').val();
+
+                GetDistrict(Checklist);
+                $("#District").empty();
+                $("#Center").empty();
+            });
+
+
+            function MnitoringOfficer(Filter) {
+
                 var District = $('#District').find('option:selected').text();
                 var Center = $('#Center').find('option:selected').text();
                 var Project = $('#Checklist').val();
 
-                if (District == "") {
-                    District = "0";
-                }
-                if (Center == "") {
-                    Center = "0";
-                }
+                $.ajax({
+                    type: 'POST',
+                    url: "/Designer/StuffDetailReportData/" + Filter,
+                    data: {},
+                    async: true,
+                    success: function (data) {
+                        $("#tbody").empty();
+                        var html = '';
+                        $.each(data, function (key, item) {
+                            html += '<tr>';
 
-                if (Project == "") {
-                    Project = "0,0,0";
-                }
+                            var PLAV = item.Remarks.split(',');
 
-                $('#Start').text(startDate);
-                $('#End').text(endDate);
-                $('#disP').text(District);
-                var Filter = Project + ","   + District + "," + Center + "," + startDate + "," + endDate;
-                MnitoringOfficer(Filter);
+                            var s1 = PLAV[0];
+                            var s2 = PLAV[1];
+                            var s3 = PLAV[2];
+                            var s4 = PLAV[3];
+                            var s5 = PLAV[4];
+                            var s6 = PLAV[5];
+                            var s7 = PLAV[6];
+                            var s8 = PLAV[7];
+                            var s9 = PLAV[8];
+                            var s10 = PLAV[9];
+
+
+                            html += '<td>' + item.asDate + '</td>';
+                            html += '<td>' + item.District + '</td>';
+                            html += '<td onclick="openModal(\'' + item.Center + '\', \'' + Project + '\', \'' + District + '\', \'' + Center + '\', \'' + startDate + '\', \'' + endDate + '\')">' + item.Center + '</td>';
+                            if (s1 == "1") {
+                                html += '<td>' + "Present" + '</td>';
+                            }
+                            else if (s1 == "2") {
+                                html += '<td>' + "Absent" + '</td>';
+                            }
+                            else if (s1 == "3") {
+                                html += '<td>' + "Leave" + '</td>';
+                            }
+                            else if (s1 == "4") {
+                                html += '<td>' + "Vcant" + '</td>';
+                            }
+
+
+                            if (s2 == "1") {
+                                html += '<td>' + "Present" + '</td>';
+                            }
+                            else if (s2 == "2") {
+                                html += '<td>' + "Absent" + '</td>';
+                            }
+                            else if (s2 == "3") {
+                                html += '<td>' + "Leave" + '</td>';
+                            }
+                            else if (s2 == "4") {
+                                html += '<td>' + "Vcant" + '</td>';
+                            }
+
+
+                            if (s3 == "1") {
+                                html += '<td>' + "Present" + '</td>';
+                            }
+                            else if (s3 == "2") {
+                                html += '<td>' + "Absent" + '</td>';
+                            }
+                            else if (s3 == "3") {
+                                html += '<td>' + "Leave" + '</td>';
+                            }
+                            else if (s3 == "4") {
+                                html += '<td>' + "Vcant" + '</td>';
+                            }
+
+
+
+                            if (s4 == "1") {
+                                html += '<td>' + "Present" + '</td>';
+                            }
+                            else if (s4 == "2") {
+                                html += '<td>' + "Absent" + '</td>';
+                            }
+                            else if (s4 == "3") {
+                                html += '<td>' + "Leave" + '</td>';
+                            }
+                            else if (s4 == "4") {
+                                html += '<td>' + "Vcant" + '</td>';
+                            }
+
+
+                            if (s5 == "1") {
+                                html += '<td>' + "Present" + '</td>';
+                            }
+                            else if (s5 == "2") {
+                                html += '<td>' + "Absent" + '</td>';
+                            }
+                            else if (s5 == "3") {
+                                html += '<td>' + "Leave" + '</td>';
+                            }
+                            else if (s5 == "4") {
+                                html += '<td>' + "Vcant" + '</td>';
+                            }
+
+
+                            if (s6 == "1") {
+                                html += '<td>' + "Present" + '</td>';
+                            }
+                            else if (s6 == "2") {
+                                html += '<td>' + "Absent" + '</td>';
+                            }
+                            else if (s6 == "3") {
+                                html += '<td>' + "Leave" + '</td>';
+                            }
+                            else if (s6 == "4") {
+                                html += '<td>' + "Vcant" + '</td>';
+                            }
+
+
+                            if (s7 == "1") {
+                                html += '<td>' + "Present" + '</td>';
+                            }
+                            else if (s7 == "2") {
+                                html += '<td>' + "Absent" + '</td>';
+                            }
+                            else if (s7 == "3") {
+                                html += '<td>' + "Leave" + '</td>';
+                            }
+                            else if (s7 == "4") {
+                                html += '<td>' + "Vcant" + '</td>';
+                            }
+
+
+                            if (s8 == "1") {
+                                html += '<td>' + "Present" + '</td>';
+                            }
+                            else if (s8 == "2") {
+                                html += '<td>' + "Absent" + '</td>';
+                            }
+                            else if (s8 == "3") {
+                                html += '<td>' + "Leave" + '</td>';
+                            }
+                            else if (s8 == "4") {
+                                html += '<td>' + "Vcant" + '</td>';
+                            }
+
+                            if (s9 == "1") {
+                                html += '<td>' + "Present" + '</td>';
+                            }
+                            else if (s9 == "2") {
+                                html += '<td>' + "Absent" + '</td>';
+                            }
+                            else if (s9 == "3") {
+                                html += '<td>' + "Leave" + '</td>';
+                            }
+                            else if (s9 == "4") {
+                                html += '<td>' + "Vcant" + '</td>';
+                            }
+
+
+                            if (s10 == "1") {
+                                html += '<td>' + "Present" + '</td>';
+                            }
+                            else if (s10 == "2") {
+                                html += '<td>' + "Absent" + '</td>';
+                            }
+                            else if (s10 == "3") {
+                                html += '<td>' + "Leave" + '</td>';
+                            }
+                            else if (s10 == "4") {
+                                html += '<td>' + "Vcant" + '</td>';
+                            }
+
+                            html += '</tr>';
+                        });
+                        $('#tbody').html(html);
+
+                    }
+
+
+                })
             }
-            catch (ex) {
 
-            }
 
-        });
 
-    </script>
+
+
+
+
+
+            $('#Search').click(function () {
+
+                var startDate = $("#startDate").val();
+                var endDate = $("#endDate").val();
+
+                if (startDate == "") {
+                    startDate = "01-01-1950";
+                }
+                if (endDate == "") {
+                    endDate = "01-01-2099";
+                }
+
+
+
+                try {
+                    var District = $('#District').find('option:selected').text();
+                    var Center = $('#Center').find('option:selected').text();
+                    var Project = $('#Checklist').val();
+
+                    if (District == "") {
+                        District = "0";
+                    }
+                    if (Center == "") {
+                        Center = "0";
+                    }
+
+                    if (Project == "") {
+                        Project = "0,0,0";
+                    }
+
+                    $('#Start').text(startDate);
+                    $('#End').text(endDate);
+                    $('#disP').text(District);
+                    var Filter = Project + "," + District + "," + Center + "," + startDate + "," + endDate;
+                    MnitoringOfficer(Filter);
+                }
+                catch (ex) {
+
+                }
+
+            });
+
+        </script>
 
