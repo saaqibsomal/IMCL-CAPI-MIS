@@ -283,22 +283,22 @@ INNER JOIN
             string Project = "";
             string StatusDiscrict = "0";
             int CenterOpenCloseID = 0;
-            string CenterId = "50446, 50486, 55588"; 
-            if (id  == "50435")
+            string CenterId = "50446, 50486, 55588";
+            if (id == "50435")
             {
                 StatusDiscrict = "50435";
                 CenterOpenCloseID = 55570;
                 Project = "7120";
                 CenterId = "50446";
             }
-            else if (id  == "50484")
+            else if (id == "50484")
             {
                 StatusDiscrict = "50484";
                 CenterOpenCloseID = 50482;
                 Project = "7121";
                 CenterId = "50486";
             }
-            else if (id== "55587")
+            else if (id == "55587")
             {
                 StatusDiscrict = "55587";
                 CenterOpenCloseID = 55585;
@@ -308,7 +308,61 @@ INNER JOIN
 
 
             #region
-            string OpenClose = $@"WITH cte AS (
+            string OpenClose = "";
+            if (id == "NaN")
+            {
+                OpenClose = $@"WITH cte AS (
+    SELECT 
+        sd.sbjnum,
+        MAX(CASE WHEN sd.FieldId  in (55585,50482,55570) THEN sd.[FieldValue] END) AS IsOpen
+
+    FROM 
+        SurveyData sd
+    WHERE 
+        sd.sbjnum IN (
+            SELECT s.sbjnum FROM survey s WHERE  s.Created between '01-01-1950' and '01-01-2099'
+        )
+      
+    GROUP BY 
+        sd.sbjnum
+),
+cte_with_titles AS (
+    SELECT 
+        cte.sbjnum,
+        cte.IsOpen
+
+    FROM 
+        cte
+),
+SplitStatus AS (
+    SELECT 
+        value AS StatusCode
+    FROM 
+        cte_with_titles cwt
+    CROSS APPLY dbo.SplitStringValue(cwt.IsOpen, ',')
+)
+SELECT 
+ 
+    CASE 
+        WHEN StatusCode = '1' THEN 'Open'
+        ELSE 'Close'
+    END AS Title,
+    COUNT(*) AS OpenClose
+FROM 
+    SplitStatus ss
+  
+GROUP BY 
+ 
+    CASE 
+        WHEN StatusCode = '1' THEN 'Open'
+        ELSE 'Close'
+    END
+ORDER BY 
+   Title;";
+            }
+            else
+            {
+                OpenClose = $@"WITH cte AS (
     SELECT 
         sd.sbjnum,
         MAX(CASE WHEN sd.FieldId = {CenterOpenCloseID} THEN sd.[FieldValue] END) AS IsOpen,
@@ -363,7 +417,7 @@ GROUP BY
     END
 ORDER BY 
    Title;";
-
+            }
             #endregion
             var Pie = db.Database.SqlQuery<PieChartOC>(OpenClose);
 
@@ -618,7 +672,7 @@ select fs2.Title as District,fs1.Title as contraceptive ,cte.FieldValue1
         {
 
             string ProjectID = id.Split(',')[2];
-            if(ProjectID=="0")
+            if (ProjectID == "0")
             {
                 ProjectID = "7122,7121,7120";
             }
@@ -828,7 +882,7 @@ FieldValue6 as Concept,
             var District_Id = id.Split(',')[5];
             int BrandedId = 0;
             int CenterOpenCloseID = 0;
-            string CenterId = "50446, 50486, 55588"; 
+            string CenterId = "50446, 50486, 55588";
             if (id.Split(',')[1].Trim() == "RHS")
             {
                 StatusDiscrict = "50435";
@@ -857,13 +911,13 @@ FieldValue6 as Concept,
                 CenterId = "55588";
             }
 
-    
+
 
             string StartDate = id.Split(',')[3];
             string EndDate = id.Split(',')[4];
             string District = id.Split(',')[5];
             var all = $"SELECT SurveyorName, COUNT(*) AS SurveyCount FROM Survey WHERE ProjectID in ({id.Split(',')[2]})  and Created between '{StartDate}' and '{EndDate}' GROUP BY SurveyorName ORDER BY COUNT(*) DESC";
- 
+
 
             string Status = $@"WITH cte AS (
     SELECT 
@@ -928,7 +982,7 @@ ORDER BY
    Status;
 ";
             #region
-            
+
             string Branded = $@"WITH cte AS (
     SELECT 
         sd.sbjnum,
@@ -987,17 +1041,24 @@ ORDER BY
 
             #endregion
 
+            string where = "";
+            if (!string.IsNullOrEmpty(Project))
+            {
+                where = $@"ProjectID = {Project} and";
+
+            }
+
             string OpenClose = $@"WITH cte AS (
     SELECT 
         sd.sbjnum,
         MAX(CASE WHEN sd.FieldId = {CenterOpenCloseID} THEN sd.[FieldValue] END) AS IsOpen,
         MAX(CASE WHEN sd.FieldId = {StatusDiscrict} THEN sd.[FieldValue] END) AS District,
-        MAX(CASE WHEN sd.FieldId = {CenterId} THEN sd.[FieldValue] END) AS Center
+        MAX(CASE WHEN sd.FieldId  in ({CenterId}) THEN sd.[FieldValue] END) AS Center
     FROM 
         SurveyData sd
     WHERE 
         sd.sbjnum IN (
-            SELECT s.sbjnum FROM survey s WHERE ProjectID = {Project} and s.Created between '{StartDate}' and '{EndDate}'
+            SELECT s.sbjnum FROM survey s WHERE {where} s.Created between '{StartDate}' and '{EndDate}'
         )
        AND sd.FieldId IN ({CenterOpenCloseID}, {StatusDiscrict}, {CenterId}) --1 Present Quest 2- District 3- Center
     GROUP BY 
@@ -1012,7 +1073,7 @@ cte_with_titles AS (
     FROM 
         cte
   INNER JOIN ProjectFieldSample p ON cte.District = p.Code AND p.FieldID = {StatusDiscrict} --50435
-    INNER JOIN ProjectFieldSample pp ON cte.Center = pp.Code AND pp.FieldID =  {CenterId} --50446
+    INNER JOIN ProjectFieldSample pp ON cte.Center = pp.Code AND pp.FieldID in(  {CenterId}) --50446
    where p.Title like '%{District_Id}%' or '---Select All---' = '{District_Id}'
 ),
 SplitStatus AS (
@@ -1048,7 +1109,6 @@ ORDER BY
             var queryFWC = db.Database.SqlQuery<SurveyorStats>(all);
             var BrandedSql = db.Database.SqlQuery<Branded>(Branded);
             TotalSurveyDetail res = new TotalSurveyDetail();
-            
             if (queryFWC.Count() > 0)
             {
                 int cnt = 0;
@@ -1059,8 +1119,6 @@ ORDER BY
                 res.All = cnt;// queryFWC.Sum(x => x.SurveyCount);
                 res.Name = id.Split(',')[1];
             }
-            
-            
             if (Openclose.Count() > 0)
             {
                 foreach (var item in Openclose.ToList())
@@ -1136,6 +1194,147 @@ ORDER BY
             {
                 res.BrandedCnt = 0;
                 res.UnBrandedCnt = 0;
+            }
+
+            return Json(res);
+        }
+
+
+        [HttpPost]
+        public JsonResult ForSelectedMonitoringLoad(string id)
+        {
+            string Project = "";
+            if (string.IsNullOrEmpty(id))
+            {
+                return Json(null);
+            }
+            string StaffID = "";
+            string StatusDiscrict = "0";
+            var District_Id = id.Split(',')[5];
+            int BrandedId = 0;
+            int CenterOpenCloseID = 0;
+            string CenterId = "50446, 50486, 55588";
+            if (id.Split(',')[1].Trim() == "RHS")
+            {
+                StatusDiscrict = "50435";
+                CenterOpenCloseID = 55570;
+                BrandedId = 50437;
+                Project = "7120";
+                StaffID = "50635";
+                CenterId = "50446";
+            }
+            else if (id.Split(',')[1].Trim() == "MSU")
+            {
+                StatusDiscrict = "50484";
+                CenterOpenCloseID = 50482;
+                BrandedId = 50634;
+                Project = "7121";
+                StaffID = "50496";
+                CenterId = "50486";
+            }
+            else if (id.Split(',')[1].Trim() == "FWC")
+            {
+                StatusDiscrict = "55587";
+                CenterOpenCloseID = 55585;
+                BrandedId = 55590;
+                Project = "7122";
+                StaffID = "55592";
+                CenterId = "55588";
+            }
+
+            string StartDate = id.Split(',')[3];
+            string EndDate = id.Split(',')[4];
+            string District = id.Split(',')[5];
+
+            string where = "";
+            if (!string.IsNullOrEmpty(Project))
+            {
+                where = $@"ProjectID = {Project} and";
+
+            }
+
+            string OpenClose = $@"WITH cte AS (
+    SELECT 
+        sd.sbjnum,
+        MAX(CASE WHEN sd.FieldId  in (55585,50482,55570) THEN sd.[FieldValue] END) AS IsOpen,
+        MAX(CASE WHEN sd.FieldId  in (55587,50484,50435) THEN sd.[FieldValue] END) AS District,
+        MAX(CASE WHEN sd.FieldId  in (50446, 50486, 55588) THEN sd.[FieldValue] END) AS Center
+    FROM 
+        SurveyData sd
+    WHERE 
+        sd.sbjnum IN (
+            SELECT s.sbjnum FROM survey s WHERE {where} s.Created between '{StartDate}' and '{EndDate}'
+        )
+       AND sd.FieldId IN (55585,50482,55570) --1 Present Quest 2- District 3- Center
+    GROUP BY 
+        sd.sbjnum
+),
+cte_with_titles AS (
+    SELECT 
+        cte.sbjnum,
+        cte.IsOpen,
+        p.Title AS DistrictTitle,
+        pp.Title AS CenterTitle
+    FROM 
+        cte
+  INNER JOIN ProjectFieldSample p ON cte.District = p.Code AND p.FieldID  in (55587,50484,50435) --50435
+    INNER JOIN ProjectFieldSample pp ON cte.Center = pp.Code AND pp.FieldID  in (50446, 50486, 55588) --50446
+
+),
+SplitStatus AS (
+    SELECT 
+        cwt.DistrictTitle,
+        cwt.CenterTitle,
+        value AS StatusCode
+    FROM 
+        cte_with_titles cwt
+    CROSS APPLY dbo.SplitStringValue(cwt.IsOpen, ',')
+)
+SELECT 
+ 
+    CASE 
+        WHEN StatusCode = '1' THEN 'Open'
+        ELSE 'Close'
+    END AS Title,
+    COUNT(*) AS OpenClose
+FROM 
+    SplitStatus ss
+ 
+ 
+    CASE 
+        WHEN StatusCode = '1' THEN 'Open'
+        ELSE 'Close'
+    END
+ORDER BY 
+   Title;";
+
+            var Openclose = db.Database.SqlQuery<OpenCloseResponse>(OpenClose);
+
+
+            TotalSurveyDetail res = new TotalSurveyDetail();
+
+            if (Openclose.Count() > 0)
+            {
+                foreach (var item in Openclose.ToList())
+                {
+                    if (item.Title == "Close")
+                    {
+                        res.Close = item.OpenClose;
+                        res.CloseTitle = item.Title;
+                    }
+                    else
+                    {
+                        res.Open = item.OpenClose;
+                        res.OpenTitle = item.Title;
+                    }
+                }
+            }
+            else
+            {
+                res.Close = 0;
+                res.CloseTitle = "Close";
+                res.Open = 0;
+                res.OpenTitle = "Open";
             }
 
             return Json(res);
@@ -2797,6 +2996,7 @@ END
 
 
 SELECT 
+Convert(varchar(40),s.Created) Created,
     s.sbjnum, 
     s.SurveyorName, 
     sd.FieldId, 
@@ -2840,7 +3040,7 @@ WHERE
 ORDER BY 
     s.sbjnum, cy.Name, ct.Name, dt.Name, s.Created DESC, ISNULL(pfn.DisplayOrder, 0), pf.DisplayOrder
 
-	 select DISTINCT CONVERT(nvarchar(max), p.Title ) AS Title, p.SurveyorName,p.FieldValue,p.sbjnum,p.FieldId,p.Latitude,p.Longitude  from #pdf p where len(p.FieldValue) > 0 and p.Title is not null and p.sbjnum = {sbjnum}   order by p.sbjnum desc  
+	 select DISTINCT p.Created, CONVERT(nvarchar(max), p.Title ) AS Title, p.SurveyorName,p.FieldValue,p.sbjnum,p.FieldId,p.Latitude,p.Longitude  from #pdf p where len(p.FieldValue) > 0 and p.Title is not null and p.sbjnum = {sbjnum}   order by p.sbjnum desc  
 ";
 
 
@@ -4161,7 +4361,7 @@ else 0 end Id , Name,id as RoleId      FROM Project WHERE id in (7120,7121,7122)
             {
                 Des = id.Split(',')[3];
                 Cen = id.Split(',')[4];
-                if (Cen == "---Select All---" || Cen == "Select Center" || Cen =="0")
+                if (Cen == "---Select All---" || Cen == "Select Center" || Cen == "0")
                 {
                     Cen = "";
                 }
@@ -4941,10 +5141,10 @@ FieldValue4 as DeadStock,
                 sd = id.Split(',')[2];
                 ed = id.Split(',')[3];
                 Project = id.Split(',')[4];
-              
-                if(Project == "0" || Project == "undefined")
+
+                if (Project == "0" || Project == "undefined")
                 {
-                  
+
                 }
                 else
                 {

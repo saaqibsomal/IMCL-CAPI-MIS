@@ -1197,13 +1197,15 @@
             url: "/Designer/OpenReport/" + sbjnum,
             data: {},
             success: function (data) {
-
+                const match = data.RawData[0].Created.match(/^(.+\d{4})\s+(\d{1,2}:\d{2}[APMapm]{2})$/);
                 $("#Heading").text("Monitoring Report (" + Heading + ")");
                // $("#SubHeading").text("(For " + Heading + ")");
                 $("#NameOfDistrict").text(data.Field.NameOfDistrict);
                 $("#NameOfCenter").text(data.Field.NameOfCenter);
-                $("#DateOfVisit").text(data.Field.DateOfVisit);
-                $("#TimeOfVisit").text(data.Field.TimeOfVisit);
+                //$("#DateOfVisit").text(data.Field.DateOfVisit);
+                //$("#TimeOfVisit").text(data.Field.TimeOfVisit);
+                $("#DateOfVisit").text(match[1]);
+                $("#TimeOfVisit").text(match[2]);
                 $("#OpenCloseStatus").text(data.Field.OpenCloseStatus);
                 try {
                     $('#Coordinate').text(data.RawData[0].Longitude + "," + data.RawData[0].Latitude);
